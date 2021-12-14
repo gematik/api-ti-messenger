@@ -1,0 +1,1095 @@
+openapi: 3.0.3
+info:
+  title: TiMessengerTestDriver
+  description: REST interface to automate the test of a TI-Messenger client implementation.
+  version: 0.0.1
+  # initiale Version
+  contact:
+    name: gematik GmbH
+    email: software-development@gematik.de
+    url: 'https://www.gematik.de'
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0'
+
+externalDocs:
+  description: TI-Messenger-API
+  url: https://github.com/gematik/api-ti-messenger
+
+servers:
+- url: https://localhost/ti-messenger-testdriver/
+tags:
+- name: getInfo
+  description: This operation returns meta data about this interface and the status of available resources
+- name: getDevices
+  description: Returns a list of connected devices.
+- name: claimDevice
+  description: A device can be claimed for exclusive use.
+- name: unclaimDevice
+  description: A device can be unclaimed.
+- name: setHomeserver
+  description: Set the Homeserver.
+- name: getAuthFlows
+  description: Read the supported authentication types.
+- name: createAccount
+  description: Create a TI-Messenger account.
+- name: readAccount
+  description: Read information about the TI-Messenger account (MXID, displayName, organization, foto).
+- name: updateAccount
+  description: Update account information.
+- name: deleteAccount
+  description: Delete a TI-Messenger account.
+- name: authenticateOnFhirDirectory
+  description: This operation is used to authenticate the user on the VZD-FHIR-Directory
+- name: setMxidInFhirDirectory
+  description: Set the MXID in own TIPractitioner entry (VZD-FHIR-Directory)
+- name: readMxidInFhirDirectory
+  description: Read the MXID in own TIPractitioner entry (VZD-FHIR-Directory)
+- name: removeMxidInFhirDirectory
+  description: Remove the MXID from own TIPractitioner entry (VZD-FHIR-Directory)
+#- name: createOwnTIOrganization
+#  description: Create a TIOrganization entry (VZD-FHIR-Directory, with portOf Relation to own TIOrganization entry, Location, HealthcareService and PractitionerRole, only for Org-Admin-Client)
+#- name: readOwnTIOrganization
+#  description: Read own TIOrganization entry (VZD-FHIR-Directory, includes all partOf entries, Location, HealthcareService and PractitionerRole, only for Org-Admin-Client)
+#- name: updateOwnTIOrganization
+#  description: Update own TIOrganization entry (VZD-FHIR-Directory, includes all partOf entries, Location, HealthcareService and PractitionerRole, only for Org-Admin-Client)
+#- name: deleteOwnTIOrganization
+#  description: Delete own TIOrganization sub entry (VZD-FHIR-Directory, own partOf sub entries, Location, HealthcareService and PractitionerRole, only for Org-Admin-Client)
+- name: searchTIOrganizationInFhirDirectory
+  description: Seerch for TIOrganization entries (VZD-FHIR-Directory)
+- name: searchTIPractitionerInFhirDirectory
+  description: Seerch for TIPractitioner entries (VZD-FHIR-Directory)
+- name: sendMessage
+  description: Send a message to a  user
+- name: receiveMessage
+  description: Rceive a message
+- name: deleteMessage
+  description: Delete a message
+- name: createRoom
+  description: Send a message to multiple  user
+- name: inviteIntoRoom
+  description: Invite a user into a room
+- name: getRoomSettings
+  description: Get the room settings
+- name: changeRoomSettings
+  description: Change the room settings
+- name: leaveRoom
+  description: Leave a room
+- name: deleteRoom
+  description: Delete a room
+
+paths:
+  /:
+    get:
+      tags:
+      - getInfo
+      description: Returns the meta data of this interface.
+      operationId: getInfo
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/InfoObject'
+        403:
+          $ref: '#/components/responses/Forbidden'
+
+  /devices:
+    get:
+      tags:
+      - getDevices
+      description: Returns the connected devices.
+      operationId: getDevices
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/Devices'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        403:
+          $ref: '#/components/responses/Forbidden'
+
+  /devices/claim/{deviceId}:
+    post:
+      tags:
+        - claimDevice
+      description: A device can be claimed for exclusive use.
+      operationId: claimDevice
+      parameters:
+      - name: deviceId
+        in: path
+        description: ID of the device that will be claimed.
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeviceStatus'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        default:
+          $ref: '#/components/responses/DefaultResponse'
+    
+  /devices/unclaim/{deviceId}:
+    post:
+      tags:
+        - unclaimDevice
+      description: A device can be unclaimed.
+      operationId: unclaimDevice
+      parameters:
+      - name: deviceId
+        in: path
+        description: ID of the device that will be unclaimed.
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeviceStatus'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        default:
+          $ref: '#/components/responses/DefaultResponse'
+
+  /account:
+    post:
+      tags:
+        - createAccount
+      description: Create a TI-Messenger account.
+      operationId: createAccount
+      parameters:
+      - name: homeserver
+        in: query
+        description: The matrix homeserver.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestAccount'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseAccount'
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthFlows'
+        default:
+          $ref: '#/components/responses/DefaultResponse'
+
+    get:
+      tags:
+      - readAccount
+      description: Returns the account data or if no account is registered returns the authentication flows supported by the homeserver.
+      operationId: readAccount
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/ResponseAccount'
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthFlows'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        404:
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          $ref: '#/components/responses/DefaultResponse'
+
+    put:
+      tags:
+        - updateAccount
+      description: Update a TI-Messenger Account.
+      operationId: updateAccount
+      parameters:
+      - name: homeserver
+        in: query
+        description: The matrix homeserver.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestAccount'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseAccount'
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthFlows'
+        default:
+          $ref: '#/components/responses/DefaultResponse'
+
+    delete:
+      tags:
+        - deleteAccount
+      description: Delete the TI-Messenger account.
+      operationId: deleteAccount
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                example: OK
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthFlows'
+        default:
+          $ref: '#/components/responses/DefaultResponse'
+
+  /fhir/fhirAuthenticate:
+    post:
+      tags:
+        - authenticateOnFhirDirectory
+      description: This request starts the OIDC authentication for getting access to change the own FHIR entry.
+      operationId: authenticateOnFhirDirectory
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FhirAuthenticateRequest'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FhirAuthenticateResponse'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        default:
+          $ref: '#/components/responses/DefaultResponse'
+ 
+  /fhir/setMxidInFhirDirectory:
+    post:
+      tags:
+        - setMxidInFhirDirectory
+      description: Set the MXID in the own TIPractitioner FHIR resource.
+      operationId: setMxidInFhirDirectory
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FhirDataResponse'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        default:
+          $ref: '#/components/responses/DefaultResponse'
+
+  /fhir/readMxidInFhirDirectory:
+    get:
+      tags:
+      - readMxidInFhirDirectory
+      description: Returns the own MXID from the FHIR Directory.
+      operationId: readMxidInFhirDirectory
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/FhirDataResponse'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        404:
+          $ref: '#/components/responses/NotFound'
+        default:
+          $ref: '#/components/responses/DefaultResponse'
+   
+  /fhir/removeMxidInFhirDirectory:
+    post:
+      tags:
+        - removeMxidInFhirDirectory
+      description: Remove the MXID in the own TIPractitioner FHIR resource.
+      operationId: removeMxidInFhirDirectory
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FhirDataResponse'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        default:
+          $ref: '#/components/responses/DefaultResponse'
+
+  /fhir/searchTIOrganizationInFhirDirectory:
+    get:
+      tags:
+      - searchTIOrganizationInFhirDirectory
+      description: Returns the found TIOrganization entries.
+      operationId: searchTIOrganizationInFhirDirectory
+      parameters:
+      - name: name
+        in: query
+        description: Name of the TIOrganization
+        schema:
+          type: string  
+      - name: address
+        in: query
+        description: Address of the TIOrganization.
+        schema:
+          type: string
+      - name: telematikId
+        in: query
+        description: The telematikId of the TIOrganization.
+        schema:
+          type: string
+      - name: identifier
+        in: query
+        description: The identifier of the TIOrganization.
+        schema:
+          type: string
+      - name: typeCode
+        in: query
+        description: The type of the TIOrganization (TIOrganizationTypeVS.Code).
+        schema:
+          type: string
+      - name: typeDisplay
+        in: query
+        description: The type of the TIOrganization (TIOrganizationTypeVS.Display).
+        schema:
+          type: string
+      - name: contactMxid
+        in: query
+        description: MXID of the TIOrganization.contact.
+        schema:
+          type: string
+      - name: contactName
+        in: query
+        description: Name of the TIOrganization.contact.
+        schema:
+          type: string
+      - name: contactPurpose
+        in: query
+        description: Purpose of the TIOrganization.contact.
+        schema:
+          type: string
+
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/FhirDataResponse'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        404:
+          $ref: '#/components/responses/NotFound'
+        default:
+          $ref: '#/components/responses/DefaultResponse'
+
+  /fhir/searchTIPractitionerInFhirDirectory:
+    get:
+      tags:
+      - searchTIPractitionerInFhirDirectory
+      description: Returns the found TIPractitioner entries.
+      operationId: searchTIPractitionerInFhirDirectory
+      parameters:
+      - name: name
+        in: query
+        description: Name of the TIPractitioner
+        schema:
+          type: string  
+      - name: address
+        in: query
+        description: Address of the TIPractitioner.
+        schema:
+          type: string
+      - name: telematikId
+        in: query
+        description: The telematikId of the TIPractitioner.
+        schema:
+          type: string
+      - name: identifier
+        in: query
+        description: The identifier of the TIPractitioner.
+        schema:
+          type: string
+      - name: typeCode
+        in: query
+        description: The type of the TIPractitioner (TIPractitionerQualificationProfessionOidVS.Code).
+        schema:
+          type: string
+      - name: typeDisplay
+        in: query
+        description: The type of the TIPractitioner (TIPractitionerQualificationProfessionOidVS.Display).
+        schema:
+          type: string
+      - name: mxid
+        in: query
+        description: MXID of the TIPractitioner.
+        schema:
+          type: string
+
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/FhirDataResponse'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        404:
+          $ref: '#/components/responses/NotFound'
+        default:
+          $ref: '#/components/responses/DefaultResponse'
+
+  /ti-m/sendMessage:
+    post:
+      tags:
+        - sendMessage
+      description: Send a message to another user.
+      operationId: sendMessage
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Message'
+      responses:
+        default:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                example: OK
+        401:
+          $ref: '#/components/responses/Unauthorized'
+
+  /ti-m/receiveMessage:
+    get:
+      tags:
+        - receiveMessage
+      description: Receive a message from another user.
+      operationId: receiveMessage
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        default:
+          $ref: '#/components/responses/DefaultResponse'
+
+  /ti-m/deleteMessage/{messageID}:
+    delete:
+      tags:
+        - deleteMessage
+      description: Receive a message from another user.
+      operationId: deleteMessage
+      parameters:
+      - name: messageID
+        in: path
+        description: ID of the message that will be deleted.
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        default:
+          $ref: '#/components/responses/DefaultResponse'
+
+  /ti-m/rooms:
+    post:
+      tags:
+        - createRoom
+      description: Create a room.
+      operationId: createRoom
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Room'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                example: OK
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        default:
+          $ref: '#/components/responses/DefaultResponse'
+
+  /ti-m/rooms/{roomId}:
+    post:
+      tags:
+        - inviteIntoRoom
+      description: Invite a user into the room.
+      operationId: inviteIntoRoom
+      parameters:
+      - name: roomId
+        in: path
+        description: ID of the room.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Room'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                example: OK
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        404:
+          $ref: '#/components/responses/NotFound'
+        default:
+          $ref: '#/components/responses/DefaultResponse'
+
+    get:
+      tags:
+        - getRoomsettings
+      description: Get the room settings.
+      operationId: getRoomsettings
+      parameters:
+      - name: roomId
+        in: path
+        description: ID of the room.
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Room'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        404:
+          $ref: '#/components/responses/NotFound'
+        default:
+          $ref: '#/components/responses/DefaultResponse'
+
+    put:
+      tags:
+        - changeRoomSettings
+      description: Change the room settings.
+      operationId: changeRoomSettings
+      parameters:
+      - name: roomId
+        in: path
+        description: ID of the room.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Room'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                example: OK
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        404:
+          $ref: '#/components/responses/NotFound'
+        default:
+          $ref: '#/components/responses/DefaultResponse'
+
+    delete:
+      tags:
+        - deleteRoom
+      description: Delete the room.
+      operationId: deleteRoom
+      parameters:
+      - name: roomId
+        in: path
+        description: ID of the room.
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                example: OK
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        404:
+          $ref: '#/components/responses/NotFound'
+        default:
+          $ref: '#/components/responses/DefaultResponse'
+
+  /ti-m/rooms/{roomId}/leave:
+    post:
+      tags:
+        - leaveRoom
+      description: Leave the room.
+      operationId: leaveRoom
+      parameters:
+      - name: roomId
+        in: path
+        description: ID of the room.
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                example: OK
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        default:
+          $ref: '#/components/responses/DefaultResponse'
+
+
+
+   
+# Descriptions of common components      
+components:
+  responses:
+    DefaultResponse:
+      description: The specified resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The specified resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+
+  schemas:
+  
+    InfoObject:
+      required:
+      - title
+      - version
+      readOnly: true
+      type: object
+      properties:
+        title:
+          type: string
+          description: Der Titel der Anwendung
+          example: "Test-Schnittstelle des TI-Messenger Clients "
+        description:
+          type: string
+          description: Eine kurze Beschreibung der Anwendung
+          example: "TI-Messenger-Client Test-Schnittstelle"
+        termsOfService:
+          type: string
+          format: uri
+          description: Eine URL zu den Terms of Service für dieses API.
+          example: "http://example.com/terms/"
+        contact:
+          $ref: '#/components/schemas/Contact'
+        license:
+          $ref: '#/components/schemas/License'
+        version:
+          type: string
+          description: Die Version von dem OpenAPI Document (YAML Datei)
+          example: "1.1.0"
+
+    Contact:
+      readOnly: true
+      description: Die Kontaktinformationen für diese Schnittstelle.
+      type: object
+      properties:
+        name:
+          type: string
+          description: Der Name von der Kontaktperson / -Organisation
+          example: "Firma 123"
+        url:
+          type: string
+          format: uri
+          description: Eine URL zu den Kontaktinformationen für dieses API.
+                       In dem Dokument unter dieser URL muss ein Link zum Download der aktuell genutzten YAML Datei dieser Schnittstelle hinterlegt sein.
+          example: "http://www.example.com/support"
+        email:
+          type: string
+          format: email
+          description: Der E-Mail Adresse der Kontaktperson / -Organisation.
+          example: "support@example.com"
+
+    License:
+      required:
+      - name
+      readOnly: true
+      description: Der Lizenzinformationen für diese Schnittstelle.
+      type: object
+      properties:
+        name:
+          type: string
+          description: Der Lizenzname
+          example: "Apache 2.0"
+        url:
+          type: string
+          description: Eine URL zu den Lizenzinformationen für dieses API.
+          example: "https://www.apache.org/licenses/LICENSE-2.0.html"
+
+    Error:
+      type: object
+      properties:
+        errorCode:
+          type: string
+        errorMessage:
+          type: string
+      required:
+        - errorCode
+        - errorMessage
+        
+    Devices:
+      type: object
+      properties:
+        devices:
+          description: The list of connected devices and their status
+          type: array
+          items:
+            type: object
+            properties:
+              deviceId:
+                description: Id of the device
+                type: string
+              deviceName:
+                description: Name of the device
+                type: string
+              deviceStatus:
+                description: Status of the device
+                type: string
+          readOnly: true
+
+    DeviceStatus:
+      required:
+      - deviceId
+      - deviceName
+      - deviceStatus
+      - registrationStatus
+      readOnly: true
+      type: object
+      properties:
+        deviceId:
+          type: string
+          description: 'Identifier of the device'
+        deviceName:
+          type: string
+          description: 'Name of the device'
+        deviceStatus:
+          type: string
+          enum: [claimed, free]
+          description: 'Status of the device'
+        registrationStatus:
+          type: object
+          description: 'The registration status'
+          properties:
+            isRegistered:
+              type: boolean
+              description: 'The device is registered or not'
+            mxid:
+              type: string
+              description: 'The MXID'
+
+    AuthFlows:
+      type: object
+      properties:
+        completedAuthStages:
+          type: object
+          description: Already completed authentication stages
+          properties:
+            authStage:
+              type: string
+              enum: [basicAuth, token, recaptcha, oAuth2, sso, email, msisdn]
+              description: A stage in the authentication flow
+        authStages:
+          type: object
+          properties:
+            authStage:
+              type: string
+              enum: [basicAuth, token, recaptcha, oAuth2, sso, email, msisdn]
+              description: A stage in the authentication flow
+        params:
+          type: object
+          properties:
+            userName:
+              type: string
+              description: The username (localpart of the MXID)
+            password:
+              type: string
+              description: If authMethod is basicAuth, a password is required
+            medium:
+              type: string
+              description: The medium of the third party identifier
+            address:
+              type: string
+              description: The third party address of the user
+            #session:
+            #  type: string
+            #  description: The session ID
+            response:
+              type: string
+              description: The captcha response
+            token:
+              type: string
+              description: The token
+            txn_id:
+              type: string
+              description: The client generated nonce
+            uri:
+              type: string
+              description: Authorization Request URI OR service selection URI. Both contain an encoded redirect URI. Used for OAuth2 login.
+        session:
+          type: string
+          description: The session ID
+      #required:
+      #  - authType
+
+    RequestAccount:
+      type: object
+      properties:
+        # authentication data
+        authType:
+          type: string
+          enum: [basicAuth, token, recaptcha, oAuth2, sso, email, msisdn]
+          description: Authentication method for account creation
+        userName:
+          type: string
+          description: The username (localpart of the MXID)
+        password:
+          type: string
+          description: If authMethod is basicAuth, a password is required
+        medium:
+          type: string
+          description: The medium of the third party identifier
+        address:
+          type: string
+          description: The third party address of the user
+        #session:
+        #  type: string
+        #  description: The session ID
+        response:
+          type: string
+          description: The captcha response
+        token:
+          type: string
+          description: The token
+        txn_id:
+          type: string
+          description: The client generated nonce
+        uri:
+          type: string
+          description: Authorization Request URI OR service selection URI. Both contain an encoded redirect URI. Used for OAuth2 login.
+        # account data
+        displayName:
+          type: string
+          description: The 
+        organization:
+          type: string
+          description: The 
+        photo:
+          type: string
+          description: The 
+
+    ResponseAccount:
+      required:
+      - mxid
+      readOnly: true
+      type: object
+      properties:
+        mxid:
+          type: string
+          description: The MXID (Matrix address)
+        displayName:
+          type: string
+          description: The displayName
+        organization:
+          type: string
+          description: The organization of the account
+        photo:
+          type: string
+          description: A photo
+
+    FhirDataResponse:
+      readOnly: true
+      type: object
+      properties:
+        tiPractitioner:
+          type: string
+          description: 'The TIPractitioner Entry'
+        tiOrganization:
+          type: string
+          description: 'The TIOrganization Entry'
+
+    FhirAuthenticateRequest:
+      readOnly: true
+      type: object
+      properties:
+        challengeResponse:
+          type: string
+          description: 'The response to the challenge'
+
+    FhirAuthenticateResponse:
+      readOnly: true
+      type: object
+      properties:
+        challenge:
+          type: string
+          description: 'The challenge'
+
+    Message:
+      readOnly: true
+      type: object
+      properties:
+        toMxid:
+          type: string
+          description: 'The recipients MXID'
+        fromMxid:
+          type: string
+          description: 'The senders MXID'
+        messageId:
+          type: string
+          description: 'The message identifier. Must be returned in response to a sendMessage request. Is used to delete a specific message.'
+        message:
+          type: string
+          description: 'The message'
+
+    Room:
+      type: object
+      properties:
+        name:
+          type: string
+          description: 'The name of the room'
+        theme:
+          type: string
+          description: 'The theme of the room'
+        roomAccess:
+          type: string
+          enum: [privite, public]
+          description: 'The visibility of the room'
+        isEncrypted:
+          type: boolean
+          readOnly: true
+          description: 'The room should always be encrypted'
+        roomId:
+          type: string
+          description: 'The room identifier. Must be returned in response to a createRoom request. Is used to delete a specific room.'
+        message:
+          type: string
+          description: 'The message'
+      required:
+      - isEncrypted
+
+# Mutual TLS is used for authentication of clients. In openAPI 3.0.x is mTLS not supported. Therefore the security scheme is not used.
+#  securitySchemes:
+#    mTLS:
+#      type: mutualTLS
+#      
+#      
+#security:
+#  - mTLS:
+#  
+    
