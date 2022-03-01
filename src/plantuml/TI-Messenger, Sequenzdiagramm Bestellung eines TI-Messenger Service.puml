@@ -32,7 +32,7 @@ activate rd
 rd --> wb: Redirect to IDP Authorization Endpoint
 wb -> ip: GET authorize
 activate ip
-ip -> au: Authentiction challenge
+ip -> au: Authentication challenge
 'wb -> au: Authentication
 activate au
 au -> ko: SignDocument
