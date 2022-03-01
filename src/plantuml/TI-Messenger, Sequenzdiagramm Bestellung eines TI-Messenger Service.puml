@@ -1,0 +1,58 @@
+@startuml
+skinparam dpi 100
+skinparam WrapWidth 200
+'skinparam monochrome true
+skinparam sequence {
+ArrowColor black
+ActorBorderColor black
+LifeLineBorderColor black
+Background transparent
+
+ParticipantBorderColor black
+ParticipantBackgroundColor transparent
+ParticipantFontColor black
+
+ActorBackgroundColor transparent
+ActorFontColor black
+}
+
+'title "TI-M, Sequenzdiagramm Bestellung eines Messenger-Service"
+actor oa as "Organization\nAdministrator"
+participant wb as "Web Browser"
+participant au as "Authenticator"
+participant ko as "Konnektor"
+participant kt as "eHealth KT\nwith SMC-B"
+participant rd as "TI-Messenger-Fachdienst\nRegistrierungsdienst"
+participant ip as "Identity-Provider"
+
+oa -> wb
+activate wb
+wb -> rd: Order Messenger-Service
+activate rd
+rd --> wb: Redirect to IDP Authorization Endpoint
+wb -> ip: GET authorize
+activate ip
+ip -> au: Authentiction challenge
+'wb -> au: Authentication
+activate au
+au -> ko: SignDocument
+activate ko
+ko -> kt: SICCT command
+activate kt
+au -> oa: "Authenticate (if SMC-B is not activated)"
+kt --> ko
+deactivate kt
+ko --> au: Response signedDocument
+deactivate ko
+'au -->wb: Authentication response
+au -->ip: Authentication response
+deactivate au
+ip --> wb: Authorization Response\nwith Authorization code
+deactivate ip
+wb -> rd: Order Messenger-Service\nwith Authorization code
+'rd --> wb: Order Response
+rd -> ip: POST /tokenEndpoint\n{authorization code}
+ip --> rd: Response\n{id_token, access_token}
+deactivate rd
+deactivate wb
+@enduml
