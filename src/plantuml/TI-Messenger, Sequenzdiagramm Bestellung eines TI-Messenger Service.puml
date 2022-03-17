@@ -1,36 +1,44 @@
 @startuml
-skinparam dpi 100
-skinparam WrapWidth 200
-'skinparam monochrome true
+skinparam defaultTextAlignment center
+skinparam sequenceMessageAlign left
+skinparam WrapWidth 300
+skinparam minClassWidth 150
+skinparam BoxPadding 1
+scale max 850 width
+
 skinparam sequence {
 ArrowColor black
 ActorBorderColor black
 LifeLineBorderColor black
-Background transparent
+LifeLineBackgroundColor Gainsboro
 
-ParticipantBorderColor black
-ParticipantBackgroundColor transparent
+ParticipantBorderColor Motivation
+ParticipantBackgroundColor Motivation
+ParticipantFontName Impact
+ParticipantFontSize 14
 ParticipantFontColor black
 
-ActorBackgroundColor transparent
+ActorBackgroundColor Gainsboro
 ActorFontColor black
+ActorFontSize 14
+ActorFontName Aapex
 }
 
 'title "TI-M, Sequenzdiagramm Bestellung eines Messenger-Service"
-actor oa as "Organization\nAdministrator"
+actor oa as "Akteur in der Rolle\nOrg-Admin"
 participant wb as "Web Browser"
 participant au as "Authenticator"
 participant ko as "Konnektor"
 participant kt as "eHealth KT\nwith SMC-B"
-participant rd as "TI-Messenger-Fachdienst\nRegistrierungsdienst"
-participant ip as "Identity-Provider"
+participant rd as "Registrierungs-Dienst"
+participant ip as "IDP-Dienst"
 
-oa -> wb
+oa -> wb: Einen Messenger-Service \nbeantragen
 activate wb
-wb -> rd: Order Messenger-Service
+wb -> rd: Web-Schnittstelle aufrufen 
 activate rd
-rd --> wb: Redirect to IDP Authorization Endpoint
-wb -> ip: GET authorize
+rd --> wb: HTTP/1.1 3xx Redirect to IDP Authorization Endpoint
+wb -> ip: GET /authorize
 activate ip
 ip -> au: Authentication challenge
 'wb -> au: Authentication
@@ -39,20 +47,22 @@ au -> ko: SignDocument
 activate ko
 ko -> kt: SICCT command
 activate kt
-au -> oa: "Authenticate (if SMC-B is not activated)"
 kt --> ko
 deactivate kt
 ko --> au: Response signedDocument
 deactivate ko
+opt Abbruch
+au -> oa: "SMC-B nicht freigeschaltet"
+end
 'au -->wb: Authentication response
 au -->ip: Authentication response
 deactivate au
-ip --> wb: Authorization Response\nwith Authorization code
-deactivate ip
-wb -> rd: Order Messenger-Service\nwith Authorization code
+ip --> wb: Authorization code
+wb -> rd: Web-Schnittstelle aufrufen (Authorization code)
 'rd --> wb: Order Response
 rd -> ip: POST /tokenEndpoint\n{authorization code}
 ip --> rd: Response\n{id_token, access_token}
+deactivate ip
 deactivate rd
 deactivate wb
 @enduml
