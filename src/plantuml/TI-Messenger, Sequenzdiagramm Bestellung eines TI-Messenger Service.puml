@@ -7,7 +7,7 @@ scale max 850 width
 
 skinparam sequence {
 ArrowColor black
-ArrowFontSize 16
+ArrowFontSize 17
 ActorBorderColor black
 LifeLineBorderColor black
 LifeLineBackgroundColor Gainsboro
@@ -28,14 +28,16 @@ ActorFontName Aapex
 
 'title "TI-M, Sequenzdiagramm Bestellung eines Messenger-Service"
 actor oa as "Akteur in der Rolle\nOrg-Admin"
+box <size:19>Endgerät</size> #WhiteSmoke
 participant wb as "Frontend des \nRegistrierungs-Dienstes"
 participant au as "Authenticator"
+end box
 participant ko as "Konnektor"
 participant kt as "eHealth KT"
 participant rd as "Registrierungs-Dienst"
 participant ip as "zentraler \nIDP-Dienst"
 
-oa -> wb: Einen Messenger-Service \nregistrieren
+oa -> wb: Organisation verifizieren
 activate wb
 wb -> rd:POST /register 
 activate rd
@@ -53,7 +55,7 @@ kt --> ko
 deactivate kt
 ko --> au: Response signedDocument
 deactivate ko
-opt Abbruch
+opt <size:15>Abbruch</size>
 au -> oa: SMC-B nicht freigeschaltet
 end
 'au -->wb: Authentication response
@@ -64,9 +66,9 @@ wb -> rd: POST /register (Authorization code)
 rd -> ip: POST /tokenEndpoint\n{authorization code}
 ip --> rd: Response\n{id_token, access_token}
 deactivate ip
-rd -> rd: Messenger Service registrieren
-rd --> wb: Account Daten
-wb --> oa: Registrierung erfolgreich
+rd -> rd: Organisation authentisieren
+rd --> wb: status, id_token, access_token
+wb --> oa: Verifizierung erfolgreich
 deactivate rd
 deactivate wb
 @enduml
