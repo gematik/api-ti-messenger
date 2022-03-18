@@ -1,3 +1,11 @@
+/' 
+# TI-Messenger 1.1
+# TI-Messenger-Dienst
+# UC - 10103
+# Sequence Diagram
+# Name: Authentisieren einer Organisation am TI-Messenger-Dienst
+'/
+
 @startuml
 skinparam sequenceMessageAlign direction
 skinparam WrapWidth 300
