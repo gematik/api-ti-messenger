@@ -1,0 +1,33 @@
+/' 
+# TI-Messenger 1.1
+# TI-Messenger-Dienst
+# Use Case Diagram
+# Name: User / User-HBA - Anwendungsfaelle
+'/
+
+@startuml
+skinparam actorStyle awesome
+left to right direction
+
+package Rolle {
+actor "User / User-HBA" as uuh
+}
+
+package Anwendungsfälle {
+usecase "**<<AF_10057>>** \nAnmeldung eines Akteurs am Messenger-Service" as UC1
+usecase "**<<AF_10058>>** \nAkteur (User-HBA) im Verzeichnisdienst \nhinzufügen" as UC2
+usecase "**<<AF_10063>>** \nAustausch von Nachrichten innerhalb eines \nMessenger-Services" as UC3
+usecase "**<<AF_10061>>** \nAustausch von Nachrichten zwischen \nMessenger-Services" as UC4
+}
+
+uuh --> UC1
+uuh --> UC2
+uuh --> UC3
+uuh --> UC4
+
+note top of (uuh)
+z. B. Leistungserbringer im Besitz 
+eines HBAs und/oder einer SMC-B
+end note
+
+@enduml
