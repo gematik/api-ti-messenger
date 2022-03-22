@@ -1,0 +1,83 @@
+/' 
+# TI-Messenger 1.1
+# TI-Messenger-Dienst
+# UC - 10060
+# Sequence Diagram
+# Name: Bereitstellung eines Messenger Service für eine Organisation
+'/
+
+@startuml
+skinparam sequenceMessageAlign direction
+skinparam WrapWidth 300
+skinparam minClassWidth 150
+skinparam BoxPadding 1
+skinparam sequenceReferenceHeaderBackgroundColor palegreen
+scale max 850 width
+
+skinparam sequence {
+ArrowColor black
+ArrowFontSize 17
+ActorBorderColor black
+LifeLineBorderColor black
+LifeLineBackgroundColor Gainsboro
+
+ParticipantBorderColor Motivation
+ParticipantBackgroundColor Motivation
+ParticipantFontName Impact
+ParticipantFontSize 20
+ParticipantFontColor black
+ParticipantBorderColor Black
+ParticipantBackgroundColor MOTIVATION
+
+ActorBackgroundColor Gainsboro
+ActorFontColor black
+ActorFontSize 20
+ActorFontName Aapex
+}
+    actor U as "Akteur in der Rolle\nOrg-Admin"
+      box <size:16>Endgerät</size> #WhiteSmoke
+        participant C as "Frontend des\nRegistrieungs-Dienstes"
+      end box
+    participant I as "zentraler IDP-Dienst"
+    participant R as "Registrierungs-Dienst"
+    participant VZD as "VZD-FHIR-Directory"
+    participant MS as "Messenger-Service" #LightBlue
+
+    |||
+    ref over U, R: <size:17>**AF: 10103** - Authentisieren einer Organisation  am TI-Messenger-Dienst</size> 
+    |||
+
+loop <size:14>1..n</size>
+    U->C: Messenger Service erstellen
+      Activate C
+    
+    C->R: POST /create (id_token, access_token, Domain)
+      Activate R
+    
+    group Messaging-Service erstellen
+    |||
+      R->R: Starte neuen Messenger-Service \nfür die Organisation (Matrix-Domain)
+      R->MS: Service erstellen, Account Daten
+        Activate MS
+      MS-->R: Status
+        Deactivate MS
+    |||
+    end
+    
+    group VZD-FHIR-Directory Eintrag
+    |||
+      R->VZD: OAuth2 Client Credentials Flow
+        Activate VZD
+      VZD-->R: Status
+      R->VZD: POST /tim-providers-services \n(Matrix-Domain)
+      VZD-->R: Status
+        Deactivate VZD
+    |||
+    end
+
+    R->C: Status, Account Daten
+      Deactivate R
+    C->U: Status, Account Daten
+      Deactivate C
+end
+@enduml
