@@ -1,0 +1,31 @@
+/'
+# TI-Messenger 1.1
+# TI-Messenger-Dienst
+# Use Case Diagram
+# Name: Org-Admin - Anwendungsfaelle
+'/
+
+@startuml
+skinparam actorStyle awesome
+left to right direction
+
+package Rolle {
+  actor "Org-Admin" as oa
+}
+
+package Anwendungsfälle {
+  usecase "**<<AF_10103>>** \nAuthentisieren einer Organisation \nam TI-Messenger-Dienst" as UC1
+  usecase "**<<AF_10060>>** \nBereitstellung eines Messenger Service \nfür eine Organisation" as UC2
+  usecase "**<<AF_10059>>** \nOrganisation im Verzeichnisdienst \nhinzufügen" as UC3
+}
+
+oa --> UC1
+oa --> UC2
+oa --> UC3
+
+note top of (oa)
+  z. B. Beauftragter Mitarbeiter in einer
+  Organisation
+end note
+
+@enduml
