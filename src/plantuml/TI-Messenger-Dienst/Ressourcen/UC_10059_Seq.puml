@@ -35,16 +35,16 @@ ActorFontName Aapex
 }
     actor U as "Akteur in der Rolle\nOrg-Admin"
     participant C as "TI-Messenger-Client\n mit Org-Admin \nFunktionalität"
-    participant A as "Authenticator \ndes IDP"
+    participant A as "Authenticator \ndes IDP-Dienst"
     participant I as "IDP-Dienst" 
     box <size:18>VZD-FHIR-Directory</size> #WhiteSmoke
       participant FP as "FHIR-Proxy"
-      participant Auth as "Auth Services"
+      participant Auth as "Auth-Service"
       participant VZD as "FHIR-Directory"
     end box
 
 |||
-note over U, I: <size:17>Die Organisation hat einen Messenger Service bereitgestellt bekommen, \n<size:17>der Teil der Förderation ist</size>
+note over U, I: <size:17>Die Organisation hat einen Messenger Service bereitgestellt bekommen, \n<size:17>der Teil der Föderation ist</size>
 |||
 
 U->C: FHIR Ressourcen im \nVZD-FHIR-Directory \nhinzufügen (MXID)
@@ -104,15 +104,29 @@ end
       
 |||
 
-C->FP: GET /owner/TIHealthCareService?providedBy.id=telematikID \nAuthorization Bearer owner-accesstoken
-  Activate FP
-FP->FP: prüfe \nowner-accesstoken
-FP->VZD: GET /TIHealthCareService?providedBy.id=\ntelematikID
-VZD-->FP: HTTP 200 OK (result body json)
-FP-->C: HTTP 200 OK (result body json)
-  Deactivate FP
-C-->U: Status
-    
+group <size:16>VZD-FHIR-Directory Eintrag</size>
+  |||
+  C->FP: GET /owner/TIHealthCareService?providedBy.id=telematikID \nAuthorization Bearer owner-accesstoken
+    Activate FP
+  FP->FP: prüfe \nowner-accesstoken
+  FP->VZD: HTTP Forward
+    Activate VZD
+  VZD-->FP: HTTP 200 OK (result body json)
+    Deactivate VZD
+  FP-->C: HTTP 200 OK (result body json)
+    Deactivate FP
+  C->FP: PUT /owner/TIHealthCareService?telecom.value=MXID \nAuthorization Bearer owner-accesstoken
+    Activate FP
+  FP->FP: prüfe \nowner-accesstoken
+  FP->VZD: HTTP Forward
+    Activate VZD
+  VZD-->FP: HTTP 201 Created (result body json)
+    Deactivate VZD
+  FP-->C: HTTP 201 Created (result body json)
+    Deactivate FP
+  C-->U: Status    
+  |||
+end
 |||
 
   Deactivate C
