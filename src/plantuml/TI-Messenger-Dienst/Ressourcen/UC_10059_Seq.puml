@@ -3,12 +3,12 @@
 # TI-Messenger-Dienst
 # UC - 10059
 # Sequence Diagram
-# Name: Bereitstellung eines Messenger Service fÃ¼r eine Organisation
+# Name: Bereitstellung eines Messenger Service für eine Organisation
 '/
 
 @startuml
 skinparam sequenceMessageAlign direction
-skinparam minClassWidth 150
+skinparam minClassWidth 200
 skinparam BoxPadding 1
 skinparam sequenceReferenceHeaderBackgroundColor palegreen
 scale max 850 width
@@ -35,7 +35,7 @@ ActorFontName Aapex
 }
     actor U as "Akteur in der Rolle\nOrg-Admin"
     participant C as "TI-Messenger-Client\n mit Org-Admin \nFunktionalität"
-    participant A as "Authenticator des IDP"
+    participant A as "Authenticator \ndes IDP"
     participant I as "IDP-Dienst" 
     box <size:18>VZD-FHIR-Directory</size> #WhiteSmoke
       participant FP as "FHIR-Proxy"
@@ -60,7 +60,7 @@ alt#LightGrey #AliceBlue <size:16>kein gültigess owner-access-token</size>
     Activate FP
   FP->Auth: HTTP Forward
     Activate Auth
-  Auth-->FP: Redirct to IDP \nAuthorization \nEndpoint
+  Auth-->FP: Redirct to IDP \nAuthorization Endpoint
     Deactivate Auth
   FP-->C: HTTP Forward
     Deactivate FP
@@ -106,8 +106,8 @@ end
 
 C->FP: GET /owner/TIHealthCareService?providedBy.id=telematikID \nAuthorization Bearer owner-accesstoken
   Activate FP
-FP->FP: prüfe owner-accesstoken
-FP->VZD: GET /TIHealthCareService?providedBy.id=telematikID
+FP->FP: prüfe \nowner-accesstoken
+FP->VZD: GET /TIHealthCareService?providedBy.id=\ntelematikID
 VZD-->FP: HTTP 200 OK (result body json)
 FP-->C: HTTP 200 OK (result body json)
   Deactivate FP
