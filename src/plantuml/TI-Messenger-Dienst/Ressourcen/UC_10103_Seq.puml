@@ -34,49 +34,54 @@ ActorFontSize 20
 ActorFontName Aapex
 }
 
-'title "TI-M, Sequenzdiagramm Bestellung eines Messenger-Service"
-actor oa as "Akteur in der Rolle\nOrg-Admin"
-box <size:19>Endgerät</size> #WhiteSmoke
-participant wb as "Frontend des \nRegistrierungs-Dienstes"
-participant au as "Authenticator"
-end box
-participant ko as "Konnektor"
-participant kt as "eHealth KT"
-participant rd as "Registrierungs-Dienst"
-participant ip as "zentraler \nIDP-Dienst"
+  actor oa as "Akteur in der Rolle\nOrg-Admin"
+    box <size:19>Endgerät</size> #WhiteSmoke
+    participant wb as "Frontend des \nRegistrierungs-Dienstes"
+    participant au as "Authenticator"
+    end box
+  participant ko as "Konnektor"
+  participant kt as "eHealth KT"
+  participant rd as "Registrierungs-Dienst"
+  participant ip as "zentraler \nIDP-Dienst"
 
-oa -> wb: Organisation verifizieren
-activate wb
-wb -> rd:POST /register 
-activate rd
-rd --> wb: HTTP/1.1 3xx Redirect to IDP Authorization Endpoint
-wb -> ip: GET /authorize
-activate ip
-ip -> au: Authentication challenge
-'wb -> au: Authentication
-activate au
-au -> ko: SignDocument
-activate ko
-ko -> kt: SICCT command
-activate kt
-kt --> ko
-deactivate kt
-ko --> au: Response signedDocument
-deactivate ko
+  oa -> wb: Organisation verifizieren
+    activate wb
+  wb -> rd:POST /register 
+    activate rd
+  rd --> wb: HTTP/1.1 3xx Redirect to IDP Authorization Endpoint
+    deactivate rd
+  wb -> ip: GET /authorize
+    activate ip
+  ip -> au: Authentication challenge
+    activate au
+  au -> ko: SignDocument
+    activate ko
+  ko -> kt: SICCT command
+    activate kt
+  kt --> ko
+    deactivate kt
+  ko --> au: Response \nsignedDocument
+    deactivate ko
+
 opt <size:15>Abbruch</size>
-au -> oa: SMC-B nicht freigeschaltet
+  au -> oa: SMC-B nicht freigeschaltet
 end
-'au -->wb: Authentication response
-au -->ip: Authentication response
-deactivate au
-ip --> wb: Authorization code
-wb -> rd: POST /register (Authorization code)
-rd -> ip: POST /tokenEndpoint\n{authorization code}
-ip --> rd: Response\n{id_token, access_token}
-deactivate ip
-rd -> rd: Organisation authentisieren
-rd --> wb: status, id_token, access_token
-wb --> oa: Verifizierung erfolgreich
-deactivate rd
-deactivate wb
+
+  au -->ip: Authentication response
+    deactivate au
+  ip --> wb: Authorization code
+    deactivate ip
+|||
+  wb -> rd: POST /register (Authorization code)
+    activate rd
+  rd -> ip: POST /tokenEndpoint\n{authorization code}
+    activate ip
+  ip --> rd: Response\n{id_token, access_token}
+    deactivate ip
+  rd -> rd: Organisation \nauthentisieren
+  rd --> wb: status, id_token, access_token
+    deactivate rd
+  wb --> oa: Verifizierung erfolgreich
+    deactivate wb
+    
 @enduml
