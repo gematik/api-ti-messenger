@@ -38,23 +38,22 @@ ActorFontName Aapex
       box <size:16>Endgerät</size> #WhiteSmoke
         participant C as "Frontend des\nRegistrieungs-Dienstes"
       end box
-    participant I as "zentraler IDP-Dienst"
+    participant I as "zentraler \nIDP-Dienst"
     participant R as "Registrierungs-Dienst"
     participant VZD as "VZD-FHIR-Directory"
     participant MS as "Messenger-Service" #LightBlue
 
-    |||
-    ref over U, R: <size:17>**AF: 10103** - Authentisieren einer Organisation  am TI-Messenger-Dienst</size> 
-    |||
+|||
+ref over U, R: <size:17>**AF: 10103** - Authentisieren einer Organisation  am TI-Messenger-Dienst</size> 
+|||
 
-loop <size:14>1..n</size>
-    U->C: Messenger Service erstellen
-      Activate C
+loop <size:16>1..n</size>
+  U->C: Messenger Service erstellen
+  Activate C
+  C->R: POST /create (id_token, access_token, Domain)
+    Activate R
     
-    C->R: POST /create (id_token, access_token, Domain)
-      Activate R
-    
-    group Messaging-Service erstellen
+    group <size:16>Messaging-Service erstellen</size>
     |||
       R->R: Starte neuen Messenger-Service \nfür die Organisation (Matrix-Domain)
       R->MS: Service erstellen, Account Daten
@@ -64,7 +63,7 @@ loop <size:14>1..n</size>
     |||
     end
     
-    group VZD-FHIR-Directory Eintrag
+    group <size:16>VZD-FHIR-Directory Eintrag</size>
     |||
       R->VZD: OAuth2 Client Credentials Flow
         Activate VZD
@@ -75,9 +74,10 @@ loop <size:14>1..n</size>
     |||
     end
 
-    R->C: Status, Account Daten
-      Deactivate R
-    C->U: Status, Account Daten
-      Deactivate C
+  R->C: Status, Account Daten
+    Deactivate R
+  C->U: Status, Account Daten
+    Deactivate C
 end
+
 @enduml
