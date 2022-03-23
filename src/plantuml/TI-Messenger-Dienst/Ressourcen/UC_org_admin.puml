@@ -14,8 +14,8 @@ package Rolle {
 }
 
 package Anwendungsfälle {
-  usecase "**<<AF_10103>>** \nAuthentisieren einer Organisation \nam TI-Messenger-Dienst" as UC1
-  usecase "**<<AF_10060>>** \nBereitstellung eines Messenger Service \nfür eine Organisation" as UC2
+  usecase "**<<AF_10103>>** \nAuthentisieren einer Organisation \nam TI-Messenger-Dienst" as UC1 #AliceBlue
+  usecase "**<<AF_10060>>** \nBereitstellung eines Messenger Service \nfür eine Organisation" as UC2 #AliceBlue
   usecase "**<<AF_10059>>** \nOrganisation im Verzeichnisdienst \nhinzufügen" as UC3
 }
 
