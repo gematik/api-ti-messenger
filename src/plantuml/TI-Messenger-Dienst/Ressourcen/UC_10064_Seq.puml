@@ -1,0 +1,99 @@
+/' 
+# TI-Messenger 1.1
+# TI-Messenger-Dienst
+# UC - 10064
+# Sequence Diagram
+# Name: Föderationszugehörigkeit eines Messenger-Service prüfen
+'/
+
+@startuml
+skinparam sequenceMessageAlign direction
+skinparam minClassWidth 200
+skinparam BoxPadding 1
+skinparam sequenceReferenceHeaderBackgroundColor palegreen
+scale max 850 width
+
+skinparam sequence {
+ArrowColor black
+ArrowFontSize 17
+ActorBorderColor black
+LifeLineBorderColor black
+LifeLineBackgroundColor Gainsboro
+
+ParticipantBorderColor Motivation
+ParticipantBackgroundColor Motivation
+ParticipantFontName Impact
+ParticipantFontSize 20
+ParticipantFontColor black
+ParticipantBorderColor Black
+ParticipantBackgroundColor MOTIVATION
+
+ActorBackgroundColor Gainsboro
+ActorFontColor black
+ActorFontSize 20
+ActorFontName Aapex
+}
+    box <size:18>Messenger-Service</size> #WhiteSmoke
+    participant MP as "Messenger-Proxy"
+    participant MH as "Matrix-Homeserver"
+    end box
+    participant RD as "Registrierungs-Dienst"
+    box <size:18>VZD-FHIR-Directory</size> #WhiteSmoke
+      participant FP as "FHIR-Proxy"
+      participant AS as "OAuth Service"
+    end box
+
+|||
+note over MP, MH: <size:17>Überprüfe, ob eingehender Matrix-Request an den \n<size:17>Matrix-Homeserver weitergeleitet werden darf</size>
+|||
+
+    Activate MP
+  MP->RD: GET /FederationList
+    Activate RD
+  RD->RD: prüfe aktualität \nder Föderationsliste
+
+|||
+alt#LightGrey #AliceBlue <size:16>Föderationsliste nicht aktuell</size>
+|||  
+
+  RD->FP: OAuth Client Credentional Flow \n(Credentials)
+      Activate FP
+  FP->AS: HTTP Forward
+    Activate AS
+  AS->AS: prüfe Credentials
+  AS-->FP: Accesstoken (30 Minuten)
+    Deactivate AS
+  FP-->RD: Status, Accesstoken (30 Minuten)
+  RD->FP: GET /tim-provider-services/FederationList \n(Accesstoken)
+  FP-->RD: Föderationsliste[]
+    Deactivate FP
+  RD-->MP: Föderationsliste[]
+
+  |||
+  else <size:16>Föderationsliste aktuell</size>
+  ||| 
+    
+    RD-->MP: Föderationsliste[] 
+      Deactivate RD
+  |||
+end
+
+  MP->MP: prüfe Domainzugehörigkeit \nder beteiligten Akteure
+
+|||
+alt#LightGrey #AliceBlue <size:16>Domain nicht berechtigt</size>
+|||  
+  note over MP, MH: <size:17>Abbruch, Verbindung wird abgelehnt</size>
+  ||| 
+  
+  else <size:16>Domain berechtigt</size>
+    ||| 
+    MP->MH: HTTP Forward
+      Activate MH
+    MH-->MP: Status
+      Deactivate MH
+      Deactivate MP
+    ||| 
+
+end
+@enduml
