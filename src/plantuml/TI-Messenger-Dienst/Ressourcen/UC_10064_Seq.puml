@@ -59,7 +59,7 @@ opt#LightGrey #AliceBlue <size:16>Föderationsliste des Messenger-Proxy nicht ak
   RD->RD: prüfe Aktualität \nder Föderationsliste
   
   |||
-  alt#LightGrey #Lightgreen <size:16>Föderationsliste im Registrierungs-Dienst ist nicht aktuell</size>
+  alt#LightGrey #MistyRose <size:16>Föderationsliste im Registrierungs-Dienst ist nicht aktuell</size>
   ||| 
   
     RD->FP: OAuth Client Credentional Flow \n(Credentials)
