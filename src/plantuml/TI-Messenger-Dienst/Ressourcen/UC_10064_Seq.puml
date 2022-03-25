@@ -48,41 +48,49 @@ note over MP, MH: <size:17>Überprüfe, ob eingehender Matrix-Request an den \n<
 |||
 
     Activate MP
-  MP->RD: GET /FederationList
-    Activate RD
-  RD->RD: prüfe aktualität \nder Föderationsliste
+  MP->MP: prüfe Föderationsliste auf Aktualität \nund ob Domain in der Liste vorhanden ist
 
 |||
-alt#LightGrey #AliceBlue <size:16>Föderationsliste nicht aktuell</size>
+opt#LightGrey #AliceBlue <size:16>Föderationsliste des Messenger-Proxy nicht aktuell || Domain nicht in der Liste enthalten</size>
 |||  
 
-  RD->FP: OAuth Client Credentional Flow \n(Credentials)
-      Activate FP
-  FP->AS: HTTP Forward
-    Activate AS
-  AS->AS: prüfe Credentials
-  AS-->FP: Accesstoken (30 Minuten)
-    Deactivate AS
-  FP-->RD: Status, Accesstoken (30 Minuten)
-  RD->FP: GET /tim-provider-services/FederationList \n(Accesstoken)
-  FP-->RD: Föderationsliste[]
-    Deactivate FP
-  RD-->MP: Föderationsliste[]
-
+  MP->RD: GET /FederationList
+    Activate RD
+  RD->RD: prüfe Aktualität \nder Föderationsliste
+  
   |||
-  else <size:16>Föderationsliste aktuell</size>
+  alt#LightGrey #Lightgreen <size:16>Föderationsliste im Registrierungs-Dienst ist nicht aktuell</size>
   ||| 
-    
-    RD-->MP: Föderationsliste[] 
-      Deactivate RD
-  |||
-end
+  
+    RD->FP: OAuth Client Credentional Flow \n(Credentials)
+        Activate FP
+    FP->AS: HTTP Forward
+      Activate AS
+    AS->AS: prüfe Credentials
+    AS-->FP: Accesstoken (30 Minuten)
+      Deactivate AS
+    FP-->RD: Status, Accesstoken (30 Minuten)
+    RD->FP: GET /tim-provider-services/FederationList \n(Accesstoken)
+    FP-->RD: Föderationsliste[]
+      Deactivate FP
+    RD-->MP: Föderationsliste[]
 
+      |||
+      else <size:16>Föderationsliste im Registrierungs-Dienst ist aktuell</size>
+      |||
+        RD-->MP: Föderationsliste[]
+  end
+  
+  |||
   MP->MP: prüfe Domainzugehörigkeit \nder beteiligten Akteure
+  |||
+  
+end
 
 |||
 alt#LightGrey #AliceBlue <size:16>Domain nicht berechtigt</size>
 |||  
+
   note over MP, MH: <size:17>Abbruch, Verbindung wird abgelehnt</size>
   ||| 
   
