@@ -1,0 +1,105 @@
+/' 
+# TI-Messenger 1.1
+# TI-Messenger-Dienst
+# UC - 10104
+# Sequence Diagram
+# Name: Einladung von Akteuren innerhalb eines Messenger-Service
+'/
+
+@startuml
+skinparam sequenceMessageAlign direction
+skinparam minClassWidth 200
+skinparam BoxPadding 1
+skinparam sequenceReferenceHeaderBackgroundColor palegreen
+scale max 850 width
+
+skinparam sequence {
+ArrowColor black
+ArrowFontSize 17
+ActorBorderColor black
+LifeLineBorderColor black
+LifeLineBackgroundColor Gainsboro
+
+ParticipantBorderColor Motivation
+ParticipantBackgroundColor Motivation
+ParticipantFontName Impact
+ParticipantFontSize 20
+ParticipantFontColor black
+ParticipantBorderColor Black
+ParticipantBackgroundColor MOTIVATION
+
+ActorBackgroundColor Gainsboro
+ActorFontColor black
+ActorFontSize 20
+ActorFontName Aapex
+}
+    actor U1 as "Akteur - A in der Rolle\nUser / User-HBA"
+    participant C1 as "TI-Messenger-\nClient A" #AliceBlue
+    actor U2 as "Akteur - B in der Rolle\nUser / User-HBA"
+    participant C2 as "TI-Messenger-\nClient B"#TECHNOLOGY
+    box <size:18>Messenger-Service</size> #WhiteSmoke
+      participant MP as "Messenger-\nProxy"
+      participant MH as "Matrix-Homeserver \n(inklusive Nutzerverzeichnis)"
+      participant PG as "Push-Gateway"
+    end box
+
+|||
+note over U1, PG: \n<size:17>Die Akteure sind auf dem selben Messenger-Service angemeldet und im Besitz eines zugelassenen TI-Messenger-Clients</size>\n
+|||
+
+    U1->C1: Suche Akteur B
+      activate C1 #AliceBlue
+    C1->MP: GET /search 
+      activate MP
+    MP->MP: TLS-Terminierung
+    MP->MH: HTTP Forward
+      activate MH
+    MH-->MP: user-id
+      deactivate MH
+    MP-->C1: HTTP Forward
+    U1->C1: Akteur B einladen
+    C1->MP: POST /_matrix/client/r0/rooms/{roomId}/invite
+      deactivate C1
+    MP->MP: Prüfe Domain
+    MP->MH: HTTP Foward
+      activate MH
+    MH-->MP: Status
+    |||
+    group par 
+      group push
+        MH->PG: Notification
+          activate PG
+        PG-->MH: Status
+          deactivate MH
+        PG->C2: Notification
+          deactivate PG
+      |||
+      end
+      |||
+      group /sync
+        MH->MP: Invite Request
+          activate MH
+        MP->C2: HTTP Forward
+          activate C2 #TECHNOLOGY
+        C2->U2: Einladung anzeigen
+        U2-->C2: Einladung bestätigen
+        C2->MP: commit
+          deactivate C2
+        MP->MP: TLS Terminierung
+        MP-->MH: HTTP Forward
+          deactivate MP
+        MH-->MH: Ivents auslösen
+        MH-->MP: Status
+          deactivate MH
+          activate MP
+        MP-->U1: Status
+        MP-->U2: Status
+          deactivate MP
+      end
+
+|||
+    end
+    
+
+
+@enduml
