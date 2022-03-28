@@ -1,0 +1,151 @@
+/' 
+# TI-Messenger 1.1
+# TI-Messenger-Dienst
+# Sequence Diagram
+# Name: Einträge im VZD-FHIR-Directory suchen
+'/
+
+@startuml
+skinparam sequenceMessageAlign direction
+skinparam minClassWidth 200
+skinparam BoxPadding 1
+skinparam sequenceReferenceHeaderBackgroundColor palegreen
+scale max 2048 width
+
+skinparam sequence {
+ArrowColor black
+ArrowFontSize 17
+ActorBorderColor black
+LifeLineBorderColor black
+LifeLineBackgroundColor Gainsboro
+
+ParticipantBorderColor Motivation
+ParticipantBackgroundColor Motivation
+ParticipantFontName Impact
+ParticipantFontSize 20
+ParticipantFontColor black
+ParticipantBorderColor Black
+ParticipantBackgroundColor MOTIVATION
+
+ActorBackgroundColor Gainsboro
+ActorFontColor black
+ActorFontSize 20
+ActorFontName Aapex
+}
+    actor U as "Akteur in der Rolle\nUser / User-HBA"
+    participant cl as "TI-Messenger-Client"
+    participant mp as "Messenger Proxy"
+    participant hs as "Matrix-Homeserver"
+    box <size:18>VZD-FHIR-Directory</size> #WhiteSmoke
+      participant fp as "FHIR-Proxy"
+      participant pp as "PASSporT-\nService"
+      participant au as "Auth-Service"
+      participant fd as "FHIR-Directory"
+    end box
+    
+|||
+      activate cl
+    U->cl:gibt Suchparameter ein
+    cl->cl: prüfe ob noch gültiges \ntim-search-accesstoken\nvom FHIR-Proxy vorliegt
+
+|||
+note over U, hs: \n<size:17>Der Akteur ist erfolgreich beim Messenger Service angemeldet</size>\n
+|||
+
+|||
+alt#LightGrey #AliceBlue <size:16>kein gültiges tim-search-accesstoken vorhanden</size>
+|||
+      
+
+    cl->mp: GET /_matrix/client/r0/user/\n{userId}/openid/request_token 
+      activate mp
+    mp->hs: HTTP Forward 
+
+      activate hs
+    hs-->mp: HTTP 200 OK, Result body \n{"access_token": \n"Matrix-OpenID-Token", \n"matrix_server_name": \n"example.com",...}
+      deactivate hs
+    mp-->cl: HTTP Forward
+      deactivate mp
+      
+    cl->fp: GET /tim-authenticate... (Auth Header mit Matrix-OpenID-Token)
+      activate fp
+    fp->au: HTTP Forward
+      activate au
+    au->au: Prüfe ob matrix_server_name\nin Föderationsliste enthalten ist
+    
+|||
+alt#LightGrey #LightBlue <size:16>matrix_server_name nicht in der Föderationsliste enthalten</size>
+|||    
+    au-->fp: HTTP 401 \nUnauthorized
+    fp-->cl: HTTP Forward
+    cl->cl: Session beenden
+    cl-->U: Suche nicht erfolgreich
+    
+    |||
+    else <size:16>matrix_server_name in der Föderationsliste enthalten</size>
+    |||
+        au->fp: GET /openid/userinfo/?\naccess_token=Matrix-OpenID-Token)
+        fp->hs: HTTP Forward
+          activate hs
+        hs-->fp: HTTP 200 OK\n(Result Body \nMXID des Nutzers)
+          deactivate hs
+        fp-->au: HTTP Forward
+        au->au: erzeuge \ntim-search-accesstoken 
+        au-->fp: HTTP 200 OK, \ntim-search-accesstoken \n(inklusive MXID des Nutzers)
+        
+        fp-->cl: HTTP Forward
+          deactivate au
+          deactivate fp
+    |||
+    end
+end
+
+    |||
+    cl->fp: GET /tim-search?... (Auth Header mit tim-search-accesstoken)
+    |||
+      activate fp
+    fp->fp: prüfe tim-search-accesstoken
+    |||
+    opt#LightGrey #MistyRose <size:16>Abbruch</size>
+      fp-->cl: kein tim-search-accesstoken vorhanden
+    end
+   
+|||
+alt#LightGrey #AliceBlue <size:16>TIHealthcareService-Einträge werden gesucht</size>
+|||
+    fp->fd: GET /?...
+      activate fd
+    fd-->fp: HTTP 200 OK\n(Result Body json)
+      deactivate fd
+|||
+end
+
+|||
+alt#LightGrey #AliceBlue <size:16>TIPractitionerRole-Einträge werden gesucht</size>
+|||
+    fp->fd: GET /?...<MXID des anfragenden Nutzers>
+      activate fd
+    fd->fd: Prüfung, ob MXID im \nTIEndpoint-Eintrag \nvorhanden ist
+    fd-->fp: HTTP 200 OK\n(Result Body json mit TIPractitioner-Eintrag)
+      deactivate fd
+|||
+end
+|||
+
+  fp->fp: MXID enthalten und \nTIEndpoint.status == active
+  |||
+  opt#LightGrey #MistyRose <size:16>Abbruch</size>
+    fp-->cl: kein passender Eintrag gefunden
+  end
+  |||
+  fp->pp: Request \nerzeuge PASSporT (MXID)
+    activate pp
+  pp->pp: Erzeuge PASSporT \n(Attribut orig, dest)
+  pp-->fp: /?PASSporT=[PASSporT-String].
+    deactivate pp
+  fp-->cl: HTTP 200 OK (MXID und PASSporT)
+   |||
+    deactivate fp
+    deactivate cl
+
+@enduml
