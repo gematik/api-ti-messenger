@@ -56,7 +56,7 @@ note over U1, U2: \n<size:17>Die Akteure sind auf dem selben Messenger-Service a
     |||
     opt#LightGrey #MistyRose <size:16>Abbruch</size>
       MP-->C1: Domain nicht auf \ndem gleichen \nMatrix-Homeserver
-      C1-->U1: Akteur B kann \nnicht eingeladen \nwerden
+      C1-->U1: Event konnte nicht \nverarbeitet werden
     end
     
     |||
