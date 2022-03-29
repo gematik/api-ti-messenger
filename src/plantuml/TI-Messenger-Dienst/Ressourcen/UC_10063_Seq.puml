@@ -1,0 +1,96 @@
+/' 
+# TI-Messenger 1.1
+# TI-Messenger-Dienst
+# UC - 10063
+# Sequence Diagram
+# Name: Austausch von Events innerhalb eines Messenger-Service
+'/
+
+@startuml
+skinparam sequenceMessageAlign direction
+skinparam minClassWidth 200
+skinparam BoxPadding 1
+skinparam sequenceReferenceHeaderBackgroundColor palegreen
+scale max 2048 width
+
+skinparam sequence {
+ArrowColor black
+ArrowFontSize 17
+ActorBorderColor black
+LifeLineBorderColor black
+LifeLineBackgroundColor Gainsboro
+
+ParticipantBorderColor Motivation
+ParticipantBackgroundColor Motivation
+ParticipantFontName Impact
+ParticipantFontSize 20
+ParticipantFontColor black
+ParticipantBorderColor Black
+ParticipantBackgroundColor MOTIVATION
+
+ActorBackgroundColor Gainsboro
+ActorFontColor black
+ActorFontSize 20
+ActorFontName Aapex
+}
+    actor U1 as "Akteur - A in der Rolle\nUser / User-HBA"
+    participant C1 as "TI-Messenger-\nClient A" #AliceBlue
+    box <size:18>Messenger-Service</size> #WhiteSmoke
+      participant MP as "Messenger-\nProxy"
+      participant MH as "Matrix-Homeserver \n(inklusive Nutzerverzeichnis)"
+      participant PG as "Push-Gateway"
+    end box
+    participant C2 as "TI-Messenger-\nClient B"#TECHNOLOGY
+    actor U2 as "Akteur - B in der Rolle\nUser / User-HBA"
+    
+|||
+note over U1, U2: \n<size:17>Die Akteure sind auf dem selben Messenger-Service angemeldet und im Besitz eines zugelassenen TI-Messenger-Clients</size>\n<size:17>Ebenfalls sind beide Akteure einem gemeinsamen Raum beigetreten</size>
+|||
+
+    U1->C1: Akteur löst \nMatrix-Event aus
+      activate C1 #AliceBlue
+    C1->MP: Matrix-Request
+      activate MP
+    MP->MP: Domainzugehörigkeit \nprüfen
+    
+    |||
+    opt#LightGrey #MistyRose <size:16>Abbruch</size>
+      MP-->C1: Domain nicht auf \ndem gleichen \nMatrix-Homeserver
+      C1-->U1: Akteur B kann \nnicht eingeladen \nwerden
+    end
+    
+    |||
+    MP->MH: HTTP Foward
+      activate MH
+    MH->MH: Event verarbeiten
+    
+    |||
+    opt <size:16>push</size>
+    MH->PG: Notification
+      activate PG
+    PG->C2: Notification
+    PG-->MH: Status
+      deactivate PG
+    |||
+    end
+    
+    |||
+    MH->MP: Matrix-Request
+    |||
+    MP->C2: HTTP Forward
+      activate C2 #TECHNOLOGY
+    C2-->MP: Status
+    |||
+    MP-->MH: HTTP Forward (Status)
+    MH->MP: Status (Matrix-Request)
+      deactivate MH
+    MP-->C1: HTTP Forward
+    C1-->U1: Status
+      deactivate C1
+    MP-->C2: HTTP Forward
+      deactivate MP
+    C2-->U2: Status
+    deactivate C2
+  |||
+|||
+@enduml
