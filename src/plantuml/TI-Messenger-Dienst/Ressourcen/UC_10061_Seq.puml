@@ -11,7 +11,7 @@ skinparam sequenceMessageAlign direction
 skinparam minClassWidth 200
 skinparam BoxPadding 1
 skinparam sequenceReferenceHeaderBackgroundColor palegreen
-scale max 2048 width
+scale max 1024 width
 
 skinparam sequence {
 ArrowColor black
@@ -103,35 +103,38 @@ note over U1, MH1: \n<size:17>Der Akteur A ist erfolgreich beim Messenger Servic
       |||
     MP2->MH2: HTTP Foward
       activate MH2
-    MH2->MH2: Event verarbeiten
-    
-    |||
-    opt <size:16>push</size>
-    MH2->PG2: Notification
-      activate PG2
-    PG2->C2: Notification
-    PG2-->MH2: Status
-      deactivate PG2
-    |||
+    group par 
+      group push
+        MH2->PG2: Notification
+          activate PG2
+        PG2->C2: Notification
+        PG2-->MH2: Status
+          deactivate PG2
+      |||
+      end
+      |||
+      group /sync
+        MH2->MP2: Invite Request
+        MP2->C2: HTTP Forward
+          activate C2 #TECHNOLOGY
+        C2->U2: Einladung anzeigen
+        U2-->C2: Einladung bestätigen
+        C2->MP2: commit
+        MP2->MP2: TLS Terminierung
+        MP2-->MH2: HTTP Forward
+        MH2-->MH2: Invite auslösen
+        MH2-->MP2: Status
+          deactivate MH2
+        MP2-->MP1: Status
+        MP1-->C1: Status
+          deactivate C1
+        MP2-->C2: Status
+          deactivate C2
+          deactivate MP2
+          |||
+      end
+|||
     end
-    
-    |||
-    MH2->MP2: Matrix-Request
-    |||
-    MP2->C2: HTTP Forward
-      activate C2 #TECHNOLOGY
-    C2-->MP2: Status
-    |||
-    MP2-->MH2: HTTP Forward (Status)
-    MH2->MP2: Status (Matrix-Request)
-      deactivate MH2
-    MP2-->MP1: HTTP Forward
-    MP1-->C1: Status
-      deactivate C1
-    MP2-->C2: HTTP Forward
-      deactivate MP2
-    C2-->U2: Status
-    deactivate C2
   |||
 |||
 @enduml
