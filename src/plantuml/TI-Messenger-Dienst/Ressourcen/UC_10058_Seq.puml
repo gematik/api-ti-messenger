@@ -1,0 +1,133 @@
+/' 
+# TI-Messenger 1.1
+# TI-Messenger-Dienst
+# UC - 10058
+# Sequence Diagram
+# Name: Akteur im Verzeichnisdienst hinzufügen
+'/
+
+@startuml
+skinparam sequenceMessageAlign direction
+skinparam minClassWidth 200
+skinparam BoxPadding 1
+skinparam sequenceReferenceHeaderBackgroundColor palegreen
+scale max 2048 width
+
+skinparam sequence {
+ArrowColor black
+ArrowFontSize 17
+ActorBorderColor black
+LifeLineBorderColor black
+LifeLineBackgroundColor Gainsboro
+
+ParticipantBorderColor Motivation
+ParticipantBackgroundColor Motivation
+ParticipantFontName Impact
+ParticipantFontSize 20
+ParticipantFontColor black
+ParticipantBorderColor Black
+ParticipantBackgroundColor MOTIVATION
+
+ActorBackgroundColor Gainsboro
+ActorFontColor black
+ActorFontSize 20
+ActorFontName Aapex
+}
+    actor U as "Akteur in der Rolle\nUser-HBA"
+    participant C as "TI-Messenger-Client"
+    participant A as "Authenticator \ndes IDP-Dienst"
+    participant I as "IDP-Dienst" 
+    box <size:18>VZD-FHIR-Directory</size> #WhiteSmoke
+      participant FP as "FHIR-Proxy"
+      participant Auth as "Auth-Service"
+      participant VZD as "FHIR-Directory"
+    end box
+
+|||
+note over U, I: <size:17>Der Akteur ist bei einem Messenger Service angemeldet (siehe AF_10057</size>
+|||
+
+U->C: FHIR Ressourcen im \nVZD-FHIR-Directory \nhinzufügen (MXID)
+  Activate C
+C->C: Prüfung, ob gültiges \nowner-accesstoken \nvorliegt
+
+|||
+alt#LightGrey #AliceBlue <size:16>kein gültigess owner-access-token</size>
+|||
+
+  C->C: Erzeuge PKCE Code \nfür verifier und challenge
+  C->FP: GET /owner-authenticate
+    Activate FP
+  FP->Auth: HTTP Forward
+    Activate Auth
+  Auth-->FP: Redirct to IDP \nAuthorization Endpoint
+    Deactivate Auth
+  FP-->C: HTTP Forward
+    Deactivate FP
+        
+  C->U: Liste verfügbarer IDP's
+  U->C: ausgewählterr IDP
+    
+  C->I: GET /authorize
+    Activate I
+  I-->C: Authentication challenge
+    Activate A
+  A->A: Authentication
+  A->I: Authentication \nchallenge response
+    Deactivate A
+  I-->C: Authorization Response with Authorization Code
+    Deactivate I
+          
+  C->FP: GET /owner-authenticate with Authorization code
+    Activate FP
+  FP->Auth: HTTP Forward
+    Deactivate FP
+    Activate Auth
+  Auth-->FP: POST /tokenEndpoint\n(authorization code)
+    Deactivate Auth
+    Activate FP
+  FP-->I: HTTP Forward
+    Activate I
+  I->FP: Response (id_token)
+    Deactivate I
+  FP->Auth: HTTP Forward
+    Deactivate FP
+    Activate Auth
+  Auth->Auth: prüfe id_token
+  Auth->Auth: erzeuge \nowner-accesstoken
+  Auth-->FP: HTTP 200 OK \n(access_token=\nowner-accesstoken)
+    Deactivate Auth
+    Activate FP
+  FP-->C: HTTP Forward
+    Deactivate FP
+end
+      
+|||
+
+group <size:16>VZD-FHIR-Directory Eintrag</size>
+  |||
+  C->FP: GET /owner/TIHealthCareService?providedBy.id=telematikID \nAuthorization Bearer owner-accesstoken
+    Activate FP
+  FP->FP: prüfe \nowner-accesstoken
+  FP->VZD: HTTP Forward
+    Activate VZD
+  VZD-->FP: HTTP 200 OK (result body json)
+    Deactivate VZD
+  FP-->C: HTTP 200 OK (result body json)
+    Deactivate FP
+  C->FP: PUT /owner/TIHealthCareService?telecom.value=MXID \nAuthorization Bearer owner-accesstoken \n(Optional: setze Flag für Sichtbarkeit)
+    Activate FP
+  FP->FP: prüfe \nowner-accesstoken
+  FP->VZD: HTTP Forward
+    Activate VZD
+  VZD-->FP: HTTP 201 Created (result body json)
+    Deactivate VZD
+  FP-->C: HTTP 201 Created (result body json)
+    Deactivate FP
+  C-->U: Status    
+  |||
+end
+|||
+
+  Deactivate C
+@enduml
