@@ -11,7 +11,7 @@ skinparam sequenceMessageAlign direction
 skinparam minClassWidth 200
 skinparam BoxPadding 1
 skinparam sequenceReferenceHeaderBackgroundColor palegreen
-scale max 1024 width
+scale max 2048 width
 
 skinparam sequence {
 ArrowColor black
@@ -49,7 +49,7 @@ ActorFontName Aapex
     participant C2 as "TI-Messenger-\nClient"
     actor U2 as "\nAkteur - B in der Rolle\nUser / User-HBA\n"
     
-note over U1, MH1: \n<size:17>Der Akteur ist erfolgreich beim Messenger Service angemeldet</size>\n    
+note over U1, MH1: \n<size:17>Der Akteur A ist erfolgreich beim Messenger Service A angemeldet</size>\n    
     
     alt#LightGrey  <size:16>Suche über VZD-FHIR-Directory</size>
       |||
