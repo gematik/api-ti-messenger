@@ -40,7 +40,7 @@ ActorFontName Aapex
       participant MH1 as "Matrix-\nHomeserver"
     end box
     participant VZD as "VZD-FHIR-\nDirectory"
-    box <size:18>Messenger-Service B</size> #WhiteSmoke
+    box <size:18>Messenger-Service B</size> #Snow
     participant MP2 as "Messenger-\nProxy"
     participant MH2 as "Matrix-\nHomeserver"
     participant PS2 as "PASSPorT-\nService"
