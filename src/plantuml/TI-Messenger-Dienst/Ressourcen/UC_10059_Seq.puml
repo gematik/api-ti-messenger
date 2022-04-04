@@ -11,7 +11,7 @@ skinparam sequenceMessageAlign direction
 skinparam minClassWidth 200
 skinparam BoxPadding 1
 skinparam sequenceReferenceHeaderBackgroundColor palegreen
-scale max 850 width
+scale max 2048 width
 
 skinparam sequence {
 ArrowColor black
@@ -69,9 +69,9 @@ alt#LightGrey #AliceBlue <size:16>kein gültigess owner-access-token</size>
   U->C: ausgewählterr IDP
     
   C->I: GET /authorize
+    Activate A
     Activate I
   I-->C: Authentication challenge
-    Activate A
   A->A: Authentication
   A->I: Authentication \nchallenge response
     Deactivate A
