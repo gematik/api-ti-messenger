@@ -69,6 +69,7 @@ loop <size:16>1..n</size>
         Activate VZD
       VZD-->R: Status
       R->VZD: POST /tim-providers-services \n(Matrix-Domain)
+      VZD-->VZD: Föderationsliste\naktualisieren
       VZD-->R: Status
         Deactivate VZD
     |||
