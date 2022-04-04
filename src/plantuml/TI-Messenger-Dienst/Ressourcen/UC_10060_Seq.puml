@@ -12,7 +12,7 @@ skinparam WrapWidth 300
 skinparam minClassWidth 150
 skinparam BoxPadding 1
 skinparam sequenceReferenceHeaderBackgroundColor palegreen
-scale max 850 width
+scale max 2048 width
 
 skinparam sequence {
 ArrowColor black
