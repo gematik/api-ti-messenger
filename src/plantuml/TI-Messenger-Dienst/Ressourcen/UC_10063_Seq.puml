@@ -40,7 +40,7 @@ ActorFontName Aapex
       participant MH as "Matrix-Homeserver \n(inklusive Nutzerverzeichnis)"
       participant PG as "Push-Gateway"
     end box
-    participant C2 as "TI-Messenger-\nClient B"#TECHNOLOGY
+    participant C2 as "TI-Messenger-\nClient B" #TECHNOLOGY
     actor U2 as "Akteur - B in der Rolle\nUser / User-HBA"
     
 |||
