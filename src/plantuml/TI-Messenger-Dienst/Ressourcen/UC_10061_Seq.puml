@@ -34,7 +34,7 @@ ActorFontSize 20
 ActorFontName Aapex
 }
     actor U1 as "\nAkteur - A in der Rolle\nUser / User-HBA\n"
-    participant C1 as "TI-Messenger-\nClient"
+    participant C1 as "TI-Messenger-\nClient" #AliceBlue
     box <size:18>Messenger-Service A</size> #WhiteSmoke
       participant MP1 as "Messenger-\nProxy"
       participant MH1 as "Matrix-\nHomeserver"
@@ -46,7 +46,7 @@ ActorFontName Aapex
     participant PS2 as "PASSPorT-\nService"
     participant PG2 as "Push-\nGateway"
     end box
-    participant C2 as "TI-Messenger-\nClient"
+    participant C2 as "TI-Messenger-\nClient" #TECHNOLOGY
     actor U2 as "\nAkteur - B in der Rolle\nUser / User-HBA\n"
     
 note over U1, MH1: \n<size:17>Der Akteur A ist erfolgreich beim Messenger Service A angemeldet</size>\n    
