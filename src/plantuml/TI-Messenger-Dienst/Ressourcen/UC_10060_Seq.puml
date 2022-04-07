@@ -12,7 +12,7 @@ skinparam WrapWidth 300
 skinparam minClassWidth 150
 skinparam BoxPadding 1
 skinparam sequenceReferenceHeaderBackgroundColor palegreen
-scale max 2048 width
+scale max 900 width
 
 skinparam sequence {
 ArrowColor black
@@ -65,10 +65,12 @@ loop <size:16>1..n</size>
     
     group <size:16>VZD-FHIR-Directory Eintrag</size>
     |||
-      R->VZD: OAuth2 Client Credentials Flow
+      R->VZD: GET /token (client_id, client_secret)
         Activate VZD
-      VZD-->R: Status
-      R->VZD: POST /tim-providers-services \n(Matrix-Domain)
+      VZD->VZD: prüfe client_id und \nclient_secret
+      VZD-->R: admin-access-token
+      |||
+      R->VZD: FHIR Request /FHIR \n(admin-access-token, Matrix-Domain)\nEndpoint (tim-domain)
       VZD-->VZD: Föderationsliste\naktualisieren
       VZD-->R: Status
         Deactivate VZD
