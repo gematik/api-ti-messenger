@@ -11,7 +11,7 @@ skinparam sequenceMessageAlign direction
 skinparam minClassWidth 200
 skinparam BoxPadding 1
 skinparam sequenceReferenceHeaderBackgroundColor palegreen
-scale max 2048 width
+scale max 900 width
 
 skinparam sequence {
 ArrowColor black
@@ -34,8 +34,10 @@ ActorFontSize 20
 ActorFontName Aapex
 }
     actor U as "Akteur in der Rolle\nOrg-Admin"
+    box <size:18>Endgerät</size> #WhiteSmoke
     participant C as "TI-Messenger-Client\n mit Org-Admin \nFunktionalität"
     participant A as "Authenticator \ndes IDP-Dienst"
+    end box
     participant I as "IDP-Dienst" 
     box <size:18>VZD-FHIR-Directory</size> #WhiteSmoke
       participant FP as "FHIR-Proxy"
@@ -56,15 +58,11 @@ alt#LightGrey #AliceBlue <size:16>kein gültigess owner-access-token</size>
 |||
 
   C->C: Erzeuge PKCE Code \nfür verifier und challenge
-  C->FP: GET /owner-authenticate
-    Activate FP
-  FP->Auth: HTTP Forward
+  |||
+  C->Auth: GET /owner-authenticate
     Activate Auth
-  Auth-->FP: Redirct to IDP \nAuthorization Endpoint
-    Deactivate Auth
-  FP-->C: HTTP Forward
-    Deactivate FP
-        
+  Auth-->C: Redirct to IDP \nAuthorization Endpoint
+
   C->U: Liste verfügbarer IDP's
   U->C: ausgewählterr IDP
     
@@ -72,34 +70,29 @@ alt#LightGrey #AliceBlue <size:16>kein gültigess owner-access-token</size>
     Activate A
     Activate I
   I-->C: Authentication challenge
+  |||
+  A->U: Aufforderung zur \nAuthentifizierung
+  U->A: Eingabe tätigen
+  |||
   A->A: Authentication
   A->I: Authentication \nchallenge response
     Deactivate A
+  |||
   I-->C: Authorization Response with Authorization Code
     Deactivate I
-          
-  C->FP: GET /owner-authenticate with Authorization code
-    Activate FP
-  FP->Auth: HTTP Forward
-    Deactivate FP
-    Activate Auth
-  Auth-->FP: POST /tokenEndpoint\n(authorization code)
-    Deactivate Auth
-    Activate FP
-  FP-->I: HTTP Forward
+      
+  |||    
+  C->Auth: GET /owner-authenticate with Authorization code
+  Auth-->I: POST /tokenEndpoint\n(authorization code)
     Activate I
-  I->FP: Response (id_token)
+  I-->Auth: Response (id_token)
     Deactivate I
-  FP->Auth: HTTP Forward
-    Deactivate FP
-    Activate Auth
   Auth->Auth: prüfe id_token
   Auth->Auth: erzeuge \nowner-accesstoken
-  Auth-->FP: HTTP 200 OK \n(access_token=\nowner-accesstoken)
+  Auth-->C: HTTP 200 OK (access_token=owner-accesstoken)
+  ||| 
+    
     Deactivate Auth
-    Activate FP
-  FP-->C: HTTP Forward
-    Deactivate FP
 end
       
 |||
@@ -115,7 +108,9 @@ group <size:16>VZD-FHIR-Directory Eintrag</size>
     Deactivate VZD
   FP-->C: HTTP 200 OK (result body json)
     Deactivate FP
+  |||
   C->FP: PUT /owner/TIHealthCareService?telecom.value=MXID \nAuthorization Bearer owner-accesstoken
+  |||
     Activate FP
   FP->FP: prüfe \nowner-accesstoken
   FP->VZD: HTTP Forward
