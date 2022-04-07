@@ -10,7 +10,7 @@ skinparam sequenceMessageAlign direction
 skinparam minClassWidth 200
 skinparam BoxPadding 1
 skinparam sequenceReferenceHeaderBackgroundColor palegreen
-scale max 2048 width
+scale max 900 width
 
 skinparam sequence {
 ArrowColor black
@@ -42,15 +42,14 @@ ActorFontName Aapex
       participant au as "Auth-Service"
       participant fd as "FHIR-Directory"
     end box
-    
-|||
-      activate cl
-    U->cl:gibt Suchparameter ein
-    cl->cl: prüfe ob noch gültiges \ntim-search-accesstoken\nvom FHIR-Proxy vorliegt
 
 |||
 note over U, hs: \n<size:17>Der Akteur ist erfolgreich beim Messenger Service angemeldet</size>\n
 |||
+
+      activate cl
+    U->cl:gibt Suchparameter ein
+    cl->cl: prüfe ob noch gültiges \ntim-search-accesstoken\nvorliegt
 
 |||
 alt#LightGrey #AliceBlue <size:16>kein gültiges tim-search-accesstoken vorhanden</size>
@@ -62,38 +61,39 @@ alt#LightGrey #AliceBlue <size:16>kein gültiges tim-search-accesstoken vorhande
     mp->hs: HTTP Forward 
 
       activate hs
+    |||
     hs-->mp: HTTP 200 OK, Result body \n{"access_token": \n"Matrix-OpenID-Token", \n"matrix_server_name": \n"example.com",...}
       deactivate hs
     mp-->cl: HTTP Forward
       deactivate mp
       
-    cl->fp: GET /tim-authenticate... (Auth Header mit Matrix-OpenID-Token)
-      activate fp
-    fp->au: HTTP Forward
+    |||
+    cl->au: GET /tim-authenticate... (Auth Header mit Matrix-OpenID-Token)
       activate au
     au->au: Prüfe ob matrix_server_name\nin Föderationsliste enthalten ist
-    
+
 |||
 alt#LightGrey #LightBlue <size:16>matrix_server_name nicht in der Föderationsliste enthalten</size>
 |||    
-    au-->fp: HTTP 401 \nUnauthorized
-    fp-->cl: HTTP Forward
+
+    au-->cl: HTTP 401 \nUnauthorized
     cl->cl: Session beenden
     cl-->U: Suche nicht erfolgreich
     
     |||
     else <size:16>matrix_server_name in der Föderationsliste enthalten</size>
     |||
-        au->fp: GET /openid/userinfo/?\naccess_token=Matrix-OpenID-Token)
-        fp->hs: HTTP Forward
+        au->mp: GET /openid/userinfo/?\naccess_token=Matrix-OpenID-Token)
+          activate mp
+        mp->hs: HTTP Forward
           activate hs
-        hs-->fp: HTTP 200 OK\n(Result Body \nMXID des Nutzers)
+        hs->hs: prüfe Matrix-OpenID-token
+        hs-->mp: HTTP 200 OK\n(Result Body \nMXID des Nutzers)
           deactivate hs
-        fp-->au: HTTP Forward
+        mp-->au: HTTP Forward
+          deactivate mp
         au->au: erzeuge \ntim-search-accesstoken 
-        au-->fp: HTTP 200 OK, \ntim-search-accesstoken \n(inklusive MXID des Nutzers)
-        
-        fp-->cl: HTTP Forward
+        au-->cl: HTTP 200 OK, \ntim-search-accesstoken \n(inklusive MXID des Nutzers)
           deactivate au
           deactivate fp
     |||
@@ -101,7 +101,7 @@ alt#LightGrey #LightBlue <size:16>matrix_server_name nicht in der Föderationsli
 end
 
     |||
-    cl->fp: GET /tim-search?... (Auth Header mit tim-search-accesstoken)
+    cl->fp: GET /tim-search?... (Auth Header mit tim-search-accesstoken inkl. MXID)
     |||
       activate fp
     fp->fp: prüfe tim-search-accesstoken
@@ -135,10 +135,10 @@ end
   fp->fp: MXID enthalten und \nTIEndpoint.status == active
   |||
   opt#LightGrey #MistyRose <size:16>Abbruch</size>
-    fp-->cl: kein passender Eintrag gefunden
+    fp-->cl: kein passender Eintrag gefunden \noder TIEndpoint.status == false
   end
   |||
-  fp->pp: Request \nerzeuge PASSporT (MXID)
+  fp->pp: Request \nerzeuge PASSporT (MXIDs...)
     activate pp
   pp->pp: Erzeuge PASSporT \n(Attribut orig, dest)
   pp-->fp: /?PASSporT=[PASSporT-String].
