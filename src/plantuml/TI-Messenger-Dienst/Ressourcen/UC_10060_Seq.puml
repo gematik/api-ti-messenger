@@ -12,7 +12,7 @@ skinparam WrapWidth 300
 skinparam minClassWidth 150
 skinparam BoxPadding 1
 skinparam sequenceReferenceHeaderBackgroundColor palegreen
-scale max 900 width
+scale max 2048 width
 
 skinparam sequence {
 ArrowColor black
@@ -35,13 +35,16 @@ ActorFontSize 20
 ActorFontName Aapex
 }
     actor U as "Akteur in der Rolle\nOrg-Admin"
-      box <size:16>Endgerät</size> #WhiteSmoke
-        participant C as "Frontend des\nRegistrieungs-Dienstes"
-      end box
+    box <size:16>Endgerät</size> #WhiteSmoke
+      participant C as "Frontend des\nRegistrieungs-Dienstes"
+    end box
     participant I as "zentraler \nIDP-Dienst"
     participant R as "Registrierungs-Dienst"
-    participant VZD as "VZD-FHIR-Directory"
-    participant MS as "Messenger-Service" #LightBlue
+    box <size:16>VZD-FHIR-Directory</size> #WhiteSmoke
+    participant Auth as "Auth Service"
+    participant FP as "FHIR Proxy"
+    participant VZD as "FHIR-Directory"
+    end box
 
 |||
 ref over U, R: <size:17>**AF: 10103** - Authentisieren einer Organisation  am TI-Messenger-Dienst</size> 
@@ -53,30 +56,45 @@ loop <size:16>1..n</size>
   C->R: POST /create (id_token, access_token, Domain)
     Activate R
     
+    |||
     group <size:16>Messaging-Service erstellen</size>
     |||
       R->R: Starte neuen Messenger-Service \nfür die Organisation (Matrix-Domain)
-      R->MS: Service erstellen, Account Daten
-        Activate MS
-      MS-->R: Status
-        Deactivate MS
+        create "Messenger-Service"
+          R-->"Messenger-Service" : Messenger-Service erstellen, Account Daten
+        Activate "Messenger-Service"
+      |||
+      "Messenger-Service"->"Messenger-Service": Account \nerstellen
+      "Messenger-Service"-->R: Status, Account Daten
+      |||
+        Deactivate "Messenger-Service"
     |||
     end
     
+    |||
+    
     group <size:16>VZD-FHIR-Directory Eintrag</size>
     |||
-      R->VZD: GET /token (client_id, client_secret)
-        Activate VZD
-      VZD->VZD: prüfe client_id und \nclient_secret
-      VZD-->R: admin-access-token
+      R->Auth: GET /token (client_id, client_secret)
+        Activate Auth
+      Auth->Auth: prüfe client_id und \nclient_secret
+      Auth-->R: admin-access-token
+        Deactivate Auth
       |||
-      R->VZD: FHIR Request /FHIR \n(admin-access-token, Matrix-Domain)\nEndpoint (tim-domain)
+      R->FP: FHIR Request /FHIR \n(admin-access-token, Matrix-Domain)\nEndpoint (tim-domain)
+        Activate FP
+      FP->VZD: HTTP Forward
+        Activate VZD
       VZD-->VZD: Föderationsliste\naktualisieren
-      VZD-->R: Status
+      VZD-->FP: Status
         Deactivate VZD
+      FP-->R: HTTP Forward
+        Deactivate FP
+
     |||
     end
 
+  |||
   R->C: Status, Account Daten
     Deactivate R
   C->U: Status, Account Daten
