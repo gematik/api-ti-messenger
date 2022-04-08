@@ -85,7 +85,7 @@ loop <size:16>1..n</size>
         Activate FP
       FP->VZD: HTTP Forward
         Activate VZD
-      VZD-->VZD: FHIR-Ressource \nerzeugen
+      VZD-->VZD: FHIR-Ressource \nerzeugen \n(TIOrganisation)
       VZD-->VZD: Föderationsliste\naktualisieren
       VZD-->FP: Status
         Deactivate VZD
