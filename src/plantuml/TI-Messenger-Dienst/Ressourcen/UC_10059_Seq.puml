@@ -3,7 +3,7 @@
 # TI-Messenger-Dienst
 # UC - 10059
 # Sequence Diagram
-# Name: Bereitstellung eines Messenger Service für eine Organisation
+# Name: Bereitstellung eines Messenger-Service für eine Organisation
 '/
 
 @startuml
@@ -34,7 +34,7 @@ ActorFontSize 20
 ActorFontName Aapex
 }
     actor U as "Akteur in der Rolle\nOrg-Admin"
-    box <size:18>Endgerät</size> #WhiteSmoke
+    box <size:18>Endgerät</size>\n #WhiteSmoke 
     participant C as "TI-Messenger-Client\n mit Org-Admin \nFunktionalität"
     participant A as "Authenticator \ndes IDP-Dienst"
     end box
@@ -46,7 +46,7 @@ ActorFontName Aapex
     end box
 
 |||
-note over U, I: <size:17>Die Organisation hat einen Messenger Service bereitgestellt bekommen, \n<size:17>der Teil der Föderation ist</size>
+note over U, I: <size:17>Die Organisation hat einen Messenger-Service bereitgestellt bekommen, \n<size:17>der Teil der Föderation ist</size>
 |||
 
 U->C: FHIR Ressourcen im \nVZD-FHIR-Directory \nhinzufügen (MXID)
@@ -54,7 +54,7 @@ U->C: FHIR Ressourcen im \nVZD-FHIR-Directory \nhinzufügen (MXID)
 C->C: Prüfung, ob gültiges \nowner-accesstoken \nvorliegt
 
 |||
-alt#LightGrey #AliceBlue <size:16>kein gültigess owner-access-token</size>
+alt#LightGrey #AliceBlue <size:16>kein gültigess owner-accesstoken</size>
 |||
 
   C->C: Erzeuge PKCE Code \nfür verifier und challenge
@@ -69,7 +69,7 @@ alt#LightGrey #AliceBlue <size:16>kein gültigess owner-access-token</size>
   C->I: GET /authorize
     Activate A
     Activate I
-  I-->C: Authentication challenge
+  I-->C: Authentication \nchallenge
   |||
   A->U: Aufforderung zur \nAuthentifizierung
   U->A: Eingabe tätigen
@@ -85,11 +85,11 @@ alt#LightGrey #AliceBlue <size:16>kein gültigess owner-access-token</size>
   C->Auth: GET /owner-authenticate with Authorization code
   Auth-->I: POST /tokenEndpoint\n(authorization code)
     Activate I
-  I-->Auth: Response (id_token)
+  I-->Auth: id_token
     Deactivate I
   Auth->Auth: prüfe id_token
   Auth->Auth: erzeuge \nowner-accesstoken
-  Auth-->C: HTTP 200 OK (access_token=owner-accesstoken)
+  Auth-->C: owner-accesstoken
   ||| 
     
     Deactivate Auth
@@ -97,27 +97,29 @@ end
       
 |||
 
-group <size:16>VZD-FHIR-Directory Eintrag</size>
+group <size:16>FHIR-Directory Eintrag erstellen</size>
   |||
-  C->FP: GET /owner/TIHealthCareService?providedBy.id=telematikID \nAuthorization Bearer owner-accesstoken
+  C->FP: GET /owner/TIHealthCareService?providedBy.id=telematikID \n(owner-accesstoken)
     Activate FP
   FP->FP: prüfe \nowner-accesstoken
   FP->VZD: HTTP Forward
     Activate VZD
-  VZD-->FP: HTTP 200 OK (result body json)
+  VZD->VZD: suche Eintrag
+  VZD-->FP: result body json
     Deactivate VZD
-  FP-->C: HTTP 200 OK (result body json)
+  FP-->C: HTTP Forward
     Deactivate FP
   |||
-  C->FP: PUT /owner/TIHealthCareService?telecom.value=MXID \nAuthorization Bearer owner-accesstoken
+  C->FP: PUT /owner/TIHealthCareService?telecom.value=MXID \n(owner-accesstoken)
   |||
     Activate FP
   FP->FP: prüfe \nowner-accesstoken
   FP->VZD: HTTP Forward
     Activate VZD
-  VZD-->FP: HTTP 201 Created (result body json)
+  VZD->VZD: Eintrag hinzufügen
+  VZD-->FP: result body json
     Deactivate VZD
-  FP-->C: HTTP 201 Created (result body json)
+  FP-->C: HTTP Forward
     Deactivate FP
   C-->U: Status    
   |||
