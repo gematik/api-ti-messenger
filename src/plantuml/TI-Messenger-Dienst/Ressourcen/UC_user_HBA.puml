@@ -27,7 +27,7 @@ ParticipantBackgroundColor MOTIVATION
 
 ActorBackgroundColor Gainsboro
 ActorFontColor black
-ActorFontSize 20
+ActorFontSize 13
 ActorFontName Aapex
 }
 
@@ -36,16 +36,20 @@ actor "User / User-HBA" as uuh
 }
 
 package Anwendungsfälle {
-usecase "**<<AF_10057>>** \nAnmeldung eines Akteurs am Messenger-Service" as UC1
-usecase "**<<AF_10058>>** \nAkteur (User-HBA) im Verzeichnisdienst \nhinzufügen" as UC2
-usecase "**<<AF_10063>>** \nAustausch von Nachrichten innerhalb eines \nMessenger-Services" as UC3
-usecase "**<<AF_10061>>** \nAustausch von Nachrichten zwischen \nunterschiedlichen Messenger-Services" as UC4
+usecase "**<<AF_10057>>** \nAnmeldung eines Akteurs am \nMessenger-Service" as UC1
+usecase "**<<AF_10058>>** \nAkteur (User-HBA) im \nVerzeichnisdienst hinzufügen" as UC2
+usecase "**<<AF_10104>>** \nEinladung von Akteuren innerhalb \neines Messenger-Services" as UC3 #AliceBlue
+usecase "**<<AF_10063>>** \nAustausch von Events innerhalb \neines Messenger-Services" as UC4 #AliceBlue
+usecase "**<<AF_10061>>** \nEinladung von Akteuren anderer \nMessenger-Services" as UC5 #Ivory
+usecase "**<<AF_10062>>** \nAustausch von Events zwischen \nanderern Messenger-Services" as UC6 #Ivory
 }
 
 uuh --> UC1
 uuh --> UC2
 uuh --> UC3
 uuh --> UC4
+uuh --> UC5
+uuh --> UC6
 
 note top of (uuh)
 z. B. Leistungserbringer im Besitz 
