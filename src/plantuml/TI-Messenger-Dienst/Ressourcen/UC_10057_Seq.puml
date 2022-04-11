@@ -11,7 +11,7 @@ skinparam sequenceMessageAlign direction
 skinparam minClassWidth 200
 skinparam BoxPadding 1
 skinparam sequenceReferenceHeaderBackgroundColor palegreen
-scale max 2048 width
+scale max 900 width
 
 skinparam sequence {
 ArrowColor black
@@ -40,15 +40,30 @@ ActorFontName Aapex
       participant MH as "Matrix-Homeserver"
     end box
     box <size:18>VZD-FHIR-Directory</size> #WhiteSmoke
+      participant Auth as "Auth-Service"
       participant FP as "FHIR-Proxy"
       participant VZD as "FHIR-Directory"
     end box
 
+|||
   U->C: Eingabe Messenger-Service \n(Manuell oder \ndurch Auswahl)
     Activate C
-  C->MP: POST /login
+  C->MP: GET /_matrix/client/login
     Activate MP
   MP->MP: TLS-Terminierung
+  MP->MP: überprüfe User-Agent, \nClient-Secret
+
+|||
+alt#LightGrey #AliceBlue <size:16>TI-Messenger Client wird vom Anbieter nicht unterstützt (kein gültiges Client-Secret)</size>
+|||  
+
+  MP-->C: HTTP 401 Unauthroized
+  C-->U: Anmeldung \nnicht erfolgreich
+  
+    |||  
+    else <size:16>TI-Messenger Client wird vom Anbieter unterstützt  (gültiges Client-Secret)</size>
+    |||
+
   MP->MH: HTTP Forward
    Activate MH
 
@@ -56,29 +71,20 @@ ActorFontName Aapex
 note over U, MH: <size:17>Die Authentifizierungsverfahren werden für jeden \n<size:17>Messenger-Service durch die Organisation festgelegt</size>
 |||
 
-  MH-->MP: Authentifizierungsverfahren
+  MH-->MP: unterstützte \nAuthentifizierungs-\nverfahren
     Deactivate MH
   MP-->C: HTTP Forward
     Deactivate MP
   C-->U: Zeige \nAuthentifizierungsmaske
   U->U: Starte Authentifizierung
   U->C: Anmeldung
-  C->MP: POST /login
+  C->MP: POST /_matrix/client/login
     Activate MP
-  MP->MP: überprüfe User-Agent, \nClient-Secret
 
-|||
-alt#LightGrey #AliceBlue <size:16>TI-Messenger Client wird vom Anbieter nicht unterstützt</size>
-|||  
-
-  MP-->C: HTTP 401 Unauthroized
-  C-->U: Anmeldung \nnicht erfolgreich
-  
-    else <size:16>TI-Messenger Client wird vom Anbieter unterstützt</size>
-  
+    
     MP->MH: HTTP Forward
       Activate MH
-    MH->MH: überprüfe Zugangsdaten
+    MH->MH: überprüfe Client-\nCredentials
     
     note over MH, MH: <size:17>Die Überprüfung ist abhängig vom \n<size:17>gewählten Authentifizierungsverfahren</size>
     
@@ -88,7 +94,9 @@ alt#LightGrey #AliceBlue <size:16>TI-Messenger Client wird vom Anbieter nicht un
     MP-->C: HTTP Forward
       Deactivate MP
     C->C: Speichere \nMatrix-ACCESS_TOKEN
-    C->MP: Request \nMatrix-OpenID-Token
+    
+    |||
+    C->MP: POST /_matrix/client\n/user/{userId}/\nopenid/request_token
       Activate MP
     MP->MH: HTTP Forward
       Activate MH
@@ -98,7 +106,10 @@ alt#LightGrey #AliceBlue <size:16>TI-Messenger Client wird vom Anbieter nicht un
     MP-->C: HTTP Forward
       Deactivate MP
     
-    C->FP: GET /tim-authenticate (Matrix-OpenID-Token)
+    |||
+    C->Auth: GET /tim-authenticate (Matrix-OpenID-Token)
+    Auth->MH: GET /openid/userinfo \n(Matrix-OpenID-Token)
+    MH-->Auth: Bestätigung
       Activate FP
     FP->VZD: HTTP Forward
       Activate VZD
