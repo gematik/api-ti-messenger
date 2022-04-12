@@ -44,11 +44,11 @@ ActorFontName Aapex
     end box
 
 |||
-note over MP, MH: <size:17>Überprüfe, ob eingehender Matrix-Request an den \n<size:17>Matrix-Homeserver weitergeleitet werden darf</size>
+note over MP, MH: \n<size:17>Überprüfe, ob eingehender Matrix-Event an den \n<size:17>Matrix-Homeserver weitergeleitet werden darf</size>\n
 |||
 
     Activate MP
-  MP->MP: prüfe Föderationsliste auf Aktualität \nund ob Domain in der Liste vorhanden ist
+  MP->MP: prüfe ob Matrix-Domain \nim PASSporT \nin der Föderationsliste \nvorhanden ist
 
 |||
 opt#LightGrey #AliceBlue <size:16>Föderationsliste des Messenger-Proxy nicht aktuell || Domain nicht in der Liste enthalten</size>
