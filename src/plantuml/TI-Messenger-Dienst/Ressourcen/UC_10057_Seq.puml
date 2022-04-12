@@ -11,7 +11,7 @@ skinparam sequenceMessageAlign direction
 skinparam minClassWidth 200
 skinparam BoxPadding 1
 skinparam sequenceReferenceHeaderBackgroundColor palegreen
-scale max 900 width
+scale max 2048 width
 
 skinparam sequence {
 ArrowColor black
@@ -42,7 +42,6 @@ ActorFontName Aapex
     box <size:18>VZD-FHIR-Directory</size> #WhiteSmoke
       participant Auth as "Auth-Service"
       participant FP as "FHIR-Proxy"
-      participant VZD as "FHIR-Directory"
     end box
 
 |||
@@ -85,6 +84,11 @@ note over U, MH: <size:17>Die Authentifizierungsverfahren werden für jeden \n<s
     MP->MH: HTTP Forward
       Activate MH
     MH->MH: überprüfe Client-\nCredentials
+    opt#LightGrey #MistyRose <size:16>Abbruch</size>
+      MH-->MP:Fehlerhafte \nAnmeldedaten 
+      MP-->C: HTTP Forward
+      C-->U: Anmeldedaten \nsind nicht korrekt
+    end
     
     note over MH, MH: <size:17>Die Überprüfung ist abhängig vom \n<size:17>gewählten Authentifizierungsverfahren</size>
     
@@ -108,31 +112,33 @@ note over U, MH: <size:17>Die Authentifizierungsverfahren werden für jeden \n<s
     
     |||
     C->Auth: GET /tim-authenticate (Matrix-OpenID-Token)
-    Auth->MH: GET /openid/userinfo \n(Matrix-OpenID-Token)
-    MH-->Auth: Bestätigung
+      Activate Auth
+    Auth->FP: GET /FederationList
       Activate FP
-    FP->VZD: HTTP Forward
-      Activate VZD
-    VZD->VZD: Prüfung \nMatrix-OpenID-Token
+    FP-->Auth: Liste[]
+      Deactivate FP
+    Auth->Auth: Prüfung, ob \nmatrix_server_name \nin FöderationList \nenthalten ist
 
       |||
-      alt#LightGrey #LightBlue <size:16>nicht valider Messenger-Srvice</size>
+      alt#LightGrey #LightBlue <size:16>nicht valider Messenger-Service, da Matrix-Homeserver nicht in der Föderationsliste enthalten ist</size>
       |||  
 
-        VZD-->FP: HTTP 401 \nUnauthorized 
-        FP-->C: HTTP Forward
+        Auth-->C: HTTP 401 \nUnauthorized 
           Deactivate FP
         C->C: Abmelden Session \nMatrix-ACCESS_TOKEN \nlöschen
         C-->U: Anmeldung \nnicht erfolgreich
         
-        else <size:16>valider Messenger-Srvice</size>
-          VZD-->FP: HTTP 200
-            Activate FP
-          FP-->C: HTTP Forward
-            Deactivate FP
+        |||
+        else <size:16>valider Messenger-Service, da Matrix-Homeserver in der Föderationsliste enthalten ist</size>
+          Auth-->C: HTTP 200
+            Deactivate Auth
           C-->U: Anmeldung \nerfolgreich
+            Deactivate C
+          |||
 
       end  
+      |||
 end
+|||
 
 @enduml
