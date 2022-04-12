@@ -11,7 +11,7 @@ skinparam sequenceMessageAlign direction
 skinparam minClassWidth 200
 skinparam BoxPadding 1
 skinparam sequenceReferenceHeaderBackgroundColor palegreen
-scale max 850 width
+scale max 2048 width
 
 skinparam sequence {
 ArrowColor black
@@ -40,7 +40,7 @@ ActorFontName Aapex
     participant RD as "Registrierungs-Dienst"
     box <size:18>VZD-FHIR-Directory</size> #WhiteSmoke
       participant FP as "FHIR-Proxy"
-      participant AS as "OAuth Service"
+      participant AS as "OAuth-Service"
     end box
 
 |||
@@ -51,50 +51,40 @@ note over MP, MH: \n<size:17>Überprüfe, ob eingehender Matrix-Event an den \n<
   MP->MP: prüfe ob Matrix-Domain \nim PASSporT \nin der Föderationsliste \nvorhanden ist
 
 |||
-opt#LightGrey #AliceBlue <size:16>Föderationsliste des Messenger-Proxy nicht aktuell || Domain nicht in der Liste enthalten</size>
+opt#LightGrey #AliceBlue <size:16>Matrix-Domain ist nicht in der Föderationsliste enthalten</size>
 |||  
 
   MP->RD: GET /FederationList
     Activate RD
-  RD->RD: prüfe Aktualität \nder Föderationsliste
-  
-  |||
-  alt#LightGrey #MistyRose <size:16>Föderationsliste im Registrierungs-Dienst ist nicht aktuell</size>
-  ||| 
-  
-    RD->FP: OAuth Client Credentional Flow \n(Credentials)
-        Activate FP
-    FP->AS: HTTP Forward
+
+    RD->AS: GET /token (client_id, client_secret) \n(OAuth Client credentials flow)
       Activate AS
-    AS->AS: prüfe Credentials
-    AS-->FP: Accesstoken (30 Minuten)
-      Deactivate AS
-    FP-->RD: Status, Accesstoken (30 Minuten)
-    RD->FP: GET /tim-provider-services/FederationList \n(Accesstoken)
+    AS->AS: prüfe client_id und \nclient_secret
+    AS-->RD: Status, admin-accesstoken (30 Minuten)
+      Deactivate AS  
+
+    |||
+    RD->FP: GET /tim-provider-services/FederationList \n(admin-accesstoken)
+      Activate FP
+    FP->FP: prüfe \nadmin-accesstoken
     FP-->RD: Föderationsliste[]
+
       Deactivate FP
     RD-->MP: Föderationsliste[]
-
-      |||
-      else <size:16>Föderationsliste im Registrierungs-Dienst ist aktuell</size>
-      |||
-        RD-->MP: Föderationsliste[]
-  end
-  
-  |||
-  MP->MP: prüfe Domainzugehörigkeit \nder beteiligten Akteure
-  |||
-  
+      Deactivate RD
+    |||
+    MP->MP: prüfe ob Matrix-Domain \nim PASSporT \nin der Föderationsliste \nvorhanden ist
+    |||
 end
-
 |||
-alt#LightGrey #AliceBlue <size:16>Domain nicht berechtigt</size>
+
+alt#LightGrey #AliceBlue <size:16>Matrix-Domain ist nicht in der Föderationsliste enthalten</size>
 |||  
 
   note over MP, MH: <size:17>Abbruch, Verbindung wird abgelehnt</size>
   ||| 
   
-  else <size:16>Domain berechtigt</size>
+  else <size:16>Matrix-Domain ist in der Föderationsliste enthalten</size>
     ||| 
     MP->MH: HTTP Forward
       Activate MH
