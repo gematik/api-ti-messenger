@@ -49,50 +49,55 @@ ActorFontName Aapex
     participant C2 as "TI-Messenger-\nClient" #TECHNOLOGY
     actor U2 as "\nAkteur - B in der Rolle\nUser / User-HBA\n"
     
-note over U1, MH1: \n<size:17>Der Akteur A ist erfolgreich beim Messenger Service A angemeldet</size>\n    
+|||
+note over U1, MH1: \n<size:17>Der Akteur A ist erfolgreich beim Messenger Service A angemeldet</size>\n   
+note over U2, MP2: \n<size:17>Der Akteur B ist erfolgreich beim Messenger Service B angemeldet</size>\n    
+|||
     
     alt#LightGrey  <size:16>Suche über VZD-FHIR-Directory</size>
       |||
       ref over U1, VZD : <size:16>Anhang B - Einträge im VZD-FHIR-Directory suchen</size>\n
       |||
-    end
-    alt#LightGrey  <size:16>PASSporT über QR-Code Austausch</size>
-      |||
-       note over U1, U2: Akteur A und Akteur B treffen sich in Person
-       autonumber
-       U1-[#0000FF]>C1: QR-Code teilen
-        activate C1 #AliceBlue
-       U2-[#red]>C2: QR-Code scannen
-        activate C2 #TECHNOLOGY
-       C2-[#red]>C1: GET /scan
-       C1-[#0000FF]>C2: MXID
-       C2-[#red]>PS2: GET /user/{mxid} 
-        activate PS2
-       PS2-[#red]>PS2: PASSporT erstellen
-       PS2--[#red]>C2: PASSporT
-        deactivate PS2
-       C2--[#red]>C1: PASSporT + MXID
-        deactivate C2
-       autonumber stop
-      |||
+    
+      else <size:16>Direktaustausch (PASSporT über QR-Code)</size>
+         |||
+         note over U1, U2: \n<size:16>Akteur A und Akteur B treffen sich in Person\n
+         |||
+         autonumber
+         U1-[#0000FF]>C1: QR-Code teilen
+          activate C1 #AliceBlue
+         U2-[#red]>C2: QR-Code scannen
+          activate C2 #TECHNOLOGY
+         C2-[#red]>C1: GET /scan
+         C1-[#0000FF]>C2: MXID
+         C2-[#red]>PS2: GET /user/{mxid} 
+          activate PS2
+         PS2-[#red]>PS2: PASSporT erstellen
+         PS2--[#red]>C2: PASSporT
+          deactivate PS2
+         C2--[#red]>C1: PASSporT + MXID
+          deactivate C2
+         autonumber stop
+        |||
     end
     
     |||
     C1->MP1: POST /_matrix/client/r0/rooms/\n{roomId}/invite \n(PASSporT)
       activate MP1
-    MP1->MP1: Check Request:\nDomain in Föderation\nPASSporT valid
+    MP1->MP1: Prüfung, ob Matrix-Domain \nin der Föderationsliste \nexistiert
+    MP1->MP1: Prüfung, ob valides \nPASSporT vorliegt
       |||
     opt#LightGrey #MistyRose <size:16>Abbruch</size>
-      MP1-->C1: fehlendes oder ungültiges PASSporT\nDomain nicht in TI-Föderation
+      MP1-->C1: Domain nicht in TI-Föderation \noder \nfehlendes oder ungültiges PASSporT
       C1-->U1: Event konnte nicht \nverarbeitet werden
     end
+    |||
     MP1->MH1: HTTP Forward
-      deactivate MP1
       activate MH1
       |||
-    MH1->MP1: POST /_matrix/client/r0/rooms/\n{roomId}/invite \n(PASSporT)
+    MH1->MH1: /Invite \nverarbeiten
+    MH1->MP1: POST /_matrix/client/r0/rooms/\n{roomId}/invite (PASSporT)
       deactivate MH1
-      activate MP1
       |||
     MP1->MP1: Check Request:\nremote Domain in Föderation\nPASSporT valid
       |||
