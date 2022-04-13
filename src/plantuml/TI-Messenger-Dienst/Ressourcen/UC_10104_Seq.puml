@@ -44,7 +44,7 @@ ActorFontName Aapex
     actor U2 as "Akteur - B in der Rolle\nUser / User-HBA"
     
 |||
-note over U1, U2: \n<size:17>Die Akteure sind auf dem selben Messenger-Service angemeldet und im Besitz eines zugelassenen TI-Messenger-Clients. Ein Chatraum wurde durch den Einladenen eingerichtet</size>\n
+note over U1, U2: \n<size:17>Die Akteure sind auf dem selben Messenger-Service angemeldet und im Besitz eines zugelassenen TI-Messenger-Clients.\n<size:17>Ein Chatraum wurde durch den Einladenen eingerichtet.</size>\n
 |||
 
     opt#LightGrey <size:16>Akteur suchen</size>
