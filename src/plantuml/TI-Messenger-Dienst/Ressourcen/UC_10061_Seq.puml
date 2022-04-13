@@ -39,7 +39,6 @@ ActorFontName Aapex
       participant MP1 as "Messenger-\nProxy"
       participant MH1 as "Matrix-\nHomeserver"
     end box
-    participant VZD as "VZD-FHIR-\nDirectory"
     box <size:18>Messenger-Service B</size> #Snow
     participant MP2 as "Messenger-\nProxy"
     participant MH2 as "Matrix-\nHomeserver"
@@ -56,7 +55,7 @@ note over U2, MP2: \n<size:17>Der Akteur B ist erfolgreich beim Messenger Servic
     
     alt#LightGrey  <size:16>Suche über VZD-FHIR-Directory</size>
       |||
-      ref over U1, VZD : <size:16>Anhang B - Einträge im VZD-FHIR-Directory suchen</size>\n
+      ref over U1, MH1 : <size:16>Anhang B - Einträge im VZD-FHIR-Directory suchen</size>\n
       |||
     
       else <size:16>Direktaustausch (PASSporT über QR-Code)</size>
@@ -99,18 +98,24 @@ note over U2, MP2: \n<size:17>Der Akteur B ist erfolgreich beim Messenger Servic
     MH1->MP1: POST /_matrix/client/r0/rooms/\n{roomId}/invite (PASSporT)
       deactivate MH1
       |||
-    MP1->MP1: Check Request:\nremote Domain in Föderation\nPASSporT valid
-      |||
     MP1->MP2: HTTP Forward
-      deactivate MP1
       activate MP2
-    MP2->MP2: Check Request:\nremote Domain in Föderation\nPASSporT valid
+    MP2->MP2: Prüfung, ob Matrix-Domain \nin der Föderationsliste \nexistiert
+    MP2->MP2: Prüfung, ob valides \nPASSporT vorliegt
       |||
+    opt#LightGrey #MistyRose <size:16>Abbruch</size>
+      MP2-->MP1: Domain nicht in TI-Föderation \noder \nfehlendes oder ungültiges PASSporT
+      MP1-->C1: HTTP Forward (Abbruch)
+      C1-->U1: Event konnte nicht \nverarbeitet werden
+    end
+    |||
     MP2->MH2: HTTP Foward
       activate MH2
+      MH2->MH2: Invite verarbeiten
+      |||
     group par 
       group push
-        MH2->PG2: Notification
+        MH2->PG2: POST /_matrix/push/notify
           activate PG2
         PG2->C2: Notification
         PG2-->MH2: Status
@@ -130,15 +135,18 @@ note over U2, MP2: \n<size:17>Der Akteur B ist erfolgreich beim Messenger Servic
         MH2-->MH2: Invite auslösen
         MH2-->MP2: Status
           deactivate MH2
-        MP2-->MP1: Status
-        MP1-->C1: Status
-          deactivate C1
+
         MP2-->C2: Status
+        C2-->U2: Nutzer ist dem \nRaum beigetreten
           deactivate C2
+        MP2-->MP1: Status 
           deactivate MP2
-          |||
+        MP1-->C1: Nutzer in den \nRaum hinzugefügt  
+                  deactivate MP1
+          deactivate C1
+      |||
       end
-|||
+    |||
     end
   |||
 |||
