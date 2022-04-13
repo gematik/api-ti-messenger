@@ -11,7 +11,7 @@ skinparam sequenceMessageAlign direction
 skinparam minClassWidth 200
 skinparam BoxPadding 1
 skinparam sequenceReferenceHeaderBackgroundColor palegreen
-scale max 2048 width
+scale max 900 width
 
 skinparam sequence {
 ArrowColor black
@@ -63,7 +63,7 @@ note over U1, U2: \n<size:17>Die Akteure sind auf dem selben Messenger-Service a
     |||
     MP-[#red]>MH: HTTP Foward
       activate MH
-    MH->MH: Event verarbeiten
+    MH->MH: Event \nverarbeiten
     
     |||
     opt <size:16>push</size>
@@ -79,17 +79,19 @@ note over U1, U2: \n<size:17>Die Akteure sind auf dem selben Messenger-Service a
     MH->MP: Matrix-Request \nan Client-B
     MP->C2: HTTP Forward
       activate C2 #TECHNOLOGY
+    C2->C2: Event \nverarbeiten
     C2-->MP: Status
     MP-->MH: HTTP Forward \n(Status Client-B)
     |||
     MH-[#red]->MP: Status (Matrix-Request)
       deactivate MH
-    MP-->C1: HTTP Forward
-    C1-->U1: Event ausgelöst
-      deactivate C1
+    |||
     MP-->C2: HTTP Forward
+    C2-->U2: Status
+      deactivate C2
+    MP-->C1: HTTP Forward
       deactivate MP
-    C2-->U2: Event ausgelöst
-    deactivate C2
+    C1-->U1: Status
+      deactivate C1
 |||
 @enduml
