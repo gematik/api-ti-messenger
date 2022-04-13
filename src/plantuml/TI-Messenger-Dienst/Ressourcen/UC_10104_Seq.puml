@@ -77,6 +77,7 @@ note over U1, U2: \n<size:17>Die Akteure sind auf dem selben Messenger-Service a
     
       MP->MH: HTTP Foward
         activate MH
+      MH->MH: Invite verarbeiten
       |||
       group par 
         opt <size:16>Pushbenachrichtigung</size>
