@@ -41,7 +41,6 @@ ActorFontName Aapex
     end box
     box <size:18>VZD-FHIR-Directory</size> #WhiteSmoke
       participant Auth as "Auth-Service"
-      participant FP as "FHIR-Proxy"
     end box
 
 |||
@@ -113,23 +112,18 @@ note over U, MH: <size:17>Die Authentifizierungsverfahren werden für jeden \n<s
     |||
     C->Auth: GET /tim-authenticate (Matrix-OpenID-Token)
       Activate Auth
-    Auth->FP: GET /FederationList
-      Activate FP
-    FP-->Auth: Liste[]
-      Deactivate FP
-    Auth->Auth: Prüfung, ob \nMatrix-Domain \nin FöderationList \nenthalten ist
+    Auth->Auth: Prüfung, ob \nMatrix-Domain \nin Föderation \nenthalten ist
 
       |||
-      alt#LightGrey #LightBlue <size:16>nicht valider Messenger-Service, da Matrix-Homeserver nicht in der Föderationsliste enthalten ist</size>
+      alt#LightGrey #LightBlue <size:16>nicht valider Messenger-Service, da Matrix-Homeserver nicht in der Föderations enthalten ist</size>
       |||  
 
         Auth-->C: HTTP 401 \nUnauthorized 
-          Deactivate FP
         C->C: Abmelden Session \nMatrix-ACCESS_TOKEN \nlöschen
         C-->U: Anmeldung \nnicht erfolgreich
         
         |||
-        else <size:16>valider Messenger-Service, da Matrix-Homeserver in der Föderationsliste enthalten ist</size>
+        else <size:16>valider Messenger-Service, da Matrix-Homeserver in der Föderation enthalten ist</size>
           Auth-->C: HTTP 200
             Deactivate Auth
           C-->U: Anmeldung \nerfolgreich
