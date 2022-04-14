@@ -61,7 +61,7 @@ alt#LightGrey #AliceBlue <size:16>kein gültigess owner-accesstoken</size>
   |||
   C->Auth: GET /owner-authenticate
     Activate Auth
-  Auth-->C: Redirct to IDP \nAuthorization Endpoint
+  Auth-->C: Redirct to IDP Authorization Endpoint
 
   C->U: Liste verfügbarer IDP's
   U->C: ausgewählterr IDP
@@ -83,7 +83,7 @@ alt#LightGrey #AliceBlue <size:16>kein gültigess owner-accesstoken</size>
       
   |||    
   C->Auth: GET /owner-authenticate with Authorization code
-  Auth-->I: POST /tokenEndpoint\n(authorization code)
+  Auth-->I: POST /tokenEndpoint (authorization code)
     Activate I
   I-->Auth: id_token
     Deactivate I
@@ -99,7 +99,7 @@ end
 
 group <size:16>FHIR-Directory Eintrag erstellen</size>
   |||
-  C->FP: GET /owner/TIHealthCareService?providedBy.id=telematikID \n(owner-accesstoken)
+  C->FP: GET /owner/HealthCareService?providedBy.id=telematikID \n(owner-accesstoken)
     Activate FP
   FP->FP: prüfe \nowner-accesstoken
   FP->VZD: HTTP Forward
@@ -110,7 +110,7 @@ group <size:16>FHIR-Directory Eintrag erstellen</size>
   FP-->C: HTTP Forward
     Deactivate FP
   |||
-  C->FP: PUT /owner/TIHealthCareService?telecom.value=MXID \n(owner-accesstoken)
+  C->FP: PUT /owner/HealthCareService?telecom.value=MXID \n(owner-accesstoken)
   |||
     Activate FP
   FP->FP: prüfe \nowner-accesstoken
@@ -121,7 +121,7 @@ group <size:16>FHIR-Directory Eintrag erstellen</size>
     Deactivate VZD
   FP-->C: HTTP Forward
     Deactivate FP
-  C-->U: Status    
+  C-->U: status    
   |||
 end
 |||
