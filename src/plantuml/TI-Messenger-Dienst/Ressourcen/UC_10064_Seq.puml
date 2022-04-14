@@ -37,7 +37,6 @@ ActorFontName Aapex
     participant MP as "Messenger-Proxy"
     participant MH as "Matrix-Homeserver"
     end box
-    participant RD as "Registrierungs-Dienst"
 
 |||
 note over MP, MH: \n<size:17>Überprüfe, ob eingehender Matrix-Event an den \n<size:17>Matrix-Homeserver weitergeleitet werden darf</size>\n
@@ -63,4 +62,5 @@ alt#LightGrey #AliceBlue <size:16>Matrix-Domain ist nicht in der Föderationslis
     ||| 
 
 end
+|||
 @enduml
