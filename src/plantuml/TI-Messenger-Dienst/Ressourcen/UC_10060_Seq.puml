@@ -89,7 +89,7 @@ loop <size:16>1..n</size>
       Auth-->R: admin-accesstoken
         Deactivate Auth
       |||
-      R->FP: FHIR Request \n(admin-accesstoken, Matrix-Domain)\nEndpoint (tim-domain)
+      R->FP: POST /tim-provider-services/addTiMessengerDomain \n(admin-accesstoken, Matrix-Domain, TelematikID)
         Activate FP
       FP->VZD: HTTP Forward
         Activate VZD
