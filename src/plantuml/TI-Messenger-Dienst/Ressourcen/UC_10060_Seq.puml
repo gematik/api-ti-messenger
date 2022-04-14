@@ -51,9 +51,17 @@ ref over U, R: <size:17>**AF: 10103** - Authentisieren einer Organisation am TI-
 
 loop <size:16>1..n</size>
   |||
+  U->C: Mit einem Admin-Account \nam Registrierungs-Dienst \nanmelden
+    Activate C
+  C->R: POST /login (Client-Credential)
+    Activate R
+  R->R: Client-Credential \nprüfen
+  R-->C: status
+    Deactivate R
+  C-->U: Erfolgreich angemeldet
+  |||
   U->C: Messenger Service erstellen
-  Activate C
-  C->R: POST /create (id_token, \naccess_token, \nMatrix-Domain)
+  C->R: POST /create (id_token, \nMatrix-Domain)
     Activate R
     
     |||
@@ -64,8 +72,8 @@ loop <size:16>1..n</size>
           R-->"Messenger-Service" : Messenger-Service erstellen 
         Activate "Messenger-Service"
       |||
-      "Messenger-Service"->"Messenger-Service": Account \nerstellen
-      "Messenger-Service"-->R: Status, Account Daten
+      "Messenger-Service"->"Messenger-Service": initial \neinrichten
+      "Messenger-Service"-->R: status
       |||
         Deactivate "Messenger-Service"
     |||
@@ -75,19 +83,19 @@ loop <size:16>1..n</size>
     
     group <size:16>FHIR-Directory Eintrag erstellen</size>
     |||
-      R->Auth: GET /token (client_id, client_secret) \n(OAuth Client credentials flow)
+      R->Auth: POST /token (client_id, client_secret) \n(OAuth Client credentials flow)
         Activate Auth
       Auth->Auth: prüfe client_id und \nclient_secret
-      Auth-->R: admin-access-token
+      Auth-->R: admin-accesstoken
         Deactivate Auth
       |||
-      R->FP: FHIR Request \n(admin-access-token, Matrix-Domain)\nEndpoint (tim-domain)
+      R->FP: FHIR Request \n(admin-accesstoken, Matrix-Domain)\nEndpoint (tim-domain)
         Activate FP
       FP->VZD: HTTP Forward
         Activate VZD
-      VZD-->VZD: FHIR-Ressource \nerzeugen \n(TIOrganisation)
+      VZD-->VZD: FHIR-Ressource \nerzeugen \n(HealthcareService)
       VZD-->VZD: Föderationsliste\naktualisieren
-      VZD-->FP: Status
+      VZD-->FP: status
         Deactivate VZD
       FP-->R: HTTP Forward
         Deactivate FP
@@ -96,9 +104,9 @@ loop <size:16>1..n</size>
     end
 
   |||
-  R->C: Status, Account Daten
+  R->C: status
     Deactivate R
-  C->U: Status, Account Daten
+  C->U: Messenger Service \nerfolgreich erstellt
     Deactivate C
   |||
 end
