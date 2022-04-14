@@ -92,25 +92,25 @@ end
 
 group <size:16>VZD-FHIR-Directory Eintrag</size>
   |||
-  C->FP: GET /owner/TIHealthCareService?providedBy.id=telematikID \nAuthorization Bearer owner-accesstoken
+  C->FP: POST /owner/PractitionerRole/?... \nFinde Datensatz für eigene TelematikID \nAuthorization Bearer owner-accesstoken
     Activate FP
   FP->FP: prüfe \nowner-accesstoken
   FP->VZD: HTTP Forward
     Activate VZD
-  VZD-->FP: HTTP 200 OK (result body json)
+  VZD-->FP: result body json
     Deactivate VZD
-  FP-->C: HTTP 200 OK (result body json)
+  FP-->C: result body json
     Deactivate FP
     
   |||
-  C->FP: PUT /owner/TIHealthCareService?telecom.value=MXID \nAuthorization Bearer owner-accesstoken \n(Optional: setze Flag für Sichtbarkeit)
+  C->FP: FHIR-Operationen um eigenen Datensatz zu verwalten \nAuthorization Bearer owner-accesstoken \n(Optional: setze Flag für Sichtbarkeit)
     Activate FP
   FP->FP: prüfe \nowner-accesstoken
   FP->VZD: HTTP Forward
     Activate VZD
-  VZD-->FP: HTTP 201 Created (result body json)
+  VZD-->FP: result body json
     Deactivate VZD
-  FP-->C: HTTP 201 Created (result body json)
+  FP-->C: result body json
     Deactivate FP
   C-->U: Status    
     Deactivate C
