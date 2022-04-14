@@ -117,7 +117,7 @@ note over U, MH: <size:17>Die Authentifizierungsverfahren werden für jeden \n<s
       Activate FP
     FP-->Auth: Liste[]
       Deactivate FP
-    Auth->Auth: Prüfung, ob \nmatrix_server_name \nin FöderationList \nenthalten ist
+    Auth->Auth: Prüfung, ob \nMatrix-Domain \nin FöderationList \nenthalten ist
 
       |||
       alt#LightGrey #LightBlue <size:16>nicht valider Messenger-Service, da Matrix-Homeserver nicht in der Föderationsliste enthalten ist</size>
