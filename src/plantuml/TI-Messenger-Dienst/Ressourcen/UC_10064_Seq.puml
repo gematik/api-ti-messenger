@@ -38,10 +38,6 @@ ActorFontName Aapex
     participant MH as "Matrix-Homeserver"
     end box
     participant RD as "Registrierungs-Dienst"
-    box <size:18>VZD-FHIR-Directory</size> #WhiteSmoke
-      participant FP as "FHIR-Proxy"
-      participant AS as "OAuth-Service"
-    end box
 
 |||
 note over MP, MH: \n<size:17>Überprüfe, ob eingehender Matrix-Event an den \n<size:17>Matrix-Homeserver weitergeleitet werden darf</size>\n
@@ -51,33 +47,6 @@ note over MP, MH: \n<size:17>Überprüfe, ob eingehender Matrix-Event an den \n<
   MP->MP: prüfe ob Matrix-Domain \nim PASSporT \nin der Föderationsliste \nvorhanden ist
 
 |||
-opt#LightGrey #AliceBlue <size:16>Matrix-Domain ist nicht in der Föderationsliste enthalten</size>
-|||  
-
-  MP->RD: GET /FederationList
-    Activate RD
-
-    RD->AS: GET /token (client_id, client_secret) \n(OAuth Client credentials flow)
-      Activate AS
-    AS->AS: prüfe client_id und \nclient_secret
-    AS-->RD: Status, admin-accesstoken (30 Minuten)
-      Deactivate AS  
-
-    |||
-    RD->FP: GET /tim-provider-services/FederationList \n(admin-accesstoken)
-      Activate FP
-    FP->FP: prüfe \nadmin-accesstoken
-    FP-->RD: Föderationsliste[]
-
-      Deactivate FP
-    RD-->MP: Föderationsliste[]
-      Deactivate RD
-    |||
-    MP->MP: prüfe ob Matrix-Domain \nim PASSporT \nin der Föderationsliste \nvorhanden ist
-    |||
-end
-|||
-
 alt#LightGrey #AliceBlue <size:16>Matrix-Domain ist nicht in der Föderationsliste enthalten</size>
 |||  
 
