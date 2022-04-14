@@ -91,6 +91,7 @@ loop <size:16>1..n</size>
       |||
       R->FP: POST /tim-provider-services/addTiMessengerDomain \n(admin-accesstoken, Matrix-Domain, TelematikID)
         Activate FP
+      FP->FP: prüfe \nadmin-accesstoken
       FP->VZD: HTTP Forward
         Activate VZD
       VZD-->VZD: FHIR-Ressource \nerzeugen \n(HealthcareService)
