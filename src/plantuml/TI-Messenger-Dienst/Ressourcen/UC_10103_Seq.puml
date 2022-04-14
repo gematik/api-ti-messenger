@@ -44,46 +44,76 @@ ActorFontName Aapex
   participant rd as "Registrierungs-Dienst"
   participant ip as "zentraler \nIDP-Dienst"
 
-  |||
-  oa -> wb: Organisation verifizieren
-    activate wb
-  wb -> rd:POST /register 
-    activate rd
-  rd --> wb: Redirect to IDP Authorization Endpoint
-    deactivate rd
-  |||
-  wb -> ip: GET /authorize
-    activate au
-    activate ip
-  ip -> au: Authentication challenge
-  au -> ko: SignDocument
-    activate ko
-  ko -> kt: SICCT command
-    activate kt
-  kt --> ko
-    deactivate kt
-  ko --> au: Response \nsignedDocument
-    deactivate ko
-
-opt #MistyRose <size:15>Abbruch</size>
-  au -> oa: SMC-B nicht freigeschaltet 
+|||
+alt#LightGrey #AliceBlue <size:16>Organisation nicht am Registrierungs-Dienst authentisiert</size>
+|||
+      oa -> wb: Organisation verifizieren
+        activate wb
+      wb -> rd:POST /register 
+        activate rd
+      rd --> wb: Redirect to IDP Authorization Endpoint
+        deactivate rd
+      |||
+      wb -> ip: GET /authorize
+        activate au
+        activate ip
+      ip -> au: Authentication challenge
+      au -> ko: SignDocument
+        activate ko
+      ko -> kt: SICCT command
+        activate kt
+      kt --> ko
+        deactivate kt
+      ko --> au: Response \nsignedDocument
+        deactivate ko
+    
+    opt #MistyRose <size:15>Abbruch</size>
+      au -> oa: SMC-B nicht freigeschaltet 
+    end
+    
+      au -->ip: Authentication response
+        deactivate au
+      ip --> wb: Authorization code
+        deactivate ip
+      |||
+      wb -> rd: POST /register (Authorization code)
+        activate rd
+      rd -> ip: POST /tokenEndpoint\n{authorization code}
+        activate ip
+      ip --> rd: id_token
+        deactivate ip
+      rd -> rd: enthaltene \nProfessionOID auf \ngültige Organisation \nprüfen
+      |||
+      
+    opt #MistyRose <size:15>Abbruch</size>
+      rd -> wb: keine gültige ProfessionOID gefunden
+      wb -> oa: Authentisierung fehlgeschlagen
+      |||
+    end  
+    
+      |||
+      rd-> rd: Organisation \nauthentifizieren
+      |||
+      
+      rd --> wb: status, id_token
+        deactivate rd
+      wb --> oa: Verifizierung erfolgreich
+        deactivate wb
+      |||  
+      
+      else <size:16>Organisation am Registrierungs-Dienst authentisiert</size>
+        |||
+        oa -> wb: Admin Account anlegen
+          activate wb
+        wb -> rd: POST /register (id_token, Client-Credentials)
+          activate rd
+        rd -> rd: id_token prüfen
+        rd -> rd: Admin Account \nfür die Organisation \nanlegen
+        rd --> wb: status, Admin-Account
+          deactivate rd
+        wb --> oa: Account angelegt
+          deactivate wb
+        |||
 end
-
-  au -->ip: Authentication response
-    deactivate au
-  ip --> wb: Authorization code
-    deactivate ip
-  |||
-  wb -> rd: POST /register (Authorization code)
-    activate rd
-  rd -> ip: POST /tokenEndpoint\n{authorization code}
-    activate ip
-  ip --> rd: Response\n{id_token, access_token}
-    deactivate ip
-  rd -> rd: Organisation \nauthentifizieren
-  rd --> wb: status, id_token, access_token
-    deactivate rd
-  wb --> oa: Verifizierung erfolgreich
-    deactivate wb
-  |||  
+|||
 @enduml
