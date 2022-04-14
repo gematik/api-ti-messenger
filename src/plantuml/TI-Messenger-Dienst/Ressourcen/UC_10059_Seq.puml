@@ -99,7 +99,7 @@ end
 
 group <size:16>FHIR-Directory Eintrag erstellen</size>
   |||
-  C->FP: POST /owner/HealthcareService/?... \nFinde Datensatz für eigene TelematikID \n(owner-accesstoken)
+  C->FP: POST /owner/HealthcareService/?... \nFinde Datensatz für eigene TelematikID \nAuthorization Bearer owner-accesstoken
     Activate FP
   FP->FP: prüfe \nowner-accesstoken
   FP->VZD: HTTP Forward
@@ -110,7 +110,7 @@ group <size:16>FHIR-Directory Eintrag erstellen</size>
   FP-->C: HTTP Forward
     Deactivate FP
   |||
-  C->FP: FHIR-Operationen um eigenen Datensatz zu verwalten \n(owner-accesstoken)
+  C->FP: FHIR-Operationen um eigenen Datensatz zu verwalten \nAuthorization Bearer owner-accesstoken
   |||
     Activate FP
   FP->FP: prüfe \nowner-accesstoken
