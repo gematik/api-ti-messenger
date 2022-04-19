@@ -40,7 +40,7 @@ ActorFontName Aapex
     end box
     participant R as "Registrierungs-Dienst"
     box <size:18>VZD-FHIR-Directory</size> #WhiteSmoke
-    participant Auth as "Auth-Service"
+    participant Auth as "OAuth-Service"
     participant FP as "FHIR-Proxy"
     participant VZD as "FHIR-Directory"
     end box
