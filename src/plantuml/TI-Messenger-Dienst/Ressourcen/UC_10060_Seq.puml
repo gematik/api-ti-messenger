@@ -73,7 +73,8 @@ loop <size:16>1..n</size>
         Activate "Messenger-Service"
       |||
       "Messenger-Service"->"Messenger-Service": initial \neinrichten
-      "Messenger-Service"-->R: status
+      "Messenger-Service"->"Messenger-Service": Org-Admin\nAccount\nerstellen
+      "Messenger-Service"-->R: status, Account Daten
       |||
         Deactivate "Messenger-Service"
     |||
@@ -105,9 +106,9 @@ loop <size:16>1..n</size>
     end
 
   |||
-  R->C: status
+  R->C: status, Account Daten
     Deactivate R
-  C->U: Messenger Service \nerfolgreich erstellt
+  C->U: Messenger Service \nerfolgreich erstellt, Account Daten
     Deactivate C
   |||
 end
