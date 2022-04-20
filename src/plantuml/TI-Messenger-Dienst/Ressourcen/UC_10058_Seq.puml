@@ -34,8 +34,10 @@ ActorFontSize 20
 ActorFontName Aapex
 }
     actor U as "Akteur in der Rolle\nUser-HBA"
-    participant C as "TI-Messenger-Client"
-    participant A as "Authenticator \ndes IDP-Dienst"
+    box <size:18>Endgerät</size> #WhiteSmoke
+      participant C as "TI-Messenger-Client"
+      participant A as "Authenticator \ndes IDP-Dienst"
+    end box
     participant I as "IDP-Dienst" 
     box <size:18>VZD-FHIR-Directory</size> #WhiteSmoke
       participant FP as "FHIR-Proxy"
