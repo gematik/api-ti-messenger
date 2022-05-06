@@ -113,7 +113,7 @@ end
 |||
 alt#LightGrey #AliceBlue <size:16>HealthcareService-Einträge werden gesucht</size>
 |||
-    fp->fd: POST /tim-search/HealthcareService/? \nFinde Datensatz für eigene TelematikID 
+    fp->fd: POST /tim-search/HealthcareService/? \nFinde Datensatz für TelematikID 
       activate fd
     fd-->fp: Result Body json
       deactivate fd
