@@ -50,6 +50,7 @@ alt#LightGrey #AliceBlue <size:16>Organisation nicht am Registrierungs-Dienst au
       oa -> wb: Organisation verifizieren
         activate wb
       wb -> rd:POST /register 
+      note right: <size:16>Schnittstelle wird nicht \n<size:16>durch die gematik spezifiziert</size>
         activate rd
       rd --> wb: Redirect to IDP Authorization Endpoint
         deactivate rd
@@ -65,12 +66,14 @@ alt#LightGrey #AliceBlue <size:16>Organisation nicht am Registrierungs-Dienst au
       kt --> ko
         deactivate kt
       ko --> au: Response \nsignedDocument
+      |||
         deactivate ko
     
     opt #MistyRose <size:15>Abbruch</size>
       au -> oa: SMC-B nicht freigeschaltet 
+      |||
     end
-    
+      |||
       au -->ip: Authentication response
         deactivate au
       ip --> wb: Authorization code
@@ -82,6 +85,7 @@ alt#LightGrey #AliceBlue <size:16>Organisation nicht am Registrierungs-Dienst au
         activate ip
       ip --> rd: id_token
         deactivate ip
+      |||
       rd -> rd: enthaltene \nProfessionOID auf \ngültige Organisation \nprüfen
       |||
       
@@ -108,6 +112,7 @@ alt#LightGrey #AliceBlue <size:16>Organisation nicht am Registrierungs-Dienst au
         wb -> rd: POST /register (id_token, Client-Credentials)
           activate rd
         rd -> rd: id_token prüfen
+        |||
         rd -> rd: Admin Account \nfür die Organisation \nanlegen
         rd --> wb: status, Admin-Account
           deactivate rd
