@@ -54,6 +54,7 @@ loop <size:16>1..n</size>
   U->C: Mit einem Admin-Account \nam Registrierungs-Dienst \nanmelden
     Activate C
   C->R: POST /login (Client-Credential)
+  note right: <size:16>Schnittstelle wird nicht \n<size:16>durch die gematik spezifiziert</size>
     Activate R
   R->R: Client-Credential \nprüfen
   R-->C: status
@@ -61,20 +62,20 @@ loop <size:16>1..n</size>
   C-->U: Erfolgreich angemeldet
   |||
   U->C: Messenger Service erstellen
-  C->R: POST /create (id_token, \nMatrix-Domain)
+  C->R: POST /create (Matrix-Domain)
     Activate R
     
     |||
     group <size:16>Messaging-Service erstellen</size>
     |||
-      R->R: Starte neuen Messenger-Service \nfür die Organisation (Matrix-Domain)
+      R->R: Prüfung auf zulässigen Domainnamen
+      R->R: Starte neuen Messenger-Service \nfür die Organisation mit Matrix-Domain
         create "Messenger-Service"
           R-->"Messenger-Service" : Messenger-Service erstellen 
         Activate "Messenger-Service"
       |||
       "Messenger-Service"->"Messenger-Service": initial \neinrichten
-      "Messenger-Service"->"Messenger-Service": Org-Admin\nAccount\nerstellen
-      "Messenger-Service"-->R: status, Account Daten
+      "Messenger-Service"-->R: status
       |||
         Deactivate "Messenger-Service"
     |||
@@ -82,7 +83,7 @@ loop <size:16>1..n</size>
     
     |||
     
-    group <size:16>FHIR-Directory Eintrag erstellen</size>
+    group <size:16>Messenger-Service in die Föderation aufnehmen</size>
     |||
       R->Auth: POST /token (client_id, client_secret) \n(OAuth Client credentials flow)
         Activate Auth
@@ -90,25 +91,24 @@ loop <size:16>1..n</size>
       Auth-->R: admin-accesstoken
         Deactivate Auth
       |||
-      R->FP: POST /tim-provider-services/addTiMessengerDomain \n(admin-accesstoken, Matrix-Domain, TelematikID)
+      R->FP: POST /tim-provider-services/addTiMessengerDomain \n(admin-accesstoken, Matrix-Domain, TelematikID, isEnsurance)
         Activate FP
       FP->FP: prüfe \nadmin-accesstoken
-      FP->VZD: HTTP Forward
+      FP->VZD: HTTPS Forward
         Activate VZD
-      VZD-->VZD: FHIR-Ressource \nerzeugen \n(HealthcareService)
       VZD-->VZD: Föderationsliste\naktualisieren
       VZD-->FP: status
         Deactivate VZD
-      FP-->R: HTTP Forward
+      FP-->R: HTTPS Forward
         Deactivate FP
 
     |||
     end
 
   |||
-  R->C: status, Account Daten
+  R->C: status
     Deactivate R
-  C->U: Messenger Service \nerfolgreich erstellt, Account Daten
+  C->U: Messenger Service \nerfolgreich erstellt
     Deactivate C
   |||
 end
