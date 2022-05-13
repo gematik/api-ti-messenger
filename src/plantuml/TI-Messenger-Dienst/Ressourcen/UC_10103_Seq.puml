@@ -97,8 +97,6 @@ alt#LightGrey #AliceBlue <size:16>Organisation nicht am Registrierungs-Dienst au
     
       |||
       rd-> rd: Organisation \nauthentifizieren
-      |||
-      
       rd --> wb: status, id_token
         deactivate rd
       wb --> oa: Verifizierung erfolgreich
