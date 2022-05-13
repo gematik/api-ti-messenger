@@ -63,7 +63,7 @@ alt#LightGrey #AliceBlue <size:16>kein gültigess owner-accesstoken</size>
   Auth-->C: Redirct to IDP Authorization Endpoint (PKCE Code)
 
   C->U: Liste verfügbarer IDPs
-  U->C: ausgewählterr IDP
+  U->C: ausgewählter IDP
     
   C->I: GET /authorize
     Activate A
@@ -119,7 +119,6 @@ group <size:16>FHIR-Directory Eintrag erstellen</size>
   group <size:16>FHIR-Ressource schreiben</size>
   |||
   C->FP: FHIR-Operationen um eigenen Datensatz zu verwalten \nAuthorization Bearer owner-accesstoken
-  |||
     Activate FP
   FP->FP: prüfe \nowner-accesstoken
   FP->VZD: HTTPS Forward
