@@ -66,7 +66,8 @@ note over U1, U2: \n<size:17>Die Akteure sind auf dem selben Messenger-Service a
     MH->MH: Event \nverarbeiten
     
     |||
-    opt#LightGrey #AliceBlue <size:16>push</size>
+    opt#LightGrey #AliceBlue <size:16>Pushbenachrichtigung</size>
+    |||
     MH->PG: POST /_matrix/push/notify
       activate PG
     PG->C2: Notification
