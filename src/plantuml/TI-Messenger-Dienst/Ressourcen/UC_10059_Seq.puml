@@ -57,13 +57,12 @@ C->C: Prüfung, ob gültiges \nowner-accesstoken \nvorliegt
 alt#LightGrey #AliceBlue <size:16>kein gültigess owner-accesstoken</size>
 |||
 
-  C->C: Erzeuge PKCE Code \nfür verifier und challenge
-  |||
   C->Auth: GET /owner-authenticate
     Activate Auth
-  Auth-->C: Redirct to IDP Authorization Endpoint
+  Auth->Auth: Erzeuge PKCE Code \nfür verifier und challenge
+  Auth-->C: Redirct to IDP Authorization Endpoint (PKCE Code)
 
-  C->U: Liste verfügbarer IDP's
+  C->U: Liste verfügbarer IDPs
   U->C: ausgewählterr IDP
     
   C->I: GET /authorize
@@ -82,12 +81,14 @@ alt#LightGrey #AliceBlue <size:16>kein gültigess owner-accesstoken</size>
     Deactivate I
       
   |||    
-  C->Auth: GET /owner-authenticate with Authorization code
+  C->Auth: GET /owner-authenticate with Authorization code (PKCE Code)
+  |||
   Auth-->I: POST /tokenEndpoint (authorization code)
     Activate I
   I-->Auth: id_token
     Deactivate I
   Auth->Auth: prüfe id_token
+  |||
   Auth->Auth: erzeuge \nowner-accesstoken
   Auth-->C: owner-accesstoken
   ||| 
@@ -99,28 +100,37 @@ end
 
 group <size:16>FHIR-Directory Eintrag erstellen</size>
   |||
+  group <size:16>FHIR-Ressource lesen</size>
+  |||
   C->FP: POST /owner/HealthcareService/?... \nFinde Datensatz für eigene TelematikID \nAuthorization Bearer owner-accesstoken
     Activate FP
   FP->FP: prüfe \nowner-accesstoken
-  FP->VZD: HTTP Forward
+  FP->VZD: HTTPS Forward
     Activate VZD
   VZD->VZD: suche Eintrag
   VZD-->FP: result body json
     Deactivate VZD
-  FP-->C: HTTP Forward
+  FP-->C: HTTPS Forward
     Deactivate FP
+  |||
+  end
+
+  |||
+  group <size:16>FHIR-Ressource schreiben</size>
   |||
   C->FP: FHIR-Operationen um eigenen Datensatz zu verwalten \nAuthorization Bearer owner-accesstoken
   |||
     Activate FP
   FP->FP: prüfe \nowner-accesstoken
-  FP->VZD: HTTP Forward
+  FP->VZD: HTTPS Forward
     Activate VZD
   VZD->VZD: Eintrag hinzufügen
   VZD-->FP: result body json
     Deactivate VZD
-  FP-->C: HTTP Forward
-    Deactivate FP
+  FP-->C: HTTPS Forward
+     Deactivate FP
+  |||
+  end
   C-->U: status    
   |||
 end
