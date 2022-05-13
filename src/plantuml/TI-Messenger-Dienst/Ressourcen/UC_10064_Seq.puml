@@ -56,9 +56,9 @@ alt#LightGrey #AliceBlue <size:16>Matrix-Domain ist nicht in der Föderationslis
   MP->MP: prüfe ob Matrix-Domain \nim PASSporT \nin der **aktualisierten** \nFöderationsliste vorhanden ist
   |||
 
-    alt#LightGrey #AliceBlue <size:16>Matrix-Domain ist nicht in der Föderationsliste enthalten</size>
+    alt#LightGrey #LightBlue <size:16>Matrix-Domain ist nicht in der Föderationsliste enthalten</size>
       |||
-      note over MP, MH: <size:17>Abbruch, Verbindung wird abgelehnt</size>
+      MP->MP: <font color=red>Abbruch, Verbindung wird abgelehnt</font>
       ||| 
       else <size:16>Matrix-Domain ist in der Föderationsliste enthalten</size>
       |||
