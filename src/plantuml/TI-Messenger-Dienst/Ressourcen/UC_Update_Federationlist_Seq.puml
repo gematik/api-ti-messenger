@@ -33,7 +33,7 @@ ActorFontColor black
 ActorFontSize 20
 ActorFontName Aapex
 }
-    box <size:18>Messenger-Service</size> #WhiteSmoke
+    box <size:18>Messenger-Service\n #WhiteSmoke
     participant MP as "Messenger-Proxy"
     participant MH as "Matrix-Homeserver"
     end box
@@ -51,13 +51,14 @@ ActorFontName Aapex
   RD->AS: GET /token (client_id, client_secret) \n(OAuth Client credentials flow)
     Activate AS
   AS->AS: prüfe client_id und \nclient_secret
-  AS-->RD: status, admin-accesstoken (30 Minuten)
+  AS-->RD: status, admin-accesstoken 
     Deactivate AS  
 
   |||
   RD->FP: GET /tim-provider-services/getFederationList \n(admin-accesstoken, version)
     Activate FP
   FP->FP: prüfe \nadmin-accesstoken
+  |||
   FP->FP: prüfe übergebene \nVersion
 
 |||
