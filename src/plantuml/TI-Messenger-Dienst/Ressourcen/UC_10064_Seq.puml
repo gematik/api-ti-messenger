@@ -36,7 +36,9 @@ ActorFontName Aapex
     box <size:18>Messenger-Service</size> #WhiteSmoke
     participant MP as "Messenger-Proxy"
     participant MH as "Matrix-Homeserver"
+    participant RD as "Registrierungs-Dienst"
     end box
+    participant VZD as "VZD-FHIR-Directory"
 
 |||
 note over MP, MH: \n<size:17>Überprüfe, ob eingehender Matrix-Event an den \n<size:17>Matrix-Homeserver weitergeleitet werden darf</size>\n
@@ -49,12 +51,28 @@ note over MP, MH: \n<size:17>Überprüfe, ob eingehender Matrix-Event an den \n<
 alt#LightGrey #AliceBlue <size:16>Matrix-Domain ist nicht in der Föderationsliste enthalten</size>
 |||  
 
-  note over MP, MH: <size:17>Abbruch, Verbindung wird abgelehnt</size>
-  ||| 
-  
+  ref over MP, VZD: <size:17>**Anhang B** - Aktualisierung der Föderationsliste</size>\n 
+  |||
+  MP->MP: prüfe ob Matrix-Domain \nim PASSporT \nin der **aktualisierten** \nFöderationsliste vorhanden ist
+  |||
+
+    alt#LightGrey #AliceBlue <size:16>Matrix-Domain ist nicht in der Föderationsliste enthalten</size>
+      |||
+      note over MP, MH: <size:17>Abbruch, Verbindung wird abgelehnt</size>
+      ||| 
+      else <size:16>Matrix-Domain ist in der Föderationsliste enthalten</size>
+      |||
+         MP->MH: HTTP(S) Forward
+          Activate MH
+        MH-->MP: Status
+          Deactivate MH
+      |||
+    end
+
+  |||
   else <size:16>Matrix-Domain ist in der Föderationsliste enthalten</size>
     ||| 
-    MP->MH: HTTP Forward
+    MP->MH: HTTP(S) Forward
       Activate MH
     MH-->MP: Status
       Deactivate MH
