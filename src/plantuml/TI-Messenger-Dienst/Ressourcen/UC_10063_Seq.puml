@@ -11,7 +11,7 @@ skinparam sequenceMessageAlign direction
 skinparam minClassWidth 200
 skinparam BoxPadding 1
 skinparam sequenceReferenceHeaderBackgroundColor palegreen
-scale max 900 width
+scale max 2048 width
 
 skinparam sequence {
 ArrowColor black
@@ -47,7 +47,7 @@ ActorFontName Aapex
 note over U1, U2: \n<size:17>Die Akteure sind auf dem selben Messenger-Service angemeldet und im Besitz eines zugelassenen TI-Messenger-Clients.</size>\n<size:17>Ebenfalls sind beide Akteure einem gemeinsamen Raum beigetreten.</size>\n
 |||
 
-    U1->C1: Akteur löst \nMatrix-Event aus
+    U1->C1: Akteur A löst \nMatrix-Event aus
       activate C1 #AliceBlue
     C1-[#red]>MP: Matrix-Request
       activate MP
@@ -55,13 +55,13 @@ note over U1, U2: \n<size:17>Die Akteure sind auf dem selben Messenger-Service a
     
     |||
     opt#LightGrey #MistyRose <size:16>Abbruch</size>
-      MP-->C1: Matrix-Domain des \nEmpfängers \nist nicht auf \ndem gleichen \nMatrix-Homeserver
+      MP-->C1: Empfänger ist nicht \nauf dem gleichen \nMatrix-Homeserver
       C1-->U1: Event konnte nicht \nverarbeitet werden
     |||
     end
     
     |||
-    MP-[#red]>MH: HTTP Foward
+    MP-[#red]>MH: HTTP(S) Foward
       activate MH
     MH->MH: Event \nverarbeiten
     
@@ -77,19 +77,19 @@ note over U1, U2: \n<size:17>Die Akteure sind auf dem selben Messenger-Service a
     
     |||
     MH->MP: Matrix-Request \nan Client-B
-    MP->C2: HTTP Forward
+    MP->C2: HTTP(S) Forward
       activate C2 #TECHNOLOGY
     C2->C2: Event \nverarbeiten
     C2-->MP: Status
-    MP-->MH: HTTP Forward \n(Status Client-B)
+    MP-->MH: HTTP(S) Forward \n(Status Client-B)
     |||
     MH-[#red]->MP: Status (Matrix-Request)
       deactivate MH
     |||
-    MP-->C2: HTTP Forward
+    MP-->C2: HTTP(S) Forward
     C2-->U2: Status
       deactivate C2
-    MP-->C1: HTTP Forward
+    MP-->C1: HTTP(S) Forward
       deactivate MP
     C1-->U1: Status
       deactivate C1
