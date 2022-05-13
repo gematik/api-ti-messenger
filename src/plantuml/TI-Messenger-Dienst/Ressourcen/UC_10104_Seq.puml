@@ -54,28 +54,30 @@ note over U1, U2: \n<size:17>Die Akteure sind auf dem selben Messenger-Service a
     C1->MP: POST /_matrix/client/\nuser_directory/search
       activate MP
     MP->MP: TLS-Terminierung
-    MP->MH: HTTP Forward
+    MP->MH: HTTP(S) Forward
       activate MH
+    MH-->MH: Nutzerverzeichnis \ndurchsuchen
     MH-->MP: MXID
       deactivate MH
-    MP-->C1: HTTP Forward
+    MP-->C1: HTTP(S) Forward
     |||
     end
     
     |||
     U1->C1: Akteur B einladen
     C1->MP: POST /_matrix/client/r0/rooms/\n{roomId}/invite (roomId)
-    MP->MP: Domainzugehörigkeit \nprüfen
+    MP->MP: Organisationszugehörigkeit \nprüfen
     |||
     
-    alt#LightGrey #AliceBlue <size:16>keine gemeinsame Matrix-Domain</size>
-      MP-->C1: Domain nicht auf \ndem gleichen \nMatrix-Homeserver
+    alt#LightGrey #AliceBlue <size:16>kein gemeinsamer Messenger-Service</size>
+      |||
+      MP-->C1: Akteure nicht auf \ndem gleichen \nMatrix-Homeserver
       C1-->U1: Akteur B kann \nnicht eingeladen \nwerden
       |||
     
-      else <size:16>Matrix-Domain sind identisch</size>
+      else <size:16>gemeinsamer Messenger-Service</size>
     
-      MP->MH: HTTP Foward
+      MP->MH: HTTP(S) Foward
         activate MH
       MH->MH: Invite verarbeiten
       |||
@@ -93,14 +95,14 @@ note over U1, U2: \n<size:17>Die Akteure sind auf dem selben Messenger-Service a
         group /sync
           |||
           MH->MP: Invite Request
-          |||
-          MP->C2: HTTP Forward
+          MP->C2: HTTP(S) Forward
             activate C2 #TECHNOLOGY
           C2->U2: Einladung anzeigen
           U2-->C2: Einladung bestätigen
           C2->MP: commit
+          |||
           MP->MP: TLS Terminierung
-          MP-->MH: HTTP Forward
+          MP-->MH: HTTP(S) Forward
           MH-->MH: Invite auslösen
           MH-->MP: Status
             deactivate MH
