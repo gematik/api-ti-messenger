@@ -69,7 +69,9 @@ loop <size:16>1..n</size>
     group <size:16>Messaging-Service erstellen</size>
     |||
       R->R: Prüfung auf zulässigen Domainnamen
+      |||
       R->R: Starte neuen Messenger-Service \nfür die Organisation mit Matrix-Domain
+      |||
         create "Messenger-Service"
           R-->"Messenger-Service" : Messenger-Service erstellen 
         Activate "Messenger-Service"
