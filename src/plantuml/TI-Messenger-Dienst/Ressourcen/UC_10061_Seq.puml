@@ -118,7 +118,7 @@ note over U2, MP2: \n<size:17>Der Akteur B ist erfolgreich beim Messenger Servic
       MH2->MH2: Invite verarbeiten
       |||
     group par 
-      group push
+      opt#LightGrey #AliceBlue <size:16>push</size>
         MH2->PG2: POST /_matrix/push/notify
           activate PG2
         PG2->C2: Notification
