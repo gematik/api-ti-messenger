@@ -47,7 +47,7 @@ ActorFontName Aapex
 note over U1, U2: \n<size:17>Die Akteure sind auf dem selben Messenger-Service angemeldet und im Besitz eines zugelassenen TI-Messenger-Clients.\n<size:17>Ein Chatraum wurde durch den Einladenen eingerichtet.</size>\n
 |||
 
-    opt#LightGrey <size:16>Akteur suchen</size>
+    opt#LightGrey #AliceBlue <size:16>Akteur suchen</size>
     |||
     U1->C1: Suche Akteur B
       activate C1 #AliceBlue
@@ -81,8 +81,7 @@ note over U1, U2: \n<size:17>Die Akteure sind auf dem selben Messenger-Service a
         activate MH
       MH->MH: Invite verarbeiten
       |||
-      group par 
-        opt <size:16>Pushbenachrichtigung</size>
+        opt#LightGrey #LightBlue <size:16>Pushbenachrichtigung</size>
           |||
           MH->PG: POST /_matrix/push/notify
             activate PG
@@ -92,8 +91,6 @@ note over U1, U2: \n<size:17>Die Akteure sind auf dem selben Messenger-Service a
         |||
         end
         |||
-        group /sync
-          |||
           MH->MP: Invite Request
           MP->C2: HTTP(S) Forward
             activate C2 #TECHNOLOGY
@@ -116,9 +113,5 @@ note over U1, U2: \n<size:17>Die Akteure sind auf dem selben Messenger-Service a
 
         |||
         end
-      |||
-      end
-    |||
-    end
-|||
+ |||
 @enduml
