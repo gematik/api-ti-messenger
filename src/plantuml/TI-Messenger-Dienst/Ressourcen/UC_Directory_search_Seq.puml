@@ -44,11 +44,11 @@ ActorFontName Aapex
     end box
 
 |||
-note over U, hs: \n<size:17>Der Akteur ist erfolgreich beim Messenger Service angemeldet</size>\n
+note over U, hs: \n<size:17>Der Akteur ist erfolgreich beim Messenger-Service angemeldet</size>\n
 |||
 
       activate cl
-    U->cl:gibt Parameter für \nFHIR-Ressourcen \nSuche ein
+    U->cl:Suchparameter für \nFHIR-Ressourcen \n eingeben
     cl->cl: prüfe ob noch gültiges \ntim-search-accesstoken\nvorliegt
 
 |||
@@ -62,15 +62,15 @@ alt#LightGrey #AliceBlue <size:16>kein gültiges tim-search-accesstoken vorhande
 
       activate hs
     |||
-    hs-->mp: HTTP Result body \n{"Matrix-OpenID-Token", \n"Matrix-Domain",...}
+    hs-->mp: Matrix-OpenID-Token
       deactivate hs
-    mp-->cl: HTTP Forward
+    mp-->cl: HTTP(S) Forward
       deactivate mp
       
     |||
     cl->au: GET /tim-authenticate... (Auth Header mit Matrix-OpenID-Token)
       activate au
-    au->au: Prüfe ob \nMatrix-Domain\nin Föderation \nenthalten ist
+    au->au: Prüfe ob \nMatrix-Domain aus dem \nMatrix-OpenID-Token in \nFöderation enthalten ist
 
 |||
 alt#LightGrey #LightBlue <size:16>Matrix-Domain nicht in der Föderation enthalten</size>
@@ -85,12 +85,12 @@ alt#LightGrey #LightBlue <size:16>Matrix-Domain nicht in der Föderation enthalt
     |||
         au->mp: GET /openid/userinfo/?Matrix-OpenID-Token)
           activate mp
-        mp->hs: HTTP Forward
+        mp->hs: HTTP(S) Forward
           activate hs
         hs->hs: prüfe Matrix-OpenID-Token
         hs-->mp: MXID des Nutzers
           deactivate hs
-        mp-->au: HTTP Forward
+        mp-->au: HTTP(S) Forward
           deactivate mp
         au->au: erzeuge \ntim-search-accesstoken 
         au-->cl: tim-search-accesstoken (inklusive MXID des Nutzers)
@@ -108,6 +108,7 @@ end
     |||
     opt#LightGrey #MistyRose <size:16>Abbruch</size>
       fp-->cl: kein gültiges tim-search-accesstoken 
+    |||
     end
    
 |||
@@ -136,6 +137,7 @@ end
   |||
   opt#LightGrey #MistyRose <size:16>Abbruch</size>
     fp-->cl: kein passender Eintrag gefunden \noder TIEndpoint.status == false
+    |||
   end
   |||
   fp->pp: Request \nerzeuge PASSporT (MXIDs...)
@@ -143,7 +145,7 @@ end
   pp->pp: Erzeuge PASSporT \n(Attribut orig, dest)
   pp-->fp: /?PASSporT=[PASSporT-String].
     deactivate pp
-  fp-->cl: MXID des Gesuchten und PASSporT
+  fp-->cl: MXID des gesuchten Akteurs und PASSporT
    |||
     deactivate fp
     deactivate cl
