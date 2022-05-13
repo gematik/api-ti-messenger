@@ -44,12 +44,13 @@ ActorFontName Aapex
     end box
 
 |||
-  U->C: Eingabe Messenger-Service \n(Manuell oder \ndurch Auswahl)
+  U->C: Eingabe Messenger-Service 
     Activate C
   C->MP: GET /_matrix/client/login
     Activate MP
   MP->MP: TLS-Terminierung
-  MP->MP: überprüfe User-Agent, \nClient-Secret
+  |||
+  MP->MP: überprüfe client_id, \nclient_secret
 
 |||
 alt#LightGrey #AliceBlue <size:16>TI-Messenger Client wird vom Anbieter nicht unterstützt (kein gültiges Client-Secret)</size>
@@ -62,7 +63,7 @@ alt#LightGrey #AliceBlue <size:16>TI-Messenger Client wird vom Anbieter nicht un
     else <size:16>TI-Messenger Client wird vom Anbieter unterstützt  (gültiges Client-Secret)</size>
     |||
 
-  MP->MH: HTTP Forward
+  MP->MH: HTTP(S) Forward
    Activate MH
 
 |||
@@ -71,42 +72,48 @@ note over U, MH: <size:17>Die Authentifizierungsverfahren werden für jeden \n<s
 
   MH-->MP: unterstützte \nAuthentifizierungs-\nverfahren
     Deactivate MH
-  MP-->C: HTTP Forward
+  MP-->C: HTTP(S) Forward
     Deactivate MP
   C-->U: Zeige \nAuthentifizierungsmaske
+  |||
   U->U: Starte Authentifizierung
   U->C: Anmeldung
   C->MP: POST /_matrix/client/login
     Activate MP
 
     
-    MP->MH: HTTP Forward
+    MP->MH: HTTP(S) Forward
       Activate MH
     MH->MH: überprüfe Client-\nCredentials
+    |||
     opt#LightGrey #MistyRose <size:16>Abbruch</size>
       MH-->MP:Fehlerhafte \nAnmeldedaten 
-      MP-->C: HTTP Forward
+      MP-->C: HTTP(S) Forward
       C-->U: Anmeldedaten \nsind nicht korrekt
+      |||
     end
+    |||
     
     note over MH, MH: <size:17>Die Überprüfung ist abhängig vom \n<size:17>gewählten Authentifizierungsverfahren</size>
     
+    |||
     MH->MH: erstelle \nMatrix-ACCESS_TOKEN, \ndevice_id, \nMXID
     MH-->MP: Matrix-ACCESS_TOKEN, \ndevice_ID, MXID
       Deactivate MH
-    MP-->C: HTTP Forward
+    MP-->C: HTTP(S) Forward
       Deactivate MP
+    |||
     C->C: Speichere \nMatrix-ACCESS_TOKEN
     
     |||
     C->MP: POST /_matrix/client\n/user/{userId}/\nopenid/request_token
       Activate MP
-    MP->MH: HTTP Forward
+    MP->MH: HTTP(S) Forward
       Activate MH
     MH->MH: Erstelle \nMatrix-OpenID-Token
     MH-->MP: Matrix-OpenID-Token
       Deactivate MH
-    MP-->C: HTTP Forward
+    MP-->C: HTTP(S) Forward
       Deactivate MP
     
     |||
@@ -124,6 +131,7 @@ note over U, MH: <size:17>Die Authentifizierungsverfahren werden für jeden \n<s
         
         |||
         else <size:16>valider Messenger-Service, da Matrix-Homeserver in der Föderation enthalten ist</size>
+          |||
           Auth-->C: HTTP 200
             Deactivate Auth
           C-->U: Anmeldung \nerfolgreich
