@@ -83,33 +83,37 @@ note over U2, MP2: \n<size:17>Der Akteur B ist erfolgreich beim Messenger Servic
     |||
     C1->MP1: POST /_matrix/client/r0/rooms/\n{roomId}/invite \n(PASSporT)
       activate MP1
-    MP1->MP1: Prüfung, ob Matrix-Domain \nin der Föderationsliste \nexistiert
+    MP1->MP1: Prüfung, ob Matrix-Domain \nin der Föderationsliste \nenthalten ist
+    |||
     MP1->MP1: Prüfung, ob valides \nPASSporT vorliegt
       |||
     opt#LightGrey #MistyRose <size:16>Abbruch</size>
-      MP1-->C1: Domain nicht in TI-Föderation \noder \nfehlendes oder ungültiges PASSporT
+      MP1-->C1: Domain nicht in der TI-Föderation \noder \nfehlendes oder ungültiges PASSporT
       C1-->U1: Event konnte nicht \nverarbeitet werden
+      |||
     end
     |||
-    MP1->MH1: HTTP Forward
+    MP1->MH1: HTTP(S) Forward
       activate MH1
       |||
     MH1->MH1: /Invite \nverarbeiten
-    MH1->MP1: POST /_matrix/client/r0/rooms/\n{roomId}/invite (PASSporT)
+    MH1->MP1: POST /_matrix/federation/v1\n/invite/{roomId}/{eventId} \n(PASSporT)
       deactivate MH1
       |||
-    MP1->MP2: HTTP Forward
+    MP1->MP2: HTTP(S) Forward
       activate MP2
-    MP2->MP2: Prüfung, ob Matrix-Domain \nin der Föderationsliste \nexistiert
+    MP2->MP2: Prüfung, ob Matrix-Domain \nin der Föderationsliste \nenthalten ist
+    |||
     MP2->MP2: Prüfung, ob valides \nPASSporT vorliegt
       |||
     opt#LightGrey #MistyRose <size:16>Abbruch</size>
-      MP2-->MP1: Domain nicht in TI-Föderation \noder \nfehlendes oder ungültiges PASSporT
-      MP1-->C1: HTTP Forward (Abbruch)
+      MP2-->MP1: Domain nicht in der TI-Föderation \noder \nfehlendes oder ungültiges PASSporT
+      MP1-->C1: HTTP(S) Forward (Abbruch)
       C1-->U1: Event konnte nicht \nverarbeitet werden
+      |||
     end
     |||
-    MP2->MH2: HTTP Foward
+    MP2->MH2: HTTP(S) Foward
       activate MH2
       MH2->MH2: Invite verarbeiten
       |||
@@ -125,13 +129,13 @@ note over U2, MP2: \n<size:17>Der Akteur B ist erfolgreich beim Messenger Servic
       |||
       group /sync
         MH2->MP2: Invite Request
-        MP2->C2: HTTP Forward
+        MP2->C2: HTTP(S) Forward
           activate C2 #TECHNOLOGY
         C2->U2: Einladung anzeigen
         U2-->C2: Einladung bestätigen
         C2->MP2: commit
         MP2->MP2: TLS Terminierung
-        MP2-->MH2: HTTP Forward
+        MP2-->MH2: HTTP(S) Forward
         MH2-->MH2: Invite auslösen
         MH2-->MP2: Status
           deactivate MH2
