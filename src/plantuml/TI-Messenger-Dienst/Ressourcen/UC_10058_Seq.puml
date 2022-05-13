@@ -57,14 +57,14 @@ C->C: Prüfung, ob gültiges \nowner-accesstoken \nvorliegt
 alt#LightGrey #AliceBlue <size:16>kein gültigess owner-access-token</size>
 |||
 
-  C->C: Erzeuge PKCE Code \nfür verifier und challenge
   C->Auth: GET /owner-authenticate
     Activate Auth
-  Auth-->C: Redirct to IDP Authorization Endpoint
+  Auth->Auth: Erzeuge PKCE Code \nfür verifier und challenge
+  Auth-->C: Redirct to IDP Authorization Endpoint (PKCE Code)
     Deactivate Auth
 
-  C->U: Liste verfügbarer IDP's
-  U->C: ausgewählterr IDP
+  C->U: Liste verfügbarer IDPs
+  U->C: ausgewählter IDP
     
   C->I: GET /authorize
     Activate A
@@ -77,13 +77,15 @@ alt#LightGrey #AliceBlue <size:16>kein gültigess owner-access-token</size>
     Deactivate I
        
   |||          
-  C->Auth: GET /owner-authenticate with Authorization code
+  C->Auth: GET /owner-authenticate with Authorization code (PKCE Code)
     Activate Auth
+  |||
   Auth-->I: POST /tokenEndpoint\n(authorization code)
     Activate I
   I->Auth: id_token
     Deactivate I
   Auth->Auth: prüfe id_token
+  |||
   Auth->Auth: erzeuge \nowner-accesstoken
   Auth-->C: owner-accesstoken
     Deactivate Auth
@@ -94,26 +96,36 @@ end
 
 group <size:16>VZD-FHIR-Directory Eintrag</size>
   |||
+  group <size:16>FHIR-Ressourcen lesen</size>
+  |||
   C->FP: POST /owner/PractitionerRole/?... \nFinde Datensatz für eigene TelematikID \nAuthorization Bearer owner-accesstoken
     Activate FP
   FP->FP: prüfe \nowner-accesstoken
-  FP->VZD: HTTP Forward
+  FP->VZD: HTTPS Forward
     Activate VZD
   VZD-->FP: result body json
     Deactivate VZD
   FP-->C: result body json
     Deactivate FP
+  |||
+  end
     
+  |||
+  group <size:16>FHIR-Ressourcen schreiben</size>
   |||
   C->FP: FHIR-Operationen um eigenen Datensatz zu verwalten \nAuthorization Bearer owner-accesstoken \n(Optional: setze Flag für Sichtbarkeit)
     Activate FP
   FP->FP: prüfe \nowner-accesstoken
-  FP->VZD: HTTP Forward
+  FP->VZD: HTTPS Forward
     Activate VZD
   VZD-->FP: result body json
     Deactivate VZD
   FP-->C: result body json
     Deactivate FP
+     
+  |||
+  end
+
   C-->U: Status    
     Deactivate C
   |||
