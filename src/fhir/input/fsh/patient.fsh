@@ -1,9 +1,6 @@
-// This is a simple example of a FSH file.
-// This file can be renamed, and additional FSH files can be added.
-// SUSHI will look for definitions in any file using the .fsh ending.
-Profile: MyPatient
+Profile: PatientTIMessengerEncounter
 Parent: Patient
-Description: "An example profile of the Patient resource."
+Description: "A profile of the Patient resource for TI-Messenger communication related to an encounter with a patient."
 * name 1..* MS
 
 Instance: PatientExample
