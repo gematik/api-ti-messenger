@@ -43,7 +43,7 @@ activate fd
 fd -> fd: Check[\nif dst is in organization directory then true\nelse if src is in practitioner directory then true\n]
 fd --> mpb: Response true
 mpb -> clb: invite von Nutzer A an Nutzer B
-else
+else Invite ist nicht erlaubt
 fd --> mpb: Response false
 mpb -> mp: ERROR: invite von Nutzer A an Nutzer B nicht erlaubt
 mp --> cl: ERROR: invite von Nutzer A an Nutzer B nicht erlaubt
