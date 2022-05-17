@@ -23,8 +23,10 @@ alt Tauscht bei persönlichem Treffen MXID mit Nutzer B aus
 a -> b: Kontaktdaten austauschen per App
 a -> cl: MXID von Nutzer B\nzu Kontakten hinzufügen
 b -> clb: MXID von Nutzer A\nzu Kontakten hinzufügen
+activate clb
 cl -> mp: invite von Nutzer B ist erlaubt
 clb -> mpb: invite von Nutzer A ist erlaubt
+activate mpb
 end
 cl -> mp: create room
 activate mp
@@ -47,6 +49,8 @@ mpb -> mp: ERROR: invite von Nutzer A an Nutzer B nicht erlaubt
 mp --> cl: ERROR: invite von Nutzer A an Nutzer B nicht erlaubt
 end
 deactivate fd
+deactivate clb
+deactivate mpb
 deactivate mp
 deactivate cl
 @enduml
