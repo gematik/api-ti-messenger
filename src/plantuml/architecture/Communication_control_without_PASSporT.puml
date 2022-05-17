@@ -1,0 +1,52 @@
+@startuml
+skinparam dpi 100
+skinparam WrapWidth 200
+skinparam monochrome true
+
+actor a as "Nutzer A"
+participant cl as "TI-M Client A"
+participant mp as "Messenger-Service A\n(Messenger-Proxy +\nHomeserver)"
+participant fd as "FHIR-Directory"
+participant mpb as "Messenger-Service B\n(Messenger-Proxy +\nHomeserver)"
+participant clb as "TI-M Client B"
+actor b as "Nutzer B"
+
+alt Suche im FHIR-Directory
+a -> cl: möchte TI-M Kontakt zum\nchatten finden
+activate cl
+cl -> fd: FHIR search request
+activate fd
+fd --> cl: FHIR response mit MXID von Nutzer B
+deactivate fd
+end
+alt Tauscht bei persönlichem Treffen MXID mit Nutzer B aus
+a -> b: Kontaktdaten austauschen per App
+a -> cl: MXID von Nutzer B\nzu Kontakten hinzufügen
+b -> clb: MXID von Nutzer A\nzu Kontakten hinzufügen
+cl -> mp: invite von Nutzer B ist erlaubt
+clb -> mpb: invite von Nutzer A ist erlaubt
+end
+cl -> mp: create room
+activate mp
+mp --> cl: room created
+
+' Invite
+cl -> mp: invite von Nutzer A an Nutzer B
+mp -> mpb: invite von Nutzer A an Nutzer B
+alt invite von Nutzer A ist erlaubt
+mpb -> clb: invite von Nutzer A an Nutzer B
+else invite von Nutzer A nicht erlaubt
+mpb -> fd: REST Operation\nIsAllowedCommunication(src=MXID Nutzer A,\n dst=MXID Nutzer B)
+activate fd
+fd -> fd: Check[\nif dst is in organization directory then true\nelse if src is in practitioner directory then true\n]
+fd --> mpb: Response true
+mpb -> clb: invite von Nutzer A an Nutzer B
+else
+fd --> mpb: Response false
+mpb -> mp: ERROR: invite von Nutzer A an Nutzer B nicht erlaubt
+mp --> cl: ERROR: invite von Nutzer A an Nutzer B nicht erlaubt
+end
+deactivate fd
+deactivate mp
+deactivate cl
+@enduml
