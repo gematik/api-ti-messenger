@@ -7,6 +7,7 @@ actor a as "Nutzer A"
 participant cl as "TI-M Client A"
 participant mp as "Messenger-Service A\n(Messenger-Proxy +\nHomeserver)"
 participant fd as "FHIR-Directory"
+participant rdb as "Registrierungsdienst B"
 participant mpb as "Messenger-Service B\n(Messenger-Proxy +\nHomeserver)"
 participant clb as "TI-M Client B"
 actor b as "Nutzer B"
@@ -38,17 +39,22 @@ mp -> mpb: invite von Nutzer A an Nutzer B
 alt invite von Nutzer A ist erlaubt
 mpb -> clb: invite von Nutzer A an Nutzer B
 else invite von Nutzer A nicht erlaubt
-mpb -> fd: REST Operation\nIsAllowedCommunication(src=MXID Nutzer A,\n dst=MXID Nutzer B)
+mpb -> rdb: REST Operation\nIsAllowedCommunication(src=MXID Nutzer A,\n dst=MXID Nutzer B)
+activate rdb
+rdb -> rdb: hashA = hash(MXID Nutzer A),\nhashB = hash(MXID Nutzer B)
+rdb -> fd: REST Operation\nWhereIs(hashA), WhereIs(hashB)
 activate fd
-fd -> fd: Check[\nif dst is in organization directory then true\nelse if src is in practitioner directory then true\n]
-fd --> mpb: Response true
+fd --> rdb: Response (hashA is in PractitionerDir),\nResponse (hashB is in OrganizationDir)
+deactivate fd
+rdb -> rdb: Cache Response (1 Tag)
+rdb -> rdb: Decision[\nif hashB is in organization directory then true\nelse if hashA is in practitioner directory\n and hashB is in practitioner directory then true\nelse false]
+rdb --> mpb: Response true
 mpb -> clb: invite von Nutzer A an Nutzer B
 else Invite ist nicht erlaubt
 fd --> mpb: Response false
 mpb -> mp: ERROR: invite von Nutzer A an Nutzer B nicht erlaubt
 mp --> cl: ERROR: invite von Nutzer A an Nutzer B nicht erlaubt
 end
-deactivate fd
 deactivate clb
 deactivate mpb
 deactivate mp
