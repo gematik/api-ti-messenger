@@ -1,4 +1,26 @@
 @startuml TI-Messenger communication control without PASSporT
+/'
+Vorteile:
+- bessere Kompatibilität mit Matrix API
+- einfachere Architektur
+- keine Signaturprüfung von PASSporT im Messenger-Proxy
+  - kein download von Signatur-, CA- und Root-Zertifikaten erforderlich (Schnittstelle und Spezifikation fehlen noch in aktueller Spec)
+  - keine Abhängigkeit meht zu PT Infrastructure
+- Bessere Latenz bei Suchen im FHIR-Dir
+  - einheitliche Schnittstelle im FHIR-Dir für TIM und KIM 2.0
+  - geringere Abhängigkeit vom FHIR-Dir
+- Ermöglicht TI 2.0 Zero Trust Architektur (Policy Decision Point ist in Registrierungsdienst integriert, Policy Enforcement Point ist der Messenger-Proxy)
+  - einfache Erweiterung um zusätzliche Policies im Reg-Service möglich (z. B. für Versicherte)
+- Bessere UX für Austausch von TI-M Adressen bei persönlichem Kontakt.
+  - Austausch von TIM Adressen grundsätzlich auch remote möglich
+
+Was muss getan werden, um ohne PASSporTs auszukommen?
+- PASSporT aus der TI-M Spec entfernen
+- PASSporT aus der FHIR-Dir Spec entfernen
+- REST Operationen am Messenger-Proxy spezifizieren (invite von MXIDs erlauben und Erlaubnis widerrufen)
+- zusätzliche REST Operationen an I_TIM_Provider_Services
+- Erläuternde Beschreibung der Abläufe zwischen Messenger-Proxy und Registrierungsdienst
+'/
 skinparam dpi 100
 skinparam WrapWidth 200
 skinparam monochrome true
