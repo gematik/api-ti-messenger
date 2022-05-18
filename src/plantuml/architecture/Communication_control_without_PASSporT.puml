@@ -9,8 +9,8 @@ Vorteile:
 - Bessere Latenz bei Suchen im FHIR-Dir
   - einheitliche Schnittstelle im FHIR-Dir für TIM und KIM 2.0
   - geringere Abhängigkeit vom FHIR-Dir
-- Ermöglicht TI 2.0 Zero Trust Architektur (Policy Decision Point ist in Registrierungsdienst integriert, Policy Enforcement Point ist der Messenger-Proxy)
-  - einfache Erweiterung um zusätzliche Policies im Reg-Service möglich (z. B. für Versicherte)
+- Ermöglicht TI 2.0 Zero Trust Architektur (Policy Decision Point (PDP) ist entweder in Registrierungsdienst integriert oder eigenständige Komponente, Policy Enforcement Point ist der Messenger-Proxy)
+  - einfache Erweiterung um zusätzliche Policies im PDP möglich (z. B. für Versicherte)
 - Bessere UX für Austausch von TI-M Adressen bei persönlichem Kontakt.
   - Austausch von TIM Adressen grundsätzlich auch remote möglich
 
