@@ -1,0 +1,62 @@
+@startuml TI-Messenger communication control without PASSporT
+skinparam dpi 100
+skinparam WrapWidth 200
+skinparam monochrome true
+
+actor a as "Nutzer A"
+participant cl as "TI-M Client A"
+participant mp as "Messenger-Service A\n(Messenger-Proxy +\nHomeserver)"
+participant fd as "FHIR-Directory"
+participant rdb as "Registrierungsdienst B"
+participant mpb as "Messenger-Service B\n(Messenger-Proxy +\nHomeserver)"
+participant clb as "TI-M Client B"
+actor b as "Nutzer B"
+
+alt Suche im FHIR-Directory
+a -> cl: möchte TI-M Kontakt zum\nchatten finden
+activate cl
+cl -> fd: FHIR search request
+activate fd
+fd --> cl: FHIR response mit MXID von Nutzer B
+deactivate fd
+end
+alt Tauscht bei persönlichem Treffen MXID mit Nutzer B aus
+a -> b: Kontaktdaten austauschen per App
+a -> cl: MXID von Nutzer B\nzu Kontakten hinzufügen
+b -> clb: MXID von Nutzer A\nzu Kontakten hinzufügen
+activate clb
+cl -> mp: invite von Nutzer B ist erlaubt
+clb -> mpb: invite von Nutzer A ist erlaubt
+activate mpb
+end
+cl -> mp: create room
+activate mp
+mp --> cl: room created
+
+' Invite
+cl -> mp: invite von Nutzer A an Nutzer B
+mp -> mpb: invite von Nutzer A an Nutzer B
+alt invite von Nutzer A ist erlaubt
+mpb -> clb: invite von Nutzer A an Nutzer B
+else invite von Nutzer A nicht erlaubt
+mpb -> rdb: REST Operation\nIsAllowedCommunication(src=MXID Nutzer A,\n dst=MXID Nutzer B)
+activate rdb
+rdb -> rdb: hashA = hash(MXID Nutzer A),\nhashB = hash(MXID Nutzer B)
+rdb -> fd: REST Operation\nWhereIs(hashA), WhereIs(hashB)
+activate fd
+fd --> rdb: Response (hashA is in PractitionerDir),\nResponse (hashB is in OrganizationDir)
+deactivate fd
+rdb -> rdb: Cache Response (1 Tag)
+rdb -> rdb: Decision[\nif hashB is in organization directory then true\nelse if hashA is in practitioner directory\n and hashB is in practitioner directory then true\nelse false]
+rdb --> mpb: Response true
+mpb -> clb: invite von Nutzer A an Nutzer B
+else Invite ist nicht erlaubt
+fd --> mpb: Response false
+mpb -> mp: ERROR: invite von Nutzer A an Nutzer B nicht erlaubt
+mp --> cl: ERROR: invite von Nutzer A an Nutzer B nicht erlaubt
+end
+deactivate clb
+deactivate mpb
+deactivate mp
+deactivate cl
+@enduml
