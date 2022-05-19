@@ -1,0 +1,112 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "ProcedureTIMessengerEncounter",
+  "extension": [
+    {
+      "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-category",
+      "valueString": "Clinical.Summary"
+    },
+    {
+      "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-security-category",
+      "valueCode": "patient"
+    }
+  ],
+  "url": "http://gematik.de/fhir/TIMessengerEncounter/StructureDefinition/ProcedureTIMessengerEncounter",
+  "version": "0.1.0",
+  "name": "ProcedureTIMessengerEncounter",
+  "status": "draft",
+  "publisher": "gematik GmbH",
+  "description": "A profile of the Procedure resource for TI-Messenger communication related to an encounter with a patient.",
+  "fhirVersion": "4.0.1",
+  "mapping": [
+    {
+      "identity": "workflow",
+      "uri": "http://hl7.org/fhir/workflow",
+      "name": "Workflow Pattern"
+    },
+    {
+      "identity": "rim",
+      "uri": "http://hl7.org/v3",
+      "name": "RIM Mapping"
+    },
+    {
+      "identity": "w5",
+      "uri": "http://hl7.org/fhir/fivews",
+      "name": "FiveWs Pattern Mapping"
+    },
+    {
+      "identity": "v2",
+      "uri": "http://hl7.org/v2",
+      "name": "HL7 v2 Mapping"
+    }
+  ],
+  "kind": "resource",
+  "abstract": false,
+  "type": "Procedure",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Procedure",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Procedure.id",
+        "path": "Procedure.id",
+        "mustSupport": true
+      },
+      {
+        "id": "Procedure.identifier",
+        "path": "Procedure.identifier",
+        "mustSupport": true
+      },
+      {
+        "id": "Procedure.status",
+        "path": "Procedure.status",
+        "mustSupport": true
+      },
+      {
+        "id": "Procedure.statusReason",
+        "path": "Procedure.statusReason",
+        "mustSupport": true
+      },
+      {
+        "id": "Procedure.category",
+        "path": "Procedure.category",
+        "mustSupport": true
+      },
+      {
+        "id": "Procedure.code",
+        "path": "Procedure.code",
+        "mustSupport": true
+      },
+      {
+        "id": "Procedure.subject",
+        "path": "Procedure.subject",
+        "mustSupport": true
+      },
+      {
+        "id": "Procedure.encounter",
+        "path": "Procedure.encounter",
+        "mustSupport": true
+      },
+      {
+        "id": "Procedure.reasonCode",
+        "path": "Procedure.reasonCode",
+        "mustSupport": true
+      },
+      {
+        "id": "Procedure.outcome",
+        "path": "Procedure.outcome",
+        "mustSupport": true
+      },
+      {
+        "id": "Procedure.complication",
+        "path": "Procedure.complication",
+        "mustSupport": true
+      },
+      {
+        "id": "Procedure.note",
+        "path": "Procedure.note",
+        "mustSupport": true
+      }
+    ]
+  }
+}

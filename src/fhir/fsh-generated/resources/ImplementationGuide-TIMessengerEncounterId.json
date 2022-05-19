@@ -33,6 +33,22 @@
     "resource": [
       {
         "reference": {
+          "reference": "StructureDefinition/ConditionTIMessengerEncounter"
+        },
+        "name": "ConditionTIMessengerEncounter",
+        "description": "A profile of the Condition resource for TI-Messenger communication related to an encounter with a patient.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/EncounterTIMessengerEncounter"
+        },
+        "name": "EncounterTIMessengerEncounter",
+        "description": "A profile of the Encounter resource for TI-Messenger communication related to an encounter with a patient.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
           "reference": "StructureDefinition/PatientTIMessengerEncounter"
         },
         "name": "PatientTIMessengerEncounter",
@@ -41,10 +57,26 @@
       },
       {
         "reference": {
-          "reference": "Patient/PatientExample"
+          "reference": "StructureDefinition/ProcedureTIMessengerEncounter"
+        },
+        "name": "ProcedureTIMessengerEncounter",
+        "description": "A profile of the Procedure resource for TI-Messenger communication related to an encounter with a patient.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "Encounter/324534708"
+        },
+        "name": "EncounterExample",
+        "description": "An example of a encounter.",
+        "exampleCanonical": "http://gematik.de/fhir/TIMessengerEncounter/StructureDefinition/EncounterTIMessengerEncounter"
+      },
+      {
+        "reference": {
+          "reference": "Patient/374885372"
         },
         "name": "PatientExample",
-        "description": "An example of a patient with a license to krill.",
+        "description": "An example of a patient.",
         "exampleCanonical": "http://gematik.de/fhir/TIMessengerEncounter/StructureDefinition/PatientTIMessengerEncounter"
       }
     ],

@@ -1,0 +1,34 @@
+{
+  "resourceType": "Encounter",
+  "id": "324534708",
+  "meta": {
+    "profile": [
+      "http://gematik.de/fhir/TIMessengerEncounter/StructureDefinition/EncounterTIMessengerEncounter"
+    ]
+  },
+  "identifier": [
+    {
+      "system": "http://example.de/StructureDefinition/identifier-interne-abrechnungsnummer",
+      "value": "ABC1234567890"
+    }
+  ],
+  "status": "in-progress",
+  "class": {
+    "code": "AMB",
+    "display": "ambulatory"
+  },
+  "priority": {
+    "coding": [
+      {
+        "code": "A",
+        "display": "ASAP"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "374885372"
+  },
+  "period": {
+    "start": "2022-05-02"
+  }
+}

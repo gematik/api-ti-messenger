@@ -27,9 +27,9 @@ Usage: #example
 * status = #in-progress
 * class.code = #AMB
 * class.display = "ambulatory"
-* priority.code = #A
-* priority.display = "ASAP"
-* subject = "374885372" // reference to the patient resource
+* priority.coding.code = #A
+* priority.coding.display = "ASAP"
+* subject.reference = "374885372" // reference to the patient resource
 * period.start = "2022-05-02"
-* reasonCode.code = #368009
-* reasonCode.display = "Heart valve disorder"
+* reasonCode.coding.code = #368009
+* reasonCode.coding.display = "Heart valve disorder"

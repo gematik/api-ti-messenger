@@ -1,0 +1,36 @@
+{
+  "resourceType": "Patient",
+  "id": "374885372",
+  "meta": {
+    "profile": [
+      "http://gematik.de/fhir/TIMessengerEncounter/StructureDefinition/PatientTIMessengerEncounter"
+    ]
+  },
+  "identifier": [
+    {
+      "system": "http://fhir.de/StructureDefinition/identifier-kvid-10",
+      "value": "ABC1234567"
+    }
+  ],
+  "name": [
+    {
+      "given": [
+        "August"
+      ],
+      "family": "Fröhlich"
+    }
+  ],
+  "gender": "male",
+  "birthDate": "2000-02-21",
+  "communication": [
+    {
+      "language": {
+        "coding": [
+          {
+            "code": "de"
+          }
+        ]
+      }
+    }
+  ]
+}
