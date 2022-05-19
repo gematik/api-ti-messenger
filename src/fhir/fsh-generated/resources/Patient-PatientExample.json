@@ -1,0 +1,33 @@
+{
+  "resourceType": "Patient",
+  "id": "PatientExample",
+  "meta": {
+    "profile": [
+      "http://gematik.de/fhir/TIMessengerEncounter/StructureDefinition/PatientTIMessengerEncounter"
+    ]
+  },
+  "identifier": [
+    {
+      "type": {
+        "coding": [
+          {
+            "system": "http://fhir.de/CodeSystem/identifier-type-de-basis",
+            "code": "GKV"
+          }
+        ],
+        "text": "KVNR"
+      },
+      "system": "http://fhir.de/sid/gkv/kvid-10",
+      "value": "1234567890"
+    }
+  ],
+  "name": [
+    {
+      "given": [
+        "August"
+      ],
+      "family": "Fröhlich"
+    }
+  ],
+  "birthDate": "2000-02-21"
+}

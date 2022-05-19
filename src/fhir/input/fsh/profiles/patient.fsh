@@ -29,10 +29,9 @@ Wir sollten die Verwendung ermöglichen da diese intern Maßgeblich zur
 Identifikation eines Menschen verwendet wird.
 (Die Fälle werden an den Patientenstamm verlinkt)
 */
-
 * name 1..1 MS
-* gender 0..1 MS
-* birthdate 0..1 MS
+* gender MS
+* birthDate MS
 * address 0.. MS
 * photo 0.. MS
 * contact 0.. MS
@@ -41,7 +40,7 @@ Identifikation eines Menschen verwendet wird.
 
 
 Instance: PatientExample
-InstanceOf: MyPatient
+InstanceOf: PatientTIMessengerEncounter
 Description: "An example of a patient with a license to krill."
 * identifier
   * type.text = "KVNR"
@@ -51,7 +50,7 @@ Description: "An example of a patient with a license to krill."
   * given[0] = "August"
   * family = "Fröhlich"
 * gender = "male"
-* birthdate = "2000-02-21"
+* birthDate = "2000-02-21"
 * communication
   * language
     * coding

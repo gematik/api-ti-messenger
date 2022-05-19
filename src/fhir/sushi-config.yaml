@@ -19,7 +19,6 @@ publisher:
   name: gematik GmbH
   url: ww.gematik.de
   # email: test@example.org
-
 # The dependencies property corresponds to IG.dependsOn. The key is the
 # package id and the value is the version (or dev/current). For advanced
 # use cases, the value can be an object with keys for id, uri, and version.
@@ -31,6 +30,9 @@ publisher:
 #     uri: http://hl7.org/fhir/us/mcode/ImplementationGuide/hl7.fhir.us.mcode
 #     version: 1.0.0
 #
+dependencies:
+  de.basisprofil.r4: 1.3.2
+#FSHOnly: true
 #
 # The pages property corresponds to IG.definition.page. SUSHI can
 # auto-generate the page list, but if the author includes pages in
