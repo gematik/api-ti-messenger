@@ -4,12 +4,14 @@ Vorteile:
 - bessere Kompatibilität mit Matrix API
 - einfachere Architektur
 - keine Signaturprüfung von PASSporT im Messenger-Proxy
-  - kein download von Signatur-, CA- und Root-Zertifikaten erforderlich (Schnittstelle und Spezifikation fehlen noch in aktueller Spec)
+  - kein download von Signatur-, CA- und Root-Zertifikaten erforderlich (Schnittstelle und
+    Spezifikation fehlen noch in aktueller Spec)
   - keine Abhängigkeit meht zu PT Infrastructure
 - Bessere Latenz bei Suchen im FHIR-Dir
   - einheitliche Schnittstelle im FHIR-Dir für TIM und KIM 2.0
   - geringere Abhängigkeit vom FHIR-Dir
-- Ermöglicht TI 2.0 Zero Trust Architektur (Policy Decision Point (PDP) ist entweder in Registrierungsdienst integriert oder eigenständige Komponente, Policy Enforcement Point ist der Messenger-Proxy)
+- Ermöglicht TI 2.0 Zero Trust Architektur (Policy Decision Point (PDP) ist entweder in
+  Registrierungsdienst integriert oder eigenständige Komponente, Policy Enforcement Point ist der Messenger-Proxy)
   - einfache Erweiterung um zusätzliche Policies im PDP möglich (z. B. für Versicherte)
   - Sicherheit von TIM wird durch TIM-Komponenten kontrolliert (und nicht durch das FHIR-Dir)
 - Bessere UX für Austausch von TI-M Adressen bei persönlichem Kontakt.
@@ -18,7 +20,8 @@ Vorteile:
 Was muss getan werden, um ohne PASSporTs auszukommen?
 - PASSporT aus der TI-M Spec entfernen
 - PASSporT aus der FHIR-Dir Spec entfernen
-- REST Operationen am Messenger-Proxy spezifizieren (invite von MXIDs erlauben und Erlaubnis widerrufen)
+- REST Operationen am Messenger-Proxy spezifizieren (invite von MXIDs erlauben und Erlaubnis widerrufen,
+  Dauer der Erlaubnis als Parameter)
 - zusätzliche REST Operationen an I_TIM_Provider_Services
 - Erläuternde Beschreibung der Abläufe zwischen Messenger-Proxy und Registrierungsdienst
 '/

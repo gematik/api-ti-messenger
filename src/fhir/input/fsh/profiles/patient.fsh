@@ -49,9 +49,20 @@ Description: "An example of a patient with a license to krill."
 * name
   * given[0] = "August"
   * family = "Fröhlich"
-* gender = "male"
+* gender
+  * code = "male"
 * birthDate = "2000-02-21"
 * communication
   * language
     * coding
       * code = "de"
+
+POST /baseR4/PractitionerRole/_search HTTP/1.1
+Host: hapi.fhir.org
+content-type: application/x-www-form-urlencoded
+Accept: application/fhir+json
+Accept-Charset: utf-8
+client_id: a3d8ff890
+Content-Length: 165
+
+_include=PractitionerRole%3Apractitioner&_include=PractitionerRole%3Alocation&_include=PractitionerRole%3Aendpoint&practitioner.name=careful&practitioner.active=true
