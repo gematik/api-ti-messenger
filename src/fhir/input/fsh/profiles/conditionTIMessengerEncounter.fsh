@@ -32,6 +32,6 @@ Usage: #example
 * code.coding.code = #368009
 * code.coding.display = "Heart valve disorder"
 * subject.reference = "374885372"
-* encounter.reference.reference = "324534708"
+* encounter.reference = "324534708"
 * recordedDate = "2022-05-02"
 * note.text = "Additional information"

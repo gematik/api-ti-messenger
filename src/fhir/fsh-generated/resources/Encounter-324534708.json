@@ -30,5 +30,15 @@
   },
   "period": {
     "start": "2022-05-02"
-  }
+  },
+  "reasonCode": [
+    {
+      "coding": [
+        {
+          "code": "368009",
+          "display": "Heart valve disorder"
+        }
+      ]
+    }
+  ]
 }

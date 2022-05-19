@@ -78,6 +78,14 @@
         "name": "PatientExample",
         "description": "An example of a patient.",
         "exampleCanonical": "http://gematik.de/fhir/TIMessengerEncounter/StructureDefinition/PatientTIMessengerEncounter"
+      },
+      {
+        "reference": {
+          "reference": "Condition/ConditionExample"
+        },
+        "name": "ConditionExample",
+        "description": "An example of a encounter.",
+        "exampleCanonical": "http://gematik.de/fhir/TIMessengerEncounter/StructureDefinition/ConditionTIMessengerEncounter"
       }
     ],
     "page": {
