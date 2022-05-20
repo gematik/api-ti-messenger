@@ -77,7 +77,7 @@ rdb -> rdb: Decision[\nif hashB is in organization directory then true\nelse if 
 rdb --> mpb: Response true
 mpb -> clb: invite von Nutzer A an Nutzer B
 else Invite ist nicht erlaubt
-fd --> mpb: Response false
+rd --> mpb: Response false
 mpb -> mp: ERROR: invite von Nutzer A an Nutzer B nicht erlaubt
 mp --> cl: ERROR: invite von Nutzer A an Nutzer B nicht erlaubt
 end
