@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="899px" preserveAspectRatio="none" style="width:1409px;height:899px;background:#FFFFFF;" version="1.1" viewBox="0 0 1409 899" width="1409px" zoomAndPan="magnify"><defs><filter height="300%" id="f1n8mbnbiak1hj" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><rect fill="#F5F5F5" height="887.6563" style="stroke:#A80036;stroke-width:1.0;" width="454" x="16" y="6"/><text fill="#000000" font-family="sans-serif" font-size="18" font-weight="bold" lengthAdjust="spacing" textLength="193" x="146.5" y="22.708">Messenger-Service</text><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="0" x="245.5" y="39.02"/><rect fill="#F5F5F5" height="887.6563" style="stroke:#A80036;stroke-width:1.0;" width="454" x="888.5" y="6"/><text fill="#000000" font-family="sans-serif" font-size="18" font-weight="bold" lengthAdjust="spacing" textLength="200" x="1013" y="22.708">VZD-FHIR-Directory</text><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="0" x="1218" y="23.8872"/><rect fill="#DCDCDC" filter="url(#f1n8mbnbiak1hj)" height="649.2188" style="stroke:#000000;stroke-width:1.0;" width="10" x="124" y="149.1563"/><rect fill="#DCDCDC" filter="url(#f1n8mbnbiak1hj)" height="649.2188" style="stroke:#000000;stroke-width:1.0;" width="10" x="589.5" y="149.1563"/><rect fill="#DCDCDC" filter="url(#f1n8mbnbiak1hj)" height="382.9063" style="stroke:#000000;stroke-width:1.0;" width="10" x="996.5" y="381.6797"/><rect fill="#DCDCDC" filter="url(#f1n8mbnbiak1hj)" height="100.3672" style="stroke:#000000;stroke-width:1.0;" width="10" x="1224.5" y="202.7344"/><rect fill="#F0F8FF" filter="url(#f1n8mbnbiak1hj)" height="251.5391" style="stroke:#000000;stroke-width:2.0;" width="1110.5" x="10" y="579.8359"/><rect fill="#F0F8FF" height="113.2031" style="stroke:none;stroke-width:1.0;" width="1110.5" x="10" y="718.1719"/><line style="stroke:#000000;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="129" x2="129" y1="88.3672" y2="848.375"/><line style="stroke:#000000;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="357" x2="357" y1="88.3672" y2="848.375"/><line style="stroke:#000000;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="594" x2="594" y1="88.3672" y2="848.375"/><line style="stroke:#000000;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="1001.5" x2="1001.5" y1="88.3672" y2="848.375"/><line style="stroke:#000000;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="1229.5" x2="1229.5" y1="88.3672" y2="848.375"/><rect fill="#EFEFFF" filter="url(#f1n8mbnbiak1hj)" height="37.2813" style="stroke:#000000;stroke-width:1.5;" width="214" x="20" y="46.0859"/><text fill="#000000" font-family="Impact" font-size="20" lengthAdjust="spacing" textLength="168" x="43" y="71.6504">Messenger-Proxy</text><rect fill="#EFEFFF" filter="url(#f1n8mbnbiak1hj)" height="37.2813" style="stroke:#000000;stroke-width:1.5;" width="214" x="20" y="847.375"/><text fill="#000000" font-family="Impact" font-size="20" lengthAdjust="spacing" textLength="168" x="43" y="872.9395">Messenger-Proxy</text><rect fill="#EFEFFF" filter="url(#f1n8mbnbiak1hj)" height="37.2813" style="stroke:#000000;stroke-width:1.5;" width="214" x="248" y="46.0859"/><text fill="#000000" font-family="Impact" font-size="20" lengthAdjust="spacing" textLength="189" x="260.5" y="71.6504">Matrix-Homeserver</text><rect fill="#EFEFFF" filter="url(#f1n8mbnbiak1hj)" height="37.2813" style="stroke:#000000;stroke-width:1.5;" width="214" x="248" y="847.375"/><text fill="#000000" font-family="Impact" font-size="20" lengthAdjust="spacing" textLength="189" x="260.5" y="872.9395">Matrix-Homeserver</text><rect fill="#EFEFFF" filter="url(#f1n8mbnbiak1hj)" height="37.2813" style="stroke:#000000;stroke-width:1.5;" width="231" x="477" y="46.0859"/><text fill="#000000" font-family="Impact" font-size="20" lengthAdjust="spacing" textLength="217" x="484" y="71.6504">Registrierungs-Dienst</text><rect fill="#EFEFFF" filter="url(#f1n8mbnbiak1hj)" height="37.2813" style="stroke:#000000;stroke-width:1.5;" width="231" x="477" y="847.375"/><text fill="#000000" font-family="Impact" font-size="20" lengthAdjust="spacing" textLength="217" x="484" y="872.9395">Registrierungs-Dienst</text><rect fill="#EFEFFF" filter="url(#f1n8mbnbiak1hj)" height="37.2813" style="stroke:#000000;stroke-width:1.5;" width="214" x="892.5" y="46.0859"/><text fill="#000000" font-family="Impact" font-size="20" lengthAdjust="spacing" textLength="108" x="945.5" y="71.6504">FHIR-Proxy</text><rect fill="#EFEFFF" filter="url(#f1n8mbnbiak1hj)" height="37.2813" style="stroke:#000000;stroke-width:1.5;" width="214" x="892.5" y="847.375"/><text fill="#000000" font-family="Impact" font-size="20" lengthAdjust="spacing" textLength="108" x="945.5" y="872.9395">FHIR-Proxy</text><rect fill="#EFEFFF" filter="url(#f1n8mbnbiak1hj)" height="37.2813" style="stroke:#000000;stroke-width:1.5;" width="214" x="1120.5" y="46.0859"/><text fill="#000000" font-family="Impact" font-size="20" lengthAdjust="spacing" textLength="144" x="1155.5" y="71.6504">OAuth-Service</text><rect fill="#EFEFFF" filter="url(#f1n8mbnbiak1hj)" height="37.2813" style="stroke:#000000;stroke-width:1.5;" width="214" x="1120.5" y="847.375"/><text fill="#000000" font-family="Impact" font-size="20" lengthAdjust="spacing" textLength="144" x="1155.5" y="872.9395">OAuth-Service</text><rect fill="#DCDCDC" filter="url(#f1n8mbnbiak1hj)" height="649.2188" style="stroke:#000000;stroke-width:1.0;" width="10" x="124" y="149.1563"/><rect fill="#DCDCDC" filter="url(#f1n8mbnbiak1hj)" height="649.2188" style="stroke:#000000;stroke-width:1.0;" width="10" x="589.5" y="149.1563"/><rect fill="#DCDCDC" filter="url(#f1n8mbnbiak1hj)" height="382.9063" style="stroke:#000000;stroke-width:1.0;" width="10" x="996.5" y="381.6797"/><rect fill="#DCDCDC" filter="url(#f1n8mbnbiak1hj)" height="100.3672" style="stroke:#000000;stroke-width:1.0;" width="10" x="1224.5" y="202.7344"/><polygon fill="#000000" points="577.5,145.1563,587.5,149.1563,577.5,153.1563,581.5,149.1563" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:1.0;" x1="134" x2="583.5" y1="149.1563" y2="149.1563"/><text fill="#000000" font-family="sans-serif" font-size="17" lengthAdjust="spacing" textLength="164" x="141" y="143.147">GET /FederationList</text><polygon fill="#000000" points="1212.5,198.7344,1222.5,202.7344,1212.5,206.7344,1216.5,202.7344" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:1.0;" x1="599.5" x2="1218.5" y1="202.7344" y2="202.7344"/><text fill="#000000" font-family="sans-serif" font-size="17" lengthAdjust="spacing" textLength="297" x="606.5" y="176.936">GET /token (client_id, client_secret)</text><text fill="#000000" font-family="sans-serif" font-size="17" lengthAdjust="spacing" textLength="259" x="606.5" y="196.7251">(OAuth Client credentials flow)</text><line style="stroke:#000000;stroke-width:1.0;" x1="1234.5" x2="1276.5" y1="256.3125" y2="256.3125"/><line style="stroke:#000000;stroke-width:1.0;" x1="1276.5" x2="1276.5" y1="256.3125" y2="269.3125"/><line style="stroke:#000000;stroke-width:1.0;" x1="1235.5" x2="1276.5" y1="269.3125" y2="269.3125"/><polygon fill="#000000" points="1245.5,265.3125,1235.5,269.3125,1245.5,273.3125,1241.5,269.3125" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="17" lengthAdjust="spacing" textLength="156" x="1241.5" y="230.5142">prüfe client_id und</text><text fill="#000000" font-family="sans-serif" font-size="17" lengthAdjust="spacing" textLength="105" x="1241.5" y="250.3032">client_secret</text><polygon fill="#000000" points="610.5,299.1016,600.5,303.1016,610.5,307.1016,606.5,303.1016" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="604.5" x2="1228.5" y1="303.1016" y2="303.1016"/><text fill="#000000" font-family="sans-serif" font-size="17" lengthAdjust="spacing" textLength="220" x="1002.5" y="297.0923">status, admin-accesstoken</text><polygon fill="#000000" points="984.5,377.6797,994.5,381.6797,984.5,385.6797,988.5,381.6797" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:1.0;" x1="599.5" x2="990.5" y1="381.6797" y2="381.6797"/><text fill="#000000" font-family="sans-serif" font-size="17" lengthAdjust="spacing" textLength="373" x="606.5" y="355.8813">GET /tim-provider-services/getFederationList</text><text fill="#000000" font-family="sans-serif" font-size="17" lengthAdjust="spacing" textLength="244" x="606.5" y="375.6704">(admin-accesstoken, version)</text><line style="stroke:#000000;stroke-width:1.0;" x1="1006.5" x2="1048.5" y1="435.2578" y2="435.2578"/><line style="stroke:#000000;stroke-width:1.0;" x1="1048.5" x2="1048.5" y1="435.2578" y2="448.2578"/><line style="stroke:#000000;stroke-width:1.0;" x1="1007.5" x2="1048.5" y1="448.2578" y2="448.2578"/><polygon fill="#000000" points="1017.5,444.2578,1007.5,448.2578,1017.5,452.2578,1013.5,448.2578" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="17" lengthAdjust="spacing" textLength="44" x="1013.5" y="409.4595">prüfe</text><text fill="#000000" font-family="sans-serif" font-size="17" lengthAdjust="spacing" textLength="159" x="1013.5" y="429.2485">admin-accesstoken</text><line style="stroke:#000000;stroke-width:1.0;" x1="1006.5" x2="1048.5" y1="526.8359" y2="526.8359"/><line style="stroke:#000000;stroke-width:1.0;" x1="1048.5" x2="1048.5" y1="526.8359" y2="539.8359"/><line style="stroke:#000000;stroke-width:1.0;" x1="1007.5" x2="1048.5" y1="539.8359" y2="539.8359"/><polygon fill="#000000" points="1017.5,535.8359,1007.5,539.8359,1017.5,543.8359,1013.5,539.8359" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="17" lengthAdjust="spacing" textLength="148" x="1013.5" y="501.0376">prüfe übergebene</text><text fill="#000000" font-family="sans-serif" font-size="17" lengthAdjust="spacing" textLength="62" x="1013.5" y="520.8267">Version</text><path d="M10,579.8359 L74,579.8359 L74,586.8359 L64,596.8359 L10,596.8359 L10,579.8359 " fill="#D3D3D3" style="stroke:#000000;stroke-width:1.0;"/><rect fill="none" height="251.5391" style="stroke:#000000;stroke-width:2.0;" width="1110.5" x="10" y="579.8359"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="19" x="25" y="592.9028">alt</text><text fill="#000000" font-family="sans-serif" font-size="11" font-weight="bold" lengthAdjust="spacing" textLength="5" x="89" y="597.8667">[</text><text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="160" x="94" y="596.6875">Version ist aktuell</text><text fill="#000000" font-family="sans-serif" font-size="11" font-weight="bold" lengthAdjust="spacing" textLength="5" x="254" y="597.8667">]</text><polygon fill="#000000" points="610.5,647.3828,600.5,651.3828,610.5,655.3828,606.5,651.3828" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="604.5" x2="995.5" y1="651.3828" y2="651.3828"/><text fill="#000000" font-family="sans-serif" font-size="17" lengthAdjust="spacing" textLength="51" x="938.5" y="645.3735">status</text><polygon fill="#000000" points="145,681.1719,135,685.1719,145,689.1719,141,685.1719" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="139" x2="588.5" y1="685.1719" y2="685.1719"/><text fill="#000000" font-family="sans-serif" font-size="17" lengthAdjust="spacing" textLength="51" x="531.5" y="679.1626">status</text><line style="stroke:#000000;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="10" x2="1120.5" y1="719.1719" y2="719.1719"/><text fill="#000000" font-family="sans-serif" font-size="11" font-weight="bold" lengthAdjust="spacing" textLength="5" x="15" y="735.2026">[</text><text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="210" x="20" y="734.0234">Version ist nicht aktuell</text><text fill="#000000" font-family="sans-serif" font-size="11" font-weight="bold" lengthAdjust="spacing" textLength="5" x="230" y="735.2026">]</text><polygon fill="#000000" points="610.5,760.5859,600.5,764.5859,610.5,768.5859,606.5,764.5859" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="604.5" x2="1000.5" y1="764.5859" y2="764.5859"/><text fill="#000000" font-family="sans-serif" font-size="17" lengthAdjust="spacing" textLength="147" x="847.5" y="758.5767">Föderationsliste[]</text><polygon fill="#000000" points="140,794.375,130,798.375,140,802.375,136,798.375" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="134" x2="593.5" y1="798.375" y2="798.375"/><text fill="#000000" font-family="sans-serif" font-size="17" lengthAdjust="spacing" textLength="147" x="440.5" y="792.3657">Föderationsliste[]</text><!--MD5=[a22917b81655198bf01ab2549c03556a]
+@startuml
+skinparam sequenceMessageAlign direction
+skinparam minClassWidth 200
+skinparam BoxPadding 1
+skinparam sequenceReferenceHeaderBackgroundColor palegreen
+scale max 2048 width
+
+skinparam sequence {
+ArrowColor black
+ArrowFontSize 17
+ActorBorderColor black
+LifeLineBorderColor black
+LifeLineBackgroundColor Gainsboro
+
+ParticipantBorderColor Motivation
+ParticipantBackgroundColor Motivation
+ParticipantFontName Impact
+ParticipantFontSize 20
+ParticipantFontColor black
+ParticipantBorderColor Black
+ParticipantBackgroundColor MOTIVATION
+
+ActorBackgroundColor Gainsboro
+ActorFontColor black
+ActorFontSize 20
+ActorFontName Aapex
+}
+    box <size:18>Messenger-Service\n #WhiteSmoke
+    participant MP as "Messenger-Proxy"
+    participant MH as "Matrix-Homeserver"
+    end box
+    participant RD as "Registrierungs-Dienst"
+    box <size:18>VZD-FHIR-Directory</size> #WhiteSmoke
+      participant FP as "FHIR-Proxy"
+      participant AS as "OAuth-Service"
+    end box
+
+  |||
+  MP->RD: GET /FederationList 
+    Activate MP
+    Activate RD
+
+  RD->AS: GET /token (client_id, client_secret) \n(OAuth Client credentials flow)
+    Activate AS
+  AS->AS: prüfe client_id und \nclient_secret
+  AS- ->RD: status, admin-accesstoken 
+    Deactivate AS  
+
+  |||
+  RD->FP: GET /tim-provider-services/getFederationList \n(admin-accesstoken, version)
+    Activate FP
+  FP->FP: prüfe \nadmin-accesstoken
+  |||
+  FP->FP: prüfe übergebene \nVersion
+
+|||
+alt#LightGrey #AliceBlue <size:16>Version ist aktuell</size>
+|||    
+
+    FP- ->RD: status
+    RD- ->MP: status
+    |||
+    
+    else <size:16>Version ist nicht aktuell</size>
+       FP- ->RD: Föderationsliste[]
+        Deactivate FP
+      RD- ->MP: Föderationsliste[]
+        Deactivate RD
+        deactivate MP
+    |||
+end
+@enduml
+
+PlantUML version 1.2021.16(Wed Dec 08 17:25:22 UTC 2021)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: null
+--></g></svg>
