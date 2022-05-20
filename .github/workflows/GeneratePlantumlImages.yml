@@ -1,0 +1,43 @@
+name: GeneratePlantumlImages
+
+on:
+  push:
+    branches: [ '*' ]
+    paths: [ 'src/plantuml/**' ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      # Runs a single command using the runners shell
+      - name: Generate images
+        run: |
+          imagedir=images/diagrams
+          mkdir -p $imagedir
+          rm -rf images/diagrams/*
+          for fullname in $(find src/plantuml/ -type f -name '*.puml')
+          do
+              echo ${fullname}
+              base=$(basename "${fullname}" .puml)
+              echo ${base}
+              outdir=$(dirname $fullname | sed s+src/plantuml+${imagedir}+)
+              echo ${outdir}
+              mkdir -p $outdir
+              curl --silent --show-error --fail -H "Content-Type: text/plain; charset=utf-8" \
+                --data-binary @- https://plantuml.gematik.solutions/plantuml/svg/ \
+                --output - < "${fullname}" > "${outdir}/${base}.svg"
+              curl --silent --show-error --fail -H "Content-Type: text/plain; charset=utf-8" \
+                --data-binary @- https://plantuml.gematik.solutions/plantuml/png/ \
+                --output - < "${fullname}" > "${outdir}/${base}.png"
+          done          
+      - name: Add & Commit
+        uses: EndBug/add-and-commit@v8
+        with:
+          add: 'images/diagrams/'
