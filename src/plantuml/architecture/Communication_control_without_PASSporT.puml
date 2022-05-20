@@ -6,7 +6,7 @@ Vorteile:
 - keine Signaturprüfung von PASSporT im Messenger-Proxy
   - kein download von Signatur-, CA- und Root-Zertifikaten erforderlich (Schnittstelle und
     Spezifikation fehlen noch in aktueller Spec)
-  - keine Abhängigkeit meht zu PT Infrastructure
+  - keine Abhängigkeit mehr zu PT Infrastructure
 - Bessere Latenz bei Suchen im FHIR-Dir
   - einheitliche Schnittstelle im FHIR-Dir für TIM und KIM 2.0
   - geringere Abhängigkeit vom FHIR-Dir
