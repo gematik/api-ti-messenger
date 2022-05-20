@@ -19,19 +19,24 @@ jobs:
       # Runs a single command using the runners shell
       - name: Generate images
         run: |
-          mkdir -p images/diagrams
+          imagedir=images/diagrams
+          mkdir -p $imagedir
           rm -rf images/diagrams/*
           for fullname in $(find src/plantuml/ -type f -name '*.puml')
           do
-            base=$(basename -- "$fullname")
-            echo ${base%.*}
-            curl --silent --show-error --fail -H "Content-Type: text/plain; charset=utf-8" \
-              --data-binary @- https://plantuml.gematik.solutions/plantuml/svg/ \
-              --output - < "src/plantuml/${base%.*}.puml" > "images/diagrams/${base%.*}.svg"
-            curl --silent --show-error --fail -H "Content-Type: text/plain; charset=utf-8" \
-              --data-binary @- https://plantuml.gematik.solutions/plantuml/png/ \
-              --output - < "src/plantuml/${base%.*}.puml" > "images/diagrams/${base%.*}.png"
-          done
+              echo ${fullname}
+              base=$(basename "${fullname}" .puml)
+              echo ${base}
+              outdir=$(dirname $fullname | sed s+src/plantuml+${imagedir}+)
+              echo ${outdir}
+              mkdir -p $outdir
+              curl --silent --show-error --fail -H "Content-Type: text/plain; charset=utf-8" \
+                --data-binary @- https://plantuml.gematik.solutions/plantuml/svg/ \
+                --output - < "${fullname}" > "${outdir}/${base}.svg"
+              curl --silent --show-error --fail -H "Content-Type: text/plain; charset=utf-8" \
+                --data-binary @- https://plantuml.gematik.solutions/plantuml/png/ \
+                --output - < "${fullname}" > "${outdir}/${base}.png"
+          done          
       - name: Add & Commit
         uses: EndBug/add-and-commit@v8
         with:
