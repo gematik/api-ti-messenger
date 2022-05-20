@@ -76,13 +76,14 @@ rdb -> rdb: Cache Response (1 Tag)
 rdb -> rdb: Decision[\nif hashB is in organization directory then true\nelse if hashA is in practitioner directory\n and hashB is in practitioner directory then true\nelse false]
 rdb --> mpb: Response true
 mpb -> clb: invite von Nutzer A an Nutzer B
+deactivate clb
 else Invite ist nicht erlaubt
 rdb --> mpb: Response false
+deactivate rdb
 mpb -> mp: ERROR: invite von Nutzer A an Nutzer B nicht erlaubt
+deactivate mpb
 mp --> cl: ERROR: invite von Nutzer A an Nutzer B nicht erlaubt
 end
-deactivate clb
-deactivate mpb
 deactivate mp
 deactivate cl
 @enduml
