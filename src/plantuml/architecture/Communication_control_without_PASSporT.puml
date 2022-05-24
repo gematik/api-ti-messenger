@@ -25,7 +25,7 @@ Was muss getan werden, um ohne PASSporTs auszukommen?
 - zusätzliche REST Operationen an I_TIM_Provider_Services
 - Erläuternde Beschreibung der Abläufe zwischen Messenger-Proxy und Registrierungsdienst
 '/
-
+!pragma layout smetana
 '!include ../includes/gem-tim.iuml
 !include ../includes/gem-tim-monochrome.iuml
 
