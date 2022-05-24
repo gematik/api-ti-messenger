@@ -25,9 +25,9 @@ Was muss getan werden, um ohne PASSporTs auszukommen?
 - zusätzliche REST Operationen an I_TIM_Provider_Services
 - Erläuternde Beschreibung der Abläufe zwischen Messenger-Proxy und Registrierungsdienst
 '/
-skinparam dpi 100
-skinparam WrapWidth 200
-skinparam monochrome true
+
+'!include ../includes/gem-tim.iuml
+!include ../includes/gem-tim-monochrome.iuml
 
 actor a as "Nutzer A"
 participant cl as "TI-M Client A"
