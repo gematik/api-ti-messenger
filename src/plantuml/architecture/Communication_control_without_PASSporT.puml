@@ -61,21 +61,25 @@ participant mpb as "Messenger-Service B\n(Messenger-Proxy +\nHomeserver)"
 participant clb as "TI-M Client B"
 actor b as "Nutzer B"
 
-alt Suche im FHIR-Directory
+alt <size:16>Suche im FHIR-Directory</size>
+|||
 a -> cl: möchte TI-M Kontakt zum\nchatten finden
 activate cl
 cl -> fd: FHIR search request
 activate fd
 fd --> cl: FHIR response mit MXID von Nutzer B
 deactivate fd
+|||
 end
-alt Tauscht bei persönlichem Treffen MXID mit Nutzer B aus
+alt <size:16>Tauscht bei persönlichem Treffen MXID mit Nutzer B aus</size>
+|||
 a -> b: Kontaktdaten austauschen per App
 a -> cl: MXID von Nutzer B\nzu Kontakten hinzufügen
 b -> clb: MXID von Nutzer A\nzu Kontakten hinzufügen
 activate clb
 cl -> mp: invite von Nutzer B ist erlaubt
 clb -> mpb: invite von Nutzer A ist erlaubt
+|||
 activate mpb
 end
 cl -> mp: create room
@@ -85,9 +89,9 @@ mp --> cl: room created
 ' Invite
 cl -> mp: invite von Nutzer A an Nutzer B
 mp -> mpb: invite von Nutzer A an Nutzer B
-alt invite von Nutzer A ist erlaubt
+alt <size:16>invite von Nutzer A ist erlaubt</size>
 mpb -> clb: invite von Nutzer A an Nutzer B
-else invite von Nutzer A nicht erlaubt
+else <size:16>invite von Nutzer A nicht erlaubt</size>
 mpb -> rdb: REST Operation\nIsAllowedCommunication\n(src=MXID Nutzer A,\n dst=MXID Nutzer B)
 activate rdb
 rdb -> rdb: hashA = hash(MXID Nutzer A),\nhashB = hash(MXID Nutzer B)
@@ -100,7 +104,7 @@ rdb -> rdb: Decision[\nif hashB is in organization directory\nthen true\nelse if
 rdb --> mpb: Response true
 mpb -> clb: invite von Nutzer A an Nutzer B
 deactivate clb
-else Invite ist nicht erlaubt
+else <size:16>Invite ist nicht erlaubt</size>
 rdb --> mpb: Response false
 deactivate rdb
 mpb -> mp: ERROR: invite von Nutzer A an Nutzer B nicht erlaubt
