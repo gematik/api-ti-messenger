@@ -1,4 +1,3 @@
-@startuml TI-Messenger communication control without PASSporT
 /'
 Vorteile:
 - bessere Kompatibilität mit Matrix API
@@ -24,9 +23,34 @@ Was muss getan werden, um ohne PASSporTs auszukommen?
 - zusätzliche REST Operationen an I_TIM_Provider_Services
 - Erläuternde Beschreibung der Abläufe zwischen Messenger-Proxy und Registrierungsdienst
 '/
-skinparam dpi 100
-skinparam WrapWidth 200
-skinparam monochrome true
+
+@startuml
+skinparam sequenceMessageAlign direction
+skinparam minClassWidth 200
+skinparam BoxPadding 1
+skinparam sequenceReferenceHeaderBackgroundColor palegreen
+scale max 2048 width
+
+skinparam sequence {
+ArrowColor black
+ArrowFontSize 17
+ActorBorderColor black
+LifeLineBorderColor black
+LifeLineBackgroundColor Gainsboro
+
+ParticipantBorderColor Motivation
+ParticipantBackgroundColor Motivation
+ParticipantFontName Impact
+ParticipantFontSize 20
+ParticipantFontColor black
+ParticipantBorderColor Black
+ParticipantBackgroundColor MOTIVATION
+
+ActorBackgroundColor Gainsboro
+ActorFontColor black
+ActorFontSize 20
+ActorFontName Aapex
+}
 
 actor a as "Nutzer A"
 participant cl as "TI-M Client A"
