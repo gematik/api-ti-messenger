@@ -1,0 +1,90 @@
+/' 
+# TI-Messenger 1.1
+# TI-Messenger-Dienst
+# Sequence Diagram
+# Name: Stufen der Berechtigungsprüfung
+'/
+
+@startuml
+skinparam sequenceMessageAlign direction
+skinparam minClassWidth 200
+skinparam BoxPadding 1
+skinparam sequenceReferenceHeaderBackgroundColor palegreen
+scale max 2048 width
+
+skinparam sequence {
+ArrowColor black
+ArrowFontSize 17
+ActorBorderColor black
+LifeLineBorderColor black
+LifeLineBackgroundColor Gainsboro
+
+ParticipantBorderColor Motivation
+ParticipantBackgroundColor Motivation
+ParticipantFontName Impact
+ParticipantFontSize 20
+ParticipantFontColor black
+ParticipantBorderColor Black
+ParticipantBackgroundColor MOTIVATION
+
+ActorBackgroundColor Gainsboro
+ActorFontColor black
+ActorFontSize 20
+ActorFontName Aapex
+}
+      participant C as "TI-Messenger-\nClient"
+      participant MP as "Messenger-\nProxy"
+      participant MH as "Matrix-\nHomeserver"
+      
+
+|||
+C->MP: Matrix-Request
+activate MP
+
+|||
+note over MP, MP: \n<size:16>Vorraussetzung: Matrix-Domain ist Teil der TI-Föderation</size>\n
+|||
+
+== <font color=green><size:16>Stufe 1</size></font>  ==
+MP->MP: \nprüfe MXIDs auf \nOrganisationszugehörigkeit
+
+|||
+alt#LightGrey #AliceBlue  <size:16>Akteure gehören einer gemeinsamen Organisation an</size>
+|||
+   MP->MH: HTTP(S) Forward
+   activate MH
+|||
+   else <size:16>Akteure gehören nicht einer gemeinsamen Organisation an</size>
+   |||
+      == <font color=green><size:16>Stufe 2</size></font>  ==
+      MP->MP: \nPrüfung, ob MXID des Einzuladenden \nin der Freigabeliste enthalten ist
+      
+      |||
+      alt#LightGrey #MOTIVATION  <size:16>MXID des Einzuladenden ist in der Freigabeliste enthalten</size>
+      |||
+         MP->MH: HTTP(S) Forward
+      |||
+         else <size:16>MXID des Einzuladenden ist nicht in der Freigabeliste enthalten</size>
+         |||
+            == <font color=green><size:16>Stufe 3</size></font>  ==
+            MP->MP: \nPrüfung, ob MXID des Einzuladenden im \nVZD-FHIR-Dirctory enthalten ist
+         |||
+            alt#LightGrey #LightBlue  <size:16>MXID des Einzuladenden ist im VZD-FHIR-Directory enthalten</size>
+            |||
+              MP->MH: HTTP(S) Forward
+            |||
+              else <size:16>MXID des Einzuladenden ist nicht im VZD-FHIR-Directory enthalten</size>
+              |||
+                MP->MP: <font color=red>Abbruch, Verbindung wird abgelehnt</font>
+              |||
+            end
+            |||
+      end
+      |||
+end
+|||
+MH-->MP: status
+deactivate MH
+MP-->C: status
+deactivate MP
+|||
