@@ -54,7 +54,7 @@ U->C: FHIR Ressourcen im \nVZD-FHIR-Directory \nhinzufügen (MXID)
 C->C: Prüfung, ob gültiges \nowner-accesstoken \nvorliegt
 
 |||
-alt#LightGrey #AliceBlue <size:16>kein gültigess owner-access-token</size>
+alt#LightGrey #AliceBlue <size:16>kein gültigess owner-accesstoken</size>
 |||
 
   C->Auth: GET /owner-authenticate
