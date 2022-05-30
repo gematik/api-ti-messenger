@@ -56,7 +56,7 @@ loop <size:16>1..n</size>
   C->R: POST /login (Client-Credential)
   note right: <size:16>Schnittstelle wird nicht \n<size:16>durch die gematik spezifiziert</size>
     Activate R
-  R->R: Client-Credential \nprüfen
+  R->R: prüfe \nClient-Credential
   R-->C: status
     Deactivate R
   C-->U: Erfolgreich angemeldet
