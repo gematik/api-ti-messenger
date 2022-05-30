@@ -38,7 +38,7 @@ ActorFontName Aapex
       
 
 |||
-C->MP: Matrix-Request
+C->MP: invite-Event
 activate MP
 
 |||
