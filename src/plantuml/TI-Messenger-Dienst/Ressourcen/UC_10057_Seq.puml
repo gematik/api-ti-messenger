@@ -50,17 +50,17 @@ ActorFontName Aapex
     Activate MP
   MP->MP: TLS-Terminierung
   |||
-  MP->MP: überprüfe client_id, \nclient_secret
+  MP->MP: prüfe client_id und \nclient_secret
 
 |||
-alt#LightGrey #AliceBlue <size:16>TI-Messenger Client wird vom Anbieter nicht unterstützt (kein gültiges Client-Secret)</size>
+alt#LightGrey #AliceBlue <size:16>TI-Messenger Client wird vom Anbieter nicht unterstützt (kein gültiges client_secret)</size>
 |||  
 
   MP-->C: HTTP 401 Unauthroized
   C-->U: Anmeldung \nnicht erfolgreich
   
     |||  
-    else <size:16>TI-Messenger Client wird vom Anbieter unterstützt  (gültiges Client-Secret)</size>
+    else <size:16>TI-Messenger Client wird vom Anbieter unterstützt  (gültiges client_secret)</size>
     |||
 
   MP->MH: HTTP(S) Forward
@@ -84,7 +84,7 @@ note over U, MH: <size:17>Die Authentifizierungsverfahren werden für jeden \n<s
     
     MP->MH: HTTP(S) Forward
       Activate MH
-    MH->MH: überprüfe Client-\nCredentials
+    MH->MH: prüfe \nClient-Credentials
     |||
     opt#LightGrey #MistyRose <size:16>Abbruch</size>
       MH-->MP:Fehlerhafte \nAnmeldedaten 
