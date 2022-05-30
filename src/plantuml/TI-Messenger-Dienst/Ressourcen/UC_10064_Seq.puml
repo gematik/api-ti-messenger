@@ -45,7 +45,7 @@ note over MP, MH: \n<size:17>Überprüfe, ob eingehender Matrix-Event an den \n<
 |||
 
     Activate MP
-  MP->MP: prüfe ob Matrix-Domain \nim PASSporT \nin der Föderationsliste \nvorhanden ist
+  MP->MP: prüfe ob Matrix-Domain \nder MXID \nin der Föderationsliste \nvorhanden ist
 
 |||
 alt#LightGrey #AliceBlue <size:16>Matrix-Domain ist nicht in der Föderationsliste enthalten</size>
@@ -53,7 +53,7 @@ alt#LightGrey #AliceBlue <size:16>Matrix-Domain ist nicht in der Föderationslis
 
   ref over MP, VZD: <size:17>**Anhang B** - Aktualisierung der Föderationsliste</size>\n 
   |||
-  MP->MP: prüfe ob Matrix-Domain \nim PASSporT \nin der **aktualisierten** \nFöderationsliste vorhanden ist
+  MP->MP: prüfe ob Matrix-Domain \nder MXID \nin der **aktualisierten** \nFöderationsliste vorhanden ist
   |||
 
     alt#LightGrey #LightBlue <size:16>Matrix-Domain ist nicht in der Föderationsliste enthalten</size>
