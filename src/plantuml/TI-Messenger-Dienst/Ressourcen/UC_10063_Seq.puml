@@ -51,7 +51,7 @@ note over U1, U2: \n<size:17>Die Akteure sind auf dem selben Messenger-Service a
       activate C1 #AliceBlue
     C1-[#red]>MP: Matrix-Request
       activate MP
-    MP->MP: Prüfung, ob der \nEmpfänger auf dem \nselben Messenger-Service \nregistriert ist
+    MP->MP: prüfe MXID auf \nOrganisationszugehörigkeit
     
     |||
     opt#LightGrey #MistyRose <size:16>Abbruch</size>
