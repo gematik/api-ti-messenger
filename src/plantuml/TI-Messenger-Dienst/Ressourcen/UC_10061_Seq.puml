@@ -39,12 +39,12 @@ ActorFontName Aapex
       participant MP1 as "Messenger-\nProxy"
       participant MH1 as "Matrix-\nHomeserver"
     end box
-    box <size:18>Messenger-Service B</size> #Snow
+    box <size:18>Messenger-Service B</size> #WhiteSmoke
     participant MP2 as "Messenger-\nProxy"
-    participant RD2 as "Registrierungs-\nDienst"
     participant MH2 as "Matrix-\nHomeserver"
     participant PG2 as "Push-\nGateway"
     end box
+    participant RD2 as "Registrierungs-\nDienst"
     participant C2 as "TI-Messenger-\nClient" #TECHNOLOGY
     actor U2 as "\nAkteur - B in der Rolle\nUser / User-HBA\n"
     
