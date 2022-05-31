@@ -9,7 +9,7 @@
 @startuml
 skinparam sequenceMessageAlign direction
 skinparam minClassWidth 200
-skinparam BoxPadding 1
+skinparam BoxPadding 15
 skinparam sequenceReferenceHeaderBackgroundColor palegreen
 scale max 2048 width
 
