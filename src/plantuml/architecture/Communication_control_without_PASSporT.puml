@@ -31,10 +31,15 @@ Was muss getan werden, um ohne PASSporTs auszukommen?
 
 actor a as "Nutzer A"
 participant cl as "TI-M Client A"
-participant mp as "Messenger-Service A\n(Messenger-Proxy +\nHomeserver)"
 participant fd as "FHIR-Directory"
+box TI-Messenger Anbieter A #GhostWhite
+participant mp as "Messenger-Service A\n(Messenger-Proxy +\nHomeserver)"
+participant rd as "Registrierungsdienst A"
+end box
+box TI-Messenger Anbieter B7 #GhostWhite
 participant rdb as "Registrierungsdienst B"
 participant mpb as "Messenger-Service B\n(Messenger-Proxy +\nHomeserver)"
+end box
 participant clb as "TI-M Client B"
 actor b as "Nutzer B"
 
@@ -51,9 +56,12 @@ a -> b: Kontaktdaten austauschen per App
 a -> cl: MXID von Nutzer B\nzu Kontakten hinzufügen
 b -> clb: MXID von Nutzer A\nzu Kontakten hinzufügen
 activate clb
-cl -> mp: invite von Nutzer B ist erlaubt
-clb -> mpb: invite von Nutzer A ist erlaubt
-activate mpb
+cl -> rd: invite von Nutzer B ist erlaubt
+activate rd
+deactivate rd
+clb -> rdb: invite von Nutzer A ist erlaubt
+activate rdb
+deactivate rdb
 end
 cl -> mp: create room
 activate mp
@@ -62,11 +70,13 @@ mp --> cl: room created
 ' Invite
 cl -> mp: invite von Nutzer A an Nutzer B
 mp -> mpb: invite von Nutzer A an Nutzer B
-alt invite von Nutzer A ist erlaubt
-mpb -> clb: invite von Nutzer A an Nutzer B
-else invite von Nutzer A nicht erlaubt
+activate mpb
 mpb -> rdb: REST Operation\nIsAllowedCommunication(src=MXID Nutzer A,\n dst=MXID Nutzer B)
 activate rdb
+alt invite von Nutzer A ist erlaubt
+rdb --> mpb: Response true
+mpb -> clb: invite von Nutzer A an Nutzer B
+else invite von Nutzer A nicht erlaubt
 rdb -> rdb: hashA = hash(MXID Nutzer A),\nhashB = hash(MXID Nutzer B)
 rdb -> fd: REST Operation\nWhereIs(hashA), WhereIs(hashB)
 activate fd
