@@ -16,6 +16,26 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
+      # Installs Java distribution for running the plantUML jar
+      - name: Install Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '11'
+          check-latest: true
+      
+      # Install graphviz for plantuml     
+      - name: Install graphviz    
+        uses: awalsh128/cache-apt-pkgs-action@v1
+        with:
+          packages: graphviz
+          version: 1.0
+          
+      # Download plantUML jar 
+      - name: Download plantuml file
+        run: |
+          wget -O plantuml.jar "https://github.com/plantuml/plantuml/releases/download/v1.2022.5/plantuml-1.2022.5.jar" 
+          
       # Runs a single command using the runners shell
       - name: Generate images
         run: |
@@ -24,19 +44,28 @@ jobs:
           rm -rf images/diagrams/*
           for fullname in $(find src/plantuml/ -type f -name '*.puml')
           do
-              echo ${fullname}
+              echo "Fullname: ${fullname}"
               base=$(basename "${fullname}" .puml)
-              echo ${base}
+              echo "Basename: ${base}"
               outdir=$(dirname $fullname | sed s+src/plantuml+${imagedir}+)
-              echo ${outdir}
+              echo "Outdir: ${outdir}"
               mkdir -p $outdir
-              curl --silent --show-error --fail -H "Content-Type: text/plain; charset=utf-8" \
-                --data-binary @- https://plantuml.gematik.solutions/plantuml/svg/ \
-                --output - < "${fullname}" > "${outdir}/${base}.svg"
-              curl --silent --show-error --fail -H "Content-Type: text/plain; charset=utf-8" \
-                --data-binary @- https://plantuml.gematik.solutions/plantuml/png/ \
-                --output - < "${fullname}" > "${outdir}/${base}.png"
-          done          
+              plantoutdir="${PWD}/${outdir}"
+              echo "PlantOutdir: ${plantoutdir}"
+              
+              # PlantUML arguments:
+              # -v for verbose output (Debugging)
+              # -checkmetadata checks whether the target png/svg has the same source
+              # and if there are no changes, doesn't regenerate the image file
+              # -o sets the output folder for the png/svg files
+              plantargs="-v -checkmetadata -o ${plantoutdir} ${fullname}"
+              
+              # separate calls are needed, because only one file type can be set
+              # per call
+              java -jar plantuml.jar -tpng ${plantargs} 
+              java -jar plantuml.jar -tsvg ${plantargs}
+          done
+          tree ./
       - name: Add & Commit
         uses: EndBug/add-and-commit@v8
         with:
