@@ -3,7 +3,7 @@
 # TI-Messenger-Dienst
 # UC - 10061
 # Sequence Diagram
-# Name: Einladung von Akteuren anderer Messenger-Services
+# Name: Einladung von Akteuren außerhalb einer Organisation
 '/
 
 @startuml
@@ -41,6 +41,7 @@ ActorFontName Aapex
     end box
     box <size:18>Messenger-Service B</size> #Snow
     participant MP2 as "Messenger-\nProxy"
+    participant RD2 as "Registrierungs-\nDienst"
     participant MH2 as "Matrix-\nHomeserver"
     participant PG2 as "Push-\nGateway"
     end box
@@ -72,14 +73,28 @@ note over U2, MP2: \n<size:17>Der Akteur B ist erfolgreich beim Messenger Servic
          U1-[#0000FF]>C1: QR-Code scannen
          C1-[#0000FF]>C2: GET /scan
          C2--[#red]>C1: MXID (Akteur B)
-          deactivate C2
          autonumber stop
          |||
-         C1->MP1: POST /approvalList \n(MXID von Akteur A und \nMXID von Akteur B)
-         activate MP1
-         MP1->MP1: MXID in \nFreigabeliste \nfür Akteur A \naufnehmen
-         MP1-->C1: status
-         deactivate MP1
+         
+         C2->MP2: POST /approvalList (MXID von Akteur A, Matrix-OpenID-Token)
+         activate MP2
+         |||
+         MP2->RD2: HTTP(S) Forward
+         activate RD2
+         RD2->MH2: GET /openid/userinfo/?Matrix-OpenID-Token
+         activate MH2
+         MH2->MH2: prüfe Matrix-OpenID-Token
+         MH2-->RD2: status
+         deactivate MH2
+         |||
+         RD2->RD2: MXID von Akteur A \nin Freigabeliste \nfür Akteur B \naufnehmen
+         |||
+         RD2-->MP2: status
+         deactivate RD2
+         |||
+         MP2-->C2: status
+         deactivate MP2
+         deactivate C2
         |||
     end
     
