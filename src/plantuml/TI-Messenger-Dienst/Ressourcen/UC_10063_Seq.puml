@@ -3,7 +3,7 @@
 # TI-Messenger-Dienst
 # UC - 10063
 # Sequence Diagram
-# Name: Austausch von Events innerhalb eines Messenger-Service
+# Name: Austausch von Events zwischen Akteuren innerhalb einer Organisation
 '/
 
 @startuml
@@ -51,16 +51,7 @@ note over U1, U2: \n<size:17>Die Akteure sind auf dem selben Messenger-Service a
       activate C1 #AliceBlue
     C1-[#red]>MP: Matrix-Request
       activate MP
-    MP->MP: prüfe MXID auf \nOrganisationszugehörigkeit
-    
-    |||
-    opt#LightGrey #MistyRose <size:16>Abbruch</size>
-      MP-->C1: Empfänger ist nicht \nauf dem gleichen \nMatrix-Homeserver
-      C1-->U1: Event konnte nicht \nverarbeitet werden
-    |||
-    end
-    
-    |||
+
     MP-[#red]>MH: HTTP(S) Foward
       activate MH
     MH->MH: Event \nverarbeiten
