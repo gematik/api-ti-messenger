@@ -33,49 +33,71 @@ ActorFontSize 20
 ActorFontName Aapex
 }
       participant C as "TI-Messenger-\nClient"
+      box <size:18>Messenger-Service\n #WhiteSmoke
       participant MP as "Messenger-\nProxy"
       participant MH as "Matrix-\nHomeserver"
-      
+      end box
+      box <size:18>Messenger-Service\n #WhiteSmoke
+      participant MP2 as "Messenger-\nProxy"
+      participant RD2 as "Registrierungs-\nDienst"
+      participant MH2 as "Matrix-\nHomeserver"
+      end box
+      participant VZD as "VZD-FHIR-\nDirectory"
 
 |||
 C->MP: Invite-Event
 activate MP
 
 |||
-note over MP, MP: \n<size:16>Vorraussetzung: Matrix-Domain ist Teil der TI-Föderation</size>\n
+note over MP, MP2: \n<size:16>Vorraussetzung: Matrix-Domain ist Teil der TI-Föderation</size>\n
 |||
 
-== <font color=green><size:16>Stufe 1</size></font>  ==
+== <font color=green><size:16>  Berechtigungskonzept - Stufe 1</size></font> == 
 MP->MP: \nprüfe MXIDs auf \nOrganisationszugehörigkeit
 
 |||
 alt#LightGrey #AliceBlue  <size:16>Akteure gehören einer gemeinsamen Organisation an</size>
 |||
    MP->MH: HTTP(S) Forward
-   activate MH
+    activate MH
+   MH->MH: Invite wird \nverarbeitet
 |||
    else <size:16>Akteure gehören nicht einer gemeinsamen Organisation an</size>
    |||
-      == <font color=green><size:16>Stufe 2</size></font>  ==
-      MP->MP: \nPrüfung, ob MXID des Einzuladenden \nin der Freigabeliste enthalten ist
+      == <font color=green><size:16>  Berechtigungskonzept - Stufe 2</size></font>  ==
+      MP->MP2: Matrix-Invite-Event \nwird weitergeleitet
+       activate MP2
+      MP2->RD2: \nPrüfung, ob MXID \ndes Einladenden \nin der Freigabeliste \nenthalten ist
+       activate RD2
+      RD2-->MP2: status
+       deactivate RD2
       
       |||
-      alt#LightGrey #MOTIVATION  <size:16>MXID des Einzuladenden ist in der Freigabeliste enthalten</size>
+      alt#LightGrey #MOTIVATION  <size:16>MXID des Einladenden ist in der Freigabeliste enthalten</size>
       |||
-         MP->MH: HTTP(S) Forward
+         MP2->MH2: HTTP(S) Forward
+          activate MH2
       |||
-         else <size:16>MXID des Einzuladenden ist nicht in der Freigabeliste enthalten</size>
+         else <size:16>MXID des Einladenden ist nicht in der Freigabeliste enthalten</size>
          |||
-            == <font color=green><size:16>Stufe 3</size></font>  ==
-            MP->MP: \nPrüfung, ob MXID des Einzuladenden im \nVZD-FHIR-Dirctory enthalten ist
+            == <font color=green><size:16>  Berechtigungskonzept - Stufe 3</size></font>  ==
+            MP2->RD2: \nPrüfung, ob MXID \ndes Einladenden im \nVZD-FHIR-Dirctory \nenthalten ist
+             activate RD2
+            RD2->VZD: HTTP(S) Forward
+             activate VZD
+            VZD->VZD: Prüfung
+            VZD-->RD2: status
+             deactivate VZD
+            RD2-->MP2: status
+             deactivate RD2
          |||
-            alt#LightGrey #LightBlue  <size:16>MXID des Einzuladenden ist im VZD-FHIR-Directory enthalten</size>
+            alt#LightGrey #LightBlue  <size:16>MXID des Einladenden ist im VZD-FHIR-Directory enthalten</size>
             |||
-              MP->MH: HTTP(S) Forward
+              MP2->MH2: HTTP(S) Forward
             |||
-              else <size:16>MXID des Einzuladenden ist nicht im VZD-FHIR-Directory enthalten</size>
+              else <size:16>MXID des Einladenden ist nicht im VZD-FHIR-Directory enthalten</size>
               |||
-                MP->MP: <font color=red>Abbruch, Verbindung wird abgelehnt</font>
+                MP2->MP2: <font color=red>Abbruch, \n<font color=red>Verbindung wird \n<font color=red>abgelehnt</font>
               |||
             end
             |||
@@ -83,8 +105,15 @@ alt#LightGrey #AliceBlue  <size:16>Akteure gehören einer gemeinsamen Organisati
       |||
 end
 |||
+
+MH2-->MP2: status
+deactivate MH2
+MP2-->MP: status
+deactivate MP2
+
 MH-->MP: status
 deactivate MH
 MP-->C: status
 deactivate MP
+
 |||
