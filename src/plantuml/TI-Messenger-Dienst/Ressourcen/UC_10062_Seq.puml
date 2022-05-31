@@ -3,7 +3,7 @@
 # TI-Messenger-Dienst
 # UC - 10062
 # Sequence Diagram
-# Name: Austausch von Nachrichten zwischen Messenger-Services
+# Name: Austausch von Events zwischen Akteuren außerhalb einer Organisation
 '/
 
 @startuml
@@ -39,7 +39,7 @@ ActorFontName Aapex
       participant MP1 as "Messenger-\nProxy"
       participant MH1 as "Matrix-\nHomeserver"
     end box
-    box <size:18>Messenger-Service B</size> #Snow
+    box <size:18>Messenger-Service B</size> #WhiteSmoke
     participant MP2 as "Messenger-\nProxy"
     participant MH2 as "Matrix-\nHomeserver"
     participant PG2 as "Push-\nGateway"
@@ -55,19 +55,7 @@ note over U1, U2: \n<size:17>Die Akteure sind auf dem selben Messenger-Service a
     activate C1 #AliceBlue
   C1-[#red]>MP1: Matrix-Request
     activate MP1
-  MP1->MP1: Prüfung, ob Matrix-Domain \nin der Föderationsliste \nenthalten ist
-  |||
-  MP1->MP1: Prüfung, ob valides \nPASSporT vorliegt
-  |||
-    
-  opt#LightGrey #MistyRose <size:16>Abbruch</size>
-    |||
-    MP1-->C1: Domain nicht in der TI-Föderation \noder \nfehlendes oder ungültiges PASSporT
-    C1-->U1: Event konnte nicht \nverarbeitet werden
-    |||
-  end
-    
-  |||
+
   MP1-[#red]>MH1: HTTP(S) Forward
     activate MH1
   MH1->MH1: Event \nverarbeiten
@@ -77,20 +65,7 @@ note over U1, U2: \n<size:17>Die Akteure sind auf dem selben Messenger-Service a
   |||
   MP1-[#red]>MP2: HTTP(S) Forward
     activate MP2
-  MP2->MP2: Prüfung, ob Matrix-Domain \nin der Föderationsliste \nenthalten ist
-  |||
-  MP2->MP2: Prüfung, ob valides \nPASSporT vorliegt
-  |||
-      
-  opt#LightGrey #MistyRose <size:16>Abbruch</size>
-    |||
-    MP2-->MP1: Domain nicht in der TI-Föderation \noder \nfehlendes oder ungültiges PASSporT
-    MP1-->C1: HTTP Forward (Abbruch)
-    C1-->U1: Event konnte nicht \nverarbeitet werden
-    |||
-  end
-    
-  |||
+
   MP2-[#red]>MH2: HTTP(S) Foward
   |||
     activate MH2
