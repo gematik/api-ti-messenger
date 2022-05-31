@@ -41,7 +41,7 @@ ActorFontName Aapex
     participant VZD as "VZD-FHIR-Directory"
 
 |||
-note over MP, MH: \n<size:17>Überprüfe, ob eingehender Matrix-Event an den \n<size:17>Matrix-Homeserver weitergeleitet werden darf</size>\n
+note over MP, MH: \n<size:17>Überprüfe, ob eingehender Matrix-Invite-Event an den \n<size:17>Matrix-Homeserver weitergeleitet werden darf</size>\n
 |||
 
     Activate MP
