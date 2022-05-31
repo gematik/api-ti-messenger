@@ -56,11 +56,25 @@ a -> b: Kontaktdaten austauschen per App
 a -> cl: MXID von Nutzer B\nzu Kontakten hinzufügen
 b -> clb: MXID von Nutzer A\nzu Kontakten hinzufügen
 activate clb
-cl -> rd: invite von Nutzer B ist erlaubt
+cl -> mp: POST /_matrix/client/r0/user/{userId}/openid/request_token
+activate mp
+mp --> cl: HTTP 200 OK, Result body {"access_token": "Matrix-OpenID-Token",...,\n"matrix_server_name": "example.com",...}
+deactivate mp
+cl -> rd: invite von Nutzer B ist erlaubt\n(Auth Header mit Matrix-OpenID-Token)
 activate rd
+rd -> mp: GET /openid/userinfo/\nrequest header, Authorization: Bearer Matrix-OpenID-Token
+mp --> rd: HTTP 200 OK\n(Result Body MXID des Nutzers)activate rd
+rd --> cl: HTTP 200 OK
 deactivate rd
-clb -> rdb: invite von Nutzer A ist erlaubt
+clb -> mpb: POST /_matrix/client/r0/user/{userId}/openid/request_token
+activate mpb
+mpb --> clb: HTTP 200 OK, Result body {"access_token": "Matrix-OpenID-Token",\n..., "matrix_server_name": "example.com",...}
+deactivate mpb
+clb -> rdb: invite von Nutzer A ist erlaubt\n(Auth Header mit Matrix-OpenID-Token)
 activate rdb
+rdb -> mpb: GET /openid/userinfo/\nrequest header, Authorization: Bearer Matrix-OpenID-Token
+mpb --> rdb: HTTP 200 OK\n(Result Body MXID des Nutzers)activate rd
+rdb --> clb: HTTP 200 OK
 deactivate rdb
 end
 cl -> mp: create room
