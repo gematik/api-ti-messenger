@@ -1,0 +1,445 @@
+openapi: 3.0.3
+info:
+  title: I_TiMessengerContactManagement
+  description: REST interface to manage the capabilities of contacts.
+  version: 0.1.0
+  # initiale Version
+  contact:
+    name: gematik GmbH
+    email: software-development@gematik.de
+    url: "https://www.gematik.de"
+  license:
+    name: Apache 2.0
+    url: "https://www.apache.org/licenses/LICENSE-2.0"
+
+externalDocs:
+  description: TI-Messenger-API
+  url: https://github.com/gematik/api-ti-messenger
+
+servers:
+  - url: https://localhost/tim-contact-mgmt/
+tags:
+  - name: info
+    description: This operation returns meta data about this interface and the status of available resources
+  - name: contacts
+    description: Operations for contact management
+
+paths:
+  /:
+    get:
+      tags:
+        - info
+      description: Returns the meta data of this interface.
+      operationId: getInfo
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InfoObject"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+  /contacts:
+    get:
+      tags:
+        - contacts
+      description: "Returns the contacts with invite settings."
+      operationId: getcontacts
+      responses:
+        200:
+          description: "List of all contact settings of the user"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/contacts"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+  /contacts/{mxidUrl}:
+    parameters:
+      - $ref: "#/components/parameters/mxidUrl"
+
+    post:
+      tags:
+        - contact
+      description: "Creates a new invite setting for the contact {mxidUrl}."
+      operationId: createInviteSetting
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/createInviteSettingRequest"
+      responses:
+        "200":
+          description: "Invite setting for {mxidUrl} successfully created"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeviceInfo"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+    put:
+      tags:
+        - contacts
+      description: "inviteGranteds a device for exclusive use."
+      operationId: inviteGrantedDevice
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/inviteGrantedRequest"
+      responses:
+        "200":
+          description: "Device successfully inviteGranteded"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeviceInfo"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+    delete:
+      tags:
+        - contacts
+      description: "inviteGranteds a device for exclusive use."
+      operationId: inviteGrantedDevice
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/inviteGrantedRequest"
+      responses:
+        "200":
+          description: "Device successfully inviteGranteded"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeviceInfo"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+
+# Descriptions of common components
+components:
+
+  parameters:
+
+    mxidUrl:
+      name: mxidUrl
+      in: path
+      description: "ID of the device that will be used."
+      required: true
+      schema:
+        type: integer
+        format: int64
+        example: 42
+
+    roomId:
+      name: roomId
+      in: path
+      description: "ID of the room"
+      required: true
+      schema:
+        type: string
+        example: room1
+
+    messageId:
+      name: messageId
+      in: path
+      description: "ID of the message"
+      required: true
+      schema:
+        type: string
+        example: msg-4711
+
+  responses:
+    DefaultResponse:
+      description: "The default error response"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    NotFound:
+      description: "The specified resource was not found"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    Unauthorized:
+      description: "Unauthorized - you have to login first"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AuthFlows"
+    Forbidden:
+      description: "Forbidden - you are not allowed to do this"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    BadRequest:
+      description: "Bad Request"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+
+  schemas:
+
+    InfoObject:
+      description: ""
+      required:
+        - title
+        - version
+      readOnly: true
+      type: object
+      properties:
+        title:
+          type: string
+          description: "Der Titel der Anwendung"
+          example: "Contact Management des TI-Messengers"
+        description:
+          type: string
+          description: "Eine kurze Beschreibung der Anwendung"
+          example: "Contact Management des TI-Messengers. Betreiber: <Betreibername>"
+        contact:
+          $ref: "#/components/schemas/Contact"
+        version:
+          type: string
+          description: "Version der implementierten TiMessengerContactManagement Schnittstelle (Version der TiMessengerContactManagement.yaml Datei)"
+          example: "1.0.0"
+
+    Contact:
+      readOnly: true
+      description: "Die Kontaktinformationen für diese Schnittstelle."
+      type: object
+      properties:
+        name:
+          type: string
+          description: "Der Name von der Kontaktperson / -Organisation"
+          example: "Firma 123"
+        url:
+          type: string
+          format: uri
+          description: "Eine URL zu den Kontaktinformationen für dieses API.
+            In dem Dokument unter dieser URL muss ein Link zum Download der aktuell genutzten YAML Datei dieser Schnittstelle hinterlegt sein."
+          example: "https://www.example.com/support"
+        email:
+          type: string
+          format: email
+          description: "Der E-Mail Adresse der Kontaktperson / -Organisation."
+          example: "support@example.com"
+
+    Error:
+      description: "Default error object with information about the occurred error"
+      type: object
+      properties:
+        errorCode:
+          description: "a code identifying this error"
+          type: string
+        errorMessage:
+          description: "a readable message describing the error"
+          type: string
+      required:
+        - errorCode
+        - errorMessage
+
+    inviteGrantedRequest:
+      required:
+        - inviteGrantedmxidUrlUrl
+        - timestamp
+      type: object
+      description: "Request for inviteGranteding a device"
+      properties:
+        inviteGrantederName:
+          type: string
+          description: "Name of the inviteGranteder"
+          example: "some name"
+        timestamp:
+          type: integer
+          description: "Duration in seconds this device should be exclusively inviteGranteded for. Resets after using device."
+          minimum: 60
+          maximum: 300
+          example: 180
+
+    contacts:
+      description: "The list of connected contacts and their status"
+      type: object
+      properties:
+        contacts:
+          description: "The list of connected contacts and their status"
+          type: array
+          items:
+            $ref: "#/components/schemas/DeviceInfo"
+          readOnly: true
+
+    AuthFlows:
+      description: "information about available authentication flows and already completed stages"
+      type: object
+      properties:
+        completedAuthStages:
+          description: "already completed stages"
+          type: array
+          items:
+            $ref: "#/components/schemas/AuthStageName"
+        flows:
+          description: "available authentication flows and their stages"
+          type: array
+          items:
+            $ref: "#/components/schemas/AuthFlow"
+        params:
+          description: "parameters for all the stages"
+          type: object
+          properties:
+            basicAuth:
+              $ref: "#/components/schemas/BasicAuthStage"
+
+    AuthStageName:
+      description: "A stage in an authentication flow"
+      type: string
+      enum: [ basicAuth ]
+      example: basicAuth
+
+    AuthFlow:
+      description: "Authentication flow and its stages"
+      type: object
+      properties:
+        stages:
+          description: "stages for this flow"
+          type: array
+          items:
+            $ref: "#/components/schemas/AuthStageName"
+
+    BasicAuthStage:
+      description: "AuthStage for username + password authentication"
+      type: object
+      properties:
+        username:
+          type: string
+          description: "The username (localpart of the mxidUrl)"
+          example: "myUsername"
+        password:
+          type: string
+          format: password
+          description: "If authMethod is basicAuth, a password is required"
+          example: "mySecretPassword"
+
+    RequestAccount:
+      description: "Data to create a new account with"
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/BasicAuthStage"
+      properties:
+        # authentication data
+        authType:
+          $ref: "#/components/schemas/AuthStageName"
+        # account data
+        displayName:
+          type: string
+          description: "display name for this account"
+          example: "some name"
+        organization:
+          type: string
+          description: "organization of this account"
+          example: "some organization"
+
+    Login:
+      description: "Login data"
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/mxidUrl"
+        - $ref: "#/components/schemas/BasicAuthStage"
+      properties:
+        authStage:
+          $ref: "#/components/schemas/AuthStageName"
+
+    mxidUrl:
+      description: "Identifier of the device"
+      type: object
+      properties:
+        mxidUrl:
+          type: integer
+          format: int64
+          example: 4711
+          description: "Identifier of a device"
+
+    Account:
+      description: "General information of an account"
+      readOnly: true
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/AccountId"
+      properties:
+        displayName:
+          type: string
+          description: "The displayName"
+          example: "some name"
+        organization:
+          type: string
+          description: "The organization of the account"
+          example: "some organization"
+
+    AccountId:
+      description: "An identifier for a specific account. Can be the mxidUrl or some other identifier."
+      required:
+        - accountId
+      type: object
+      properties:
+        accountId:
+          description: "An identifier for a specific account. Can be the mxidUrl or some other identifier."
+          type: string
+          example: "@someone:gematik.de"
+
+    Messages:
+      description: "A list of messages and its properties"
+      type: array
+      items:
+        $ref: "#/components/schemas/Message"
+
+    Message:
+      description: "A message and its metadata"
+      readOnly: true
+      type: object
+      properties:
+        messageId:
+          type: string
+          description: "The message identifier. Must be returned in response to a sendMessage request. Is used to delete a specific message."
+          example: "06eaad80-f8ce-4dce-82bc-62dd194e626c"
+        timestamp:
+          type: string
+          format: date-time
+          example: 2021-07-20T17:32:28Z
+          description: "timestamp of sending the message"
+      allOf:
+        - $ref: "#/components/schemas/MessageText"
+
+    MessageText:
+      description: "A messages text value"
+      readOnly: true
+      type: object
+      properties:
+        message:
+          type: string
+          description: "The message"
+          example: "hi there"
+
