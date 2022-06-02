@@ -25,18 +25,18 @@ Was muss getan werden, um ohne PASSporTs auszukommen?
 - zusätzliche REST Operationen an I_TIM_Provider_Services
 - Erläuternde Beschreibung der Abläufe zwischen Messenger-Proxy und Registrierungsdienst
 '/
-  !pragma layout smetana
+!pragma layout smetana
 '!include ../includes/gem-tim.iuml
 '!include ../includes/gem-tim-monochrome.iuml
 skinparam monochrome true
 
 actor a as "Nutzer A"
 participant cl as "TI-M Client A"
-participant fd as "FHIR-Directory"
 box TI-Messenger Anbieter A #GhostWhite
 participant mp as "Messenger-Service A\n(Messenger-Proxy +\nHomeserver)"
 participant rd as "Registrierungsdienst A"
 end box
+participant fd as "FHIR-Directory"
 box TI-Messenger Anbieter B7 #GhostWhite
 participant rdb as "Registrierungsdienst B"
 participant mpb as "Messenger-Service B\n(Messenger-Proxy +\nHomeserver)"
