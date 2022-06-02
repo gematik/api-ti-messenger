@@ -1,0 +1,298 @@
+openapi: 3.0.3
+info:
+  title: I_TiMessengerContactManagement
+  description: |
+    # Overview
+    This is a TI-Messenger Registrierungsdienst REST interface.
+    It is used by TI-Messenger-Clients to manage the invite settings of contacts.
+    Each mxid in an active contact setting has the right to invite the
+    user who created the contact setting.
+    # Context
+    ## Authentication
+    The TI-Messenger-Client uses a Matrix-OpenID-Token from his Messenger-Service for
+    authentication on all REST operations. The bearer token can be obtained from the
+    homeserver. (POST /_matrix/client/r0/user/{userId}/openid/request_token).
+
+
+    TI-Messenger-Client ---> Messenger-Proxy ---> Homeserver
+    ## REST operations
+    The interface implements CRUD operations to manage the contact settings.
+
+    TI-Messenger-Client ---> Messenger-Service / Messenger-Proxy ---> Registrierungsdienst
+
+    # Contact
+  version: 1.0.0
+  # initiale Version
+  contact:
+    name: gematik GmbH
+    email: software-development@gematik.de
+    url: "https://www.gematik.de"
+  license:
+    name: Apache 2.0
+    url: "https://www.apache.org/licenses/LICENSE-2.0"
+
+externalDocs:
+  description: TI-Messenger-API
+  url: https://github.com/gematik/api-ti-messenger
+
+servers:
+  - url: https://localhost/tim-contact-mgmt/v1.0/
+tags:
+  - name: info
+    description: This operation returns meta data about this interface and the status of available resources
+  - name: contacts
+    description: Operations for contact management
+
+paths:
+  /:
+    get:
+      tags:
+        - info
+      description: Returns the meta data of this interface.
+      operationId: getInfo
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InfoObject"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+  /contacts:
+    get:
+      tags:
+        - getContacts
+      description: "Returns the contacts with invite settings."
+      operationId: getContacts
+      responses:
+        200:
+          description: "List of all contact settings of the user"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Contacts"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+  /contacts/{mxidUrl}:
+    parameters:
+      - $ref: "#/components/parameters/mxidUrl"
+
+    get:
+      tags:
+        - getContact
+      description: "Returns the contacts with invite settings."
+      operationId: getContact
+      responses:
+        200:
+          description: "Retrieve the setting for the contact {mxidUrl}."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Contact"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+    post:
+      tags:
+        - createContactSetting
+      description: "Creates the setting for the contact {mxidUrl}."
+      operationId: createContactSetting
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Contact"
+      responses:
+        "200":
+          description: "Contact setting for {mxidUrl} successfully created"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Contact"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+    put:
+      tags:
+        - updateContactSetting
+      description: "Updates the setting for the contact {mxidUrl}."
+      operationId: updateContactSetting
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Contact"
+      responses:
+        "200":
+          description: "Contact setting for {mxidUrl} successfully updated"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Contact"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+    delete:
+      tags:
+        - deleteContactSetting
+      description: "Deletes the setting for the contact {mxidUrl}."
+      operationId: deleteContactSetting
+      responses:
+        "204":
+          description: Deleted
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          description: Unauthorized
+        "404":
+          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+# Descriptions of common components
+components:
+
+  parameters:
+
+    mxidUrl:
+      name: mxidUrl
+      in: path
+      description: "ID of the contact (mxidUrl))."
+      required: true
+      schema:
+        type: string
+        #example: "@you:example.org"
+        example: "matrix:u/you:example.org"
+
+  responses:
+    DefaultResponse:
+      description: "The default error response"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    NotFound:
+      description: "The specified resource was not found"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    Unauthorized:
+      description: "Unauthorized"
+    Forbidden:
+      description: "Forbidden - you are not allowed to do this"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    BadRequest:
+      description: "Bad Request"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+
+  schemas:
+
+    InfoObject:
+      description: ""
+      required:
+        - title
+        - version
+      readOnly: true
+      type: object
+      properties:
+        title:
+          type: string
+          description: "Der Titel der Anwendung"
+          example: "Contact Management des TI-Messengers"
+        description:
+          type: string
+          description: "Short description of the application"
+          example: "Contact Management des TI-Messengers. Betreiber: <Betreibername>"
+        contact:
+          type: string
+          description: "Contact information"
+        version:
+          type: string
+          description: "Version der implementierten TiMessengerContactManagement.yaml Schnittstelle (Version der TiMessengerContactManagement.yaml Datei)"
+          example: "1.0.0"
+
+    Contact:
+      description: "Contact settings."
+      type: object
+      properties:
+        mxidUrl:
+          type: string
+          description: "ID of the contact (mxidUrl))."
+          #example: "@you:example.org"
+          example: "matrix:u/you:example.org"
+        inviteSettings:
+          type: object
+          properties:
+            start:
+              type: integer
+              format: int64
+              description: "start (Epoch Unix Timestamp, SECONDS SINCE JAN 01 1970. (UTC))"
+              example: "1654159585"
+            end:
+              type: integer
+              format: int64
+              description: "end  (Epoch Unix Timestamp, SECONDS SINCE JAN 01 1970. (UTC))"
+              example: "1654169585"
+          required:
+            - start
+          description: "Invites from the mxidUrl are granted between start and end date-time."
+      required:
+        - mxidUrl
+        - inviteSettings
+
+    Contacts:
+      description: "The list of contacts and their settings."
+      type: object
+      properties:
+        contacts:
+          description: "The list of contacts and their settings."
+          type: array
+          items:
+            $ref: "#/components/schemas/Contact"
+          readOnly: true
+
+    Error:
+      description: "Default error object with information about the occurred error"
+      type: object
+      properties:
+        errorCode:
+          description: "a code identifying this error"
+          type: string
+        errorMessage:
+          description: "a readable message describing the error"
+          type: string
+      required:
+        - errorCode
+        - errorMessage
+
+  securitySchemes:
+    bearerMatrixOpenIdTokenAuth:            # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT    # optional, arbitrary value for documentation purposes
+
+# the security applies to all operations
+security:
+  - bearerMatrixOpenIdTokenAuth: []         # use the same name as above

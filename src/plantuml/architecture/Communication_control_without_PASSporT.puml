@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+@startuml TI-Messenger communication control without PASSporT
+=======
+>>>>>>> master
 /'
 Vorteile:
 - bessere Kompatibilität mit Matrix API
@@ -15,6 +19,10 @@ Vorteile:
   - Sicherheit von TIM wird durch TIM-Komponenten kontrolliert (und nicht durch das FHIR-Dir)
 - Bessere UX für Austausch von TI-M Adressen bei persönlichem Kontakt.
   - Austausch von TIM Adressen grundsätzlich auch remote möglich
+<<<<<<< HEAD
+
+=======
+>>>>>>> master
 Was muss getan werden, um ohne PASSporTs auszukommen?
 - PASSporT aus der TI-M Spec entfernen
 - PASSporT aus der FHIR-Dir Spec entfernen
@@ -23,6 +31,12 @@ Was muss getan werden, um ohne PASSporTs auszukommen?
 - zusätzliche REST Operationen an I_TIM_Provider_Services
 - Erläuternde Beschreibung der Abläufe zwischen Messenger-Proxy und Registrierungsdienst
 '/
+<<<<<<< HEAD
+!pragma layout smetana
+'!include ../includes/gem-tim.iuml
+'!include ../includes/gem-tim-monochrome.iuml
+skinparam monochrome true
+=======
 
 @startuml
 skinparam sequenceMessageAlign direction
@@ -51,13 +65,19 @@ ActorFontColor black
 ActorFontSize 20
 ActorFontName Aapex
 }
+>>>>>>> master
 
 actor a as "Nutzer A"
 participant cl as "TI-M Client A"
+box TI-Messenger Anbieter A #GhostWhite
 participant mp as "Messenger-Service A\n(Messenger-Proxy +\nHomeserver)"
+participant rd as "Registrierungsdienst A"
+end box
 participant fd as "FHIR-Directory"
+box TI-Messenger Anbieter B7 #GhostWhite
 participant rdb as "Registrierungsdienst B"
 participant mpb as "Messenger-Service B\n(Messenger-Proxy +\nHomeserver)"
+end box
 participant clb as "TI-M Client B"
 actor b as "Nutzer B"
 
@@ -77,10 +97,34 @@ a -> b: Kontaktdaten austauschen per App
 a -> cl: MXID von Nutzer B\nzu Kontakten hinzufügen
 b -> clb: MXID von Nutzer A\nzu Kontakten hinzufügen
 activate clb
+<<<<<<< HEAD
+cl -> mp: POST /_matrix/client/r0/user/{userId}/openid/request_token
+activate mp
+mp --> cl: HTTP 200 OK, Result body {"access_token": "Matrix-OpenID-Token",...,\n"matrix_server_name": "example.com",...}
+deactivate mp
+cl -> rd: invite von Nutzer B ist erlaubt\n(Auth Header mit Matrix-OpenID-Token)
+activate rd
+rd->rd: verify that the token comes\nfrom own Messenger-Service
+rd -> mp: GET /openid/userinfo/\nrequest header, Authorization: Bearer Matrix-OpenID-Token
+mp --> rd: HTTP 200 OK\n(Result Body MXID des Nutzers)activate rd
+rd --> cl: HTTP 200 OK
+deactivate rd
+clb -> mpb: POST /_matrix/client/r0/user/{userId}/openid/request_token
+=======
 cl -> mp: invite von Nutzer B ist erlaubt
 clb -> mpb: invite von Nutzer A ist erlaubt
 |||
+>>>>>>> master
 activate mpb
+mpb --> clb: HTTP 200 OK, Result body {"access_token": "Matrix-OpenID-Token",\n..., "matrix_server_name": "example.com",...}
+deactivate mpb
+clb -> rdb: invite von Nutzer A ist erlaubt\n(Auth Header mit Matrix-OpenID-Token)
+activate rdb
+rdb->rdb: verify that the token comes\nfrom own Messenger-Service
+rdb -> mpb: GET /openid/userinfo/\nrequest header, Authorization: Bearer Matrix-OpenID-Token
+mpb --> rdb: HTTP 200 OK\n(Result Body MXID des Nutzers)activate rd
+rdb --> clb: HTTP 200 OK
+deactivate rdb
 end
 cl -> mp: create room
 activate mp
@@ -89,11 +133,21 @@ mp --> cl: room created
 ' Invite
 cl -> mp: invite von Nutzer A an Nutzer B
 mp -> mpb: invite von Nutzer A an Nutzer B
+<<<<<<< HEAD
+activate mpb
+mpb -> rdb: REST Operation\nIsAllowedCommunication(src=MXID Nutzer A,\n dst=MXID Nutzer B)
+activate rdb
+alt invite von Nutzer A ist erlaubt
+rdb --> mpb: Response true
+mpb -> clb: invite von Nutzer A an Nutzer B
+else invite von Nutzer A nicht erlaubt
+=======
 alt <size:16>invite von Nutzer A ist erlaubt</size>
 mpb -> clb: invite von Nutzer A an Nutzer B
 else <size:16>invite von Nutzer A nicht erlaubt</size>
 mpb -> rdb: REST Operation\nIsAllowedCommunication\n(src=MXID Nutzer A,\n dst=MXID Nutzer B)
 activate rdb
+>>>>>>> master
 rdb -> rdb: hashA = hash(MXID Nutzer A),\nhashB = hash(MXID Nutzer B)
 rdb -> fd: REST Operation\nWhereIs(hashA), WhereIs(hashB)
 activate fd
@@ -104,12 +158,20 @@ rdb -> rdb: Decision[\nif hashB is in organization directory\nthen true\nelse if
 rdb --> mpb: Response true
 mpb -> clb: invite von Nutzer A an Nutzer B
 deactivate clb
+<<<<<<< HEAD
+else Invite ist nicht erlaubt
+=======
 else <size:16>Invite ist nicht erlaubt</size>
+>>>>>>> master
 rdb --> mpb: Response false
 deactivate rdb
 mpb -> mp: ERROR: invite von Nutzer A an Nutzer B nicht erlaubt
 deactivate mpb
+<<<<<<< HEAD
+mp --> cl: ERROR: invite von Nutzer A an Nutzer B nicht erlaubt
+=======
 mp --> cl: ERROR: invite von Nutzer A\nan Nutzer B nicht erlaubt
+>>>>>>> master
 end
 deactivate mp
 deactivate cl

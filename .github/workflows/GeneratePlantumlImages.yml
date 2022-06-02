@@ -16,6 +16,8 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
+<<<<<<< HEAD
+=======
       # Installs Java distribution for running the plantUML jar
       - name: Install Java
         uses: actions/setup-java@v3
@@ -36,6 +38,7 @@ jobs:
         run: |
           wget -O plantuml.jar "https://github.com/plantuml/plantuml/releases/download/v1.2022.5/plantuml-1.2022.5.jar" 
           
+>>>>>>> master
       # Runs a single command using the runners shell
       - name: Generate images
         run: |
@@ -44,6 +47,21 @@ jobs:
           rm -rf images/diagrams/*
           for fullname in $(find src/plantuml/ -type f -name '*.puml')
           do
+<<<<<<< HEAD
+              echo ${fullname}
+              base=$(basename "${fullname}" .puml)
+              echo ${base}
+              outdir=$(dirname $fullname | sed s+src/plantuml+${imagedir}+)
+              echo ${outdir}
+              mkdir -p $outdir
+              curl --silent --show-error --fail -H "Content-Type: text/plain; charset=utf-8" \
+                --data-binary @- https://plantuml.gematik.solutions/plantuml/svg/ \
+                --output - < "${fullname}" > "${outdir}/${base}.svg"
+              curl --silent --show-error --fail -H "Content-Type: text/plain; charset=utf-8" \
+                --data-binary @- https://plantuml.gematik.solutions/plantuml/png/ \
+                --output - < "${fullname}" > "${outdir}/${base}.png"
+          done          
+=======
               echo "Fullname: ${fullname}"
               base=$(basename "${fullname}" .puml)
               echo "Basename: ${base}"
@@ -66,6 +84,7 @@ jobs:
               java -jar plantuml.jar -tsvg ${plantargs}
           done
           tree ./
+>>>>>>> master
       - name: Add & Commit
         uses: EndBug/add-and-commit@v8
         with:

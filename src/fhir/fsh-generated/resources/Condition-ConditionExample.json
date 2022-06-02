@@ -1,0 +1,66 @@
+{
+  "resourceType": "Condition",
+  "id": "ConditionExample",
+  "meta": {
+    "profile": [
+      "http://gematik.de/fhir/TIMessengerEncounter/StructureDefinition/ConditionTIMessengerEncounter"
+    ]
+  },
+  "identifier": [
+    {
+      "system": "http://example.de/StructureDefinition/identifier-interne-abrechnungsnummer",
+      "value": "ABC1234567890"
+    }
+  ],
+  "clinicalStatus": {
+    "coding": [
+      {
+        "code": "active"
+      }
+    ]
+  },
+  "verificationStatus": {
+    "coding": [
+      {
+        "code": "provisional"
+      }
+    ]
+  },
+  "category": [
+    {
+      "coding": [
+        {
+          "code": "encounter-diagnosis"
+        }
+      ]
+    }
+  ],
+  "severity": {
+    "coding": [
+      {
+        "code": "24484000",
+        "display": "Severe"
+      }
+    ]
+  },
+  "code": {
+    "coding": [
+      {
+        "code": "368009",
+        "display": "Heart valve disorder"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "374885372"
+  },
+  "encounter": {
+    "reference": "324534708"
+  },
+  "recordedDate": "2022-05-02",
+  "note": [
+    {
+      "text": "Additional information"
+    }
+  ]
+}
