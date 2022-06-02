@@ -129,7 +129,6 @@ note over U2, MP2: \n<size:17>Der Akteur B ist erfolgreich beim Messenger Servic
     MP1->MP2: HTTP(S) Forward
     |||
       activate MP2
-    |||
       ref over MP2, MP2: <size:17>**AF_10064** - \tFöderationszugehörigkeit eines \n<size:17>        \tMessenger-Service prüfen</size>\n 
     |||
 
