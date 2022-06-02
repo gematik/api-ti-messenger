@@ -123,7 +123,7 @@ MH->MH: Prüfung auf \nOrganisationszugehörigkeit
              else <size:16>MXID des Einladenden ist nicht in der Freigabeliste enthalten</size>
              |||
                 == <font color=green><size:16>  Berechtigungskonzept - Stufe 3</size></font>  ==
-                MP2->RD2: \nPrüfung, ob MXID \ndes Einladenden im \nVZD-FHIR-Dirctory \nenthalten ist
+                MP2->RD2: \nPrüfung, ob MXID \nder Akteure im \nVZD-FHIR-Dirctory \nenthalten ist
                  activate RD2
                 RD2->VZD: POST /tim-provider-services/whereIs
                  activate VZD
