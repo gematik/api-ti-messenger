@@ -1,7 +1,26 @@
 openapi: 3.0.3
 info:
   title: I_TiMessengerContactManagement
-  description: "REST interface to manage the settings of contacts. The settings control the invite behavior of a contact mxid."
+  description: |
+    # Overview
+    This is a TI-Messenger Registrierungsdienst REST interface.
+    It is used by TI-Messenger-Clients to manage the invite settings of contacts.
+    Each mxid in an active contact setting has the right to invite the
+    user who created the contact setting.
+    # Context
+    ## Authentication
+    The TI-Messenger-Client uses a Matrix-OpenID-Token from his Messenger-Service for
+    authentication on all REST operations. The bearer token can be obtained from the
+    homeserver. (POST /_matrix/client/r0/user/{userId}/openid/request_token).
+
+
+    TI-Messenger-Client ---> Messenger-Proxy ---> Homeserver
+    ## REST operations
+    The interface implements CRUD operations to manage the contact settings.
+
+    TI-Messenger-Client ---> Messenger-Service / Messenger-Proxy ---> Registrierungsdienst
+
+    # Contact
   version: 1.0.0
   # initiale Version
   contact:
