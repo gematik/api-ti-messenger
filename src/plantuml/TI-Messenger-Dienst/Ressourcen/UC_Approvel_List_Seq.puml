@@ -125,12 +125,13 @@ MH->MH: Prüfung auf \nOrganisationszugehörigkeit
                 == <font color=green><size:16>  Berechtigungskonzept - Stufe 3</size></font>  ==
                 MP2->RD2: \nPrüfung, ob MXID \ndes Einladenden im \nVZD-FHIR-Dirctory \nenthalten ist
                  activate RD2
-                RD2->VZD: HTTP(S) Forward
+                RD2->VZD: POST /tim-provider-services/whereIs
                  activate VZD
-                VZD->VZD: Prüfung
-                VZD-->RD2: status
+                VZD->VZD: Suche
+                VZD-->RD2: Ergebnis, status
                  deactivate VZD
-                RD2-->MP2: status
+                RD2->RD2: Prüfung 
+                RD2-->MP2: Ergebnis, status
                  deactivate RD2
              |||
                 alt#LightGrey #LightBlue  <size:16>MXID des Einladenden ist im VZD-FHIR-Directory enthalten</size>
