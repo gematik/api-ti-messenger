@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: I_TiMessengerContactManagement
   description: "REST interface to manage the settings of contacts. The settings control the invite behavior of a contact mxid."
-  version: 0.1.0
+  version: 1.0.0
   # initiale Version
   contact:
     name: gematik GmbH
@@ -17,7 +17,7 @@ externalDocs:
   url: https://github.com/gematik/api-ti-messenger
 
 servers:
-  - url: https://localhost/v1.0/tim-contact-mgmt/
+  - url: https://localhost/tim-contact-mgmt/v1.0/
 tags:
   - name: info
     description: This operation returns meta data about this interface and the status of available resources
