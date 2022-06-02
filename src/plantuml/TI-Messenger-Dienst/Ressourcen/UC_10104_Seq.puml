@@ -66,16 +66,21 @@ note over U1, U2: \n<size:17>Die Akteure sind auf dem selben Messenger-Service a
     |||
     U1->C1: Akteur B einladen
     C1->MP: POST /_matrix/client/r0/rooms/\n{roomId}/invite (roomId)
-    MP->MP: **Stufe 1** \nprüfe MXID auf \nOrganisationszugehörigkeit
+    
+    |||
+      ref over MP, MP: <size:17>**AF_10064** - Föderationszugehörigkeit eines Messenger-Service prüfen</size>\n 
     |||
     
-    alt#LightGrey #AliceBlue <size:16>kein gemeinsamer Messenger-Service</size>
+    alt#LightGrey #AliceBlue <size:16>Matrix-Domain nicht in der Föderation enthalten</size>
       |||
-      MP-->C1: Akteure nicht auf \ndem gleichen \nMatrix-Homeserver
-      C1-->U1: Akteur B kann \nnicht eingeladen \nwerden
+      MP-->C1: HTTP 401 \nUnauthorized
+      |||
+      C1-->C1: Abmeldung der Session
+      |||
+      C1-->U1: Anmeldung nicht \nerfolgreich
       |||
     
-      else <size:16>gemeinsamer Messenger-Service</size>
+      else <size:16>Matrix-Domain in der Föderation enthalten</size>
     
       MP->MH: HTTP(S) Foward
         activate MH
