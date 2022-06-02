@@ -81,15 +81,16 @@ MH->MH: Prüfung auf \nOrganisationszugehörigkeit
 
    else <size:16>Akteure gehören nicht einer gemeinsamen Organisation an</size>
    |||
-      == <font color=green><size:16>  Berechtigungskonzept - Stufe 1</size></font>  ==
-      |||
       MH->MP: Matrix-Invite-Event \nwird weitergeleitet
       deactivate MH
       |||
       MP->MP2: Matrix-Invite-Event \nwird weitergeleitet
       activate MP2 #SALMON
-     
-        |||
+      
+      |||
+          == <font color=green><size:16>  Berechtigungskonzept - Stufe 1</size></font>  ==
+      |||
+
         ref over MP2, MP2: <size:17>**AF_10064** - \tFöderationszugehörigkeit eines \n<size:17>        \tMessenger-Service prüfen</size>\n 
         |||
      
