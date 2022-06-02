@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: I_TiMessengerContactManagement
-  description: REST interface to manage the capabilities of contacts.
+  description: "REST interface to manage the settings of contacts. The settings control the invite behavior of a contact mxid."
   version: 0.1.0
   # initiale Version
   contact:
@@ -17,7 +17,7 @@ externalDocs:
   url: https://github.com/gematik/api-ti-messenger
 
 servers:
-  - url: https://localhost/tim-contact-mgmt/
+  - url: https://localhost/v1.0/tim-contact-mgmt/
 tags:
   - name: info
     description: This operation returns meta data about this interface and the status of available resources
@@ -159,10 +159,11 @@ components:
     mxidUrl:
       name: mxidUrl
       in: path
-      description: "ID of the contact in url form."
+      description: "ID of the contact (mxidUrl))."
       required: true
       schema:
         type: string
+        #example: "@you:example.org"
         example: "matrix:u/you:example.org"
 
   responses:
@@ -216,32 +217,48 @@ components:
           description: "Contact information"
         version:
           type: string
-          description: "Version der implementierten TiMessengerContactManagement Schnittstelle (Version der TiMessengerContactManagement.yaml Datei)"
+          description: "Version der implementierten TiMessengerContactManagement.yaml Schnittstelle (Version der TiMessengerContactManagement.yaml Datei)"
           example: "1.0.0"
 
     Contact:
-      readOnly: true
       description: "Contact settings."
       type: object
       properties:
         mxidUrl:
           type: string
-          description: "ID of the contact in url form."
+          description: "ID of the contact (mxidUrl))."
+          #example: "@you:example.org"
           example: "matrix:u/you:example.org"
         inviteSettings:
           type: object
           properties:
             start:
-              type: string
-              format: date-time
-              description: Start date
-              example: "2022-07-21T17:32:28+02:00"
+              type: integer
+              format: int64
+              description: "start (Epoch Unix Timestamp, SECONDS SINCE JAN 01 1970. (UTC))"
+              example: "1654159585"
             end:
-              type: string
-              format: date-time
-              description: Start date
-              example: "2022-08-21T17:32:28+02:00"
+              type: integer
+              format: int64
+              description: "end  (Epoch Unix Timestamp, SECONDS SINCE JAN 01 1970. (UTC))"
+              example: "1654169585"
+          required:
+            - start
           description: "Invites from the mxidUrl are granted between start and end date-time."
+      required:
+        - mxidUrl
+        - inviteSettings
+
+    Contacts:
+      description: "The list of contacts and their settings."
+      type: object
+      properties:
+        contacts:
+          description: "The list of contacts and their settings."
+          type: array
+          items:
+            $ref: "#/components/schemas/Contact"
+          readOnly: true
 
     Error:
       description: "Default error object with information about the occurred error"
@@ -256,25 +273,3 @@ components:
       required:
         - errorCode
         - errorMessage
-
-    Contacts:
-      description: "The list of contacts and their settings."
-      type: object
-      properties:
-        contacts:
-          description: "The list of contacts and their settings."
-          type: array
-          items:
-            $ref: "#/components/schemas/Contact"
-          readOnly: true
-
-
-    mxidUrl:
-      description: "Identifier of the device"
-      type: object
-      properties:
-        mxidUrl:
-          type: integer
-          format: int64
-          example: 4711
-          description: "Identifier of a device"
