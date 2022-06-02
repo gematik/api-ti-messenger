@@ -134,11 +134,11 @@ MH->MH: Prüfung auf \nOrganisationszugehörigkeit
                 RD2-->MP2: Ergebnis, status
                  deactivate RD2
              |||
-                alt#LightGrey #LightBlue  <size:16>MXID des Einladenden ist im VZD-FHIR-Directory enthalten</size>
+                alt#LightGrey #LightBlue  <size:16>MXID ist im VZD-FHIR-Directory und Ergebnis == true</size>
                 |||
                   MP2->MH2: HTTP(S) Forward
                 |||
-                  else <size:16>MXID des Einladenden ist nicht im VZD-FHIR-Directory enthalten</size>
+                  else <size:16>MXID ist nicht im VZD-FHIR-Directory enthalten</size>
                   |||
                     MP2->MP2: <font color=red>Abbruch, \n<font color=red>Verbindung wird \n<font color=red>abgelehnt</font>
                   |||
