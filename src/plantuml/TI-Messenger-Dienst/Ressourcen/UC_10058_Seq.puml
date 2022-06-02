@@ -34,8 +34,10 @@ ActorFontSize 20
 ActorFontName Aapex
 }
     actor U as "Akteur in der Rolle\nUser-HBA"
-    participant C as "TI-Messenger-Client"
-    participant A as "Authenticator \ndes IDP-Dienst"
+    box <size:18>Endgerät</size> #WhiteSmoke
+      participant C as "TI-Messenger-Client"
+      participant A as "Authenticator \ndes IDP-Dienst"
+    end box
     participant I as "IDP-Dienst" 
     box <size:18>VZD-FHIR-Directory</size> #WhiteSmoke
       participant FP as "FHIR-Proxy"
@@ -44,7 +46,7 @@ ActorFontName Aapex
     end box
 
 |||
-note over U, I: <size:17>Der Akteur ist bei einem Messenger Service angemeldet (siehe AF_10057</size>
+note over U, I: \n<size:17>Der Akteur ist bei einem Messenger Service angemeldet (siehe AF_10057)</size>\n
 |||
 
 U->C: FHIR Ressourcen im \nVZD-FHIR-Directory \nhinzufügen (MXID)
@@ -52,21 +54,17 @@ U->C: FHIR Ressourcen im \nVZD-FHIR-Directory \nhinzufügen (MXID)
 C->C: Prüfung, ob gültiges \nowner-accesstoken \nvorliegt
 
 |||
-alt#LightGrey #AliceBlue <size:16>kein gültigess owner-access-token</size>
+alt#LightGrey #AliceBlue <size:16>kein gültigess owner-accesstoken</size>
 |||
 
-  C->C: Erzeuge PKCE Code \nfür verifier und challenge
-  C->FP: GET /owner-authenticate
-    Activate FP
-  FP->Auth: HTTP Forward
+  C->Auth: GET /owner-authenticate
     Activate Auth
-  Auth-->FP: Redirct to IDP \nAuthorization Endpoint
+  Auth->Auth: Erzeuge PKCE Code \nfür verifier und challenge
+  Auth-->C: Redirct to IDP Authorization Endpoint (PKCE Code)
     Deactivate Auth
-  FP-->C: HTTP Forward
-    Deactivate FP
-        
-  C->U: Liste verfügbarer IDP's
-  U->C: ausgewählterr IDP
+
+  C->U: Liste verfügbarer IDPs
+  U->C: ausgewählter IDP
     
   C->I: GET /authorize
     Activate A
@@ -77,54 +75,59 @@ alt#LightGrey #AliceBlue <size:16>kein gültigess owner-access-token</size>
     Deactivate A
   I-->C: Authorization Response with Authorization Code
     Deactivate I
-          
-  C->FP: GET /owner-authenticate with Authorization code
-    Activate FP
-  FP->Auth: HTTP Forward
-    Deactivate FP
+       
+  |||          
+  C->Auth: GET /owner-authenticate with Authorization code (PKCE Code)
     Activate Auth
-  Auth-->FP: POST /tokenEndpoint\n(authorization code)
-    Deactivate Auth
-    Activate FP
-  FP-->I: HTTP Forward
+  |||
+  Auth-->I: POST /tokenEndpoint\n(authorization code)
     Activate I
-  I->FP: Response (id_token)
+  I->Auth: id_token
     Deactivate I
-  FP->Auth: HTTP Forward
-    Deactivate FP
-    Activate Auth
   Auth->Auth: prüfe id_token
+  |||
   Auth->Auth: erzeuge \nowner-accesstoken
-  Auth-->FP: HTTP 200 OK \n(access_token=\nowner-accesstoken)
+  Auth-->C: owner-accesstoken
     Deactivate Auth
-    Activate FP
-  FP-->C: HTTP Forward
-    Deactivate FP
+  |||
 end
       
 |||
 
 group <size:16>VZD-FHIR-Directory Eintrag</size>
   |||
-  C->FP: GET /owner/TIHealthCareService?providedBy.id=telematikID \nAuthorization Bearer owner-accesstoken
+  group <size:16>FHIR-Ressourcen lesen</size>
+  |||
+  C->FP: POST /owner/PractitionerRole/?... \nFinde Datensatz für eigene TelematikID \nAuthorization Bearer owner-accesstoken
     Activate FP
   FP->FP: prüfe \nowner-accesstoken
-  FP->VZD: HTTP Forward
+  FP->VZD: HTTPS Forward
     Activate VZD
-  VZD-->FP: HTTP 200 OK (result body json)
+  VZD-->FP: result body json
     Deactivate VZD
-  FP-->C: HTTP 200 OK (result body json)
+  FP-->C: result body json
     Deactivate FP
-  C->FP: PUT /owner/TIHealthCareService?telecom.value=MXID \nAuthorization Bearer owner-accesstoken \n(Optional: setze Flag für Sichtbarkeit)
+  |||
+  end
+    
+  |||
+  group <size:16>FHIR-Ressourcen schreiben</size>
+  |||
+  C->FP: FHIR-Operationen um eigenen Datensatz zu verwalten \nAuthorization Bearer owner-accesstoken \n(Optional: setze Flag für Sichtbarkeit)
     Activate FP
   FP->FP: prüfe \nowner-accesstoken
-  FP->VZD: HTTP Forward
+  FP->VZD: HTTPS Forward
     Activate VZD
-  VZD-->FP: HTTP 201 Created (result body json)
+  VZD-->FP: result body json
     Deactivate VZD
-  FP-->C: HTTP 201 Created (result body json)
+  FP-->C: result body json
     Deactivate FP
+     
+  |||
+  end
+
   C-->U: Status    
+    Deactivate C
   |||
 end
 |||

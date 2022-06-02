@@ -3,7 +3,7 @@
 # TI-Messenger-Dienst
 # UC - 10104
 # Sequence Diagram
-# Name: Einladung von Akteuren innerhalb eines Messenger-Service
+# Name: Einladung von Akteuren innerhalb einer Organisation
 '/
 
 @startuml
@@ -44,62 +44,79 @@ ActorFontName Aapex
     actor U2 as "Akteur - B in der Rolle\nUser / User-HBA"
     
 |||
-note over U1, U2: \n<size:17>Die Akteure sind auf dem selben Messenger-Service angemeldet und im Besitz eines zugelassenen TI-Messenger-Clients</size>\n
+note over U1, U2: \n<size:17>Die Akteure sind auf dem selben Messenger-Service angemeldet und im Besitz eines zugelassenen TI-Messenger-Clients.\n<size:17>Ein Chatraum wurde durch den Einladenen eingerichtet.</size>\n
 |||
 
-    opt#LightGrey <size:16>Akteur suchen</size>
+    opt#LightGrey #AliceBlue <size:16>Akteur suchen</size>
+    |||
     U1->C1: Suche Akteur B
       activate C1 #AliceBlue
-    C1->MP: GET /search (display_name)
+    C1->MP: POST /_matrix/client/\nuser_directory/search
       activate MP
     MP->MP: TLS-Terminierung
-    MP->MH: HTTP Forward
+    MP->MH: HTTP(S) Forward
       activate MH
-    MH-->MP: user-id
+    MH-->MH: Nutzerverzeichnis \ndurchsuchen
+    MH-->MP: MXID
       deactivate MH
-    MP-->C1: HTTP Forward
+    MP-->C1: HTTP(S) Forward
+    |||
     end
+    
+    |||
     U1->C1: Akteur B einladen
-    C1->MP: POST /_matrix/client/r0/rooms/\n{roomId}/invite
-    MP->MP: Domainzugehörigkeit \nprüfen
+    C1->MP: POST /_matrix/client/r0/rooms/\n{roomId}/invite (roomId)
+    
     |||
-    opt#LightGrey #MistyRose <size:16>Abbruch</size>
-      MP-->C1: Domain nicht auf \ndem gleichen \nMatrix-Homeserver
-      C1-->U1: Akteur B kann \nnicht eingeladen \nwerden
-    end
+      ref over MP, MP: <size:17>**AF_10064** - Föderationszugehörigkeit eines Messenger-Service prüfen</size>\n 
     |||
-    MP->MH: HTTP Foward
-      activate MH
-    |||
-    group par 
-      group push
-        MH->PG: Notification
-          activate PG
-        PG->C2: Notification
-        PG-->MH: Status
-          deactivate PG
+    
+    alt#LightGrey #AliceBlue <size:16>Matrix-Domain nicht in der Föderation enthalten</size>
       |||
-      end
+      MP-->C1: HTTP 401 \nUnauthorized
       |||
-      group /sync
-        MH->MP: Invite Request
-        MP->C2: HTTP Forward
-          activate C2 #TECHNOLOGY
-        C2->U2: Einladung anzeigen
-        U2-->C2: Einladung bestätigen
-        C2->MP: commit
-        MP->MP: TLS Terminierung
-        MP-->MH: HTTP Forward
-        MH-->MH: Invite auslösen
-        MH-->MP: Status
-          deactivate MH
-        MP-->C1: Status
-          deactivate C1
-        MP-->C2: Status
-          deactivate C2
-          deactivate MP
+      C1-->C1: Abmeldung der Session
+      |||
+      C1-->U1: Anmeldung nicht \nerfolgreich
+      |||
+    
+      else <size:16>Matrix-Domain in der Föderation enthalten</size>
+    
+      MP->MH: HTTP(S) Foward
+        activate MH
+      MH->MH: Invite verarbeiten
+      |||
+        opt#LightGrey #LightBlue <size:16>Pushbenachrichtigung</size>
           |||
-      end
-|||
-    end
+          MH->PG: POST /_matrix/push/notify
+            activate PG
+          PG->C2: Notification
+          PG-->MH: Status
+            deactivate PG
+        |||
+        end
+        |||
+          MH->MP: Invite Request
+          MP->C2: HTTP(S) Forward
+            activate C2 #TECHNOLOGY
+          C2->U2: Einladung anzeigen
+          U2-->C2: Einladung bestätigen
+          C2->MP: commit
+          |||
+          MP->MP: TLS Terminierung
+          MP-->MH: HTTP(S) Forward
+          MH-->MH: Invite auslösen
+          MH-->MP: Status
+            deactivate MH
+          MP-->C1: Status
+          C1-->U1: Nutzer in den \nRaum hinzugefügt
+            deactivate C1
+          MP-->C2: Status
+            deactivate MP
+          C2-->U2: Nutzer ist dem \nRaum beigetreten
+            deactivate C2
+
+        |||
+        end
+ |||
 @enduml

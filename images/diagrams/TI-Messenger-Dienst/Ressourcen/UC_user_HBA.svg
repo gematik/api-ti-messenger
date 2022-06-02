@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="1380px" preserveAspectRatio="none" style="width:1364px;height:1380px;background:#FFFFFF;" version="1.1" viewBox="0 0 1364 1380" width="1364px" zoomAndPan="magnify"><defs/><g><!--MD5=[246d21d283e7f1425940e1b77c3fb026]
 cluster Rolle--><g id="cluster_Rolle"><path d="M119,562 L197,562 A7.5,7.5 0 0 1 202,567 L216,606.5938 L383,606.5938 A5,5 0 0 1 388,611.5938 L388,815 A5,5 0 0 1 383,820 L119,820 A5,5 0 0 1 114,815 L114,567 A5,5 0 0 1 119,562 " style="stroke:#000000;stroke-width:3.0;fill:none;"/><line style="stroke:#000000;stroke-width:3.0;fill:none;" x1="114" x2="216" y1="606.5938" y2="606.5938"/><text fill="#000000" font-family="sans-serif" font-size="28" font-weight="bold" lengthAdjust="spacing" textLength="76" x="122" y="591.9902">Rolle</text></g><!--MD5=[899f87e56611ae811baaba93b9518920]
 cluster Anwendungsfälle--><g id="cluster_Anwendungsfälle"><path d="M583,12 L859,12 A7.5,7.5 0 0 1 864,17 L878,56.5938 L1345,56.5938 A5,5 0 0 1 1350,61.5938 L1350,1361 A5,5 0 0 1 1345,1366 L583,1366 A5,5 0 0 1 578,1361 L578,17 A5,5 0 0 1 583,12 " style="stroke:#000000;stroke-width:3.0;fill:none;"/><line style="stroke:#000000;stroke-width:3.0;fill:none;" x1="578" x2="878" y1="56.5938" y2="56.5938"/><text fill="#000000" font-family="sans-serif" font-size="28" font-weight="bold" lengthAdjust="spacing" textLength="274" x="586" y="41.9902">Anwendungsfälle</text></g><!--MD5=[92da7467bbc3967f34935f3754b4788a]
@@ -8,6 +9,9 @@ link uuh to UC3--><g id="link_uuh_UC3"><path d="M356.1,693.72 C438.12,680.76 557
 link uuh to UC4--><g id="link_uuh_UC4"><path d="M356.1,726 C439.6,738.96 561.46,757.86 674.04,775.32 " fill="none" id="uuh-to-UC4" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="#000000" points="684.2,776.9,667.6489,766.22,674.3196,775.358,665.1817,782.0287,684.2,776.9" style="stroke:#000000;stroke-width:2.0;"/></g><!--MD5=[873bae0a809e21b62a257dc63b837696]
 link uuh to UC5--><g id="link_uuh_UC5"><path d="M356.38,744.58 C400.78,762.86 451.24,788.54 490,822 C533.66,859.7 515.24,896.22 562,930 C597.82,955.88 639.46,975.66 682.04,990.8 " fill="none" id="uuh-to-UC5" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="#000000" points="691.72,994.16,677.3062,980.7346,682.2651,990.9036,672.096,995.8625,691.72,994.16" style="stroke:#000000;stroke-width:2.0;"/></g><!--MD5=[87592ed2ded85244cca22c7b445f5090]
 link uuh to UC6--><g id="link_uuh_UC6"><path d="M356.18,735.94 C403.58,752.92 456.54,780 490,822 C583,938.74 459.26,1041.74 562,1150 C589.66,1179.14 624.24,1200.8 661.44,1216.86 " fill="none" id="uuh-to-UC6" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="#000000" points="670.94,1220.82,657.4173,1206.4974,661.7135,1216.9637,651.2472,1221.2599,670.94,1220.82" style="stroke:#000000;stroke-width:2.0;"/></g><!--MD5=[dafc26f54e7c1cd6bd3413d06356e4a6]
+=======
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="412px" preserveAspectRatio="none" style="width:606px;height:412px;background:#FFFFFF;" version="1.1" viewBox="0 0 606 412" width="606px" zoomAndPan="magnify"><defs/><g><text fill="#33FF02" font-family="sans-serif" font-size="28" font-weight="bold" lengthAdjust="spacing" textLength="522" x="10" y="38">Dot Executable: /opt/local/bin/dot</text><text fill="#33FF02" font-family="sans-serif" font-size="28" font-weight="bold" lengthAdjust="spacing" textLength="290" x="10" y="70.5938">File does not exist</text><text fill="#33FF02" font-family="sans-serif" font-size="28" font-weight="bold" lengthAdjust="spacing" textLength="582" x="10" y="103.1875">Cannot find Graphviz. You should try</text><text fill="#33FF02" font-family="sans-serif" font-size="28" font-weight="bold" lengthAdjust="spacing" textLength="10" x="10" y="135.7813"> </text><text fill="#33FF02" font-family="sans-serif" font-size="28" font-weight="bold" lengthAdjust="spacing" textLength="158" x="10" y="168.375">@startuml</text><text fill="#33FF02" font-family="sans-serif" font-size="28" font-weight="bold" lengthAdjust="spacing" textLength="114" x="10" y="200.9688">testdot</text><text fill="#33FF02" font-family="sans-serif" font-size="28" font-weight="bold" lengthAdjust="spacing" textLength="144" x="10" y="233.5625">@enduml</text><text fill="#33FF02" font-family="sans-serif" font-size="28" font-weight="bold" lengthAdjust="spacing" textLength="10" x="10" y="266.1563"> </text><text fill="#33FF02" font-family="sans-serif" font-size="28" font-weight="bold" lengthAdjust="spacing" textLength="34" x="20" y="298.75">or</text><text fill="#33FF02" font-family="sans-serif" font-size="28" font-weight="bold" lengthAdjust="spacing" textLength="10" x="10" y="331.3438"> </text><text fill="#33FF02" font-family="sans-serif" font-size="28" font-weight="bold" lengthAdjust="spacing" textLength="454" x="10" y="363.9375">java -jar plantuml.jar -testdot</text><text fill="#33FF02" font-family="sans-serif" font-size="28" font-weight="bold" lengthAdjust="spacing" textLength="10" x="10" y="396.5313"> </text><!--MD5=[6937e8fc542e6fe11f97756c73dc352a]
+>>>>>>> master
 @startuml
 skinparam actorStyle awesome
 left to right direction
@@ -41,10 +45,17 @@ actor "User / User-HBA" as uuh
 package Anwendungsfälle {
 usecase "**<<AF_10057>>** \nAnmeldung eines Akteurs am \nMessenger-Service" as UC1
 usecase "**<<AF_10058>>** \nAkteur (User-HBA) im \nVerzeichnisdienst hinzufügen" as UC2
+<<<<<<< HEAD
 usecase "**<<AF_10104>>** \nEinladung von Akteuren innerhalb \neines Messenger-Services" as UC3 #AliceBlue
 usecase "**<<AF_10063>>** \nAustausch von Events innerhalb \neines Messenger-Services" as UC4 #AliceBlue
 usecase "**<<AF_10061>>** \nEinladung von Akteuren anderer \nMessenger-Services" as UC5 #Ivory
 usecase "**<<AF_10062>>** \nAustausch von Events zwischen \nanderern Messenger-Services" as UC6 #Ivory
+=======
+usecase "**<<AF_10104>>** \nEinladung von Akteuren \ninnerhalb einer Organisation" as UC3 #AliceBlue
+usecase "**<<AF_10063>>** \nAustausch von Events \nzwischen Akteuren \ninnerhalb einer Organisation" as UC4 #AliceBlue
+usecase "**<<AF_10061>>** \nEinladung von Akteuren \naußerhalb einer Organisation" as UC5 #Ivory
+usecase "**<<AF_10062>>** \nAustausch von Events \nzwischen Akteuren \naußerhalb einer Organisation" as UC6 #Ivory
+>>>>>>> master
 }
 
 uuh - -> UC1

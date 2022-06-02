@@ -1,0 +1,80 @@
+/' 
+# TI-Messenger 1.1
+# TI-Messenger-Dienst
+# UC - 10064
+# Sequence Diagram
+# Name: Föderationszugehörigkeit eines Messenger-Service prüfen
+'/
+
+@startuml
+skinparam sequenceMessageAlign direction
+skinparam minClassWidth 200
+skinparam BoxPadding 1
+skinparam sequenceReferenceHeaderBackgroundColor palegreen
+scale max 2048 width
+
+skinparam sequence {
+ArrowColor black
+ArrowFontSize 17
+ActorBorderColor black
+LifeLineBorderColor black
+LifeLineBackgroundColor Gainsboro
+
+ParticipantBorderColor Motivation
+ParticipantBackgroundColor Motivation
+ParticipantFontName Impact
+ParticipantFontSize 20
+ParticipantFontColor black
+ParticipantBorderColor Black
+ParticipantBackgroundColor MOTIVATION
+
+ActorBackgroundColor Gainsboro
+ActorFontColor black
+ActorFontSize 20
+ActorFontName Aapex
+}
+    box <size:18>Messenger-Service\n #WhiteSmoke
+    participant MP as "Messenger-Proxy"
+    participant MH as "Matrix-Homeserver"
+    end box
+    participant RD as "Registrierungs-Dienst"
+    box <size:18>VZD-FHIR-Directory</size> #WhiteSmoke
+      participant FP as "FHIR-Proxy"
+      participant AS as "OAuth-Service"
+    end box
+
+  |||
+  MP->RD: GET /FederationList 
+    Activate MP
+    Activate RD
+
+  RD->AS: GET /token (client_id, client_secret) \n(OAuth Client credentials flow)
+    Activate AS
+  AS->AS: prüfe client_id und \nclient_secret
+  AS-->RD: status, admin-accesstoken 
+    Deactivate AS  
+
+  |||
+  RD->FP: GET /tim-provider-services/getFederationList \n(admin-accesstoken, version)
+    Activate FP
+  FP->FP: prüfe \nadmin-accesstoken
+  |||
+  FP->FP: prüfe übergebene \nVersion
+
+|||
+alt#LightGrey #AliceBlue <size:16>Version ist aktuell</size>
+|||    
+
+    FP-->RD: status
+    RD-->MP: status
+    |||
+    
+    else <size:16>Version ist nicht aktuell</size>
+       FP-->RD: Föderationsliste[]
+        Deactivate FP
+      RD-->MP: Föderationsliste[]
+        Deactivate RD
+        deactivate MP
+    |||
+end
+@enduml

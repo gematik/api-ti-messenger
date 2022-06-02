@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="891px" preserveAspectRatio="none" style="width:1395px;height:891px;background:#FFFFFF;" version="1.1" viewBox="0 0 1395 891" width="1395px" zoomAndPan="magnify"><defs/><g><rect fill="#F5F5F5" height="879.6563" style="stroke:#181818;stroke-width:0.5;" width="446" x="16" y="6"/><text fill="#000000" font-family="sans-serif" font-size="18" font-weight="bold" lengthAdjust="spacing" textLength="193" x="142.5" y="22.708">Messenger-Service</text><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="5" x="142.5" y="39.02"> </text><rect fill="#F5F5F5" height="879.6563" style="stroke:#181818;stroke-width:0.5;" width="446" x="880.5" y="6"/><text fill="#000000" font-family="sans-serif" font-size="18" font-weight="bold" lengthAdjust="spacing" textLength="200" x="1001" y="22.708">VZD-FHIR-Directory</text><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="5" x="1201" y="23.8872"> </text><rect fill="#DCDCDC" height="649.2188" style="stroke:#000000;stroke-width:1.0;" width="10" x="122" y="145.1563"/><rect fill="#DCDCDC" height="649.2188" style="stroke:#000000;stroke-width:1.0;" width="10" x="579.5" y="145.1563"/><rect fill="#DCDCDC" height="382.9063" style="stroke:#000000;stroke-width:1.0;" width="10" x="986.5" y="377.6797"/><rect fill="#DCDCDC" height="100.3672" style="stroke:#000000;stroke-width:1.0;" width="10" x="1210.5" y="198.7344"/><rect fill="#F0F8FF" height="251.5391" style="stroke:#000000;stroke-width:1.5;" width="1098.5" x="10" y="575.8359"/><rect fill="#F0F8FF" height="113.2031" style="stroke:none;stroke-width:1.0;" width="1098.5" x="10" y="714.1719"/><line style="stroke:#000000;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="127" x2="127" y1="84.3672" y2="844.375"/><line style="stroke:#000000;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="351" x2="351" y1="84.3672" y2="844.375"/><line style="stroke:#000000;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="584" x2="584" y1="84.3672" y2="844.375"/><line style="stroke:#000000;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="991.5" x2="991.5" y1="84.3672" y2="844.375"/><line style="stroke:#000000;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="1215.5" x2="1215.5" y1="84.3672" y2="844.375"/><rect fill="#EFEFFF" height="37.2813" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:0.5;" width="214" x="20" y="46.0859"/><text fill="#000000" font-family="Impact" font-size="20" lengthAdjust="spacing" textLength="168" x="43" y="71.6504">Messenger-Proxy</text><rect fill="#EFEFFF" height="37.2813" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:0.5;" width="214" x="20" y="843.375"/><text fill="#000000" font-family="Impact" font-size="20" lengthAdjust="spacing" textLength="168" x="43" y="868.9395">Messenger-Proxy</text><rect fill="#EFEFFF" height="37.2813" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:0.5;" width="214" x="244" y="46.0859"/><text fill="#000000" font-family="Impact" font-size="20" lengthAdjust="spacing" textLength="189" x="256.5" y="71.6504">Matrix-Homeserver</text><rect fill="#EFEFFF" height="37.2813" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:0.5;" width="214" x="244" y="843.375"/><text fill="#000000" font-family="Impact" font-size="20" lengthAdjust="spacing" textLength="189" x="256.5" y="868.9395">Matrix-Homeserver</text><rect fill="#EFEFFF" height="37.2813" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:0.5;" width="231" x="469" y="46.0859"/><text fill="#000000" font-family="Impact" font-size="20" lengthAdjust="spacing" textLength="217" x="476" y="71.6504">Registrierungs-Dienst</text><rect fill="#EFEFFF" height="37.2813" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:0.5;" width="231" x="469" y="843.375"/><text fill="#000000" font-family="Impact" font-size="20" lengthAdjust="spacing" textLength="217" x="476" y="868.9395">Registrierungs-Dienst</text><rect fill="#EFEFFF" height="37.2813" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:0.5;" width="214" x="884.5" y="46.0859"/><text fill="#000000" font-family="Impact" font-size="20" lengthAdjust="spacing" textLength="108" x="937.5" y="71.6504">FHIR-Proxy</text><rect fill="#EFEFFF" height="37.2813" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:0.5;" width="214" x="884.5" y="843.375"/><text fill="#000000" font-family="Impact" font-size="20" lengthAdjust="spacing" textLength="108" x="937.5" y="868.9395">FHIR-Proxy</text><rect fill="#EFEFFF" height="37.2813" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:0.5;" width="214" x="1108.5" y="46.0859"/><text fill="#000000" font-family="Impact" font-size="20" lengthAdjust="spacing" textLength="144" x="1143.5" y="71.6504">OAuth-Service</text><rect fill="#EFEFFF" height="37.2813" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:0.5;" width="214" x="1108.5" y="843.375"/><text fill="#000000" font-family="Impact" font-size="20" lengthAdjust="spacing" textLength="144" x="1143.5" y="868.9395">OAuth-Service</text><rect fill="#DCDCDC" height="649.2188" style="stroke:#000000;stroke-width:1.0;" width="10" x="122" y="145.1563"/><rect fill="#DCDCDC" height="649.2188" style="stroke:#000000;stroke-width:1.0;" width="10" x="579.5" y="145.1563"/><rect fill="#DCDCDC" height="382.9063" style="stroke:#000000;stroke-width:1.0;" width="10" x="986.5" y="377.6797"/><rect fill="#DCDCDC" height="100.3672" style="stroke:#000000;stroke-width:1.0;" width="10" x="1210.5" y="198.7344"/><polygon fill="#000000" points="567.5,141.1563,577.5,145.1563,567.5,149.1563,571.5,145.1563" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:1.0;" x1="132" x2="573.5" y1="145.1563" y2="145.1563"/><text fill="#000000" font-family="sans-serif" font-size="17" lengthAdjust="spacing" textLength="164" x="139" y="139.147">GET /FederationList</text><polygon fill="#000000" points="1198.5,194.7344,1208.5,198.7344,1198.5,202.7344,1202.5,198.7344" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:1.0;" x1="589.5" x2="1204.5" y1="198.7344" y2="198.7344"/><text fill="#000000" font-family="sans-serif" font-size="17" lengthAdjust="spacing" textLength="297" x="596.5" y="172.936">GET /token (client_id, client_secret)</text><text fill="#000000" font-family="sans-serif" font-size="17" lengthAdjust="spacing" textLength="259" x="596.5" y="192.7251">(OAuth Client credentials flow)</text><line style="stroke:#000000;stroke-width:1.0;" x1="1220.5" x2="1262.5" y1="252.3125" y2="252.3125"/><line style="stroke:#000000;stroke-width:1.0;" x1="1262.5" x2="1262.5" y1="252.3125" y2="265.3125"/><line style="stroke:#000000;stroke-width:1.0;" x1="1221.5" x2="1262.5" y1="265.3125" y2="265.3125"/><polygon fill="#000000" points="1231.5,261.3125,1221.5,265.3125,1231.5,269.3125,1227.5,265.3125" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="17" lengthAdjust="spacing" textLength="156" x="1227.5" y="226.5142">prüfe client_id und</text><text fill="#000000" font-family="sans-serif" font-size="17" lengthAdjust="spacing" textLength="105" x="1227.5" y="246.3032">client_secret</text><polygon fill="#000000" points="600.5,295.1016,590.5,299.1016,600.5,303.1016,596.5,299.1016" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="594.5" x2="1214.5" y1="299.1016" y2="299.1016"/><text fill="#000000" font-family="sans-serif" font-size="17" lengthAdjust="spacing" textLength="220" x="988.5" y="293.0923">status, admin-accesstoken</text><polygon fill="#000000" points="974.5,373.6797,984.5,377.6797,974.5,381.6797,978.5,377.6797" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:1.0;" x1="589.5" x2="980.5" y1="377.6797" y2="377.6797"/><text fill="#000000" font-family="sans-serif" font-size="17" lengthAdjust="spacing" textLength="373" x="596.5" y="351.8813">GET /tim-provider-services/getFederationList</text><text fill="#000000" font-family="sans-serif" font-size="17" lengthAdjust="spacing" textLength="244" x="596.5" y="371.6704">(admin-accesstoken, version)</text><line style="stroke:#000000;stroke-width:1.0;" x1="996.5" x2="1038.5" y1="431.2578" y2="431.2578"/><line style="stroke:#000000;stroke-width:1.0;" x1="1038.5" x2="1038.5" y1="431.2578" y2="444.2578"/><line style="stroke:#000000;stroke-width:1.0;" x1="997.5" x2="1038.5" y1="444.2578" y2="444.2578"/><polygon fill="#000000" points="1007.5,440.2578,997.5,444.2578,1007.5,448.2578,1003.5,444.2578" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="17" lengthAdjust="spacing" textLength="44" x="1003.5" y="405.4595">prüfe</text><text fill="#000000" font-family="sans-serif" font-size="17" lengthAdjust="spacing" textLength="159" x="1003.5" y="425.2485">admin-accesstoken</text><line style="stroke:#000000;stroke-width:1.0;" x1="996.5" x2="1038.5" y1="522.8359" y2="522.8359"/><line style="stroke:#000000;stroke-width:1.0;" x1="1038.5" x2="1038.5" y1="522.8359" y2="535.8359"/><line style="stroke:#000000;stroke-width:1.0;" x1="997.5" x2="1038.5" y1="535.8359" y2="535.8359"/><polygon fill="#000000" points="1007.5,531.8359,997.5,535.8359,1007.5,539.8359,1003.5,535.8359" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="17" lengthAdjust="spacing" textLength="148" x="1003.5" y="497.0376">prüfe übergebene</text><text fill="#000000" font-family="sans-serif" font-size="17" lengthAdjust="spacing" textLength="62" x="1003.5" y="516.8267">Version</text><path d="M10,575.8359 L74,575.8359 L74,582.9688 L64,592.9688 L10,592.9688 L10,575.8359 " fill="#D3D3D3" style="stroke:#000000;stroke-width:1.5;"/><rect fill="none" height="251.5391" style="stroke:#000000;stroke-width:1.5;" width="1098.5" x="10" y="575.8359"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="19" x="25" y="588.9028">alt</text><text fill="#000000" font-family="sans-serif" font-size="11" font-weight="bold" lengthAdjust="spacing" textLength="5" x="89" y="593.8667">[</text><text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="160" x="94" y="592.6875">Version ist aktuell</text><text fill="#000000" font-family="sans-serif" font-size="11" font-weight="bold" lengthAdjust="spacing" textLength="5" x="254" y="593.8667">]</text><polygon fill="#000000" points="600.5,643.3828,590.5,647.3828,600.5,651.3828,596.5,647.3828" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="594.5" x2="985.5" y1="647.3828" y2="647.3828"/><text fill="#000000" font-family="sans-serif" font-size="17" lengthAdjust="spacing" textLength="51" x="928.5" y="641.3735">status</text><polygon fill="#000000" points="143,677.1719,133,681.1719,143,685.1719,139,681.1719" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="137" x2="578.5" y1="681.1719" y2="681.1719"/><text fill="#000000" font-family="sans-serif" font-size="17" lengthAdjust="spacing" textLength="51" x="521.5" y="675.1626">status</text><line style="stroke:#000000;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="10" x2="1108.5" y1="715.1719" y2="715.1719"/><text fill="#000000" font-family="sans-serif" font-size="11" font-weight="bold" lengthAdjust="spacing" textLength="5" x="15" y="731.2026">[</text><text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="210" x="20" y="730.0234">Version ist nicht aktuell</text><text fill="#000000" font-family="sans-serif" font-size="11" font-weight="bold" lengthAdjust="spacing" textLength="5" x="230" y="731.2026">]</text><polygon fill="#000000" points="600.5,756.5859,590.5,760.5859,600.5,764.5859,596.5,760.5859" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="594.5" x2="990.5" y1="760.5859" y2="760.5859"/><text fill="#000000" font-family="sans-serif" font-size="17" lengthAdjust="spacing" textLength="147" x="837.5" y="754.5767">Föderationsliste[]</text><polygon fill="#000000" points="138,790.375,128,794.375,138,798.375,134,794.375" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="132" x2="583.5" y1="794.375" y2="794.375"/><text fill="#000000" font-family="sans-serif" font-size="17" lengthAdjust="spacing" textLength="147" x="430.5" y="788.3657">Föderationsliste[]</text><!--MD5=[10130b9be60894d734ae25daafcd412d]
+@startuml
+skinparam sequenceMessageAlign direction
+skinparam minClassWidth 200
+skinparam BoxPadding 1
+skinparam sequenceReferenceHeaderBackgroundColor palegreen
+scale max 2048 width
+
+skinparam sequence {
+ArrowColor black
+ArrowFontSize 17
+ActorBorderColor black
+LifeLineBorderColor black
+LifeLineBackgroundColor Gainsboro
+
+ParticipantBorderColor Motivation
+ParticipantBackgroundColor Motivation
+ParticipantFontName Impact
+ParticipantFontSize 20
+ParticipantFontColor black
+ParticipantBorderColor Black
+ParticipantBackgroundColor MOTIVATION
+
+ActorBackgroundColor Gainsboro
+ActorFontColor black
+ActorFontSize 20
+ActorFontName Aapex
+}
+    box <size:18>Messenger-Service\n #WhiteSmoke
+    participant MP as "Messenger-Proxy"
+    participant MH as "Matrix-Homeserver"
+    end box
+    participant RD as "Registrierungs-Dienst"
+    box <size:18>VZD-FHIR-Directory</size> #WhiteSmoke
+      participant FP as "FHIR-Proxy"
+      participant AS as "OAuth-Service"
+    end box
+
+  |||
+  MP->RD: GET /FederationList 
+    Activate MP
+    Activate RD
+
+  RD->AS: GET /token (client_id, client_secret) \n(OAuth Client credentials flow)
+    Activate AS
+  AS->AS: prüfe client_id und \nclient_secret
+  AS- ->RD: status, admin-accesstoken 
+    Deactivate AS  
+
+  |||
+  RD->FP: GET /tim-provider-services/getFederationList \n(admin-accesstoken, version)
+    Activate FP
+  FP->FP: prüfe \nadmin-accesstoken
+  |||
+  FP->FP: prüfe übergebene \nVersion
+
+|||
+alt#LightGrey #AliceBlue <size:16>Version ist aktuell</size>
+|||    
+
+    FP- ->RD: status
+    RD- ->MP: status
+    |||
+    
+    else <size:16>Version ist nicht aktuell</size>
+       FP- ->RD: Föderationsliste[]
+        Deactivate FP
+      RD- ->MP: Föderationsliste[]
+        Deactivate RD
+        deactivate MP
+    |||
+end
+@enduml
+
+PlantUML version 1.2022.5(Sat Apr 30 10:55:52 UTC 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: null
+--></g></svg>

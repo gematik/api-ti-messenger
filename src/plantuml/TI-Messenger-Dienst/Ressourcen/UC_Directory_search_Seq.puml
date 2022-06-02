@@ -38,17 +38,16 @@ ActorFontName Aapex
     participant hs as "Matrix-Homeserver"
     box <size:18>VZD-FHIR-Directory</size> #WhiteSmoke
       participant fp as "FHIR-Proxy"
-      participant pp as "PASSporT-\nService"
       participant au as "Auth-Service"
       participant fd as "FHIR-Directory"
     end box
 
 |||
-note over U, hs: \n<size:17>Der Akteur ist erfolgreich beim Messenger Service angemeldet</size>\n
+note over U, hs: \n<size:17>Der Akteur ist erfolgreich beim Messenger-Service angemeldet</size>\n
 |||
 
       activate cl
-    U->cl:gibt Suchparameter ein
+    U->cl:Suchparameter für \nFHIR-Ressourcen \n eingeben
     cl->cl: prüfe ob noch gültiges \ntim-search-accesstoken\nvorliegt
 
 |||
@@ -56,24 +55,24 @@ alt#LightGrey #AliceBlue <size:16>kein gültiges tim-search-accesstoken vorhande
 |||
       
 
-    cl->mp: GET /_matrix/client/r0/user/\n{userId}/openid/request_token 
+    cl->mp: GET /_matrix/client/user/\n{userId}/openid/request_token 
       activate mp
     mp->hs: HTTP Forward 
 
       activate hs
     |||
-    hs-->mp: HTTP 200 OK, Result body \n{"access_token": \n"Matrix-OpenID-Token", \n"matrix_server_name": \n"example.com",...}
+    hs-->mp: Matrix-OpenID-Token
       deactivate hs
-    mp-->cl: HTTP Forward
+    mp-->cl: HTTP(S) Forward
       deactivate mp
       
     |||
     cl->au: GET /tim-authenticate... (Auth Header mit Matrix-OpenID-Token)
       activate au
-    au->au: Prüfe ob matrix_server_name\nin Föderationsliste enthalten ist
+    au->au: Prüfe ob \nMatrix-Domain aus dem \nMatrix-OpenID-Token in \nFöderation enthalten ist
 
 |||
-alt#LightGrey #LightBlue <size:16>matrix_server_name nicht in der Föderationsliste enthalten</size>
+alt#LightGrey #LightBlue <size:16>Matrix-Domain nicht in der Föderation enthalten</size>
 |||    
 
     au-->cl: HTTP 401 \nUnauthorized
@@ -81,19 +80,19 @@ alt#LightGrey #LightBlue <size:16>matrix_server_name nicht in der Föderationsli
     cl-->U: Suche nicht erfolgreich
     
     |||
-    else <size:16>matrix_server_name in der Föderationsliste enthalten</size>
+    else <size:16>matrix_server_name in der Föderation enthalten</size>
     |||
-        au->mp: GET /openid/userinfo/?\naccess_token=Matrix-OpenID-Token)
+        au->mp: GET /openid/userinfo/?Matrix-OpenID-Token)
           activate mp
-        mp->hs: HTTP Forward
+        mp->hs: HTTP(S) Forward
           activate hs
-        hs->hs: prüfe Matrix-OpenID-token
-        hs-->mp: HTTP 200 OK\n(Result Body \nMXID des Nutzers)
+        hs->hs: prüfe Matrix-OpenID-Token
+        hs-->mp: MXID des Nutzers
           deactivate hs
-        mp-->au: HTTP Forward
+        mp-->au: HTTP(S) Forward
           deactivate mp
         au->au: erzeuge \ntim-search-accesstoken 
-        au-->cl: HTTP 200 OK, \ntim-search-accesstoken \n(inklusive MXID des Nutzers)
+        au-->cl: tim-search-accesstoken (inklusive MXID des Nutzers)
           deactivate au
           deactivate fp
     |||
@@ -101,51 +100,51 @@ alt#LightGrey #LightBlue <size:16>matrix_server_name nicht in der Föderationsli
 end
 
     |||
-    cl->fp: GET /tim-search?... (Auth Header mit tim-search-accesstoken inkl. MXID)
+    cl->fp: POST /search?... (Auth Header mit tim-search-accesstoken inkl. MXID)
     |||
       activate fp
     fp->fp: prüfe tim-search-accesstoken
     |||
     opt#LightGrey #MistyRose <size:16>Abbruch</size>
-      fp-->cl: kein tim-search-accesstoken vorhanden
+      fp-->cl: kein gültiges tim-search-accesstoken 
+    |||
     end
    
 |||
-alt#LightGrey #AliceBlue <size:16>TIHealthcareService-Einträge werden gesucht</size>
+alt#LightGrey #AliceBlue <size:16>HealthcareService-Einträge werden gesucht</size>
 |||
-    fp->fd: GET /?...
+    fp->fd: POST /search/HealthcareService/? \nFinde Datensatz für TelematikID 
       activate fd
-    fd-->fp: HTTP 200 OK\n(Result Body json)
+    fd-->fp: Result Body json
       deactivate fd
 |||
 end
 
 |||
-alt#LightGrey #AliceBlue <size:16>TIPractitionerRole-Einträge werden gesucht</size>
+alt#LightGrey #AliceBlue <size:16>PractitionerRole-Einträge werden gesucht</size>
 |||
-    fp->fd: GET /?...<MXID des anfragenden Nutzers>
+    fp->fd: POST /search/PractitionerRole/? ...<MXID des anfragenden Nutzers> 
       activate fd
     fd->fd: Prüfung, ob MXID im \nTIEndpoint-Eintrag \nvorhanden ist
-    fd-->fp: HTTP 200 OK\n(Result Body json mit TIPractitioner-Eintrag)
+    fd-->fp: Result Body json mit TIPractitioner-Eintrag
       deactivate fd
 |||
 end
 |||
 
-  fp->fp: MXID enthalten und \nTIEndpoint.status == active
+  fp->fp: Prüfung, ob MXID enthalten \nund \nTIEndpoint.status == active
   |||
   opt#LightGrey #MistyRose <size:16>Abbruch</size>
     fp-->cl: kein passender Eintrag gefunden \noder TIEndpoint.status == false
+    |||
   end
   |||
-  fp->pp: Request \nerzeuge PASSporT (MXIDs...)
-    activate pp
-  pp->pp: Erzeuge PASSporT \n(Attribut orig, dest)
-  pp-->fp: /?PASSporT=[PASSporT-String].
-    deactivate pp
-  fp-->cl: HTTP 200 OK (MXID und PASSporT)
+
+  fp-->cl: MXID des gesuchten Akteurs
+  deactivate fp
+  cl-->U: status
    |||
-    deactivate fp
+    
     deactivate cl
 
 @enduml

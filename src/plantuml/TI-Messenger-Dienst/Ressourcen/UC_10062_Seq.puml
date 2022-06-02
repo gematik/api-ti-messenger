@@ -3,15 +3,15 @@
 # TI-Messenger-Dienst
 # UC - 10062
 # Sequence Diagram
-# Name: Austausch von Nachrichten zwischen Messenger-Services
+# Name: Austausch von Events zwischen Akteuren außerhalb einer Organisation
 '/
 
 @startuml
 skinparam sequenceMessageAlign direction
 skinparam minClassWidth 200
-skinparam BoxPadding 1
+skinparam BoxPadding 15
 skinparam sequenceReferenceHeaderBackgroundColor palegreen
-scale max 4096 width
+scale max 2048 width
 
 skinparam sequence {
 ArrowColor black
@@ -39,78 +39,68 @@ ActorFontName Aapex
       participant MP1 as "Messenger-\nProxy"
       participant MH1 as "Matrix-\nHomeserver"
     end box
-    box <size:18>Messenger-Service B</size> #Snow
+    box <size:18>Messenger-Service B</size> #WhiteSmoke
     participant MP2 as "Messenger-\nProxy"
     participant MH2 as "Matrix-\nHomeserver"
-    participant PS2 as "PASSPorT-\nService"
     participant PG2 as "Push-\nGateway"
     end box
     participant C2 as "TI-Messenger-\nClient" #TECHNOLOGY
     actor U2 as "\nAkteur - B in der Rolle\nUser / User-HBA\n"
     
-    |||
-note over U1, U2: \n<size:20>Die Akteure sind erfolgreich beim jeweiligen Messenger Service angemeldet</size>\n    
-    
-    |||
-    U1->C1: Akteur löst\nMatrix-Event aus
-      activate C1 #AliceBlue
-      C1->MP1: Matrix-Request
-      activate MP1
-    MP1->MP1: Check Request:\nFöderationszugehörigkeit\nprüfen
-      |||
-    opt#LightGrey #MistyRose <size:16>Abbruch</size>
-      MP1-->C1: Domain nicht in TI-Föderation
-      C1-->U1: Event konnte nicht \nverarbeitet werden
-    end
-      |||
-    MP1->MH1: HTTP Forward
-      deactivate MP1
-      activate MH1
-    MH1->MH1: Event verarbeiten
-      |||
-    MH1->MP1: Matrix-Request
-      deactivate MH1
-      activate MP1
-      |||
-    MP1->MP1: Check Request:\nremote Domain in Föderation
-      |||
-    MP1->MP2: HTTP Forward
-      deactivate MP1
-      activate MP2
-    MP2->MP2: Check Request:\nremote Domain in Föderation
-      |||
-    MP2->MH2: HTTP Foward
-      activate MH2
-    group par 
-    opt <size:16>push</size>
-    MH2->PG2: Notification
+|||
+note over U1, U2: \n<size:17>Die Akteure sind auf dem selben Messenger-Service angemeldet und im Besitz eines zugelassenen TI-Messenger-Clients.</size>\n<size:17>Ebenfalls sind beide Akteure einem gemeinsamen Raum beigetreten.</size>\n
+|||
+
+  U1->C1: Akteur A löst\nMatrix-Event aus
+    activate C1 #AliceBlue
+  C1-[#red]>MP1: Matrix-Request
+    activate MP1
+
+  MP1-[#red]>MH1: HTTP(S) Forward
+    activate MH1
+  MH1->MH1: Event \nverarbeiten
+  |||
+  MH1->MP1: Matrix-Request
+    deactivate MH1
+  |||
+  MP1-[#red]>MP2: HTTP(S) Forward
+    activate MP2
+
+  MP2-[#red]>MH2: HTTP(S) Foward
+  |||
+    activate MH2
+  MH2->MH2: Event \nverarbeiten
+  |||
+ 
+  opt#LightGrey #AliceBlue <size:16>Pushbenachrichtigung</size>
+  |||
+    MH2->PG2: POST /_matrix/push/notify
       activate PG2
     PG2->C2: Notification
     PG2-->MH2: Status
       deactivate PG2
-    |||
-    end
-      |||
-      group /sync
-        MH2->MP2: Matrix-Request
-        MP2->C2: HTTP Forward
-          activate C2 #TECHNOLOGY
-        C2->U2: Request anzeigen
-        C2-->MP2: Status
-          |||
-        MP2-->MH2: HTTP Forward
-        MH2->MP2: Status (Matrix-Request)
-          deactivate MH2
-        MP2-->MP1: HTTP Forward
-        MP1-->C1: Status
-          deactivate C1
-        MP2-->C2: HTTP Forward
-          deactivate C2
-          deactivate MP2
-          |||
-      end
-|||
-    end
+  |||
+  end
+  |||
+
+  MH2->MP2: Matrix-Request \nan Client-B)
+  MP2->C2: HTTP(S) Forward 
+    activate C2 #TECHNOLOGY
+  C2->C2: Event verarbeiten
+
+  C2-->MP2: Status
+  |||
+  MP2-->MH2: HTTP(S) Forward \n(Status Client-B)
+  MH2--[#red]>MP2: Status (Matrix-Request)
+    deactivate MH2
+  MP2-->C2: HTTP(S) Forward
+  C2->U2: Status
+    deactivate C2
+  MP2-->MP1: HTTP(S) Forward
+    deactivate MP2
+  MP1-->C1: Status
+    deactivate MP1
+    deactivate C1
   |||
 |||
 @enduml

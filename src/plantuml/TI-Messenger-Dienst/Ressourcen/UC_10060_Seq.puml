@@ -40,7 +40,7 @@ ActorFontName Aapex
     end box
     participant R as "Registrierungs-Dienst"
     box <size:18>VZD-FHIR-Directory</size> #WhiteSmoke
-    participant Auth as "Auth-Service"
+    participant Auth as "OAuth-Service"
     participant FP as "FHIR-Proxy"
     participant VZD as "FHIR-Directory"
     end box
@@ -51,21 +51,33 @@ ref over U, R: <size:17>**AF: 10103** - Authentisieren einer Organisation am TI-
 
 loop <size:16>1..n</size>
   |||
+  U->C: Mit einem Admin-Account \nam Registrierungs-Dienst \nanmelden
+    Activate C
+  C->R: POST /login (Client-Credential)
+  note right: <size:16>Schnittstelle wird nicht \n<size:16>durch die gematik spezifiziert</size>
+    Activate R
+  R->R: prüfe \nClient-Credential
+  R-->C: status
+    Deactivate R
+  C-->U: Erfolgreich angemeldet
+  |||
   U->C: Messenger Service erstellen
-  Activate C
-  C->R: POST /create (id_token, \naccess_token, \nMatrix-Domain)
+  C->R: POST /create (Matrix-Domain)
     Activate R
     
     |||
     group <size:16>Messaging-Service erstellen</size>
     |||
-      R->R: Starte neuen Messenger-Service \nfür die Organisation (Matrix-Domain)
+      R->R: Prüfung auf zulässigen Domainnamen
+      |||
+      R->R: Starte neuen Messenger-Service \nfür die Organisation mit Matrix-Domain
+      |||
         create "Messenger-Service"
           R-->"Messenger-Service" : Messenger-Service erstellen 
         Activate "Messenger-Service"
       |||
-      "Messenger-Service"->"Messenger-Service": Account \nerstellen
-      "Messenger-Service"-->R: Status, Account Daten
+      "Messenger-Service"->"Messenger-Service": initial \neinrichten
+      "Messenger-Service"-->R: status
       |||
         Deactivate "Messenger-Service"
     |||
@@ -73,32 +85,32 @@ loop <size:16>1..n</size>
     
     |||
     
-    group <size:16>FHIR-Directory Eintrag erstellen</size>
+    group <size:16>Messenger-Service in die Föderation aufnehmen</size>
     |||
-      R->Auth: GET /token (client_id, client_secret) \n(OAuth Client credentials flow)
+      R->Auth: POST /token (client_id, client_secret) \n(OAuth Client credentials flow)
         Activate Auth
       Auth->Auth: prüfe client_id und \nclient_secret
-      Auth-->R: admin-access-token
+      Auth-->R: admin-accesstoken
         Deactivate Auth
       |||
-      R->FP: FHIR Request \n(admin-access-token, Matrix-Domain)\nEndpoint (tim-domain)
+      R->FP: POST /tim-provider-services/addTiMessengerDomain \n(admin-accesstoken, Matrix-Domain, TelematikID, isEnsurance)
         Activate FP
-      FP->VZD: HTTP Forward
+      FP->FP: prüfe \nadmin-accesstoken
+      FP->VZD: HTTPS Forward
         Activate VZD
-      VZD-->VZD: FHIR-Ressource \nerzeugen \n(TIOrganisation)
       VZD-->VZD: Föderationsliste\naktualisieren
-      VZD-->FP: Status
+      VZD-->FP: status
         Deactivate VZD
-      FP-->R: HTTP Forward
+      FP-->R: HTTPS Forward
         Deactivate FP
 
     |||
     end
 
   |||
-  R->C: Status, Account Daten
+  R->C: status
     Deactivate R
-  C->U: Status, Account Daten
+  C->U: Messenger Service \nerfolgreich erstellt
     Deactivate C
   |||
 end
