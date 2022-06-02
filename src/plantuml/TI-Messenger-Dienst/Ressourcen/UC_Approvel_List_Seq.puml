@@ -46,7 +46,7 @@ ActorFontName Aapex
 
 |||
 C->MP: Invite-Event
- activate MP
+ activate MP #LIGHTGREEN
 
 == <font color=green><size:16>  Berechtigungskonzept - Stufe 1</size></font> == 
     |||
@@ -67,18 +67,27 @@ end
 |||
 MP->MH: HTTP(S) Forward
  activate MH
-MH->MH: Invite wird \nverarbeitet 
+
 |||
 MH->MH: Prüfung auf \nOrganisationszugehörigkeit
 
 |||
-   alt#LightGrey #AliceBlue <size:16>Akteure gehören nicht einer gemeinsamen Organisation an</size>
+   alt#LightGrey #AliceBlue <size:16>Akteure gehören  einer gemeinsamen Organisation an</size> 
+   |||
+      MH->MH: Invite wird \nverarbeitet 
+      MH-->MP: status
+      MP-->C: status
+      |||
+
+   else <size:16>Akteure gehören nicht einer gemeinsamen Organisation an</size>
    |||
       == <font color=green><size:16>  Berechtigungskonzept - Stufe 1</size></font>  ==
       |||
       MH->MP: Matrix-Invite-Event \nwird weitergeleitet
+      deactivate MH
       |||
       MP->MP2: Matrix-Invite-Event \nwird weitergeleitet
+      activate MP2 #SALMON
      
         |||
         ref over MP2, MP2: <size:17>**AF_10064** - \tFöderationszugehörigkeit eines \n<size:17>        \tMessenger-Service prüfen</size>\n 
@@ -147,8 +156,6 @@ deactivate MH2
 MP2-->MP: status
 deactivate MP2
 
-MH-->MP: status
-deactivate MH
 MP-->C: status
 deactivate MP
 
