@@ -76,42 +76,50 @@ note over U2, MP2: \n<size:17>Der Akteur B ist erfolgreich beim Messenger Servic
          autonumber stop
          |||
          
-         C2->MP2: POST /approvalList (MXID von Akteur A, Matrix-OpenID-Token)
-         activate MP2
+         opt#LightGrey #AliceBlue <size:16>Eintrag in Freigabeliste erzeugen</size>
          |||
-         MP2->RD2: HTTP(S) Forward
-         activate RD2
-         RD2->MH2: GET /openid/userinfo/?Matrix-OpenID-Token
-         activate MH2
-         MH2->MH2: prüfe Matrix-OpenID-Token
-         MH2-->RD2: status
-         deactivate MH2
-         |||
-         RD2->RD2: MXID von Akteur A \nin Freigabeliste \nfür Akteur B \naufnehmen
-         |||
-         RD2-->MP2: status
-         deactivate RD2
-         |||
-         MP2-->C2: status
-         deactivate MP2
-         deactivate C2
+           C2->MP2: POST /tim-contact-mgmt/createContactSetting (MXID, start, end)
+           activate MP2
+           |||
+           MP2->RD2: HTTP(S) Forward
+           activate RD2
+           RD2->MH2: GET /openid/userinfo/?Matrix-OpenID-Token
+           activate MH2
+           MH2->MH2: prüfe Matrix-OpenID-Token
+           MH2-->RD2: status
+           deactivate MH2
+           |||
+           RD2->RD2: MXID von Akteur A \nin Freigabeliste \nfür Akteur B \naufnehmen
+           |||
+           RD2-->MP2: status
+           deactivate RD2
+           |||
+           MP2-->C2: status
+           deactivate MP2
+           deactivate C2
+          |||
+        end
         |||
     end
     
     |||
     C1->MP1: POST /_matrix/client/r0/\nrooms/{roomId}/invite 
       activate MP1
-    MP1->MP1: prüfe, ob Matrix-Domain \nder MXID (Akteur B) \nin der Föderationsliste \nenthalten ist
+    
+    |||
+      ref over MP1, MP1: <size:17>**AF_10064** - \tFöderationszugehörigkeit eines \n<size:17>        \tMessenger-Service prüfen</size>\n 
     |||
       opt#LightGrey #MistyRose <size:16>Abbruch</size>
-        MP1-->C1: Matrix-Domain nicht \nin der TI-Föderation 
-        C1-->U1: Event konnte nicht \nverarbeitet werden
-        |||
+      |||
+      MP1-->C1: HTTP 401 \nUnauthorized
+      |||
+      C1-->C1: Abmeldung der Session
+      |||
+      C1-->U1: Anmeldung nicht \nerfolgreich
+      |||
       end
       |||
-      
-    ref over MP1, MH1 : <size:16>Anhang B - Stufen der Berechtigungsprüfung</size>\n
-    |||
+
     MP1->MH1: HTTP(S) Forward
       activate MH1
     MH1->MH1: Invite verarbeiten
@@ -121,15 +129,22 @@ note over U2, MP2: \n<size:17>Der Akteur B ist erfolgreich beim Messenger Servic
     MP1->MP2: HTTP(S) Forward
     |||
       activate MP2
-    MP2->MP2: prüfe, ob Matrix-Domain \nder MXID (Akteur A) \nin der Föderationsliste \nenthalten ist
     |||
+      ref over MP2, MP2: <size:17>**AF_10064** - \tFöderationszugehörigkeit eines \n<size:17>        \tMessenger-Service prüfen</size>\n 
+    |||
+
       opt#LightGrey #MistyRose <size:16>Abbruch</size>
-        MP2-->MP1: Matrix-Domain nicht \nin der TI-Föderation
-        MP1-->C1: HTTP(S) Forward (Abbruch)
-        C1-->U1: Event konnte nicht \nverarbeitet werden
-        |||
+      |||
+      MP2-->MP1: HTTP 401 \nUnauthorized
+      |||
+      MP1-->C1: HTTP(S) forward
+      |||
+      C1-->C1: Abmeldung der Session
+      |||
+      C1-->U1: Anmeldung nicht \nerfolgreich
+      |||
       end
-    |||
+
     |||
       ref over MP2, MH2 : <size:16>Anhang B - Stufen der Berechtigungsprüfung</size>\n
     |||
