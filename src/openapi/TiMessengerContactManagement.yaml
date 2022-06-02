@@ -133,12 +133,6 @@ paths:
         - deleteContactSetting
       description: "Deletes the setting for the contact {mxidUrl}."
       operationId: deleteContactSetting
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Contact"
       responses:
         "204":
           description: Deleted
@@ -273,3 +267,13 @@ components:
       required:
         - errorCode
         - errorMessage
+
+  securitySchemes:
+    bearerMatrixOpenIdTokenAuth:            # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT    # optional, arbitrary value for documentation purposes
+
+# the security applies to all operations
+security:
+  - bearerMatrixOpenIdTokenAuth: []         # use the same name as above

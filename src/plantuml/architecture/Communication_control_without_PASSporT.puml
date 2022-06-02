@@ -63,6 +63,7 @@ mp --> cl: HTTP 200 OK, Result body {"access_token": "Matrix-OpenID-Token",...,\
 deactivate mp
 cl -> rd: invite von Nutzer B ist erlaubt\n(Auth Header mit Matrix-OpenID-Token)
 activate rd
+rd->rd: verify that the token comes\nfrom own Messenger-Service
 rd -> mp: GET /openid/userinfo/\nrequest header, Authorization: Bearer Matrix-OpenID-Token
 mp --> rd: HTTP 200 OK\n(Result Body MXID des Nutzers)activate rd
 rd --> cl: HTTP 200 OK
@@ -73,6 +74,7 @@ mpb --> clb: HTTP 200 OK, Result body {"access_token": "Matrix-OpenID-Token",\n.
 deactivate mpb
 clb -> rdb: invite von Nutzer A ist erlaubt\n(Auth Header mit Matrix-OpenID-Token)
 activate rdb
+rdb->rdb: verify that the token comes\nfrom own Messenger-Service
 rdb -> mpb: GET /openid/userinfo/\nrequest header, Authorization: Bearer Matrix-OpenID-Token
 mpb --> rdb: HTTP 200 OK\n(Result Body MXID des Nutzers)activate rd
 rdb --> clb: HTTP 200 OK
