@@ -1,0 +1,39 @@
+---
+---
+<!-- get modelType -->
+{% include fragment-modelType.html id='EncounterCaseReference' %}
+
+{% assign format = page.path | split: '.html'| first | split: '.' | last %}
+
+{% if format == 'xml' %}
+{% assign section = '7' %}
+{% elsif format == 'json' %}
+{% assign section = '8' %}
+{% else %}
+{% assign section = '9' %}
+{% endif %}
+
+{% include fragment-pagebegin.html %}
+<div style="counter-reset: section {{section}}" class="col-12">
+  <!--ReleaseHeader--><p id="publish-box">Publish Box goes here</p><!--EndReleaseHeader-->
+  {% include fragment-profile-navtabs.html type='StructureDefinition' id='EncounterCaseReference' active=format %}
+
+<a name="root"> </a>
+<h2 id="root">{{modelType}}: EncounterCaseReference - {{format | upcase}} Profile</h2>
+{% include fragment-simpletable.html %}
+
+<p>{{format | upcase}} representation of the EncounterCaseReference {{modelType | downcase }}.</p>
+
+<p><a href="StructureDefinition-EncounterCaseReference.{{format}}" no-download="true">Raw {{format}}</a> | <a href="StructureDefinition-EncounterCaseReference.{{format}}" download>Download</a></p>
+
+  <!-- insert intro if present -->
+  {% include fragment-intro.html type='StructureDefinition' id='EncounterCaseReference' %}
+
+  {%include StructureDefinition-EncounterCaseReference-{{format}}-html.xhtml%}
+
+  <!-- insert notes if present -->
+  {% include fragment-notes.html type='StructureDefinition' id='EncounterCaseReference' %}
+
+</div>
+{% assign includetabscripts = 'true' %}
+{% include fragment-pageend.html %}

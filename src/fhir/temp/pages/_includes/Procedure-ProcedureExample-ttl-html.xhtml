@@ -1,0 +1,46 @@
+{% raw %}<pre class="rdf"><code class="language-turtle">
+@prefix fhir: &lt;http://hl7.org/fhir/&gt; .
+@prefix owl: &lt;http://www.w3.org/2002/07/owl#&gt; .
+@prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
+@prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt; .
+
+# - resource -------------------------------------------------------------------
+
+ a fhir:Procedure;
+  <a href="http://hl7.org/fhir/R4/rdf.html#tree-root">fhir:nodeRole</a> fhir:treeRoot;
+  <a href="http://hl7.org/fhir/R4/procedure.html#Procedure.id">fhir:Resource.id</a> [ <a href="http://hl7.org/fhir/R4/datatypes.html#string">fhir:value</a> &quot;ProcedureExample&quot;];
+  <a href="http://hl7.org/fhir/R4/procedure.html#Procedure.meta">fhir:Resource.meta</a> [
+     <a href="http://hl7.org/fhir/R4/datatypes.html#Meta#Meta.profile">fhir:Meta.profile</a> [
+       <a href="http://hl7.org/fhir/R4/datatypes.html#canonical">fhir:value</a> &quot;http://gematik.de/fhir/TIM/CaseReference/StructureDefinition/ProcedureCaseReference&quot;;
+       <a href="http://hl7.org/fhir/R4/rdf.html#index">fhir:index</a> 0;
+       <a href="http://hl7.org/fhir/R4/rdf.html#reference">fhir:link</a> &lt;http://gematik.de/fhir/TIM/CaseReference/StructureDefinition/ProcedureCaseReference&gt;     ]
+  ];
+  <a href="http://hl7.org/fhir/R4/procedure.html#Procedure.text">fhir:DomainResource.text</a> [
+     <a href="http://hl7.org/fhir/R4/datatypes.html#Narrative#Narrative.status">fhir:Narrative.status</a> [ <a href="http://hl7.org/fhir/R4/datatypes.html#code">fhir:value</a> &quot;generated&quot; ];
+     fhir:Narrative.div &quot;&lt;div xmlns=\&quot;http://www.w3.org/1999/xhtml\&quot;&gt;&lt;p&gt;&lt;b&gt;Generated Narrative&lt;/b&gt;&lt;/p&gt;&lt;div style=\&quot;display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%\&quot;&gt;&lt;p style=\&quot;margin-bottom: 0px\&quot;&gt;Resource \&quot;ProcedureExample\&quot; &lt;/p&gt;&lt;p style=\&quot;margin-bottom: 0px\&quot;&gt;Profile: &lt;a href=\&quot;StructureDefinition-ProcedureCaseReference.html\&quot;&gt;ProcedureCaseReference&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;&lt;p&gt;&lt;b&gt;identifier&lt;/b&gt;: id: ABC1234567890&lt;/p&gt;&lt;p&gt;&lt;b&gt;status&lt;/b&gt;: preparation&lt;/p&gt;&lt;p&gt;&lt;b&gt;subject&lt;/b&gt;: &lt;a href=\&quot;https://simplifier.net/resolve?scope=de.basisprofil.r4@1.3.2&amp;amp;canonical=http://fhir.org/packages/de.basisprofil.r4/374885372\&quot;&gt;374885372&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;encounter&lt;/b&gt;: &lt;a href=\&quot;https://simplifier.net/resolve?scope=de.basisprofil.r4@1.3.2&amp;amp;canonical=http://fhir.org/packages/de.basisprofil.r4/324534708\&quot;&gt;324534708&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;note&lt;/b&gt;: Additional information&lt;/p&gt;&lt;/div&gt;&quot;
+  ];
+  <a href="http://hl7.org/fhir/R4/procedure.html#Procedure.identifier">fhir:Procedure.identifier</a> [
+     <a href="http://hl7.org/fhir/R4/rdf.html#index">fhir:index</a> 0;
+     <a href="http://hl7.org/fhir/R4/datatypes.html#Identifier#Identifier.system">fhir:Identifier.system</a> [ <a href="http://hl7.org/fhir/R4/datatypes.html#uri">fhir:value</a> &quot;http://example.de/StructureDefinition/identifier-interne-abrechnungsnummer&quot; ];
+     <a href="http://hl7.org/fhir/R4/datatypes.html#Identifier#Identifier.value">fhir:Identifier.value</a> [ <a href="http://hl7.org/fhir/R4/datatypes.html#string">fhir:value</a> &quot;ABC1234567890&quot; ]
+  ];
+  <a href="http://hl7.org/fhir/R4/procedure.html#Procedure.status">fhir:Procedure.status</a> [ <a href="http://hl7.org/fhir/R4/datatypes.html#code">fhir:value</a> &quot;preparation&quot;];
+  <a href="http://hl7.org/fhir/R4/procedure.html#Procedure.subject">fhir:Procedure.subject</a> [
+     <a href="http://hl7.org/fhir/R4/references.html#Reference#Reference.reference">fhir:Reference.reference</a> [ <a href="http://hl7.org/fhir/R4/datatypes.html#string">fhir:value</a> &quot;374885372&quot; ]
+  ];
+  <a href="http://hl7.org/fhir/R4/procedure.html#Procedure.encounter">fhir:Procedure.encounter</a> [
+     <a href="http://hl7.org/fhir/R4/references.html#Reference#Reference.reference">fhir:Reference.reference</a> [ <a href="http://hl7.org/fhir/R4/datatypes.html#string">fhir:value</a> &quot;324534708&quot; ]
+  ];
+  <a href="http://hl7.org/fhir/R4/procedure.html#Procedure.note">fhir:Procedure.note</a> [
+     <a href="http://hl7.org/fhir/R4/rdf.html#index">fhir:index</a> 0;
+     <a href="http://hl7.org/fhir/R4/datatypes.html#Annotation#Annotation.text">fhir:Annotation.text</a> [ <a href="http://hl7.org/fhir/R4/datatypes.html#markdown">fhir:value</a> &quot;Additional information&quot; ]
+  ].
+
+# - ontology header ------------------------------------------------------------
+
+ a owl:Ontology;
+  owl:imports fhir:fhir.ttl.
+
+</code></pre>
+
+{% endraw %}

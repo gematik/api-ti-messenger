@@ -1,0 +1,70 @@
+{
+  "package": "CaseReference",
+  "version": "0.1.0",
+  "fhirVersion": "4.0.1",
+  "extensions": [],
+  "profiles": {
+    "Condition": [
+      {
+        "url": "http://gematik.de/fhir/TIM/CaseReference/StructureDefinition/ConditionCaseReference",
+        "title": "ConditionCaseReference"
+      }
+    ],
+    "Encounter": [
+      {
+        "url": "http://gematik.de/fhir/TIM/CaseReference/StructureDefinition/EncounterCaseReference",
+        "title": "EncounterCaseReference"
+      }
+    ],
+    "Patient": [
+      {
+        "url": "http://gematik.de/fhir/TIM/CaseReference/StructureDefinition/PatientCaseReference",
+        "title": "PatientCaseReference"
+      }
+    ],
+    "Procedure": [
+      {
+        "url": "http://gematik.de/fhir/TIM/CaseReference/StructureDefinition/ProcedureCaseReference",
+        "title": "ProcedureCaseReference"
+      }
+    ]
+  },
+  "usage": {
+    "http://hl7.org/fhir/StructureDefinition/elementdefinition-bestpractice": [
+      "StructureDefinition.snapshot.element.constraint"
+    ],
+    "http://hl7.org/fhir/StructureDefinition/elementdefinition-bestpractice-explanation": [
+      "StructureDefinition.snapshot.element.constraint"
+    ],
+    "http://hl7.org/fhir/StructureDefinition/elementdefinition-bindingName": [
+      "StructureDefinition.snapshot.element.binding"
+    ],
+    "http://hl7.org/fhir/StructureDefinition/elementdefinition-isCommonBinding": [
+      "StructureDefinition.snapshot.element.binding"
+    ],
+    "http://hl7.org/fhir/StructureDefinition/elementdefinition-maxValueSet": [
+      "StructureDefinition.snapshot.element.binding"
+    ],
+    "http://hl7.org/fhir/StructureDefinition/structuredefinition-category": [
+      "StructureDefinition"
+    ],
+    "http://hl7.org/fhir/StructureDefinition/structuredefinition-explicit-type-name": [
+      "StructureDefinition.snapshot.element"
+    ],
+    "http://hl7.org/fhir/StructureDefinition/structuredefinition-fhir-type": [
+      "StructureDefinition.snapshot.element.type"
+    ],
+    "http://hl7.org/fhir/StructureDefinition/structuredefinition-hierarchy": [
+      "StructureDefinition.snapshot.element.type"
+    ],
+    "http://hl7.org/fhir/StructureDefinition/structuredefinition-security-category": [
+      "StructureDefinition"
+    ],
+    "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter": [
+      "ImplementationGuide.definition"
+    ],
+    "http://hl7.org/fhir/tools/StructureDefinition/resource-information": [
+      "ImplementationGuide.definition.resource"
+    ]
+  }
+}

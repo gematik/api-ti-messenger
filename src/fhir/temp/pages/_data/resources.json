@@ -1,0 +1,136 @@
+{
+  "ImplementationGuide/CaseReference": {
+    "history": false,
+    "index": 0,
+    "source": "/mnt/c/dev/github/api-ti-messenger/src/fhir/fsh-generated/resources/ImplementationGuide-CaseReference.json",
+    "sourceTail": "ImplementationGuide-CaseReference.json",
+    "path": "ImplementationGuide-CaseReference.html",
+    "url": "http://gematik.de/fhir/TIM/CaseReference/ImplementationGuide/CaseReference",
+    "version": "0.1.0",
+    "name": "CaseReference",
+    "experimental": false,
+    "date": "2022-06-03T21:10:15+02:00",
+    "status": {
+      "class": "colsd",
+      "owner": "gematik GmbH",
+      "link": "www.gematik.de",
+      "status": "Draft"
+    }
+  },
+  "StructureDefinition/ConditionCaseReference": {
+    "history": false,
+    "index": 1,
+    "source": "/mnt/c/dev/github/api-ti-messenger/src/fhir/fsh-generated/resources/structuredefinition-ConditionCaseReference.json",
+    "sourceTail": "structuredefinition-ConditionCaseReference.json",
+    "path": "StructureDefinition-ConditionCaseReference.html",
+    "url": "http://gematik.de/fhir/TIM/CaseReference/StructureDefinition/ConditionCaseReference",
+    "version": "0.1.0",
+    "name": "ConditionCaseReference",
+    "experimental": false,
+    "date": "2022-06-03T21:10:15+02:00",
+    "description": "A profile of the Condition resource for TI-Messenger communication related to a patients case reference",
+    "status": {
+      "class": "colsd",
+      "owner": "gematik GmbH",
+      "link": "www.gematik.de",
+      "status": "Draft"
+    }
+  },
+  "StructureDefinition/EncounterCaseReference": {
+    "history": false,
+    "index": 2,
+    "source": "/mnt/c/dev/github/api-ti-messenger/src/fhir/fsh-generated/resources/structuredefinition-EncounterCaseReference.json",
+    "sourceTail": "structuredefinition-EncounterCaseReference.json",
+    "path": "StructureDefinition-EncounterCaseReference.html",
+    "url": "http://gematik.de/fhir/TIM/CaseReference/StructureDefinition/EncounterCaseReference",
+    "version": "0.1.0",
+    "name": "EncounterCaseReference",
+    "experimental": false,
+    "date": "2022-06-03T21:10:15+02:00",
+    "description": "A profile of the Encounter resource for TI-Messenger communication related to a patients case reference.",
+    "status": {
+      "class": "colsd",
+      "owner": "gematik GmbH",
+      "link": "www.gematik.de",
+      "status": "Draft"
+    }
+  },
+  "StructureDefinition/PatientCaseReference": {
+    "history": false,
+    "index": 3,
+    "source": "/mnt/c/dev/github/api-ti-messenger/src/fhir/fsh-generated/resources/structuredefinition-PatientCaseReference.json",
+    "sourceTail": "structuredefinition-PatientCaseReference.json",
+    "path": "StructureDefinition-PatientCaseReference.html",
+    "url": "http://gematik.de/fhir/TIM/CaseReference/StructureDefinition/PatientCaseReference",
+    "version": "0.1.0",
+    "name": "PatientCaseReference",
+    "experimental": false,
+    "date": "2022-06-03T21:10:15+02:00",
+    "description": "A profile of the Patient resource for TI-Messenger communication related to a patients case reference.",
+    "status": {
+      "class": "colsd",
+      "owner": "gematik GmbH",
+      "link": "www.gematik.de",
+      "status": "Draft"
+    }
+  },
+  "StructureDefinition/ProcedureCaseReference": {
+    "history": false,
+    "index": 4,
+    "source": "/mnt/c/dev/github/api-ti-messenger/src/fhir/fsh-generated/resources/structuredefinition-ProcedureCaseReference.json",
+    "sourceTail": "structuredefinition-ProcedureCaseReference.json",
+    "path": "StructureDefinition-ProcedureCaseReference.html",
+    "url": "http://gematik.de/fhir/TIM/CaseReference/StructureDefinition/ProcedureCaseReference",
+    "version": "0.1.0",
+    "name": "ProcedureCaseReference",
+    "experimental": false,
+    "date": "2022-06-03T21:10:15+02:00",
+    "description": "A profile of the Procedure resource for TI-Messenger communication related to a patients case reference.",
+    "status": {
+      "class": "colsd",
+      "owner": "gematik GmbH",
+      "link": "www.gematik.de",
+      "status": "Draft"
+    }
+  },
+  "Encounter/324534708": {
+    "history": false,
+    "index": 5,
+    "source": "/mnt/c/dev/github/api-ti-messenger/src/fhir/fsh-generated/resources/encounter-324534708.json",
+    "sourceTail": "encounter-324534708.json",
+    "path": "Encounter-324534708.html",
+    "status": {
+      "class": "colsi"
+    }
+  },
+  "Patient/374885372": {
+    "history": false,
+    "index": 6,
+    "source": "/mnt/c/dev/github/api-ti-messenger/src/fhir/fsh-generated/resources/patient-374885372.json",
+    "sourceTail": "patient-374885372.json",
+    "path": "Patient-374885372.html",
+    "status": {
+      "class": "colsi"
+    }
+  },
+  "Condition/ConditionExample": {
+    "history": false,
+    "index": 7,
+    "source": "/mnt/c/dev/github/api-ti-messenger/src/fhir/fsh-generated/resources/condition-ConditionExample.json",
+    "sourceTail": "condition-ConditionExample.json",
+    "path": "Condition-ConditionExample.html",
+    "status": {
+      "class": "colsi"
+    }
+  },
+  "Procedure/ProcedureExample": {
+    "history": false,
+    "index": 8,
+    "source": "/mnt/c/dev/github/api-ti-messenger/src/fhir/fsh-generated/resources/procedure-ProcedureExample.json",
+    "sourceTail": "procedure-ProcedureExample.json",
+    "path": "Procedure-ProcedureExample.html",
+    "status": {
+      "class": "colsi"
+    }
+  }
+}

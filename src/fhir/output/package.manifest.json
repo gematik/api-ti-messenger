@@ -1,0 +1,8 @@
+{
+  "version": "0.1.0",
+  "fhirVersion": [
+    "4.0.1"
+  ],
+  "date": "20220603210810",
+  "name": "CaseReference"
+}

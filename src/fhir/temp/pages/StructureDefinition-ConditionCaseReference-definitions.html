@@ -1,0 +1,27 @@
+---
+---
+<!-- get modelType -->
+{% include fragment-modelType.html id='ConditionCaseReference' %}
+
+{% include fragment-pagebegin.html %}
+<div style="counter-reset: section 4" class="col-12">
+  <!--ReleaseHeader--><p id="publish-box">Publish Box goes here</p><!--EndReleaseHeader-->
+  {% include fragment-profile-navtabs.html type='StructureDefinition' id='ConditionCaseReference' active='definition' %}
+
+<a name="root"> </a>
+<h2 id="root">{{modelType}}: ConditionCaseReference - Detailed Descriptions</h2>
+{% include fragment-simpletable.html %}
+
+<p>Definitions for the ConditionCaseReference {{modelType | downcase}}.</p>
+
+  <!-- insert intro if present -->
+  {% include fragment-intro.html type='StructureDefinition' id='ConditionCaseReference' %}
+
+  {%include StructureDefinition-ConditionCaseReference-dict.xhtml%}
+
+  <!-- insert notes if present -->
+  {% include fragment-notes.html type='StructureDefinition' id='ConditionCaseReference' %}
+
+</div>
+{% assign includetabscripts = 'true' %}
+{% include fragment-pageend.html %}

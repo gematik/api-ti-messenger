@@ -1,0 +1,53 @@
+@prefix fhir: <http://hl7.org/fhir/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# - resource -------------------------------------------------------------------
+
+<http://gematik.de/fhir/TIM/CaseReference/Patient/374885372> a fhir:Patient;
+  fhir:nodeRole fhir:treeRoot;
+  fhir:Resource.id [ fhir:value "374885372"];
+  fhir:Resource.meta [
+     fhir:Meta.profile [
+       fhir:value "http://gematik.de/fhir/TIM/CaseReference/StructureDefinition/PatientCaseReference";
+       fhir:index 0;
+       fhir:link <http://gematik.de/fhir/TIM/CaseReference/StructureDefinition/PatientCaseReference>
+     ]
+  ];
+  fhir:DomainResource.text [
+     fhir:Narrative.status [ fhir:value "generated" ];
+     fhir:Narrative.div "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>August Fröhlich </b> male, DoB: 2000-02-21 ( id: ABC1234567)</p></div>"
+  ];
+  fhir:Patient.identifier [
+     fhir:index 0;
+     fhir:Identifier.system [ fhir:value "http://fhir.de/StructureDefinition/identifier-kvid-10" ];
+     fhir:Identifier.value [ fhir:value "ABC1234567" ]
+  ];
+  fhir:Patient.name [
+     fhir:index 0;
+     fhir:HumanName.family [ fhir:value "Fröhlich" ];
+     fhir:HumanName.given [
+       fhir:value "August";
+       fhir:index 0
+     ]
+  ];
+  fhir:Patient.gender [ fhir:value "male"];
+  fhir:Patient.birthDate [ fhir:value "2000-02-21"^^xsd:date];
+  fhir:Patient.communication [
+     fhir:index 0;
+     fhir:Patient.communication.language [
+       fhir:CodeableConcept.coding [
+         fhir:index 0;
+         fhir:Coding.code [ fhir:value "de" ]
+       ]
+     ]
+  ] .
+
+# - ontology header ------------------------------------------------------------
+
+<http://gematik.de/fhir/TIM/CaseReference/Patient/374885372.ttl> a owl:Ontology;
+  owl:imports fhir:fhir.ttl .
+
+# -------------------------------------------------------------------------------------
+

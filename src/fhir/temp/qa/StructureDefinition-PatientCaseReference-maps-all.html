@@ -1,0 +1,338 @@
+﻿<html>
+<head>
+  <title>StructureDefinition-PatientCaseReference-maps-all</title>
+  <link rel="stylesheet" href="fhir.css"/>
+</head>
+<body>
+<a name="rim"> </a><h3>Mappings for RIM Mapping (<a href="http://hl7.org/comparison-v3.html">http://hl7.org/v3</a>)</h3><table class="grid">
+ <tr><td colspan="3"><b>PatientCaseReference</b></td></tr>
+ <tr><td>Patient</td><td>Entity. Role, or Act, Patient[classCode=PAT]</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;id</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;meta</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;implicitRules</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;language</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;text</td><td>Act.text?</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;contained</td><td>N/A</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;extension</td><td>N/A</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;modifierExtension</td><td>N/A</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;identifier</td><td>id</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;identifier (KVNR)</td><td>id</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id</td><td>n/a</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extension</td><td>n/a</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;use</td><td>Role.code or implied by context</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type</td><td>Role.code or implied by context</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;system</td><td>II.root or Role.id.root</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value</td><td>II.extension or II.root if system indicates OID or GUID (Or Role.id.extension or root)</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;period</td><td>Role.effectiveTime or implied by context</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assigner</td><td>II.assigningAuthorityName but note that this is an improper use by the definition of the field.  Also Role.scoper</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;identifier (PKVID)</td><td>id</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id</td><td>n/a</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extension</td><td>n/a</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;use</td><td>Role.code or implied by context</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type</td><td>Role.code or implied by context</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;system</td><td>II.root or Role.id.root</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value</td><td>II.extension or II.root if system indicates OID or GUID (Or Role.id.extension or root)</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;period</td><td>Role.effectiveTime or implied by context</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assigner</td><td>II.assigningAuthorityName but note that this is an improper use by the definition of the field.  Also Role.scoper</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;active</td><td>statusCode</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;name</td><td>name</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;telecom</td><td>telecom</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;gender</td><td>player[classCode=PSN|ANM and determinerCode=INSTANCE]/administrativeGender</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;birthDate</td><td>player[classCode=PSN|ANM and determinerCode=INSTANCE]/birthTime</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;deceased[x]</td><td>player[classCode=PSN|ANM and determinerCode=INSTANCE]/deceasedInd, player[classCode=PSN|ANM and determinerCode=INSTANCE]/deceasedTime</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;address</td><td>addr</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;maritalStatus</td><td>player[classCode=PSN]/maritalStatusCode</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;multipleBirth[x]</td><td>player[classCode=PSN|ANM and determinerCode=INSTANCE]/multipleBirthInd,  player[classCode=PSN|ANM and determinerCode=INSTANCE]/multipleBirthOrderNumber</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;photo</td><td>player[classCode=PSN|ANM and determinerCode=INSTANCE]/desc</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;contact</td><td>player[classCode=PSN|ANM and determinerCode=INSTANCE]/scopedRole[classCode=CON]</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id</td><td>n/a</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extension</td><td>n/a</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;modifierExtension</td><td>N/A</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;relationship</td><td>code</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name</td><td>name</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;telecom</td><td>telecom</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;address</td><td>addr</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gender</td><td>player[classCode=PSN|ANM and determinerCode=INSTANCE]/administrativeGender</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;organization</td><td>scoper</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;period</td><td>effectiveTime</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;communication</td><td>LanguageCommunication</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id</td><td>n/a</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extension</td><td>n/a</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;modifierExtension</td><td>N/A</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;language</td><td>player[classCode=PSN|ANM and determinerCode=INSTANCE]/languageCommunication/code</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;preferred</td><td>preferenceInd</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;generalPractitioner</td><td>subjectOf.CareEvent.performer.AssignedEntity</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;managingOrganization</td><td>scoper</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;link</td><td>outboundLink</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id</td><td>n/a</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extension</td><td>n/a</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;modifierExtension</td><td>N/A</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;other</td><td>id</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type</td><td>typeCode</td> </tr>
+</table>
+<a name="cda"> </a><h3>Mappings for CDA (R2) (<a href="http://hl7.org/comparison-cda.html">http://hl7.org/v3/cda</a>)</h3><table class="grid">
+ <tr><td colspan="3"><b>PatientCaseReference</b></td></tr>
+ <tr><td>Patient</td><td>ClinicalDocument.recordTarget.patientRole</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;id</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;meta</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;implicitRules</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;language</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;text</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;contained</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;extension</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;modifierExtension</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;identifier</td><td>.id</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;identifier (KVNR)</td><td>.id</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extension</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;use</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;system</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;period</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assigner</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;identifier (PKVID)</td><td>.id</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extension</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;use</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;system</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;period</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assigner</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;active</td><td>n/a</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;name</td><td>.patient.name</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;telecom</td><td>.telecom</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;gender</td><td>.patient.administrativeGenderCode</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;birthDate</td><td>.patient.birthTime</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;deceased[x]</td><td>n/a</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;address</td><td>.addr</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;maritalStatus</td><td>.patient.maritalStatusCode</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;multipleBirth[x]</td><td>n/a</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;photo</td><td>n/a</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;contact</td><td>n/a</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extension</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;modifierExtension</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;relationship</td><td>n/a</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name</td><td>n/a</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;telecom</td><td>n/a</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;address</td><td>n/a</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gender</td><td>n/a</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;organization</td><td>n/a</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;period</td><td>n/a</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;communication</td><td>patient.languageCommunication</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extension</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;modifierExtension</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;language</td><td>.languageCode</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;preferred</td><td>.preferenceInd</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;generalPractitioner</td><td>n/a</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;managingOrganization</td><td>.providerOrganization</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;link</td><td>n/a</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extension</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;modifierExtension</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;other</td><td>n/a</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type</td><td>n/a</td> </tr>
+</table>
+<a name="w5"> </a><h3>Mappings for FiveWs Pattern Mapping (http://hl7.org/fhir/fivews)</h3><table class="grid">
+ <tr><td colspan="3"><b>PatientCaseReference</b></td></tr>
+ <tr><td>Patient</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;id</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;meta</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;implicitRules</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;language</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;text</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;contained</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;extension</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;modifierExtension</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;identifier</td><td>FiveWs.identifier</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;identifier (KVNR)</td><td>FiveWs.identifier</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extension</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;use</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;system</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;period</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assigner</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;identifier (PKVID)</td><td>FiveWs.identifier</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extension</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;use</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;system</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;period</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assigner</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;active</td><td>FiveWs.status</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;name</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;telecom</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;gender</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;birthDate</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;deceased[x]</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;address</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;maritalStatus</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;multipleBirth[x]</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;photo</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;contact</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extension</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;modifierExtension</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;relationship</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;telecom</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;address</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gender</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;organization</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;period</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;communication</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extension</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;modifierExtension</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;language</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;preferred</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;generalPractitioner</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;managingOrganization</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;link</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extension</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;modifierExtension</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;other</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type</td><td></td> </tr>
+</table>
+<a name="v2"> </a><h3>Mappings for HL7 v2 Mapping (<a href="http://hl7.org/comparison-v2.html">http://hl7.org/v2</a>)</h3><table class="grid">
+ <tr><td colspan="3"><b>PatientCaseReference</b></td></tr>
+ <tr><td>Patient</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;id</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;meta</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;implicitRules</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;language</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;text</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;contained</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;extension</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;modifierExtension</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;identifier</td><td>PID-3</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;identifier (KVNR)</td><td>PID-3</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extension</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;use</td><td>N/A</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type</td><td>CX.5</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;system</td><td>CX.4 / EI-2-4</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value</td><td>CX.1 / EI.1</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;period</td><td>CX.7 + CX.8</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assigner</td><td>CX.4 / (CX.4,CX.9,CX.10)</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;identifier (PKVID)</td><td>PID-3</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extension</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;use</td><td>N/A</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type</td><td>CX.5</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;system</td><td>CX.4 / EI-2-4</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value</td><td>CX.1 / EI.1</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;period</td><td>CX.7 + CX.8</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assigner</td><td>CX.4 / (CX.4,CX.9,CX.10)</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;active</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;name</td><td>PID-5, PID-9</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;telecom</td><td>PID-13, PID-14, PID-40</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;gender</td><td>PID-8</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;birthDate</td><td>PID-7</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;deceased[x]</td><td>PID-30  (bool) and PID-29 (datetime)</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;address</td><td>PID-11</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;maritalStatus</td><td>PID-16</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;multipleBirth[x]</td><td>PID-24 (bool), PID-25 (integer)</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;photo</td><td>OBX-5 - needs a profile</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;contact</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extension</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;modifierExtension</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;relationship</td><td>NK1-7, NK1-3</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name</td><td>NK1-2</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;telecom</td><td>NK1-5, NK1-6, NK1-40</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;address</td><td>NK1-4</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gender</td><td>NK1-15</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;organization</td><td>NK1-13, NK1-30, NK1-31, NK1-32, NK1-41</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;period</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;communication</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extension</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;modifierExtension</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;language</td><td>PID-15, LAN-2</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;preferred</td><td>PID-15</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;generalPractitioner</td><td>PD1-4</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;managingOrganization</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;link</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extension</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;modifierExtension</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;other</td><td>PID-3, MRG-1</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type</td><td></td> </tr>
+</table>
+<a name="loinc"> </a><h3>Mappings for LOINC code for the element (<a href="http://loinc.org">http://loinc.org</a>)</h3><table class="grid">
+ <tr><td colspan="3"><b>PatientCaseReference</b></td></tr>
+ <tr><td>Patient</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;id</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;meta</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;implicitRules</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;language</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;text</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;contained</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;extension</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;modifierExtension</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;identifier</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;identifier (KVNR)</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extension</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;use</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;system</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;period</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assigner</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;identifier (PKVID)</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extension</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;use</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;system</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;period</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assigner</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;active</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;name</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;telecom</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;gender</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;birthDate</td><td>21112-8</td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;deceased[x]</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;address</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;maritalStatus</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;multipleBirth[x]</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;photo</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;contact</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extension</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;modifierExtension</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;relationship</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;telecom</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;address</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gender</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;organization</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;period</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;communication</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extension</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;modifierExtension</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;language</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;preferred</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;generalPractitioner</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;managingOrganization</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;link</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extension</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;modifierExtension</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;other</td><td></td> </tr>
+ <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type</td><td></td> </tr>
+</table>
+</body>
+</html>

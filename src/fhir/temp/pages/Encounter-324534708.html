@@ -1,0 +1,39 @@
+---
+---
+{% include fragment-pagebegin.html %}
+<div class="col-12">
+  <!--ReleaseHeader--><p id="publish-box">Publish Box goes here</p><!--EndReleaseHeader-->
+
+  {% include fragment-base-navtabs.html type='Encounter' id='324534708' active='content' %}
+
+  <a name="root"> </a>
+{% if site.data.artifacts[page.path].example %}
+  {% assign example = 'Example ' %}
+{% endif %}
+{% assign prefix = site.data.artifacts[page.path].type %}
+  <h2 id="root">{{example}}{{prefix}}: {{site.data.pages[page.path].title | escape_once}}</h2>
+
+{% include fragment-simpletable.html %}
+{% unless example %}
+  {% if 'Encounter' == 'CapabilityStatement' %}
+      <p>
+      <a href="324534708.openapi.json" no-download="true">Raw OpenAPI-Swagger Definition file</a> | <a href="324534708.openapi.json" download>Download</a>
+      </p>
+  {% endif %}
+{% endunless %}
+
+  <!-- insert intro if present -->
+  {% include fragment-intro.html type='Encounter' id='324534708' %}
+
+  {% include Encounter-324534708-html.xhtml %}
+
+  {% if site.data.resources[resource_].contained != nil %}
+  <h4>Contained resources</h4>
+  {% include Encounter-324534708-contained-index.xhtml %}
+  {% endif %}
+
+  <!-- insert notes if present -->
+  {% include fragment-notes.html type='Encounter' id='324534708' %}
+
+</div>
+{% include fragment-pageend.html %}
