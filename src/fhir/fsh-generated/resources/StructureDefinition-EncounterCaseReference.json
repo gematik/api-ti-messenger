@@ -1,6 +1,6 @@
 {
   "resourceType": "StructureDefinition",
-  "id": "EncounterTIMessengerEncounter",
+  "id": "EncounterCaseReference",
   "extension": [
     {
       "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-category",
@@ -11,12 +11,12 @@
       "valueCode": "patient"
     }
   ],
-  "url": "http://gematik.de/fhir/TIMessengerEncounter/StructureDefinition/EncounterTIMessengerEncounter",
+  "url": "http://gematik.de/fhir/TIMessengerEncounter/StructureDefinition/EncounterCaseReference",
   "version": "0.1.0",
-  "name": "EncounterTIMessengerEncounter",
+  "name": "EncounterCaseReference",
   "status": "draft",
   "publisher": "gematik GmbH",
-  "description": "A profile of the Encounter resource for TI-Messenger communication related to an encounter with a patient.",
+  "description": "A profile of the Encounter resource for TI-Messenger communication related to a patients case reference.",
   "fhirVersion": "4.0.1",
   "mapping": [
     {

@@ -33,34 +33,34 @@
     "resource": [
       {
         "reference": {
-          "reference": "StructureDefinition/ConditionTIMessengerEncounter"
+          "reference": "StructureDefinition/ConditionCaseReference"
         },
-        "name": "ConditionTIMessengerEncounter",
-        "description": "A profile of the Condition resource for TI-Messenger communication related to an encounter with a patient.",
+        "name": "ConditionCaseReference",
+        "description": "A profile of the Condition resource for TI-Messenger communication related to a patients case reference",
         "exampleBoolean": false
       },
       {
         "reference": {
-          "reference": "StructureDefinition/EncounterTIMessengerEncounter"
+          "reference": "StructureDefinition/EncounterCaseReference"
         },
-        "name": "EncounterTIMessengerEncounter",
-        "description": "A profile of the Encounter resource for TI-Messenger communication related to an encounter with a patient.",
+        "name": "EncounterCaseReference",
+        "description": "A profile of the Encounter resource for TI-Messenger communication related to a patients case reference.",
         "exampleBoolean": false
       },
       {
         "reference": {
-          "reference": "StructureDefinition/PatientTIMessengerEncounter"
+          "reference": "StructureDefinition/PatientCaseReference"
         },
-        "name": "PatientTIMessengerEncounter",
-        "description": "A profile of the Patient resource for TI-Messenger communication related to an encounter with a patient.",
+        "name": "PatientCaseReference",
+        "description": "A profile of the Patient resource for TI-Messenger communication related to a patients case reference.",
         "exampleBoolean": false
       },
       {
         "reference": {
-          "reference": "StructureDefinition/ProcedureTIMessengerEncounter"
+          "reference": "StructureDefinition/ProcedureCaseReference"
         },
-        "name": "ProcedureTIMessengerEncounter",
-        "description": "A profile of the Procedure resource for TI-Messenger communication related to an encounter with a patient.",
+        "name": "ProcedureCaseReference",
+        "description": "A profile of the Procedure resource for TI-Messenger communication related to a patients case reference.",
         "exampleBoolean": false
       },
       {
@@ -69,7 +69,7 @@
         },
         "name": "EncounterExample",
         "description": "An example of a encounter.",
-        "exampleCanonical": "http://gematik.de/fhir/TIMessengerEncounter/StructureDefinition/EncounterTIMessengerEncounter"
+        "exampleCanonical": "http://gematik.de/fhir/TIMessengerEncounter/StructureDefinition/EncounterCaseReference"
       },
       {
         "reference": {
@@ -77,15 +77,23 @@
         },
         "name": "PatientExample",
         "description": "An example of a patient.",
-        "exampleCanonical": "http://gematik.de/fhir/TIMessengerEncounter/StructureDefinition/PatientTIMessengerEncounter"
+        "exampleCanonical": "http://gematik.de/fhir/TIMessengerEncounter/StructureDefinition/PatientCaseReference"
       },
       {
         "reference": {
           "reference": "Condition/ConditionExample"
         },
         "name": "ConditionExample",
+        "description": "An example of a condition.",
+        "exampleCanonical": "http://gematik.de/fhir/TIMessengerEncounter/StructureDefinition/ConditionCaseReference"
+      },
+      {
+        "reference": {
+          "reference": "Procedure/ProcedureExample"
+        },
+        "name": "ProcedureExample",
         "description": "An example of a encounter.",
-        "exampleCanonical": "http://gematik.de/fhir/TIMessengerEncounter/StructureDefinition/ConditionTIMessengerEncounter"
+        "exampleCanonical": "http://gematik.de/fhir/TIMessengerEncounter/StructureDefinition/ProcedureCaseReference"
       }
     ],
     "page": {

@@ -1,6 +1,6 @@
-Profile: PatientTIMessengerEncounter
+Profile: PatientCaseReference
 Parent: Patient
-Description: "A profile of the Patient resource for TI-Messenger communication related to an encounter with a patient."
+Description: "A profile of the Patient resource for TI-Messenger communication related to a patients case reference."
 * insert Meta
 * id MS
 * identifier 1..* MS
@@ -25,7 +25,7 @@ Description: "A profile of the Patient resource for TI-Messenger communication r
 
 // Instance that should pass validation
 Instance: PatientExample
-InstanceOf: PatientTIMessengerEncounter
+InstanceOf: PatientCaseReference
 Description: "An example of a patient."
 Usage: #example
 * id = "374885372" // Meta id

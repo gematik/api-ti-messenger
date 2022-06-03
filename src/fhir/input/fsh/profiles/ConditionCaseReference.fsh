@@ -1,6 +1,6 @@
-Profile: ConditionTIMessengerEncounter
+Profile: ConditionCaseReference
 Parent: Condition
-Description: "A profile of the Condition resource for TI-Messenger communication related to an encounter with a patient."
+Description: "A profile of the Condition resource for TI-Messenger communication related to a patients case reference"
 * insert Meta
 * id MS
 * identifier MS
@@ -19,8 +19,8 @@ Description: "A profile of the Condition resource for TI-Messenger communication
 
 // Instance that should pass validation
 Instance: ConditionExample
-InstanceOf: ConditionTIMessengerEncounter
-Description: "An example of a encounter."
+InstanceOf: ConditionCaseReference
+Description: "An example of a condition."
 Usage: #example
 * identifier.system = "http://example.de/StructureDefinition/identifier-interne-abrechnungsnummer"
 * identifier.value = "ABC1234567890"

@@ -1,0 +1,27 @@
+{
+  "resourceType": "Procedure",
+  "id": "ProcedureExample",
+  "meta": {
+    "profile": [
+      "http://gematik.de/fhir/TIMessengerEncounter/StructureDefinition/ProcedureCaseReference"
+    ]
+  },
+  "identifier": [
+    {
+      "system": "http://example.de/StructureDefinition/identifier-interne-abrechnungsnummer",
+      "value": "ABC1234567890"
+    }
+  ],
+  "status": "preparation",
+  "subject": {
+    "reference": "374885372"
+  },
+  "encounter": {
+    "reference": "324534708"
+  },
+  "note": [
+    {
+      "text": "Additional information"
+    }
+  ]
+}

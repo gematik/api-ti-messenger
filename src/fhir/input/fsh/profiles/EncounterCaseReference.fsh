@@ -1,6 +1,6 @@
-Profile: EncounterTIMessengerEncounter
+Profile: EncounterCaseReference
 Parent: Encounter
-Description: "A profile of the Encounter resource for TI-Messenger communication related to an encounter with a patient."
+Description: "A profile of the Encounter resource for TI-Messenger communication related to a patients case reference."
 * insert Meta
 * id MS
 * identifier MS
@@ -18,7 +18,7 @@ Description: "A profile of the Encounter resource for TI-Messenger communication
 
 // Instance that should pass validation
 Instance: EncounterExample
-InstanceOf: EncounterTIMessengerEncounter
+InstanceOf: EncounterCaseReference
 Description: "An example of a encounter."
 Usage: #example
 * id = "324534708"

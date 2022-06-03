@@ -3,7 +3,7 @@
   "id": "324534708",
   "meta": {
     "profile": [
-      "http://gematik.de/fhir/TIMessengerEncounter/StructureDefinition/EncounterTIMessengerEncounter"
+      "http://gematik.de/fhir/TIMessengerEncounter/StructureDefinition/EncounterCaseReference"
     ]
   },
   "identifier": [

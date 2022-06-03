@@ -1,6 +1,6 @@
-Profile: ProcedureTIMessengerEncounter
+Profile: ProcedureCaseReference
 Parent: Procedure
-Description: "A profile of the Procedure resource for TI-Messenger communication related to an encounter with a patient."
+Description: "A profile of the Procedure resource for TI-Messenger communication related to a patients case reference."
 * insert Meta
 * id MS
 * identifier MS
@@ -16,14 +16,13 @@ Description: "A profile of the Procedure resource for TI-Messenger communication
 * note MS
 
 // Instance that should pass validation
-/*
 Instance: ProcedureExample
-InstanceOf: ProcedureTIMessengerEncounter
+InstanceOf: ProcedureCaseReference
 Description: "An example of a encounter."
 Usage: #example
 * identifier.system = "http://example.de/StructureDefinition/identifier-interne-abrechnungsnummer"
 * identifier.value = "ABC1234567890"
-* encounter = "324534708"
-* subject = "374885372"
+* status = #preparation
+* subject.reference = "374885372"
+* encounter.reference = "324534708"
 * note.text = "Additional information"
-*/
