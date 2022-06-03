@@ -11,7 +11,7 @@
       "valueCode": "patient"
     }
   ],
-  "url": "http://gematik.de/fhir/TIMessengerEncounter/StructureDefinition/EncounterCaseReference",
+  "url": "http://gematik.de/fhir/TIM/CaseReference/StructureDefinition/EncounterCaseReference",
   "version": "0.1.0",
   "name": "EncounterCaseReference",
   "status": "draft",

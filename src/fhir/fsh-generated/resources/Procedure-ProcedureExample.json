@@ -3,7 +3,7 @@
   "id": "ProcedureExample",
   "meta": {
     "profile": [
-      "http://gematik.de/fhir/TIMessengerEncounter/StructureDefinition/ProcedureCaseReference"
+      "http://gematik.de/fhir/TIM/CaseReference/StructureDefinition/ProcedureCaseReference"
     ]
   },
   "identifier": [

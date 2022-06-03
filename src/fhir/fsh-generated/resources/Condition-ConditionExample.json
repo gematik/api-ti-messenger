@@ -3,7 +3,7 @@
   "id": "ConditionExample",
   "meta": {
     "profile": [
-      "http://gematik.de/fhir/TIMessengerEncounter/StructureDefinition/ConditionCaseReference"
+      "http://gematik.de/fhir/TIM/CaseReference/StructureDefinition/ConditionCaseReference"
     ]
   },
   "identifier": [
