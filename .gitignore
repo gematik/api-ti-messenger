@@ -1,7 +1,3 @@
 *.dtmp
 src/fhir/input-cache
-<<<<<<< HEAD
 images
-=======
-images
->>>>>>> master
