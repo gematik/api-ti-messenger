@@ -1,0 +1,14 @@
+{% raw %}<table class="grid">
+<tr><td><b>Level</b></td><td><b>Type</b></td><td><b>Location</b></td><td><b>Message</b></td></tr>
+<tr><td>error</td><td>code-invalid</td><td>Condition/ConditionExample: Condition.clinicalStatus</td><td>None of the codings provided are in the value set 'Condition Clinical Status Codes' (http://hl7.org/fhir/ValueSet/condition-clinical|4.0.1), and a coding from this value set is required) (codes = null#active)</td><td></td></tr>
+<tr><td>error</td><td>code-invalid</td><td>Condition/ConditionExample: Condition.verificationStatus</td><td>None of the codings provided are in the value set 'ConditionVerificationStatus' (http://hl7.org/fhir/ValueSet/condition-ver-status|4.0.1), and a coding from this value set is required) (codes = null#provisional)</td><td></td></tr>
+<tr><td>error</td><td>structure</td><td>Condition/ConditionExample: Condition.subject</td><td>Unable to resolve resource with reference '374885372'</td><td></td></tr>
+<tr><td>error</td><td>structure</td><td>Condition/ConditionExample: Condition.encounter</td><td>Unable to resolve resource with reference '324534708'</td><td></td></tr>
+<tr><td>warning</td><td>code-invalid</td><td>Condition/ConditionExample: Condition.clinicalStatus.coding[0]</td><td>A code with no system has no defined meaning. A system should be provided</td><td></td></tr>
+<tr><td>warning</td><td>code-invalid</td><td>Condition/ConditionExample: Condition.verificationStatus.coding[0]</td><td>A code with no system has no defined meaning. A system should be provided</td><td></td></tr>
+<tr><td>warning</td><td>code-invalid</td><td>Condition/ConditionExample: Condition.category[0].coding[0]</td><td>A code with no system has no defined meaning. A system should be provided</td><td></td></tr>
+<tr><td>warning</td><td>code-invalid</td><td>Condition/ConditionExample: Condition.severity.coding[0]</td><td>A code with no system has no defined meaning. A system should be provided</td><td></td></tr>
+<tr><td>warning</td><td>code-invalid</td><td>Condition/ConditionExample: Condition.code.coding[0]</td><td>A code with no system has no defined meaning. A system should be provided</td><td></td></tr>
+<tr><td>information</td><td>informational</td><td>Condition/ConditionExample: Condition</td><td>Validate resource against profile http://gematik.de/fhir/TIM/CaseReference/StructureDefinition/ConditionCaseReference</td><td></td></tr>
+</table>
+{% endraw %}

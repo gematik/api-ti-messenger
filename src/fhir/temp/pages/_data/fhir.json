@@ -1,0 +1,44 @@
+{
+  "path": "http://hl7.org/fhir/R4/",
+  "canonical": "http://gematik.de/fhir/TIM/CaseReference",
+  "igId": "CaseReference",
+  "igName": "CaseReference",
+  "packageId": "CaseReference",
+  "igVer": "0.1.0",
+  "errorCount": 18,
+  "version": "4.0.1",
+  "revision": "a53ec6ee1b",
+  "versionFull": "4.0.1-a53ec6ee1b",
+  "toolingVersion": "5.0.0-snapshot1",
+  "toolingRevision": "3",
+  "toolingVersionFull": "5.0.0-snapshot1 (3)",
+  "totalFiles": 9,
+  "processedFiles": 16,
+  "genDate": "Fri, Jun 3, 2022 21:10+0200",
+  "genDay": "03/06/2022",
+  "ig": {
+    "id": "CaseReference",
+    "name": "CaseReference",
+    "url": "http://gematik.de/fhir/TIM/CaseReference/ImplementationGuide/CaseReference",
+    "version": "0.1.0",
+    "status": "draft",
+    "experimental": false,
+    "publisher": "gematik GmbH",
+    "gitstatus": "",
+    "contact": [
+      {
+        "name": "gematik GmbH",
+        "telecom": [
+          "www.gematik.de"
+        ]
+      }
+    ],
+    "date": "2022-06-03T21:10:15+02:00",
+    "fhirVersion": "4.0.1"
+  },
+  "hl7tx": "http://terminology.hl7.org",
+  "ver": {
+    "hl7tx": "http://terminology.hl7.org/3.1.0"
+  },
+  "de_basisprofil_r4": "http://fhir.org/packages/de.basisprofil.r4"
+}

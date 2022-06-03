@@ -1,0 +1,12 @@
+{
+  "url": "http://gematik.de/fhir/TIM/CaseReference/ImplementationGuide/CaseReference",
+  "name": "CaseReference",
+  "package-id": "CaseReference",
+  "ig-ver": "0.1.0",
+  "date": "Fri, 03 Jun, 2022 21:10:15 +0200",
+  "errs": 18,
+  "warnings": 9,
+  "hints": 0,
+  "version": "4.0.1",
+  "tool": "5.0.0-snapshot1 (3)"
+}

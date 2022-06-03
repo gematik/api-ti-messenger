@@ -1,0 +1,109 @@
+﻿CaseReference : Validation Results
+=========================================
+
+err = 18, warn = 9, info = 0
+IG Publisher Version: 1.1.121
+Generated Fri Jun 03 21:12:41 CEST 2022. FHIR version 4.0.1 for CaseReference#0.1.0 (canonical = http://gematik.de/fhir/TIM/CaseReference)
+ Build Errors : 55 / 0 / 0
+ /mnt/c/dev/github/api-ti-messenger/src/fhir/fsh-generated/resources/ImplementationGuide-CaseReference : 0 / 0 / 1
+ /mnt/c/dev/github/api-ti-messenger/src/fhir/fsh-generated/resources/condition-ConditionExample : 4 / 5 / 1
+ /mnt/c/dev/github/api-ti-messenger/src/fhir/fsh-generated/resources/encounter-324534708 : 1 / 3 / 1
+ /mnt/c/dev/github/api-ti-messenger/src/fhir/fsh-generated/resources/patient-374885372 : 1 / 1 / 1
+ /mnt/c/dev/github/api-ti-messenger/src/fhir/fsh-generated/resources/procedure-ProcedureExample : 2 / 0 / 1
+ /mnt/c/dev/github/api-ti-messenger/src/fhir/fsh-generated/resources/structuredefinition-ConditionCaseReference : 0 / 0 / 1
+ /mnt/c/dev/github/api-ti-messenger/src/fhir/fsh-generated/resources/structuredefinition-EncounterCaseReference : 0 / 0 / 1
+ /mnt/c/dev/github/api-ti-messenger/src/fhir/fsh-generated/resources/structuredefinition-PatientCaseReference : 10 / 0 / 1
+ /mnt/c/dev/github/api-ti-messenger/src/fhir/fsh-generated/resources/structuredefinition-ProcedureCaseReference : 0 / 0 / 1
+</table>
+== n/a ==
+ERROR: /mnt/c/dev/github/api-ti-messenger/src/fhir/output/Condition-ConditionExample.change.history.html#/html/body/div/div/div/p/a at Line 209, column 28: The link 'www.gematik.de' for "gematik GmbH" cannot be resolved
+ERROR: /mnt/c/dev/github/api-ti-messenger/src/fhir/output/Condition-ConditionExample.html#/html/body/div/div/div/p/a at Line 209, column 28: The link 'www.gematik.de' for "gematik GmbH" cannot be resolved
+ERROR: /mnt/c/dev/github/api-ti-messenger/src/fhir/output/Condition-ConditionExample.json.html#/html/body/div/div/div/p/a at Line 279, column 28: The link 'www.gematik.de' for "gematik GmbH" cannot be resolved
+ERROR: /mnt/c/dev/github/api-ti-messenger/src/fhir/output/Condition-ConditionExample.ttl.html#/html/body/div/div/div/p/a at Line 281, column 28: The link 'www.gematik.de' for "gematik GmbH" cannot be resolved
+ERROR: /mnt/c/dev/github/api-ti-messenger/src/fhir/output/Condition-ConditionExample.xml.html#/html/body/div/div/div/p/a at Line 263, column 28: The link 'www.gematik.de' for "gematik GmbH" cannot be resolved
+ERROR: /mnt/c/dev/github/api-ti-messenger/src/fhir/output/Encounter-324534708.change.history.html#/html/body/div/div/div/p/a at Line 209, column 28: The link 'www.gematik.de' for "gematik GmbH" cannot be resolved
+ERROR: /mnt/c/dev/github/api-ti-messenger/src/fhir/output/Encounter-324534708.html#/html/body/div/div/div/p/a at Line 209, column 28: The link 'www.gematik.de' for "gematik GmbH" cannot be resolved
+ERROR: /mnt/c/dev/github/api-ti-messenger/src/fhir/output/Encounter-324534708.json.html#/html/body/div/div/div/p/a at Line 257, column 28: The link 'www.gematik.de' for "gematik GmbH" cannot be resolved
+ERROR: /mnt/c/dev/github/api-ti-messenger/src/fhir/output/Encounter-324534708.ttl.html#/html/body/div/div/div/p/a at Line 266, column 28: The link 'www.gematik.de' for "gematik GmbH" cannot be resolved
+ERROR: /mnt/c/dev/github/api-ti-messenger/src/fhir/output/Encounter-324534708.xml.html#/html/body/div/div/div/p/a at Line 249, column 28: The link 'www.gematik.de' for "gematik GmbH" cannot be resolved
+ERROR: /mnt/c/dev/github/api-ti-messenger/src/fhir/output/Patient-374885372.change.history.html#/html/body/div/div/div/p/a at Line 209, column 28: The link 'www.gematik.de' for "gematik GmbH" cannot be resolved
+ERROR: /mnt/c/dev/github/api-ti-messenger/src/fhir/output/Patient-374885372.html#/html/body/div/div/div/p/a at Line 209, column 28: The link 'www.gematik.de' for "gematik GmbH" cannot be resolved
+ERROR: /mnt/c/dev/github/api-ti-messenger/src/fhir/output/Patient-374885372.json.html#/html/body/div/div/div/p/a at Line 249, column 28: The link 'www.gematik.de' for "gematik GmbH" cannot be resolved
+ERROR: /mnt/c/dev/github/api-ti-messenger/src/fhir/output/Patient-374885372.ttl.html#/html/body/div/div/div/p/a at Line 258, column 28: The link 'www.gematik.de' for "gematik GmbH" cannot be resolved
+ERROR: /mnt/c/dev/github/api-ti-messenger/src/fhir/output/Patient-374885372.xml.html#/html/body/div/div/div/p/a at Line 238, column 28: The link 'www.gematik.de' for "gematik GmbH" cannot be resolved
+ERROR: /mnt/c/dev/github/api-ti-messenger/src/fhir/output/Procedure-ProcedureExample.change.history.html#/html/body/div/div/div/p/a at Line 209, column 28: The link 'www.gematik.de' for "gematik GmbH" cannot be resolved
+ERROR: /mnt/c/dev/github/api-ti-messenger/src/fhir/output/Procedure-ProcedureExample.html#/html/body/div/div/div/p/a at Line 209, column 28: The link 'www.gematik.de' for "gematik GmbH" cannot be resolved
+ERROR: /mnt/c/dev/github/api-ti-messenger/src/fhir/output/Procedure-ProcedureExample.json.html#/html/body/div/div/div/p/a at Line 240, column 28: The link 'www.gematik.de' for "gematik GmbH" cannot be resolved
+ERROR: /mnt/c/dev/github/api-ti-messenger/src/fhir/output/Procedure-ProcedureExample.ttl.html#/html/body/div/div/div/p/a at Line 253, column 28: The link 'www.gematik.de' for "gematik GmbH" cannot be resolved
+ERROR: /mnt/c/dev/github/api-ti-messenger/src/fhir/output/Procedure-ProcedureExample.xml.html#/html/body/div/div/div/p/a at Line 236, column 28: The link 'www.gematik.de' for "gematik GmbH" cannot be resolved
+ERROR: /mnt/c/dev/github/api-ti-messenger/src/fhir/output/StructureDefinition-ConditionCaseReference-definitions.html#/html/body/div/div/div/p/a at Line 638, column 28: The link 'www.gematik.de' for "gematik GmbH" cannot be resolved
+ERROR: /mnt/c/dev/github/api-ti-messenger/src/fhir/output/StructureDefinition-ConditionCaseReference-examples.html#/html/body/div/div/div/p/a at Line 276, column 28: The link 'www.gematik.de' for "gematik GmbH" cannot be resolved
+ERROR: /mnt/c/dev/github/api-ti-messenger/src/fhir/output/StructureDefinition-ConditionCaseReference-mappings.html#/html/body/div/div/div/p/a at Line 384, column 28: The link 'www.gematik.de' for "gematik GmbH" cannot be resolved
+ERROR: /mnt/c/dev/github/api-ti-messenger/src/fhir/output/StructureDefinition-ConditionCaseReference.html#/html/body/div/div/div/p/a at Line 815, column 28: The link 'www.gematik.de' for "gematik GmbH" cannot be resolved
+ERROR: /mnt/c/dev/github/api-ti-messenger/src/fhir/output/StructureDefinition-ConditionCaseReference.profile.history.html#/html/body/div/div/div/p/a at Line 254, column 28: The link 'www.gematik.de' for "gematik GmbH" cannot be resolved
+ERROR: /mnt/c/dev/github/api-ti-messenger/src/fhir/output/StructureDefinition-ConditionCaseReference.profile.json.html#/html/body/div/div/div/p/a at Line 2349, column 28: The link 'www.gematik.de' for "gematik GmbH" cannot be resolved
+ERROR: /mnt/c/dev/github/api-ti-messenger/src/fhir/output/StructureDefinition-ConditionCaseReference.profile.ttl.html#/html/body/div/div/div/p/a at Line 2104, column 28: The link 'www.gematik.de' for "gematik GmbH" cannot be resolved
+ERROR: /mnt/c/dev/github/api-ti-messenger/src/fhir/output/StructureDefinition-ConditionCaseReference.profile.xml.html#/html/body/div/div/div/p/a at Line 2159, column 28: The link 'www.gematik.de' for "gematik GmbH" cannot be resolved
+ERROR: /mnt/c/dev/github/api-ti-messenger/src/fhir/output/StructureDefinition-EncounterCaseReference-definitions.html#/html/body/div/div/div/p/a at Line 961, column 28: The link 'www.gematik.de' for "gematik GmbH" cannot be resolved
+ERROR: /mnt/c/dev/github/api-ti-messenger/src/fhir/output/StructureDefinition-EncounterCaseReference-examples.html#/html/body/div/div/div/p/a at Line 276, column 28: The link 'www.gematik.de' for "gematik GmbH" cannot be resolved
+ERROR: /mnt/c/dev/github/api-ti-messenger/src/fhir/output/StructureDefinition-EncounterCaseReference-mappings.html#/html/body/div/div/div/p/a at Line 415, column 28: The link 'www.gematik.de' for "gematik GmbH" cannot be resolved
+ERROR: /mnt/c/dev/github/api-ti-messenger/src/fhir/output/StructureDefinition-EncounterCaseReference.html#/html/body/div/div/div/p/a at Line 976, column 28: The link 'www.gematik.de' for "gematik GmbH" cannot be resolved
+ERROR: /mnt/c/dev/github/api-ti-messenger/src/fhir/output/StructureDefinition-EncounterCaseReference.profile.history.html#/html/body/div/div/div/p/a at Line 254, column 28: The link 'www.gematik.de' for "gematik GmbH" cannot be resolved
+ERROR: /mnt/c/dev/github/api-ti-messenger/src/fhir/output/StructureDefinition-EncounterCaseReference.profile.json.html#/html/body/div/div/div/p/a at Line 3846, column 28: The link 'www.gematik.de' for "gematik GmbH" cannot be resolved
+ERROR: /mnt/c/dev/github/api-ti-messenger/src/fhir/output/StructureDefinition-EncounterCaseReference.profile.ttl.html#/html/body/div/div/div/p/a at Line 3386, column 28: The link 'www.gematik.de' for "gematik GmbH" cannot be resolved
+ERROR: /mnt/c/dev/github/api-ti-messenger/src/fhir/output/StructureDefinition-EncounterCaseReference.profile.xml.html#/html/body/div/div/div/p/a at Line 3402, column 28: The link 'www.gematik.de' for "gematik GmbH" cannot be resolved
+ERROR: /mnt/c/dev/github/api-ti-messenger/src/fhir/output/StructureDefinition-PatientCaseReference-definitions.html#/html/body/div/div/div/p/a at Line 958, column 28: The link 'www.gematik.de' for "gematik GmbH" cannot be resolved
+ERROR: /mnt/c/dev/github/api-ti-messenger/src/fhir/output/StructureDefinition-PatientCaseReference-examples.html#/html/body/div/div/div/p/a at Line 276, column 28: The link 'www.gematik.de' for "gematik GmbH" cannot be resolved
+ERROR: /mnt/c/dev/github/api-ti-messenger/src/fhir/output/StructureDefinition-PatientCaseReference-mappings.html#/html/body/div/div/div/p/a at Line 413, column 28: The link 'www.gematik.de' for "gematik GmbH" cannot be resolved
+ERROR: /mnt/c/dev/github/api-ti-messenger/src/fhir/output/StructureDefinition-PatientCaseReference.html#/html/body/div/div/div/p/a at Line 959, column 28: The link 'www.gematik.de' for "gematik GmbH" cannot be resolved
+ERROR: /mnt/c/dev/github/api-ti-messenger/src/fhir/output/StructureDefinition-PatientCaseReference.profile.history.html#/html/body/div/div/div/p/a at Line 254, column 28: The link 'www.gematik.de' for "gematik GmbH" cannot be resolved
+ERROR: /mnt/c/dev/github/api-ti-messenger/src/fhir/output/StructureDefinition-PatientCaseReference.profile.json.html#/html/body/div/div/div/p/a at Line 3559, column 28: The link 'www.gematik.de' for "gematik GmbH" cannot be resolved
+ERROR: /mnt/c/dev/github/api-ti-messenger/src/fhir/output/StructureDefinition-PatientCaseReference.profile.ttl.html#/html/body/div/div/div/p/a at Line 3080, column 28: The link 'www.gematik.de' for "gematik GmbH" cannot be resolved
+ERROR: /mnt/c/dev/github/api-ti-messenger/src/fhir/output/StructureDefinition-PatientCaseReference.profile.xml.html#/html/body/div/div/div/p/a at Line 3228, column 28: The link 'www.gematik.de' for "gematik GmbH" cannot be resolved
+ERROR: /mnt/c/dev/github/api-ti-messenger/src/fhir/output/StructureDefinition-ProcedureCaseReference-definitions.html#/html/body/div/div/div/p/a at Line 744, column 28: The link 'www.gematik.de' for "gematik GmbH" cannot be resolved
+ERROR: /mnt/c/dev/github/api-ti-messenger/src/fhir/output/StructureDefinition-ProcedureCaseReference-examples.html#/html/body/div/div/div/p/a at Line 276, column 28: The link 'www.gematik.de' for "gematik GmbH" cannot be resolved
+ERROR: /mnt/c/dev/github/api-ti-messenger/src/fhir/output/StructureDefinition-ProcedureCaseReference-mappings.html#/html/body/div/div/div/p/a at Line 365, column 28: The link 'www.gematik.de' for "gematik GmbH" cannot be resolved
+ERROR: /mnt/c/dev/github/api-ti-messenger/src/fhir/output/StructureDefinition-ProcedureCaseReference.html#/html/body/div/div/div/p/a at Line 842, column 28: The link 'www.gematik.de' for "gematik GmbH" cannot be resolved
+ERROR: /mnt/c/dev/github/api-ti-messenger/src/fhir/output/StructureDefinition-ProcedureCaseReference.profile.history.html#/html/body/div/div/div/p/a at Line 254, column 28: The link 'www.gematik.de' for "gematik GmbH" cannot be resolved
+ERROR: /mnt/c/dev/github/api-ti-messenger/src/fhir/output/StructureDefinition-ProcedureCaseReference.profile.json.html#/html/body/div/div/div/p/a at Line 2690, column 28: The link 'www.gematik.de' for "gematik GmbH" cannot be resolved
+ERROR: /mnt/c/dev/github/api-ti-messenger/src/fhir/output/StructureDefinition-ProcedureCaseReference.profile.ttl.html#/html/body/div/div/div/p/a at Line 2434, column 28: The link 'www.gematik.de' for "gematik GmbH" cannot be resolved
+ERROR: /mnt/c/dev/github/api-ti-messenger/src/fhir/output/StructureDefinition-ProcedureCaseReference.profile.xml.html#/html/body/div/div/div/p/a at Line 2426, column 28: The link 'www.gematik.de' for "gematik GmbH" cannot be resolved
+ERROR: /mnt/c/dev/github/api-ti-messenger/src/fhir/output/artifacts.html#/html/body/div/div/div/p/a at Line 258, column 28: The link 'www.gematik.de' for "gematik GmbH" cannot be resolved
+ERROR: /mnt/c/dev/github/api-ti-messenger/src/fhir/output/index.html#/html/body/div/div/div/p/a at Line 203, column 28: The link 'www.gematik.de' for "gematik GmbH" cannot be resolved
+ERROR: /mnt/c/dev/github/api-ti-messenger/src/fhir/output/toc.html#/html/body/div/div/div/p/a at Line 145, column 28: The link 'www.gematik.de' for "gematik GmbH" cannot be resolved
+== fsh-generated/resources/ImplementationGuide-CaseReference.json ==
+== fsh-generated/resources/condition-ConditionExample.json ==
+ERROR: Condition/ConditionExample: Condition.clinicalStatus: None of the codings provided are in the value set 'Condition Clinical Status Codes' (http://hl7.org/fhir/ValueSet/condition-clinical|4.0.1), and a coding from this value set is required) (codes = null#active)
+WARNING: Condition/ConditionExample: Condition.clinicalStatus.coding[0]: A code with no system has no defined meaning. A system should be provided
+ERROR: Condition/ConditionExample: Condition.verificationStatus: None of the codings provided are in the value set 'ConditionVerificationStatus' (http://hl7.org/fhir/ValueSet/condition-ver-status|4.0.1), and a coding from this value set is required) (codes = null#provisional)
+WARNING: Condition/ConditionExample: Condition.verificationStatus.coding[0]: A code with no system has no defined meaning. A system should be provided
+WARNING: Condition/ConditionExample: Condition.category[0].coding[0]: A code with no system has no defined meaning. A system should be provided
+WARNING: Condition/ConditionExample: Condition.severity.coding[0]: A code with no system has no defined meaning. A system should be provided
+WARNING: Condition/ConditionExample: Condition.code.coding[0]: A code with no system has no defined meaning. A system should be provided
+ERROR: Condition/ConditionExample: Condition.subject: Unable to resolve resource with reference '374885372'
+ERROR: Condition/ConditionExample: Condition.encounter: Unable to resolve resource with reference '324534708'
+== fsh-generated/resources/encounter-324534708.json ==
+WARNING: Encounter/324534708: Encounter.class: A code with no system has no defined meaning. A system should be provided
+WARNING: Encounter/324534708: Encounter.priority.coding[0]: A code with no system has no defined meaning. A system should be provided
+ERROR: Encounter/324534708: Encounter.subject: Unable to resolve resource with reference '374885372'
+WARNING: Encounter/324534708: Encounter.reasonCode[0].coding[0]: A code with no system has no defined meaning. A system should be provided
+== fsh-generated/resources/patient-374885372.json ==
+ERROR: Patient/374885372: Patient.identifier[0].system.type: Missing element 'type' - required by fixed value assigned in profile http://gematik.de/fhir/TIM/CaseReference/StructureDefinition/PatientCaseReference
+WARNING: Patient/374885372: Patient.communication[0].language.coding[0]: A code with no system has no defined meaning. A system should be provided
+== fsh-generated/resources/procedure-ProcedureExample.json ==
+ERROR: Procedure/ProcedureExample: Procedure.subject: Unable to resolve resource with reference '374885372'
+ERROR: Procedure/ProcedureExample: Procedure.encounter: Unable to resolve resource with reference '324534708'
+== fsh-generated/resources/structuredefinition-ConditionCaseReference.json ==
+== fsh-generated/resources/structuredefinition-EncounterCaseReference.json ==
+== fsh-generated/resources/structuredefinition-PatientCaseReference.json ==
+ERROR: Identifier.system: The fixed value has type 'Identifier' which is not valid (valid type: [uri])
+ERROR: Identifier.system: The fixed value has type 'Identifier' which is not valid (valid type: [uri])
+ERROR: StructureDefinition/PatientCaseReference: StructureDefinition.snapshot.element[15]: eld-8: 'Pattern and fixed are mutually exclusive' Rule 'Pattern and fixed are mutually exclusive' Failed
+ERROR: StructureDefinition/PatientCaseReference: StructureDefinition.snapshot.element[24]: eld-8: 'Pattern and fixed are mutually exclusive' Rule 'Pattern and fixed are mutually exclusive' Failed
+ERROR: StructureDefinition/PatientCaseReference: StructureDefinition.differential.element[4]: eld-8: 'Pattern and fixed are mutually exclusive' Rule 'Pattern and fixed are mutually exclusive' Failed
+ERROR: StructureDefinition/PatientCaseReference: StructureDefinition.differential.element[6]: eld-8: 'Pattern and fixed are mutually exclusive' Rule 'Pattern and fixed are mutually exclusive' Failed
+ERROR: StructureDefinition/PatientCaseReference: StructureDefinition: The fixed value has type 'Identifier' which is not valid (valid type: [uri])
+ERROR: StructureDefinition/PatientCaseReference: StructureDefinition: The fixed value has type 'Identifier' which is not valid (valid type: [uri])
+ERROR: StructureDefinition/PatientCaseReference: StructureDefinition.snapshot.element[15].pattern.ofType(Identifier): The element Patient.identifier:KVNR.system has a pattern of type Identifier, which is not in the list of allowed types ([uri])
+ERROR: StructureDefinition/PatientCaseReference: StructureDefinition.snapshot.element[24].pattern.ofType(Identifier): The element Patient.identifier:PKVID.system has a pattern of type Identifier, which is not in the list of allowed types ([uri])
+== fsh-generated/resources/structuredefinition-ProcedureCaseReference.json ==

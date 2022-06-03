@@ -1,0 +1,48 @@
+{
+  "resourceType": "Encounter",
+  "id": "324534708",
+  "meta": {
+    "profile": [
+      "http://gematik.de/fhir/TIM/CaseReference/StructureDefinition/EncounterCaseReference"
+    ]
+  },
+  "text": {
+    "status": "generated",
+    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Generated Narrative</b></p><div style=\"display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%\"><p style=\"margin-bottom: 0px\">Resource \"324534708\" </p><p style=\"margin-bottom: 0px\">Profile: <a href=\"StructureDefinition-EncounterCaseReference.html\">EncounterCaseReference</a></p></div><p><b>identifier</b>: id: ABC1234567890</p><p><b>status</b>: in-progress</p><p><b>class</b>: ambulatory (Details: [not stated] code AMB = 'AMB', stated as 'ambulatory')</p><p><b>priority</b>: ASAP <span style=\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\"> ([not stated]#A)</span></p><p><b>subject</b>: <a href=\"https://simplifier.net/resolve?scope=de.basisprofil.r4@1.3.2&amp;canonical=http://fhir.org/packages/de.basisprofil.r4/374885372\">374885372</a></p><p><b>period</b>: 2022-05-02 --&gt; (ongoing)</p><p><b>reasonCode</b>: Heart valve disorder <span style=\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\"> ([not stated]#368009)</span></p></div>"
+  },
+  "identifier": [
+    {
+      "system": "http://example.de/StructureDefinition/identifier-interne-abrechnungsnummer",
+      "value": "ABC1234567890"
+    }
+  ],
+  "status": "in-progress",
+  "class": {
+    "code": "AMB",
+    "display": "ambulatory"
+  },
+  "priority": {
+    "coding": [
+      {
+        "code": "A",
+        "display": "ASAP"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "374885372"
+  },
+  "period": {
+    "start": "2022-05-02"
+  },
+  "reasonCode": [
+    {
+      "coding": [
+        {
+          "code": "368009",
+          "display": "Heart valve disorder"
+        }
+      ]
+    }
+  ]
+}

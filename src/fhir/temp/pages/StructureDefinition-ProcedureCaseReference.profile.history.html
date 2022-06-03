@@ -1,0 +1,21 @@
+---
+---
+<!-- get modelType -->
+{% include fragment-modelType.html id='ProcedureCaseReference' %}
+
+{% include fragment-pagebegin.html %}
+
+<div style="counter-reset: section 10" class="col-12">
+  <!--ReleaseHeader--><p id="publish-box">Publish Box goes here</p><!--EndReleaseHeader-->
+  {% include fragment-profile-navtabs.html type='StructureDefinition' id='ProcedureCaseReference' active='history' %}
+
+  <a name="root"> </a>
+  <h2 id="root">{{modelType}}: ProcedureCaseReference - Change History</h2>
+{% include fragment-simpletable.html %}
+  <p>Changes in the ProcedureCaseReference {{modelType | downcase}}.</p>
+
+  {%include StructureDefinition-ProcedureCaseReference-history.xhtml%}
+
+</div>
+{% assign includetabscripts = 'true' %}
+{% include fragment-pageend.html %}
