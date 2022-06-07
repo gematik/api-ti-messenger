@@ -50,7 +50,7 @@ ActorFontName Aapex
     Activate MP
   MP->MP: TLS-Terminierung
   |||
-  MP->MP: prüfe client_id und \nclient_secret
+  MP->MP: prüfe client_id 
 
 |||
 alt#LightGrey #AliceBlue <size:16>TI-Messenger Client wird vom Anbieter nicht unterstützt (kein gültiges client_secret)</size>
