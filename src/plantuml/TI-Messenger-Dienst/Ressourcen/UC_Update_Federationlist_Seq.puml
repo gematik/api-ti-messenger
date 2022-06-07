@@ -48,7 +48,7 @@ ActorFontName Aapex
     Activate MP
     Activate RD
 
-  RD->AS: GET /token (client_id, client_secret) \n(OAuth Client credentials flow)
+  RD->AS: GET /authenticate (client_id, client_secret) \n(OAuth Client credentials flow)
     Activate AS
   AS->AS: prüfe client_id und \nclient_secret
   AS-->RD: status, provider-accesstoken 
