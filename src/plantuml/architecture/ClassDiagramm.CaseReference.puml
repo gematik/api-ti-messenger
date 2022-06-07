@@ -17,13 +17,13 @@ class Encounter {
 class Patient {
   {field} identifier (1.., MS)
   {field} name (1..1, MS)
-  {field} gender (1..1, MS)
-  {field} birthDate (1..1, MS)
+  {field} gender (..1, MS)
+  {field} birthDate (..1, MS)
   {field} address (0.., MS)
   {field} photo (1.., MS)
-  {field} contact (1..1, MS)
-  {field} communication (1..1, MS)
-  {field} generalPractitioner (1..1, MS)
+  {field} contact (0.., MS)
+  {field} communication (0.., MS)
+  {field} generalPractitioner (0.., MS)
 }
 class Condition {
   {field} identifier (0.., MS)
