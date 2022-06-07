@@ -90,12 +90,12 @@ loop <size:16>1..n</size>
       R->Auth: POST /token (client_id, client_secret) \n(OAuth Client credentials flow)
         Activate Auth
       Auth->Auth: prüfe client_id und \nclient_secret
-      Auth-->R: admin-accesstoken
+      Auth-->R: provider-accesstoken
         Deactivate Auth
       |||
-      R->FP: POST /tim-provider-services/addTiMessengerDomain \n(admin-accesstoken, Matrix-Domain, TelematikID, isEnsurance)
+      R->FP: POST /tim-provider-services/addTiMessengerDomain \n(provider-accesstoken, Matrix-Domain, TelematikID, isEnsurance)
         Activate FP
-      FP->FP: prüfe \nadmin-accesstoken
+      FP->FP: prüfe \nprovider-accesstoken
       FP->VZD: HTTPS Forward
         Activate VZD
       VZD-->VZD: Föderationsliste\naktualisieren
