@@ -87,7 +87,7 @@ loop <size:16>1..n</size>
     
     group <size:16>Messenger-Service in die Föderation aufnehmen</size>
     |||
-      R->Auth: POST /token (client_id, client_secret) \n(OAuth Client credentials flow)
+      R->Auth: POST /authenticate (client_id, client_secret) \n(OAuth Client credentials flow)
         Activate Auth
       Auth->Auth: prüfe client_id und \nclient_secret
       Auth-->R: provider-accesstoken
