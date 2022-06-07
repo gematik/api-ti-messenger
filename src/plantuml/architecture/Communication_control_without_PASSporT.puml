@@ -1,7 +1,5 @@
-<<<<<<< HEAD
 @startuml TI-Messenger communication control without PASSporT
 =======
->>>>>>> master
 /'
 Vorteile:
 - bessere Kompatibilität mit Matrix API
@@ -19,7 +17,6 @@ Vorteile:
   - Sicherheit von TIM wird durch TIM-Komponenten kontrolliert (und nicht durch das FHIR-Dir)
 - Bessere UX für Austausch von TI-M Adressen bei persönlichem Kontakt.
   - Austausch von TIM Adressen grundsätzlich auch remote möglich
-<<<<<<< HEAD
 
 =======
 Was muss getan werden, um ohne PASSporTs auszukommen?
@@ -63,7 +60,6 @@ ActorFontColor black
 ActorFontSize 20
 ActorFontName Aapex
 }
->>>>>>> master
 
 actor a as "Nutzer A"
 participant cl as "TI-M Client A"
@@ -156,20 +152,16 @@ rdb -> rdb: Decision[\nif hashB is in organization directory\nthen true\nelse if
 rdb --> mpb: Response true
 mpb -> clb: invite von Nutzer A an Nutzer B
 deactivate clb
-<<<<<<< HEAD
 else Invite ist nicht erlaubt
 =======
 else <size:16>Invite ist nicht erlaubt</size>
->>>>>>> master
 rdb --> mpb: Response false
 deactivate rdb
 mpb -> mp: ERROR: invite von Nutzer A an Nutzer B nicht erlaubt
 deactivate mpb
-<<<<<<< HEAD
 mp --> cl: ERROR: invite von Nutzer A an Nutzer B nicht erlaubt
 =======
 mp --> cl: ERROR: invite von Nutzer A\nan Nutzer B nicht erlaubt
->>>>>>> master
 end
 deactivate mp
 deactivate cl
