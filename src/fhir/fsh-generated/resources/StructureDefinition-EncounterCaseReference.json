@@ -12,7 +12,7 @@
     }
   ],
   "url": "http://gematik.de/fhir/TIM/CaseReference/StructureDefinition/EncounterCaseReference",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "name": "EncounterCaseReference",
   "status": "draft",
   "publisher": "gematik GmbH",

@@ -2,9 +2,9 @@
   "resourceType": "ImplementationGuide",
   "id": "CaseReference",
   "url": "http://gematik.de/fhir/TIM/CaseReference/ImplementationGuide/CaseReference",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "name": "CaseReference",
-  "status": "draft",
+  "status": "active",
   "publisher": "gematik GmbH",
   "contact": [
     {

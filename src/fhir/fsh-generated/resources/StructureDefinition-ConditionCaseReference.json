@@ -12,7 +12,7 @@
     }
   ],
   "url": "http://gematik.de/fhir/TIM/CaseReference/StructureDefinition/ConditionCaseReference",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "name": "ConditionCaseReference",
   "status": "draft",
   "publisher": "gematik GmbH",
