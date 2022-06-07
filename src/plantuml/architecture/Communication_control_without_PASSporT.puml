@@ -22,7 +22,6 @@ Vorteile:
 <<<<<<< HEAD
 
 =======
->>>>>>> master
 Was muss getan werden, um ohne PASSporTs auszukommen?
 - PASSporT aus der TI-M Spec entfernen
 - PASSporT aus der FHIR-Dir Spec entfernen
@@ -30,11 +29,10 @@ Was muss getan werden, um ohne PASSporTs auszukommen?
   Dauer der Erlaubnis als Parameter)
 - zusätzliche REST Operationen an I_TIM_Provider_Services
 - Erläuternde Beschreibung der Abläufe zwischen Messenger-Proxy und Registrierungsdienst
-'/
-<<<<<<< HEAD
 !pragma layout smetana
 '!include ../includes/gem-tim.iuml
 '!include ../includes/gem-tim-monochrome.iuml
+'/
 skinparam monochrome true
 =======
 
