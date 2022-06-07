@@ -48,10 +48,10 @@ note over U, hs: \n<size:17>Der Akteur ist erfolgreich beim Messenger-Service an
 
       activate cl
     U->cl:Suchparameter für \nFHIR-Ressourcen \n eingeben
-    cl->cl: prüfe ob noch gültiges \ntim-search-accesstoken\nvorliegt
+    cl->cl: prüfe ob noch gültiges \nsearch-accesstoken\nvorliegt
 
 |||
-alt#LightGrey #AliceBlue <size:16>kein gültiges tim-search-accesstoken vorhanden</size>
+alt#LightGrey #AliceBlue <size:16>kein gültiges search-accesstoken vorhanden</size>
 |||
       
 
@@ -91,8 +91,8 @@ alt#LightGrey #LightBlue <size:16>Matrix-Domain nicht in der Föderation enthalt
           deactivate hs
         mp-->au: HTTP(S) Forward
           deactivate mp
-        au->au: erzeuge \ntim-search-accesstoken 
-        au-->cl: tim-search-accesstoken (inklusive MXID des Nutzers)
+        au->au: erzeuge \nsearch-accesstoken 
+        au-->cl: search-accesstoken (inklusive MXID des Nutzers)
           deactivate au
           deactivate fp
     |||
@@ -100,13 +100,13 @@ alt#LightGrey #LightBlue <size:16>Matrix-Domain nicht in der Föderation enthalt
 end
 
     |||
-    cl->fp: POST /search?... (Auth Header mit tim-search-accesstoken inkl. MXID)
+    cl->fp: POST /search?... (Auth Header mit search-accesstoken inkl. MXID)
     |||
       activate fp
-    fp->fp: prüfe tim-search-accesstoken
+    fp->fp: prüfe search-accesstoken
     |||
     opt#LightGrey #MistyRose <size:16>Abbruch</size>
-      fp-->cl: kein gültiges tim-search-accesstoken 
+      fp-->cl: kein gültiges search-accesstoken 
     |||
     end
    
