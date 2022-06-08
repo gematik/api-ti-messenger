@@ -14,7 +14,7 @@
   "url": "http://gematik.de/fhir/TIM/CaseReference/StructureDefinition/EncounterCaseReference",
   "version": "1.0.0",
   "name": "EncounterCaseReference",
-  "status": "draft",
+  "status": "active",
   "publisher": "gematik GmbH",
   "description": "A profile of the Encounter resource for TI-Messenger communication related to a patients case reference.",
   "fhirVersion": "4.0.1",

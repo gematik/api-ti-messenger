@@ -1,3 +1,3 @@
 RuleSet: Meta
-* ^status = #draft
+* ^status = #active
 * ^publisher = "gematik GmbH"
