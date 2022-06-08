@@ -7,7 +7,7 @@ Description: "A profile of the Encounter resource for TI-Messenger communication
 * status MS
 * statusHistory MS
 * class MS
-* classHistory MS
+* type MS
 * serviceType MS
 * priority MS
 * subject 1..1 MS
@@ -15,6 +15,8 @@ Description: "A profile of the Encounter resource for TI-Messenger communication
 * length MS
 * reasonCode MS
 * diagnosis MS
+* account MS
+* hospitalization MS
 
 // Instance that should pass validation
 Instance: EncounterExample

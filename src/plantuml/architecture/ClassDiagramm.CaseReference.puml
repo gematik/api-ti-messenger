@@ -5,7 +5,7 @@ class Encounter {
   {field} status (1..1, MS)
   {field} statusHistory (0.., MS)
   {field} class (..1, MS)
-  {field} classHistory (0.., MS)
+  {field} type (0.., MS)
   {field} serviceType (0.., MS)
   {field} priority (0.., MS)
   {field} subject (1..1, MS)
@@ -13,6 +13,8 @@ class Encounter {
   {field} length (0.., MS)
   {field} reasonCode (0.., MS)
   {field} diagnosis (0.., MS)
+  {field} account (0.., MS)
+  {field} hospitalization (0..1, MS)
 }
 class Patient {
   {field} identifier (1.., MS)
