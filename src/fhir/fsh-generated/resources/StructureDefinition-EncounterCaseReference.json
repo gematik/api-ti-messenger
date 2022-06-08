@@ -73,8 +73,8 @@
         "mustSupport": true
       },
       {
-        "id": "Encounter.classHistory",
-        "path": "Encounter.classHistory",
+        "id": "Encounter.type",
+        "path": "Encounter.type",
         "mustSupport": true
       },
       {
@@ -111,6 +111,16 @@
       {
         "id": "Encounter.diagnosis",
         "path": "Encounter.diagnosis",
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.account",
+        "path": "Encounter.account",
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.hospitalization",
+        "path": "Encounter.hospitalization",
         "mustSupport": true
       }
     ]
