@@ -22,7 +22,7 @@ class Patient {
   {field} gender (..1, MS)
   {field} birthDate (..1, MS)
   {field} address (0.., MS)
-  {field} photo (1.., MS)
+  {field} photo (0.., MS)
   {field} contact (0.., MS)
   {field} communication (0.., MS)
   {field} generalPractitioner (0.., MS)
