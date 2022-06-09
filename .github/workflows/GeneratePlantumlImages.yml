@@ -15,12 +15,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      test:
-        name: Test on node ${{ matrix.node-version }} and ${{ matrix.os }}
-        runs-on: ${{ matrix.os }}
-        strategy:
-          matrix:
-            os: [ubuntu-latest, windows-latest, macos-latest]
+      # test:
+        # name: Test on node ${{ matrix.node-version }} and ${{ matrix.os }}
+        # runs-on: ${{ matrix.os }}
+        # strategy:
+          # matrix:
+            # os: [ubuntu-latest, windows-latest, macos-latest]
       
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
