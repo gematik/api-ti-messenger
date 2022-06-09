@@ -50,20 +50,26 @@ jobs:
               outdir=$(dirname $fullname | sed s+src/plantuml+${imagedir}+)
               echo "Outdir: ${outdir}"
               mkdir -p $outdir
-              plantoutdir="${PWD}/${outdir}"
-              echo "PlantOutdir: ${plantoutdir}"
+              # plantoutdir="${PWD}/${outdir}"
+              # echo "PlantOutdir: ${plantoutdir}"
               
               # PlantUML arguments:
               # -v for verbose output (Debugging)
               # -checkmetadata checks whether the target png/svg has the same source
               # and if there are no changes, doesn't regenerate the image file
               # -o sets the output folder for the png/svg files
-              plantargs="-v -checkmetadata -o ${plantoutdir} ${fullname}"
+              # plantargs="-v -checkmetadata -o ${plantoutdir} ${fullname}"
               
               # separate calls are needed, because only one file type can be set
               # per call
-              java -jar plantuml.jar -tpng ${plantargs} 
-              java -jar plantuml.jar -tsvg ${plantargs}
+              
+              # not used because filenames with dots are not working properly
+              # java -jar plantuml.jar -tpng ${plantargs} 
+              # java -jar plantuml.jar -tsvg ${plantargs}
+              
+              # new method with pipes
+              cat "${fullname}" | java -jar plantuml.jar -p -tpng -checkmetadata  > "${outdir}/${base}.png"
+              cat "${fullname}" | java -jar plantuml.jar -p -tsvg -checkmetadata  > "${outdir}/${base}.svg"
           done
           tree ./
       - name: Add & Commit
