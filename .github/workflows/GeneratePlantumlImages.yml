@@ -13,6 +13,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      test:
+        name: Test on node ${{ matrix.node-version }} and ${{ matrix.os }}
+        runs-on: ${{ matrix.os }}
+        strategy:
+          matrix:
+            os: [ubuntu-latest, windows-latest, macos-latest]
+      
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
@@ -25,12 +32,15 @@ jobs:
           check-latest: true
       
       # Install graphviz for plantuml     
-      - name: Install graphviz    
-        uses: awalsh128/cache-apt-pkgs-action@v1
-        with:
-          packages: graphviz
-          version: 1.0
-          
+      - name: Setup Graphviz
+        uses: ts-graphviz/setup-graphviz@v1
+      
+      #- name: Install graphviz    
+      #  uses: awalsh128/cache-apt-pkgs-action@v1
+      #  with:
+      #    packages: graphviz
+      #    version: 1.0
+      
       # Download plantUML jar 
       - name: Download plantuml file
         run: |
