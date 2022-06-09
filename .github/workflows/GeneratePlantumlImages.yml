@@ -7,20 +7,12 @@ on:
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-    branches: [ '*' ]
-    paths: [ 'src/plantuml/**' ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      # test:
-        # name: Test on node ${{ matrix.node-version }} and ${{ matrix.os }}
-        # runs-on: ${{ matrix.os }}
-        # strategy:
-          # matrix:
-            # os: [ubuntu-latest, windows-latest, macos-latest]
       
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
@@ -36,12 +28,6 @@ jobs:
       # Install graphviz for plantuml     
       - name: Setup Graphviz
         uses: ts-graphviz/setup-graphviz@v1
-      
-      #- name: Install graphviz    
-      #  uses: awalsh128/cache-apt-pkgs-action@v1
-      #  with:
-      #    packages: graphviz
-      #    version: 1.0
       
       # Download plantUML jar 
       - name: Download plantuml file
@@ -62,22 +48,9 @@ jobs:
               outdir=$(dirname $fullname | sed s+src/plantuml+${imagedir}+)
               echo "Outdir: ${outdir}"
               mkdir -p $outdir
-              # plantoutdir="${PWD}/${outdir}"
-              # echo "PlantOutdir: ${plantoutdir}"
               
-              # PlantUML arguments:
-              # -v for verbose output (Debugging)
-              # -checkmetadata checks whether the target png/svg has the same source
-              # and if there are no changes, doesn't regenerate the image file
-              # -o sets the output folder for the png/svg files
-              # plantargs="-v -checkmetadata -o ${plantoutdir} ${fullname}"
-              
-              # separate calls are needed, because only one file type can be set
-              # per call
-              
-              # not used because filenames with dots are not working properly
-              # java -jar plantuml.jar -tpng ${plantargs} 
-              # java -jar plantuml.jar -tsvg ${plantargs}
+              # for include support
+              cd $(dirname $fullname)
               
               # new method with pipes
               cat "${fullname}" | java -jar plantuml.jar -p -tpng -checkmetadata  > "${outdir}/${base}.png"
