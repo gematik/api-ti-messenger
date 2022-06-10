@@ -33,7 +33,7 @@ Was muss getan werden, um ohne PASSporTs auszukommen?
 skinparam monochrome true
 =======
 
-@startuml
+@startuml Communication control without PASSporT
 skinparam sequenceMessageAlign direction
 skinparam minClassWidth 200
 skinparam BoxPadding 1
