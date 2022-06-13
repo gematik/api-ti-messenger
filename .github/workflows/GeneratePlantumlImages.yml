@@ -63,8 +63,8 @@ jobs:
               
               # separate calls are needed, because only one file type can be set
               # per call
-              java -jar plantuml.jar -tpng -v -checkmetadata -ofile ${pngfilename} 
-              java -jar plantuml.jar -tsvg ${plantargs}
+              java -jar plantuml.jar -tpng -v -checkmetadata -ofile ${pngfilename} ${fullname}
+              java -jar plantuml.jar -tsvg ${plantargs} ${fullname}
           done
           tree ./
       - name: Add & Commit
