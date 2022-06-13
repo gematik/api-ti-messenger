@@ -1,5 +1,5 @@
 @startuml ClassDiagram.CaseReference
-skinparam monochrome true
+skinparam monochrome false
 class Encounter {
   {field} identifier (0.., MS)
   {field} status (1..1, MS)
