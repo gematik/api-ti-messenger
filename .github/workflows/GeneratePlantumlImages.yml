@@ -52,7 +52,7 @@ jobs:
               mkdir -p $outdir
               plantoutdir="${PWD}/${outdir}"
               echo "PlantOutdir: ${plantoutdir}"
-              pngfilename="${plantoutdir}/${base}.png"
+              pngfilename="${plantoutdir}/${base}"
               echo "pngfilename: ${pngfilename}"
               # PlantUML arguments:
               # -v for verbose output (Debugging)
