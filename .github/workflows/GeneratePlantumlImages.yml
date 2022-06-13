@@ -58,7 +58,7 @@ jobs:
               # -checkmetadata checks whether the target png/svg has the same source
               # and if there are no changes, doesn't regenerate the image file
               # -o sets the output folder for the png/svg files
-              plantargs="-v -checkmetadata -o ${plantoutdir} ${fullname}"
+              plantargs="-v -checkmetadata -o ${plantoutdir} -filename ${fullname}"
               
               # separate calls are needed, because only one file type can be set
               # per call
