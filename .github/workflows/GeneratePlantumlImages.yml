@@ -52,7 +52,8 @@ jobs:
               mkdir -p $outdir
               plantoutdir="${PWD}/${outdir}"
               echo "PlantOutdir: ${plantoutdir}"
-              
+              pngfilename= "${outdir}/${base}.png"
+              echo "pngfilename: ${pngfilename}"
               # PlantUML arguments:
               # -v for verbose output (Debugging)
               # -checkmetadata checks whether the target png/svg has the same source
@@ -62,7 +63,7 @@ jobs:
               
               # separate calls are needed, because only one file type can be set
               # per call
-              java -jar plantuml.jar -tpng ${plantargs} 
+              java -jar plantuml.jar -tpng -v -checkmetadata -ofile ${pngfilename} 
               java -jar plantuml.jar -tsvg ${plantargs}
           done
           tree ./
