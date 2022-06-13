@@ -1,6 +1,6 @@
 @startuml
 skinparam monochrome true
-class Encounters {
+class Encounter {
   {field} identifier (0.., MS)
   {field} status (1..1, MS)
   {field} statusHistory (0.., MS)
