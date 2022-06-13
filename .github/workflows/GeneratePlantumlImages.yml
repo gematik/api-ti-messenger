@@ -66,7 +66,7 @@ jobs:
               java -jar plantuml.jar -tpng ${plantargs} ${fullname}
               java -jar plantuml.jar -tsvg ${plantargs} ${fullname}
           done
-          tree ./
+          tree ./images
       - name: Add & Commit
         uses: EndBug/add-and-commit@v8
         with:
