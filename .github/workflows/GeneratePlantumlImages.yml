@@ -44,15 +44,23 @@ jobs:
           do
               echo "Fullname: ${fullname}"
               base=$(basename "${fullname}" .puml)
+              dir=$(dirname $fullname)
               echo "Basename: ${base}"
               outdir=$(dirname $fullname | sed s+src/plantuml+${imagedir}+)
               echo "Outdir: ${outdir}"
               mkdir -p $outdir
               
-              # for include support
-              cd $(dirname $fullname)
               
-              # new method with pipes
+              # local method
+              # cp $fullname tmp.puml  # because of filename bug in plantuml.jar (dots in filename are not suppoerted)
+              # tmpname=$dir/tmp.puml
+              # java -jar plantuml.jar -tpng -checkmetadata -o $outdir $tmpname
+              # mv ${outdir}/${tmpname} ${outdir}/${base}.png
+              # java -jar plantuml.jar -tsvg -checkmetadata -o $outdir $tmpname
+              # mv ${outdir}/${tmpname} ${outdir}/${base}.svg
+              # rm -f $dir/tmp.puml
+              
+              # method with pipes
               cat "${fullname}" | java -jar plantuml.jar -p -tpng -checkmetadata  > "${outdir}/${base}.png"
               cat "${fullname}" | java -jar plantuml.jar -p -tsvg -checkmetadata  > "${outdir}/${base}.svg"
           done
