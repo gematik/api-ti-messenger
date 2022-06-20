@@ -1,0 +1,471 @@
+﻿<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!-- broken links = errors = 18, warn = 9, info = 0, 55 -->
+<head>
+  <title>CaseReference : Validation Results</title>
+  <link href="fhir.css" rel="stylesheet"/>
+  <style>
+    span.flip  { background-color: #4CAF50; color: white; border: solid 1px #a6d8a8; padding: 2px }
+    span.toggle  { background-color: #e6f2ff; color: black; border: solid 1px #0056b3; padding: 2px; font-size: 10px }
+    span.toggle  { font-size: 10px }
+  </style>
+  <script>
+    function flip(id) {
+      var span = document.getElementById('s'+id);
+      var div = document.getElementById(id);
+      if (document.getElementById('s'+id).innerHTML == 'Show Reasoning') {
+        div.style.display = 'block';
+        span.innerHTML = 'Hide Reasoning';
+      } else {
+        div.style.display = 'none';
+        span.innerHTML = 'Show Reasoning';
+      }
+    }
+    function toggle(id) {
+      var span = document.getElementById('s'+id);
+      var div = document.getElementById(id);
+      if (document.getElementById('s'+id).innerHTML == 'Show Validation Information') {
+        div.style.display = 'block';
+        span.innerHTML = 'Hide Validation Information';
+      } else {
+        div.style.display = 'none';
+        span.innerHTML = 'Show Validation Information';
+      }
+    }
+  </script>
+</head>
+<body style="margin: 20px; background-color: #ffffff">
+ <h1>Validation Results for CaseReference</h1>
+ <p>Generated Fri Jun 03 21:12:40 CEST 2022, FHIR version 4.0.1 for CaseReference#0.1.0 (canonical = <a href="http://gematik.de/fhir/TIM/CaseReference">http://gematik.de/fhir/TIM/CaseReference</a> (<a href="http://gematik.de/fhir/TIM/CaseReference/history.html">history</a>)). See <a href="qa.html">Full QA Report</a></p>
+<table class="grid"> <tr><td colspan=2><b>Quality Checks</b></td></tr>
+ <tr><td>Publisher Version:</td><td><span>IG Publisher Version: v1.1.121</span></td></tr>
+ <tr><td>Publication Code:</td><td>n/a<span style="color: maroon; font-weight: bold"> </span>. PackageId = CaseReference, Canonical = http://gematik.de/fhir/TIM/CaseReference</td></tr>
+ <tr><td>Realm Check for n/a:</td><td><span style="color: maroon; font-weight: bold"></span><ul><li>n/a</li></ul></td></tr>
+ <tr><td>Version Check:</td><td>0.1.0: <span stlye="color: marron; font-weight: bold">no package-list.json - the guide is not ready for publishing</span></td></tr>
+ <tr><td>Supressed Messages:</td><td>No Suppressed Issues
+</td></tr>
+ <tr><td>Dependency Checks:</td><td><div><table border="0" cellpadding="0" cellspacing="0" style="border: 0px #F0F0F0 solid; font-size: 11px; font-family: verdana; vertical-align: top;"><tr style="border: 1px #F0F0F0 solid; font-size: 11px; font-family: verdana; vertical-align: top"><th style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy"><span title="The NPM Package Id">Package</span></th><th style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy"><span title="The version of the package">Version</span></th><th style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy"><span title="The version of FHIR that the package is based on">FHIR Release</span></th><th style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy"><span title="Canonical URL">Canonical</span></th><th style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy"><span title="Web Reference Base">Web Base</span></th><th style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy"><span title="Comments about this entry">Comment</span></th></tr><tr style="border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white"><td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(/mnt/c/dev/github/api-ti-messenger/src/fhir/outputdata:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAyAAAAACCAYAAACg/LjIAAAALUlEQVR4Xu3IoREAIAwEwfT6/ddA0GBAxO3NrLlKUj9263wAAAAvrgEAADClAVWFQIBRHMicAAAAAElFTkSuQmCC)" class="hierarchy"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAWCAYAAAABxvaqAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wYeFzIs1vtcMQAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAAE0lEQVQI12P4//8/AxMDAwNdCABMPwMo2ctnoQAAAABJRU5ErkJggg==" alt="." style="background-color: inherit" class="hierarchy"/><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3QYZCik0qECmbAAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAABtUlEQVQoz2P8//8/Ayb4///v8xfM4iIMzKxoMkwMOMC3DVv/vXmEKY5Dw///Pw8c+Xn2CLEa/r55+/P07t/nrxKl4f/PX6+8g1mlP/44c4eAhn8fP33bsOV1dBoT51V2+z/MohIfeyYy/P2LXcPfFy8/NLb9efTs//utgjUfft35xRUY8Hnm/N/Xb2LT8P//h5ZOnvjoj+11giXcTH//MTLp/v/x9c/z279uXsOi4e/LRwzsbz6vmMyTLM6m9fnXE3Y2l+yv+yez2nL9eX0Wi4afF5eyW4r/+3qYP1Xjz/N3P17ZsRsKMrJd4rL9wcTxDIsGZqEvLEKv2VT/Mgl+/XGbXSB72s/zxXyBYmwqLCxSLFg0sKkHsAg+YJX7xfBTmt204s/NXE4dQTZtT2beH6yqFv9ebkDXwMhnxixrySb68f9fcWYRTSbGA6ya2QwMsixCvxk/djByiWIJVkbBBGaNOoafO5nYWVlkPRjYtP5/388s+JdJkI+R1xquDMl9zOqMQioM7BIMjJ8Z2IUYWOQZeT0Y/u5mEF+G7AdGLMn7712GnycY/v1g+HOZga+WgUkYWRIAe6ip9OnE1GoAAAAASUVORK5CYII=" alt="." style="background-color: white; background-color: inherit" title="NPM Package" class="hierarchy"/> CaseReference</td><td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy">0.1.0</td><td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy">4.0.1</td><td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy">http://gematik.de/fhir/TIM/CaseReference</td><td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy"></td><td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy"></td></tr>
+<tr style="border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: #F7F7F7"><td style="vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(/mnt/c/dev/github/api-ti-messenger/src/fhir/outputdata:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAyAAAAACCAYAAACg/LjIAAAALUlEQVR4Xu3IoREAIAwEwfT6/ddA0GBAxO3NrLlKUj9263wAAAAvrgEAADClAVWFQIBRHMicAAAAAElFTkSuQmCC)" class="hierarchy"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAWCAYAAAABxvaqAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wYeFzIs1vtcMQAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAAE0lEQVQI12P4//8/AxMDAwNdCABMPwMo2ctnoQAAAABJRU5ErkJggg==" alt="." style="background-color: inherit" class="hierarchy"/><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAWCAYAAADJqhx8AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wYeFzI3XJ6V3QAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAANklEQVQ4y+2RsQ0AIAzDav7/2VzQwoCY4iWbZSmo1QGoUgNMghvWaIejPQW/CrrNCylIwcOCDYfLNRcNer4SAAAAAElFTkSuQmCC" alt="." style="background-color: inherit" class="hierarchy"/><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3QYZCik0qECmbAAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAABtUlEQVQoz2P8//8/Ayb4///v8xfM4iIMzKxoMkwMOMC3DVv/vXmEKY5Dw///Pw8c+Xn2CLEa/r55+/P07t/nrxKl4f/PX6+8g1mlP/44c4eAhn8fP33bsOV1dBoT51V2+z/MohIfeyYy/P2LXcPfFy8/NLb9efTs//utgjUfft35xRUY8Hnm/N/Xb2LT8P//h5ZOnvjoj+11giXcTH//MTLp/v/x9c/z279uXsOi4e/LRwzsbz6vmMyTLM6m9fnXE3Y2l+yv+yez2nL9eX0Wi4afF5eyW4r/+3qYP1Xjz/N3P17ZsRsKMrJd4rL9wcTxDIsGZqEvLEKv2VT/Mgl+/XGbXSB72s/zxXyBYmwqLCxSLFg0sKkHsAg+YJX7xfBTmt204s/NXE4dQTZtT2beH6yqFv9ebkDXwMhnxixrySb68f9fcWYRTSbGA6ya2QwMsixCvxk/djByiWIJVkbBBGaNOoafO5nYWVlkPRjYtP5/388s+JdJkI+R1xquDMl9zOqMQioM7BIMjJ8Z2IUYWOQZeT0Y/u5mEF+G7AdGLMn7712GnycY/v1g+HOZga+WgUkYWRIAe6ip9OnE1GoAAAAASUVORK5CYII=" alt="." style="background-color: #F7F7F7; background-color: inherit" title="NPM Package" class="hierarchy"/> hl7.terminology.r4</td><td style="vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy">3.1.0 <span style="padding-left: 3px; padding-right: 3px; color: white; background-color: green" title="Latest Milestone Release">M</span></td><td style="vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy">4.0.1</td><td style="vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy">http://terminology.hl7.org</td><td style="vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy">http://terminology.hl7.org/3.1.0</td><td style="vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy"></td></tr>
+<tr style="border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white"><td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(/mnt/c/dev/github/api-ti-messenger/src/fhir/outputdata:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAyAAAAACCAYAAACg/LjIAAAAJUlEQVR4Xu3IIQEAAAgDsHd9/w4EQIOamFnaBgAA4MMKAACAKwNp30CqZFfFmwAAAABJRU5ErkJggg==)" class="hierarchy"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAWCAYAAAABxvaqAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wYeFzIs1vtcMQAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAAE0lEQVQI12P4//8/AxMDAwNdCABMPwMo2ctnoQAAAABJRU5ErkJggg==" alt="." style="background-color: inherit" class="hierarchy"/><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAWCAYAAADJqhx8AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wYeFzME+lXFigAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAANklEQVQ4y+3OsRUAIAjEUOL+O8cJABttJM11/x1qZAGqRBEVcNIqdWj1efDqQbb3HwwwwEfABmQUHSPM9dtDAAAAAElFTkSuQmCC" alt="." style="background-color: inherit" class="hierarchy"/><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3QYZCik0qECmbAAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAABtUlEQVQoz2P8//8/Ayb4///v8xfM4iIMzKxoMkwMOMC3DVv/vXmEKY5Dw///Pw8c+Xn2CLEa/r55+/P07t/nrxKl4f/PX6+8g1mlP/44c4eAhn8fP33bsOV1dBoT51V2+z/MohIfeyYy/P2LXcPfFy8/NLb9efTs//utgjUfft35xRUY8Hnm/N/Xb2LT8P//h5ZOnvjoj+11giXcTH//MTLp/v/x9c/z279uXsOi4e/LRwzsbz6vmMyTLM6m9fnXE3Y2l+yv+yez2nL9eX0Wi4afF5eyW4r/+3qYP1Xjz/N3P17ZsRsKMrJd4rL9wcTxDIsGZqEvLEKv2VT/Mgl+/XGbXSB72s/zxXyBYmwqLCxSLFg0sKkHsAg+YJX7xfBTmt204s/NXE4dQTZtT2beH6yqFv9ebkDXwMhnxixrySb68f9fcWYRTSbGA6ya2QwMsixCvxk/djByiWIJVkbBBGaNOoafO5nYWVlkPRjYtP5/388s+JdJkI+R1xquDMl9zOqMQioM7BIMjJ8Z2IUYWOQZeT0Y/u5mEF+G7AdGLMn7712GnycY/v1g+HOZga+WgUkYWRIAe6ip9OnE1GoAAAAASUVORK5CYII=" alt="." style="background-color: white; background-color: inherit" title="NPM Package" class="hierarchy"/> de.basisprofil.r4</td><td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy">1.3.2 <span style="padding-left: 3px; padding-right: 3px; color: white; background-color: red" title="Not yet released">U</span></td><td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy">4.0.1</td><td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy"></td><td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy"></td><td style="vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px" class="hierarchy"></td></tr>
+</table><para>Templates: fhir.base.template#0.2.2</para></div></td></tr>
+ <tr><td>Dependent IGs:</td><td><a href="qa-dep.html">no references</a></td></tr>
+ <tr><td>Publication Rules:</td><td>Code = n/a. n/a - not an HL7.org or FHIR.org implementation guide
+ <br/><br/>The copyrightYear parameter ('2022+') in the IG resource is good</td></tr>
+ <tr><td>HTA Analysis:</td><td><i>Non-HL7 Igs are exempt from terminology dependency analysis</i></td></tr>
+ <tr><td>R5 Dependencies:</td><td><span style="color: grey">(none)</span></td></tr>
+ <tr><td>Previous Version Comparison:</td><td> Unable to compare with previous version: Unable to find version history at http://gematik.de/fhir/TIM/CaseReference (Problem #1 with package-list.json at http://gematik.de/fhir/TIM/CaseReference: Invalid HTTP response 404 from https://fhir.gematik.de/TIM/CaseReference/package-list.json?nocache=1654283415065 (Not Found) (content in /tmp/fhir-http-2.log))</td></tr>
+ <tr><td>Summary:</td><td> errors = 18, warn = 9, info = 0, broken links = 55</td></tr>
+</table>
+ <table class="grid">
+   <tr>
+     <td><b>Filename</b></td><td><b>Errors</b></td><td><b>Warnings</b></td><td><b>Hints</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><a href="#internal"><b>Build Errors</b></a></td><td><b>55</b></td><td><b>0</b></td><td><b>0</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><a href="#_mnt_c_dev_github_api-ti-messenger_src_fhir_fsh-generated_resources_condition-ConditionExample"><b>/mnt/c/dev/github/api-ti-messenger/src/fhir/fsh-generated/resources/condition-ConditionExample</b></a></td><td><b>4</b></td><td><b>5</b></td><td><b>0</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><a href="#_mnt_c_dev_github_api-ti-messenger_src_fhir_fsh-generated_resources_encounter-324534708"><b>/mnt/c/dev/github/api-ti-messenger/src/fhir/fsh-generated/resources/encounter-324534708</b></a></td><td><b>1</b></td><td><b>3</b></td><td><b>0</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><a href="#_mnt_c_dev_github_api-ti-messenger_src_fhir_fsh-generated_resources_patient-374885372"><b>/mnt/c/dev/github/api-ti-messenger/src/fhir/fsh-generated/resources/patient-374885372</b></a></td><td><b>1</b></td><td><b>1</b></td><td><b>0</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><a href="#_mnt_c_dev_github_api-ti-messenger_src_fhir_fsh-generated_resources_procedure-ProcedureExample"><b>/mnt/c/dev/github/api-ti-messenger/src/fhir/fsh-generated/resources/procedure-ProcedureExample</b></a></td><td><b>2</b></td><td><b>0</b></td><td><b>0</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><a href="#_mnt_c_dev_github_api-ti-messenger_src_fhir_fsh-generated_resources_structuredefinition-PatientCaseReference"><b>/mnt/c/dev/github/api-ti-messenger/src/fhir/fsh-generated/resources/structuredefinition-PatientCaseReference</b></a></td><td><b>10</b></td><td><b>0</b></td><td><b>0</b></td>
+   </tr>
+</table>
+<hr/>
+<a name="internal"> </a>
+<h2><a href="">n/a</a> <span id="sv" class="toggle" onclick="toggle('v')">Show Validation Information</span> <span class="vcount" onclick="toggle('v')"></span></h2>
+ <div style="border: 1px grey solid; display: none" id="v"></div>
+ <table class="grid">
+   <tr style="background-color: #ffcccc">
+     <td><b><a href="Condition-ConditionExample.change.history.html#l281">output/Condition-ConditionExample.change.history.html#/html/body/div/div/div/p/a at Line 209, column 28</a></b></td><td><b>error</b></td><td><b>The link 'www.gematik.de' for &quot;gematik GmbH&quot; cannot be resolved</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b><a href="Condition-ConditionExample.html#l364">output/Condition-ConditionExample.html#/html/body/div/div/div/p/a at Line 209, column 28</a></b></td><td><b>error</b></td><td><b>The link 'www.gematik.de' for &quot;gematik GmbH&quot; cannot be resolved</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b><a href="Condition-ConditionExample.json.html#l413">output/Condition-ConditionExample.json.html#/html/body/div/div/div/p/a at Line 279, column 28</a></b></td><td><b>error</b></td><td><b>The link 'www.gematik.de' for &quot;gematik GmbH&quot; cannot be resolved</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b><a href="Condition-ConditionExample.ttl.html#l486">output/Condition-ConditionExample.ttl.html#/html/body/div/div/div/p/a at Line 281, column 28</a></b></td><td><b>error</b></td><td><b>The link 'www.gematik.de' for &quot;gematik GmbH&quot; cannot be resolved</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b><a href="Condition-ConditionExample.xml.html#l458">output/Condition-ConditionExample.xml.html#/html/body/div/div/div/p/a at Line 263, column 28</a></b></td><td><b>error</b></td><td><b>The link 'www.gematik.de' for &quot;gematik GmbH&quot; cannot be resolved</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b><a href="Encounter-324534708.change.history.html#l281">output/Encounter-324534708.change.history.html#/html/body/div/div/div/p/a at Line 209, column 28</a></b></td><td><b>error</b></td><td><b>The link 'www.gematik.de' for &quot;gematik GmbH&quot; cannot be resolved</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b><a href="Encounter-324534708.html#l344">output/Encounter-324534708.html#/html/body/div/div/div/p/a at Line 209, column 28</a></b></td><td><b>error</b></td><td><b>The link 'www.gematik.de' for &quot;gematik GmbH&quot; cannot be resolved</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b><a href="Encounter-324534708.json.html#l389">output/Encounter-324534708.json.html#/html/body/div/div/div/p/a at Line 257, column 28</a></b></td><td><b>error</b></td><td><b>The link 'www.gematik.de' for &quot;gematik GmbH&quot; cannot be resolved</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b><a href="Encounter-324534708.ttl.html#l444">output/Encounter-324534708.ttl.html#/html/body/div/div/div/p/a at Line 266, column 28</a></b></td><td><b>error</b></td><td><b>The link 'www.gematik.de' for &quot;gematik GmbH&quot; cannot be resolved</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b><a href="Encounter-324534708.xml.html#l428">output/Encounter-324534708.xml.html#/html/body/div/div/div/p/a at Line 249, column 28</a></b></td><td><b>error</b></td><td><b>The link 'www.gematik.de' for &quot;gematik GmbH&quot; cannot be resolved</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b><a href="Patient-374885372.change.history.html#l281">output/Patient-374885372.change.history.html#/html/body/div/div/div/p/a at Line 209, column 28</a></b></td><td><b>error</b></td><td><b>The link 'www.gematik.de' for &quot;gematik GmbH&quot; cannot be resolved</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b><a href="Patient-374885372.html#l304">output/Patient-374885372.html#/html/body/div/div/div/p/a at Line 209, column 28</a></b></td><td><b>error</b></td><td><b>The link 'www.gematik.de' for &quot;gematik GmbH&quot; cannot be resolved</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b><a href="Patient-374885372.json.html#l368">output/Patient-374885372.json.html#/html/body/div/div/div/p/a at Line 249, column 28</a></b></td><td><b>error</b></td><td><b>The link 'www.gematik.de' for &quot;gematik GmbH&quot; cannot be resolved</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b><a href="Patient-374885372.ttl.html#l414">output/Patient-374885372.ttl.html#/html/body/div/div/div/p/a at Line 258, column 28</a></b></td><td><b>error</b></td><td><b>The link 'www.gematik.de' for &quot;gematik GmbH&quot; cannot be resolved</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b><a href="Patient-374885372.xml.html#l395">output/Patient-374885372.xml.html#/html/body/div/div/div/p/a at Line 238, column 28</a></b></td><td><b>error</b></td><td><b>The link 'www.gematik.de' for &quot;gematik GmbH&quot; cannot be resolved</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b><a href="Procedure-ProcedureExample.change.history.html#l281">output/Procedure-ProcedureExample.change.history.html#/html/body/div/div/div/p/a at Line 209, column 28</a></b></td><td><b>error</b></td><td><b>The link 'www.gematik.de' for &quot;gematik GmbH&quot; cannot be resolved</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b><a href="Procedure-ProcedureExample.html#l334">output/Procedure-ProcedureExample.html#/html/body/div/div/div/p/a at Line 209, column 28</a></b></td><td><b>error</b></td><td><b>The link 'www.gematik.de' for &quot;gematik GmbH&quot; cannot be resolved</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b><a href="Procedure-ProcedureExample.json.html#l362">output/Procedure-ProcedureExample.json.html#/html/body/div/div/div/p/a at Line 240, column 28</a></b></td><td><b>error</b></td><td><b>The link 'www.gematik.de' for &quot;gematik GmbH&quot; cannot be resolved</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b><a href="Procedure-ProcedureExample.ttl.html#l396">output/Procedure-ProcedureExample.ttl.html#/html/body/div/div/div/p/a at Line 253, column 28</a></b></td><td><b>error</b></td><td><b>The link 'www.gematik.de' for &quot;gematik GmbH&quot; cannot be resolved</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b><a href="Procedure-ProcedureExample.xml.html#l386">output/Procedure-ProcedureExample.xml.html#/html/body/div/div/div/p/a at Line 236, column 28</a></b></td><td><b>error</b></td><td><b>The link 'www.gematik.de' for &quot;gematik GmbH&quot; cannot be resolved</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b><a href="StructureDefinition-ConditionCaseReference-definitions.html#l2867">output/StructureDefinition-ConditionCaseReference-definitions.html#/html/body/div/div/div/p/a at Line 638, column 28</a></b></td><td><b>error</b></td><td><b>The link 'www.gematik.de' for &quot;gematik GmbH&quot; cannot be resolved</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b><a href="StructureDefinition-ConditionCaseReference-examples.html#l338">output/StructureDefinition-ConditionCaseReference-examples.html#/html/body/div/div/div/p/a at Line 276, column 28</a></b></td><td><b>error</b></td><td><b>The link 'www.gematik.de' for &quot;gematik GmbH&quot; cannot be resolved</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b><a href="StructureDefinition-ConditionCaseReference-mappings.html#l1034">output/StructureDefinition-ConditionCaseReference-mappings.html#/html/body/div/div/div/p/a at Line 384, column 28</a></b></td><td><b>error</b></td><td><b>The link 'www.gematik.de' for &quot;gematik GmbH&quot; cannot be resolved</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b><a href="StructureDefinition-ConditionCaseReference.html#l5035">output/StructureDefinition-ConditionCaseReference.html#/html/body/div/div/div/p/a at Line 815, column 28</a></b></td><td><b>error</b></td><td><b>The link 'www.gematik.de' for &quot;gematik GmbH&quot; cannot be resolved</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b><a href="StructureDefinition-ConditionCaseReference.profile.history.html#l307">output/StructureDefinition-ConditionCaseReference.profile.history.html#/html/body/div/div/div/p/a at Line 254, column 28</a></b></td><td><b>error</b></td><td><b>The link 'www.gematik.de' for &quot;gematik GmbH&quot; cannot be resolved</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b><a href="StructureDefinition-ConditionCaseReference.profile.json.html#l4266">output/StructureDefinition-ConditionCaseReference.profile.json.html#/html/body/div/div/div/p/a at Line 2349, column 28</a></b></td><td><b>error</b></td><td><b>The link 'www.gematik.de' for &quot;gematik GmbH&quot; cannot be resolved</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b><a href="StructureDefinition-ConditionCaseReference.profile.ttl.html#l8893">output/StructureDefinition-ConditionCaseReference.profile.ttl.html#/html/body/div/div/div/p/a at Line 2104, column 28</a></b></td><td><b>error</b></td><td><b>The link 'www.gematik.de' for &quot;gematik GmbH&quot; cannot be resolved</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b><a href="StructureDefinition-ConditionCaseReference.profile.xml.html#l8007">output/StructureDefinition-ConditionCaseReference.profile.xml.html#/html/body/div/div/div/p/a at Line 2159, column 28</a></b></td><td><b>error</b></td><td><b>The link 'www.gematik.de' for &quot;gematik GmbH&quot; cannot be resolved</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b><a href="StructureDefinition-EncounterCaseReference-definitions.html#l4899">output/StructureDefinition-EncounterCaseReference-definitions.html#/html/body/div/div/div/p/a at Line 961, column 28</a></b></td><td><b>error</b></td><td><b>The link 'www.gematik.de' for &quot;gematik GmbH&quot; cannot be resolved</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b><a href="StructureDefinition-EncounterCaseReference-examples.html#l338">output/StructureDefinition-EncounterCaseReference-examples.html#/html/body/div/div/div/p/a at Line 276, column 28</a></b></td><td><b>error</b></td><td><b>The link 'www.gematik.de' for &quot;gematik GmbH&quot; cannot be resolved</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b><a href="StructureDefinition-EncounterCaseReference-mappings.html#l1343">output/StructureDefinition-EncounterCaseReference-mappings.html#/html/body/div/div/div/p/a at Line 415, column 28</a></b></td><td><b>error</b></td><td><b>The link 'www.gematik.de' for &quot;gematik GmbH&quot; cannot be resolved</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b><a href="StructureDefinition-EncounterCaseReference.html#l6861">output/StructureDefinition-EncounterCaseReference.html#/html/body/div/div/div/p/a at Line 976, column 28</a></b></td><td><b>error</b></td><td><b>The link 'www.gematik.de' for &quot;gematik GmbH&quot; cannot be resolved</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b><a href="StructureDefinition-EncounterCaseReference.profile.history.html#l307">output/StructureDefinition-EncounterCaseReference.profile.history.html#/html/body/div/div/div/p/a at Line 254, column 28</a></b></td><td><b>error</b></td><td><b>The link 'www.gematik.de' for &quot;gematik GmbH&quot; cannot be resolved</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b><a href="StructureDefinition-EncounterCaseReference.profile.json.html#l7188">output/StructureDefinition-EncounterCaseReference.profile.json.html#/html/body/div/div/div/p/a at Line 3846, column 28</a></b></td><td><b>error</b></td><td><b>The link 'www.gematik.de' for &quot;gematik GmbH&quot; cannot be resolved</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b><a href="StructureDefinition-EncounterCaseReference.profile.ttl.html#l14995">output/StructureDefinition-EncounterCaseReference.profile.ttl.html#/html/body/div/div/div/p/a at Line 3386, column 28</a></b></td><td><b>error</b></td><td><b>The link 'www.gematik.de' for &quot;gematik GmbH&quot; cannot be resolved</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b><a href="StructureDefinition-EncounterCaseReference.profile.xml.html#l13398">output/StructureDefinition-EncounterCaseReference.profile.xml.html#/html/body/div/div/div/p/a at Line 3402, column 28</a></b></td><td><b>error</b></td><td><b>The link 'www.gematik.de' for &quot;gematik GmbH&quot; cannot be resolved</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b><a href="StructureDefinition-PatientCaseReference-definitions.html#l4711">output/StructureDefinition-PatientCaseReference-definitions.html#/html/body/div/div/div/p/a at Line 958, column 28</a></b></td><td><b>error</b></td><td><b>The link 'www.gematik.de' for &quot;gematik GmbH&quot; cannot be resolved</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b><a href="StructureDefinition-PatientCaseReference-examples.html#l338">output/StructureDefinition-PatientCaseReference-examples.html#/html/body/div/div/div/p/a at Line 276, column 28</a></b></td><td><b>error</b></td><td><b>The link 'www.gematik.de' for &quot;gematik GmbH&quot; cannot be resolved</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b><a href="StructureDefinition-PatientCaseReference-mappings.html#l1327">output/StructureDefinition-PatientCaseReference-mappings.html#/html/body/div/div/div/p/a at Line 413, column 28</a></b></td><td><b>error</b></td><td><b>The link 'www.gematik.de' for &quot;gematik GmbH&quot; cannot be resolved</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b><a href="StructureDefinition-PatientCaseReference.html#l6243">output/StructureDefinition-PatientCaseReference.html#/html/body/div/div/div/p/a at Line 959, column 28</a></b></td><td><b>error</b></td><td><b>The link 'www.gematik.de' for &quot;gematik GmbH&quot; cannot be resolved</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b><a href="StructureDefinition-PatientCaseReference.profile.history.html#l307">output/StructureDefinition-PatientCaseReference.profile.history.html#/html/body/div/div/div/p/a at Line 254, column 28</a></b></td><td><b>error</b></td><td><b>The link 'www.gematik.de' for &quot;gematik GmbH&quot; cannot be resolved</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b><a href="StructureDefinition-PatientCaseReference.profile.json.html#l6657">output/StructureDefinition-PatientCaseReference.profile.json.html#/html/body/div/div/div/p/a at Line 3559, column 28</a></b></td><td><b>error</b></td><td><b>The link 'www.gematik.de' for &quot;gematik GmbH&quot; cannot be resolved</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b><a href="StructureDefinition-PatientCaseReference.profile.ttl.html#l13744">output/StructureDefinition-PatientCaseReference.profile.ttl.html#/html/body/div/div/div/p/a at Line 3080, column 28</a></b></td><td><b>error</b></td><td><b>The link 'www.gematik.de' for &quot;gematik GmbH&quot; cannot be resolved</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b><a href="StructureDefinition-PatientCaseReference.profile.xml.html#l12411">output/StructureDefinition-PatientCaseReference.profile.xml.html#/html/body/div/div/div/p/a at Line 3228, column 28</a></b></td><td><b>error</b></td><td><b>The link 'www.gematik.de' for &quot;gematik GmbH&quot; cannot be resolved</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b><a href="StructureDefinition-ProcedureCaseReference-definitions.html#l3547">output/StructureDefinition-ProcedureCaseReference-definitions.html#/html/body/div/div/div/p/a at Line 744, column 28</a></b></td><td><b>error</b></td><td><b>The link 'www.gematik.de' for &quot;gematik GmbH&quot; cannot be resolved</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b><a href="StructureDefinition-ProcedureCaseReference-examples.html#l338">output/StructureDefinition-ProcedureCaseReference-examples.html#/html/body/div/div/div/p/a at Line 276, column 28</a></b></td><td><b>error</b></td><td><b>The link 'www.gematik.de' for &quot;gematik GmbH&quot; cannot be resolved</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b><a href="StructureDefinition-ProcedureCaseReference-mappings.html#l992">output/StructureDefinition-ProcedureCaseReference-mappings.html#/html/body/div/div/div/p/a at Line 365, column 28</a></b></td><td><b>error</b></td><td><b>The link 'www.gematik.de' for &quot;gematik GmbH&quot; cannot be resolved</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b><a href="StructureDefinition-ProcedureCaseReference.html#l5504">output/StructureDefinition-ProcedureCaseReference.html#/html/body/div/div/div/p/a at Line 842, column 28</a></b></td><td><b>error</b></td><td><b>The link 'www.gematik.de' for &quot;gematik GmbH&quot; cannot be resolved</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b><a href="StructureDefinition-ProcedureCaseReference.profile.history.html#l307">output/StructureDefinition-ProcedureCaseReference.profile.history.html#/html/body/div/div/div/p/a at Line 254, column 28</a></b></td><td><b>error</b></td><td><b>The link 'www.gematik.de' for &quot;gematik GmbH&quot; cannot be resolved</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b><a href="StructureDefinition-ProcedureCaseReference.profile.json.html#l4938">output/StructureDefinition-ProcedureCaseReference.profile.json.html#/html/body/div/div/div/p/a at Line 2690, column 28</a></b></td><td><b>error</b></td><td><b>The link 'www.gematik.de' for &quot;gematik GmbH&quot; cannot be resolved</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b><a href="StructureDefinition-ProcedureCaseReference.profile.ttl.html#l10372">output/StructureDefinition-ProcedureCaseReference.profile.ttl.html#/html/body/div/div/div/p/a at Line 2434, column 28</a></b></td><td><b>error</b></td><td><b>The link 'www.gematik.de' for &quot;gematik GmbH&quot; cannot be resolved</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b><a href="StructureDefinition-ProcedureCaseReference.profile.xml.html#l9228">output/StructureDefinition-ProcedureCaseReference.profile.xml.html#/html/body/div/div/div/p/a at Line 2426, column 28</a></b></td><td><b>error</b></td><td><b>The link 'www.gematik.de' for &quot;gematik GmbH&quot; cannot be resolved</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b><a href="artifacts.html#l448">output/artifacts.html#/html/body/div/div/div/p/a at Line 258, column 28</a></b></td><td><b>error</b></td><td><b>The link 'www.gematik.de' for &quot;gematik GmbH&quot; cannot be resolved</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b><a href="index.html#l305">output/index.html#/html/body/div/div/div/p/a at Line 203, column 28</a></b></td><td><b>error</b></td><td><b>The link 'www.gematik.de' for &quot;gematik GmbH&quot; cannot be resolved</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b><a href="toc.html#l339">output/toc.html#/html/body/div/div/div/p/a at Line 145, column 28</a></b></td><td><b>error</b></td><td><b>The link 'www.gematik.de' for &quot;gematik GmbH&quot; cannot be resolved</b></td>
+   </tr>
+</table>
+<hr/>
+<a name="_mnt_c_dev_github_api-ti-messenger_src_fhir_fsh-generated_resources_condition-ConditionExample"> </a>
+<h2><a href="Condition-ConditionExample.html">fsh-generated/resources/condition-ConditionExample.json</a> <span id="svi1" class="toggle" onclick="toggle('vi1')">Show Validation Information</span> <span class="vcount" onclick="toggle('vi1')">(1)</span></h2>
+ <div style="border: 1px grey solid; display: none" id="vi1"><ul style="font-size: 7px"><li>Condition: Validated against <i>this.</i><a href="StructureDefinition-ConditionCaseReference.html">ConditionCaseReference</a></li></ul>
+</div>
+ <table class="grid">
+   <tr>
+     <td><b>Path</b></td><td><b>Severity</b></td><td><b>Message</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b>Condition.clinicalStatus (l16/c16)</b></td><td><b>error</b></td><td><b>None of the codings provided are in the value set 'Condition Clinical Status Codes' (http://hl7.org/fhir/ValueSet/condition-clinical|4.0.1), and a coding from this value set is required) (codes = null#active)</b> (<a href="qa-tx.html#l5">see Tx log</a>)</td>
+   </tr>
+   <tr style="background-color: #ffebcc">
+     <td><b>Condition.clinicalStatus.coding[0] (l17/c8)</b></td><td><b>warning</b></td><td title="TERMINOLOGY_TX_SYSTEM_NO_CODE"><b>A code with no system has no defined meaning. A system should be provided</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b>Condition.verificationStatus (l23/c16)</b></td><td><b>error</b></td><td><b>None of the codings provided are in the value set 'ConditionVerificationStatus' (http://hl7.org/fhir/ValueSet/condition-ver-status|4.0.1), and a coding from this value set is required) (codes = null#provisional)</b> (<a href="qa-tx.html#l6">see Tx log</a>)</td>
+   </tr>
+   <tr style="background-color: #ffebcc">
+     <td><b>Condition.verificationStatus.coding[0] (l24/c8)</b></td><td><b>warning</b></td><td title="TERMINOLOGY_TX_SYSTEM_NO_CODE"><b>A code with no system has no defined meaning. A system should be provided</b></td>
+   </tr>
+   <tr style="background-color: #ffebcc">
+     <td><b>Condition.category[0].coding[0] (l32/c10)</b></td><td><b>warning</b></td><td title="TERMINOLOGY_TX_SYSTEM_NO_CODE"><b>A code with no system has no defined meaning. A system should be provided</b></td>
+   </tr>
+   <tr style="background-color: #ffebcc">
+     <td><b>Condition.severity.coding[0] (l40/c8)</b></td><td><b>warning</b></td><td title="TERMINOLOGY_TX_SYSTEM_NO_CODE"><b>A code with no system has no defined meaning. A system should be provided</b></td>
+   </tr>
+   <tr style="background-color: #ffebcc">
+     <td><b>Condition.code.coding[0] (l48/c8)</b></td><td><b>warning</b></td><td title="TERMINOLOGY_TX_SYSTEM_NO_CODE"><b>A code with no system has no defined meaning. A system should be provided</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b>Condition.subject (l56/c4)</b></td><td><b>error</b></td><td title="Reference_REF_CantResolve"><b>Unable to resolve resource with reference '374885372'</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b>Condition.encounter (l59/c4)</b></td><td><b>error</b></td><td title="Reference_REF_CantResolve"><b>Unable to resolve resource with reference '324534708'</b></td>
+   </tr>
+</table>
+<hr/>
+<a name="_mnt_c_dev_github_api-ti-messenger_src_fhir_fsh-generated_resources_encounter-324534708"> </a>
+<h2><a href="Encounter-324534708.html">fsh-generated/resources/encounter-324534708.json</a> <span id="svi2" class="toggle" onclick="toggle('vi2')">Show Validation Information</span> <span class="vcount" onclick="toggle('vi2')">(1)</span></h2>
+ <div style="border: 1px grey solid; display: none" id="vi2"><ul style="font-size: 7px"><li>Encounter: Validated against <i>this.</i><a href="StructureDefinition-EncounterCaseReference.html">EncounterCaseReference</a></li></ul>
+</div>
+ <table class="grid">
+   <tr>
+     <td><b>Path</b></td><td><b>Severity</b></td><td><b>Message</b></td>
+   </tr>
+   <tr style="background-color: #ffebcc">
+     <td><b>Encounter.class (l17/c19)</b></td><td><b>warning</b></td><td title="TERMINOLOGY_TX_SYSTEM_NO_CODE"><b>A code with no system has no defined meaning. A system should be provided</b></td>
+   </tr>
+   <tr style="background-color: #ffebcc">
+     <td><b>Encounter.priority.coding[0] (l22/c8)</b></td><td><b>warning</b></td><td title="TERMINOLOGY_TX_SYSTEM_NO_CODE"><b>A code with no system has no defined meaning. A system should be provided</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b>Encounter.subject (l30/c4)</b></td><td><b>error</b></td><td title="Reference_REF_CantResolve"><b>Unable to resolve resource with reference '374885372'</b></td>
+   </tr>
+   <tr style="background-color: #ffebcc">
+     <td><b>Encounter.reasonCode[0].coding[0] (l37/c10)</b></td><td><b>warning</b></td><td title="TERMINOLOGY_TX_SYSTEM_NO_CODE"><b>A code with no system has no defined meaning. A system should be provided</b></td>
+   </tr>
+</table>
+<hr/>
+<a name="_mnt_c_dev_github_api-ti-messenger_src_fhir_fsh-generated_resources_patient-374885372"> </a>
+<h2><a href="Patient-374885372.html">fsh-generated/resources/patient-374885372.json</a> <span id="svi3" class="toggle" onclick="toggle('vi3')">Show Validation Information</span> <span class="vcount" onclick="toggle('vi3')">(1)</span></h2>
+ <div style="border: 1px grey solid; display: none" id="vi3"><ul style="font-size: 7px"><li>Patient: Validated against <i>this.</i><a href="StructureDefinition-PatientCaseReference.html">PatientCaseReference</a></li></ul>
+</div>
+ <table class="grid">
+   <tr>
+     <td><b>Path</b></td><td><b>Severity</b></td><td><b>Message</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b>Patient.identifier[0].system.type (l11/c73)</b></td><td><b>error</b></td><td title="Profile_VAL_MissingElement"><b>Missing element 'type' - required by fixed value assigned in profile http://gematik.de/fhir/TIM/CaseReference/StructureDefinition/PatientCaseReference</b></td>
+   </tr>
+   <tr style="background-color: #ffebcc">
+     <td><b>Patient.communication[0].language.coding[0] (l29/c12)</b></td><td><b>warning</b></td><td title="TERMINOLOGY_TX_SYSTEM_NO_CODE"><b>A code with no system has no defined meaning. A system should be provided</b></td>
+   </tr>
+</table>
+<hr/>
+<a name="_mnt_c_dev_github_api-ti-messenger_src_fhir_fsh-generated_resources_procedure-ProcedureExample"> </a>
+<h2><a href="Procedure-ProcedureExample.html">fsh-generated/resources/procedure-ProcedureExample.json</a> <span id="svi4" class="toggle" onclick="toggle('vi4')">Show Validation Information</span> <span class="vcount" onclick="toggle('vi4')">(1)</span></h2>
+ <div style="border: 1px grey solid; display: none" id="vi4"><ul style="font-size: 7px"><li>Procedure: Validated against <i>this.</i><a href="StructureDefinition-ProcedureCaseReference.html">ProcedureCaseReference</a></li></ul>
+</div>
+ <table class="grid">
+   <tr>
+     <td><b>Path</b></td><td><b>Severity</b></td><td><b>Message</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b>Procedure.subject (l18/c4)</b></td><td><b>error</b></td><td title="Reference_REF_CantResolve"><b>Unable to resolve resource with reference '374885372'</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b>Procedure.encounter (l21/c4)</b></td><td><b>error</b></td><td title="Reference_REF_CantResolve"><b>Unable to resolve resource with reference '324534708'</b></td>
+   </tr>
+</table>
+<hr/>
+<a name="_mnt_c_dev_github_api-ti-messenger_src_fhir_fsh-generated_resources_structuredefinition-PatientCaseReference"> </a>
+<h2><a href="StructureDefinition-PatientCaseReference.html">fsh-generated/resources/structuredefinition-PatientCaseReference.json</a> <span id="svi5" class="toggle" onclick="toggle('vi5')">Show Validation Information</span> <span class="vcount" onclick="toggle('vi5')">(1)</span></h2>
+ <div style="border: 1px grey solid; display: none" id="vi5"><ul style="font-size: 7px"><li>StructureDefinition: Validated against <a href="http://hl7.org/fhir">fhir</a>.<a href="http://hl7.org/fhir/R4/structuredefinition.html">StructureDefinition</a></li></ul>
+</div>
+ <table class="grid">
+   <tr>
+     <td><b>Path</b></td><td><b>Severity</b></td><td><b>Message</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b>Identifier.system</b></td><td><b>error</b></td><td title=""><b>The fixed value has type 'Identifier' which is not valid (valid type: [uri])</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b>Identifier.system</b></td><td><b>error</b></td><td title=""><b>The fixed value has type 'Identifier' which is not valid (valid type: [uri])</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b>StructureDefinition.snapshot.element[15]</b></td><td><b>error</b></td><td title="eld-8: 'Pattern and fixed are mutually exclusive' Rule 'Pattern and fixed are mutually exclusive' Failed"><b>eld-8: 'Pattern and fixed are mutually exclusive' Rule 'Pattern and fixed are mutually exclusive' Failed</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b>StructureDefinition.snapshot.element[24]</b></td><td><b>error</b></td><td title="eld-8: 'Pattern and fixed are mutually exclusive' Rule 'Pattern and fixed are mutually exclusive' Failed"><b>eld-8: 'Pattern and fixed are mutually exclusive' Rule 'Pattern and fixed are mutually exclusive' Failed</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b>StructureDefinition.differential.element[4]</b></td><td><b>error</b></td><td title="eld-8: 'Pattern and fixed are mutually exclusive' Rule 'Pattern and fixed are mutually exclusive' Failed"><b>eld-8: 'Pattern and fixed are mutually exclusive' Rule 'Pattern and fixed are mutually exclusive' Failed</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b>StructureDefinition.differential.element[6]</b></td><td><b>error</b></td><td title="eld-8: 'Pattern and fixed are mutually exclusive' Rule 'Pattern and fixed are mutually exclusive' Failed"><b>eld-8: 'Pattern and fixed are mutually exclusive' Rule 'Pattern and fixed are mutually exclusive' Failed</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b>StructureDefinition</b></td><td><b>error</b></td><td title=""><b>The fixed value has type 'Identifier' which is not valid (valid type: [uri])</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b>StructureDefinition</b></td><td><b>error</b></td><td title=""><b>The fixed value has type 'Identifier' which is not valid (valid type: [uri])</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b>StructureDefinition.snapshot.element[15].pattern.ofType(Identifier)</b></td><td><b>error</b></td><td title="SD_VALUE_TYPE_IILEGAL"><b>The element Patient.identifier:KVNR.system has a pattern of type Identifier, which is not in the list of allowed types ([uri])</b></td>
+   </tr>
+   <tr style="background-color: #ffcccc">
+     <td><b>StructureDefinition.snapshot.element[24].pattern.ofType(Identifier)</b></td><td><b>error</b></td><td title="SD_VALUE_TYPE_IILEGAL"><b>The element Patient.identifier:PKVID.system has a pattern of type Identifier, which is not in the list of allowed types ([uri])</b></td>
+   </tr>
+</table>
+<a name="suppressed"> </a>
+<p><b>Suppressed Messages (Warnings, hints, broken links)</b></p>
+<p>No suppressed messsages</p><a name="sorted"> </a>
+<p><b>Errors sorted by type</b></p>
+<hr/>
+<a name="Profile_VAL_MissingElement"> </a>
+<h2>Profile_VAL_MissingElement</h2>
+ <table class="grid">
+   <tr style="background-color: #ffeeee">
+     <td><a href="Patient-374885372.html">fsh-generated/resources/patient-374885372.json</a></td><td><b>Missing element 'type' - required by fixed value assigned in profile http://gematik.de/fhir/TIM/CaseReference/StructureDefinition/PatientCaseReference</b></td>
+   </tr>
+</table>
+<hr/>
+<a name="Reference_REF_CantResolve"> </a>
+<h2>Reference_REF_CantResolve</h2>
+ <table class="grid">
+   <tr style="background-color: #ffeeee">
+     <td><a href="Condition-ConditionExample.html">fsh-generated/resources/condition-ConditionExample.json</a></td><td><b>Unable to resolve resource with reference '374885372'</b></td>
+   </tr>
+   <tr style="background-color: #ffeeee">
+     <td><a href="Condition-ConditionExample.html">fsh-generated/resources/condition-ConditionExample.json</a></td><td><b>Unable to resolve resource with reference '324534708'</b></td>
+   </tr>
+   <tr style="background-color: #ffeeee">
+     <td><a href="Encounter-324534708.html">fsh-generated/resources/encounter-324534708.json</a></td><td><b>Unable to resolve resource with reference '374885372'</b></td>
+   </tr>
+   <tr style="background-color: #ffeeee">
+     <td><a href="Procedure-ProcedureExample.html">fsh-generated/resources/procedure-ProcedureExample.json</a></td><td><b>Unable to resolve resource with reference '374885372'</b></td>
+   </tr>
+   <tr style="background-color: #ffeeee">
+     <td><a href="Procedure-ProcedureExample.html">fsh-generated/resources/procedure-ProcedureExample.json</a></td><td><b>Unable to resolve resource with reference '324534708'</b></td>
+   </tr>
+</table>
+<hr/>
+<a name="SD_VALUE_TYPE_IILEGAL"> </a>
+<h2>SD_VALUE_TYPE_IILEGAL</h2>
+ <table class="grid">
+   <tr style="background-color: #ffeeee">
+     <td><a href="StructureDefinition-PatientCaseReference.html">fsh-generated/resources/structuredefinition-PatientCaseReference.json</a></td><td><b>The element Patient.identifier:KVNR.system has a pattern of type Identifier, which is not in the list of allowed types ([uri])</b></td>
+   </tr>
+   <tr style="background-color: #ffeeee">
+     <td><a href="StructureDefinition-PatientCaseReference.html">fsh-generated/resources/structuredefinition-PatientCaseReference.json</a></td><td><b>The element Patient.identifier:PKVID.system has a pattern of type Identifier, which is not in the list of allowed types ([uri])</b></td>
+   </tr>
+</table>
+<hr/>
+<a name="TERMINOLOGY_TX_SYSTEM_NO_CODE"> </a>
+<h2>TERMINOLOGY_TX_SYSTEM_NO_CODE</h2>
+ <table class="grid">
+   <tr style="background-color: #fff4ee">
+     <td><a href="Condition-ConditionExample.html">fsh-generated/resources/condition-ConditionExample.json</a></td><td><b>A code with no system has no defined meaning. A system should be provided</b></td>
+   </tr>
+   <tr style="background-color: #fff4ee">
+     <td><a href="Condition-ConditionExample.html">fsh-generated/resources/condition-ConditionExample.json</a></td><td><b>A code with no system has no defined meaning. A system should be provided</b></td>
+   </tr>
+   <tr style="background-color: #fff4ee">
+     <td><a href="Condition-ConditionExample.html">fsh-generated/resources/condition-ConditionExample.json</a></td><td><b>A code with no system has no defined meaning. A system should be provided</b></td>
+   </tr>
+   <tr style="background-color: #fff4ee">
+     <td><a href="Condition-ConditionExample.html">fsh-generated/resources/condition-ConditionExample.json</a></td><td><b>A code with no system has no defined meaning. A system should be provided</b></td>
+   </tr>
+   <tr style="background-color: #fff4ee">
+     <td><a href="Condition-ConditionExample.html">fsh-generated/resources/condition-ConditionExample.json</a></td><td><b>A code with no system has no defined meaning. A system should be provided</b></td>
+   </tr>
+   <tr style="background-color: #fff4ee">
+     <td><a href="Encounter-324534708.html">fsh-generated/resources/encounter-324534708.json</a></td><td><b>A code with no system has no defined meaning. A system should be provided</b></td>
+   </tr>
+   <tr style="background-color: #fff4ee">
+     <td><a href="Encounter-324534708.html">fsh-generated/resources/encounter-324534708.json</a></td><td><b>A code with no system has no defined meaning. A system should be provided</b></td>
+   </tr>
+   <tr style="background-color: #fff4ee">
+     <td><a href="Encounter-324534708.html">fsh-generated/resources/encounter-324534708.json</a></td><td><b>A code with no system has no defined meaning. A system should be provided</b></td>
+   </tr>
+   <tr style="background-color: #fff4ee">
+     <td><a href="Patient-374885372.html">fsh-generated/resources/patient-374885372.json</a></td><td><b>A code with no system has no defined meaning. A system should be provided</b></td>
+   </tr>
+</table>
+<hr/>
+<a name="Terminology_TX_NoValid_1_CC"> </a>
+<h2>Terminology_TX_NoValid_1_CC</h2>
+ <table class="grid">
+   <tr style="background-color: #ffeeee">
+     <td><a href="Condition-ConditionExample.html">fsh-generated/resources/condition-ConditionExample.json</a></td><td><b>None of the codings provided are in the value set 'Condition Clinical Status Codes' (http://hl7.org/fhir/ValueSet/condition-clinical|4.0.1), and a coding from this value set is required) (codes = null#active)</b></td>
+   </tr>
+   <tr style="background-color: #ffeeee">
+     <td><a href="Condition-ConditionExample.html">fsh-generated/resources/condition-ConditionExample.json</a></td><td><b>None of the codings provided are in the value set 'ConditionVerificationStatus' (http://hl7.org/fhir/ValueSet/condition-ver-status|4.0.1), and a coding from this value set is required) (codes = null#provisional)</b></td>
+   </tr>
+</table>
+</body>
+</html>

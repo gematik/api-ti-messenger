@@ -48,16 +48,16 @@ ActorFontName Aapex
     Activate MP
     Activate RD
 
-  RD->AS: GET /token (client_id, client_secret) \n(OAuth Client credentials flow)
+  RD->AS: GET /authenticate (client_id, client_secret) \n(OAuth Client credentials flow)
     Activate AS
   AS->AS: prüfe client_id und \nclient_secret
-  AS-->RD: status, admin-accesstoken 
+  AS-->RD: status, provider-accesstoken 
     Deactivate AS  
 
   |||
-  RD->FP: GET /tim-provider-services/getFederationList \n(admin-accesstoken, version)
+  RD->FP: GET /tim-provider-services/getFederationList \n(provider-accesstoken, version)
     Activate FP
-  FP->FP: prüfe \nadmin-accesstoken
+  FP->FP: prüfe \nprovider-accesstoken
   |||
   FP->FP: prüfe übergebene \nVersion
 

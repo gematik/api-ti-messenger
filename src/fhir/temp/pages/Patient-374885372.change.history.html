@@ -1,0 +1,21 @@
+---
+---
+<!-- layouts\layout-changehistory.html -->
+<!-- get modelType -->
+
+
+{% include fragment-pagebegin.html %}
+
+<div style="counter-reset: section 10" class="col-12">
+  <!--ReleaseHeader--><p id="publish-box">Publish Box goes here</p><!--EndReleaseHeader-->
+  {% include fragment-base-navtabs.html type='Patient' id='374885372' active='history' %}
+
+  <a name="root"> </a>
+  <h2 id="root">{{type}}: Patient/374885372 - Change History</h2>
+  <p>History of changes for 374885372 {{type | downcase}}.</p>
+
+  {%include Patient-374885372-history.xhtml%}
+
+</div>
+{% assign includetabscripts = 'true' %}
+{% include fragment-pageend.html %}

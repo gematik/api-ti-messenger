@@ -1,0 +1,41 @@
+---
+---
+<!-- get modelType -->
+{% include fragment-modelType.html id='ConditionCaseReference' %}
+
+{% include fragment-pagebegin.html %}
+<div style="counter-reset: section 6" class="col-12">
+  <!--ReleaseHeader--><p id="publish-box">Publish Box goes here</p><!--EndReleaseHeader-->
+  {% include fragment-profile-navtabs.html type='StructureDefinition' id='ConditionCaseReference' active='example' %}
+
+  <a name="root"> </a>
+  <h2 id="root">{{modelType}}: ConditionCaseReference - Examples</h2>
+{% include fragment-simpletable.html %}
+
+   <!-- insert intro if present -->
+    {% include fragment-intro.html type='StructureDefinition' id='ConditionCaseReference' %}
+
+{% assign basepath = page.path | replace: '-examples.html', '.html' %}
+{% if site.data.pages[basepath].examples.size > 0 %}
+  <p>Examples for the ConditionCaseReference Profile.</p>
+  <table style="grid">
+    <tbody>
+      {% for example in site.data.pages[basepath].examples %}
+        <tr>
+          <td>
+            <a href="{{example.url}}">{{example.title | escape_once}}</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <p><b>No examples are currently available for the {{id}} Profile.</b></p>
+{% endif %}
+
+<!-- insert notes if present -->
+{% include fragment-notes.html type='StructureDefinition' id='ConditionCaseReference' %}
+
+</div>
+{% assign includetabscripts = 'true' %}
+{% include fragment-pageend.html %}

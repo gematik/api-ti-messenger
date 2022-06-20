@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ImplementationGuide xmlns="http://hl7.org/fhir">
+   <id value="CaseReference"/>
+   <text>
+      <status value="extensions"/>
+      <div xmlns="http://www.w3.org/1999/xhtml">
+         <h2>CaseReference</h2>
+         <p>The official URL for this implementation guide is: </p>
+         <pre>http://gematik.de/fhir/TIM/CaseReference/ImplementationGuide/CaseReference</pre>
+      </div>
+   </text>
+   <url value="http://gematik.de/fhir/TIM/CaseReference/ImplementationGuide/CaseReference"/>
+   <version value="0.1.0"/>
+   <name value="CaseReference"/>
+   <status value="draft"/>
+   <date value="2022-06-03T21:10:15+02:00"/>
+   <publisher value="gematik GmbH"/>
+   <contact>
+      <name value="gematik GmbH"/>
+      <telecom>
+         <system value="url"/>
+         <value value="www.gematik.de"/>
+      </telecom>
+   </contact>
+   <packageId value="CaseReference"/>
+   <license value="CC0-1.0"/>
+   <fhirVersion value="4.0.1"/>
+   <dependsOn id="hl7tx">
+      <uri value="http://terminology.hl7.org/ImplementationGuide/hl7.terminology"/>
+      <packageId value="hl7.terminology.r4"/>
+      <version value="3.1.0"/>
+   </dependsOn>
+   <dependsOn id="de_basisprofil_r4">
+      <uri value="http://fhir.org/packages/de.basisprofil.r4/ImplementationGuide/de.basisprofil.r4"/>
+      <packageId value="de.basisprofil.r4"/>
+      <version value="1.3.2"/>
+   </dependsOn>
+   <definition>
+
+
+
+
+
+
+
+      <grouping id="-str-profile">
+         <name value="Structures: Resource Profiles"/>
+         <description value="These define constraints on FHIR resources for systems conforming to this implementation guide"/>
+      </grouping>
+
+
+
+
+
+
+
+
+
+
+
+
+      <grouping id="-ex-example">
+         <name value="Example: Example Instances"/>
+         <description value="These are example instances that show what data produced and consumed by systems conforming with this implementation guide might look like"/>
+      </grouping>
+
+      <resource>
+         <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
+            <valueString value="StructureDefinition:resource"/>
+         </extension>
+         <extension url="http://hl7.org/fhir/StructureDefinition/implementationguide-page">
+            <valueUri value="StructureDefinition-ConditionCaseReference.html"/>
+         </extension>
+         <reference>
+            <reference value="StructureDefinition/ConditionCaseReference"/>
+         </reference>
+         <name value="ConditionCaseReference"/>
+         <description value="A profile of the Condition resource for TI-Messenger communication related to a patients case reference"/>
+         <exampleBoolean value="false"/>
+         <groupingId value="-str-profile"/>
+      </resource>
+      <resource>
+         <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
+            <valueString value="StructureDefinition:resource"/>
+         </extension>
+         <extension url="http://hl7.org/fhir/StructureDefinition/implementationguide-page">
+            <valueUri value="StructureDefinition-EncounterCaseReference.html"/>
+         </extension>
+         <reference>
+            <reference value="StructureDefinition/EncounterCaseReference"/>
+         </reference>
+         <name value="EncounterCaseReference"/>
+         <description value="A profile of the Encounter resource for TI-Messenger communication related to a patients case reference."/>
+         <exampleBoolean value="false"/>
+         <groupingId value="-str-profile"/>
+      </resource>
+      <resource>
+         <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
+            <valueString value="StructureDefinition:resource"/>
+         </extension>
+         <extension url="http://hl7.org/fhir/StructureDefinition/implementationguide-page">
+            <valueUri value="StructureDefinition-PatientCaseReference.html"/>
+         </extension>
+         <reference>
+            <reference value="StructureDefinition/PatientCaseReference"/>
+         </reference>
+         <name value="PatientCaseReference"/>
+         <description value="A profile of the Patient resource for TI-Messenger communication related to a patients case reference."/>
+         <exampleBoolean value="false"/>
+         <groupingId value="-str-profile"/>
+      </resource>
+      <resource>
+         <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
+            <valueString value="StructureDefinition:resource"/>
+         </extension>
+         <extension url="http://hl7.org/fhir/StructureDefinition/implementationguide-page">
+            <valueUri value="StructureDefinition-ProcedureCaseReference.html"/>
+         </extension>
+         <reference>
+            <reference value="StructureDefinition/ProcedureCaseReference"/>
+         </reference>
+         <name value="ProcedureCaseReference"/>
+         <description value="A profile of the Procedure resource for TI-Messenger communication related to a patients case reference."/>
+         <exampleBoolean value="false"/>
+         <groupingId value="-str-profile"/>
+      </resource>
+      <resource>
+         <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
+            <valueString value="Encounter"/>
+         </extension>
+         <extension url="http://hl7.org/fhir/StructureDefinition/implementationguide-page">
+            <valueUri value="Encounter-324534708.html"/>
+         </extension>
+         <reference>
+            <reference value="Encounter/324534708"/>
+         </reference>
+         <name value="EncounterExample"/>
+         <description value="An example of a encounter."/>
+         <exampleCanonical value="http://gematik.de/fhir/TIM/CaseReference/StructureDefinition/EncounterCaseReference"/>
+         <groupingId value="-ex-example"/>
+      </resource>
+      <resource>
+         <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
+            <valueString value="Patient"/>
+         </extension>
+         <extension url="http://hl7.org/fhir/StructureDefinition/implementationguide-page">
+            <valueUri value="Patient-374885372.html"/>
+         </extension>
+         <reference>
+            <reference value="Patient/374885372"/>
+         </reference>
+         <name value="PatientExample"/>
+         <description value="An example of a patient."/>
+         <exampleCanonical value="http://gematik.de/fhir/TIM/CaseReference/StructureDefinition/PatientCaseReference"/>
+         <groupingId value="-ex-example"/>
+      </resource>
+      <resource>
+         <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
+            <valueString value="Condition"/>
+         </extension>
+         <extension url="http://hl7.org/fhir/StructureDefinition/implementationguide-page">
+            <valueUri value="Condition-ConditionExample.html"/>
+         </extension>
+         <reference>
+            <reference value="Condition/ConditionExample"/>
+         </reference>
+         <name value="ConditionExample"/>
+         <description value="An example of a condition."/>
+         <exampleCanonical value="http://gematik.de/fhir/TIM/CaseReference/StructureDefinition/ConditionCaseReference"/>
+         <groupingId value="-ex-example"/>
+      </resource>
+      <resource>
+         <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
+            <valueString value="Procedure"/>
+         </extension>
+         <extension url="http://hl7.org/fhir/StructureDefinition/implementationguide-page">
+            <valueUri value="Procedure-ProcedureExample.html"/>
+         </extension>
+         <reference>
+            <reference value="Procedure/ProcedureExample"/>
+         </reference>
+         <name value="ProcedureExample"/>
+         <description value="An example of a encounter."/>
+         <exampleCanonical value="http://gematik.de/fhir/TIM/CaseReference/StructureDefinition/ProcedureCaseReference"/>
+         <groupingId value="-ex-example"/>
+      </resource>
+      <page>
+         <nameUrl value="toc.html"/>
+         <title value="Table of Contents"/>
+         <generation value="html"/>
+         <page>
+            <nameUrl value="index.html"/>
+            <title value="Home"/>
+            <generation value="markdown"/>
+         </page>
+         <page>
+            <nameUrl value="artifacts.html"/>
+            <title value="Artifacts Summary"/>
+            <generation value="html"/>
+            <page>
+               <nameUrl value="StructureDefinition-ConditionCaseReference.html"/>
+               <title value="ConditionCaseReference"/>
+               <generation value="generated"/>
+            </page>
+            <page>
+               <nameUrl value="StructureDefinition-EncounterCaseReference.html"/>
+               <title value="EncounterCaseReference"/>
+               <generation value="generated"/>
+            </page>
+            <page>
+               <nameUrl value="StructureDefinition-PatientCaseReference.html"/>
+               <title value="PatientCaseReference"/>
+               <generation value="generated"/>
+            </page>
+            <page>
+               <nameUrl value="StructureDefinition-ProcedureCaseReference.html"/>
+               <title value="ProcedureCaseReference"/>
+               <generation value="generated"/>
+            </page>
+            <page>
+               <nameUrl value="Encounter-324534708.html"/>
+               <title value="EncounterExample"/>
+               <generation value="generated"/>
+            </page>
+            <page>
+               <nameUrl value="Patient-374885372.html"/>
+               <title value="PatientExample"/>
+               <generation value="generated"/>
+            </page>
+            <page>
+               <nameUrl value="Condition-ConditionExample.html"/>
+               <title value="ConditionExample"/>
+               <generation value="generated"/>
+            </page>
+            <page>
+               <nameUrl value="Procedure-ProcedureExample.html"/>
+               <title value="ProcedureExample"/>
+               <generation value="generated"/>
+            </page>
+         </page>
+      </page>
+      <parameter>
+         <code value="copyrightyear"/>
+         <value value="2022+"/>
+      </parameter>
+      <parameter>
+         <code value="releaselabel"/>
+         <value value="ci-build"/>
+      </parameter>
+      <parameter>
+         <code value="path-resource"/>
+         <value value="input/capabilities"/>
+      </parameter>
+      <parameter>
+         <code value="path-resource"/>
+         <value value="input/examples"/>
+      </parameter>
+      <parameter>
+         <code value="path-resource"/>
+         <value value="input/extensions"/>
+      </parameter>
+      <parameter>
+         <code value="path-resource"/>
+         <value value="input/models"/>
+      </parameter>
+      <parameter>
+         <code value="path-resource"/>
+         <value value="input/operations"/>
+      </parameter>
+      <parameter>
+         <code value="path-resource"/>
+         <value value="input/profiles"/>
+      </parameter>
+      <parameter>
+         <code value="path-resource"/>
+         <value value="input/resources"/>
+      </parameter>
+      <parameter>
+         <code value="path-resource"/>
+         <value value="input/vocabulary"/>
+      </parameter>
+      <parameter>
+         <code value="path-resource"/>
+         <value value="input/maps"/>
+      </parameter>
+      <parameter>
+         <code value="path-resource"/>
+         <value value="input/testing"/>
+      </parameter>
+      <parameter>
+         <code value="path-resource"/>
+         <value value="input/history"/>
+      </parameter>
+      <parameter>
+         <code value="path-resource"/>
+         <value value="fsh-generated/resources"/>
+      </parameter>
+      <parameter>
+         <code value="path-pages"/>
+         <value value="template/config"/>
+      </parameter>
+      <parameter>
+         <code value="path-pages"/>
+         <value value="input/images"/>
+      </parameter>
+      <parameter>
+         <code value="path-liquid"/>
+         <value value="template/liquid"/>
+      </parameter>
+      <parameter>
+         <code value="path-liquid"/>
+         <value value="input/liquid"/>
+      </parameter>
+      <parameter>
+         <code value="path-qa"/>
+         <value value="temp/qa"/>
+      </parameter>
+      <parameter>
+         <code value="path-temp"/>
+         <value value="temp/pages"/>
+      </parameter>
+      <parameter>
+         <code value="path-output"/>
+         <value value="output"/>
+      </parameter>
+      <parameter>
+         <code value="path-tx-cache"/>
+         <value value="input-cache/txcache"/>
+      </parameter>
+      <parameter>
+         <code value="path-suppressed-warnings"/>
+         <value value="input/ignoreWarnings.txt"/>
+      </parameter>
+      <parameter>
+         <code value="path-history"/>
+         <value value="http://gematik.de/fhir/TIM/CaseReference/history.html"/>
+      </parameter>
+      <parameter>
+         <code value="template-html"/>
+         <value value="template-page.html"/>
+      </parameter>
+      <parameter>
+         <code value="template-md"/>
+         <value value="template-page-md.html"/>
+      </parameter>
+      <parameter>
+         <code value="apply-contact"/>
+         <value value="true"/>
+      </parameter>
+      <parameter>
+         <code value="apply-context"/>
+         <value value="true"/>
+      </parameter>
+      <parameter>
+         <code value="apply-copyright"/>
+         <value value="true"/>
+      </parameter>
+      <parameter>
+         <code value="apply-jurisdiction"/>
+         <value value="true"/>
+      </parameter>
+      <parameter>
+         <code value="apply-license"/>
+         <value value="true"/>
+      </parameter>
+      <parameter>
+         <code value="apply-publisher"/>
+         <value value="true"/>
+      </parameter>
+      <parameter>
+         <code value="apply-version"/>
+         <value value="true"/>
+      </parameter>
+      <parameter>
+         <code value="active-tables"/>
+         <value value="true"/>
+      </parameter>
+      <parameter>
+         <code value="fmm-definition"/>
+         <value value="http://hl7.org/fhir/versions.html#maturity"/>
+      </parameter>
+      <parameter>
+         <code value="propagate-status"/>
+         <value value="true"/>
+      </parameter>
+      <parameter>
+         <code value="excludelogbinaryformat"/>
+         <value value="true"/>
+      </parameter>
+   </definition>
+</ImplementationGuide>

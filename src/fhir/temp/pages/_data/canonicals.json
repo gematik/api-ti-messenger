@@ -1,0 +1,37 @@
+[
+  {
+    "id": "CaseReference",
+    "type": "ImplementationGuide",
+    "url": "http://gematik.de/fhir/TIM/CaseReference/ImplementationGuide/CaseReference",
+    "version": "0.1.0",
+    "name": "CaseReference"
+  },
+  {
+    "id": "ConditionCaseReference",
+    "type": "StructureDefinition",
+    "url": "http://gematik.de/fhir/TIM/CaseReference/StructureDefinition/ConditionCaseReference",
+    "version": "0.1.0",
+    "name": "ConditionCaseReference"
+  },
+  {
+    "id": "EncounterCaseReference",
+    "type": "StructureDefinition",
+    "url": "http://gematik.de/fhir/TIM/CaseReference/StructureDefinition/EncounterCaseReference",
+    "version": "0.1.0",
+    "name": "EncounterCaseReference"
+  },
+  {
+    "id": "PatientCaseReference",
+    "type": "StructureDefinition",
+    "url": "http://gematik.de/fhir/TIM/CaseReference/StructureDefinition/PatientCaseReference",
+    "version": "0.1.0",
+    "name": "PatientCaseReference"
+  },
+  {
+    "id": "ProcedureCaseReference",
+    "type": "StructureDefinition",
+    "url": "http://gematik.de/fhir/TIM/CaseReference/StructureDefinition/ProcedureCaseReference",
+    "version": "0.1.0",
+    "name": "ProcedureCaseReference"
+  }
+]

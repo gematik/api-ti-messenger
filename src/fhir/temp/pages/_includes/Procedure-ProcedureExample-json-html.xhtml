@@ -1,0 +1,33 @@
+{% raw %}<pre class="json"><code class="language-json">
+{
+  "<a href="http://hl7.org/fhir/R4/procedure.html#Procedure">resourceType</a>" : "Procedure",
+  "<a href="http://hl7.org/fhir/R4/procedure.html#Procedure.id">id</a>" : "ProcedureExample",
+  "<a href="http://hl7.org/fhir/R4/procedure.html#Procedure.meta">meta</a>" : {
+    "<a href="http://hl7.org/fhir/R4/datatypes.html#Meta#Meta.profile">profile</a>" : [
+      "http://gematik.de/fhir/TIM/CaseReference/StructureDefinition/ProcedureCaseReference"
+    ]
+  },
+  "<a href="http://hl7.org/fhir/R4/procedure.html#Procedure.text">text</a>" : {
+    "<a href="http://hl7.org/fhir/R4/datatypes.html#Narrative#Narrative.status">status</a>" : "generated",
+    "<a href="http://hl7.org/fhir/R4/datatypes.html#Narrative#Narrative.div">div</a>" : "&lt;div xmlns=\&quot;http://www.w3.org/1999/xhtml\&quot;&gt;&lt;p&gt;&lt;b&gt;Generated Narrative&lt;/b&gt;&lt;/p&gt;&lt;div style=\&quot;display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%\&quot;&gt;&lt;p style=\&quot;margin-bottom: 0px\&quot;&gt;Resource \&quot;ProcedureExample\&quot; &lt;/p&gt;&lt;p style=\&quot;margin-bottom: 0px\&quot;&gt;Profile: &lt;a href=\&quot;StructureDefinition-ProcedureCaseReference.html\&quot;&gt;ProcedureCaseReference&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;&lt;p&gt;&lt;b&gt;identifier&lt;/b&gt;: id: ABC1234567890&lt;/p&gt;&lt;p&gt;&lt;b&gt;status&lt;/b&gt;: preparation&lt;/p&gt;&lt;p&gt;&lt;b&gt;subject&lt;/b&gt;: &lt;a href=\&quot;https://simplifier.net/resolve?scope=de.basisprofil.r4@1.3.2&amp;amp;canonical=http://fhir.org/packages/de.basisprofil.r4/374885372\&quot;&gt;374885372&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;encounter&lt;/b&gt;: &lt;a href=\&quot;https://simplifier.net/resolve?scope=de.basisprofil.r4@1.3.2&amp;amp;canonical=http://fhir.org/packages/de.basisprofil.r4/324534708\&quot;&gt;324534708&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;note&lt;/b&gt;: Additional information&lt;/p&gt;&lt;/div&gt;"<a name="end-xhtml"></a>
+  },
+  "<a href="http://hl7.org/fhir/R4/procedure.html#Procedure.identifier">identifier</a>" : [
+    {
+      "<a href="http://hl7.org/fhir/R4/datatypes.html#Identifier#Identifier.system">system</a>" : "http://example.de/StructureDefinition/identifier-interne-abrechnungsnummer",
+      "<a href="http://hl7.org/fhir/R4/datatypes.html#Identifier#Identifier.value">value</a>" : "ABC1234567890"
+    }
+  ],
+  "<a href="http://hl7.org/fhir/R4/procedure.html#Procedure.status">status</a>" : "preparation",
+  "<a href="http://hl7.org/fhir/R4/procedure.html#Procedure.subject">subject</a>" : {
+    "<a href="http://hl7.org/fhir/R4/references.html#Reference#Reference.reference">reference</a>" : "374885372"
+  },
+  "<a href="http://hl7.org/fhir/R4/procedure.html#Procedure.encounter">encounter</a>" : {
+    "<a href="http://hl7.org/fhir/R4/references.html#Reference#Reference.reference">reference</a>" : "324534708"
+  },
+  "<a href="http://hl7.org/fhir/R4/procedure.html#Procedure.note">note</a>" : [
+    {
+      "<a href="http://hl7.org/fhir/R4/datatypes.html#Annotation#Annotation.text">text</a>" : "Additional information"
+    }
+  ]
+}</code></pre>
+{% endraw %}

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Condition xmlns="http://hl7.org/fhir">
+  <id value="ConditionExample"/>
+  <meta>
+    <profile value="http://gematik.de/fhir/TIM/CaseReference/StructureDefinition/ConditionCaseReference"/>
+  </meta>
+  <text>
+    <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p><b>Generated Narrative</b></p><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"><p style="margin-bottom: 0px">Resource "ConditionExample" </p><p style="margin-bottom: 0px">Profile: <a href="StructureDefinition-ConditionCaseReference.html">ConditionCaseReference</a></p></div><p><b>identifier</b>: id: ABC1234567890</p><p><b>clinicalStatus</b>: active <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> ([not stated]#active)</span></p><p><b>verificationStatus</b>: provisional <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> ([not stated]#provisional)</span></p><p><b>category</b>: encounter-diagnosis <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> ([not stated]#encounter-diagnosis)</span></p><p><b>severity</b>: Severe <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> ([not stated]#24484000)</span></p><p><b>code</b>: Heart valve disorder <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> ([not stated]#368009)</span></p><p><b>subject</b>: <a href="https://simplifier.net/resolve?scope=de.basisprofil.r4@1.3.2&amp;canonical=http://fhir.org/packages/de.basisprofil.r4/374885372">374885372</a></p><p><b>encounter</b>: <a href="https://simplifier.net/resolve?scope=de.basisprofil.r4@1.3.2&amp;canonical=http://fhir.org/packages/de.basisprofil.r4/324534708">324534708</a></p><p><b>recordedDate</b>: 2022-05-02</p><p><b>note</b>: Additional information</p></div>
+  </text>
+  <identifier>
+    <system value="http://example.de/StructureDefinition/identifier-interne-abrechnungsnummer"/>
+    <value value="ABC1234567890"/>
+  </identifier>
+  <clinicalStatus>
+    <coding>
+      <code value="active"/>
+    </coding>
+  </clinicalStatus>
+  <verificationStatus>
+    <coding>
+      <code value="provisional"/>
+    </coding>
+  </verificationStatus>
+  <category>
+    <coding>
+      <code value="encounter-diagnosis"/>
+    </coding>
+  </category>
+  <severity>
+    <coding>
+      <code value="24484000"/>
+      <display value="Severe"/>
+    </coding>
+  </severity>
+  <code>
+    <coding>
+      <code value="368009"/>
+      <display value="Heart valve disorder"/>
+    </coding>
+  </code>
+  <subject>
+    <reference value="374885372"/>
+  </subject>
+  <encounter>
+    <reference value="324534708"/>
+  </encounter>
+  <recordedDate value="2022-05-02"/>
+  <note>
+    <text value="Additional information"/>
+  </note>
+</Condition>
