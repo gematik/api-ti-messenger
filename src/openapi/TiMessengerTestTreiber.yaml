@@ -1218,6 +1218,9 @@ components:
         canAdministrateFhirPractitioner:
           type: boolean
           description: "Whether this client can handle operations to administrate a practitioner entry in FHIR-VZD"
+        canSendMessages:
+          type: boolean
+          description: "Whether this client has basic messaging capabilities"
 
     OsInfo:
       description: "General information about the underlying operating system"
