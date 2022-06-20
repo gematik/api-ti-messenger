@@ -2,8 +2,7 @@ openapi: 3.0.3
 info:
   title: TiMessengerTestDriver
   description: REST interface to automate the test of a TI-Messenger client implementation.
-  version: 0.1.0
-  # initiale Version
+  version: 0.2.0
   contact:
     name: gematik GmbH
     email: software-development@gematik.de
@@ -22,7 +21,6 @@ tags:
   - name: info
     description: This operation returns meta data about this interface and the status of available resources
   - name: devices
-
     description: Operations for device management
   - name: account
     description: Account operations
@@ -35,11 +33,11 @@ tags:
   - name: searchInFhirDirectory
     description: Seerch for TIOrganization or TIPractitioner entries (VZD-FHIR-Directory)
   - name: message
-
     description: message operations
   - name: room
-
     description: room operations
+  - name: contactManagement
+    description: contact management operations
 
 paths:
   /:
@@ -90,7 +88,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ClaimRequest"
+              $ref: "#/components/schemas/ClaimDeviceRequest"
       responses:
         "200":
           description: "Device successfully claimed"
@@ -219,7 +217,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/RequestAccount"
+              $ref: "#/components/schemas/CreateAccountRequest"
       responses:
         "201":
           description: "Successfully created a new account with the given data"
@@ -270,7 +268,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/RequestAccount"
+              $ref: "#/components/schemas/CreateAccountRequest"
       responses:
         "200":
           description: "Successfully updated account data"
@@ -472,7 +470,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/FhirSearchResult"
+                $ref: "#/components/schemas/FhirOrganizationSearchResult"
         "401":
           $ref: "#/components/responses/Unauthorized"
         "403":
@@ -507,11 +505,6 @@ paths:
           description: "The telematikId of the TIPractitioner."
           schema:
             type: string
-        - name: identifier
-          in: query
-          description: "The identifier of the TIPractitioner."
-          schema:
-            type: string
         - name: typeCode
           in: query
           description: "The type of the TIPractitioner (TIPractitionerQualificationProfessionOidVS.Code)."
@@ -534,7 +527,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/FhirSearchResult"
+                $ref: "#/components/schemas/FhirPractitionerSearchResult"
         "401":
           $ref: "#/components/responses/Unauthorized"
         "404":
@@ -627,11 +620,42 @@ paths:
         default:
           $ref: "#/components/responses/DefaultResponse"
 
+  /devices/{deviceId}/rooms/public:
+    parameters:
+      - $ref: "#/components/parameters/deviceId"
+
+    get:
+      tags:
+        - room
+      description: "Get public rooms matching params"
+      operationId: getPublicRooms
+      parameters:
+        - name: name
+          in: query
+          description: "Full- or partial name of the Room"
+          schema:
+            type: string
+
+      responses:
+        "200":
+          description: "all associated rooms of the logged in account"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Rooms"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
   /devices/{deviceId}/rooms/{roomId}:
     parameters:
       - $ref: "#/components/parameters/deviceId"
       - $ref: "#/components/parameters/roomId"
-
     get:
       tags:
         - room
@@ -911,6 +935,111 @@ paths:
         default:
           $ref: "#/components/responses/DefaultResponse"
 
+  /devices/{deviceId}/contacts:
+    parameters:
+      - $ref: "#/components/parameters/deviceId"
+
+    get:
+      tags:
+        - contactManagement
+      description: "Returns the contacts with invite settings."
+      operationId: getContacts
+      responses:
+        200:
+          description: "List of all contact settings of the user"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Contacts"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+  /devices/{deviceId}/contacts/{mxidUrl}:
+    parameters:
+      - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/mxidUrl"
+
+    get:
+      tags:
+        - contactManagement
+      description: "Returns the contacts with invite settings."
+      operationId: getContact
+      responses:
+        200:
+          description: "Retrieve the setting for the contact {mxidUrl}."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Contact"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+    post:
+      tags:
+        - contactManagement
+      description: "Creates the setting for the contact {mxidUrl}."
+      operationId: createContactSetting
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Contact"
+      responses:
+        "200":
+          description: "Contact setting for {mxidUrl} successfully created"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Contact"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+    put:
+      tags:
+        - contactManagement
+      description: "Updates the setting for the contact {mxidUrl}."
+      operationId: updateContactSetting
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Contact"
+      responses:
+        "200":
+          description: "Contact setting for {mxidUrl} successfully updated"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Contact"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+    delete:
+      tags:
+        - contactManagement
+      description: "Deletes the setting for the contact {mxidUrl}."
+      operationId: deleteContactSetting
+      responses:
+        "204":
+          description: Deleted
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          description: Unauthorized
+        "404":
+          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
 
 # Descriptions of common components
 components:
@@ -944,6 +1073,16 @@ components:
       schema:
         type: string
         example: msg-4711
+
+    mxidUrl:
+      name: mxidUrl
+      in: path
+      description: "ID of the contact (mxidUrl))."
+      required: true
+      schema:
+        type: string
+        #example: "@you:example.org"
+        example: "matrix:u/you:example.org"
 
   responses:
     DefaultResponse:
@@ -1003,7 +1142,7 @@ components:
           description: "Eine URL zu den Terms of Service für dieses API."
           example: "https://example.com/terms/"
         contact:
-          $ref: "#/components/schemas/Contact"
+          $ref: "#/components/schemas/ContactInfo"
         clientInfo:
           $ref: "#/components/schemas/ClientSoftwareInfo"
         fachdienstInfo:
@@ -1013,7 +1152,7 @@ components:
           description: "Version of the implemented TiMessengerTestDriver"
           example: "1.0.0"
 
-    Contact:
+    ContactInfo:
       readOnly: true
       description: "Die Kontaktinformationen für diese Schnittstelle."
       type: object
@@ -1058,7 +1197,7 @@ components:
         applicationType:
           $ref: "#/components/schemas/ApplicationType"
         contact:
-          $ref: "#/components/schemas/Contact"
+          $ref: "#/components/schemas/ContactInfo"
 
     ClientSoftwareInfo:
       description: "General information about the client software"
@@ -1130,7 +1269,7 @@ components:
         - errorCode
         - errorMessage
 
-    ClaimRequest:
+    ClaimDeviceRequest:
       required:
         - claimerName
         - claimFor
@@ -1236,6 +1375,9 @@ components:
 
     BasicAuthStage:
       description: "AuthStage for username + password authentication"
+      required:
+        - username
+        - password
       type: object
       properties:
         username:
@@ -1248,8 +1390,10 @@ components:
           description: "If authMethod is basicAuth, a password is required"
           example: "mySecretPassword"
 
-    RequestAccount:
+    CreateAccountRequest:
       description: "Data to create a new account with"
+      required:
+        - authType
       type: object
       allOf:
         - $ref: "#/components/schemas/BasicAuthStage"
@@ -1271,7 +1415,6 @@ components:
       description: "Login data"
       type: object
       allOf:
-        - $ref: "#/components/schemas/DeviceId"
         - $ref: "#/components/schemas/BasicAuthStage"
       properties:
         authStage:
@@ -1307,10 +1450,13 @@ components:
       description: "common information for a FHIR-VZD entry"
       type: object
       required:
+        - accountId
         - endpointName
-      allOf:
-        - $ref: "#/components/schemas/AccountId"
       properties:
+        accountId:
+          description: "An identifier for a specific account. Can be the mxId or some other identifier."
+          type: string
+          example: "@someone:gematik.de"
         mxid:
           description: "The Matrix-ID of this entry"
           type: string
@@ -1320,8 +1466,8 @@ components:
           type: string
           example: "Someone"
 
-    FhirSearchResult:
-      description: "The result for a search request"
+    FhirOrganizationSearchResult:
+      description: "The result for a search request for organisations"
       readOnly: true
       type: object
       properties:
@@ -1333,10 +1479,22 @@ components:
           description: "The list of search results. Its size May be smaller than totalSearchResults, if there are many results."
           type: array
           items:
-            #oneOf: FIXME: use oneOf if supported
-            allOf:
-              - $ref: "#/components/schemas/FhirOrganization"
-              - $ref: "#/components/schemas/FhirPractitioner"
+            $ref: "#/components/schemas/FhirOrganization"
+
+    FhirPractitionerSearchResult:
+      description: "The result for a search request for practitioner"
+      readOnly: true
+      type: object
+      properties:
+        totalSearchResults:
+          description: "Total result count for this search. The number of entries in searchResults may be less or equal this number."
+          type: integer
+          example: 42
+        searchResults:
+          description: "The list of search results. Its size May be smaller than totalSearchResults, if there are many results."
+          type: array
+          items:
+            $ref: "#/components/schemas/FhirPractitioner"
 
     FhirPractitioner:
       description: "data of a FHIR-VZD practitioner entry and its connected resources"
@@ -1410,7 +1568,15 @@ components:
           type: string
           format: date-time
           example: 2021-07-20T17:32:28Z
-          description: "timestamp of sending the message"
+          description: "Timestamp of sending the message"
+        lastUpdated:
+          type: string
+          format: date-time
+          example: 2021-07-20T18:32:28Z
+          description: "Timestamp of last editing"
+        author:
+          type: string
+          description: "AccountId of the author of this message"
       allOf:
         - $ref: "#/components/schemas/MessageText"
 
@@ -1479,7 +1645,7 @@ components:
           example: "some theme"
         roomAccess:
           type: string
-          enum: [ privite, public ]
+          enum: [ private, public ]
           description: "The visibility of the room"
         isEncrypted:
           type: boolean
@@ -1489,8 +1655,6 @@ components:
           type: string
           description: "The room identifier. Must be returned in response to a createRoom request. Is used to identify a specific room."
           example: "!dowjfsdkjfskjdfsd:gematik.de"
-      required:
-        - isEncrypted
 
     RoomMembershipState:
       description: "An accounts membership state for a room"
@@ -1517,6 +1681,48 @@ components:
           description: "associated accounts of the room and their states"
           items:
             $ref: "#/components/schemas/RoomMember"
+
+    Contact:
+      description: "Contact settings."
+      type: object
+      properties:
+        mxidUrl:
+          type: string
+          description: "ID of the contact (mxidUrl))."
+          #example: "@you:example.org"
+          example: "matrix:u/you:example.org"
+        inviteSettings:
+          type: object
+          properties:
+            start:
+              type: integer
+              minimum: 0
+              format: int64
+              description: "start (Epoch Unix Timestamp, SECONDS SINCE JAN 01 1970. (UTC))"
+              example: "1654159585"
+            end:
+              type: integer
+              minimum: 0
+              format: int64
+              description: "end  (Epoch Unix Timestamp, SECONDS SINCE JAN 01 1970. (UTC))"
+              example: "1654169585"
+          required:
+            - start
+          description: "Invites from the mxidUrl are granted between start and end date-time."
+      required:
+        - mxidUrl
+        - inviteSettings
+
+    Contacts:
+      description: "The list of contacts and their settings."
+      type: object
+      properties:
+        contacts:
+          description: "The list of contacts and their settings."
+          type: array
+          items:
+            $ref: "#/components/schemas/Contact"
+          readOnly: true
 
 # Mutual TLS is used for authentication of clients. In openAPI 3.0.x is mTLS not supported. Therefore the security scheme is not used.
 #  securitySchemes:
