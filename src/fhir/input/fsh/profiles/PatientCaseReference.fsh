@@ -14,13 +14,6 @@ Description: "A profile of the Patient resource for TI-Messenger communication r
 * identifier[PKVID].system = $IdentifierPKVID (exactly)
   * ^patternIdentifier.type = $v2-0203#PRN
 * name 1..1 MS
-* gender 0.. MS
-* birthDate 0.. MS
-* address 0.. MS
-* photo 0.. MS
-* contact 0.. MS
-* communication 0.. MS
-* generalPractitioner 0.. MS
 
 
 // Instance that should pass validation

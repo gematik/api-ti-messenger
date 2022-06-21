@@ -2,21 +2,7 @@ Profile: EncounterCaseReference
 Parent: Encounter
 Description: "A profile of the Encounter resource for TI-Messenger communication related to a patients case reference."
 * insert Meta
-* id MS
-* identifier MS
-* status MS
-* statusHistory MS
-* class MS
-* type MS
-* serviceType MS
-* priority MS
 * subject 1..1 MS
-* period MS
-* length MS
-* reasonCode MS
-* diagnosis MS
-* account MS
-* hospitalization MS
 
 // Instance that should pass validation
 Instance: EncounterExample
