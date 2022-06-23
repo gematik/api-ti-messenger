@@ -48,36 +48,6 @@
   "differential": {
     "element": [
       {
-        "id": "Procedure.id",
-        "path": "Procedure.id",
-        "mustSupport": true
-      },
-      {
-        "id": "Procedure.identifier",
-        "path": "Procedure.identifier",
-        "mustSupport": true
-      },
-      {
-        "id": "Procedure.status",
-        "path": "Procedure.status",
-        "mustSupport": true
-      },
-      {
-        "id": "Procedure.statusReason",
-        "path": "Procedure.statusReason",
-        "mustSupport": true
-      },
-      {
-        "id": "Procedure.category",
-        "path": "Procedure.category",
-        "mustSupport": true
-      },
-      {
-        "id": "Procedure.code",
-        "path": "Procedure.code",
-        "mustSupport": true
-      },
-      {
         "id": "Procedure.subject",
         "path": "Procedure.subject",
         "mustSupport": true
@@ -85,26 +55,6 @@
       {
         "id": "Procedure.encounter",
         "path": "Procedure.encounter",
-        "mustSupport": true
-      },
-      {
-        "id": "Procedure.reasonCode",
-        "path": "Procedure.reasonCode",
-        "mustSupport": true
-      },
-      {
-        "id": "Procedure.outcome",
-        "path": "Procedure.outcome",
-        "mustSupport": true
-      },
-      {
-        "id": "Procedure.complication",
-        "path": "Procedure.complication",
-        "mustSupport": true
-      },
-      {
-        "id": "Procedure.note",
-        "path": "Procedure.note",
         "mustSupport": true
       }
     ]
