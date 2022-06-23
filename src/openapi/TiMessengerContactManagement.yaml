@@ -3,7 +3,7 @@ info:
   title: I_TiMessengerContactManagement
   description: |
     # Overview
-    This is a TI-Messenger Registrierungsdienst REST interface.
+    This is a TI-Messenger REST interface.
     It is used by TI-Messenger-Clients to manage the invite settings of contacts.
     Each mxid in an active contact setting has the right to invite the
     user who created the contact setting.
@@ -18,7 +18,7 @@ info:
     ## REST operations
     The interface implements CRUD operations to manage the contact settings.
 
-    TI-Messenger-Client ---> Messenger-Service / Messenger-Proxy ---> Registrierungsdienst
+    TI-Messenger-Client ---> Messenger-Proxy
 
     # Contact
   version: 1.0.0
@@ -237,6 +237,10 @@ components:
       description: "Contact settings."
       type: object
       properties:
+        displayName:
+          type: string
+          description: "Name of the contact)."
+          example: "Musterfrau, Erika"
         mxidUrl:
           type: string
           description: "ID of the contact (mxidUrl))."
