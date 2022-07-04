@@ -263,6 +263,7 @@ components:
             - start
           description: "Invites from the mxidUrl are granted between start and end date-time."
       required:
+        - displayName
         - mxidUrl
         - inviteSettings
 
