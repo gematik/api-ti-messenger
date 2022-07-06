@@ -72,7 +72,8 @@ alt#LightGrey #AliceBlue <size:16>Version ist aktuell</size>
     else <size:16>Version ist nicht aktuell</size>
        FP-->RD: Föderationsliste[]
         Deactivate FP
-       RD->RD: Signatur der Föderationsliste prüfen
+       |||
+      RD->RD: Signatur der Föderationsliste prüfen
       RD-->MP: Föderationsliste[]
         Deactivate RD
         deactivate MP
