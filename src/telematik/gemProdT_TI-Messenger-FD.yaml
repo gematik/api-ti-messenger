@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/spilikin/api-tools/main/schema/ApprovalObject.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/spilikin/api-tools/main/schema/ApprovalObject.schema.yaml
 apiVersion: v1
 kind: ApprovalObject
 meta:
@@ -6,7 +6,10 @@ meta:
   version: 1.1.0
   description: |
     ## TI-Messenger-Fachdienst
-    Der TI-Messenger-Fachdienst ermöglicht eine sichere Kommunikation zwischen verschiedenen Akteuren im deutschen Gesundheitswesen. Dieser basiert auf dem offenen und dezentralen Kommunikationsprotokoll Matrix. Dabei stellt der Matrix Standard RESTful-APIs für die sichere Übertragung von JSON-Objekten zwischen Matrix-Clients und weiteren Diensten bereit. Die sichere Kommunikation zwischen den einzelnen Akteuren findet in verschlüsselter Form in Räumen auf den beteiligten Matrix-Homeservern statt.
+    Der TI-Messenger-Fachdienst ermöglicht eine sichere Kommunikation zwischen verschiedenen Akteuren im deutschen Gesundheitswesen.
+    Dieser basiert auf dem offenen und dezentralen Kommunikationsprotokoll Matrix. Dabei stellt der Matrix Standard RESTful-APIs für
+    die sichere Übertragung von JSON-Objekten zwischen Matrix-Clients und weiteren Diensten bereit. Die sichere Kommunikation zwischen
+    den einzelnen Akteuren findet in verschlüsselter Form in Räumen auf den beteiligten Matrix-Homeservern statt.
 spec:
   components:
     - name: Registrierungsdienst
