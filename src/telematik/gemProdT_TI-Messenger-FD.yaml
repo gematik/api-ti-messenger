@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/spilikin/api-tools/main/schema/ApprovalObject.schema.json
+apiVersion: v1
+kind: ApprovalObject
+meta:
+  name: gemProdT_TI-Messenger-FD
+  version: 1.1.0
+  description: |
+    ## TI-Messenger-Fachdienst
+    Der TI-Messenger-Fachdienst ermöglicht eine sichere Kommunikation zwischen verschiedenen Akteuren im deutschen Gesundheitswesen. Dieser basiert auf dem offenen und dezentralen Kommunikationsprotokoll Matrix. Dabei stellt der Matrix Standard RESTful-APIs für die sichere Übertragung von JSON-Objekten zwischen Matrix-Clients und weiteren Diensten bereit. Die sichere Kommunikation zwischen den einzelnen Akteuren findet in verschlüsselter Form in Räumen auf den beteiligten Matrix-Homeservern statt.
+spec:
+  components:
+    - name: Registrierungsdienst
+      provides:
+        - name: I_Registration
+          description: Administration des Organisationsaccounts und des Messenger-Service der Organisation
+        - name: I_internVerification
+        - name: I_VZD_Provider_Services
+    - name: Messenger-Service
+      provides:
+        - name: Matrix-Client-Server-API
+          version: 1.3
+        - name: Matrix-Server-Server-API
+          version: 1.3
+        - name: I_TiMessengerContactManagement
+          version: 1.0.0
+    - name: Push-Gateway
+      provides:
+        - name: Matrix-Push-Gateway-API
+          version: 1.3
