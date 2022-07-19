@@ -17,6 +17,7 @@ externalDocs:
 
 servers:
   - url: https://localhost/ti-messenger-testdriver/
+
 tags:
   - name: info
     description: This operation returns meta data about this interface and the status of available resources
@@ -1284,6 +1285,56 @@ paths:
         default:
           $ref: "#/components/responses/DefaultResponse"
 
+    post:
+      tags:
+        - contactManagement
+      description: "Creates the setting for the contact."
+      operationId: createContactSetting
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Contact"
+      responses:
+        "200":
+          description: "Contact setting successfully created"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Contact"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+    put:
+      tags:
+        - contactManagement
+      description: "Updates the setting for the contact."
+      operationId: updateContactSetting
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Contact"
+      responses:
+        "200":
+          description: "Contact setting successfully updated"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Contact"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
   /devices/{deviceId}/contacts/{mxidUrl}:
     parameters:
       - $ref: "#/components/parameters/deviceId"
@@ -1301,56 +1352,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Contact"
-        default:
-          $ref: "#/components/responses/DefaultResponse"
-
-    post:
-      tags:
-        - contactManagement
-      description: "Creates the setting for the contact {mxidUrl}."
-      operationId: createContactSetting
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Contact"
-      responses:
-        "200":
-          description: "Contact setting for {mxidUrl} successfully created"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Contact"
-        "400":
-          $ref: "#/components/responses/BadRequest"
-        "404":
-          $ref: "#/components/responses/NotFound"
-        default:
-          $ref: "#/components/responses/DefaultResponse"
-
-    put:
-      tags:
-        - contactManagement
-      description: "Updates the setting for the contact {mxidUrl}."
-      operationId: updateContactSetting
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Contact"
-      responses:
-        "200":
-          description: "Contact setting for {mxidUrl} successfully updated"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Contact"
-        "400":
-          $ref: "#/components/responses/BadRequest"
-        "404":
-          $ref: "#/components/responses/NotFound"
         default:
           $ref: "#/components/responses/DefaultResponse"
 
