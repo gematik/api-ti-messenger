@@ -875,7 +875,7 @@ paths:
     post:
       tags:
         - message
-      description: "Send a direct message to another user. Should work without creating a dedicated room first. The recipients accountId is received through a searchInFhirDirectory-Request."
+      description: "Send a direct message to another user. Should work without creating a dedicated room first. The recipients MxId is received through a searchInFhirDirectory-Request."
       operationId: sendDirectMessage
       requestBody:
         content:
@@ -1891,7 +1891,7 @@ components:
       readOnly: true
       type: object
       allOf:
-        - $ref: "#/components/schemas/AccountId"
+        - $ref: "#/components/schemas/MxId"
       properties:
         displayName:
           type: string
@@ -1901,26 +1901,6 @@ components:
           type: string
           description: "The organization of the account"
           example: "some organization"
-
-    FhirEntry:
-      description: "common information for a FHIR-VZD entry"
-      type: object
-      required:
-        - accountId
-        - endpointName
-      properties:
-        accountId:
-          description: "An identifier for a specific account. Can be the mxId or some other identifier."
-          type: string
-          example: "@someone:gematik.de"
-        mxid:
-          description: "The Matrix-ID of this entry"
-          type: string
-          example: "@someone:gematik.de"
-        endpointName:
-          description: "Name of the endpoint"
-          type: string
-          example: "Someone"
 
     FhirPractitionerSearchResult:
       description: "The result for a search request for practitioner"
@@ -2186,20 +2166,11 @@ components:
     MxId:
       description: "The Matrix-ID of an account"
       type: object
+      required:
+        - mxid
       properties:
         mxid:
           description: "The Matrix-ID of an account"
-          type: string
-          example: "@someone:gematik.de"
-
-    AccountId:
-      description: "An identifier for a specific account. Can be the mxId or some other identifier."
-      required:
-        - accountId
-      type: object
-      properties:
-        accountId:
-          description: "An identifier for a specific account. Can be the mxId or some other identifier."
           type: string
           example: "@someone:gematik.de"
 
@@ -2230,7 +2201,7 @@ components:
           description: "Timestamp of last editing"
         author:
           type: string
-          description: "AccountId of the author of this message"
+          description: "MxId of the author of this message"
       allOf:
         - $ref: "#/components/schemas/MessageText"
 
@@ -2266,7 +2237,7 @@ components:
       description: "List of accounts to invite into a room"
       type: array
       items:
-        $ref: "#/components/schemas/AccountId"
+        $ref: "#/components/schemas/MxId"
 
     CreateRoomRequest:
       description: "Information for a new room"
@@ -2277,7 +2248,7 @@ components:
           description: "list of accounts to invite into the new room"
           type: array
           items:
-            $ref: "#/components/schemas/AccountId"
+            $ref: "#/components/schemas/MxId"
 
     Room:
       description: "Information about a room and its members"
@@ -2319,8 +2290,8 @@ components:
       description: ""
       type: object
       properties:
-        accountId:
-          description: "An identifier for a specific account. Can be the mxId or some other identifier."
+        mxid:
+          description: "MxId as identifier, refers to an existing account"
           type: string
           example: "@someone:gematik.de"
         membershipState:
