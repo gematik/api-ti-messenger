@@ -241,6 +241,8 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "404":
           $ref: "#/components/responses/NotFound"
+        "409":
+          $ref: "#/components/responses/Conflict"
         default:
           $ref: "#/components/responses/DefaultResponse"
 
@@ -1469,6 +1471,12 @@ components:
             $ref: "#/components/schemas/Error"
     BadRequest:
       description: "Bad Request"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    Conflict:
+      description: "Conflict"
       content:
         application/json:
           schema:
