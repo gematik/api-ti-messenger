@@ -81,7 +81,7 @@ paths:
     post:
       tags:
         - createContactSetting
-      description: "Creates the setting for the contact {mxidUrl}."
+      description: "Creates the setting for the contact {mxid}."
       operationId: createContactSetting
       requestBody:
         required: true
@@ -91,7 +91,7 @@ paths:
               $ref: "#/components/schemas/Contact"
       responses:
         "200":
-          description: "Contact setting for {mxidUrl} successfully created"
+          description: "Contact setting for {mxid successfully created"
           content:
             application/json:
               schema:
@@ -103,29 +103,10 @@ paths:
         default:
           $ref: "#/components/responses/DefaultResponse"
 
-  /contacts/{mxidUrl}:
-    parameters:
-      - $ref: "#/components/parameters/mxidUrl"
-
-    get:
-      tags:
-        - getContact
-      description: "Returns the contacts with invite settings."
-      operationId: getContact
-      responses:
-        200:
-          description: "Retrieve the setting for the contact {mxidUrl}."
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Contact"
-        default:
-          $ref: "#/components/responses/DefaultResponse"
-
     put:
       tags:
         - updateContactSetting
-      description: "Updates the setting for the contact {mxidUrl}."
+      description: "Updates the setting for the contact {mxid}."
       operationId: updateContactSetting
       requestBody:
         required: true
@@ -135,7 +116,7 @@ paths:
               $ref: "#/components/schemas/Contact"
       responses:
         "200":
-          description: "Contact setting for {mxidUrl} successfully updated"
+          description: "Contact setting for {mxid} successfully updated"
           content:
             application/json:
               schema:
@@ -147,10 +128,29 @@ paths:
         default:
           $ref: "#/components/responses/DefaultResponse"
 
+  /contacts/{mxid}:
+    parameters:
+      - $ref: "#/components/parameters/mxid"
+
+    get:
+      tags:
+        - getContact
+      description: "Returns the contacts with invite settings."
+      operationId: getContact
+      responses:
+        200:
+          description: "Retrieve the setting for the contact {mxid}."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Contact"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
     delete:
       tags:
         - deleteContactSetting
-      description: "Deletes the setting for the contact {mxidUrl}."
+      description: "Deletes the setting for the contact {mxidU."
       operationId: deleteContactSetting
       responses:
         "204":
@@ -169,15 +169,13 @@ components:
 
   parameters:
 
-    mxidUrl:
-      name: mxidUrl
+    mxid:
+      name: mxid
       in: path
-      description: "ID of the contact (mxidUrl))."
+      description: "ID of the contact (mxid))."
       required: true
       schema:
         type: string
-        #example: "@you:example.org"
-        example: "matrix:u/you:example.org"
 
   responses:
     DefaultResponse:
@@ -241,9 +239,9 @@ components:
           type: string
           description: "Name of the contact)."
           example: "Musterfrau, Erika"
-        mxidUrl:
+        mxid:
           type: string
-          description: "ID of the contact (mxidUrl))."
+          description: "ID of the contact (mxid))."
           #example: "@you:example.org"
           example: "matrix:u/you:example.org"
         inviteSettings:
@@ -261,10 +259,10 @@ components:
               example: "1654169585"
           required:
             - start
-          description: "Invites from the mxidUrl are granted between start and end date-time."
+          description: "Invites from the mxid are granted between start and end date-time."
       required:
         - displayName
-        - mxidUrl
+        - mxid
         - inviteSettings
 
     Contacts:
