@@ -150,7 +150,7 @@ paths:
     delete:
       tags:
         - deleteContactSetting
-      description: "Deletes the setting for the contact {mxid."
+      description: "Deletes the setting for the contact {mxid}."
       operationId: deleteContactSetting
       responses:
         "204":
