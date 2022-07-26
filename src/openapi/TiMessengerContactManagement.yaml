@@ -150,7 +150,7 @@ paths:
     delete:
       tags:
         - deleteContactSetting
-      description: "Deletes the setting for the contact {mxidU."
+      description: "Deletes the setting for the contact {mxid."
       operationId: deleteContactSetting
       responses:
         "204":
@@ -242,8 +242,6 @@ components:
         mxid:
           type: string
           description: "ID of the contact (mxid))."
-          #example: "@you:example.org"
-          example: "matrix:u/you:example.org"
         inviteSettings:
           type: object
           properties:
