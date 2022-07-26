@@ -78,25 +78,6 @@ paths:
         default:
           $ref: "#/components/responses/DefaultResponse"
 
-  /contacts/{mxidUrl}:
-    parameters:
-      - $ref: "#/components/parameters/mxidUrl"
-
-    get:
-      tags:
-        - getContact
-      description: "Returns the contacts with invite settings."
-      operationId: getContact
-      responses:
-        200:
-          description: "Retrieve the setting for the contact {mxidUrl}."
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Contact"
-        default:
-          $ref: "#/components/responses/DefaultResponse"
-
     post:
       tags:
         - createContactSetting
@@ -119,6 +100,25 @@ paths:
           $ref: "#/components/responses/BadRequest"
         "404":
           $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+  /contacts/{mxidUrl}:
+    parameters:
+      - $ref: "#/components/parameters/mxidUrl"
+
+    get:
+      tags:
+        - getContact
+      description: "Returns the contacts with invite settings."
+      operationId: getContact
+      responses:
+        200:
+          description: "Retrieve the setting for the contact {mxidUrl}."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Contact"
         default:
           $ref: "#/components/responses/DefaultResponse"
 
