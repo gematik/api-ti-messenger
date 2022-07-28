@@ -72,8 +72,12 @@ alt#LightGrey #AliceBlue <size:16>Version ist aktuell</size>
     else <size:16>Version ist nicht aktuell</size>
        FP-->RD: Föderationsliste[]
         Deactivate FP
+       |||
       RD-->MP: Föderationsliste[]
         Deactivate RD
+      MP->MP: Signatur der Föderationsliste prüfen
+      'Needed for correct deactivation in case last message is message to itself
+      MP-[hidden]->MP
         deactivate MP
     |||
 end

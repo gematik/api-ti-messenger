@@ -110,10 +110,7 @@ MH->MH: Prüfung auf \nOrganisationszugehörigkeit
         == <font color=green><size:16>  Berechtigungskonzept - Stufe 2</size></font>  ==     
        
          activate MP2
-        MP2->RD2: \nPrüfung, ob MXID \ndes Einladenden \nin der Freigabeliste \nenthalten ist
-         activate RD2
-        RD2-->MP2: status
-         deactivate RD2
+        MP2->MP2: \nPrüfung, ob MXID \ndes Einladenden \nin der Freigabeliste \nenthalten ist
         |||
           
           alt#LightGrey #MOTIVATION  <size:16>MXID des Einladenden ist in der Freigabeliste enthalten</size>

@@ -44,7 +44,6 @@ ActorFontName Aapex
     participant MH2 as "Matrix-\nHomeserver"
     participant PG2 as "Push-\nGateway"
     end box
-    participant RD2 as "Registrierungs-\nDienst"
     participant C2 as "TI-Messenger-\nClient" #TECHNOLOGY
     actor U2 as "\nAkteur - B in der Rolle\nUser / User-HBA\n"
     
@@ -78,21 +77,16 @@ note over U2, MP2: \n<size:17>Der Akteur B ist erfolgreich beim Messenger Servic
          
          opt#LightGrey #AliceBlue <size:16>Eintrag in Freigabeliste erzeugen</size>
          |||
-           C2->MP2: POST /tim-contact-mgmt/createContactSetting (MXID, start, end)
+           C2->MP2: POST /tim-contact-mgmt/createContactSetting (MXID, start, end, Matrix-OpenID-Token)
            activate MP2
            |||
-           MP2->RD2: HTTP(S) Forward
-           activate RD2
-           RD2->MH2: GET /openid/userinfo/?Matrix-OpenID-Token
+           MP2->MH2: GET /openid/userinfo/\n?Matrix-OpenID-Token
            activate MH2
-           MH2->MH2: prüfe Matrix-OpenID-Token
-           MH2-->RD2: status
+           MH2->MH2: prüfe \nMatrix-OpenID-Token
+           MH2-->MP2: status
            deactivate MH2
            |||
-           RD2->RD2: MXID von Akteur A \nin Freigabeliste \nfür Akteur B \naufnehmen
-           |||
-           RD2-->MP2: status
-           deactivate RD2
+           MP2->MP2: MXID von Akteur A \nin Freigabeliste \nfür Akteur B \naufnehmen
            |||
            MP2-->C2: status
            deactivate MP2

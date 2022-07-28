@@ -107,6 +107,12 @@ alt#LightGrey #AliceBlue <size:16>Organisation nicht am Registrierungs-Dienst au
         |||
         oa -> wb: Admin Account anlegen
           activate wb
+        wb -> wb: Prüfung auf existierenden Admin Account
+         opt #MistyRose <size:15>Abbruch</size>
+         wb -> oa: Admin Account existiert bereits
+         |||
+        end  
+         |||
         wb -> rd: POST /register (id_token, Client-Credentials)
           activate rd
         rd -> rd: id_token prüfen
