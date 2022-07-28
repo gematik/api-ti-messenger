@@ -2,8 +2,7 @@ openapi: 3.0.3
 info:
   title: TiMessengerTestDriver
   description: REST interface to automate the test of a TI-Messenger client implementation.
-  version: 0.1.0
-  # initiale Version
+  version: 0.2.0
   contact:
     name: gematik GmbH
     email: software-development@gematik.de
@@ -18,28 +17,35 @@ externalDocs:
 
 servers:
   - url: https://localhost/ti-messenger-testdriver/
+
 tags:
   - name: info
     description: This operation returns meta data about this interface and the status of available resources
   - name: devices
-
     description: Operations for device management
   - name: account
     description: Account operations
   - name: login/logout
     description: login / logout an account
-  - name: orgAdminFhirAdministration
-    description: "orgAdmin operations for VZD-FHIR-Directory administration of an organization and its HealthcareServices, Locations and Endpoints"
+  - name: orgAdminFhirOrganization
+    description: OrgAdmin operations that could be operated on organizations in FHIR-VZD
+  - name: orgAdminFhirHealthcareService
+    description: OrgAdmin operations of HealthcareServices of an organization to FHIR-VZD
+  - name: orgAdminFhirEndpoints
+    description: OrgAdmin operations of Endpoints of an organization to FHIR-VZD
+  - name: orgAdminFhirLocations
+    description: OrgAdmin operations of Locations of an organization to FHIR-VZD
   - name: practitionerFhirAdministration
     description: operations for practitioner to write to FHIR-VZD
   - name: searchInFhirDirectory
-    description: Seerch for TIOrganization or TIPractitioner entries (VZD-FHIR-Directory)
+    description: Search for TIOrganization or TIPractitioner entries (VZD-FHIR-Directory)
   - name: message
 
     description: message operations
   - name: room
-
     description: room operations
+  - name: contactManagement
+    description: contact management operations
 
 paths:
   /:
@@ -90,7 +96,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ClaimRequest"
+              $ref: "#/components/schemas/ClaimDeviceRequest"
       responses:
         "200":
           description: "Device successfully claimed"
@@ -219,7 +225,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/RequestAccount"
+              $ref: "#/components/schemas/CreateAccountRequest"
       responses:
         "201":
           description: "Successfully created a new account with the given data"
@@ -235,6 +241,8 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "404":
           $ref: "#/components/responses/NotFound"
+        "409":
+          $ref: "#/components/responses/Conflict"
         default:
           $ref: "#/components/responses/DefaultResponse"
 
@@ -270,7 +278,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/RequestAccount"
+              $ref: "#/components/schemas/CreateAccountRequest"
       responses:
         "200":
           description: "Successfully updated account data"
@@ -332,12 +340,335 @@ paths:
         default:
           $ref: "#/components/responses/DefaultResponse"
 
-  # TODO: orgAdminFhirAdministration - orgAdmin operations for VZD-FHIR-Directory administration of an organization and its HealthcareServices, Locations and Endpoints
-  # this operations will be defined in the future
-  #/devices/{deviceId}/fhir/organization:
-  #/devices/{deviceId}/fhir/organization/{organizationId}/healthcareService:
-  #/devices/{deviceId}/fhir/organization/{organizationId}/healthcareService/{healthcareServiceId}/location:
-  #/devices/{deviceId}/fhir/organization/{organizationId}/healthcareService/{healthcareServiceId}/endpoint:
+  /devices/{deviceId}/fhir/org:
+    parameters:
+      - $ref: "#/components/parameters/deviceId"
+    get:
+      tags:
+        - orgAdminFhirOrganization
+      description: "Get organization from the selected device"
+      operationId: "Get organization"
+      responses:
+        "200":
+          description: "Data of organization from claimed client"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FhirOrganization"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+  /devices/{deviceId}/fhir/org/healthcareService:
+    parameters:
+      - $ref: "#/components/parameters/deviceId"
+
+    get:
+      tags:
+        - orgAdminFhirHealthcareService
+      description: "Get healthcareServices regarding the named organizationId"
+      operationId: GetHealthcareServices
+      responses:
+        "200":
+          description: "List of all healthcareServices associated with organization"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FhirHealthcareServices"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+    post:
+      tags:
+        - orgAdminFhirHealthcareService
+      description: "Created new healthcare service"
+      operationId: CreateHealthcareService
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FhirCreateHealthcareService"
+      responses:
+        "201":
+          description: "Successfully created a new healthcare service with the given data"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FhirHealthcareService"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+  /devices/{deviceId}/fhir/org/healthcareService/{hsId}:
+    parameters:
+      - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/healthcareServiceId"
+
+    get:
+      tags:
+        - orgAdminFhirHealthcareService
+      description: "Get specific healthcareService regarding"
+      operationId: GetHealthcareService
+      responses:
+        "200":
+          description: "Data of healthcareService associated with healthcareServiceId"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FhirHealthcareService"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+    put:
+      tags:
+        - orgAdminFhirHealthcareService
+      description: ""
+      operationId: UpdateHealthcareService
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FhirCreateHealthcareService"
+      responses:
+        "200":
+          description: "Successful updated healthcare service"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FhirHealthcareService"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+    delete:
+      tags:
+        - orgAdminFhirHealthcareService
+      description: "Delete specific healthcareService regarding"
+      operationId: DeleteHealthcareService"
+      responses:
+        "204":
+          description: "Successfully delete healthcare service"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+  /devices/{deviceId}/fhir/org/healthcareService/{hsId}/location:
+    parameters:
+      - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/healthcareServiceId"
+
+    get:
+      tags:
+        - orgAdminFhirLocations
+      description: "Get all locations for healthcare service"
+      operationId: "GetLocations"
+      responses:
+        "200":
+          description: "Successfully get all locations for healthcare service"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FhirLocations"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+    post:
+      tags:
+        - orgAdminFhirLocations
+      description: "Create location"
+      operationId: "CreateLocation"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FhirLocation"
+      responses:
+        "201":
+          description: "Successful created"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FhirLocation"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+  /devices/{deviceId}/fhir/org/healthcareService/{hsId}/location/{locId}:
+    parameters:
+      - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/healthcareServiceId"
+      - $ref: "#/components/parameters/locationId"
+
+    get:
+      tags:
+        - orgAdminFhirLocations
+      operationId: "GetLocation"
+      responses:
+        "200":
+          description: "Successfully get Location"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FhirLocation"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+    put:
+      tags:
+        - orgAdminFhirLocations
+      description: "Updates a Location"
+      operationId: "UpdateLocation"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FhirLocation"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FhirLocation"
+          description: "Successfully updated location"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+    delete:
+      tags:
+        - orgAdminFhirLocations
+      description: "Deletes a location"
+      operationId: "DeleteLocation"
+      responses:
+        "204":
+          description: "Successfully delete location"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+  /devices/{deviceId}/fhir/org/healthcareService/{hsId}/endpoint:
+    parameters:
+      - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/healthcareServiceId"
+
+    get:
+      tags:
+        - orgAdminFhirEndpoints
+      description: "Get all endpoints for healthcare service"
+      operationId: "GetEndpoints"
+      responses:
+        "200":
+          description: "Successfully get all endpoints for healthcare service"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FhirEndpoints"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+    post:
+      tags:
+        - orgAdminFhirEndpoints
+      description: "Create endpoint"
+      operationId: "CreateEndpoint"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FhirEndpoint"
+      responses:
+        "201":
+          description: "Successful created"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FhirEndpoint"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+  /devices/{deviceId}/fhir/org/healthcareService/{hsId}/endpoint/{endId}:
+    parameters:
+      - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/healthcareServiceId"
+      - $ref: "#/components/parameters/endpointId"
+
+    get:
+      tags:
+        - orgAdminFhirEndpoints
+      operationId: "GetEndpoint"
+      responses:
+        "200":
+          description: "Successfully get endpoint"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FhirEndpoint"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+    put:
+      tags:
+        - orgAdminFhirEndpoints
+      description: "Updates an endpoint"
+      operationId: "UpdateEndpoint"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FhirEndpoint"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FhirEndpoint"
+          description: "Successfully updated endpoint"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+    delete:
+      tags:
+        - orgAdminFhirEndpoints
+      description: "Deletes a endpoint"
+      operationId: "DeleteEndpoint"
+      responses:
+        "204":
+          description: "Successfully delete endpoint"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
 
   /devices/{deviceId}/fhir/mxidInFhirDirectory:
     parameters:
@@ -420,6 +751,11 @@ paths:
       description: "Returns the found TIOrganization entries."
       operationId: searchTIOrganizationInFhirDirectory
       parameters:
+        - name: healthcareServiceName
+          in: query
+          description: "Name of the healthcare service"
+          schema:
+            type: string
         - name: name
           in: query
           description: "Name of the TIOrganization"
@@ -433,11 +769,6 @@ paths:
         - name: telematikId
           in: query
           description: "The telematikId of the TIOrganization."
-          schema:
-            type: string
-        - name: identifier
-          in: query
-          description: "The identifier of the TIOrganization."
           schema:
             type: string
         - name: typeCode
@@ -472,7 +803,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/FhirSearchResult"
+                $ref: "#/components/schemas/FhirOrganizationSearchResultList"
         "401":
           $ref: "#/components/responses/Unauthorized"
         "403":
@@ -507,11 +838,6 @@ paths:
           description: "The telematikId of the TIPractitioner."
           schema:
             type: string
-        - name: identifier
-          in: query
-          description: "The identifier of the TIPractitioner."
-          schema:
-            type: string
         - name: typeCode
           in: query
           description: "The type of the TIPractitioner (TIPractitionerQualificationProfessionOidVS.Code)."
@@ -534,7 +860,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/FhirSearchResult"
+                $ref: "#/components/schemas/FhirPractitionerSearchResult"
         "401":
           $ref: "#/components/responses/Unauthorized"
         "404":
@@ -549,7 +875,7 @@ paths:
     post:
       tags:
         - message
-      description: "Send a direct message to another user. Should work without creating a dedicated room first. The recipients accountId is received through a searchInFhirDirectory-Request."
+      description: "Send a direct message to another user. Should work without creating a dedicated room first. The recipients MxId is received through a searchInFhirDirectory-Request."
       operationId: sendDirectMessage
       requestBody:
         content:
@@ -627,11 +953,42 @@ paths:
         default:
           $ref: "#/components/responses/DefaultResponse"
 
+  /devices/{deviceId}/rooms/public:
+    parameters:
+      - $ref: "#/components/parameters/deviceId"
+
+    get:
+      tags:
+        - room
+      description: "Get public rooms matching params"
+      operationId: getPublicRooms
+      parameters:
+        - name: name
+          in: query
+          description: "Full- or partial name of the Room"
+          schema:
+            type: string
+
+      responses:
+        "200":
+          description: "all associated rooms of the logged in account"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Rooms"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
   /devices/{deviceId}/rooms/{roomId}:
     parameters:
       - $ref: "#/components/parameters/deviceId"
       - $ref: "#/components/parameters/roomId"
-
     get:
       tags:
         - room
@@ -911,6 +1268,111 @@ paths:
         default:
           $ref: "#/components/responses/DefaultResponse"
 
+  /devices/{deviceId}/contacts:
+    parameters:
+      - $ref: "#/components/parameters/deviceId"
+
+    get:
+      tags:
+        - contactManagement
+      description: "Returns the contacts with invite settings."
+      operationId: getContacts
+      responses:
+        200:
+          description: "List of all contact settings of the user"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Contacts"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+    post:
+      tags:
+        - contactManagement
+      description: "Creates the setting for the contact."
+      operationId: createContactSetting
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Contact"
+      responses:
+        "200":
+          description: "Contact setting successfully created"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Contact"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+    put:
+      tags:
+        - contactManagement
+      description: "Updates the setting for the contact."
+      operationId: updateContactSetting
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Contact"
+      responses:
+        "200":
+          description: "Contact setting successfully updated"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Contact"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+  /devices/{deviceId}/contacts/{mxidUrl}:
+    parameters:
+      - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/mxidUrl"
+
+    get:
+      tags:
+        - contactManagement
+      description: "Returns the contacts with invite settings."
+      operationId: getContact
+      responses:
+        200:
+          description: "Retrieve the setting for the contact {mxidUrl}."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Contact"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+    delete:
+      tags:
+        - contactManagement
+      description: "Deletes the setting for the contact {mxidUrl}."
+      operationId: deleteContactSetting
+      responses:
+        "204":
+          description: Deleted
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          description: Unauthorized
+        "404":
+          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
 
 # Descriptions of common components
 components:
@@ -945,6 +1407,43 @@ components:
         type: string
         example: msg-4711
 
+    mxidUrl:
+      name: mxidUrl
+      in: path
+      description: "ID of the contact (mxidUrl))."
+      required: true
+      schema:
+        type: string
+        #example: "@you:example.org"
+        example: "matrix:u/you:example.org"
+
+    healthcareServiceId:
+      name: hsId
+      in: path
+      description: "ID of the healthcareService"
+      required: true
+      schema:
+        type: string
+        example: 1a62648f-55a7-42d5-ab7f-841e78be390e
+
+    locationId:
+      name: locId
+      in: path
+      description: "ID of the location"
+      required: true
+      schema:
+        type: string
+        example: c8632e61-b04d-4c3f-9818-ab9a641ef18a
+
+    endpointId:
+      name: endId
+      in: path
+      description: "ID of the location"
+      required: true
+      schema:
+        type: string
+        example: 81add1c5-675b-4785-9405-a2e75b660b2e
+
   responses:
     DefaultResponse:
       description: "The default error response"
@@ -976,6 +1475,12 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/Error"
+    Conflict:
+      description: "Conflict"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
 
   schemas:
 
@@ -1003,7 +1508,7 @@ components:
           description: "Eine URL zu den Terms of Service für dieses API."
           example: "https://example.com/terms/"
         contact:
-          $ref: "#/components/schemas/Contact"
+          $ref: "#/components/schemas/ContactInfo"
         clientInfo:
           $ref: "#/components/schemas/ClientSoftwareInfo"
         fachdienstInfo:
@@ -1013,7 +1518,7 @@ components:
           description: "Version of the implemented TiMessengerTestDriver"
           example: "1.0.0"
 
-    Contact:
+    ContactInfo:
       readOnly: true
       description: "Die Kontaktinformationen für diese Schnittstelle."
       type: object
@@ -1033,6 +1538,94 @@ components:
           format: email
           description: "Der E-Mail Adresse der Kontaktperson / -Organisation."
           example: "support@example.com"
+
+    Telecom:
+      description: "THIS HAVE TO BE CLARIFIED!!!"
+      type: object
+      properties:
+        id:
+          description: "THIS HAVE TO BE CLARIFIED!!!"
+          type: string
+          example: "THIS HAVE TO BE CLARIFIED!!!"
+
+    FhirLocation:
+      description: "The location(s) where this healthcare service may be provided"
+      type: object
+      properties:
+        locationId:
+          description: "The unique identifier of a local resource"
+          type: string
+          example: 41300796-8363-4d82-b60f-08f530d5b447
+        name:
+          type: string
+          description: "Name of the location as used by humans. Does not need to be unique"
+          example: "gematik GmbH"
+        description:
+          description: "Description of the Location, which helps in finding or referencing the place"
+          example: "Headquarter of gematik"
+          type: string
+        address:
+          $ref: "#/components/schemas/Address"
+        position:
+          $ref: "#/components/schemas/Position"
+        hoursOfOperation:
+          description: ""
+          type: array
+          items:
+            type: string
+          example: [ "TBD have to be discussed" ]
+        availabilityExceptions:
+          description: ""
+          type: array
+          items:
+            type: string
+          example: [ "TBD have to be discussed" ]
+
+    FhirLocations:
+      type: object
+      properties:
+        locations:
+          type: array
+          items:
+            $ref: "#/components/schemas/FhirLocation"
+
+    Address:
+      description: "Physical location"
+      type: object
+      properties:
+        line:
+          description: "Street name, number, direction & P.O. Box etc."
+          type: string
+          example: Friedrichstraße 136
+        city:
+          description: "Name of city, town etc."
+          type: string
+          example: Berlin
+        state:
+          description: "Sub-unit of country (abbreviations ok)"
+          type: string
+          example: Berlin
+        postalCode:
+          description: "Postal code for area"
+          type: string
+          example: 10117
+        country:
+          description: "Country (e.g. can be ISO 3166 2 or 3 letter code)"
+          type: string
+          example: DE
+
+    Position:
+      description: "The absolute geographic location of the Location, expressed using the WGS84 datum (This is the same co-ordinate system used in KML)"
+      type: object
+      properties:
+        lon:
+          description: "Longitude"
+          type: number
+          example: 13.387548
+        lat:
+          description: "Lantitude"
+          type: number
+          example: 52.522680
 
     SoftwareInfo:
       description: "General information about a software"
@@ -1058,7 +1651,7 @@ components:
         applicationType:
           $ref: "#/components/schemas/ApplicationType"
         contact:
-          $ref: "#/components/schemas/Contact"
+          $ref: "#/components/schemas/ContactInfo"
 
     ClientSoftwareInfo:
       description: "General information about the client software"
@@ -1079,6 +1672,9 @@ components:
         canAdministrateFhirPractitioner:
           type: boolean
           description: "Whether this client can handle operations to administrate a practitioner entry in FHIR-VZD"
+        canSendMessages:
+          type: boolean
+          description: "Whether this client has basic messaging capabilities"
 
     OsInfo:
       description: "General information about the underlying operating system"
@@ -1115,7 +1711,6 @@ components:
           description: "Version of the used Browser"
           example: 1.0.0
 
-
     Error:
       description: "Default error object with information about the occurred error"
       type: object
@@ -1130,7 +1725,7 @@ components:
         - errorCode
         - errorMessage
 
-    ClaimRequest:
+    ClaimDeviceRequest:
       required:
         - claimerName
         - claimFor
@@ -1236,6 +1831,9 @@ components:
 
     BasicAuthStage:
       description: "AuthStage for username + password authentication"
+      required:
+        - username
+        - password
       type: object
       properties:
         username:
@@ -1248,8 +1846,10 @@ components:
           description: "If authMethod is basicAuth, a password is required"
           example: "mySecretPassword"
 
-    RequestAccount:
+    CreateAccountRequest:
       description: "Data to create a new account with"
+      required:
+        - authType
       type: object
       allOf:
         - $ref: "#/components/schemas/BasicAuthStage"
@@ -1271,7 +1871,6 @@ components:
       description: "Login data"
       type: object
       allOf:
-        - $ref: "#/components/schemas/DeviceId"
         - $ref: "#/components/schemas/BasicAuthStage"
       properties:
         authStage:
@@ -1292,7 +1891,7 @@ components:
       readOnly: true
       type: object
       allOf:
-        - $ref: "#/components/schemas/AccountId"
+        - $ref: "#/components/schemas/MxId"
       properties:
         displayName:
           type: string
@@ -1303,25 +1902,8 @@ components:
           description: "The organization of the account"
           example: "some organization"
 
-    FhirEntry:
-      description: "common information for a FHIR-VZD entry"
-      type: object
-      required:
-        - endpointName
-      allOf:
-        - $ref: "#/components/schemas/AccountId"
-      properties:
-        mxid:
-          description: "The Matrix-ID of this entry"
-          type: string
-          example: "@someone:gematik.de"
-        endpointName:
-          description: "name of the endpoint"
-          type: string
-          example: "Someone"
-
-    FhirSearchResult:
-      description: "The result for a search request"
+    FhirPractitionerSearchResult:
+      description: "The result for a search request for practitioner"
       readOnly: true
       type: object
       properties:
@@ -1333,61 +1915,284 @@ components:
           description: "The list of search results. Its size May be smaller than totalSearchResults, if there are many results."
           type: array
           items:
-            #oneOf: FIXME: use oneOf if supported
-            allOf:
-              - $ref: "#/components/schemas/FhirOrganization"
-              - $ref: "#/components/schemas/FhirPractitioner"
+            $ref: "#/components/schemas/FhirPractitioner"
+
+    FhirOrganizationSearchResultList:
+      description: "The result for a search request for organisations"
+      readOnly: true
+      type: object
+      properties:
+        totalSearchResults:
+          description: "Total result count for this search. The number of entries in searchResults may be less or equal this number."
+          type: integer
+          example: 42
+        searchResults:
+          description: "The list of search results. Its size May be smaller than totalSearchResults, if there are many results."
+          type: array
+          items:
+            $ref: "#/components/schemas/FhirOrganizationSearchResult"
+
+    FhirOrganizationSearchResult:
+      description: "A flat description of an endpoint with belonging healthcare service and organization"
+      readOnly: true
+      type: object
+      properties:
+        Organization:
+          $ref: "#/components/schemas/FhirOrganization"
+        HealthcareService:
+          $ref: "#/components/schemas/FhirHealthcareService"
+        Endpoint:
+          $ref: "#/components/schemas/FhirEndpoint"
+
+    FhirHealthcareSearchResult:
+      description: "The result for a search request for all healthcare services of an organization"
+      readOnly: true
+      type: object
+      properties:
+        totalSearchResults:
+          description: "Total result count for this search. The number of entries in searchResults may be less or equal this number."
+          type: integer
+          example: 42
+        searchResults:
+          description: "The list of search results. Its size May be smaller than totalSearchResults, if there are many results."
+          type: array
+          items:
+            $ref: "#/components/schemas/FhirHealthcareService"
 
     FhirPractitioner:
       description: "data of a FHIR-VZD practitioner entry and its connected resources"
       readOnly: true
       type: object
-      allOf:
-        - $ref: "#/components/schemas/FhirEntry"
+      required:
+        - mxid
+        - practitionerName
       properties:
+        mxid:
+          description: "The Matrix-ID of this entry"
+          type: string
+          example: "@someone:gematik.de"
         practitionerName:
-          description: "name of the practitioner"
+          description: "Name of the practitioner"
           type: string
           example: "Peter Practitioner"
+        endpointName:
+          description: "Name of the endpoint"
+          type: string
+          example: "Someone"
         practitionerQualifications:
-          description: "qualifications of the practitioner"
+          description: "Qualifications of the practitioner"
           type: array
           items:
-            type: string
+            $ref: "#/components/schemas/CodeableConcept"
 
     FhirOrganization:
       description: "data of a FHIR-VZD organization entry and its connected resources"
       readOnly: true
       type: object
-      allOf:
-        - $ref: "#/components/schemas/FhirEntry"
+      required:
+        - organizationId
       properties:
-        organizationName:
-          description: "name of the organization"
-          example: "some organization"
+        organizationId:
+          description: "Identifier of the organization"
           type: string
+          example: "fa2b79c8-ed57-11ec-8ea0-0242ac120002"
+        active:
+          description: "Is organization active"
+          example: true
+          type: boolean
+        type:
+          description: "Type of organization (https://gematik.de/fhir/directory/CodeSystem/OrganizationProviderType)"
+          type: string
+          enum: [ tim-provider ]
+          example: "tim-provider"
+        name:
+          description: "Name of the organization"
+          type: string
+          example: "Regenbogen-Klinik"
+        alias:
+          description: "Possible alias for the organization"
+          type: array
+          items:
+            type: string
+          example: [ "Rainbow-Klinik" ]
+        telecom:
+          type: array
+          items:
+            $ref: "#/components/schemas/Telecom"
+        contact:
+          type: array
+          items:
+            $ref: "#/components/schemas/ContactInfo"
+
+    FhirHealthcareService:
+      description: "data of a FHIR-VZD organization entry and its connected resources"
+      type: object
+      required:
+        - providedBy
+        - name
+      properties:
+        healthcareServiceId:
+          description: "The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes."
+          type: string
+          example: "1a62648f-55a7-42d5-ab7f-841e78be390e"
+        providedBy:
+          description: "Reference to the associated organization"
+          type: string
+          example: "fa2b79c8-ed57-11ec-8ea0-0242ac120002"
+        speciality:
+          $ref: "#/components/schemas/FhirSpeciality"
+        location:
+          type: array
+          items:
+            $ref: "#/components/schemas/FhirLocation"
         healthcareServiceName:
-          description: "name of the healthcare service"
-          example: "Rehabilitative Care"
+          description: "Name of the healthcare service"
           type: string
+          example: "Rehabilitative Care"
+        telecom:
+          type: array
+          items:
+            $ref: "#/components/schemas/Telecom"
+        serviceProvisionCode:
+          type: array
+          example: free
+          items:
+            enum: [ payed, free ]
+        communication:
+          description: "The language that this service is offered in"
+          type: array
+          example: [ "deutsch", "english" ]
+          items:
+            type: string
+        appointmentRequired:
+          description: "If an appointment is required for access to this service"
+          type: boolean
+          example: true
+        availableTime:
+          description: "Times the service site is available"
+          type: string
+          example: "Mon - Fri | 10:00 - 14:00"
+        availabilityExceptions:
+          description: "Description of availability exceptions"
+          type: string
+          example: "During summer holiday"
+        endpoint:
+          description: "Technical endpoints providing access to electronic services operated for the healthcare service"
+          type: array
+          items:
+            $ref: "#/components/schemas/FhirEndpoint"
+
+    FhirHealthcareServices:
+      type: object
+      properties:
+        healthcareServices:
+          description: "The list of healthcare services"
+          type: array
+          items:
+            $ref: "#/components/schemas/FhirHealthcareService"
+
+    FhirCreateHealthcareService:
+      description: "data of a FHIR-VZD organization entry and its connected resources"
+      type: object
+      required:
+        - name
+      properties:
+        speciality:
+          $ref: "#/components/schemas/FhirSpeciality"
+        location:
+          type: array
+          items:
+            $ref: "#/components/schemas/FhirLocation"
+        healthcareServiceName:
+          description: "Name of the healthcare service"
+          type: string
+          example: "Rehabilitative Care"
+        telecom:
+          type: array
+          items:
+            $ref: "#/components/schemas/Telecom"
+        serviceProvisionCode:
+          type: array
+          example: free
+          items:
+            enum: [ payed, free ]
+        communication:
+          description: "The language that this service is offered in"
+          type: array
+          example: [ "deutsch", "english" ]
+          items:
+            type: string
+        appointmentRequired:
+          description: "If an appointment is required for access to this service"
+          type: boolean
+          example: true
+        availableTime:
+          description: "Times the service site is available"
+          type: string
+          example: "Mon - Fri | 10:00 - 14:00"
+        availabilityExceptions:
+          description: "Description of availability exceptions"
+          type: string
+          example: "During summer holiday"
+
+    FhirSpeciality:
+      description: "Collection of specialties handled by the service site. This is more of a medical term. (https://wiki.hl7.de/index.php?title=IG:Value_Sets_f%C3%BCr_XDS#DocumentEntry.practiceSettingCode)"
+      type: array
+      items:
+        enum: [ ALLG,ANAE,ARBE,AUGE,CHIR,ALCH,GFCH,HZCH,KDCH,ORTH,PLCH,THCH,UNFC,VICH,FRAU,GEND,GONK,PERI,GERI,HNOH,HRST,HAUT,HIST,HUMA,HYGI,INNE,ANGI,ENDO,GAST,HAEM,KARD,NEPH,PNEU,RHEU,INTM,INTZ,INTO,INTS,TRPL,SELT,KIJU,KONK,KKAR,NNAT,NPAE,KPSY,LABO,MIKR,MKGC,NATU,NOTF,NRCH,NEUR,NUKL,GESU,PALL,PATH,NPAT,PHAR,TOXI,REHA,PSYC,FPSY,PSYM,RADI,KRAD,NRAD,RECH,SCHL,SPOR,STRA,TRAN,TROP,UROL,MZKH,ORAL,KIEF,PARO,ERG,ERN,FOR,PFL,ALT,KIN,PAT,PHZ,POD,PRV,SOZ,SPR,VKO,VER,PST ]
+
+    FhirEndpoint:
+      description: "The technical details of an endpoint that can be used for electronic services"
+      type: object
+      properties:
+        endpointId:
+          description: "Id to identify the entry"
+          type: string
+          example: "7dee886f-ce5e-4879-9c36-3407825ad374"
+        status:
+          description: "active | suspended | error | off | entered-in-error | test"
+          type: string
+          enum: [ active , suspended , error , off , entered-in-error , test ]
+          example: "active"
+        connectionType:
+          description: "Protocol/Profile/Standard to be used with this endpoint connection"
+          type: string
+        name:
+          description: "A name that this endpoint can be identified by"
+          type: string
+          example: "Kardiologie Regenbogen-Klinik"
+        managingOrganization:
+          description: "Organization that manages this endpoint (might not be the organization that exposes the endpoint)"
+          type: string
+          example: "fa2b79c8-ed57-11ec-8ea0-0242ac120002"
+        payloadType:
+          description: "The type of content that may be used at this endpoint"
+          type: array
+          items:
+            type: string
+          example: [ "XDS Discharge summaries" ]
+        address:
+          description: "The technical base address for connecting to this endpoint (MXID)"
+          type: string
+          example: "@gematik:matrix.org"
+
+    FhirEndpoints:
+      type: object
+      properties:
+        endpoints:
+          description: "The list of endpoints"
+          type: array
+          items:
+            $ref: "#/components/schemas/FhirEndpoint"
 
     MxId:
       description: "The Matrix-ID of an account"
       type: object
+      required:
+        - mxid
       properties:
         mxid:
           description: "The Matrix-ID of an account"
-          type: string
-          example: "@someone:gematik.de"
-
-    AccountId:
-      description: "An identifier for a specific account. Can be the mxId or some other identifier."
-      required:
-        - accountId
-      type: object
-      properties:
-        accountId:
-          description: "An identifier for a specific account. Can be the mxId or some other identifier."
           type: string
           example: "@someone:gematik.de"
 
@@ -1410,7 +2215,15 @@ components:
           type: string
           format: date-time
           example: 2021-07-20T17:32:28Z
-          description: "timestamp of sending the message"
+          description: "Timestamp of sending the message"
+        lastUpdated:
+          type: string
+          format: date-time
+          example: 2021-07-20T18:32:28Z
+          description: "Timestamp of last editing"
+        author:
+          type: string
+          description: "MxId of the author of this message"
       allOf:
         - $ref: "#/components/schemas/MessageText"
 
@@ -1446,7 +2259,7 @@ components:
       description: "List of accounts to invite into a room"
       type: array
       items:
-        $ref: "#/components/schemas/AccountId"
+        $ref: "#/components/schemas/MxId"
 
     CreateRoomRequest:
       description: "Information for a new room"
@@ -1457,7 +2270,7 @@ components:
           description: "list of accounts to invite into the new room"
           type: array
           items:
-            $ref: "#/components/schemas/AccountId"
+            $ref: "#/components/schemas/MxId"
 
     Room:
       description: "Information about a room and its members"
@@ -1479,7 +2292,7 @@ components:
           example: "some theme"
         roomAccess:
           type: string
-          enum: [ privite, public ]
+          enum: [ private, public ]
           description: "The visibility of the room"
         isEncrypted:
           type: boolean
@@ -1489,8 +2302,6 @@ components:
           type: string
           description: "The room identifier. Must be returned in response to a createRoom request. Is used to identify a specific room."
           example: "!dowjfsdkjfskjdfsd:gematik.de"
-      required:
-        - isEncrypted
 
     RoomMembershipState:
       description: "An accounts membership state for a room"
@@ -1501,8 +2312,8 @@ components:
       description: ""
       type: object
       properties:
-        accountId:
-          description: "An identifier for a specific account. Can be the mxId or some other identifier."
+        mxid:
+          description: "MxId as identifier, refers to an existing account"
           type: string
           example: "@someone:gematik.de"
         membershipState:
@@ -1517,6 +2328,59 @@ components:
           description: "associated accounts of the room and their states"
           items:
             $ref: "#/components/schemas/RoomMember"
+
+    Contact:
+      description: "Contact settings."
+      type: object
+      properties:
+        mxidUrl:
+          type: string
+          description: "ID of the contact (mxidUrl))."
+          #example: "@you:example.org"
+          example: "matrix:u/you:example.org"
+        inviteSettings:
+          type: object
+          properties:
+            start:
+              type: integer
+              minimum: 0
+              format: int64
+              description: "start (Epoch Unix Timestamp, SECONDS SINCE JAN 01 1970. (UTC))"
+              example: "1654159585"
+            end:
+              type: integer
+              minimum: 0
+              format: int64
+              description: "end  (Epoch Unix Timestamp, SECONDS SINCE JAN 01 1970. (UTC))"
+              example: "1654169585"
+          required:
+            - start
+          description: "Invites from the mxidUrl are granted between start and end date-time."
+      required:
+        - mxidUrl
+        - inviteSettings
+
+    Contacts:
+      description: "The list of contacts and their settings."
+      type: object
+      properties:
+        contacts:
+          description: "The list of contacts and their settings."
+          type: array
+          items:
+            $ref: "#/components/schemas/Contact"
+          readOnly: true
+
+    CodeableConcept:
+      description: "see https://www.hl7.org/fhir/R4/datatypes.html#CodeableConcept"
+      type: object
+      properties:
+        system:
+          type: string
+        code:
+          type: string
+        display:
+          type: string
 
 # Mutual TLS is used for authentication of clients. In openAPI 3.0.x is mTLS not supported. Therefore the security scheme is not used.
 #  securitySchemes:

@@ -3,19 +3,8 @@ Parent: Condition
 Description: "A profile of the Condition resource for TI-Messenger communication related to a patients case reference"
 * insert Meta
 * id MS
-* identifier MS
-* clinicalStatus MS
-* verificationStatus MS
-* category MS
-* severity MS
-* code MS
-* bodySite MS
 * subject 1..1 MS
 * encounter MS
-* recordedDate MS
-* stage MS
-* evidence MS
-* note MS
 
 // Instance that should pass validation
 Instance: ConditionExample

@@ -63,41 +63,6 @@
         "mustSupport": true
       },
       {
-        "id": "Condition.identifier",
-        "path": "Condition.identifier",
-        "mustSupport": true
-      },
-      {
-        "id": "Condition.clinicalStatus",
-        "path": "Condition.clinicalStatus",
-        "mustSupport": true
-      },
-      {
-        "id": "Condition.verificationStatus",
-        "path": "Condition.verificationStatus",
-        "mustSupport": true
-      },
-      {
-        "id": "Condition.category",
-        "path": "Condition.category",
-        "mustSupport": true
-      },
-      {
-        "id": "Condition.severity",
-        "path": "Condition.severity",
-        "mustSupport": true
-      },
-      {
-        "id": "Condition.code",
-        "path": "Condition.code",
-        "mustSupport": true
-      },
-      {
-        "id": "Condition.bodySite",
-        "path": "Condition.bodySite",
-        "mustSupport": true
-      },
-      {
         "id": "Condition.subject",
         "path": "Condition.subject",
         "mustSupport": true
@@ -105,26 +70,6 @@
       {
         "id": "Condition.encounter",
         "path": "Condition.encounter",
-        "mustSupport": true
-      },
-      {
-        "id": "Condition.recordedDate",
-        "path": "Condition.recordedDate",
-        "mustSupport": true
-      },
-      {
-        "id": "Condition.stage",
-        "path": "Condition.stage",
-        "mustSupport": true
-      },
-      {
-        "id": "Condition.evidence",
-        "path": "Condition.evidence",
-        "mustSupport": true
-      },
-      {
-        "id": "Condition.note",
-        "path": "Condition.note",
         "mustSupport": true
       }
     ]

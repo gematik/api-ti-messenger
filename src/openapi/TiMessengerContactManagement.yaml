@@ -3,7 +3,7 @@ info:
   title: I_TiMessengerContactManagement
   description: |
     # Overview
-    This is a TI-Messenger Registrierungsdienst REST interface.
+    This is a TI-Messenger REST interface.
     It is used by TI-Messenger-Clients to manage the invite settings of contacts.
     Each mxid in an active contact setting has the right to invite the
     user who created the contact setting.
@@ -18,7 +18,7 @@ info:
     ## REST operations
     The interface implements CRUD operations to manage the contact settings.
 
-    TI-Messenger-Client ---> Messenger-Service / Messenger-Proxy ---> Registrierungsdienst
+    TI-Messenger-Client ---> Messenger-Proxy
 
     # Contact
   version: 1.0.0
@@ -78,29 +78,10 @@ paths:
         default:
           $ref: "#/components/responses/DefaultResponse"
 
-  /contacts/{mxidUrl}:
-    parameters:
-      - $ref: "#/components/parameters/mxidUrl"
-
-    get:
-      tags:
-        - getContact
-      description: "Returns the contacts with invite settings."
-      operationId: getContact
-      responses:
-        200:
-          description: "Retrieve the setting for the contact {mxidUrl}."
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Contact"
-        default:
-          $ref: "#/components/responses/DefaultResponse"
-
     post:
       tags:
         - createContactSetting
-      description: "Creates the setting for the contact {mxidUrl}."
+      description: "Creates the setting for the contact {mxid}."
       operationId: createContactSetting
       requestBody:
         required: true
@@ -110,7 +91,7 @@ paths:
               $ref: "#/components/schemas/Contact"
       responses:
         "200":
-          description: "Contact setting for {mxidUrl} successfully created"
+          description: "Contact setting for {mxid successfully created"
           content:
             application/json:
               schema:
@@ -125,7 +106,7 @@ paths:
     put:
       tags:
         - updateContactSetting
-      description: "Updates the setting for the contact {mxidUrl}."
+      description: "Updates the setting for the contact {mxid}."
       operationId: updateContactSetting
       requestBody:
         required: true
@@ -135,7 +116,7 @@ paths:
               $ref: "#/components/schemas/Contact"
       responses:
         "200":
-          description: "Contact setting for {mxidUrl} successfully updated"
+          description: "Contact setting for {mxid} successfully updated"
           content:
             application/json:
               schema:
@@ -147,10 +128,29 @@ paths:
         default:
           $ref: "#/components/responses/DefaultResponse"
 
+  /contacts/{mxid}:
+    parameters:
+      - $ref: "#/components/parameters/mxid"
+
+    get:
+      tags:
+        - getContact
+      description: "Returns the contacts with invite settings."
+      operationId: getContact
+      responses:
+        200:
+          description: "Retrieve the setting for the contact {mxid}."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Contact"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
     delete:
       tags:
         - deleteContactSetting
-      description: "Deletes the setting for the contact {mxidUrl}."
+      description: "Deletes the setting for the contact {mxid}."
       operationId: deleteContactSetting
       responses:
         "204":
@@ -169,15 +169,13 @@ components:
 
   parameters:
 
-    mxidUrl:
-      name: mxidUrl
+    mxid:
+      name: mxid
       in: path
-      description: "ID of the contact (mxidUrl))."
+      description: "ID of the contact (mxid))."
       required: true
       schema:
         type: string
-        #example: "@you:example.org"
-        example: "matrix:u/you:example.org"
 
   responses:
     DefaultResponse:
@@ -237,11 +235,13 @@ components:
       description: "Contact settings."
       type: object
       properties:
-        mxidUrl:
+        displayName:
           type: string
-          description: "ID of the contact (mxidUrl))."
-          #example: "@you:example.org"
-          example: "matrix:u/you:example.org"
+          description: "Name of the contact)."
+          example: "Musterfrau, Erika"
+        mxid:
+          type: string
+          description: "ID of the contact (mxid))."
         inviteSettings:
           type: object
           properties:
@@ -257,9 +257,10 @@ components:
               example: "1654169585"
           required:
             - start
-          description: "Invites from the mxidUrl are granted between start and end date-time."
+          description: "Invites from the mxid are granted between start and end date-time."
       required:
-        - mxidUrl
+        - displayName
+        - mxid
         - inviteSettings
 
     Contacts:
