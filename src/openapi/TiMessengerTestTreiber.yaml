@@ -40,12 +40,13 @@ tags:
   - name: searchInFhirDirectory
     description: Search for TIOrganization or TIPractitioner entries (VZD-FHIR-Directory)
   - name: message
-
     description: message operations
   - name: room
     description: room operations
   - name: contactManagement
     description: contact management operations
+  - name: media
+    description: media file upload and download
 
 paths:
   /:
@@ -1090,7 +1091,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/MessageText"
+              $ref: "#/components/schemas/MessageContent"
       responses:
         "201":
           description: "Message sent"
@@ -1145,7 +1146,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/MessageText"
+              $ref: "#/components/schemas/MessageContent"
       responses:
         "200":
           description: "successfully edited message"
@@ -1337,10 +1338,10 @@ paths:
         default:
           $ref: "#/components/responses/DefaultResponse"
 
-  /devices/{deviceId}/contacts/{mxidUrl}:
+  /devices/{deviceId}/contacts/{mxid}:
     parameters:
       - $ref: "#/components/parameters/deviceId"
-      - $ref: "#/components/parameters/mxidUrl"
+      - $ref: "#/components/parameters/mxidInPath"
 
     get:
       tags:
@@ -1349,7 +1350,7 @@ paths:
       operationId: getContact
       responses:
         200:
-          description: "Retrieve the setting for the contact {mxidUrl}."
+          description: "Retrieve the setting for the contact {mxid}."
           content:
             application/json:
               schema:
@@ -1360,7 +1361,7 @@ paths:
     delete:
       tags:
         - contactManagement
-      description: "Deletes the setting for the contact {mxidUrl}."
+      description: "Deletes the setting for the contact {mxid}."
       operationId: deleteContactSetting
       responses:
         "204":
@@ -1373,6 +1374,62 @@ paths:
           $ref: "#/components/responses/NotFound"
         default:
           $ref: "#/components/responses/DefaultResponse"
+
+  /devices/{deviceId}/media:
+    parameters:
+      - $ref: "#/components/parameters/deviceId"
+    post:
+      tags:
+        - media
+      description: "Uploads a file and returns its file-id"
+      operationId: postMediaFile
+      requestBody:
+        required: true
+        content:
+          "*/*":
+            schema:
+              type: string
+              format: binary
+      responses:
+        "201":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MediaFileId"
+
+  /devices/{deviceId}/media/{mediaId}:
+    parameters:
+      - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/mediaId"
+    get:
+      tags:
+        - media
+      description: "Returns a previously uploaded file with given id"
+      operationId: getMediaFile
+      responses:
+        "200":
+          description: "Retrieve the media file"
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        "404":
+          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+    delete:
+      tags:
+        - media
+      description: "Deletes a previously uploaded file with given id"
+      operationId: deleteMediaFile
+      responses:
+        "204":
+          description: "Media deleted"
+        "404":
+          $ref: "#/components/responses/NotFound"
 
 # Descriptions of common components
 components:
@@ -1407,15 +1464,14 @@ components:
         type: string
         example: msg-4711
 
-    mxidUrl:
-      name: mxidUrl
+    mxidInPath:
+      name: mxid
       in: path
-      description: "ID of the contact (mxidUrl))."
+      description: "ID of the contact (mxid)."
       required: true
       schema:
         type: string
-        #example: "@you:example.org"
-        example: "matrix:u/you:example.org"
+        example: "@you:example.org"
 
     healthcareServiceId:
       name: hsId
@@ -1442,6 +1498,16 @@ components:
       required: true
       schema:
         type: string
+        example: 81add1c5-675b-4785-9405-a2e75b660b2e
+
+    mediaId:
+      name: mediaId
+      in: path
+      description: "ID of media file"
+      required: true
+      schema:
+        type: string
+        format: uuid
         example: 81add1c5-675b-4785-9405-a2e75b660b2e
 
   responses:
@@ -1507,6 +1573,10 @@ components:
           format: uri
           description: "Eine URL zu den Terms of Service für dieses API."
           example: "https://example.com/terms/"
+        homeserver:
+          type: string
+          description: "Name des zuständigen Homeservers"
+          example: "matrix.org"
         contact:
           $ref: "#/components/schemas/ContactInfo"
         clientInfo:
@@ -2099,10 +2169,6 @@ components:
       properties:
         speciality:
           $ref: "#/components/schemas/FhirSpeciality"
-        location:
-          type: array
-          items:
-            $ref: "#/components/schemas/FhirLocation"
         healthcareServiceName:
           description: "Name of the healthcare service"
           type: string
@@ -2225,17 +2291,49 @@ components:
           type: string
           description: "MxId of the author of this message"
       allOf:
-        - $ref: "#/components/schemas/MessageText"
+        - $ref: "#/components/schemas/MessageContent"
 
-    MessageText:
-      description: "A messages text value"
+    MessageContent:
+      description: "Content of a message"
       readOnly: true
       type: object
+      required:
+        - body
+        - msgtype
       properties:
-        message:
+        body:
           type: string
-          description: "The message"
+          description: "The textual representation of this message."
           example: "hi there"
+        msgtype:
+          type: string
+          description: "The type of message, e.g. m.image, m.text. See https://spec.matrix.org/v1.3/client-server-api/#mroommessage-msgtypes for more information"
+          example: "m.text"
+        fileId:
+          type: string
+          format: uuid
+          description: "File id - for example an UUID"
+          example: "74738ff5-5367-5958-9aee-98fffdcd1876"
+        info:
+          type: object
+          properties:
+            mimetype:
+              type: string
+              description: "Mimetype of the file located at {url}"
+              example: "image/jpeg"
+            size:
+              type: integer
+              description: "Size of the file in bytes."
+              example: 123456
+
+    MediaFileId:
+      description: "A unique id to a previously uploaded file. For example an UUID."
+      required:
+        - fileId
+      properties:
+        fileId:
+          type: string
+          format: uuid
 
     DirectMessage:
       description: "A direct message to an other account."
@@ -2247,7 +2345,7 @@ components:
           description: "The recipients account ID. Can be the mxId or an other account id returned by the searchInFhirDirectory operations."
           example: "@someone:gematik.de"
       allOf:
-        - $ref: "#/components/schemas/MessageText"
+        - $ref: "#/components/schemas/MessageContent"
 
     Rooms:
       description: "List of rooms and their properties"
@@ -2333,9 +2431,9 @@ components:
       description: "Contact settings."
       type: object
       properties:
-        mxidUrl:
+        mxid:
           type: string
-          description: "ID of the contact (mxidUrl))."
+          description: "ID of the contact (mxid)."
           #example: "@you:example.org"
           example: "matrix:u/you:example.org"
         inviteSettings:
@@ -2355,9 +2453,9 @@ components:
               example: "1654169585"
           required:
             - start
-          description: "Invites from the mxidUrl are granted between start and end date-time."
+          description: "Invites from the mxid are granted between start and end date-time."
       required:
-        - mxidUrl
+        - mxid
         - inviteSettings
 
     Contacts:
