@@ -44,6 +44,7 @@ ActorFontName Aapex
       participant Auth as "Auth-Service"
       participant VZD as "FHIR-Directory"
     end box
+    participant RD as "TI-Messenger\nRegistrierungsdienst"
 
 |||
 note over U, I: <size:17>Die Organisation hat einen Messenger-Service bereitgestellt bekommen, \n<size:17>der Teil der Föderation ist</size>
@@ -54,17 +55,39 @@ U->C: FHIR Ressourcen im \nVZD-FHIR-Directory \nhinzufügen (MXID)
 C->C: Prüfung, ob gültiges \nowner-accesstoken \nvorliegt
 
 |||
-alt#LightGrey #AliceBlue <size:16>kein gültigess owner-accesstoken</size>
+opt#LightGrey #AliceBlue <size:16>kein gültiges owner-accesstoken</size>
 |||
-
-  C->Auth: GET /owner-authenticate
+group <size:16>Prüfung valider Org-Admin User</size>
+|||
+C->C: Prüfung, ob gültiges \nRegService-OpenID-Token\nvorliegt
+|||
+opt#LightGrey #AliceBlue <size:16>kein gültiges RegService-OpenID-Token</size>
+|||
+  C -> RD: POST /regservice/user/{userId}/request_token
+  activate RD
+  RD --> C: HTTP 200 OK, Result body {"access_token": "RegService-OpenID-Token",..., "reg_server_url": "https://regserver.example.com/openid/userinfo/"; "userid": "admin-userid"}
+  deactivate RD
+|||
+  end
+|||
+  C->Auth: GET /owner-authenticate (Auth Header mit RegService-OpenID-Token)
     Activate Auth
+  Auth -> RD: GET /openid/userinfo/?\naccess_token=RegService-OpenID-Token)
+  activate RD
+  RD --> Auth: HTTP 200 OK\n(userid des Org-Admin)
+  deactivate RD
+  Auth -> Auth: verify Response.userid=\nRegService-OpenID-Token.userid
+  opt#LightGrey #MistyRose <size:16>Abbruch</size>
+  Auth --> C: Unbekannte userid
+  C --> U: keine Berechtigung
+  |||
+  end
+  |||
+end group
+|||
   Auth->Auth: Erzeuge PKCE Code \nfür verifier und challenge
-  Auth-->C: Redirct to IDP Authorization Endpoint (PKCE Code)
+  Auth-->C: Redirect to IDP Authorization Endpoint (PKCE Code)
 
-  C->U: Liste verfügbarer IDPs
-  U->C: ausgewählter IDP
-    
   C->I: GET /authorize
     Activate A
     Activate I
@@ -100,7 +123,7 @@ end
 
 group <size:16>FHIR-Directory Eintrag erstellen</size>
   |||
-  group <size:16>FHIR-Ressource lesen</size>
+  group <size:16>FHIR-Ressource der Organisation anzeigen</size>
   |||
   C->FP: POST /owner/HealthcareService/?... \nFinde Datensatz für eigene TelematikID \nAuthorization Bearer owner-accesstoken
     Activate FP
@@ -116,7 +139,7 @@ group <size:16>FHIR-Directory Eintrag erstellen</size>
   end
 
   |||
-  group <size:16>FHIR-Ressource schreiben</size>
+  group <size:16>FHIR-Ressource der Organisation erstellen/ändern</size>
   |||
   C->FP: FHIR-Operationen um eigenen Datensatz zu verwalten \nAuthorization Bearer owner-accesstoken
     Activate FP
