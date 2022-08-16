@@ -22,7 +22,6 @@ LifeLineBackgroundColor Gainsboro
 
 ParticipantBorderColor Motivation
 ParticipantBackgroundColor Motivation
-ParticipantFontName Impact
 ParticipantFontSize 20
 ParticipantFontColor black
 ParticipantBorderColor Black
@@ -50,7 +49,7 @@ ActorFontName Aapex
 note over U, I: <size:17>Die Organisation hat einen Messenger-Service bereitgestellt bekommen, \n<size:17>der Teil der Föderation ist</size>
 |||
 
-U->C: FHIR Ressourcen im \nVZD-FHIR-Directory \nhinzufügen (MXID)
+U->C: FHIR Ressourcen im \nVZD-FHIR-Directory \nhinzufügen
   Activate C
 C->C: Prüfung, ob gültiges \nowner-accesstoken \nvorliegt
 
