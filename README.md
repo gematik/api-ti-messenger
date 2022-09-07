@@ -1,26 +1,19 @@
 # api-ti-messenger
-
 gematik, Systems Engineering
 :source-highlighter: rouge
 :title-page:
-:imagesdir: images/
-//:sectnums:
-//:toc:
-//:toclevels: 3
-//:toc-title: Inhaltsverzeichnis
-
-ifndef::env-github[]
-image::gematik_logo.svg[gematik,float="right"]
-endif::[]
+:imagesdir: /images/
 ifdef::env-github[]
-++++
-<img align="right" role="right" src="images/gematik_logo.svg?raw=true"/>
-++++
+:toc: preamble
 endif::[]
+ifndef::env-github[]
+:toc: left
+endif::[]
+:toclevels: 3
+:toc-title: Inhaltsverzeichnis
+//:sectnums:
 
-image:https://img.shields.io/badge/api--ti--messenger-github-blue
-
-image:https://img.shields.io/badge/github.com-api--ti--messenger-blue?logo=github[link=https://github.com/gematik/api-ti-messenger]
+image::gematik_logo.svg[gematik,float="right"]
 
 Der TI-Messenger ermöglicht sicheres und interoperable Instant Messaging im Gesundheitswesen.
 Im Gesundheitswesen spielt das Konzept der digitalen Ad-hoc-Kommunikation eine immer wichtigere Rolle. Allerdings stoßen die Nutzer derzeit auf verschiedene Hürden, darunter:
