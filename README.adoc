@@ -13,6 +13,7 @@ endif::[]
 :toc-title: Inhaltsverzeichnis
 //:sectnums:
 
+
 image::gematik_logo.svg[gematik,float="right"]
 
 Der TI-Messenger ermöglicht sicheres und interoperable Instant Messaging im Gesundheitswesen.
