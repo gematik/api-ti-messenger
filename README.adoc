@@ -11,10 +11,21 @@ ifndef::env-github[]
 endif::[]
 :toclevels: 3
 :toc-title: Inhaltsverzeichnis
-//:sectnums:
-
+// ifndef::env-github[]
+//image::gematik_logo.svg[gematik,float="right"]
+// endif::[]
+// ifdef::env-github[]
+// ++++
+// <img align="right" role="right" src="images/gematik_logo.svg?raw=true"/>
+// ++++
+// endif::[]
 
 image::gematik_logo.svg[gematik,float="right"]
+
+image:https://img.shields.io/badge/gemSpec__TI--Messenger--Client-v1.1.0-blue[link="https://fachportal.gematik.de/fachportal-import/files/gemSpec_TI-Messenger-Client_V1.1.0.pdf"]
+image:https://img.shields.io/badge/gemSpec__TI--Messenger--FD-v1.1.0-blue[link="https://fachportal.gematik.de/fachportal-import/files/gemSpec_TI-Messenger-FD_V1.1.0.pdf"]
+
+
 
 Der TI-Messenger ermöglicht sicheres und interoperable Instant Messaging im Gesundheitswesen.
 Im Gesundheitswesen spielt das Konzept der digitalen Ad-hoc-Kommunikation eine immer wichtigere Rolle. Allerdings stoßen die Nutzer derzeit auf verschiedene Hürden, darunter:
