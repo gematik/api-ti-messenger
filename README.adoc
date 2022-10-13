@@ -25,7 +25,7 @@ image::gematik_logo.svg[gematik,float="right"]
 image:https://img.shields.io/badge/gemSpec__TI--Messenger--Client-v1.1.0-blue[link="https://fachportal.gematik.de/fachportal-import/files/gemSpec_TI-Messenger-Client_V1.1.0.pdf"]
 image:https://img.shields.io/badge/gemSpec__TI--Messenger--FD-v1.1.0-blue[link="https://fachportal.gematik.de/fachportal-import/files/gemSpec_TI-Messenger-FD_V1.1.0.pdf"]
 
-
+== Introduction
 
 Der TI-Messenger ermöglicht sicheres und interoperable Instant Messaging im Gesundheitswesen.
 Im Gesundheitswesen spielt das Konzept der digitalen Ad-hoc-Kommunikation eine immer wichtigere Rolle. Allerdings stoßen die Nutzer derzeit auf verschiedene Hürden, darunter:
@@ -40,3 +40,34 @@ TI-Messenger hingegen werden auf Basis des Matrix-Protokolls, dem offenen Messen
 - Integrität dank hohem Out-of-the-box-Sicherheitsniveau,
 - Ende-zu-Ende-Verschlüsselung sowie
 - Innovation durch fortlaufende Weiterentwicklung des Matrix-Protokolls.
+
+== TI-Messenger-Client
+
+=== Matrix Client-Server-API
+
+https://spec.matrix.org/v1.4/client-server-api/[The matrix.org Client-Server-API]
+
+=== FHIR-Directory Search-API
+
+=== FHIR-Dirctory Owner-API
+
+=== ContactManagement-API
+
+=== Org-Admin
+
+=== TestDriver-API
+
+== Messenger-Service
+
+=== Matrix Client-Server-API
+
+=== Matrix Server-Server-API
+
+=== ContactManagement-API
+
+== RegistrationService
+
+=== ProviderServices-API
+
+== Push-Gateway
+
