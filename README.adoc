@@ -20,21 +20,15 @@ endif::[]
 // ++++
 // endif::[]
 
-image::gematik_logo.svg[gematik,float="right"]
+image::gematik_logo.svg[width=70%]
 
 image:https://img.shields.io/badge/gemSpec__TI--Messenger--Client-v1.1.0-blue[link="https://fachportal.gematik.de/fachportal-import/files/gemSpec_TI-Messenger-Client_V1.1.0.pdf"]
 image:https://img.shields.io/badge/gemSpec__TI--Messenger--FD-v1.1.0-blue[link="https://fachportal.gematik.de/fachportal-import/files/gemSpec_TI-Messenger-FD_V1.1.0.pdf"]
 
 
+Im Gesundheitswesen spielt das Konzept der digitalen Ad-hoc-Kommunikation eine immer wichtigere Rolle. Der sichere und interoperable Nachrichtenaustausch zwischen beteiligten Akteuren des deutschen Gesundheitswesens erfolgt über den TI-Messenger.
 
-Der TI-Messenger ermöglicht sicheres und interoperable Instant Messaging im Gesundheitswesen.
-Im Gesundheitswesen spielt das Konzept der digitalen Ad-hoc-Kommunikation eine immer wichtigere Rolle. Allerdings stoßen die Nutzer derzeit auf verschiedene Hürden, darunter:
-
-- fehlende Interoperabilität zwischen den Messenger-Anbietern,
-- fehlende einheitliche Zertifizierung zur Gewährleistung der Sicherheit sowie
-- fehlende einheitliche Vorgaben zur Authentisierung.
-
-TI-Messenger hingegen werden auf Basis des Matrix-Protokolls, dem offenen Messenger-Standard der Matrix.org Foundation, neue Maßstäbe für die Kommunikation in Echtzeit setzen. Der neue Kommunikationsstandard der gematik gewährleistet:
+Dieser basiert auf dem Matrix-Protokoll, einem offenen Messenger-Standard der Matrix.org Foundation. Der neue Kommunikationsstandard der gematik gewährleistet:
 
 - Interoperabilität - und somit den sektoren- und anbieterübergreifenden Austausch
 - Integrität dank hohem Out-of-the-box-Sicherheitsniveau,
