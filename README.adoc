@@ -92,6 +92,8 @@ https://spec.matrix.org/v1.4/server-server-api/[The matrix.org Server-Server-API
 
 == Push-Gateway
 
+=== Matrix Push-Gateway-API
+
 https://spec.matrix.org/v1.4/push-gateway-api/[The matrix.org Push-Gateway-API]
 
 == License
