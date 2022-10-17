@@ -27,19 +27,21 @@ image:https://img.shields.io/badge/gemSpec__TI--Messenger--FD-v1.1.0-blue[link="
 
 == Introduction
 
-Der TI-Messenger ermöglicht sicheres und interoperable Instant Messaging im Gesundheitswesen.
-Im Gesundheitswesen spielt das Konzept der digitalen Ad-hoc-Kommunikation eine immer wichtigere Rolle. Allerdings stoßen die Nutzer derzeit auf verschiedene Hürden, darunter:
+The TI-Messenger is a secure and interoperable Instant Messaging for the german healthcare system.
+Digital ad-hoc communication is becoming more and more important in the healthcare system.
 
-- fehlende Interoperabilität zwischen den Messenger-Anbietern,
-- fehlende einheitliche Zertifizierung zur Gewährleistung der Sicherheit sowie
-- fehlende einheitliche Vorgaben zur Authentisierung.
+However, users are currently encountering various hurdles, including:
 
-TI-Messenger hingegen werden auf Basis des Matrix-Protokolls, dem offenen Messenger-Standard der Matrix.org Foundation, neue Maßstäbe für die Kommunikation in Echtzeit setzen. Der neue Kommunikationsstandard der gematik gewährleistet:
+- lack of interoperability between the messenger providers,
+- lack of uniform certification to ensure safety and
+- lack of uniform specifications for authentication.
 
-- Interoperabilität - und somit den sektoren- und anbieterübergreifenden Austausch
-- Integrität dank hohem Out-of-the-box-Sicherheitsniveau,
-- Ende-zu-Ende-Verschlüsselung sowie
-- Innovation durch fortlaufende Weiterentwicklung des Matrix-Protokolls.
+TI messengers, on the other hand, will set new standards for real-time communication based on the Matrix protocol, the open messenger standard from the Matrix.org Foundation. The new communication standard from gematik guarantees:
+
+- Interoperability - and thus cross-sector and cross-provider exchange
+- integrity thanks to high level security out-of-the-box,
+- End-to-end encryption and
+- Innovation through continuous development of the Matrix protocol.
 
 == System overview
 
