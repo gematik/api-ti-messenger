@@ -20,7 +20,7 @@ endif::[]
 // ++++
 // endif::[]
 
-image::gematik_logo.svg[gematik,width="60%"]
+image::gematik_logo.svg[gematik,width="70%"]
 
 image:https://img.shields.io/badge/gemSpec TI&hyphen;Messenger&hyphen;Client-v1.1.0-blue[link="https://fachportal.gematik.de/fachportal-import/files/gemSpec_TI-Messenger-Client_V1.1.0.pdf"]
 image:https://img.shields.io/badge/gemSpec TI&hyphen;Messenger&hyphen;FD-v1.1.0-blue[link="https://fachportal.gematik.de/fachportal-import/files/gemSpec_TI-Messenger-FD_V1.1.0.pdf"]
