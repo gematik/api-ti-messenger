@@ -92,6 +92,7 @@ https://spec.matrix.org/v1.4/server-server-api/[The matrix.org Server-Server-API
 
 == Push-Gateway
 
+https://spec.matrix.org/v1.4/push-gateway-api/[The matrix.org Push-Gateway-API]
 
 == License
 Copyright (c) 2022 gematik GmbH
