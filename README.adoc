@@ -78,7 +78,11 @@ xref:docs/FHIR-Directory-search-api.adoc[FHIR-Directory Search-API]
 
 === Matrix Client-Server-API
 
+https://spec.matrix.org/v1.4/client-server-api/[The matrix.org Client-Server-API]
+
 === Matrix Server-Server-API
+
+https://spec.matrix.org/v1.4/server-server-api/[The matrix.org Server-Server-API]
 
 === ContactManagement-API
 
