@@ -71,10 +71,6 @@ xref:docs/FHIR-Directory-search-api.adoc[FHIR-Directory Search-API]
 
 === FHIR-Dirctory Owner-API
 
-=== ContactManagement-API
-
-https://github.com/gematik/api-ti-messenger/blob/develop/src/openapi/TiMessengerContactManagement.yaml/[The gematik ContactManagement-API]
-
 === Org-Admin
 
 === TestDriver-API
@@ -92,6 +88,8 @@ https://spec.matrix.org/v1.4/client-server-api/[The matrix.org Client-Server-API
 https://spec.matrix.org/v1.4/server-server-api/[The matrix.org Server-Server-API]
 
 === ContactManagement-API
+
+https://github.com/gematik/api-ti-messenger/blob/develop/src/openapi/TiMessengerContactManagement.yaml/[The gematik ContactManagement-API]
 
 == RegistrationService
 
