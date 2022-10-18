@@ -1,0 +1,49 @@
+:imagesdir: ../images
+:toc: macro
+:toclevels: 5
+:toc-title: Inhaltsverzeichnis
+:numbered:
+
+image:gematik_logo.svg[width=70%]
+
+toc::[]
+
+= TI-Messenger-Fachdienst
+Der TI-Messenger-Fachdienst ist in *[gemSpec_TI-Messenger-FD]* spezifiziert. Dieser besteht aus den Teilkomponenten Registrierungs-Dienst, Messenger-Service und einem Push-Gateway. Dieser stellt den TI-Messenger-Clients verschiedene Schnittstellen bereit, um die Kommunikations mit der jeweiligen Teilkomponente zu ermöglichen. In der folgenden Abbildung (links) sind alle Schnittstellen, die der Fachdienst anbietet, mit der jeweiligen Teilkomponente, dargestellt.
+
+++++
+<p align="left">
+  <img width="100%" src=../images/I_Fachdienst.png>
+</p>
+++++
+
+== Registrierungs-Dienst
+Über den Registrierungs-Dienst bekommt der TI-Messenger-Anbieter die Möglichkeit Messenger-Services automatisiert Organisationen zur Verfügung zu stellen und die Matrix-Domain der von ihm bereitgestellten Messenger-Services in deren Organisationsressource in das zentrale VZD-FHIR-Directory einzutragen. Der Registrierungs-Dienst eines TI-Messenger-Fachdienstes bietet als weitere Funktion die Bereitstellung einer Föderationsliste für die Messenger Proxies seiner Messenger-Services an
+
+=== I_Registration
+Diese nicht durch die gematik normierte Operation `I_Registration` am Registrierungs-Dienst ermöglicht es Akteuren ihre Organisation über deren Identität (SMC-B) bei einem Anbieter zu registrieren um Messenge-Services bereitzustellen. Es ist zu empfehlen, diese Schnittstelle als eine REST-Schnittstelle zu implementieren. Der Akteur sollte diese über ein Webbrowser (z. B. über ein Portal des Anbieters) aufrufen können. 
+
+Für die Authentifizierung einer Organisation am Registrierungs-Dienst wird der zentrale IDP-Dienst der gematik benötigt. Hierfür wird das durch die gematik bereitgestellte Authenticator-Modul (siehe *[gematik Authenticator]* ) verwendet, um  das Authentifizierungszertifikats der SMC-B in ein ID_TOKEN umzuwandeln. Der Authenticator wird ineiner Windows-Systemumgebungen zusammen mit dem Primärsystem betrieben. 
+
+Nach der erfolgreichen Authentifizierung der Organisation am Registrierungs-Dienst muss es über die Schnittstelle möglich sein, dass ein Admin Account für die Organisation angelegt werden kann. Die für den Nutzer notwendigen Credentials werden bei der Einrichtung des Admin Accounts auf dem Registrierungs-Dienst übergeben. Es muss berücksichtigt werden, dass mindestens eine 2-Faktor Verfahren unterstützt wird. 
+
+
+
+
+
+=== I_internVerification
+
+
+
+
+= Referenzierte Dokumente
+
+Die nachfolgende Tabelle enthält die in der vorliegenden Online Dokumentation referenzierten Dokumente der gematik. Deren zu diesem Dokument jeweils gültige Versionsnummer entnehmen Sie bitte der aktuellen, auf der Internetseite der gematik veröffentlichten, Dokumentenlandkarte, in der die vorliegende Version aufgeführt wird.
+
+|===
+|[Quelle] |Herausgeber: Titel
+
+|*[gemSpec_TI-Messenger-FD]* |gematik: Spezifikation TI-Messenger-Fachdienst
+|*[gematik Authenticator]* | gematik Authenticator +
+https://cloud.gematik.de/index.php/s/23ebxa75z3s7zGt?path=%2Fv2.1.0 
+|===
