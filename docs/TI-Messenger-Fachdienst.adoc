@@ -34,7 +34,7 @@ Bei der Schnittstelle I_internVerification handelt es sich um eine abstrakte int
 - die Überprüfung von MXID-Einträgen im VZD-FHIR-Directory, um die Berechtigungsprüfung der Stufe 3 durchführen zu können.
 
 
-[source, yaml]
+[source, object]
 ----
 FederationList {
   version	    integer
@@ -48,6 +48,18 @@ FederationList {
   domainList        [ 
                       The list of hashed TI-Messenger domain names
 
+                    DomainList {
+                        description:	  the list of hashed TI-Messenger domain names
+                        
+                        domain	          string
+                                          hashed TI-Messenger domain name
+                                        
+                        isInsurance	  boolean
+                                          example: false
+                                          Indicates if it is a domain of an health insurance for insured persons
+                                        
+                  }]
+}
 ----
 
 
