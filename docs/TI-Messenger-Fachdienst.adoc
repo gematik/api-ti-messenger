@@ -23,16 +23,32 @@ Der TI-Messenger-Fachdienst ist in *[gemSpec_TI-Messenger-FD]* spezifiziert. Die
 === I_Registration
 Diese nicht durch die gematik normierte Operation `I_Registration` am Registrierungs-Dienst ermöglicht es Akteuren ihre Organisation über deren Identität (SMC-B) bei einem Anbieter zu registrieren um Messenge-Services bereitzustellen. Es ist zu empfehlen, diese Schnittstelle als eine REST-Schnittstelle zu implementieren. Der Akteur sollte diese über ein Webbrowser (z. B. über ein Portal des Anbieters) aufrufen können. 
 
-Für die Authentifizierung einer Organisation am Registrierungs-Dienst wird der zentrale IDP-Dienst der gematik benötigt. Hierfür wird das durch die gematik bereitgestellte Authenticator-Modul (siehe *[gematik Authenticator]* ) verwendet, um  das Authentifizierungszertifikats der SMC-B in ein ID_TOKEN umzuwandeln. Der Authenticator wird ineiner Windows-Systemumgebungen zusammen mit dem Primärsystem betrieben. 
+Für die Authentifizierung einer Organisation am Registrierungs-Dienst wird der zentrale IDP-Dienst der gematik benötigt. Hierfür wird das durch die gematik bereitgestellte Authenticator-Modul (siehe *[gematik Authenticator]* ) verwendet, um  das Authentifizierungszertifikats der SMC-B in ein ID_TOKEN umzuwandeln. Der Authenticator wird in einer Windows-Systemumgebungen zusammen mit dem Primärsystem betrieben. 
 
 Nach der erfolgreichen Authentifizierung der Organisation am Registrierungs-Dienst muss es über die Schnittstelle möglich sein, dass ein Admin Account für die Organisation angelegt werden kann. Die für den Nutzer notwendigen Credentials werden bei der Einrichtung des Admin Accounts auf dem Registrierungs-Dienst übergeben. Es muss berücksichtigt werden, dass mindestens eine 2-Faktor Verfahren unterstützt wird. 
 
-
-
-
-
 === I_internVerification
+Bei der Schnittstelle I_internVerification handelt es sich um eine abstrakte interne Schnittstelle am Registrierungs-Dienst mit der den Messenger-Proxies die folgenden  Funktionalitäten bereitgestellt werden:
 
+- Bereitstellung der Föderationsliste, die alle verifizierte Matrix-Domains als Hashes enthält und
+- die Überprüfung von MXID-Einträgen im VZD-FHIR-Directory, um die Berechtigungsprüfung der Stufe 3 durchführen zu können.
+
+
+[source, yaml]
+----
+FederationList {
+  version	    integer
+                    readOnly: true
+                    The version of the federation list
+ 
+  hashAlgorithm	    string
+                    readOnly: true
+                    The hash algorithm that was used to create the hashes. Currently only SHA-256 is supported.
+ 
+  domainList        [ 
+                      The list of hashed TI-Messenger domain names
+
+----
 
 
 
