@@ -34,7 +34,7 @@ Bei der Schnittstelle I_internVerification handelt es sich um eine abstrakte int
 - die Überprüfung von MXID-Einträgen im VZD-FHIR-Directory, um die Berechtigungsprüfung der Stufe 3 durchführen zu können.
 
 
-[source, object]
+[source, yaml]
 ----
 FederationList {
   version	    integer
