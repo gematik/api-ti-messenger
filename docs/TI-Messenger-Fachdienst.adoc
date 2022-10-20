@@ -28,12 +28,17 @@ Für die Authentifizierung einer Organisation am Registrierungs-Dienst wird der 
 Nach der erfolgreichen Authentifizierung der Organisation am Registrierungs-Dienst muss es über die Schnittstelle möglich sein, dass ein Admin Account für die Organisation angelegt werden kann. Die für den Nutzer notwendigen Credentials werden bei der Einrichtung des Admin Accounts auf dem Registrierungs-Dienst übergeben. Es muss berücksichtigt werden, dass mindestens eine 2-Faktor Verfahren unterstützt wird. 
 
 === I_internVerification
-Bei der Schnittstelle I_internVerification handelt es sich um eine abstrakte interne Schnittstelle am Registrierungs-Dienst mit der den Messenger-Proxies die folgenden  Funktionalitäten bereitgestellt werden:
+Bei der Schnittstelle `I_internVerification` handelt es sich um eine abstrakte interne Schnittstelle am Registrierungs-Dienst mit der den Messenger-Proxies die folgenden  Funktionalitäten bereitgestellt werden:
 
 - Bereitstellung der Föderationsliste, die alle verifizierte Matrix-Domains als Hashes enthält und
 - die Überprüfung von MXID-Einträgen im VZD-FHIR-Directory, um die Berechtigungsprüfung der Stufe 3 durchführen zu können.
 
+Für die Prüfung der Organisationszugehörigkeit ist es erforderlich, dass der Registrierungs-Dienst über die abstrakte Schnittstelle `I_internVerification` den Messenger-Proxies eine aktuelle Föderationsliste bereitstellt. Hierfür ist es erforderlich, dass der Registrierungs-Dienst die Operation `/tim-provider-services/getFederationList` am FHIR-Proxys des VZD-FHIR-Directory aufruft, um eine aktuelle Föderationsliste zu erhalten. 
+Im fogenden ist der Aufbau der Föderationsliste die vom FHIR-Proxy des VZD-FHIR-Directory bereitgestellt wird dargestellt
 
+.Föderationsliste
+[%collapsible%open]
+====
 [source, yaml]
 ----
 FederationList {
@@ -61,8 +66,34 @@ FederationList {
                   }]
 }
 ----
+====
+
+*Beispiel einer HTTP Nachricht*
+
+[cols="h,a",] 
+|===
+|URI        |\https://vzd-fhir-directory.vzd.ti-dienste.de/tim-provider-services
+|Method     |GET
+|Header |
+[source, bash]
+----
+HTTP-Version: "HTTP/1.1"
+Authorization: "provider-accesstoken"
+----
+|Body    |
+[source, bash]
+----
+-
+|===
 
 
+*Beispielabfrage:*
+[source, bash]
+-----------------
+curl -X 'GET' \
+  'https://vzd-fhir-directory.vzd.ti-dienste.de/tim-provider-services/FederationList?version=1' \
+  -H 'accept: application/json'
+-----------------
 
 = Referenzierte Dokumente
 
