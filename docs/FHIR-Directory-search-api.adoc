@@ -5,14 +5,20 @@ The FHIR-Directory contains entries for healthcare services provided by organiza
 The FHIR Profiles are defined in the https://simplifier.net/vzd-fhir-directory[FHIR-Directory Simplifier project].
 
 In generell FHIR allows various search capabilities. The https://www.hl7.org/fhir/search.html[FHIR search] page describes in detail the search framework.
+The search always begins at a HealthcareService or a PractitionerRole ressource.
+
+
 
 == Full text search
 
-The search parameters, _text and _content, are used for full text search .
+The search parameters, _text and _content, are used for full text search.
 
 === Request
 
-
+[source,html]
+----
+GET [base]/HealthcareService?_text=Chirurgie AND Berlin
+----
 
 === Response
 
