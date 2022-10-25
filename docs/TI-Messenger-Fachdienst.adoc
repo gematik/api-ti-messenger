@@ -96,18 +96,18 @@ curl -X 'GET' \
 -----------------
 
 
-= Messenger-Service
+== Messenger-Service
 Beschreibungstext
 
 
 Die Messenger-Services KÖNNEN den Akteuren unterschiedliche Authentifizierungsverfahren anbieten, bei denen der Besitz einer SMC-B oder eines HBAs nicht vorausgesetzt wird
 
-== Messenger Proxy
+=== Messenger Proxy
 Der Messenger-Proxy als Prüfinstanz aller eingehenden Anfragen zum Messenger-Service ist für die Regelung der gemäß Matrix Client-Server-API und Matrix-Server-Server-API geltenden Aufrufe zuständig.
 
 Freigabeliste
 
-== Matrix-Homeserver
+=== Matrix-Homeserver
 
 = Referenzierte Dokumente
 
