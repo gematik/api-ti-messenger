@@ -95,6 +95,14 @@ curl -X 'GET' \
   -H 'accept: application/json'
 -----------------
 
+
+= Messenger-Service
+Beschreibungstext
+
+== Messenger Proxy
+
+== Matrix-Homeserver
+
 = Referenzierte Dokumente
 
 Die nachfolgende Tabelle enthält die in der vorliegenden Online Dokumentation referenzierten Dokumente der gematik. Deren zu diesem Dokument jeweils gültige Versionsnummer entnehmen Sie bitte der aktuellen, auf der Internetseite der gematik veröffentlichten, Dokumentenlandkarte, in der die vorliegende Version aufgeführt wird.
