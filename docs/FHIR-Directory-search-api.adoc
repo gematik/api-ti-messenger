@@ -15,7 +15,7 @@ IMPORTANT: Full text search is not yet supported by the FHIR-Directory
 
 The search parameters, _text and _content, are used for full text search.
 
-=== Authentication
+== Authentication
 
 The /search endpoint requires a valid jwt in the Authorization header. In order to get the jwt the following steps must be performed.
 
@@ -88,7 +88,7 @@ BODY
 
 ----
 
-=== FHIR /search Request
+== FHIR /search Request
 
 .Example: FHIR /search Request
 [source,]
