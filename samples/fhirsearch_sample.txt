@@ -10,7 +10,7 @@ HEADER
 {"date"=>"Tue, 25 Oct 2022 08:25:34 GMT", "server"=>"Synapse/1.53.0", "content-type"=>"application/json", "cache-control"=>"no-cache, no-store, must-revalidate", "access-control-allow-origin"=>"*", "access-control-allow-methods"=>"GET, HEAD, POST, PUT, DELETE, OPTIONS", "access-control-allow-headers"=>"X-Requested-With, Content-Type, Authorization, Date", "transfer-encoding"=>"chunked"}
 BODY
 {
-  "user_id": "@ettr02:matrix.dev.service-ti.de",
+  "user_id": "@<userid>:matrix.dev.service-ti.de",
   "access_token": "syt_ZXR0cjAy_JjbHoMZhkIfxeiaCaNHN_2LGskp",
   "home_server": "matrix.dev.service-ti.de",
   "device_id": "FSEPQFDOXU"

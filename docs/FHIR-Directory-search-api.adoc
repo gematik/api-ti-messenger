@@ -1,3 +1,5 @@
+:source-highlighter: highlight.js
+
 = FHIR-Directory Search-API
 
 The FHIR-Directory contains entries for healthcare services provided by organizations as well as practitioner entries. This page describes how to use the FHIR-Directory /search endpoint. The specification of the FHIR-Directory (https://fachportal.gematik.de/fachportal-import/files/gemSpec_VZD_FHIR_Directory_V1.1.0.pdf[gemSpec_VZD_FHIR_Directory v1.1.0]) contains information about the endpoints and authentication methods.
@@ -21,19 +23,190 @@ The /search endpoint requires a valid jwt in the Authorization header. In order 
 2. Get the Matrix OpenID Token
 3. Get the jwt from the /tim-authenticate endpoint
 
-.Example authentication
-====
-
-====
-
-=== Request
-
-[source,html]
+.Example: Login to the matrix homeserver
+[source,]
 ----
-GET [base]/HealthcareService?_text=Chirurgie AND Berlin
+REQUEST
+POST https://matrix.dev.service-ti.de/_matrix/client/r0/login
+HEADER
+{"User-Agent"=>"Faraday v2.6.0", "Content-Type"=>"application/json"}
+BODY
+{"type":"m.login.password","user":"mxid","password":"password"}
+
+RESPONSE
+STATUS 200
+HEADER
+{"date"=>"Tue, 25 Oct 2022 08:25:34 GMT", "server"=>"Synapse/1.53.0", "content-type"=>"application/json", "cache-control"=>"no-cache, no-store, must-revalidate", "access-control-allow-origin"=>"*", "access-control-allow-methods"=>"GET, HEAD, POST, PUT, DELETE, OPTIONS", "access-control-allow-headers"=>"X-Requested-With, Content-Type, Authorization, Date", "transfer-encoding"=>"chunked"}
+BODY
+{
+  "user_id": "@<userid>:matrix.dev.service-ti.de",
+  "access_token": "syt_ZXR0cjAy_JjbHoMZhkIfxeiaCaNHN_2LGskp",
+  "home_server": "matrix.dev.service-ti.de",
+  "device_id": "FSEPQFDOXU"
+}
+----
+.Example: Get the Matrix OpenID Token
+[source,]
+----
+REQUEST
+POST https://matrix.dev.service-ti.de/_matrix/client/v3/user/@ettr02:matrix.dev.service-ti.de/openid/request_token?access_token=syt_ZXR0cjAy_JjbHoMZhkIfxeiaCaNHN_2LGskp
+HEADER
+{"User-Agent"=>"Faraday v2.6.0", "Content-Type"=>"application/json"}
+BODY
+{}
+
+RESPONSE
+STATUS 200
+HEADER
+{"date"=>"Tue, 25 Oct 2022 08:25:35 GMT", "server"=>"Synapse/1.53.0", "content-type"=>"application/json", "cache-control"=>"no-cache, no-store, must-revalidate", "access-control-allow-origin"=>"*", "access-control-allow-methods"=>"GET, HEAD, POST, PUT, DELETE, OPTIONS", "access-control-allow-headers"=>"X-Requested-With, Content-Type, Authorization, Date", "transfer-encoding"=>"chunked"}
+BODY
+{
+  "access_token": "OhkRxRtoFVWfdKwEYxpgtplV",
+  "token_type": "Bearer",
+  "matrix_server_name": "matrix.dev.service-ti.de",
+  "expires_in": 3600
+}
+----
+.Example: Get the jwt from the /tim-authenticate endpoint
+[source,]
+----
+REQUEST
+GET https://fhir-directory-test.vzd.ti-dienste.de/tim-authenticate?mxId=matrix.dev.service-ti.de
+HEADER
+{"User-Agent"=>"Faraday v2.6.0", "Content-Type"=>"application/json", "X-Matrix-OpenID-Token"=>"OhkRxRtoFVWfdKwEYxpgtplV", "X-Matrix-Server-Name"=>"matrix.dev.service-ti.de"}
+
+RESPONSE
+STATUS 200
+HEADER
+{"date"=>"Tue, 25 Oct 2022 08:31:25 GMT", "server"=>"Apache", "etag"=>"\"0919146fd23aa4c8094a9b642d25b7060\"", "content-type"=>"application/json", "content-length"=>"453"}
+BODY
+{
+  "jwt": "eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJpc3MiOiJodHRwczovL2ZoaXItZGlyZWN0b3J5LXRlc3QudnpkLnRpLWRpZW5zdGUuZGUvdGltLWF1dGhlbnRpY2F0ZSIsImF1ZCI6Imh0dHBzOi8vZmhpci1kaXJlY3RvcnktdGVzdC52emQudGktZGllbnN0ZS5kZS9zZWFyY2giLCJzdWIiOiJAZXR0cjAyOm1hdHJpeC5kZXYuc2VydmljZS10aS5kZSIsImlhdCI6MTY2NjY4NjY4NSwiZXhwIjoxNjY2NzczMDg1fQ.Q8wZjDNiJt8m5fTHEXMCGzZYo7zGdWjtJ5qvpTyfklOXby5n9mt8uWOYQGeD1MdAu6Cy213nd1PwrBR25W2CyQ",
+  "token_type": "bearer",
+  "expires_in": 86400
+}
+
 ----
 
-=== Response
+=== FHIR /search Request
 
+.Example: FHIR /search Request
+[source,]
+----
+REQUEST
+GET https://fhir-directory-test.vzd.ti-dienste.de/search/HealthcareService?organization.active=true&_count=2
+HEADER
+{"User-Agent"=>"Faraday v2.6.0", "Content-Type"=>"application/json", "Authorization"=>"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJpc3MiOiJodHRwczovL2ZoaXItZGlyZWN0b3J5LXRlc3QudnpkLnRpLWRpZW5zdGUuZGUvdGltLWF1dGhlbnRpY2F0ZSIsImF1ZCI6Imh0dHBzOi8vZmhpci1kaXJlY3RvcnktdGVzdC52emQudGktZGllbnN0ZS5kZS9zZWFyY2giLCJzdWIiOiJAZXR0cjAyOm1hdHJpeC5kZXYuc2VydmljZS10aS5kZSIsImlhdCI6MTY2NjY4NjY4NSwiZXhwIjoxNjY2NzczMDg1fQ.Q8wZjDNiJt8m5fTHEXMCGzZYo7zGdWjtJ5qvpTyfklOXby5n9mt8uWOYQGeD1MdAu6Cy213nd1PwrBR25W2CyQ"}
 
-==
+RESPONSE
+STATUS 200
+HEADER
+{"date"=>"Tue, 25 Oct 2022 08:31:25 GMT", "server"=>"Apache", "x-powered-by"=>"HAPI FHIR 5.6.0 REST Server (FHIR Server; FHIR 4.0.1/R4)", "x-request-id"=>"337CmwyUvyJn6LhE", "last-modified"=>"Tue, 25 Oct 2022 08:31:25 GMT", "content-type"=>"application/fhir+json;charset=UTF-8", "transfer-encoding"=>"chunked"}
+BODY
+{
+  "resourceType": "Bundle",
+  "id": "0cb1959e-4631-498b-94c1-a0d7d4d7e06b",
+  "meta": {
+    "lastUpdated": "2022-10-25T10:31:25.346+02:00"
+  },
+  "type": "searchset",
+  "total": 2,
+  "entry": [
+    {
+      "fullUrl": "https://fhir-directory-test.vzd.ti-dienste.de/search/HealthcareService/2735300",
+      "resource": {
+        "resourceType": "HealthcareService",
+        "id": "2735300",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2022-08-31T18:15:37.867+02:00",
+          "source": "#s0lLf9tTclCIsOiR",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory",
+            "http://hl7.org/fhir/StructureDefinition/HealthcareService"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Generated by Arvato QA at 2022-08-31T18:15:37+02:00\ndata model version:2\nprofile version   :0.8.0-beta6</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "2efc99ad-f825-43d2-aa49-ab4e4a5ee0cd"
+          }
+        ],
+        "providedBy": {
+          "reference": "Organization/2735297"
+        },
+        "specialty": [
+          {
+            "coding": [
+              {
+                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.5",
+                "code": "FOR",
+                "display": "Forschung"
+              }
+            ]
+          }
+        ],
+        "location": [
+          {
+            "reference": "Location/2735299"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/2735298"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-test.vzd.ti-dienste.de/search/HealthcareService/2668716",
+      "resource": {
+        "resourceType": "HealthcareService",
+        "id": "2668716",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2022-08-31T17:47:37.380+02:00",
+          "source": "#lUklnUrrVxFYWubt",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory",
+            "http://hl7.org/fhir/StructureDefinition/HealthcareService"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Generated by Arvato QA at 2022-08-31T17:47:37+02:00\ndata model version:2\nprofile version   :0.8.0-beta6</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "e87e62ff-c887-4062-99d9-1a2f4c9a469d"
+          }
+        ],
+        "providedBy": {
+          "reference": "Organization/2668713"
+        },
+        "location": [
+          {
+            "reference": "Location/2668715"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/2668714"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    }
+  ]
+}
+----
