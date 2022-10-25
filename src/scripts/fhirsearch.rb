@@ -109,7 +109,7 @@ file_content += "BODY\n#{JSON.pretty_generate(response.body)}\n"
 tim_authenticate_jwt = response.body['jwt']
 
 # FHIR /search
-url = "https://fhir-directory-test.vzd.ti-dienste.de/search/HealthcareService?organization.active=true&_count=2"
+url = "https://fhir-directory-test.vzd.ti-dienste.de/search/HealthcareService?organization.active=true&_count=2&_include=HealthcareService:endpoint&_include=HealthcareService:location&_include=HealthcareService:organization&_pretty=true"
 
 conn = Faraday.new(url) do |f|
   f.request :json
