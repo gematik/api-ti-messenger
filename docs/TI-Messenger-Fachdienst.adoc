@@ -103,7 +103,7 @@ Beschreibungstext
 Die Messenger-Services KÖNNEN den Akteuren unterschiedliche Authentifizierungsverfahren anbieten, bei denen der Besitz einer SMC-B oder eines HBAs nicht vorausgesetzt wird
 
 
-Synapse-Konfigurationsdatei /etc/matrix-synapse/homeserver.yaml
+Über eine Anpassung in der Synapse-Konfigurationsdatei /etc/matrix-synapse/homeserver.yaml ist es möglich existierende Authentifizierungsverfahren anzubinden.
 
 [source, yaml]
 -----------------
