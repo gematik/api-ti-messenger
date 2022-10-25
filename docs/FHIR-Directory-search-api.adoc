@@ -97,6 +97,7 @@ REQUEST
 GET https://fhir-directory-test.vzd.ti-dienste.de/search/HealthcareService?organization.active=true&_count=2&_include=HealthcareService:endpoint&_include=HealthcareService:location&_include=HealthcareService:organization&_pretty=true
 HEADER
 {"User-Agent"=>"Faraday v2.6.0", "Content-Type"=>"application/json", "Authorization"=>"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJpc3MiOiJodHRwczovL2ZoaXItZGlyZWN0b3J5LXRlc3QudnpkLnRpLWRpZW5zdGUuZGUvdGltLWF1dGhlbnRpY2F0ZSIsImF1ZCI6Imh0dHBzOi8vZmhpci1kaXJlY3RvcnktdGVzdC52emQudGktZGllbnN0ZS5kZS9zZWFyY2giLCJzdWIiOiJAZXR0cjAyOm1hdHJpeC5kZXYuc2VydmljZS10aS5kZSIsImlhdCI6MTY2NjY4OTQ2OCwiZXhwIjoxNjY2Nzc1ODY4fQ.b58Pc_zecezYrqOPe_Gsfnx9ehQGoMO0OPqX7nGNyIVfUGAeo6pV5r_WXrtg70gq4lY1j1khZQV7zXWd20eDcA"}
+
 RESPONSE
 STATUS 200
 HEADER
