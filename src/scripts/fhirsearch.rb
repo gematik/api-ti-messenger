@@ -130,6 +130,6 @@ file_content += "BODY\n#{JSON.pretty_generate(response.body)}\n"
 
 puts file_content
 
-f = File.open('../../samples/matrix_openid_token.txt', 'w')
+f = File.open('../../samples/fhirsearch_sample.txt', 'w')
 f.write(file_content)
 f.close

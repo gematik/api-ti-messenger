@@ -7,16 +7,16 @@ BODY
 RESPONSE
 STATUS 200
 HEADER
-{"date"=>"Tue, 25 Oct 2022 08:07:35 GMT", "server"=>"Synapse/1.53.0", "content-type"=>"application/json", "cache-control"=>"no-cache, no-store, must-revalidate", "access-control-allow-origin"=>"*", "access-control-allow-methods"=>"GET, HEAD, POST, PUT, DELETE, OPTIONS", "access-control-allow-headers"=>"X-Requested-With, Content-Type, Authorization, Date", "transfer-encoding"=>"chunked"}
+{"date"=>"Tue, 25 Oct 2022 08:25:34 GMT", "server"=>"Synapse/1.53.0", "content-type"=>"application/json", "cache-control"=>"no-cache, no-store, must-revalidate", "access-control-allow-origin"=>"*", "access-control-allow-methods"=>"GET, HEAD, POST, PUT, DELETE, OPTIONS", "access-control-allow-headers"=>"X-Requested-With, Content-Type, Authorization, Date", "transfer-encoding"=>"chunked"}
 BODY
 {
   "user_id": "@ettr02:matrix.dev.service-ti.de",
-  "access_token": "syt_ZXR0cjAy_ICiRXSHQuhQeuPXLQsTK_2aijKq",
+  "access_token": "syt_ZXR0cjAy_JjbHoMZhkIfxeiaCaNHN_2LGskp",
   "home_server": "matrix.dev.service-ti.de",
-  "device_id": "QFBXNBIZHH"
+  "device_id": "FSEPQFDOXU"
 }
 REQUEST
-POST https://matrix.dev.service-ti.de/_matrix/client/v3/user/@ettr02:matrix.dev.service-ti.de/openid/request_token?access_token=syt_ZXR0cjAy_ICiRXSHQuhQeuPXLQsTK_2aijKq
+POST https://matrix.dev.service-ti.de/_matrix/client/v3/user/@ettr02:matrix.dev.service-ti.de/openid/request_token?access_token=syt_ZXR0cjAy_JjbHoMZhkIfxeiaCaNHN_2LGskp
 HEADER
 {"User-Agent"=>"Faraday v2.6.0", "Content-Type"=>"application/json"}
 BODY
@@ -24,10 +24,10 @@ BODY
 RESPONSE
 STATUS 200
 HEADER
-{"date"=>"Tue, 25 Oct 2022 08:07:35 GMT", "server"=>"Synapse/1.53.0", "content-type"=>"application/json", "cache-control"=>"no-cache, no-store, must-revalidate", "access-control-allow-origin"=>"*", "access-control-allow-methods"=>"GET, HEAD, POST, PUT, DELETE, OPTIONS", "access-control-allow-headers"=>"X-Requested-With, Content-Type, Authorization, Date", "transfer-encoding"=>"chunked"}
+{"date"=>"Tue, 25 Oct 2022 08:25:35 GMT", "server"=>"Synapse/1.53.0", "content-type"=>"application/json", "cache-control"=>"no-cache, no-store, must-revalidate", "access-control-allow-origin"=>"*", "access-control-allow-methods"=>"GET, HEAD, POST, PUT, DELETE, OPTIONS", "access-control-allow-headers"=>"X-Requested-With, Content-Type, Authorization, Date", "transfer-encoding"=>"chunked"}
 BODY
 {
-  "access_token": "YiGVmjTEDWQoyHHeIqmxlxOh",
+  "access_token": "OhkRxRtoFVWfdKwEYxpgtplV",
   "token_type": "Bearer",
   "matrix_server_name": "matrix.dev.service-ti.de",
   "expires_in": 3600
@@ -35,31 +35,31 @@ BODY
 REQUEST
 GET https://fhir-directory-test.vzd.ti-dienste.de/tim-authenticate?mxId=matrix.dev.service-ti.de
 HEADER
-{"User-Agent"=>"Faraday v2.6.0", "Content-Type"=>"application/json", "X-Matrix-OpenID-Token"=>"YiGVmjTEDWQoyHHeIqmxlxOh", "X-Matrix-Server-Name"=>"matrix.dev.service-ti.de"}
+{"User-Agent"=>"Faraday v2.6.0", "Content-Type"=>"application/json", "X-Matrix-OpenID-Token"=>"OhkRxRtoFVWfdKwEYxpgtplV", "X-Matrix-Server-Name"=>"matrix.dev.service-ti.de"}
 RESPONSE
 STATUS 200
 HEADER
-{"date"=>"Tue, 25 Oct 2022 08:13:25 GMT", "server"=>"Apache", "etag"=>"\"0e9b3a6dfa5b5d80866ffe5ffcfb5544e\"", "content-type"=>"application/json", "content-length"=>"453"}
+{"date"=>"Tue, 25 Oct 2022 08:31:25 GMT", "server"=>"Apache", "etag"=>"\"0919146fd23aa4c8094a9b642d25b7060\"", "content-type"=>"application/json", "content-length"=>"453"}
 BODY
 {
-  "jwt": "eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJpc3MiOiJodHRwczovL2ZoaXItZGlyZWN0b3J5LXRlc3QudnpkLnRpLWRpZW5zdGUuZGUvdGltLWF1dGhlbnRpY2F0ZSIsImF1ZCI6Imh0dHBzOi8vZmhpci1kaXJlY3RvcnktdGVzdC52emQudGktZGllbnN0ZS5kZS9zZWFyY2giLCJzdWIiOiJAZXR0cjAyOm1hdHJpeC5kZXYuc2VydmljZS10aS5kZSIsImlhdCI6MTY2NjY4NTYwNSwiZXhwIjoxNjY2NzcyMDA1fQ.CnW6m2lERXfHM0V3z0xJko0DUhdJsEas0aAMFOBx3viFfM5tmsZPCdOtOcnqN9wdj7rYOd9UvdwTrZRq-fEArg",
+  "jwt": "eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJpc3MiOiJodHRwczovL2ZoaXItZGlyZWN0b3J5LXRlc3QudnpkLnRpLWRpZW5zdGUuZGUvdGltLWF1dGhlbnRpY2F0ZSIsImF1ZCI6Imh0dHBzOi8vZmhpci1kaXJlY3RvcnktdGVzdC52emQudGktZGllbnN0ZS5kZS9zZWFyY2giLCJzdWIiOiJAZXR0cjAyOm1hdHJpeC5kZXYuc2VydmljZS10aS5kZSIsImlhdCI6MTY2NjY4NjY4NSwiZXhwIjoxNjY2NzczMDg1fQ.Q8wZjDNiJt8m5fTHEXMCGzZYo7zGdWjtJ5qvpTyfklOXby5n9mt8uWOYQGeD1MdAu6Cy213nd1PwrBR25W2CyQ",
   "token_type": "bearer",
   "expires_in": 86400
 }
 REQUEST
 GET https://fhir-directory-test.vzd.ti-dienste.de/search/HealthcareService?organization.active=true&_count=2
 HEADER
-{"User-Agent"=>"Faraday v2.6.0", "Content-Type"=>"application/json", "Authorization"=>"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJpc3MiOiJodHRwczovL2ZoaXItZGlyZWN0b3J5LXRlc3QudnpkLnRpLWRpZW5zdGUuZGUvdGltLWF1dGhlbnRpY2F0ZSIsImF1ZCI6Imh0dHBzOi8vZmhpci1kaXJlY3RvcnktdGVzdC52emQudGktZGllbnN0ZS5kZS9zZWFyY2giLCJzdWIiOiJAZXR0cjAyOm1hdHJpeC5kZXYuc2VydmljZS10aS5kZSIsImlhdCI6MTY2NjY4NTYwNSwiZXhwIjoxNjY2NzcyMDA1fQ.CnW6m2lERXfHM0V3z0xJko0DUhdJsEas0aAMFOBx3viFfM5tmsZPCdOtOcnqN9wdj7rYOd9UvdwTrZRq-fEArg"}
+{"User-Agent"=>"Faraday v2.6.0", "Content-Type"=>"application/json", "Authorization"=>"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJpc3MiOiJodHRwczovL2ZoaXItZGlyZWN0b3J5LXRlc3QudnpkLnRpLWRpZW5zdGUuZGUvdGltLWF1dGhlbnRpY2F0ZSIsImF1ZCI6Imh0dHBzOi8vZmhpci1kaXJlY3RvcnktdGVzdC52emQudGktZGllbnN0ZS5kZS9zZWFyY2giLCJzdWIiOiJAZXR0cjAyOm1hdHJpeC5kZXYuc2VydmljZS10aS5kZSIsImlhdCI6MTY2NjY4NjY4NSwiZXhwIjoxNjY2NzczMDg1fQ.Q8wZjDNiJt8m5fTHEXMCGzZYo7zGdWjtJ5qvpTyfklOXby5n9mt8uWOYQGeD1MdAu6Cy213nd1PwrBR25W2CyQ"}
 RESPONSE
 STATUS 200
 HEADER
-{"date"=>"Tue, 25 Oct 2022 08:13:25 GMT", "server"=>"Apache", "x-powered-by"=>"HAPI FHIR 5.6.0 REST Server (FHIR Server; FHIR 4.0.1/R4)", "x-request-id"=>"haADj9m9UEZgyyvX", "last-modified"=>"Tue, 25 Oct 2022 08:13:25 GMT", "content-type"=>"application/fhir+json;charset=UTF-8", "transfer-encoding"=>"chunked"}
+{"date"=>"Tue, 25 Oct 2022 08:31:25 GMT", "server"=>"Apache", "x-powered-by"=>"HAPI FHIR 5.6.0 REST Server (FHIR Server; FHIR 4.0.1/R4)", "x-request-id"=>"337CmwyUvyJn6LhE", "last-modified"=>"Tue, 25 Oct 2022 08:31:25 GMT", "content-type"=>"application/fhir+json;charset=UTF-8", "transfer-encoding"=>"chunked"}
 BODY
 {
   "resourceType": "Bundle",
-  "id": "58e7d3ed-d30c-4781-9970-d3854fab6c27",
+  "id": "0cb1959e-4631-498b-94c1-a0d7d4d7e06b",
   "meta": {
-    "lastUpdated": "2022-10-25T10:13:25.905+02:00"
+    "lastUpdated": "2022-10-25T10:31:25.346+02:00"
   },
   "type": "searchset",
   "total": 2,

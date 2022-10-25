@@ -7,11 +7,24 @@ The FHIR Profiles are defined in the https://simplifier.net/vzd-fhir-directory[F
 In generell FHIR allows various search capabilities. The https://www.hl7.org/fhir/search.html[FHIR search] page describes in detail the search framework.
 The search always begins at a HealthcareService or a PractitionerRole ressource.
 
-
-
 == Full text search
 
+IMPORTANT: Full text search is not yet supported by the FHIR-Directory
+
 The search parameters, _text and _content, are used for full text search.
+
+=== Authentication
+
+The /search endpoint requires a valid jwt in the Authorization header. In order to get the jwt the following steps must be performed.
+
+1. Login to the matrix homeserver
+2. Get the Matrix OpenID Token
+3. Get the jwt from the /tim-authenticate endpoint
+
+.Example authentication
+====
+
+====
 
 === Request
 
