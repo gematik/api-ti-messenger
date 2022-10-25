@@ -102,6 +102,36 @@ Beschreibungstext
 
 Die Messenger-Services KÖNNEN den Akteuren unterschiedliche Authentifizierungsverfahren anbieten, bei denen der Besitz einer SMC-B oder eines HBAs nicht vorausgesetzt wird
 
+
+Synapse-Konfigurationsdatei /etc/matrix-synapse/homeserver.yaml
+
+[source, yaml]
+-----------------
+Passwortanbieter:
+    - Modul: "ldap_auth_provider.LdapAuthProvider"
+      Config:
+        aktiviert: wahr
+        uri: "ldap://DIRECTION_IP_DC:389"
+        start_tls: falsch
+        Base: "oder = OR_2, oder = OR_1, dc = DOMAIN,dc=LOCAL"
+        Attribute:
+           uid: "sAMAccountName"
+           Post: "Post"
+           Name: "Vorname"
+        bind_dn: "cn=USUARIO_LDAP_SYNAPSE,oder = OR_2, oder = OR_1, dc = DOMAIN,dc=LOCAL"
+        bind_password: "PASSWORT"
+        #Filter: "(objectClass=posixAccount)"
+-----------------
+
+Quelle: https://github.com/matrix-org/matrix-synapse-ldap3
+
+2 Faktor gemäß BSI Empfehlung
+
+Beispiel
+
+- E-Mail?
+- SMS Code?
+
 === Messenger Proxy
 Der Messenger-Proxy als Prüfinstanz aller eingehenden Anfragen zum Messenger-Service ist für die Regelung der gemäß Matrix Client-Server-API und Matrix-Server-Server-API geltenden Aufrufe zuständig.
 
