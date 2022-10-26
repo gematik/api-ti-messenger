@@ -134,7 +134,7 @@ Mögliche Beispiele wären:
 * Überprüfung per SMS Code
 
 ==== Proxy für das Matrix-Protokoll
-Der Messenger-Proxy ist technisch ein Reverse-proxy ...
+Der Messenger-Proxy ist technisch ein Reverse-proxy und leitet alle Anfragen nach einer Berechtigungsprüfung an den Matrix Homeserver weiter. 
 
 ==== I_TiMessengerContactManagement
 
