@@ -141,8 +141,7 @@ Für die Adminstration der Freigabeliste eines Akteurs wird durch den Messenger 
 
 === Matrix-Homeserver
 
-
-Freigabeliste
+Die Teilkomponente Matrix-Homeserver basiert auf dem offenen Kommunikationsprotokoll Matrix. 
 
 === Matrix-Homeserver
 
