@@ -134,7 +134,7 @@ Mögliche Beispiele wären:
 * Überprüfung per SMS Code
 
 ==== Proxy für das Matrix-Protokoll
-Der Messenger-Proxy ist technisch ein Reverse-proxy und leitet alle Anfragen, die einer Matrix API entsprechen, nach einer Berechtigungsprüfung an den Matrix Homeserver weiter. 
+Der Messenger-Proxy ist technisch ein Reverse-proxy und leitet alle Anfragen, die einer Matrix API entsprechen, nach einer Berechtigungsprüfung, an den Matrix Homeserver weiter. 
 
 ==== I_TiMessengerContactManagement
 Für die Adminstration der Freigabeliste eines Akteurs wird durch den Messenger Proxy das Interface `I_TiMessengerContactManagement` bereitgestellt, welches die Administration dieser Liste für jeden Akteur ermöglicht. Die Beschreibung der Schnittstelle ist hier zu finden: https://github.com/gematik/api-ti-messenger/blob/feature/fachdienst/src/openapi/TiMessengerContactManagement.yaml[&#91;TIMessengerContactManagement&#93;]
