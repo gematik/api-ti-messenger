@@ -29,6 +29,9 @@ Für die Authentifizierung einer Organisation am Registrierungs-Dienst wird der 
 
 Nach der erfolgreichen Authentifizierung der Organisation am Registrierungs-Dienst muss es über die Schnittstelle möglich sein, dass ein Admin Account für die Organisation angelegt werden kann. Die für den Nutzer notwendigen Credentials werden bei der Einrichtung des Admin Accounts auf dem Registrierungs-Dienst übergeben. Es muss berücksichtigt werden, dass mindestens eine 2-Faktor Verfahren unterstützt wird. 
 
+POST /login? auch mit der Schnittstelle?
+POST /create Erzeugen eines MEssenger Services?
+
 === I_internVerification
 Bei der Schnittstelle `I_internVerification` handelt es sich um eine abstrakte interne Schnittstelle am Registrierungs-Dienst mit der den Messenger-Proxies die folgenden  Funktionalitäten bereitgestellt werden:
 
@@ -145,6 +148,8 @@ Der Messenger-Proxy ist technisch ein Reverse-proxy und leitet alle Anfragen, di
 
 ==== Bereistellen und Administration der Freigabeliste
 Bei der Freigabeliste handelt es sich um eine Whitelist, die alle Akteure enthält, die vom jeweiligen Akteur berechtigt werden mit ihm kontakt aufzunehmen. Die Liste kann in Form einer Lookup-Table implementiert werden. Für die Adminstration der Freigabeliste eines Akteurs ist es erforderlich, dass der Messenger Proxy Schnittstelle `I_TiMessengerContactManagement` gemäß https://github.com/gematik/api-ti-messenger/blob/feature/fachdienst/src/openapi/TiMessengerContactManagement.yaml[&#91;TIMessengerContactManagement&#93;] bereitgestellt.
+
+POST /tim-contact-mgmt/createContactSetting
 
 ==== Prüfregeln
 Der Messenger-Proxy muss bei jedem `Invite-Event` die Anfrage an den Matrix-Homeserver auf Berechtigung prüfen. Die Berechtigungsstufen sind in *[gemSpec_TI_Messenger-Dienst#Berechtigungskonzept]* beschrieben. 
