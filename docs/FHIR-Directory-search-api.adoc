@@ -85,7 +85,8 @@ BODY
   "jwt": "tim-authenticate-token",
   "token_type": "bearer",
   "expires_in": 86400
-}----
+}
+----
 
 == FHIR /search Request
 
