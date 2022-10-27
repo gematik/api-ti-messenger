@@ -105,7 +105,7 @@ Therefore the search must include a *organization.active=true* or a *practitione
 
 The goal of searches by TI-Messenger-Clients is to find the matrix adresses of other users. The Endpoint ressource contains the mxid of a user or of a bot. Again, only active endpoints should be searched (search parameter *endpoint.status=active*).
 
-The search response should include the referenced ressources (search parameter _include=*).
+The search response should include the referenced ressources (search parameter *_include=**).
 
 .Example: FHIR /search Request
 [source,]
