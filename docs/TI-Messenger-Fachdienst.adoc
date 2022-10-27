@@ -152,8 +152,10 @@ Bei einer Clint-Server Kommunikation wird nur die Föderationszugehörigkeit (St
 Zur Überpürfung gemäß der Berechtigungsstufe 1, ist es erforderlich, dass der Messenger-Proxy die Föderationsliste vom zuständigen Registrierungs-Dienst abruft. Dies ist in *[gemSpec_TI-Messenger-FD#Messenger-Proxy]* beschrieben. 
 
 === Matrix-Homeserver
-
 Die Teilkomponente Matrix-Homeserver basiert auf dem offenen Kommunikationsprotokoll Matrix. 
+
+=== Push-Gateway
+Das Push-Gateway muss gemäß der Matrix-Spezifikation implementiert werden. 
 
 
 = Betriebliche Aspekte
