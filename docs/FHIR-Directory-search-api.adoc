@@ -90,6 +90,23 @@ BODY
 
 == FHIR /search Request
 
+It is important to understand how the entries in the FHIR-Directory are structured. The FHIR-Directory has two kinds of entries.
+An organization entry has the following structure.
+
+image:https://raw.githubusercontent.com/gematik/api-vzd/main/images/diagrams/ObjectDiagram.HealthcareService.svg[Organization entry]
+
+A practitioner entry has this structure.
+
+image:https://raw.githubusercontent.com/gematik/api-vzd/main/images/diagrams/ObjectDiagram.PractitionerRole.svg[Practitioner entry]
+
+Therefore the search starts with a HealthcareService or a PractitionerRole ressource. The FHIR-Directory /search endpoint verifies that only active organization entries or active practitioner entries are requested.
+
+Therefore the search must include a *organization.active=true* or a *practitioner.active=true* filter.
+
+The goal of searches by TI-Messenger-Clients is to find the matrix adresses of other users. The Endpoint ressource contains the mxid of a user or of a bot. Again, only active endpoints should be searched.
+
+Therefore the search should include a filter *endpoint.status=active*.
+
 .Example: FHIR /search Request
 [source,]
 ----
