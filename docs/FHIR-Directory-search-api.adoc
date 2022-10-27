@@ -99,13 +99,11 @@ A practitioner entry has this structure.
 
 image:https://raw.githubusercontent.com/gematik/api-vzd/main/images/diagrams/ObjectDiagram.PractitionerRole.svg[Practitioner entry]
 
-The search must start with a HealthcareService or a PractitionerRole ressource. In addition the FHIR-Directory /search endpoint verifies that only active organization entries or active practitioner entries are requested.
-
-Therefore the search must include a *organization.active=true* or a *practitioner.active=true* filter.
-
-The goal of searches by TI-Messenger-Clients is to find the matrix addresses of other users. The Endpoint ressource contains the mxid of a user or of a bot. Again, only active endpoints should be searched (search parameter *endpoint.status=active*).
+If the goal of the search are organization entries then the search must start with */search/HealthcareService*. If practitioner entries the search must start with */search/PractitionerRole* ressource. In addition the FHIR-Directory /search endpoint verifies that only active organization entries or active practitioner entries are requested. Therefore the search must include a *organization.active=true* or a *practitioner.active=true* filter.
 
 The search response should include the referenced ressources (search parameter *_include=**).
+
+The matrix addresses of other users (mxid) are saved in HealthcareService.endpoint.address. The Endpoint ressource contains the mxid of a user or of a bot. Only active endpoints should be used (search parameter *endpoint.status=active*).
 
 .Example: FHIR /search Request
 [source,]
