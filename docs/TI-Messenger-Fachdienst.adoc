@@ -157,7 +157,7 @@ Die Teilkomponente Matrix-Homeserver basiert auf dem offenen Kommunikationsprot
 
 
 = Betriebliche Aspekte
-Foo Text
+Der Betrieb des Fachdienstes wird durch den TI-Messenger-Anbieter verantwortet.
 
 = Referenzierte Dokumente
 
