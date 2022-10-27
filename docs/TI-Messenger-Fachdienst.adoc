@@ -1,3 +1,11 @@
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
 :imagesdir: ../images
 :toc: macro
 :toclevels: 5
@@ -9,7 +17,19 @@ image:gematik_logo.svg[width=70%]
 toc::[]
 
 = TI-Messenger-Fachdienst
-Der TI-Messenger-Fachdienst ist in *[gemSpec_TI-Messenger-FD]* spezifiziert. Dieser besteht aus den Teilkomponenten Registrierungs-Dienst, Messenger-Service und einem Push-Gateway. Dieser stellt den TI-Messenger-Clients verschiedene Schnittstellen bereit, um die Kommunikations mit der jeweiligen Teilkomponente zu ermöglichen. In der folgenden Abbildung (links) sind alle Schnittstellen, die der Fachdienst anbietet, mit der jeweiligen Teilkomponente, dargestellt.
+Der folgende Leitfaden soll als Unterstützung bei der Implementierung des TI-Messenger-Fachdienstes dienen. 
+
+TIP: Dieser Leitfaden kann als Ergänzung zur Spezifikation gemäß *[gemSpec_TI-Messenger-FD]* gesehen werden.
+
+Der TI-Messenger-Fachdienst besteht aus den Teilkomponenten:  
+
+* Registrierungs-Dienst, 
+
+* Messenger-Service und
+
+* Push-Gateway. 
+
+Der TI-Messenger-Fachdienst stellt verschiedene Schnittstellen bereit, um die Kommunikations mit den Teilkomponenten zu ermöglichen. In der folgenden Abbildung sind alle Schnittstellen, die der Fachdienst anbietet, mit der jeweiligen Teilkomponente, dargestellt.
 
 ++++
 <p align="left">
@@ -18,23 +38,18 @@ Der TI-Messenger-Fachdienst ist in *[gemSpec_TI-Messenger-FD]* spezifiziert. Die
 ++++
 
 == Registrierungs-Dienst
-Über den Registrierungs-Dienst bekommt der TI-Messenger-Anbieter die Möglichkeit Messenger-Services automatisiert Organisationen zur Verfügung zu stellen und die Matrix-Domain der von ihm bereitgestellten Messenger-Services in deren Organisationsressource in das zentrale VZD-FHIR-Directory einzutragen. Der Registrierungs-Dienst eines TI-Messenger-Fachdienstes bietet als weitere Funktion die Bereitstellung einer Föderationsliste für die Messenger Proxies seiner Messenger-Services an
+Über den Registrierungs-Dienst bekommt der TI-Messenger-Anbieter die Möglichkeit Messenger-Services automatisiert authentifizierten Organisationen zur Verfügung zu stellen und die Matrix-Domain der von ihm bereitgestellten Messenger-Services in deren Organisationsressource in das zentrale VZD-FHIR-Directory einzutragen. 
+Als Weitere Funktion bietet der Registrierungs-Dienst eines TI-Messenger-Fachdienstes die Bereitstellung einer Föderationsliste für die Messenger Proxies seiner Messenger-Services an
 
-...ist zwangsläufig immer ID_TOKEN gematik IDP....Ein Akteur in der Rolle "Org-Admin" MUSS sich über das vom TI-Messenger-Anbieter bereitgestellte Frontend eines  Registrierungs-Dienstes mit der Identität (SMC-B) der Organisation gegenüber dem Registrierungs-Dienst [BSI_16] authentisieren, um einen oder mehrere Messenger-Services für seine Organisation registrieren zu können.....
-
-.....Über den Registrierungs-Dienst bekommt der TI-Messenger-Anbieter die Möglichkeit Messenger-Services automatisiert Organisationen zur Verfügung zu stellen und die Matrix-Domain der von ihm bereitgestellten Messenger-Services in deren Organisationsressource in das zentrale VZD-FHIR-Directory einzutragen.....
+TIP:  Für die Authentifizierung einer Organisation am Registrierungs-Dienst ist es erforderlich den zentrale IDP-Dienst gemäß *[gemSpec_IDP_FD]* zu verwenden
 
 === I_Registration
-Diese nicht durch die gematik normierte Operation `I_Registration` am Registrierungs-Dienst ermöglicht es Akteuren ihre Organisation über deren Identität (SMC-B) bei einem Anbieter zu registrieren um Messenge-Services bereitzustellen. Es ist zu empfehlen, diese Schnittstelle als eine REST-Schnittstelle zu implementieren. Der Akteur sollte diese über ein Webbrowser (z. B. über ein Portal des Anbieters) aufrufen können. 
+Die nicht durch die gematik normierte Schnittstelle wird über ein Frontend am Registrierungs-Dienst aufgerufen. Diese ermöglicht die Authentifizierung einer Organisation sowie die Administration und Bereitstellung von Messenger-Services. Hierbei erfolgt die Authentifizierung einer Organisation über deren Identität (SMC-B).
+Es ist zu empfehlen, diese Schnittstelle als eine REST-Schnittstelle zu implementieren.
 
-Für die Authentifizierung einer Organisation am Registrierungs-Dienst wird der zentrale IDP-Dienst der gematik benötigt. Hierfür wird das durch die gematik bereitgestellte Authenticator-Modul (siehe *[gematik Authenticator]* ) verwendet, um  das Authentifizierungszertifikats der SMC-B in ein ID_TOKEN umzuwandeln. Der Authenticator wird in einer Windows-Systemumgebungen zusammen mit dem Primärsystem betrieben. 
+Für die Authentifizierung einer Organisation am Registrierungs-Dienst wird der zentrale IDP-Dienst der gematik benötigt. Hierfür wird das durch die gematik bereitgestellte Authenticator-Modul (siehe *[gematik Authenticator]* ) verwendet, um  das Authentifizierungszertifikats der SMC-B in ein ID_TOKEN umzuwandeln. Der Authenticator wird in einer Windows-Systemumgebungen zusammen mit dem Primärsystem betrieben. Der Registrierungs-Dienst  muss bei der Verifikation der Organisation das ID_TOKEN verifizieren. Um die Verifikation durchführen zu können, muss der Registrierungs-Dienst sowie das Frontend beim zentralen IDP-Dienst registriert sein. 
 
-.....Um einen benutzerfreundlichen Onboarding-Prozess zu gewährleisten MUSS der Registrierungs-Dienst die Bereitstellung eines Messenger-Service über ein Frontend ermöglichen (im Folgenden auch als Frontend des Registrierungs-Dienstes bezeichnet).Dazu MUSS das Frontend des Registrierungs-Dienstes bei allen durch ihn unterstützten IDP-Diensten registriert sein.....Hierfür MÜSSEN der Registrierungs-Dienst und die TI-Messenger-Clients am zugelassenen IDP-Dienst der gematik gemäß [gemSpec_IDP_FD] registriert sein. Diese MÜSSEN den ausgestellten Security Tokens (ID_TOKEN) dieses IDP-Dienstes vertrauen......
-
-Nach der erfolgreichen Authentifizierung der Organisation am Registrierungs-Dienst muss es über die Schnittstelle möglich sein, dass ein Admin Account für die Organisation angelegt werden kann. Die für den Nutzer notwendigen Credentials werden bei der Einrichtung des Admin Accounts auf dem Registrierungs-Dienst übergeben. Es muss berücksichtigt werden, dass mindestens eine 2-Faktor Verfahren unterstützt wird. 
-
-POST /login? auch mit der Schnittstelle?
-POST /create Erzeugen eines MEssenger Services?
+Nach der erfolgreichen Authentifizierung der Organisation am Registrierungs-Dienst muss es über das Frontend des Registrierungs-Dienstes möglich sein einen Admin-Account für die Organisation anzulegen. Mit diesem dmin-Account können anschließend Messenger-Services erzeugt und bereitgestellt werden. 
 
 === I_internVerification
 Bei der Schnittstelle `I_internVerification` handelt es sich um eine abstrakte interne Schnittstelle am Registrierungs-Dienst mit der den Messenger-Proxies die folgenden  Funktionalitäten bereitgestellt werden:
