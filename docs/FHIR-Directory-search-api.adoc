@@ -1,6 +1,13 @@
-:source-highlighter: highlight.js
-
 = FHIR-Directory Search-API
+:source-highlighter: highlight.js
+ifdef::env-github[]
+:toc: preamble
+endif::[]
+ifndef::env-github[]
+:toc: left
+endif::[]
+:toclevels: 3
+:toc-title: Inhaltsverzeichnis
 
 The FHIR-Directory contains entries for healthcare services provided by organizations as well as practitioner entries. This page describes how to use the FHIR-Directory /search endpoint. The specification of the FHIR-Directory (https://fachportal.gematik.de/fachportal-import/files/gemSpec_VZD_FHIR_Directory_V1.1.0.pdf[gemSpec_VZD_FHIR_Directory v1.1.0]) contains information about the endpoints and authentication methods.
 
@@ -8,12 +15,6 @@ The FHIR Profiles are defined in the https://simplifier.net/vzd-fhir-directory[F
 
 In generell FHIR allows various search capabilities. The https://www.hl7.org/fhir/search.html[FHIR search] page describes in detail the search framework.
 The search always begins at a HealthcareService or a PractitionerRole ressource.
-
-== Full text search
-
-IMPORTANT: Full text search is not yet supported by the FHIR-Directory
-
-The search parameters, _text and _content, are used for full text search.
 
 == Authentication
 
@@ -546,3 +547,8 @@ The results of the search are summarized in a json FHIR Bundle structure. Each e
 
 HINT: The search results can also contain FHIR data which is not marked as _must support_.
 
+== Full text search
+
+IMPORTANT: Full text search is not yet supported by the FHIR-Directory
+
+The search parameters, _text and _content, are used for full text search.
