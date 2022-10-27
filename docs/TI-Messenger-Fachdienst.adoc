@@ -25,6 +25,8 @@ Diese nicht durch die gematik normierte Operation `I_Registration` am Registrier
 
 Für die Authentifizierung einer Organisation am Registrierungs-Dienst wird der zentrale IDP-Dienst der gematik benötigt. Hierfür wird das durch die gematik bereitgestellte Authenticator-Modul (siehe *[gematik Authenticator]* ) verwendet, um  das Authentifizierungszertifikats der SMC-B in ein ID_TOKEN umzuwandeln. Der Authenticator wird in einer Windows-Systemumgebungen zusammen mit dem Primärsystem betrieben. 
 
+.....Um einen benutzerfreundlichen Onboarding-Prozess zu gewährleisten MUSS der Registrierungs-Dienst die Bereitstellung eines Messenger-Service über ein Frontend ermöglichen (im Folgenden auch als Frontend des Registrierungs-Dienstes bezeichnet).Dazu MUSS das Frontend des Registrierungs-Dienstes bei allen durch ihn unterstützten IDP-Diensten registriert sein.....
+
 Nach der erfolgreichen Authentifizierung der Organisation am Registrierungs-Dienst muss es über die Schnittstelle möglich sein, dass ein Admin Account für die Organisation angelegt werden kann. Die für den Nutzer notwendigen Credentials werden bei der Einrichtung des Admin Accounts auf dem Registrierungs-Dienst übergeben. Es muss berücksichtigt werden, dass mindestens eine 2-Faktor Verfahren unterstützt wird. 
 
 === I_internVerification
