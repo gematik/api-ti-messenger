@@ -20,12 +20,16 @@ Der TI-Messenger-Fachdienst ist in *[gemSpec_TI-Messenger-FD]* spezifiziert. Die
 == Registrierungs-Dienst
 Über den Registrierungs-Dienst bekommt der TI-Messenger-Anbieter die Möglichkeit Messenger-Services automatisiert Organisationen zur Verfügung zu stellen und die Matrix-Domain der von ihm bereitgestellten Messenger-Services in deren Organisationsressource in das zentrale VZD-FHIR-Directory einzutragen. Der Registrierungs-Dienst eines TI-Messenger-Fachdienstes bietet als weitere Funktion die Bereitstellung einer Föderationsliste für die Messenger Proxies seiner Messenger-Services an
 
+...ist zwangsläufig immer ID_TOKEN gematik IDP....Ein Akteur in der Rolle "Org-Admin" MUSS sich über das vom TI-Messenger-Anbieter bereitgestellte Frontend eines  Registrierungs-Dienstes mit der Identität (SMC-B) der Organisation gegenüber dem Registrierungs-Dienst [BSI_16] authentisieren, um einen oder mehrere Messenger-Services für seine Organisation registrieren zu können.....
+
+.....Über den Registrierungs-Dienst bekommt der TI-Messenger-Anbieter die Möglichkeit Messenger-Services automatisiert Organisationen zur Verfügung zu stellen und die Matrix-Domain der von ihm bereitgestellten Messenger-Services in deren Organisationsressource in das zentrale VZD-FHIR-Directory einzutragen.....
+
 === I_Registration
 Diese nicht durch die gematik normierte Operation `I_Registration` am Registrierungs-Dienst ermöglicht es Akteuren ihre Organisation über deren Identität (SMC-B) bei einem Anbieter zu registrieren um Messenge-Services bereitzustellen. Es ist zu empfehlen, diese Schnittstelle als eine REST-Schnittstelle zu implementieren. Der Akteur sollte diese über ein Webbrowser (z. B. über ein Portal des Anbieters) aufrufen können. 
 
 Für die Authentifizierung einer Organisation am Registrierungs-Dienst wird der zentrale IDP-Dienst der gematik benötigt. Hierfür wird das durch die gematik bereitgestellte Authenticator-Modul (siehe *[gematik Authenticator]* ) verwendet, um  das Authentifizierungszertifikats der SMC-B in ein ID_TOKEN umzuwandeln. Der Authenticator wird in einer Windows-Systemumgebungen zusammen mit dem Primärsystem betrieben. 
 
-.....Um einen benutzerfreundlichen Onboarding-Prozess zu gewährleisten MUSS der Registrierungs-Dienst die Bereitstellung eines Messenger-Service über ein Frontend ermöglichen (im Folgenden auch als Frontend des Registrierungs-Dienstes bezeichnet).Dazu MUSS das Frontend des Registrierungs-Dienstes bei allen durch ihn unterstützten IDP-Diensten registriert sein.....
+.....Um einen benutzerfreundlichen Onboarding-Prozess zu gewährleisten MUSS der Registrierungs-Dienst die Bereitstellung eines Messenger-Service über ein Frontend ermöglichen (im Folgenden auch als Frontend des Registrierungs-Dienstes bezeichnet).Dazu MUSS das Frontend des Registrierungs-Dienstes bei allen durch ihn unterstützten IDP-Diensten registriert sein.....Hierfür MÜSSEN der Registrierungs-Dienst und die TI-Messenger-Clients am zugelassenen IDP-Dienst der gematik gemäß [gemSpec_IDP_FD] registriert sein. Diese MÜSSEN den ausgestellten Security Tokens (ID_TOKEN) dieses IDP-Dienstes vertrauen......
 
 Nach der erfolgreichen Authentifizierung der Organisation am Registrierungs-Dienst muss es über die Schnittstelle möglich sein, dass ein Admin Account für die Organisation angelegt werden kann. Die für den Nutzer notwendigen Credentials werden bei der Einrichtung des Admin Accounts auf dem Registrierungs-Dienst übergeben. Es muss berücksichtigt werden, dass mindestens eine 2-Faktor Verfahren unterstützt wird. 
 
