@@ -19,11 +19,9 @@ The search parameters, _text and _content, are used for full text search.
 
 The /search endpoint requires a valid jwt in the Authorization header. In order to get the jwt the following steps must be performed.
 
-1. Login to the matrix homeserver
-2. Get the Matrix OpenID Token
-3. Get the jwt from the /tim-authenticate endpoint
-
-.Example: Login to the matrix homeserver
+.*1. Login to the matrix homeserver*
+[%collapsible]
+====
 [source,]
 ----
 REQUEST
@@ -44,9 +42,12 @@ BODY
   "home_server": "matrix.dev.service-ti.de",
   "device_id": "SRCDQZFMLS"
 }
-
 ----
-.Example: Get the Matrix OpenID Token
+====
+
+.*2. Get the Matrix OpenID Token*
+[%collapsible]
+====
 [source,]
 ----
 REQUEST
@@ -68,7 +69,11 @@ BODY
   "expires_in": 3600
 }
 ----
-.Example: Get the jwt from the /tim-authenticate endpoint
+====
+
+.*3. Get the jwt from the /tim-authenticate endpoint*
+[%collapsible]
+====
 [source,]
 ----
 REQUEST
@@ -87,6 +92,7 @@ BODY
   "expires_in": 86400
 }
 ----
+====
 
 == FHIR /search Request
 
@@ -95,17 +101,23 @@ An organization entry has the following structure.
 
 image:https://raw.githubusercontent.com/gematik/api-vzd/main/images/diagrams/ObjectDiagram.HealthcareService.svg[Organization entry]
 
-A practitioner entry has this structure.
+A practitioner entry has a similar structure.
 
 image:https://raw.githubusercontent.com/gematik/api-vzd/main/images/diagrams/ObjectDiagram.PractitionerRole.svg[Practitioner entry]
 
-If the goal of the search are organization entries then the search must start with */search/HealthcareService*. If practitioner entries the search must start with */search/PractitionerRole* ressource. In addition the FHIR-Directory /search endpoint verifies that only active organization entries or active practitioner entries are requested. Therefore the search must include a *organization.active=true* or a *practitioner.active=true* filter.
+Please refer to the https://www.hl7.org/fhir/healthcareservice.html#search[HL7 FHIR documentation] to find the possible search parameters of each FHIR ressource.
+
+If the goal of the search are organization entries then the search must start with */search/HealthcareService*. If practitioner entries are searched the search must start with */search/PractitionerRole*. In addition the FHIR-Directory /search endpoint verifies that only active organization entries or active practitioner entries are requested. Therefore the search must include a *organization.active=true* or a *practitioner.active=true* filter.
 
 The search response should include the referenced ressources (search parameter *_include=**).
 
 The matrix addresses of other users (mxid) are saved in HealthcareService.endpoint.address. The Endpoint ressource contains the mxid of a user or of a bot. Only active endpoints should be used (search parameter *endpoint.status=active*).
 
-.Example: FHIR /search Request
+The FHIR Endpoint ressources are also used for other TI Applications e.g. https://github.com/gematik/api-kim[KIM]. For TI-Messenger Clients it is recommended to use a search parameter *endpoint.connection-type=tim*. This way only Endpoints with TI-Messenger addresses are found.
+
+.*FHIR /search Request*
+[%collapsible]
+====
 [source,]
 ----
 REQUEST
@@ -526,3 +538,11 @@ BODY
   ]
 }
 ----
+====
+
+== Display search results
+
+The results of the search are summarized in a json FHIR Bundle structure. Each entry of the Bundle contains a FHIR ressource. The https://simplifier.net/VZD-FHIR-Directory/~introduction[FHIR-Directory simplifier page] specifies the _must support_ elements of the FHIR ressources. It is recommended to display at least those elements of the search results.
+
+HINT: The search results can also contain FHIR data which is not marked as _must support_.
+
