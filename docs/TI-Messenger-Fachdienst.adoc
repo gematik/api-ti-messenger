@@ -157,7 +157,8 @@ Die Teilkomponente Matrix-Homeserver basiert auf dem offenen Kommunikationsprot
 
 
 = Betriebliche Aspekte
-Der Betrieb des Fachdienstes wird durch den TI-Messenger-Anbieter verantwortet. Zentrale Komponenten, wie der Registrierungs-Dienst und das Push-Gateway werden zentral durch den TI-Messenger-Anbieter bereitgestellt und betrieben. Ein Messenger Service kann sowohl in einem Rechenzentrum des TI-Messenger-Anbieters als auch on Premise in den Räumlichkeiten einer Organisation betrieben werden.
+Der Betrieb des Fachdienstes wird durch den TI-Messenger-Anbieter verantwortet. Zentrale Komponenten, wie der Registrierungs-Dienst und das Push-Gateway werden zentral durch den TI-Messenger-Anbieter bereitgestellt und betrieben. Ein Messenger Service kann sowohl in einem Rechenzentrum des TI-Messenger-Anbieters als auch on Premise in den Räumlichkeiten einer Organisation durch den TI-Messenger-Anbieter betrieben werden.
+
 
 = Referenzierte Dokumente
 
