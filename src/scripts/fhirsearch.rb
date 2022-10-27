@@ -103,9 +103,7 @@ file_content += "BODY\n#{JSON.pretty_generate(response.body)}\n"
 tim_authenticate_jwt = response.body['jwt']
 
 # FHIR /search
-url = Addressable::URI.escape 'https://fhir-directory-test.vzd.ti-dienste.de/search/HealthcareService?organization.active=true&endpoint.status=active&_include=*&_count=2&_pretty=true'
-
-puts url
+url = Addressable::URI.escape 'https://fhir-directory-test.vzd.ti-dienste.de/search/HealthcareService?organization.active=true&endpoint.status=active&location.address-city=Berlin&_include=*&_count=2&_pretty=true'
 
 conn = Faraday.new(url) do |f|
   f.request :json
@@ -125,6 +123,6 @@ file_content += "BODY\n#{JSON.pretty_generate(response.body)}\n"
 puts file_content
 
 # write log file
-f = File.open('../../samples/fhirsearch_sample.txt', 'w')
-f.write(file_content)
-f.close
+# f = File.open('../../samples/fhirsearch_sample.txt', 'w')
+# f.write(file_content)
+# f.close
