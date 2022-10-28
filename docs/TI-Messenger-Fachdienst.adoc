@@ -163,7 +163,7 @@ Der Messenger-Service besteht aus der Teilkomponente Messenger-Proxy und dem Mat
 TIP: Eine direkte Kommunikation zum Matrix-Homeserver ist nicht erlaubt. 
 
 === Messenger-Proxy
-Der Messenger-Proxy als Prüfinstanz aller eingehenden `Invite Events`???? zum Messenger-Service ist für die Regelung der gemäß Matrix Client-Server-API und Matrix-Server-Server-API geltenden Aufrufe zuständig.
+Der Messenger-Proxy als Prüfinstanz aller eingehenden `Invite Events` ist für die Regelung der gemäß Matrix Client-Server-API und Matrix-Server-Server-API geltenden Aufrufe zuständig. Bei erfolgt wird das `Invite Event` an den zuständigen Matrix-Homeserver weitergeleitet. Im folgenden werden die Funktionsmerkmale die der Messenger-Proxy umsetzen muss beschrieben. 
 
 ==== TLS-Kommunikation
 Am Messenger-Proxy wird die TLS-Kommunikation zwischen den TI-Messenger-Clients und den Matrix-Homeserver terminiert. Für die Serverauthentisierung ist es erfordlich ein durch den Fachdienst-Anbieter bereitgestelltes X.509-Zertifikat zu verwenden. Hierbei darf es sich nicht um ein self-signed Zertifikat handeln. 
@@ -171,7 +171,6 @@ Am Messenger-Proxy wird die TLS-Kommunikation zwischen den TI-Messenger-Clients 
 Der Messenger-Proxy prüft bei jeder Verbindung, anhand der `client_id`, ob es sich um einen zugelassenen TI-Messenger-Client handelt. Damit der TI-Messenger-Client mit dem Messenger-Proxy erfolgreich kommunizieren kann, ist es erforderlich, dass die `client_id` beim Messenger-Proxy bekannt ist. Hierfür muss der TI-Messenger-Client Hersteller die `client_id` beim TI-Messenger-Anbieter bekannt machen. Sollten unterschiedliche TI-Messenger-Clients vom Messenger-Proxy eines Anbieters unterstützt werden, so müssen alle `client_id` an den TI-Messenger-Anbieter des Messener-Proxies übermittelt werden. 
 
 ==== Authentifizierungsverfahren
-
 Neben der Authentifizierung mittels einer SMC-B oder eines HBA's können auch weitere Authentifizierungsverfahren vom Messenger-Service unterstützt werden. Dies ermöglicht es Nutzern bereits existierende Authentifizierungsverfahren in ihrer Organisation nachzunutzen. Dies kann zum Beispiel ein Active Directory oder ein LDAP-Verzeichnis sein.
 
 Um dies innerhalb einer Organisation für die Nutzer bereitstellen zu können muss das bestehende Authentifizierungsverfahren in der Matrix-Homeserver Konfiguration eingerichtet werden. 
@@ -228,7 +227,6 @@ Der Betrieb des Fachdienstes wird durch den TI-Messenger-Anbieter verantwortet. 
 
 
 = Referenzierte Dokumente
-
 Die nachfolgende Tabelle enthält die in der vorliegenden Online Dokumentation referenzierten Dokumente der gematik. Deren zu diesem Dokument jeweils gültige Versionsnummer entnehmen Sie bitte der aktuellen, auf der Internetseite der gematik veröffentlichten, Dokumentenlandkarte, in der die vorliegende Version aufgeführt wird.
 
 |===
