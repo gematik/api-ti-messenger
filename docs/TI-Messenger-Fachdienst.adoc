@@ -158,10 +158,12 @@ responses:
 Das Ergebnis vom FHIR-Proxy muss an den anfragenenden Messenger-Proxy zurückgegeben werden.
 
 == Messenger-Service
-Der Messenger-Service besteht aus der Teilkomponente Messenger-Proxy und dem Matrix-Homeserver. Über den Messenger-Proxy werden immer alle Anfragen an den Matrix-Homeserver weitergeleitet. Eine direkte Kommunikation zum Matrix-Homeserver ist nicht erlaubt. 
+Der Messenger-Service besteht aus der Teilkomponente Messenger-Proxy und dem Matrix-Homeserver. Über den Messenger-Proxy werden immer alle Anfragen an den Matrix-Homeserver weitergeleitet. Die Bereitstellung eines Messenger-Services erfolgt durch einen Akteur über das Frontend des Registrierungs-Dienstes. 
+
+TIP: Eine direkte Kommunikation zum Matrix-Homeserver ist nicht erlaubt. 
 
 === Messenger-Proxy
-Der Messenger-Proxy als Prüfinstanz aller eingehenden Anfragen zum Messenger-Service ist für die Regelung der gemäß Matrix Client-Server-API und Matrix-Server-Server-API geltenden Aufrufe zuständig.
+Der Messenger-Proxy als Prüfinstanz aller eingehenden `Invite Events`???? zum Messenger-Service ist für die Regelung der gemäß Matrix Client-Server-API und Matrix-Server-Server-API geltenden Aufrufe zuständig.
 
 ==== TLS-Kommunikation
 Am Messenger-Proxy wird die TLS-Kommunikation zwischen den TI-Messenger-Clients und den Matrix-Homeserver terminiert. Für die Serverauthentisierung ist es erfordlich ein durch den Fachdienst-Anbieter bereitgestelltes X.509-Zertifikat zu verwenden. Hierbei darf es sich nicht um ein self-signed Zertifikat handeln. 
