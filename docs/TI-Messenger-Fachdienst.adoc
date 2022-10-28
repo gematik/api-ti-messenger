@@ -163,7 +163,7 @@ Der Messenger-Service besteht aus der Teilkomponente Messenger-Proxy und dem Mat
 TIP: Eine direkte Kommunikation zum Matrix-Homeserver ist nicht erlaubt. 
 
 === Messenger-Proxy
-Der Messenger-Proxy als Prüfinstanz aller eingehenden `Invite Events` ist für die Regelung der gemäß Matrix Client-Server-API und Matrix-Server-Server-API geltenden Aufrufe zuständig. Bei erfolgt wird das `Invite Event` an den zuständigen Matrix-Homeserver weitergeleitet. Im folgenden werden die Funktionsmerkmale die der Messenger-Proxy umsetzen muss beschrieben. 
+Der Messenger-Proxy als Prüfinstanz aller eingehenden `Invite Events` ist für die Regelung der gemäß Matrix Client-Server-API und Matrix-Server-Server-API geltenden Aufrufe zuständig. Bei erfolgt wird das `Invite Event` an den zuständigen Matrix-Homeserver weitergeleitet. Eine Übersich ist in *[gemSpec_TI-Messenger-Dienst#Stufen der Berechtigungsprüfung]* zu finden. Im folgenden werden die Funktionsmerkmale die der Messenger-Proxy umsetzen muss beschrieben. 
 
 ==== TLS-Kommunikation
 Am Messenger-Proxy wird die TLS-Kommunikation zwischen den TI-Messenger-Clients und den Matrix-Homeserver terminiert. Für die Serverauthentisierung ist es erfordlich ein durch den Fachdienst-Anbieter bereitgestelltes X.509-Zertifikat zu verwenden. Hierbei darf es sich nicht um ein self-signed Zertifikat handeln. 
