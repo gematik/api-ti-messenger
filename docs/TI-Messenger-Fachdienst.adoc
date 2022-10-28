@@ -62,9 +62,9 @@ Bei der Schnittstelle `I_internVerification` handelt es sich um eine abstrakte i
 Für die Prüfung der Organisationszugehörigkeit ist es erforderlich, dass der Registrierungs-Dienst über die abstrakte Schnittstelle `I_internVerification` den Messenger-Proxies eine aktuelle Föderationsliste bereitstellt. Hierfür ist es erforderlich, dass der Registrierungs-Dienst die Operation `/tim-provider-services/getFederationList` am FHIR-Proxys des VZD-FHIR-Directory aufruft, um eine aktuelle Föderationsliste zu erhalten. 
 Im fogenden ist der Aufbau der Föderationsliste die vom FHIR-Proxy des VZD-FHIR-Directory bereitgestellt wird dargestellt.
 
-.Föderationsliste
-[%collapsible%open]
-====
+*Aufbau der Föderationsliste*
+|====
+a|
 [source, yaml]
 ----
 FederationList {
@@ -92,7 +92,10 @@ FederationList {
                   }]
 }
 ----
-====
+|====
+
+
+
 
 *Beispiel einer HTTP Nachricht*
 
