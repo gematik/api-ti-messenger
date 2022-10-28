@@ -45,7 +45,7 @@ TIP:  Für die Authentifizierung einer Organisation am Registrierungs-Dienst ist
 
 Für die Umsetzung der beschriebenen Funktionen werden durch den Registrierungs-Dienst die beiden Schnittstellen `I_Registration` und `I_internVerification` implementiert. Diese werden im folgenden beschrieben. 
 
-=== I_Registration
+=== Schnittstelle: I_Registration
 Die nicht durch die gematik normierte Schnittstelle wird über ein Frontend am Registrierungs-Dienst aufgerufen. Diese ermöglicht die Authentifizierung einer Organisation sowie die Administration und Bereitstellung von Messenger-Services. Hierbei erfolgt die Authentifizierung einer Organisation über deren Identität (SMC-B).
 Es ist zu empfehlen, diese Schnittstelle als eine REST-Schnittstelle zu implementieren.
 
@@ -53,12 +53,15 @@ Für die Authentifizierung einer Organisation am Registrierungs-Dienst wird der 
 
 Nach der erfolgreichen Authentifizierung der Organisation am Registrierungs-Dienst muss es über das Frontend des Registrierungs-Dienstes möglich sein einen Admin-Account für die Organisation anzulegen. Mit diesem Admin-Account können anschließend Messenger-Services erzeugt und bereitgestellt werden. 
 
-=== I_internVerification
+=== Schnittstelle: I_internVerification
 Bei der Schnittstelle `I_internVerification` handelt es sich um eine abstrakte interne Schnittstelle am Registrierungs-Dienst, mit der den Messenger-Proxies die folgenden  Funktionalitäten bereitgestellt werden:
 
 - Bereitstellung der Föderationsliste, die alle verifizierten Matrix-Domains als Hashes enthält und
-- die Überprüfung von MXID-Einträgen im VZD-FHIR-Directory, um die Berechtigungsprüfung der Stufe 3 durchführen zu können.
+- die Überprüfung von MXID-Einträgen im VZD-FHIR-Directory, um die Berechtigungsprüfung der Stufe 3 gemäß *[gemSpec_TI-Messenger-FD#Messenger-Proxy]* durchführen zu können.
 
+TIP: Die Umsetzung der bereitzustellenden Funktionalitäten Bereitstellung der Föderationsliste und Berechtigungsprüfung - Stufe 3 am Registrierungs-Dienst kann auch über separate Schnittstellen am Registrierungs-Dienst erfolgen.
+
+==== Funktionsmerkmal: Bereitstellung der Föderationsliste
 Für die Prüfung der Organisationszugehörigkeit ist es erforderlich, dass der Registrierungs-Dienst über die abstrakte Schnittstelle `I_internVerification` den Messenger-Proxies eine aktuelle Föderationsliste bereitstellt. Hierfür ist es erforderlich, dass der Registrierungs-Dienst die Operation `/tim-provider-services/getFederationList` am FHIR-Proxys des VZD-FHIR-Directory aufruft, um eine aktuelle Föderationsliste zu erhalten. 
 Im fogenden ist der Aufbau der Föderationsliste die vom FHIR-Proxy des VZD-FHIR-Directory bereitgestellt wird dargestellt.
 
@@ -94,9 +97,6 @@ FederationList {
 ----
 |====
 
-
-
-
 *Beispiel einer HTTP Nachricht*
 
 [cols="h,a",] 
@@ -124,6 +124,12 @@ curl -X 'GET' \
   -H 'accept: application/json'
 -----------------
 
+==== Funktionsmerkmal: Regelprüfung gemäß Berechtigungsprüfung - Stufe 3
+Der Registrierungs-Dienst muss den Messenger-Proxies des TI-Messenger-Fachdienstes eine Funktion über die Schnittstelle `I_internVerification` anbieten, mit der die Überprüfung auf MXID-Einträge im VZD-FHIR-Directory möglich ist. 
+
+TIP: Gemäß der TI-Messenger Architektur dürfen nur die jeweiligen Registrierungs-Dienste eines TI-Messenger-Fachdienstes auf den VZD-FHIR-Directory zugreifen. 
+
+Hierfür ist es erforderlich die Operation `/tim-provider-services/whereIs` mit den MXIDs der im `Invite-Event` gelisteten Akteuren am FHIR-Proxy aufrufen. Als Ergebnis wird vom FHIR-Proxy ein Boolen `true`/`false` zurückgegeben. Das Ergebnis vom FHIR-Proxy muss an den anfragenenden Messenger-Proxy zurückgegeben werden.
 
 == Messenger-Service
 Der Messenger-Service besteht aus der Teilkomponente Messenger-Proxy und dem Matrix-Homeserver. Über den Messenger-Proxy werden immer alle Anfragen an den Matrix-Homeserver weitergeleitet. Eine direkte Kommunikation zum Matrix-Homeserver ist nicht erlaubt. 
