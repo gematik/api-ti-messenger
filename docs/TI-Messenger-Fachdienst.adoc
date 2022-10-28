@@ -129,7 +129,33 @@ Der Registrierungs-Dienst muss den Messenger-Proxies des TI-Messenger-Fachdienst
 
 TIP: Gemäß der TI-Messenger Architektur dürfen nur die jeweiligen Registrierungs-Dienste eines TI-Messenger-Fachdienstes auf den VZD-FHIR-Directory zugreifen. 
 
-Hierfür ist es erforderlich die Operation `/tim-provider-services/whereIs` mit den MXIDs der im `Invite-Event` gelisteten Akteuren am FHIR-Proxy aufrufen. Als Ergebnis wird vom FHIR-Proxy ein Boolen `true`/`false` zurückgegeben. Das Ergebnis vom FHIR-Proxy muss an den anfragenenden Messenger-Proxy zurückgegeben werden.
+Hierfür ist es erforderlich die Operation `/tim-provider-services/whereIs` mit den MXIDs der im `Invite-Event` gelisteten Akteuren am FHIR-Proxy aufrufen. Als Ergebnis wird vom FHIR-Proxy folgendes zurückgegeben. 
+
+*Rückgabewert der Operation `whereIs`*
+|====
+a|
+[source, yaml]
+----
+responses:
+  200:
+    description: OK
+    content:
+      application/json:
+        schema:
+            type: string
+            enum: [org, pract, orgPract, none]
+            example: org |
+            *description:* +
+              Returns in which part of the directory the MXID (the request contains the hash of the MXID) is located: 
+              
+               - `org`:      Located in the Organization part +               
+               - `pract`:    Located in the Practitioner part +         
+               - `orgPract`: Located in the Organization and Practitioner part +               
+               - `none`:     Not found in any part
+                    
+|====
+
+Das Ergebnis vom FHIR-Proxy muss an den anfragenenden Messenger-Proxy zurückgegeben werden.
 
 == Messenger-Service
 Der Messenger-Service besteht aus der Teilkomponente Messenger-Proxy und dem Matrix-Homeserver. Über den Messenger-Proxy werden immer alle Anfragen an den Matrix-Homeserver weitergeleitet. Eine direkte Kommunikation zum Matrix-Homeserver ist nicht erlaubt. 
