@@ -163,19 +163,19 @@ Der Messenger-Service besteht aus der Teilkomponente Messenger-Proxy und dem Mat
 TIP: Eine direkte Kommunikation zum Matrix-Homeserver ist nicht erlaubt. 
 
 === Messenger-Proxy
-Der Messenger-Proxy als Prüfinstanz aller eingehenden `Invite Events` ist für die Regelung der gemäß Matrix Client-Server-API und Matrix-Server-Server-API geltenden Aufrufe zuständig. Bei erfolgt wird das `Invite Event` an den zuständigen Matrix-Homeserver weitergeleitet. Eine Übersich ist in *[gemSpec_TI-Messenger-Dienst#Stufen der Berechtigungsprüfung]* zu finden. Im folgenden werden die Funktionsmerkmale die der Messenger-Proxy umsetzen muss beschrieben. 
+Der Messenger-Proxy als Prüfinstanz aller eingehenden `Invite Events` ist für die Regelung der gemäß Matrix Client-Server-API und Matrix-Server-Server-API geltenden Aufrufe zuständig. Nach erfolgreicher Prüfung wird das `Invite Event` an den zuständigen Matrix-Homeserver weitergeleitet. Eine Übersich ist in *[gemSpec_TI-Messenger-Dienst#Stufen der Berechtigungsprüfung]* zu finden. Im folgenden werden die Funktionsmerkmale die der Messenger-Proxy umsetzen muss beschrieben. 
 
 ==== TLS-Kommunikation
-Am Messenger-Proxy wird die TLS-Kommunikation zwischen den TI-Messenger-Clients und den Matrix-Homeserver terminiert. Für die Serverauthentisierung ist es erfordlich ein durch den Fachdienst-Anbieter bereitgestelltes X.509-Zertifikat zu verwenden. Hierbei darf es sich nicht um ein self-signed Zertifikat handeln. 
+Am Messenger-Proxy wird die TLS-Kommunikation zwischen den TI-Messenger-Clients und dem Matrix-Homeserver terminiert. Für die Serverauthentisierung ist es erforderlich ein durch den Fachdienst-Anbieter bereitgestelltes X.509-Zertifikat zu verwenden. 
 
-Der Messenger-Proxy prüft bei jeder Verbindung, anhand der `client_id`, ob es sich um einen zugelassenen TI-Messenger-Client handelt. Damit der TI-Messenger-Client mit dem Messenger-Proxy erfolgreich kommunizieren kann, ist es erforderlich, dass die `client_id` beim Messenger-Proxy bekannt ist. Hierfür muss der TI-Messenger-Client Hersteller die `client_id` beim TI-Messenger-Anbieter bekannt machen. Sollten unterschiedliche TI-Messenger-Clients vom Messenger-Proxy eines Anbieters unterstützt werden, so müssen alle `client_id` an den TI-Messenger-Anbieter des Messener-Proxies übermittelt werden. 
+TIP: Bei dem X.509-Zertifikat muss es sich um ein öffentliches Zertifkat handeln, welches durch einen vertrauswürdigen Herausgeber ausgestellt wurde.
+
+Der Messenger-Proxy prüft bei jeder Verbindung, anhand der `client_id`, ob es sich um einen zugelassenen TI-Messenger-Client handelt. Damit der TI-Messenger-Client mit dem Messenger-Proxy erfolgreich kommunizieren kann, ist es erforderlich, dass die `client_id` beim Messenger-Proxy bekannt ist. Hierfür muss der TI-Messenger-Client Hersteller die `client_id` beim TI-Messenger-Anbieter bekannt machen. Sollten unterschiedliche TI-Messenger-Clients vom Messenger-Proxy eines Anbieters unterstützt werden, so müssen alle `client_ids` an den TI-Messenger-Anbieter der Messenger-Proxies übermittelt werden. 
 
 ==== Authentifizierungsverfahren
-Neben der Authentifizierung mittels einer SMC-B oder eines HBA's können auch weitere Authentifizierungsverfahren vom Messenger-Service unterstützt werden. Dies ermöglicht es Nutzern bereits existierende Authentifizierungsverfahren in ihrer Organisation nachzunutzen. Dies kann zum Beispiel ein Active Directory oder ein LDAP-Verzeichnis sein.
+Neben der Authentifizierung mittels einer SMC-B oder eines HBA's können weitere Authentifizierungsverfahren vom Messenger-Service unterstützt werden. Dies ermöglicht es Akteuren bereits existierende Authentifizierungsverfahren in ihrer Organisation nachzunutzen. Beispielweise ein bestehendes Active Directory in einer Organisation.
 
-Um dies innerhalb einer Organisation für die Nutzer bereitstellen zu können muss das bestehende Authentifizierungsverfahren in der Matrix-Homeserver Konfiguration eingerichtet werden. 
-
-Beim Einsatz eines Synapse-Servers als Matrix-Homeserver kann zum Beispiel für eine LDAP-Authentifizierung das modul `LDAP Auth Provider` gemäß https://github.com/matrix-org/matrix-synapse-ldap3[[LDAP Auth Provider]] verwendet werden. Hierfür muss die Synapse-Konfigurationsdatei `/etc/matrix-synapse/homeserver.yaml` wie folgt angepasst werden:
+Um dies innerhalb einer Organisation für die Akteure bereitstellen zu können muss das bestehende Authentifizierungsverfahren in der Matrix-Homeserver Konfiguration eingerichtet werden. Beim Einsatz eines Synapse-Servers als Matrix-Homeserver kann zum Beispiel für eine LDAP-Authentifizierung das Modul `LDAP Auth Provider` gemäß https://github.com/matrix-org/matrix-synapse-ldap3[[LDAP Auth Provider]] verwendet werden. Hierfür muss die Synapse-Konfigurationsdatei `/etc/matrix-synapse/homeserver.yaml` wie folgt angepasst werden:
 
 [source, yaml]
 -----------------
@@ -198,29 +198,72 @@ Mögliche 2. Faktoren wären:
 
 * Verifizierung über E-Mail
 
-* Überprüfung per SMS Code
+* SMS-TAN Verfahren
 
 ==== Proxy für das Matrix-Protokoll
-Der Messenger-Proxy ist technisch ein Reverse-Proxy und leitet alle Anfragen, die einer Matrix API entsprechen, nach einer Berechtigungsprüfung, an den Matrix Homeserver weiter. 
+Der Messenger-Proxy agiert als ein Reverse-Proxy und leitet alle Anfragen, die einer Matrix API entsprechen, nach einer Berechtigungsprüfung, an den Matrix Homeserver weiter. 
 
 ==== Bereistellen und Administration der Freigabeliste
-Bei der Freigabeliste handelt es sich um eine Whitelist, die alle Akteure enthält, die vom jeweiligen Akteur berechtigt werden mit ihm Kontakt aufzunehmen. Die Liste kann in Form einer Lookup-Table implementiert werden. Für die Adminstration der Freigabeliste eines Akteurs ist es erforderlich, dass der Messenger Proxy die Schnittstelle `I_TiMessengerContactManagement` gemäß https://github.com/gematik/api-ti-messenger/blob/feature/fachdienst/src/openapi/TiMessengerContactManagement.yaml[&#91;TIMessengerContactManagement&#93;] bereitgestellt.
+Bei der Freigabeliste handelt es sich um eine Whitelist, die alle Akteure enthält, die vom jeweiligen Akteur berechtigt werden mit ihm Kontakt aufzunehmen. Die Liste kann in Form einer Lookup-Table implementiert werden. Für die Adminstration der Freigabeliste eines Akteurs ist es erforderlich, dass der Messenger Proxy die Schnittstelle `I_TiMessengerContactManagement` gemäß https://github.com/gematik/api-ti-messenger/blob/feature/fachdienst/src/openapi/TiMessengerContactManagement.yaml[&#91;TIMessengerContactManagement&#93;] bereitstellt.
 
-POST /tim-contact-mgmt/createContactSetting
+Für das Hinzufügen einer MXID eines Akteurs in die Freigabeliste ist die Operation  `createContactSetting` zu verwenden. 
 
+*Beispiel einer HTTP Nachricht*
+
+[cols="h,a",] 
+|===
+|URI        |\https::{domain}/tim-contact-mgmt/contacts
+|Method     |POST
+|Header |
+[source, bash]
+----
+HTTP-Version: "HTTP/1.1"
+----
+|Body    |
+[source, bash]
+----
+{
+  "displayName": "Musterfrau, Erika",
+  "mxid": "string",
+  "inviteSettings": {
+    "start": 1654159585,
+    "end": 1654169585
+  }
+}
+|===
+
+
+*Beispielabfrage:*
+[source, bash]
+-----------------
+curl -X 'POST' \
+  'https://localhost/tim-contact-mgmt/v1.0/contacts' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "displayName": "Musterfrau, Erika",
+  "mxid": "string",
+  "inviteSettings": {
+    "start": 1654159585,
+    "end": 1654169585
+  }
+}'
+----------------- 
+ 
+Die Attribute  `start` und `end` geben den Zeitraum der Berechtigung vor. 
+ 
 ==== Prüfregeln
-Der Messenger-Proxy muss bei jedem `Invite-Event` die Anfrage an den Matrix-Homeserver auf Berechtigung prüfen. Die Berechtigungsstufen sind in *[gemSpec_TI_Messenger-Dienst#Berechtigungskonzept]* beschrieben. 
+TIP: Der Messenger-Proxy muss bei jedem `Invite-Event` die Anfrage an den Matrix-Homeserver auf Berechtigung prüfen. 
 
-Bei einer Clint-Server Kommunikation wird nur die Föderationszugehörigkeit (Stufe 1) geprüft. Bei einer Server-Server Kommunikation werden alle Berechtigungsstufen durchlaufen. 
+Die Berechtigungsstufen sind in *[gemSpec_TI_Messenger-Dienst#Berechtigungskonzept]* beschrieben. Bei einer Clint-Server Kommunikation wird nur die Föderationszugehörigkeit (Stufe 1) geprüft. Bei einer Server-Server Kommunikation werden alle Berechtigungsstufen durchlaufen. 
 
 Zur Überpürfung gemäß der Berechtigungsstufe 1, ist es erforderlich, dass der Messenger-Proxy die Föderationsliste vom zuständigen Registrierungs-Dienst abruft. Dies ist in *[gemSpec_TI-Messenger-FD#Messenger-Proxy]* beschrieben. 
 
 === Matrix-Homeserver
-Die Teilkomponente Matrix-Homeserver basiert auf dem offenen Kommunikationsprotokoll Matrix. 
+Die Teilkomponente Matrix-Homeserver ist eine Komponente die die Matrix-Spezifikation (Client-Server / Server-Server-API) umgesetzt haben muss. Ein bekannter Matrix-Homeserver ist https://matrix.org/docs/projects/server/synapse[[synapse]]. Generell muss diese komponente  nicht selbst entwickelt werden. Es genügt diese entsprechend den Anforderungen zu konfigurieren. 
 
 === Push-Gateway
-Das Push-Gateway muss gemäß der Matrix-Spezifikation implementiert werden. 
-
+Die Teilkomponente Push-Gateway muss gemäß der Matrix-Spezifikation implementiert werden. 
 
 = Betriebliche Aspekte
 Der Betrieb des Fachdienstes wird durch den TI-Messenger-Anbieter verantwortet. Zentrale Komponenten, wie der Registrierungs-Dienst und das Push-Gateway werden zentral durch den TI-Messenger-Anbieter bereitgestellt und betrieben. Ein Messenger Service kann sowohl in einem Rechenzentrum des TI-Messenger-Anbieters als auch on Premise in den Räumlichkeiten einer Organisation durch den TI-Messenger-Anbieter betrieben werden.
