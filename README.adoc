@@ -13,21 +13,12 @@ image:https://img.shields.io/badge/TI&hyphen;Messenger&hyphen;Client-v1.1.0-gree
 
 
 == Allgemeines
-Die folgende Dokumentation beschreibt die systemspezifische Lösung des TI-Messengers in der Version 1.1 gemäß *[gemSpec_TI-Messenger-Dienst]*. Der AD-Hoc Kommunikationsstandard der gematik ermöglicht: +
+Die folgende Dokumentation baut auf die Spezifikation des TI-Messengers v1.1 gemäß *[gemSpec_TI-Messenger-Dienst]* auf. An dieser Stelle werden insbesondere die in der Spezifikation genannten Komponenten der Lösung sowie deren Schnittstellen weiter dargestellt und erläutert, um Herstellern und Anbietern bestmöglich zu unterstützen. Der Funktionsumfang des TI-Messengers in der Version 1.1 beinhaltet: +
 
-* Interoperabilität - und somit den sektoren- und anbieterübergreifenden Austausch
-* Integrität dank hohem Out-of-the-box-Sicherheitsniveau,
-* Ende-zu-Ende-Verschlüsselung sowie
-* Innovation durch fortlaufende Weiterentwicklung des Matrix-Protokolls.
+* die Echtzeit-Kommunikation zwischen Leistungserbringern und Leistungserbringerorganistionen und
+* die Echtzeit-Kommunikation direkt zwischen Leistungserbringern.
 
-
-An dieser Stelle werden insbesondere die Komponenten der Lösung sowie deren Schnittstellen dargestellt und erläutert. Der Funktionsumfang des TI-Messengers in der Version 1.1 beinhaltet:
-
-* die Kommunikation zwischen Leistungserbringern
-
-* die Kommunikation zwischen Leistungserbringern und Leistungserbringerorganisationen
-
-* foo text
+_Hinweis: In der TI-Messenger Spezifikation v1.1 können keine Versicherten an den TI-Messenger Dienst teilnehmen_
 
 == Systemüberblick
 ++++
