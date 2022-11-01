@@ -4,9 +4,11 @@
 image::gematik_logo.svg[gematik,width="70%"]
 
 image:https://img.shields.io/badge/Release%20Notes-v0.1-red?style=plastic&logo=github&logoColor=red[link="https://fachportal.gematik.de/fachportal-import/files/gemSpec_TI-Messenger-Client_V1.1.0.pdf"] +
-image:https://img.shields.io/badge/TI&hyphen;Messenger&hyphen;Dienst-v1.1.0-green[link="https://fachportal.gematik.de/fachportal-import/files/gemSpec_TI-Messenger-Dienst_V1.1.0.pdf"]
-image:https://img.shields.io/badge/TI&hyphen;Messenger&hyphen;FD-v1.1.0-green[link="https://fachportal.gematik.de/fachportal-import/files/gemSpec_TI-Messenger-FD_V1.1.0.pdf"]
-image:https://img.shields.io/badge/TI&hyphen;Messenger&hyphen;Client-v1.1.0-green[link="https://fachportal.gematik.de/fachportal-import/files/gemSpec_TI-Messenger-Client_V1.1.0.pdf"]
+image:https://img.shields.io/badge/ContactManagement-v1.0.0-blue?style=plastic&logo=github&logoColor=blue[link="https://fachportal.gematik.de/fachportal-import/files/gemSpec_TI-Messenger-Client_V1.1.0.pdf"]
+image:https://img.shields.io/badge/TestTreiber-v0.2.0-blue?style=plastic&logo=github&logoColor=blue[link="https://fachportal.gematik.de/fachportal-import/files/gemSpec_TI-Messenger-Client_V1.1.0.pdf"] +
+image:https://img.shields.io/badge/TI&hyphen;Messenger&hyphen;Dienst-v1.1.0-green?style=plastic&logo=github&logoColor=green[link="https://fachportal.gematik.de/fachportal-import/files/gemSpec_TI-Messenger-Dienst_V1.1.0.pdf"]
+image:https://img.shields.io/badge/TI&hyphen;Messenger&hyphen;FD-v1.1.0-green?style=plastic&logo=github&logoColor=green[link="https://fachportal.gematik.de/fachportal-import/files/gemSpec_TI-Messenger-FD_V1.1.0.pdf"]
+image:https://img.shields.io/badge/TI&hyphen;Messenger&hyphen;Client-v1.1.0-green?style=plastic&logo=github&logoColor=green[link="https://fachportal.gematik.de/fachportal-import/files/gemSpec_TI-Messenger-Client_V1.1.0.pdf"]
 
 
 
