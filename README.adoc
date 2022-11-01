@@ -1,24 +1,5 @@
-= api-ti-messenger
-gematik, Systems Engineering
-:source-highlighter: rouge
-:title-page:
 :imagesdir: /images/
-ifdef::env-github[]
-:toc: preamble
-endif::[]
-ifndef::env-github[]
-:toc: left
-endif::[]
-:toclevels: 3
-:toc-title: Inhaltsverzeichnis
-// ifndef::env-github[]
-//image::gematik_logo.svg[gematik,float="right"]
-// endif::[]
-// ifdef::env-github[]
-// ++++
-// <img align="right" role="right" src="images/gematik_logo.svg?raw=true"/>
-// ++++
-// endif::[]
+= TI-Messenger Dokumentation
 
 image::gematik_logo.svg[gematik,width="70%"]
 
@@ -26,7 +7,7 @@ image:https://img.shields.io/badge/gemSpec TI&hyphen;Messenger&hyphen;Client-v1.
 image:https://img.shields.io/badge/gemSpec TI&hyphen;Messenger&hyphen;FD-v1.1.0-blue[link="https://fachportal.gematik.de/fachportal-import/files/gemSpec_TI-Messenger-FD_V1.1.0.pdf"]
 image:https://img.shields.io/badge/gemSpec TI&hyphen;Messenger&hyphen;Dienst-v1.1.0-blue[link="https://fachportal.gematik.de/fachportal-import/files/gemSpec_TI-Messenger-Dienst_V1.1.0.pdf"]
 
-== Introduction
+== Allgemeines
 
 Der TI-Messenger ermöglicht sicheres und interoperable Instant Messaging im Gesundheitswesen.
 Im Gesundheitswesen spielt das Konzept der digitalen Ad-hoc-Kommunikation eine immer wichtigere Rolle. Allerdings stoßen die Nutzer derzeit auf verschiedene Hürden, darunter:
@@ -63,47 +44,7 @@ TI-Messenger hingegen werden auf Basis des Matrix-Protokolls, dem offenen Messen
     └── ReleaseNotes.md
 
 
-== TI-Messenger-Client
 
-=== Matrix Client-Server-API
-
-https://spec.matrix.org/v1.4/client-server-api/[The matrix.org Client-Server-API]
-
-=== FHIR-Directory Search-API
-
-xref:docs/FHIR-Directory-search-api.adoc[FHIR-Directory Search-API]
-
-=== FHIR-Dirctory Owner-API
-
-=== Org-Admin
-
-=== TestDriver-API
-
-https://github.com/gematik/api-ti-messenger/blob/develop/src/openapi/TiMessengerTestTreiber.yaml/[The gematik TestDriver-API]
-
-== Messenger-Service
-
-=== Matrix Client-Server-API
-
-https://spec.matrix.org/v1.4/client-server-api/[The matrix.org Client-Server-API]
-
-=== Matrix Server-Server-API
-
-https://spec.matrix.org/v1.4/server-server-api/[The matrix.org Server-Server-API]
-
-=== ContactManagement-API
-
-https://github.com/gematik/api-ti-messenger/blob/develop/src/openapi/TiMessengerContactManagement.yaml/[The gematik ContactManagement-API]
-
-== RegistrationService
-
-=== ProviderServices-API
-
-== Push-Gateway
-
-=== Matrix Push-Gateway-API
-
-https://spec.matrix.org/v1.4/push-gateway-api/[The matrix.org Push-Gateway-API]
 
 == License
 Copyright (c) 2022 gematik GmbH
