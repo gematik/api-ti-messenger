@@ -25,7 +25,7 @@ An dieser Stelle werden insbesondere die Komponenten der Lösung sowie deren Sch
 
 * die Kommunikation zwischen Leistungserbringern
 
-* die Kommunikation zwischen Leistungserbringern und Leistungserbringerorganistionen
+* die Kommunikation zwischen Leistungserbringern und Leistungserbringerorganisationen
 
 * foo text
 
