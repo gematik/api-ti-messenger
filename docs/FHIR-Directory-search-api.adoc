@@ -7,7 +7,7 @@ ifndef::env-github[]
 :toc: left
 endif::[]
 :toclevels: 3
-:toc-title: Inhaltsverzeichnis
+:toc-title: Table of content
 
 The FHIR-Directory contains entries for healthcare services provided by organizations as well as practitioner entries. This page describes how to use the FHIR-Directory /search endpoint. The https://fachportal.gematik.de/fachportal-import/files/gemSpec_VZD_FHIR_Directory_V1.1.0.pdf[specification of the FHIR-Directory] contains information about the endpoints and authentication methods.
 
