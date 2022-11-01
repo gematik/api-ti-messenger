@@ -11,7 +11,7 @@ endif::[]
 
 The FHIR-Directory contains entries for healthcare services provided by organizations as well as practitioner entries. Both types of entries can be changed by using the FHIR-Directory /owner endpoint. The ways to authenticate differ depending on the entry type. The https://fachportal.gematik.de/fachportal-import/files/gemSpec_VZD_FHIR_Directory_V1.1.0.pdf[specification of the FHIR-Directory] contains information about the endpoint and authentication methods.
 
-The FHIR Profiles are defined in the https://simplifier.net/vzd-fhir-directory[FHIR-Directory Simplifier project].
+The FHIR profiles are defined in the https://simplifier.net/vzd-fhir-directory[FHIR-Directory Simplifier project].
 
 == Organization entry
 
@@ -19,16 +19,11 @@ An organization entry has the following structure.
 
 image:https://raw.githubusercontent.com/gematik/api-vzd/main/images/diagrams/ObjectDiagram.HealthcareService.svg[Organization entry]
 
-
-
-
-
 === Authentication
 
-The /search endpoint requires a valid jwt in the Authorization header. In order to get the jwt the following steps must be performed.
+The /owner endpoint requires a valid jwt in the Authorization header. In order to get the jwt the following steps must be performed.
 
 .*1. Login to the TI-Messenger Registrierungsdienst as Org-Admin*
-[%collapsible]
 
 This is a proprietary interface. Only healthcare organizations are permitted to take part in the TI-Messenger federation. Each TI-Messenger provider implements a way to authenticate a healthcare organization with OIDC and OAuth2. After the successful authentication the healthcare organization may create Org-Admin Accounts on the Registrierungsdienst.
 
@@ -41,7 +36,21 @@ After login the Org-Admin requests a token from the Registrierungsdienst.
 ====
 [source,]
 ----
+REQUEST
+GET https://fhir-directory-test.vzd.ti-dienste.de/owner-authenticate
+HEADER
+{"User-Agent"=>"Faraday v2.6.0", "Content-Type"=>"application/json", "X-RegService-Token"=>"registration-service-token", "X-Registration-Server-Name"=>"registration-service.dev.service-ti.de"}
 
+RESPONSE
+STATUS 200
+HEADER
+{"date"=>"Thu, 27 Oct 2022 09:22:38 GMT", "server"=>"Apache", "etag"=>"\"002d6050a8c142c91e88dc2d7ef4e3fbf\"", "content-type"=>"application/json", "content-length"=>"453"}
+BODY
+{
+  "jwt": "owner-authenticate-token",
+  "token_type": "bearer",
+  "expires_in": 86400
+}
 ----
 ====
 
