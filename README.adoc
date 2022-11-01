@@ -21,7 +21,7 @@ Die folgende Dokumentation baut auf die Spezifikation des TI-Messengers v1.1 gem
 _Hinweis: In der TI-Messenger Version v1.1 können keine Versicherten an dem TI-Messenger Dienst teilnehmen_
 
 == Systemüberblick
-Die folgende Abbildung gibt einen Überblick über die Systemarchitektur des TI-Messengers in der Version 1.1 und zeigt die in dieser Dokumentation beschriebenen Schnittstellen. Die ebenfalls für den Betreib des TI-Messenger Dienstes notwendigen IDP-Dienste werden an dieser Stelle nicht  betrachtet.
+Die folgende Abbildung gibt einen Überblick über die Systemarchitektur des TI-Messengers in der Version 1.1. 
 
 ++++
 <p align="left">
@@ -30,18 +30,33 @@ Die folgende Abbildung gibt einen Überblick über die Systemarchitektur des TI-
 ++++
 
 == Ordnerstruktur
+Im Folgenden ist die Organisation der Ordnerstruktur dargestellt.
 
-    TI-Messenger-API
-    ├─ github
-	   │   └──── workflows
-    ├─ src
-    │   ├──── fhir
-    │   ├──── openapi
-    │   └──── plantuml
-    ├── README.md
-    └── ReleaseNotes.md
-
-
+----
+TI-Messenger Dokumentation
+├─ github
+│   └──── workflows
+├─ docs
+├─ images
+├─ src
+│   ├──── fhir
+│   │    ├── fsh-generated
+│   │    ├── input
+│   │    ├── output
+│   │    ├── temp
+│   │    └── template
+│   ├──── openapi
+│   │    ├── TiMessengerContactManagement.yaml
+│   │    └── TiMessengerTestTreiber.yaml 
+│   ├──── plantuml
+│   │    ├── TI-Messenger-Dienst
+│   │    ├── architecture
+│   │    └── includes 
+│   └──── schema
+│        └── Attachment_schema.json
+├── README.adoc
+└── ReleaseNotes.md
+----
 
 
 == License
