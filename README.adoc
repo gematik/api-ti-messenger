@@ -29,6 +29,17 @@ Die folgende Abbildung gibt einen Überblick über die Systemarchitektur des TI-
 </p>
 ++++
 
+link:docs/TI-Messenger-Fachdienst.adoc[*TI-Messenger-Fachdienst*]
+
+* *Registrierungs-Dienst:* +
+TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT
+
+* *Messenger-Service:* +
+TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT
+
+* *Push-Gateway:* +
+TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT
+
 == Ordnerstruktur
 Im Folgenden ist die Organisation der Ordnerstruktur dargestellt.
 
@@ -58,6 +69,35 @@ TI-Messenger Dokumentation
 └── ReleaseNotes.md
 ----
 
+== Referenzierte Dokumente
+Die nachfolgende Tabelle enthält die in der vorliegenden Online Dokumentation referenzierten Dokumente der gematik zur Telematikinfrastruktur. Deren zu diesem Dokument jeweils gültige Versionsnummer entnehmen Sie bitte der aktuellen, auf der Internetseite der gematik veröffentlichten, Dokumentenlandkarte, in der die vorliegende Version aufgeführt wird.
+
+|===
+|[Quelle] |Herausgeber: Titel
+
+|*[gemSpec_TI-Messenger-Dienst]* |gematik: Spezifikation TI-Messenger-Dienst
+|*[gemSpec_TI-Messenger-FD]* |gematik: Spezifikation TI-Messenger-Fachdienst
+|*[gemSpec_TI-Messenger-Client]* |gematik: Spezifikation TI-Messenger-Client
+|*[gemSpec_VZD_FHIR_Directory]* |gematik: Spezifikation Verzeichnisdienst FHIR-Directory
+|===
+
+== Weiterführende Seiten
+*Anwendungsfälle* +
+link:docs/Anwendungsfaelle.adoc[- Anwendungsfälle] 
+
+*Produkttypen* +
+link:docs/KIM_API.adoc[- TI-Messenger-Fachdienst] +
+link:docs/Fachdienst.adoc[- TI-Messenger-Client] +
+link:docs/Verzeichnisdienst.adoc[- VZD-FHIR-Directory]
+
+*Leitfaden für Primärsystemhersteller* +
+link:docs/Primaersystem.adoc[- Primärsystem] 
+
+*Diverses* +
+link:docs/Authentisierung.adoc[- Authentisierung] +
+
+*Referenz-Implementierungen* +
+https://github.com/gematik/kim-attachment-service[-] +
 
 == License
 Copyright (c) 2022 gematik GmbH
