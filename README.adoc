@@ -13,29 +13,23 @@ image:https://img.shields.io/badge/TI&hyphen;Messenger&hyphen;Client-v1.1.0-gree
 
 
 == Allgemeines
+Die folgende Dokumentation beschreibt die systemspezifische Lösung des TI-Messengers in der Version 1.1 gemäß *[gemSpec_TI-Messenger-Dienst]*. Der AD-Hoc Kommunikationsstandard der gematik ermöglicht: +
 
-Der TI-Messenger ermöglicht sicheres und interoperable Instant Messaging im Gesundheitswesen.
-Im Gesundheitswesen spielt das Konzept der digitalen Ad-hoc-Kommunikation eine immer wichtigere Rolle. Allerdings stoßen die Nutzer derzeit auf verschiedene Hürden, darunter:
+* Interoperabilität - und somit den sektoren- und anbieterübergreifenden Austausch
+* Integrität dank hohem Out-of-the-box-Sicherheitsniveau,
+* Ende-zu-Ende-Verschlüsselung sowie
+* Innovation durch fortlaufende Weiterentwicklung des Matrix-Protokolls.
 
-- fehlende Interoperabilität zwischen den Messenger-Anbietern,
-- fehlende einheitliche Zertifizierung zur Gewährleistung der Sicherheit sowie
-- fehlende einheitliche Vorgaben zur Authentisierung.
 
-TI-Messenger hingegen werden auf Basis des Matrix-Protokolls, dem offenen Messenger-Standard der Matrix.org Foundation, neue Maßstäbe für die Kommunikation in Echtzeit setzen. Der neue Kommunikationsstandard der gematik gewährleistet:
-
-- Interoperabilität - und somit den sektoren- und anbieterübergreifenden Austausch
-- Integrität dank hohem Out-of-the-box-Sicherheitsniveau,
-- Ende-zu-Ende-Verschlüsselung sowie
-- Innovation durch fortlaufende Weiterentwicklung des Matrix-Protokolls.
-
-Die folgende Dokumentation beschreibt die systemspezifische Lösung von TIM 1.1. An dieser Stelle werden insbesondere die Komponenten der Lösung sowie deren Schnittstellen dargestellt und erläutert. Der Funktionsumfang der TIM Version 1.1 beinhaltet wie folgt:
+An dieser Stelle werden insbesondere die Komponenten der Lösung sowie deren Schnittstellen dargestellt und erläutert. Der Funktionsumfang des TI-Messengers in der Version 1.1 beinhaltet:
 
 * die Kommunikation zwischen Leistungserbringern
 
 * die Kommunikation zwischen Leistungserbringern und Leistungserbringerorganistionen
 
-* 
+* foo text
 
+== Systemüberblick
 ++++
 <p align="left">
   <img width="100%" src=/images/System_overview.png>
