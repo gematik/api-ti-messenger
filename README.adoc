@@ -46,7 +46,7 @@ TI-Messenger hingegen werden auf Basis des Matrix-Protokolls, dem offenen Messen
 
 ++++
 <p align="left">
-  <img width="100%" src=/images/system_overview.png>
+  <img width="100%" src=/images/System_overview.png>
 </p>
 ++++
 
