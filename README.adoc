@@ -44,7 +44,11 @@ TI-Messenger hingegen werden auf Basis des Matrix-Protokolls, dem offenen Messen
 
 == System overview
 
-image::system_overview.png[gematik,width="80%"]
+++++
+<p align="left">
+  <img width="100%" src=/images/Systemoverview.png>
+</p>
+++++
 
 == Folder structure
 
