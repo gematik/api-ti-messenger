@@ -40,6 +40,14 @@ TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT
 * *Push-Gateway:* +
 TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT
 
+link:docs/TI-Messenger-Fachdienst.adoc[*TI-Messenger-Client*] +
+
+* TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT
+
+link:docs/TI-Messenger-Fachdienst.adoc[*VZD-FHIR-Directory*] +
+
+* TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT
+
 == Ordnerstruktur
 Im Folgenden ist die Organisation der Ordnerstruktur dargestellt.
 
