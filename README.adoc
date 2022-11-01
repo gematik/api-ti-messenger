@@ -32,13 +32,13 @@ Die folgende Abbildung gibt einen Überblick über die Systemarchitektur des TI-
 link:docs/TI-Messenger-Fachdienst.adoc[*TI-Messenger-Fachdienst*]
 
 * *Registrierungs-Dienst:* +
-TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT
+Der Registrierungs-Dienst ist eine Komponente, die vom Hersteller des TI-Messenger-Fachdienstes umgesetzt wird. Über ein Frontend des Registrierungsdientes ist es einem Akteur in der Rolle "Org-Admin" möglich einen Administrations-Account im Registrierungs-Dienst für seine Organisation anzulegen. Dieser ermöglicht es ihm einen oder mehrere Messenger-Services für seine Organisation zu registrieren. Die Eintragung der Matrix-Domain seiner Messenger-Services in die Ressource der Organisation im FHIR-VZD-Directory erfolgt ebenfalls durch den Registrierungsdienst. Der Registrierungs-Dienst muss eine Liste aller verifizierten Matrix-Domains des VZD-FHIR-Directory vorhalten und diese den Messenger-Proxies über eine interne Schnittstelle bereitstellen.
 
 * *Messenger-Service:* +
-TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT
+Ein Messenger-Service besteht aus den Teilkomponenten Matrix-Homeserver und dem Messenger-Proxy. Die Teilkomponente Matrix-Homeserver basiert auf dem offenen Kommunikationsprotokoll Matrix. Der Messenger-Proxy muss für jeden Messenger-Service bereitgestellt werden. Alle Anfragen der TI-Messenger-Clients und anderer Messenger-Services an den Matrix-Homeserver werden über den Messenger-Proxy geleitet. Die TLS-Kommunikation zwischen den TI-Messenger-Clients und den Matrix-Homeservern werden am Messenger-Proxy terminiert. Für die Nutzung eines eigenen Authentifizierungs-Dienstes durch eine Organisation wird durch den Messenger-Proxy eine Schnittstelle für die Anbindung des Authentifizierungs-Dienstes der Organisation bereitgestellt. Der Messenger-Proxy ruft bei seinem zuständigen Registrierungs-Dienst die Föderationsliste über die interne Schnittstelle (I_internVerification) ab und  speichert diese lokal. Der Messenger-Proxy hält eine Freigabeliste vor, die zur Prüfung, ob einem eingehenden Invite-Event am Messenger-Proxy zugestimmt wird, genutzt wird.
 
 * *Push-Gateway:* +
-TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT
+Der TI-Messenger-Fachdienst stellt ein Push-Gateway, gemäß [Matrix Specification#Push Gateway API], für den TI-Messenger-Client bereit. Das Push-Gateway ermöglicht es, Akteure über eingegangene Nachrichten zu informieren.
 
 link:docs/TI-Messenger-Fachdienst.adoc[*TI-Messenger-Client*] +
 
