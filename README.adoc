@@ -18,7 +18,7 @@ Die folgende Dokumentation baut auf die Spezifikation des TI-Messengers v1.1 gem
 * die Echtzeit-Kommunikation zwischen Leistungserbringern und Leistungserinstitutionen und
 * die Echtzeit-Kommunikation direkt zwischen Leistungserbringern.
 
-_Hinweis: In der TI-Messenger Spezifikation v1.1 können keine Versicherten an den TI-Messenger Dienst teilnehmen_
+_Hinweis: In der TI-Messenger Version v1.1 können keine Versicherten an dem TI-Messenger Dienst teilnehmen_
 
 == Systemüberblick
 Die folgende Abbildung gibt einen Überblick über die Systemarchitektur des TI-Messengers in der Version 1.1. 
