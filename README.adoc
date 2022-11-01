@@ -15,19 +15,21 @@ image:https://img.shields.io/badge/TI&hyphen;Messenger&hyphen;Client-v1.1.0-gree
 == Allgemeines
 Die folgende Dokumentation baut auf die Spezifikation des TI-Messengers v1.1 gemäß *[gemSpec_TI-Messenger-Dienst]* auf. An dieser Stelle werden insbesondere die in der Spezifikation genannten Komponenten der Lösung sowie deren Schnittstellen weiter dargestellt und erläutert, um Herstellern und Anbietern bestmöglich zu unterstützen. Der Funktionsumfang des TI-Messengers in der Version 1.1 beinhaltet: +
 
-* die Echtzeit-Kommunikation zwischen Leistungserbringern und Leistungserbringerorganistionen und
+* die Echtzeit-Kommunikation zwischen Leistungserbringern und Leistungserinstitutionen und
 * die Echtzeit-Kommunikation direkt zwischen Leistungserbringern.
 
 _Hinweis: In der TI-Messenger Spezifikation v1.1 können keine Versicherten an den TI-Messenger Dienst teilnehmen_
 
 == Systemüberblick
+Die folgende Abbildung gibt einen Überblick über die Systemarchitektur des TI-Messengers in der Version 1.1. 
+
 ++++
 <p align="left">
   <img width="100%" src=/images/System_overview.png>
 </p>
 ++++
 
-== Folder structure
+== Ordnerstruktur
 
     TI-Messenger-API
     ├─ github
