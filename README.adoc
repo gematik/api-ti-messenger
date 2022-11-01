@@ -103,6 +103,7 @@ link:docs/Primaersystem.adoc[- Primärsystem]
 
 *Diverses* +
 link:docs/Authentisierung.adoc[- Authentisierung] +
+link:docs/faq.adoc[- Fragen und Antworten zur aktuellen Spezifikation &#91;FAQ&#93;]
 
 *Referenz-Implementierungen* +
 https://github.com/gematik/kim-attachment-service[-] +
