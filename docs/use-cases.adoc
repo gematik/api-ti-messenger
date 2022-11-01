@@ -1,0 +1,221 @@
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+:imagesdir: ../images
+:toc: macro
+:toclevels: 3
+:toc-title: table of content
+:numbered:
+
+image:gematik_logo.svg[width=70%]
+
+toc::[]
+
+= Use-Cases
+This page shall give the reader an overview of the most common use-cases for TI-Messenger users. Besides the introduction every chapter contains a brief overview of the use-case itself and a sequence diagram showing the interaction between the involved components.
+
+TIP: The service calls might not include all parameters need for the call. A detailed description is located: TODO
+
+IMPORTANT:  The following sequence diagrams might not include all failure cases. They focus on the most common failure cases for each individual use-case. 
+
+== Create messenger service
+To start exchanging messages with other users the organisation needs a messenger service offered by the selected provider. 
+
+++++
+<p align="center">
+  TODO some Picture
+</p>
+++++
+
+=== AF_10103 Authentication of an organisation on the TI-Messenger service
+In case the organization has never been authenticated at the registration service, this is the first step that has to be taken. First the user has to identify that he acts in place of a valid organization in the german healthcare system. To do so organization's SMC-B is needed to answer the authentication challenge of the central IDP-Service. 
+Next to the SMC-B the user who is starting the process needs: 
+[square]
+* access to the frontend of the registration service
+* the registration service frontend is registered at the central IDP-Service
+* a connector that is connected to the gematik network
+* a card terminal for the organization's SMC-B connected to the connector
+* an authenticator is available for the data exchange with the connector 
+* the SMC-B is plugged in the card terminal and unlocked
+* a valid domain for the TI-Messenger-Dienst
+
+After a successful Authentication with the SMC-B an Admin Account can be created and used to create a TI-Messenger Fachdienst for the organization.
+
+.AF_10103 use case description
+[%collapsible]
+====
+[caption=]
+.Authentication of an organisation on the TI-Messenger service
+[%header, cols="1,1"]
+|===
+| |description
+|Actor |Representative of an organisation in the "Org Admin" role
+|Trigger |The administrator of the organisation (Org Admin) wants to make their organisation accessible by storing the MXIDs of the actors of the organisation in the VZD-FHIR directory.
+|Components a|
+              * TI-Messenger client (with advanced Org Admin functionality), 
+              * Authenticator
+              * IDP-Dienst
+              * VZD Auth service
+              * FHIR proxy
+              * FHIR directory
+|Preconditions a| 
+                  * A messenger service was provided to the organisation and a FHIR resource was created in the VZD-FHIR directory.
+                  * The organisation administrator has a TI-Messenger client (with advanced Org Admin functionality).
+                  * The VZD-FHIR directory is registered with a responsible IDP service.
+                  * The organisation administrator can authenticate themselves using a responsible IDP service.
+|Input data |SMC-B, FHIR organisation resources
+|Result |FHIR organisation resources updated, status
+|Output data |Updated VZD-FHIR directory records 
+|===
+====
+
+.AF_10103 sequence diagram
+[%collapsible]
+====
+++++
+<p align="center">
+  <img width="75%" src=../images/diagrams/TI-Messenger-Dienst/Ressourcen/UC_10103_Seq.svg>
+</p>
+++++
+====
+
+=== AF_10060 Provision of messenger service to an organisation
+After a successful authentication the user can use the admin credentials to log into the registration service. After a successful login the user is able to create new messenger services(TODO ref API) by providing a domain name. This domain name will be checked. (TODO list check examples). Afterwards a messenger service will be created and configured. To take part in the TI-messenger federation the new service domain has to be added to the federation list hosted at the VZD-FHIR directory. (TODO Ref auf provider access token and addtimessengerDomain Endpoint)
+
+.AF_10060 use case description
+[%collapsible]
+====
+[caption=]
+Provision of messenger service to an organisation
+[%header, cols="1,1"]
+|===
+| |description
+|Actor |Representative of an organisation in the "Org Admin" role
+|Trigger |An organisation of the German healthcare system wants to participate in the TI-Messenger service and needs to provide one or more messenger services
+|Components a|
+              * Front end of the registration service, 
+              * Registrierungs-Dienst, 
+              * VZD-FHIR directory,
+              * Messenger-Service 
+|Preconditions a| 
+                  * There is a contractual relationship with a TI-Messenger provider. 
+                  * The operator has a front end of the registration service for communication with the registration service.
+                  * The used front end of the registration service is registered with the responsible IDP service.
+                  * The SMC-B inserted in the eHealth card terminal is enabled.
+                  * The registration service can authenticate itself with the VZD-FHIR directory server for write access
+                    with OAuth2.
+|Input data |Admin account, identity of organisation (SMC-B)
+|Result a|
+            * The messenger service for the organisation has been created.
+            * The Matrix domain of the new messenger service was entered as an endpoint in the VZD-FHIR directory and  
+              included in the federation.
+|Output data |New messenger service for the organisation, status
+|===
+====
+.AF_10060 sequence diagram 
+[%collapsible]
+====
+++++
+<p align="center">
+  <img width="60%" src=../images/diagrams/TI-Messenger-Dienst/Ressourcen/UC_10060_Seq.svg>
+</p>
+++++
+====
+
+== VZD Resource management
+The VZD-FHIR directory is the main address book for organizations and people in the german healtcare system.
+
+=== AF_10059 Add organisation resources to directory service
+With the aquisition of the SMC-B an entry for the organisation will be created in the VZD-FHIR directory by the [TODO]. 
+
+.AF_10059 use case description
+[%collapsible]
+====
+[caption=]
+Add organisation resources to directory service
+[%header, cols="1,1"]
+|===
+| |description
+|Actor |Representative of an organisation in the "Org Admin" role
+|Trigger |An organisation of the German healthcare system wants to participate in the TI-Messenger service and needs to provide one or more messenger services
+|Components a|
+              * Front end of the registration service, 
+              * Registrierungs-Dienst, 
+              * VZD-FHIR directory,
+              * Messenger-Service 
+|Preconditions a| 
+                  * There is a contractual relationship with a TI-Messenger provider. 
+                  * The operator has a front end of the registration service for communication with the registration service.
+                  * The used front end of the registration service is registered with the responsible IDP service.
+                  * The SMC-B inserted in the eHealth card terminal is enabled.
+                  * The registration service can authenticate itself with the VZD-FHIR directory server for write access
+                    with OAuth2.
+|Input data |Admin account, identity of organisation (SMC-B)
+|Result a|
+            * The messenger service for the organisation has been created.
+            * The Matrix domain of the new messenger service was entered as an endpoint in the VZD-FHIR directory and  
+              included in the federation.
+|Output data |New messenger service for the organisation, status
+|===
+====
+
+.AF_10059 sequence diagram 
+[%collapsible]
+====
+++++
+<p align="center">
+  <img width="60%" src=../images/diagrams/TI-Messenger-Dienst/Ressourcen/UC_10059_Seq.svg>
+</p>
+++++
+====
+
+=== AF_10058 Akteur (User-HBA) im Verzeichnisdienst hinzufügen
+
+.AF_10058 use case description
+[%collapsible]
+====
+[caption=]
+Bereitstellung eines Messenger-Service für eine Organisation
+[%header, cols="1,1"]
+|===
+| |description
+|Actor |Service provider, a healthcare organisation employee in the "User-HBA" role
+|Trigger |An actor in the "User-HBA" role wants to be accessible in the person directory by storing their MXID in their Practitioner record in the VZD-FHIR directory.
+|Components a|
+              * TI-Messenger-Client,
+              * Authenticator,
+              * IDP service, 
+              * FHIR Proxy, 
+              * Auth service,
+              * VZD-FHIR directory,
+|Preconditions a| 
+                  * The actor is logged in to a valid messenger service (see AF_10057). 
+                  *	The actor has an approved TI-Messenger client.
+                  * The VZD-FHIR directory is registered with a responsible IDP service.
+                  * The actor can authenticate themselves using the IDP service.
+                  * The registration service can authenticate itself with the VZD-FHIR directory server for write access
+                    with OAuth2.
+|Input data |Admin account, identity of organisation (SMC-B)
+|Result a|
+            * The messenger service for the organisation has been created.
+            * The Matrix domain of the new messenger service was entered as an endpoint in the VZD-FHIR directory and  
+              included in the federation.
+|Output data |New messenger service for the organisation, status
+|===
+====
+.AF_10058 sequence diagram 
+[%collapsible]
+====
+++++
+<p align="center">
+  <img width="55%" src=../images/diagrams/TI-Messenger-Dienst/Ressourcen/UC_10058_Seq.svg>
+</p>
+++++
+====
+
+== Messenger interaction
