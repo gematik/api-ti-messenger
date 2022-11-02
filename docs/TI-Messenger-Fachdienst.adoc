@@ -268,6 +268,7 @@ Die Teilkomponente Push-Gateway muss gemäß der Matrix-Spezifikation implementi
 = Betriebliche Aspekte
 Der Betrieb des Fachdienstes wird durch den TI-Messenger-Anbieter verantwortet. Zentrale Komponenten, wie der Registrierungs-Dienst und das Push-Gateway werden zentral durch den TI-Messenger-Anbieter bereitgestellt und betrieben. Ein Messenger Service kann sowohl in einem Rechenzentrum des TI-Messenger-Anbieters als auch on Premise in den Räumlichkeiten einer Organisation durch den TI-Messenger-Anbieter betrieben werden.
 
+???Deplyoment???
 
 = Referenzierte Dokumente
 Die nachfolgende Tabelle enthält die in der vorliegenden Online Dokumentation referenzierten Dokumente der gematik. Deren zu diesem Dokument jeweils gültige Versionsnummer entnehmen Sie bitte der aktuellen, auf der Internetseite der gematik veröffentlichten, Dokumentenlandkarte, in der die vorliegende Version aufgeführt wird.
