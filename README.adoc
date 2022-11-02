@@ -46,7 +46,7 @@ Der TI-Messenger-Client wird als eine Anwendung (oder eingebettet in bestehende
 
 link:docs/TI-Messenger-Fachdienst.adoc[*VZD-FHIR-Directory*] +
 
-* TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT
+Beim VZD-FHIR-Directory handelt es sich um einen zentralen Verzeichnisdient der TI, der die deutschlandweite Suche von Organisationen und Akteuren des TI-Messenger-Dienstes ermöglicht. Das VZD-FHIR-Directory basiert auf dem FHIR-Standard zum Austausch von definierten Informationsobjekten (FHIR-Ressourcen).
 
 == Ordnerstruktur
 Im Folgenden ist die Organisation der Ordnerstruktur dargestellt.
