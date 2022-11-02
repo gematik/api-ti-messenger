@@ -42,7 +42,7 @@ Der TI-Messenger-Fachdienst stellt ein Push-Gateway, gemäß [Matrix Specificati
 
 link:docs/TI-Messenger-Fachdienst.adoc[*TI-Messenger-Client*] +
 
-* TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT
+Der TI-Messenger-Client wird als eine Anwendung (oder eingebettet in bestehende Anwendungen) auf dem Endgerät eines Akteurs installiert und ermöglicht eine sichere, nachrichtenbasierte Kommunikation mit anderen Akteuren des TI-Messenger-Dienstes. Der TI-Messenger-Client folgt den offenen Standards des Kommunikationsprotokolls Matrix und synchronisiert, durch die Matrix Foundation festgelegte, JSON-Objekte mit Matrix-Homeservern, welche als Teil des Messenger-Services eines TI-Messenger-Fachdienstes bereitgestellt werden.Die Kommunikation zwischen den Akteuren des TI-Messenger-Dienstes erfolgt Ende-zu-Ende verschlüsselt in Räumen. 
 
 link:docs/TI-Messenger-Fachdienst.adoc[*VZD-FHIR-Directory*] +
 
