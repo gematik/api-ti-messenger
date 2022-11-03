@@ -19,7 +19,7 @@ toc::[]
 = VZD-FHIR-Directory
 The FHIR-Directory contains entries for healthcare services provided by organizations as well as practitioner entries. This page describes how to use the FHIR-Directory `/search` endpoint. The https://fachportal.gematik.de/fachportal-import/files/gemSpec_VZD_FHIR_Directory_V1.1.0.pdf[[gemSpec_VZD_FHIR_Directory]] contains information about the endpoints and authentication methods.
 
-== generel
+== FHIR Profiles
 The FHIR Profiles are defined in the https://simplifier.net/vzd-fhir-directory[FHIR-Directory Simplifier project].
 In generell FHIR allows various search capabilities. The https://www.hl7.org/fhir/search.html[FHIR search] page describes in detail the search framework.
 
