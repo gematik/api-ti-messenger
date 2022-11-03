@@ -25,34 +25,54 @@ The FHIR-Directory contains entries for healthcare services provided by organiza
 </p>
 ++++
 
-
 == FHIR Profiles
 The FHIR Profiles are defined in the Simplifier project https://simplifier.net/vzd-fhir-directory[VZD-FHIR-Directory]. 
 
 TIP: In generell FHIR allows various search capabilities. The https://www.hl7.org/fhir/search.html[FHIR search] page describes in detail the search framework.
 
 == REST Service Endpoints
-The VZD-FHIR-Directory provides three endpoints: `/search`, `/owner` and `tim-provider-services`. 
+The VZD-FHIR-Directory provides three endpoints: +
+
+* `/search`, 
+* `/owner` and 
+* `tim-provider-services`. 
 
 === Endpoint: /search
 ==== Authentication
-The `/search` endpoint requires a valid jwt in the Authorization header. In order to get the jwt the following steps must be performed.
+TIP: The `/search` endpoint requires a valid JSON Web Token (`tim-authenticate-token`) in the Authorization header. 
+
+In order to get the JSON Web Token the following steps must be performed.
+
+*REQUEST*
+[source, bash]
+-----------------
+POST https://matrix.dev.service-ti.de/_matrix/client/r0/login
+-----------------
 
 .*1. Login to the matrix homeserver*
 ====
-[source,]
+[source,yaml]
 ----
-REQUEST
-POST https://matrix.dev.service-ti.de/_matrix/client/r0/login
 HEADER
-{"User-Agent"=>"Faraday v2.6.0", "Content-Type"=>"application/json"}
+    {"User-Agent"=>"Faraday v2.6.0", 
+    "Content-Type"=>"application/json"}
 BODY
-{"type":"m.login.password","user":"@user:matrix.dev.service-ti.de","password":"password"}
+    {"type":"m.login.password",
+    "user":"@user:matrix.dev.service-ti.de",
+    "password":"password"}
 
 RESPONSE
 STATUS 200
 HEADER
-{"date"=>"Thu, 27 Oct 2022 09:16:30 GMT", "server"=>"Synapse/1.53.0", "content-type"=>"application/json", "cache-control"=>"no-cache, no-store, must-revalidate", "access-control-allow-origin"=>"*", "access-control-allow-methods"=>"GET, HEAD, POST, PUT, DELETE, OPTIONS", "access-control-allow-headers"=>"X-Requested-With, Content-Type, Authorization, Date", "transfer-encoding"=>"chunked"}
+  {"date"=>"Thu, 27 Oct 2022 09:16:30 GMT", 
+  "server"=>"Synapse/1.53.0", 
+  "content-type"=>"application/json", 
+  "cache-control"=>"no-cache, no-store, must-revalidate", 
+  "access-control-allow-origin"=>"*", 
+  "access-control-allow-methods"=>"GET, HEAD, POST, PUT, DELETE, OPTIONS", 
+  "access-control-allow-headers"=>"X-Requested-With, Content-Type, Authorization, Date", 
+  "transfer-encoding"=>"chunked"}
+
 BODY
 {
   "user_id": "@user:matrix.dev.service-ti.de",
