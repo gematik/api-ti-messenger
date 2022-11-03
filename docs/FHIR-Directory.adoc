@@ -17,15 +17,17 @@ image:gematik_logo.svg[width=70%]
 toc::[]
 
 = VZD-FHIR-Directory
-The FHIR-Directory contains entries for healthcare services provided by organizations as well as practitioner entries. This page describes how to use the FHIR-Directory `/search` endpoint. The https://fachportal.gematik.de/fachportal-import/files/gemSpec_VZD_FHIR_Directory_V1.1.0.pdf[[gemSpec_VZD_FHIR_Directory]] contains information about the endpoints and authentication methods.
+The FHIR-Directory contains entries for healthcare services provided by organizations as well as practitioner entries. This page describes how to use the FHIR-Directory endpoints. See more information in https://fachportal.gematik.de/fachportal-import/files/gemSpec_VZD_FHIR_Directory_V1.1.0.pdf[[gemSpec_VZD_FHIR_Directory]].  It contains information about the endpoints and authentication methods.
 
 == FHIR Profiles
-The FHIR Profiles are defined in the https://simplifier.net/vzd-fhir-directory[FHIR-Directory Simplifier project].
-In generell FHIR allows various search capabilities. The https://www.hl7.org/fhir/search.html[FHIR search] page describes in detail the search framework.
+The FHIR Profiles are defined in the Simplifier project https://simplifier.net/vzd-fhir-directory[VZD-FHIR-Directory]. 
 
-== Search-API
+TIP: In generell FHIR allows various search capabilities. The https://www.hl7.org/fhir/search.html[FHIR search] page describes in detail the search framework.
 
-=== Authentication
+== Interfaces
+=== Search-API
+
+==== Authentication
 The `/search` endpoint requires a valid jwt in the Authorization header. In order to get the jwt the following steps must be performed.
 
 .*1. Login to the matrix homeserver*
@@ -100,7 +102,7 @@ BODY
 ----
 ====
 
-=== FHIR /search Request
+==== FHIR /search Request
 It is important to understand how the entries in the FHIR-Directory are structured. The FHIR-Directory has two kinds of entries.
 An organization entry has the following structure.
 
@@ -552,18 +554,18 @@ BODY
 ----
 ====
 
-=== Display search results
+==== Display search results
 
 The results of the search are summarized in a json FHIR Bundle structure. Each entry of the Bundle contains a FHIR ressource. The https://simplifier.net/VZD-FHIR-Directory/~introduction[FHIR-Directory simplifier page] specifies the _must support_ elements of the FHIR ressources. It is recommended to display at least those elements of the search results.
 
 TIP: The search results can also contain FHIR data which is not marked as _must support_.
 
-=== Full text search
+==== Full text search
 
 IMPORTANT: Full text search is not yet supported by the FHIR-Directory
 
 The search parameters, *_text* and *_content*, are used for full text search.
 
 
-== Owner-API
+=== Owner-API
 
