@@ -24,9 +24,10 @@ The FHIR Profiles are defined in the Simplifier project https://simplifier.net/v
 
 TIP: In generell FHIR allows various search capabilities. The https://www.hl7.org/fhir/search.html[FHIR search] page describes in detail the search framework.
 
-== Interfaces
-=== Search-API
+== REST Service Endpoints
+The VZD-FHIR-Directory provides three endpoints: `/search`, `/owner` and `tim-provider-services`. 
 
+=== Endpoint: /search
 ==== Authentication
 The `/search` endpoint requires a valid jwt in the Authorization header. In order to get the jwt the following steps must be performed.
 
@@ -566,6 +567,8 @@ IMPORTANT: Full text search is not yet supported by the FHIR-Directory
 
 The search parameters, *_text* and *_content*, are used for full text search.
 
+
+=== Owner-API
 
 === Owner-API
 
