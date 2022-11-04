@@ -1,105 +1,112 @@
-= api-ti-messenger
-gematik, Systems Engineering
-:source-highlighter: rouge
-:title-page:
 :imagesdir: /images/
-ifdef::env-github[]
-:toc: preamble
-endif::[]
-ifndef::env-github[]
-:toc: left
-endif::[]
-:toclevels: 3
-:toc-title: Inhaltsverzeichnis
-// ifndef::env-github[]
-//image::gematik_logo.svg[gematik,float="right"]
-// endif::[]
-// ifdef::env-github[]
-// ++++
-// <img align="right" role="right" src="images/gematik_logo.svg?raw=true"/>
-// ++++
-// endif::[]
+= TI-Messenger Dokumentation
 
 image::gematik_logo.svg[gematik,width="70%"]
 
-image:https://img.shields.io/badge/gemSpec TI&hyphen;Messenger&hyphen;Client-v1.1.0-blue[link="https://fachportal.gematik.de/fachportal-import/files/gemSpec_TI-Messenger-Client_V1.1.0.pdf"]
-image:https://img.shields.io/badge/gemSpec TI&hyphen;Messenger&hyphen;FD-v1.1.0-blue[link="https://fachportal.gematik.de/fachportal-import/files/gemSpec_TI-Messenger-FD_V1.1.0.pdf"]
-image:https://img.shields.io/badge/gemSpec TI&hyphen;Messenger&hyphen;Dienst-v1.1.0-blue[link="https://fachportal.gematik.de/fachportal-import/files/gemSpec_TI-Messenger-Dienst_V1.1.0.pdf"]
-
-== Introduction
-
-Der TI-Messenger ermöglicht sicheres und interoperable Instant Messaging im Gesundheitswesen.
-Im Gesundheitswesen spielt das Konzept der digitalen Ad-hoc-Kommunikation eine immer wichtigere Rolle. Allerdings stoßen die Nutzer derzeit auf verschiedene Hürden, darunter:
-
-- fehlende Interoperabilität zwischen den Messenger-Anbietern,
-- fehlende einheitliche Zertifizierung zur Gewährleistung der Sicherheit sowie
-- fehlende einheitliche Vorgaben zur Authentisierung.
-
-TI-Messenger hingegen werden auf Basis des Matrix-Protokolls, dem offenen Messenger-Standard der Matrix.org Foundation, neue Maßstäbe für die Kommunikation in Echtzeit setzen. Der neue Kommunikationsstandard der gematik gewährleistet:
-
-- Interoperabilität - und somit den sektoren- und anbieterübergreifenden Austausch
-- Integrität dank hohem Out-of-the-box-Sicherheitsniveau,
-- Ende-zu-Ende-Verschlüsselung sowie
-- Innovation durch fortlaufende Weiterentwicklung des Matrix-Protokolls.
-
-== System overview
-
-image::system_overview.png[gematik,width="80%"]
-
-== Folder structure
-
-    TI-Messenger-API
-    ├─ github
-	   │   └──── workflows
-    ├─ src
-    │   ├──── fhir
-    │   ├──── openapi
-    │   └──── plantuml
-    ├── README.md
-    └── ReleaseNotes.md
+image:https://img.shields.io/badge/Release%20Notes-v0.1-red?style=plastic&logo=github&logoColor=red[link="ReleaseNotes.md"] +
+image:https://img.shields.io/badge/ContactManagement-v1.0.0-blue?style=plastic&logo=github&logoColor=blue[link=/src/openapi/TiMessengerContactManagement.yaml"]
+image:https://img.shields.io/badge/TestTreiber-v0.2.0-blue?style=plastic&logo=github&logoColor=blue[link="/src/openapi/TiMessengerTestTreiber.yaml"] +
+image:https://img.shields.io/badge/TI&hyphen;Messenger&hyphen;Dienst-v1.1.0-green?style=plastic&logo=github&logoColor=green[link="https://fachportal.gematik.de/fachportal-import/files/gemSpec_TI-Messenger-Dienst_V1.1.0.pdf"]
+image:https://img.shields.io/badge/TI&hyphen;Messenger&hyphen;FD-v1.1.0-green?style=plastic&logo=github&logoColor=green[link="https://fachportal.gematik.de/fachportal-import/files/gemSpec_TI-Messenger-FD_V1.1.0.pdf"]
+image:https://img.shields.io/badge/TI&hyphen;Messenger&hyphen;Client-v1.1.0-green?style=plastic&logo=github&logoColor=green[link="https://fachportal.gematik.de/fachportal-import/files/gemSpec_TI-Messenger-Client_V1.1.0.pdf"]
 
 
-== TI-Messenger-Client
 
-=== Matrix Client-Server-API
+== Allgemeines
+Die folgende Dokumentation baut auf die Spezifikation des TI-Messengers v1.1 gemäß *[gemSpec_TI-Messenger-Dienst]* auf. An dieser Stelle werden insbesondere die in der Spezifikation genannten Komponenten der Lösung sowie deren Schnittstellen weiter dargestellt und erläutert, um Herstellern und Anbietern bestmöglich zu unterstützen. Der Funktionsumfang des TI-Messengers in der Version 1.1 beinhaltet: +
 
-https://spec.matrix.org/v1.4/client-server-api/[The matrix.org Client-Server-API]
+* die Echtzeit-Kommunikation zwischen Leistungserbringern und Leistungserbringerinstitutionen und
+* die Echtzeit-Kommunikation direkt zwischen Leistungserbringern.
 
-=== FHIR-Directory Search-API
+_Hinweis: In der TI-Messenger Version v1.1 können keine Versicherten an dem TI-Messenger Dienst teilnehmen_
 
-xref:docs/FHIR-Directory-search-api.adoc[FHIR-Directory Search-API]
+== Systemüberblick
+Die folgende Abbildung gibt einen Überblick über die Systemarchitektur des TI-Messengers in der Version 1.1. Die ebenfalls für den Betreib des TI-Messenger Dienstes notwendigen IDP-Dienste werden an dieser Stelle nicht betrachtet.
 
-=== FHIR-Dirctory Owner-API
+++++
+<p align="left">
+  <img width="100%" src=/images/System_overview.png>
+</p>
+++++
 
-=== Org-Admin
+link:docs/TI-Messenger-Fachdienst.adoc[*TI-Messenger-Fachdienst*]
 
-=== TestDriver-API
+* *Registrierungs-Dienst:* +
+Der Registrierungs-Dienst bietet zwei abstrakte Schnittstellen an. Die Schnittstelle `I_Registration` wird vom Frontend des Registrierungs-Dienstes aufgerufen, um eine Organisation beim Registrierungs-Dienst zu authentifizieren und Messenger-Services zu administrieren. Die Schnittstelle `I_internVerfification` wird von den Messenger-Proxies aufgerufen, um die Föderationsliste abzurufen und für die Prüfung auf existierende VZD-FHIR-Einträge der beteiligten Akteure einer beabsichtigten Kommunikation. 
 
-https://github.com/gematik/api-ti-messenger/blob/develop/src/openapi/TiMessengerTestTreiber.yaml/[The gematik TestDriver-API]
+* *Messenger-Service:* +
+Ein Messenger-Service besteht aus den Teilkomponenten Messenger-Proxy und einem Matrix-Homeserver. Die Teilkomponente Matrix-Homeserver basiert auf dem offenen Kommunikationsprotokoll Matrix und bietet die `Matrix-Client-Server API` sowie die `Matrix-Server-Server API` an. Die Kommunikation zu einem Matrix-Homeserver wird immer über den Messenger-Proxy geleitet, sofern die Berechtigungsprüfung erfolgreich war. Dieser stellt die Schnittstelle `I_TiMessengerContactManagement` bereit, um die Administration einer Freigabeliste eines Akteurs zu ermöglichen. 
 
-== Messenger-Service
+* *Push-Gateway:* +
+Das Push-Gateway stellt die `Matrix-Push Gateway API` gemäß der Matrix Spezifikation bereit. Dieses ermöglicht die Weiterleitung von Benachrichtigungen an Akteure des TI-Messenger-Dienstes.
 
-=== Matrix Client-Server-API
+link:docs/TI-Messenger-Fachdienst.adoc[*TI-Messenger-Client*] +
 
-https://spec.matrix.org/v1.4/client-server-api/[The matrix.org Client-Server-API]
+* Der TI-Messenger-Client basiert auf der `Matrix-Client-Server API`. Er wird durch weitere Funktionsmerkmale erweitert und ruft die Schnittstellen am TI-Messenger-Fachdienst sowie am VZD-FHIR-Directory auf. 
 
-=== Matrix Server-Server-API
+link:docs/TI-Messenger-Fachdienst.adoc[*VZD-FHIR-Directory*] +
 
-https://spec.matrix.org/v1.4/server-server-api/[The matrix.org Server-Server-API]
+* Beim VZD-FHIR-Directory handelt es sich um einen zentralen Verzeichnisdient der TI, der die deutschlandweite Suche von Organisationen und Akteuren des TI-Messenger-Dienstes ermöglicht. Das VZD-FHIR-Directory basiert auf dem FHIR-Standard und bietet für den TI-Messenger-Dienst relevante Schnittstellen an. Die Schnittstelle `I_VZD_TiMessenger_services` wird vom Registrierungs-Dienst aufgerufen, um eine Föderationsliste herunterzuladen. Die Schnittstellen `tim-authenticate` und `owner-authenticate` werden von den TI-Messenger-Clients afgerufen, um eine Suche bzw. einen Eintrag im VZD-FHIR-Directory zu ermöglichen. 
 
-=== ContactManagement-API
+== Ordnerstruktur
+Im Folgenden ist die Organisation der Ordnerstruktur dargestellt.
 
-https://github.com/gematik/api-ti-messenger/blob/develop/src/openapi/TiMessengerContactManagement.yaml/[The gematik ContactManagement-API]
+----
+TI-Messenger Dokumentation
+├─ github
+│   └──── workflows
+├─ docs
+├─ images
+├─ src
+│   ├──── fhir
+│   │    ├── fsh-generated
+│   │    ├── input
+│   │    ├── output
+│   │    ├── temp
+│   │    └── template
+│   ├──── openapi
+│   │    ├── TiMessengerContactManagement.yaml
+│   │    └── TiMessengerTestTreiber.yaml 
+│   ├──── plantuml
+│   │    ├── TI-Messenger-Dienst
+│   │    ├── architecture
+│   │    └── includes 
+│   └──── schema
+│        └── Attachment_schema.json
+├── README.adoc
+└── ReleaseNotes.md
+----
 
-== RegistrationService
+== Referenzierte Dokumente
+Die nachfolgende Tabelle enthält die in der vorliegenden Online Dokumentation referenzierten Dokumente der gematik zur Telematikinfrastruktur. Deren zu diesem Dokument jeweils gültige Versionsnummer entnehmen Sie bitte der aktuellen, auf der Internetseite der gematik veröffentlichten, Dokumentenlandkarte, in der die vorliegende Version aufgeführt wird.
 
-=== ProviderServices-API
+|===
+|[Quelle] |Herausgeber: Titel
 
-== Push-Gateway
+|*[gemSpec_TI-Messenger-Dienst]* |gematik: Spezifikation TI-Messenger-Dienst
+|*[gemSpec_TI-Messenger-FD]* |gematik: Spezifikation TI-Messenger-Fachdienst
+|*[gemSpec_TI-Messenger-Client]* |gematik: Spezifikation TI-Messenger-Client
+|*[gemSpec_VZD_FHIR_Directory]* |gematik: Spezifikation Verzeichnisdienst FHIR-Directory
+|===
 
-=== Matrix Push-Gateway-API
+== Weiterführende Seiten
+*Anwendungsfälle* +
+link:docs/Anwendungsfaelle.adoc[- Anwendungsfälle] 
 
-https://spec.matrix.org/v1.4/push-gateway-api/[The matrix.org Push-Gateway-API]
+*Produkttypen* +
+link:docs/KIM_API.adoc[- TI-Messenger-Fachdienst] +
+link:docs/Fachdienst.adoc[- TI-Messenger-Client] +
+link:docs/Verzeichnisdienst.adoc[- VZD-FHIR-Directory]
+
+*Leitfaden für Primärsystemhersteller* +
+link:docs/Primaersystem.adoc[- Primärsystem] 
+
+*Diverses* +
+link:docs/Authentisierung.adoc[- Authentisierung] +
+link:docs/faq.adoc[- Fragen und Antworten zur aktuellen Spezifikation &#91;FAQ&#93;]
+
+*Referenz-Implementierungen* +
+https://github.com/gematik/kim-attachment-service[-] +
 
 == License
 Copyright (c) 2022 gematik GmbH
