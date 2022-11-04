@@ -219,19 +219,15 @@ BODY
 
 
 ==== Display search results
-
-The results of the search are summarized in a json FHIR Bundle structure. Each entry of the Bundle contains a FHIR ressource. The https://simplifier.net/VZD-FHIR-Directory/~introduction[FHIR-Directory simplifier page] specifies the _must support_ elements of the FHIR ressources. It is recommended to display at least those elements of the search results.
+The results of the search-request are summarized in a JSON FHIR Bundle structure. Each entry of the Bundle contains a FHIR ressource. The https://simplifier.net/VZD-FHIR-Directory/~introduction[FHIR-Directory simplifier page] specifies the _must support_ elements of the FHIR ressources. It is recommended to display at least those elements of the search results.
 
 TIP: The search results can also contain FHIR data which is not marked as _must support_.
 
 ==== Full text search
-
 IMPORTANT: Full text search is not yet supported by the FHIR-Directory
 
 The search parameters, *_text* and *_content*, are used for full text search.
 
-
-=== Owner-API
 
 === Owner-API
 
