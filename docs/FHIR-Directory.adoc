@@ -61,6 +61,8 @@ The VZD-FHIR-Directory provides three endpoints: +
 * `tim-provider-services`. 
 
 === Endpoint: /search
+The */search* endpoint is provided by the FHIR-Proxy to search for directory entries. This chapter describes how to use the FHIR-Proxy endpoint.
+
 ==== Authentication
 The */search* endpoint requires a valid JSON Web Token (`tim-authenticate-token`) in the Authorization header. To get the token you need a 3rd Party Token from a permitted matrix-homeserver (`matrix-openid-token`) . With this token you can get the `tim-authenticate-token` from the */tim-authenticate* endpoint from the VZD-FHIR-Directory Auth Service. There are two steps necessary:
 
@@ -217,7 +219,6 @@ BODY
 ----
 ====
 
-
 ==== Display search results
 The results of the search-request are summarized in a JSON FHIR Bundle structure. Each entry of the Bundle contains a FHIR ressource. The https://simplifier.net/VZD-FHIR-Directory/~introduction[FHIR-Directory simplifier page] specifies the _must support_ elements of the FHIR ressources. It is recommended to display at least those elements of the search results.
 
@@ -229,5 +230,55 @@ IMPORTANT: Full text search is not yet supported by the FHIR-Directory
 The search parameters, *_text* and *_content*, are used for full text search.
 
 
-=== Owner-API
+=== Endpoint: /owner
+The */owner* endpoint is provided by the FHIR-Proxy to change directory entries by the owner of the entry. This chapter describes how to use the FHIR-Proxy endpoint.
 
+==== Authentication
+The ways to authenticate differ depending on the entry type. The https://fachportal.gematik.de/fachportal-import/files/gemSpec_VZD_FHIR_Directory_V1.1.0.pdf[specification of the FHIR-Directory] contains information about the endpoint and authentication methods.
+
+The */owner* endpoint requires a valid JSON Web Token (`owner-authenticate-token`) in the Authorization header. In order to get the JSON Web Token the following steps must be performed.
+
+.*1. Login to the TI-Messenger Registrierungs-Dienst as Org-Admin*
+
+This is a proprietary interface. Only healthcare organizations are permitted to take part in the TI-Messenger federation. Each TI-Messenger provider implements a way to authenticate a healthcare organization with OIDC and OAuth2. After the successful authentication the healthcare organization may create Org-Admin Accounts on the Registrierungsdienst.
+
+.*2. Get the Registrierungs-Dienst token*
+
+After login the Org-Admin requests a token from the Registrierungs-Dienst.
+
+Now, the following example shows the call to the */owner-authenticate* endpoint to get the `owner-authenticate-token`.
+
+*REQUEST*
+====
+[source,text]
+----
+GET https://fhir-directory-test.vzd.ti-dienste.de/owner-authenticate
+----
+====
+
+====
+[source,yaml]
+----
+HEADER
+{
+  "User-Agent": "Faraday v2.6.0", 
+  "Content-Type": "application/json", 
+  "X-RegService-Token": "registration-service-token", 
+  "X-Registration-Server-Name": "registration-service.dev.service-ti.de"
+}
+----
+====
+
+*RESPONSE*
+====
+[source,yaml]
+----
+...
+BODY
+{
+  "jwt": "owner-authenticate-token",
+  "token_type": "bearer",
+  "expires_in": 86400
+}
+----
+====
