@@ -236,13 +236,15 @@ The */owner* endpoint is provided by the FHIR-Proxy to change directory entries 
 ==== Authentication
 The ways to authenticate differ depending on the entry type. The https://fachportal.gematik.de/fachportal-import/files/gemSpec_VZD_FHIR_Directory_V1.1.0.pdf[specification of the FHIR-Directory] contains information about the endpoint and authentication methods.
 
-The */owner* endpoint requires a valid JSON Web Token (`owner-authenticate-token`) in the Authorization header. In order to get the JSON Web Token the following steps must be performed.
+The */owner* endpoint requires a valid JSON Web Token (`owner-authenticate-token`) in the Authorization header. 
 
-.*1. Login to the TI-Messenger Registrierungs-Dienst as Org-Admin*
+To get the token you need a 3rd Party Token from a permitted Registrierungs-Dienst (`registration-service-token`). With this token you can get the `owner-authenticate-token` from the */owner-authenticate* endpoint from the VZD-FHIR-Directory Auth Service. There are two steps necessary:
+
+.*1. Login to the Registrierungs-Dienst as Org-Admin*
 
 This is a proprietary interface. Only healthcare organizations are permitted to take part in the TI-Messenger federation. Each TI-Messenger provider implements a way to authenticate a healthcare organization with OIDC and OAuth2. After the successful authentication the healthcare organization may create Org-Admin Accounts on the Registrierungsdienst.
 
-.*2. Get the Registrierungs-Dienst token*
+.*2. Request a 3rd Party Token from the Registrierungs-Dienst*
 
 After login the Org-Admin requests a token from the Registrierungs-Dienst.
 
