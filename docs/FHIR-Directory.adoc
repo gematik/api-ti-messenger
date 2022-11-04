@@ -39,7 +39,59 @@ The VZD-FHIR-Directory provides three endpoints: +
 
 === Endpoint: /search
 ==== Authentication
-The */search* endpoint requires a valid JSON Web Token (`tim-authenticate-token`) in the Authorization header. To get the token you need a valid `matrix-openid-token` from a permitted matrix-homeserver. With the `matrix-openid-token` you can get the `tim-authenticate-token` from the */tim-authenticate* endpoint from the VZD-FHIR-Directory Auth Service. The following example shows the call to the */tim-authenticate* endpoint to get the token.
+The */search* endpoint requires a valid JSON Web Token (`tim-authenticate-token`) in the Authorization header. To get the token you need a 3rd Party Token from a permitted matrix-homeserver (`matrix-openid-token`) . With this token you can get the `tim-authenticate-token` from the */tim-authenticate* endpoint from the VZD-FHIR-Directory Auth Service. There are two steps necessary:
+
+*1) Login to the matrix homeserver* 
+
+*REQUEST*
+====
+[source,bash]
+----
+POST https://{domain}/_matrix/client/r0/login
+----
+====
+
+*RESPONSE*
+====
+[source,yaml]
+----
+...
+BODY
+{
+  "user_id": "@user:matrix.dev.service-ti.de",
+  "access_token": "matrix-accesstoken",
+  "home_server": "matrix.dev.service-ti.de",
+  "device_id": "SRCDQZFMLS"
+}
+----
+====
+
+*2) Request a 3rd Party Token*
+
+*REQUEST*
+====
+[source,bash]
+----
+POST https://{domain}/_matrix/client/v3/user/{userid}/openid/request_token?access_token=matrix-accesstoken
+----
+====
+
+*RESPONSE*
+====
+[source,yaml]
+----
+...
+BODY
+{
+  "access_token": "matrix-openid-token",
+  "token_type": "Bearer",
+  "matrix_server_name": "matrix.dev.service-ti.de",
+  "expires_in": 3600
+}
+----
+====
+
+Now, the following example shows the call to the */tim-authenticate* endpoint to get the `tim-authenticate-token`.
 
 *REQUEST*
 [source, bash]
@@ -63,14 +115,7 @@ HEADER
 *RESPONSE*
 [source, yaml]
 -----------------
-STATUS 200
-HEADER
-{
-  "date": "Thu, 27 Oct 2022 09:22:38 GMT", 
-  "server": "Apache", "etag"=>"\"002d6050a8c142c91e88dc2d7ef4e3fbf\"", 
-  "content-type": "application/json", 
-  "content-length": "453"
-}
+...
 BODY
 {
   "jwt": "tim-authenticate-token",
