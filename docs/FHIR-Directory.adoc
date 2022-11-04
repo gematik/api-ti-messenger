@@ -236,9 +236,7 @@ The */owner* endpoint is provided by the FHIR-Proxy to change directory entries 
 ==== Authentication
 The ways to authenticate differ depending on the entry type. The https://fachportal.gematik.de/fachportal-import/files/gemSpec_VZD_FHIR_Directory_V1.1.0.pdf[specification of the FHIR-Directory] contains information about the endpoint and authentication methods.
 
-The */owner* endpoint requires a valid JSON Web Token (`owner-authenticate-token`) in the Authorization header. 
-
-To get the token you need a 3rd Party Token from a permitted Registrierungs-Dienst (`registration-service-token`). With this token you can get the `owner-authenticate-token` from the */owner-authenticate* endpoint from the VZD-FHIR-Directory Auth Service. There are two steps necessary:
+The */owner* endpoint requires a valid JSON Web Token (`owner-authenticate-token`) in the Authorization header. To get the token you need a 3rd Party Token from a permitted Registrierungs-Dienst (`registration-service-token`). With this token you can get the `owner-authenticate-token` from the */owner-authenticate* endpoint from the VZD-FHIR-Directory Auth Service. There are two steps necessary:
 
 .*1. Login to the Registrierungs-Dienst as Org-Admin*
 
