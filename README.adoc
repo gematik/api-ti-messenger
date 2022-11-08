@@ -21,7 +21,7 @@ Die folgende Dokumentation baut auf die Spezifikation des TI-Messengers v1.1 gem
 _Hinweis: In der TI-Messenger Version v1.1 können keine Versicherten an dem TI-Messenger Dienst teilnehmen_
 
 == Systemüberblick
-Die folgende Abbildung gibt einen Überblick über die Systemarchitektur des TI-Messengers in der Version 1.1. Die ebenfalls für den Betreib des TI-Messenger Dienstes notwendigen IDP-Dienste werden an dieser Stelle nicht betrachtet.
+Die folgende Abbildung gibt einen Überblick über die Systemarchitektur des TI-Messengers in der Version 1.1. Schnittstellen die der Authentifizierung dienen werden in der Abbildung nicht berücksichtigt. 
 
 ++++
 <p align="left">
