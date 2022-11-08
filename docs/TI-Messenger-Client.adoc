@@ -17,9 +17,29 @@ image:gematik_logo.svg[width=70%]
 toc::[]
 
 = TI-Messenger-Client
+Der TI-Messenger-Client basiert auf den offenen Kommunikationsprotokoll Matrix und wird auf dem Endgerät eines Akteurs verwendet. Die Funktionalität des TI-Messenger-Clients kann in drei abstrakten Modulen unterteilt werden. In der folgende Abbildung wird dies verdeutlicht. 
+
 
 ++++
 <p align="left">
   <img width="100%" src=../images/I_Client.png>
 </p>
 ++++
+
+== VZD-FHIR-Directory Modul
+Der TI-Messenger-Client nutzt die Schnittstellen der Teilkomponenten Auth Services und FHIR-Proxy am VZD-FHIR-Directory. Für den Aufruf der beiden Schnittstellen am FHIR-Proxy werden Token benötigt, um die Berechtigung für den Zugriff nachzuweisen. Daher muss der TI-Messenger-Client zuvor am Auth Service die notwendigen Token anfragen. Im folgenden werden die Aufrufe beschrieben. 
+
+=== /tim-authenticate
+
+=== /owner-authenticate
+
+=== /search
+
+=== /owner
+
+
+siehe: https://github.com/gematik/api-vzd/blob/feature/ILF-FHIR_VZD/docs/gemILF_FHIR_VZD.adoc#fhir-search-organizations[Link]
+
+== TI-Messenger Modul
+
+== Auth Modul
