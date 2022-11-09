@@ -73,8 +73,10 @@ GET https://[baseUrl]/[resourceType]?organization.active=true&[optional paramete
 |===
 |resourceType | description
 
-|HealthcareService | To search for organizations, use "HealthcareService" as the resource type
-|PractitionerRole | To search for people, use "PractitionerRole" as the resource type
+|HealthcareService | To search for organizations, use "HealthcareService" + 
+as the resource type
+|PractitionerRole | To search for people, use "PractitionerRole" + 
+as the resource type
 |===
 
 TIP: Only resources with the status "active" may be displayed. For this reason, the [resource].active=true parameter must be specified for all search operations.
