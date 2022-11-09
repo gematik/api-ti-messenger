@@ -85,7 +85,8 @@ Der FHIR Proxy des VZD-FHIR-Directory bietet über die Schnittstelle *FHIRDirect
 *Aufbau des Requests*
 [source, bash]
 -----------------
-GET https://[baseUrl]/[resourceType]?organization.active=true&[optional parameters]
+GET https://[baseUrl]/search/[resourceType]?organization.active=true&[optional parameters] \
+-H "Authorization: Bearer {search-accesstoken}
 -----------------
 
 *Ressourcen Types*
@@ -110,9 +111,16 @@ curl -X GET "https://fhir-directory-test.vzd.ti-dienste.de/search/HealthcareServ
 -----------------
 
 ==== /owner
+Der FHIR Proxy des VZD-FHIR-Directory bietet über die Schnittstelle *FHIRDirectoryOwnerAPI* den Endpunkt */owner* an, um FHIR-Ressourcen im FHIR-Directory für einen Akteur einzutragen. Um den Endpunkt */owner* aufrufen zu können, wird ein `owner-accesstoken` im Authorization Header benötigt. 
 
+*Aufbau des Requests*
+[source, bash]
+-----------------
+POST https://[baseUrl]/owner/[resourceType]&[optional parameters] \
+-H "Authorization: Bearer {owner-accesstoken}
+-----------------
 
-siehe: 
+!!!TODO!!!
 
 == TI-Messenger Modul
 
