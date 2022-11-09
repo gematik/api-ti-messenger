@@ -122,20 +122,6 @@ POST https://[baseUrl]/owner/[resourceType]&[optional parameters] \
 
 !!!TODO!!!
 
-POST https://[baseUrl]/owner/PractitionerRole?_format=json&_pretty=true
--d 
- 	
-{
-  "resourceType": "Practitioner",
-  "id": "1600",
-  "meta": {
-    "versionId": "1",
-    "lastUpdated": "2019-09-20T10:52:18.836+00:00",
-    "source": "#52337a345e9c4676"
-  },
-...
-}
-
 == TI-Messenger Modul
 
 == Auth Modul
