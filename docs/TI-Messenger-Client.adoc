@@ -30,6 +30,27 @@ Der TI-Messenger-Client basiert auf den offenen Kommunikationsprotokoll Matrix u
 Der TI-Messenger-Client nutzt die Schnittstellen der Teilkomponenten Auth Services und FHIR-Proxy am VZD-FHIR-Directory. Für den Aufruf der beiden Schnittstellen am FHIR-Proxy werden Token benötigt, um die Berechtigung für den Zugriff nachzuweisen. Daher muss der TI-Messenger-Client zuvor am Auth Service die notwendigen Token anfragen. Im folgenden werden die Aufrufe beschrieben. 
 
 === /tim-authenticate
+Der Auth Service des VZD-FHIR-Directory bietet über die Schnittstelle *FHIRDirectorySearchAPI* den Endpunkt */tim-authenticate* an, um sich ein `search-accesstoken` ausstellen zu lassen, welches am FHIR-Proxy für die Suche nach FHIR-Ressourcen am Endpunkt */search* notwendig ist. Bei Aufruf des Endpunktes */tim-authenticate* ist es erforderlich im Header, dass 3rd Party Token `Matrix-OpenID-Token` mit zu übergeben. 
+
+*Beispielabfrage:*
+[source, bash]
+-----------------
+curl -X GET \
+'https://[FHIRbaseUrl]/tim-authenticate?mxId=matrix.dev.service-ti.de' \
+-H 'X-Matrix-OpenID-Token: zbKsYFDoZBWcKJMylLjCcMcR'
+-----------------
+
+*Beispielantwort*
+[source, ruby]
+-----------------
+Code: 200
+{
+ "jwt": "eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.e5......",
+ "token_type": "bearer",
+ "expires_in": 86400
+}
+-----------------
+
 
 === /owner-authenticate
 
