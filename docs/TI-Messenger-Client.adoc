@@ -33,13 +33,13 @@ Der TI-Messenger-Client nutzt die Schnittstellen der Teilkomponenten Auth Servic
 Der Auth Service des VZD-FHIR-Directory bietet zwei Schnittstellen an, um sich valide ACCESS TOKENS ausstellen zu lassen.
 
 ==== /tim-authenticate
-Der Auth Service des VZD-FHIR-Directory bietet über den Endpunkt */tim-authenticate* an, um sich ein `search-accesstoken` ausstellen zu lassen, welches am FHIR-Proxy für die Suche nach FHIR-Ressourcen am Endpunkt */search* notwendig ist. Bei Aufruf des Endpunktes */tim-authenticate* ist es erforderlich im Header, dass 3rd Party Token `Matrix-OpenID-Token` mit zu übergeben, welches zurvor sich der TI-Messenger-Client vom zuständigen Matrix-Homeserver als 3rd Party Token austellen lassen muss.  
+Der Auth Service des VZD-FHIR-Directory bietet über den Endpunkt */tim-authenticate* die Mglichkeit an, sich ein `search-accesstoken` ausstellen zu lassen, welches am FHIR-Proxy für die Suche nach FHIR-Ressourcen am Endpunkt */search* notwendig ist. Bei Aufruf des Endpunktes */tim-authenticate* ist es erforderlich im Header, dass 3rd Party Token `Matrix-OpenID-Token` mit zu übergeben, welches zuvor sich der TI-Messenger-Client vom zuständigen Matrix-Homeserver austellen lassen muss. Bei den Endpunkt */tim-authenticate* ist es zusätzlich erforderlich die MXID des Akteurs als Parameter `mxId` mit zu übergeben. 
 
-*Beispielabfrage:*
+*Aufbau des Requests*
 [source, bash]
 -----------------
 curl -X GET \
-'https://[FHIRbaseUrl]/tim-authenticate?mxId=matrix.dev.service-ti.de' \
+'https://[FHIRbaseUrl]/tim-authenticate?mxId={MXID}' \
 -H 'X-Matrix-OpenID-Token: {Matrix-OpenID-Token}'
 -----------------
 
@@ -54,17 +54,16 @@ Code: 200
 }
 -----------------
 
-
 ==== /owner-authenticate
-Der Auth Service des VZD-FHIR-Directory bietet über den Endpunkt */owner-authenticate* an, um sich ein `owner-accesstoken` ausstellen zu lassen, welches am FHIR-Proxy für das Eintragen von FHIR-Ressourcen eines Akteurs am Endpunkt */owner* notwendig ist. Bei Aufruf des Endpunktes */owner-authenticate* ist es erforderlich im Header, dass 3rd Party Token `registration-service-token` mit zu übergeben, welches zurvor sich der TI-Messenger-Client vom zuständigen Registrierungs-Dienst als 3rd Party Token austellen lassen muss. 
+Der Auth Service des VZD-FHIR-Directory bietet über den Endpunkt */owner-authenticate* die Möglichkeit an, sich ein `owner-accesstoken` ausstellen zu lassen, welches am FHIR-Proxy für das Eintragen von FHIR-Ressourcen eines Akteurs am Endpunkt */owner* notwendig ist. Bei Aufruf des Endpunktes */owner-authenticate* ist es erforderlich im Header, dass 3rd Party Token `registration-service-token` mit zu übergeben, welches zurvor sich der TI-Messenger-Client vom zuständigen Registrierungs-Dienst austellen lassen muss. Ebenfalls ist es erforderlich im Header den Server Namen (`Registration-Server-Name`) des ausstelenden Registrierungs-Dienstes mit zu übergeben. Bei den Endpunkt */owner-authenticate* ist es ebenfalls erforderlich die MXID des Akteurs als Parameter `mxId` mit zu übergeben. 
 
-*Beispielabfrage:*
+*Aufbau des Requests*
 [source, bash]
 -----------------
 curl -X GET \
-'https://[FHIRbaseUrl]/owner-authenticate?mxId=matrix.dev.service-ti.de' \
--H 'X-RegService-Token": "registration-service-token', 
--H 'X-Registration-Server-Name": "registration-service.dev.service-ti.de'
+'https://[FHIRbaseUrl]/owner-authenticate?mxId={MXID}' \
+-H 'X-RegService-Token: {registration-service-token}', \
+-H 'X-Registration-Server-Name: {Service-Name}'
 -----------------
 
 *Beispielantwort*
@@ -83,8 +82,7 @@ Code: 200
 ==== /search
 Der FHIR Proxy des VZD-FHIR-Directory bietet über die Schnittstelle *FHIRDirectorySearchAPI* den Endpunkt */search* an, um FHIR-Ressourcen im FHIR-Directory zu suchen. Um den Endpunkt */search* aufrufen zu können, wird ein `search-accesstoken` im Authorization Header benötigt. 
 
-Es gilt der folgende Aufbau:
-
+*Aufbau des Requests*
 [source, bash]
 -----------------
 GET https://[baseUrl]/[resourceType]?organization.active=true&[optional parameters]
@@ -108,7 +106,7 @@ Ein Überblick über die unterstützten FHIR Parameter können https://github.co
 [source, bash]
 -----------------
 curl -X GET "https://fhir-directory-test.vzd.ti-dienste.de/search/HealthcareService?organization.active=true&_count=1" \
-    -H "Authorization: Bearer {owner-accesstoken}
+    -H "Authorization: Bearer {search-accesstoken}
 -----------------
 
 ==== /owner
