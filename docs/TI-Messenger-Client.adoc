@@ -122,7 +122,7 @@ POST https://[baseUrl]/owner/[resourceType]&[optional parameters] \
 
 !!!TODO!!!
 
-POST https://[baseUrl]/owner/Practitioner?_format=json&_pretty=true
+POST https://[baseUrl]/owner/PractitionerRole?_format=json&_pretty=true
 -d 
  	
 {
