@@ -40,7 +40,7 @@ Der Auth Service des VZD-FHIR-Directory bietet über den Endpunkt */tim-authenti
 -----------------
 curl -X GET \
 'https://[FHIRbaseUrl]/tim-authenticate?mxId=matrix.dev.service-ti.de' \
--H 'X-Matrix-OpenID-Token: zbKsYFDoZBWcKJMylLjCcMcR'
+-H 'X-Matrix-OpenID-Token: {Matrix-OpenID-Token}'
 -----------------
 
 *Beispielantwort*
@@ -108,7 +108,7 @@ Ein Überblick über die unterstützten FHIR Parameter können https://github.co
 [source, bash]
 -----------------
 curl -X GET "https://fhir-directory-test.vzd.ti-dienste.de/search/HealthcareService?organization.active=true&_count=1" \
-    -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOi...
+    -H "Authorization: Bearer {owner-accesstoken}
 -----------------
 
 ==== /owner
