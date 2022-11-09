@@ -87,7 +87,7 @@ Ein Überblick über die unterstützten FHIR Parameter können https://github.co
 [source, bash]
 -----------------
 curl -X GET "https://fhir-directory-test.vzd.ti-dienste.de/search/HealthcareService?organization.active=true&_count=1" \
-    -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.e5Jpc3MiOiJodHRwczovL2ZoaXItZGlyZWN0b3J5LXRlc3QudnpkLnRpLWRpZW5zdGUuZGUvdGltLWF1dGhlbnRpY2F0ZSIsImF1ZCI6Imh0dHBzOi8vZmhpci1kaXJlY3RvcnktdGVzdC52emQudGktZGllbnN0ZS5kZS9zZWGyY2giLCJzdWIiOiJAZXR0cjAyOm1hdHJpeC5kZXYuc2VydmljZS10aS5kZSIsImlhdCI6MTY2NDEyMjY3MywiZXhwIjoxNjY0MjA5MDczfQ.CoTwrZmZJyfVYVJFD068QJNFo0YLemhfPVER_lW5h3MU2hgoiSj1lkD6yDHPDQAs4JJ6PlBWIUHtoGoYAwVOVw
+    -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOi...
 -----------------
 
 ==== /owner
