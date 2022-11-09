@@ -120,6 +120,8 @@ POST https://[baseUrl]/owner/[resourceType]&[optional parameters] \
 -H "Authorization: Bearer {owner-accesstoken}
 -----------------
 
+Erst GET (Datensatz suchen) -> PUT (Datensatz ändern)
+
 !!!TODO!!!
 
 == TI-Messenger Modul
