@@ -33,7 +33,7 @@ Der TI-Messenger-Client nutzt die Schnittstellen der Teilkomponenten Auth Servic
 Der Auth Service des VZD-FHIR-Directory bietet zwei Schnittstellen an, um sich valide ACCESS TOKENS ausstellen zu lassen.
 
 ==== /tim-authenticate
-Der Auth Service des VZD-FHIR-Directory bietet über den Endpunkt */tim-authenticate* an, um sich ein `search-accesstoken` ausstellen zu lassen, welches am FHIR-Proxy für die Suche nach FHIR-Ressourcen am Endpunkt */search* notwendig ist. Bei Aufruf des Endpunktes */tim-authenticate* ist es erforderlich im Header, dass 3rd Party Token `Matrix-OpenID-Token` mit zu übergeben. 
+Der Auth Service des VZD-FHIR-Directory bietet über den Endpunkt */tim-authenticate* an, um sich ein `search-accesstoken` ausstellen zu lassen, welches am FHIR-Proxy für die Suche nach FHIR-Ressourcen am Endpunkt */search* notwendig ist. Bei Aufruf des Endpunktes */tim-authenticate* ist es erforderlich im Header, dass 3rd Party Token `Matrix-OpenID-Token` mit zu übergeben, welches zurvor sich der TI-Messenger-Client vom zuständigen Matrix-Homeserver als 3rd Party Token austellen lassen muss.  
 
 *Beispielabfrage:*
 [source, bash]
@@ -48,7 +48,7 @@ curl -X GET \
 -----------------
 Code: 200
 {
- "jwt": "eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.e5......",
+ "jwt": "search-accesstoken",
  "token_type": "bearer",
  "expires_in": 86400
 }
@@ -56,6 +56,27 @@ Code: 200
 
 
 ==== /owner-authenticate
+Der Auth Service des VZD-FHIR-Directory bietet über den Endpunkt */owner-authenticate* an, um sich ein `owner-accesstoken` ausstellen zu lassen, welches am FHIR-Proxy für das Eintragen von FHIR-Ressourcen eines Akteurs am Endpunkt */owner* notwendig ist. Bei Aufruf des Endpunktes */owner-authenticate* ist es erforderlich im Header, dass 3rd Party Token `registration-service-token` mit zu übergeben, welches zurvor sich der TI-Messenger-Client vom zuständigen Registrierungs-Dienst als 3rd Party Token austellen lassen muss. 
+
+*Beispielabfrage:*
+[source, bash]
+-----------------
+curl -X GET \
+'https://[FHIRbaseUrl]/owner-authenticate?mxId=matrix.dev.service-ti.de' \
+-H 'X-RegService-Token": "registration-service-token', 
+-H 'X-Registration-Server-Name": "registration-service.dev.service-ti.de'
+-----------------
+
+*Beispielantwort*
+[source, ruby]
+-----------------
+Code: 200
+{
+  "jwt": "owner-accesstoken",
+  "token_type": "bearer",
+  "expires_in": 86400
+}
+-----------------
 
 === FHIR Proxy
 
