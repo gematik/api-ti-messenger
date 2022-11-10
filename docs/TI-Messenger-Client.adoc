@@ -134,3 +134,6 @@ Erst GET (Datensatz suchen) -> PUT (Datensatz ändern)
 
 
 == Auth Modul
+
+
+=== OIDC / OAuth
