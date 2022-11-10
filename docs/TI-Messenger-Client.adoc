@@ -27,7 +27,7 @@ Der TI-Messenger-Client basiert auf den offenen Kommunikationsprotokoll Matrix u
 ++++
 
 == VZD-FHIR-Directory Modul
-Der TI-Messenger-Client nutzt die Schnittstellen der Teilkomponenten Auth Services und FHIR-Proxy am VZD-FHIR-Directory. Für den Aufruf der beiden Schnittstellen am FHIR-Proxy werden Token benötigt, um die Berechtigung für den Zugriff nachzuweisen. Daher muss der TI-Messenger-Client zuvor am Auth Service die notwendigen Token anfragen. Im folgenden werden die Aufrufe beschrieben. 
+Über dieses abstrakten Modul wird die Suche und die Pflege von Einträgen im FHIR-Directory ermöglicht. Der TI-Messenger-Client nutzt die Schnittstellen der Teilkomponenten Auth Services und FHIR-Proxy am VZD-FHIR-Directory. Für den Aufruf der beiden Schnittstellen am FHIR-Proxy werden Token benötigt, um die Berechtigung für den Zugriff nachzuweisen. Daher muss der TI-Messenger-Client zuvor am Auth Service die notwendigen Token anfragen. Im folgenden werden die Aufrufe beschrieben. 
 
 === Auth Service
 Der Auth Service des VZD-FHIR-Directory bietet zwei Schnittstellen an, um sich valide ACCESS TOKENS ausstellen zu lassen.
@@ -125,5 +125,12 @@ Erst GET (Datensatz suchen) -> PUT (Datensatz ändern)
 !!!TODO!!!
 
 == TI-Messenger Modul
+Über dieses abstrakten Modul wird die eigentliche Ad-Hoc Kommunikation durchgeführt. Der TI-Messenger-Client kommuniziert mit den Messenger Service des TI-Messenger-Fachdienstes über die Matrix - Client-Server Schnittstelle, um Events auszutauschen. Für die Administration einer Freigabeliste stellt der Messenger Service die Schnittstelle `I_Ti_MessengerContactManagement` bereit. Der Aufruf der Schnittstellen erfolgt immer über den Messenger Proxy. Im folgenden werden die Schnittstellen beschrieben. 
+
+=== Matrix - Client-Server API
+
+
+=== I_Ti_MessengerContactManagement
+
 
 == Auth Modul
