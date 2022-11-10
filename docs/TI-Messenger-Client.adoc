@@ -128,7 +128,7 @@ Erst GET (Datensatz suchen) -> PUT (Datensatz ändern)
 Über dieses abstrakten Modul wird die eigentliche Ad-Hoc Kommunikation durchgeführt. Der TI-Messenger-Client kommuniziert mit den Messenger Service des TI-Messenger-Fachdienstes über die Matrix - Client-Server Schnittstelle, um Events auszutauschen. Für die Administration einer Freigabeliste stellt der Messenger Service die Schnittstelle `I_Ti_MessengerContactManagement` bereit. Der Aufruf der Schnittstellen erfolgt immer über den Messenger Proxy. Im folgenden werden die Schnittstellen beschrieben. 
 
 === Matrix - Client-Server API
-
+Der Matrix Homeserver muss die Schnittstellen gemäß der Matrix https://spec.matrix.org/latest/[[Client-Server API]] anbieten, welche der TI-Messenger Client aufruft. Der Aufruf der einzelnen Endpunkte kann dort nachgelesen werden. Ein Überblick über die Schnittstellen ist in der Matrix https://matrix.org/docs/api/#overview[[API Playground]] einsehbar. 
 
 === I_Ti_MessengerContactManagement
 
@@ -137,3 +137,13 @@ Erst GET (Datensatz suchen) -> PUT (Datensatz ändern)
 
 
 === OIDC / OAuth
+
+= Referenzierte Dokumente
+Die nachfolgende Tabelle enthält die in der vorliegenden Online Dokumentation referenzierten Dokumente der gematik. Deren zu diesem Dokument jeweils gültige Versionsnummer entnehmen Sie bitte der aktuellen, auf der Internetseite der gematik veröffentlichten, Dokumentenlandkarte, in der die vorliegende Version aufgeführt wird.
+
+|===
+|[Quelle] |Herausgeber: Titel
+
+|*[Client-Server API]* | https://spec.matrix.org/latest/client-server-api/
+|*[API Playground]* | https://matrix.org/docs/api/#overview
+|===
