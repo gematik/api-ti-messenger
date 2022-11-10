@@ -130,8 +130,24 @@ Erst GET (Datensatz suchen) -> PUT (Datensatz ändern)
 === Matrix - Client-Server API
 Der Matrix Homeserver muss die Schnittstellen gemäß der Matrix https://spec.matrix.org/latest/[[Client-Server API]] anbieten, welche der TI-Messenger Client aufruft. Der Aufruf der einzelnen Endpunkte kann dort nachgelesen werden. Ein Überblick über die Schnittstellen ist in der Matrix https://matrix.org/docs/api/#overview[[API Playground]] einsehbar. 
 
-=== I_Ti_MessengerContactManagement
+Für die Fallbezogene Kommunikation ist es erforderlich was am Event xyz anzupassen!!!!
+Es ist erforderlich, dass der TI-Messenger-Client FHIR-Ressourcen in den Room-State eines existierenden Chatraumes hinzufügt. 
 
+Art des Events: state event
+Event state_key: <vom Sender festgelegt>
+Event type: "de.gematik.tim.casereference"
+Die FHIR-Ressourcen werden im Element content als json-Daten eingetragen und als FHIR-Bundle (type message) zusammengefasst.
+
+*Aufbau des Requests*
+[source, bash]
+-----------------
+POST 'https://{domain}/_matrix/client/v3/createRoom' \
+-----------------
+
+=== I_Ti_MessengerContactManagement
+Es ist erforderlich das der TI-Messenger-Client die Operationen der Schnittstelle `I_TiMessengerContactManagement` aufruft. 
+
+/tim-contact-mgmt/
 
 == Auth Modul
 
