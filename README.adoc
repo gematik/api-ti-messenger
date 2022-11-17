@@ -12,13 +12,13 @@ image:https://img.shields.io/badge/TI&hyphen;Messenger&hyphen;Client-v1.1.0-gree
 
 
 
-== Allgemeines
+== General
 The following documentation is based on the TI-Messenger v1.1 specification according to *[gemSpec_TI-Messenger-Dienst]. At this point, the components of the solution mentioned in the specification and their interfaces are presented and explained in order to provide manufacturers and providers with the best possible support. The range of functions of the TI Messenger in version 1.1 includes: +
 
 * the real-time communication between practitioners and practitioner institutions and
 * real-time communication directly between practitioners.
 
-_Hinweis: With TI Messenger version v1.1 no insured persons can participate in the TI-Messenger service_
+_Notice: With TI Messenger version v1.1 no insured persons can participate in the TI-Messenger service_
 
 == System Overview
 The following picture gives an overview of the system architecture of the TI-Messenger in version 1.1. The IDP services that are also necessary for the operation of the TI-Messenger service are not considered here.
@@ -90,7 +90,7 @@ The table below contains the gematik documents on the telematics infrastructure 
 |===
 
 == Additional pages
-*Anwendungsfälle* +
+*Use cases* +
 link:docs/Anwendungsfaelle.adoc[- Anwendungsfälle] 
 
 *Product types* +
