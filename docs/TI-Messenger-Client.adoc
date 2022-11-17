@@ -17,7 +17,7 @@ image:gematik_logo.svg[width=70%]
 toc::[]
 
 = TI-Messenger-Client
-Der TI-Messenger-Client basiert auf den offenen Kommunikationsprotokoll Matrix und wird auf dem Endgerät eines Akteurs verwendet. Die Funktionalität des TI-Messenger-Clients kann in drei abstrakten Modulen unterteilt werden. In der folgende Abbildung wird dies verdeutlicht. 
+Der TI-Messenger-Client basiert auf dem offenen Kommunikationsprotokoll Matrix und wird auf dem Endgerät eines Akteurs verwendet. Die Funktionalität des TI-Messenger-Clients kann in drei abstrakte Module unterteilt werden. In der folgende Abbildung wird dies verdeutlicht. 
 
 
 ++++
@@ -27,13 +27,13 @@ Der TI-Messenger-Client basiert auf den offenen Kommunikationsprotokoll Matrix u
 ++++
 
 == VZD-FHIR-Directory Modul
-Über dieses abstrakten Modul wird die Suche und die Pflege von Einträgen im FHIR-Directory ermöglicht. Der TI-Messenger-Client nutzt die Schnittstellen der Teilkomponenten Auth Services und FHIR-Proxy am VZD-FHIR-Directory. Für den Aufruf der beiden Schnittstellen am FHIR-Proxy werden Token benötigt, um die Berechtigung für den Zugriff nachzuweisen. Daher muss der TI-Messenger-Client zuvor am Auth Service die notwendigen Token anfragen. Im folgenden werden die Aufrufe beschrieben. 
+Über dieses abstrakte Modul wird die Suche und die Pflege von Einträgen im FHIR-Directory ermöglicht. Der TI-Messenger-Client nutzt die Schnittstellen der Teilkomponenten Auth Services und FHIR-Proxy am VZD-FHIR-Directory. Für den Aufruf der beiden Schnittstellen am FHIR-Proxy werden Token benötigt, um die Berechtigung für den Zugriff nachzuweisen. Daher muss der TI-Messenger-Client zuvor am Auth Service des VZD-FHIR-Directory die notwendigen Token anfragen. Im folgenden werden die Aufrufe beschrieben. 
 
 === Auth Service
 Der Auth Service des VZD-FHIR-Directory bietet zwei Schnittstellen an, um sich valide ACCESS TOKENS ausstellen zu lassen.
 
 ==== /tim-authenticate
-Der Auth Service des VZD-FHIR-Directory bietet über den Endpunkt */tim-authenticate* die Mglichkeit an, sich ein `search-accesstoken` ausstellen zu lassen, welches am FHIR-Proxy für die Suche nach FHIR-Ressourcen am Endpunkt */search* notwendig ist. Bei Aufruf des Endpunktes */tim-authenticate* ist es erforderlich im Header, dass 3rd Party Token `Matrix-OpenID-Token` mit zu übergeben, welches zuvor sich der TI-Messenger-Client vom zuständigen Matrix-Homeserver austellen lassen muss. Bei den Endpunkt */tim-authenticate* ist es zusätzlich erforderlich die MXID des Akteurs als Parameter `mxId` mit zu übergeben. 
+Der Auth Service des VZD-FHIR-Directory bietet über den Endpunkt */tim-authenticate* die Möglichkeit an, sich ein `search-accesstoken` ausstellen zu lassen, welches am FHIR-Proxy für die Suche nach FHIR-Ressourcen am Endpunkt */search* notwendig ist. Bei Aufruf des Endpunktes */tim-authenticate* ist es erforderlich dass 3rd Party Token `Matrix-OpenID-Token` mit im Header zu übergeben, welches sich der TI-Messenger-Client zuvor vom zuständigen Matrix-Homeserver austellen lassen muss. Bei den Endpunkt */tim-authenticate* ist es zusätzlich erforderlich die MXID des Akteurs als Parameter `mxId` beim Aufruf mit zu übergeben. 
 
 *Aufbau des Requests*
 [source, bash]
@@ -55,7 +55,7 @@ Code: 200
 -----------------
 
 ==== /owner-authenticate
-Der Auth Service des VZD-FHIR-Directory bietet über den Endpunkt */owner-authenticate* die Möglichkeit an, sich ein `owner-accesstoken` ausstellen zu lassen, welches am FHIR-Proxy für das Eintragen von FHIR-Ressourcen eines Akteurs am Endpunkt */owner* notwendig ist. Bei Aufruf des Endpunktes */owner-authenticate* ist es erforderlich im Header, dass 3rd Party Token `registration-service-token` mit zu übergeben, welches zurvor sich der TI-Messenger-Client vom zuständigen Registrierungs-Dienst austellen lassen muss. Ebenfalls ist es erforderlich im Header den Server Namen (`Registration-Server-Name`) des ausstelenden Registrierungs-Dienstes mit zu übergeben. Bei den Endpunkt */owner-authenticate* ist es ebenfalls erforderlich die MXID des Akteurs als Parameter `mxId` mit zu übergeben. 
+Der Auth Service des VZD-FHIR-Directory bietet über den Endpunkt */owner-authenticate* die Möglichkeit an, sich ein `owner-accesstoken` ausstellen zu lassen, welches am FHIR-Proxy für das Eintragen von FHIR-Ressourcen eines Akteurs am Endpunkt */owner* notwendig ist. Bei Aufruf des Endpunktes */owner-authenticate* ist es erforderlich dass 3rd Party Token `registration-service-token` im Header mit zu übergeben, welches sich der TI-Messenger-Client zurvor vom zuständigen Registrierungs-Dienst austellen lassen muss. Ebenfalls ist es erforderlich im Header den Server Namen (`Registration-Server-Name`) des ausstelenden Registrierungs-Dienstes beim Aufruf mit zu übergeben. Am Endpunkt */owner-authenticate* ist es ebenfalls erforderlich die MXID des Akteurs als Parameter `mxId` im Aufruf mit zu übergeben. 
 
 *Aufbau des Requests*
 [source, bash]
@@ -101,7 +101,7 @@ as the resource type
 
 TIP: Only resources with the status "active" may be displayed. For this reason, the [resource].active=true parameter must be specified for all search operations.
 
-Ein Überblick über die unterstützten FHIR Parameter können https://github.com/gematik/api-vzd/blob/feature/ILF-FHIR_VZD/docs/gemILF_FHIR_VZD.adoc#fhir-search-organizations[[FHIR VZD implementation guide]] nachgelesen werden 
+Ein Überblick über die unterstützten FHIR Parameter können hier https://github.com/gematik/api-vzd/blob/feature/ILF-FHIR_VZD/docs/gemILF_FHIR_VZD.adoc#fhir-search-organizations[[FHIR VZD implementation guide]] nachgelesen werden.
 
 *Beispielabfrage:*
 [source, bash]
@@ -125,12 +125,12 @@ Erst GET (Datensatz suchen) -> PUT (Datensatz ändern)
 !!!TODO!!!
 
 == TI-Messenger Modul
-Über dieses abstrakten Modul wird die eigentliche Ad-Hoc Kommunikation durchgeführt. Der TI-Messenger-Client kommuniziert mit den Messenger Service des TI-Messenger-Fachdienstes über die Matrix - Client-Server Schnittstelle, um Events auszutauschen. Für die Administration einer Freigabeliste stellt der Messenger Service die Schnittstelle `I_Ti_MessengerContactManagement` bereit. Der Aufruf der Schnittstellen erfolgt immer über den Messenger Proxy. Im folgenden werden die Schnittstellen beschrieben. 
+Über dieses abstrakte Modul wird die eigentliche Ad-Hoc Kommunikation durchgeführt. Der TI-Messenger-Client kommuniziert mit dem Messenger Service des TI-Messenger-Fachdienstes über die Matrix - Client-Server Schnittstelle, um Events auszutauschen. Für die Administration einer Freigabeliste stellt der Messenger Service die Schnittstelle `I_Ti_MessengerContactManagement` bereit. Der Aufruf der Schnittstellen erfolgt immer über den Messenger Proxy. Im folgenden werden die Schnittstellen beschrieben. 
 
 === Matrix - Client-Server API
-Der Matrix Homeserver muss die Schnittstellen gemäß der Matrix https://spec.matrix.org/latest/[[Client-Server API]] anbieten, welche der TI-Messenger Client aufruft. Der Aufruf der einzelnen Endpunkte kann dort nachgelesen werden. Ein Überblick über die Schnittstellen ist in der Matrix https://matrix.org/docs/api/#overview[[API Playground]] einsehbar. 
+Der Matrix Homeserver muss die Schnittstelle gemäß der Matrix https://spec.matrix.org/latest/[[Client-Server API]] anbieten, welche der TI-Messenger Client aufruft. Der Aufruf der einzelnen Endpunkte kann dort nachgelesen werden. Ein Überblick über die einzelnen Endpunkte der Schnittstelle ist hier https://matrix.org/docs/api/#overview[[API Playground]] einsehbar. 
 
-Für die Fallbezogene Kommunikation ist es erforderlich was am Event xyz anzupassen!!!!
+Für die Fallbezogene Kommunikation ist es erforderlich etwas am Event xyz anzupassen!!!!
 Es ist erforderlich, dass der TI-Messenger-Client FHIR-Ressourcen in den Room-State eines existierenden Chatraumes hinzufügt. 
 
 Art des Events: state event
@@ -150,7 +150,7 @@ Es ist erforderlich das der TI-Messenger-Client die Operationen der Schnittstell
 /tim-contact-mgmt/
 
 == Auth Modul
-Über dieses abstrakten Modul wird die Kommunikation mit dem IDP durchgeführt. Der TI-Messenger-Client authentisiert sich mittels OpenID-Connect um ein ID_TOKEN ausgestellt zu bekommen. Für die Authentisierung am IDP wird endweder eine SMC-B oder ein HBA verwendet.
+Über dieses abstrakte Modul wird die Kommunikation mit dem IDP durchgeführt. Der TI-Messenger-Client authentisiert sich mittels OpenID-Connect um ein ID_TOKEN ausgestellt zu bekommen. Für die Authentisierung am IDP wird endweder eine SMC-B oder ein HBA verwendet.
 
 === OIDC / OAuth
 
