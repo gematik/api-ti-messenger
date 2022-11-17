@@ -13,15 +13,15 @@ image:https://img.shields.io/badge/TI&hyphen;Messenger&hyphen;Client-v1.1.0-gree
 
 
 == Allgemeines
-Die folgende Dokumentation baut auf die Spezifikation des TI-Messengers v1.1 gemäß *[gemSpec_TI-Messenger-Dienst]* auf. An dieser Stelle werden insbesondere die in der Spezifikation genannten Komponenten der Lösung sowie deren Schnittstellen weiter dargestellt und erläutert, um Herstellern und Anbietern bestmöglich zu unterstützen. Der Funktionsumfang des TI-Messengers in der Version 1.1 beinhaltet: +
+The following documentation is based on the TI-Messenger v1.1 specification according to *[gemSpec_TI-Messenger-Dienst]. At this point, the components of the solution mentioned in the specification and their interfaces are presented and explained in order to provide manufacturers and providers with the best possible support. The range of functions of the TI Messenger in version 1.1 includes: +
 
-* die Echtzeit-Kommunikation zwischen Leistungserbringern und Leistungserbringerinstitutionen und
-* die Echtzeit-Kommunikation direkt zwischen Leistungserbringern.
+* the real-time communication between practitioners and practitioner institutions and
+* real-time communication directly between practitioners.
 
-_Hinweis: In der TI-Messenger Version v1.1 können keine Versicherten an dem TI-Messenger Dienst teilnehmen_
+_Hinweis: With TI Messenger version v1.1 no insured persons can participate in the TI-Messenger service_
 
-== Systemüberblick
-Die folgende Abbildung gibt einen Überblick über die Systemarchitektur des TI-Messengers in der Version 1.1. Die ebenfalls für den Betreib des TI-Messenger Dienstes notwendigen IDP-Dienste werden an dieser Stelle nicht betrachtet.
+== System Overview
+The following picture gives an overview of the system architecture of the TI-Messenger in version 1.1. The IDP services that are also necessary for the operation of the TI-Messenger service are not considered here.
 
 ++++
 <p align="left">
@@ -32,24 +32,24 @@ Die folgende Abbildung gibt einen Überblick über die Systemarchitektur des TI-
 link:docs/TI-Messenger-Fachdienst.adoc[*TI-Messenger-Fachdienst*]
 
 * *Registrierungs-Dienst:* +
-Der Registrierungs-Dienst bietet zwei abstrakte Schnittstellen an. Die Schnittstelle `I_Registration` wird vom Frontend des Registrierungs-Dienstes aufgerufen, um eine Organisation beim Registrierungs-Dienst zu authentifizieren und Messenger-Services zu administrieren. Die Schnittstelle `I_internVerfification` wird von den Messenger-Proxies aufgerufen, um die Föderationsliste abzurufen und für die Prüfung auf existierende VZD-FHIR-Einträge der beteiligten Akteure einer beabsichtigten Kommunikation. 
+The Registration-Dienst offers two abstract interfaces. The `I_Registration` interface is called by the registration service frontend to authenticate an organization to the Registration-Dienst and to administrate Messenger-Services. The `I_internVerfification` interface is called by the Messenger-Proxies to retrieve the federation list and to check for existing VZD-FHIR entries of the actors involved in an intended communication.
 
 * *Messenger-Service:* +
-Ein Messenger-Service besteht aus den Teilkomponenten Messenger-Proxy und einem Matrix-Homeserver. Die Teilkomponente Matrix-Homeserver basiert auf dem offenen Kommunikationsprotokoll Matrix und bietet die `Matrix-Client-Server API` sowie die `Matrix-Server-Server API` an. Die Kommunikation zu einem Matrix-Homeserver wird immer über den Messenger-Proxy geleitet, sofern die Berechtigungsprüfung erfolgreich war. Dieser stellt die Schnittstelle `I_TiMessengerContactManagement` bereit, um die Administration einer Freigabeliste eines Akteurs zu ermöglichen. 
+A Messenger-Service consists of the sub-components Messenger-Proxy and a Matrix Homeserver. The sub-component  Matrix-Homeserver is based on the open communication protocol Matrix and offers the `Matrix-Client-Server API` and the `Matrix-Server-Server API`. Communication with a Matrix home server is always routed via the Messenger-Proxy, provided the authorization check was successful. This provides the interface `I_TiMessengerContactManagement` to enable the administration of an actor's release list (Freigabeliste).
 
 * *Push-Gateway:* +
-Das Push-Gateway stellt die `Matrix-Push Gateway API` gemäß der Matrix Spezifikation bereit. Dieses ermöglicht die Weiterleitung von Benachrichtigungen an Akteure des TI-Messenger-Dienstes.
+The Push-Gateway provides the `Matrix-Push Gateway API` according to the Matrix specification. This enables notifications to be forwarded to actors in the TI Messenger Service.
 
 link:docs/TI-Messenger-Fachdienst.adoc[*TI-Messenger-Client*] +
 
-* Der TI-Messenger-Client basiert auf der `Matrix-Client-Server API`. Er wird durch weitere Funktionsmerkmale erweitert und ruft die Schnittstellen am TI-Messenger-Fachdienst sowie am VZD-FHIR-Directory auf. 
+* The TI-Messenger-Client is based on the `Matrix-Client-Server API`. It is expanded by further functional features and calls up the interfaces on the TI-Messenger-Fachdienst and on the VZD FHIR directory.
 
 link:docs/TI-Messenger-Fachdienst.adoc[*VZD-FHIR-Directory*] +
 
-* Beim VZD-FHIR-Directory handelt es sich um einen zentralen Verzeichnisdient der TI, der die deutschlandweite Suche von Organisationen und Akteuren des TI-Messenger-Dienstes ermöglicht. Das VZD-FHIR-Directory basiert auf dem FHIR-Standard und bietet für den TI-Messenger-Dienst relevante Schnittstellen an. Die Schnittstelle `I_VZD_TiMessenger_services` wird vom Registrierungs-Dienst aufgerufen, um eine Föderationsliste herunterzuladen. Die Schnittstellen `tim-authenticate` und `owner-authenticate` werden von den TI-Messenger-Clients afgerufen, um eine Suche bzw. einen Eintrag im VZD-FHIR-Directory zu ermöglichen. 
+* The VZD-FHIR-Directory is a central TI directory service that enables organizations and actors in the TI-Messenger-Service to be searched throughout Germany. The VZD-FHIR-Directory is based on the FHIR standard and offers relevant interfaces for the TI Messenger service. The `I_VZD_TiMessenger_services` interface is called by the Registrierungs-Dienst to download a federation list. The interfaces `tim-authenticate` and `owner-authenticate` are called by the TI messenger clients to enable a search or to make an entry in the VZD-FHIR directory.
 
-== Ordnerstruktur
-Im Folgenden ist die Organisation der Ordnerstruktur dargestellt.
+== Folder structure
+The organization of the folder structure is shown below.
 
 ----
 TI-Messenger Dokumentation
@@ -77,11 +77,11 @@ TI-Messenger Dokumentation
 └── ReleaseNotes.md
 ----
 
-== Referenzierte Dokumente
-Die nachfolgende Tabelle enthält die in der vorliegenden Online Dokumentation referenzierten Dokumente der gematik zur Telematikinfrastruktur. Deren zu diesem Dokument jeweils gültige Versionsnummer entnehmen Sie bitte der aktuellen, auf der Internetseite der gematik veröffentlichten, Dokumentenlandkarte, in der die vorliegende Version aufgeführt wird.
+== Referenced documents
+The table below contains the gematik documents on the telematics infrastructure referenced in this online documentation. The version number valid for this document can be found in the current document map published on the gematik website, in which the present version is listed.
 
 |===
-|[Quelle] |Herausgeber: Titel
+|[Source] |Editor: Title
 
 |*[gemSpec_TI-Messenger-Dienst]* |gematik: Spezifikation TI-Messenger-Dienst
 |*[gemSpec_TI-Messenger-FD]* |gematik: Spezifikation TI-Messenger-Fachdienst
@@ -89,23 +89,23 @@ Die nachfolgende Tabelle enthält die in der vorliegenden Online Dokumentation r
 |*[gemSpec_VZD_FHIR_Directory]* |gematik: Spezifikation Verzeichnisdienst FHIR-Directory
 |===
 
-== Weiterführende Seiten
+== Additional pages
 *Anwendungsfälle* +
 link:docs/Anwendungsfaelle.adoc[- Anwendungsfälle] 
 
-*Produkttypen* +
+*Product types* +
 link:docs/KIM_API.adoc[- TI-Messenger-Fachdienst] +
 link:docs/Fachdienst.adoc[- TI-Messenger-Client] +
 link:docs/Verzeichnisdienst.adoc[- VZD-FHIR-Directory]
 
-*Leitfaden für Primärsystemhersteller* +
+*Primary system manufacturer Guideline* +
 link:docs/Primaersystem.adoc[- Primärsystem] 
 
-*Diverses* +
+*Miscellaneous* +
 link:docs/Authentisierung.adoc[- Authentisierung] +
-link:docs/faq.adoc[- Fragen und Antworten zur aktuellen Spezifikation &#91;FAQ&#93;]
+link:docs/faq.adoc[- Questions and answers on the current specification &#91;FAQ&#93;]
 
-*Referenz-Implementierungen* +
+*Reference implementations* +
 https://github.com/gematik/kim-attachment-service[-] +
 
 == License
