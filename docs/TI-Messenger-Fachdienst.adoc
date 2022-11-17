@@ -17,19 +17,19 @@ image:gematik_logo.svg[width=70%]
 toc::[]
 
 = TI-Messenger-Fachdienst
-Der folgende Leitfaden soll als Unterstützung bei der Implementierung des TI-Messenger-Fachdienstes dienen. 
+The following guide is intended to assist in the implementation of the TI-Messenger-Fachdienst.
 
-TIP: Dieser Leitfaden kann als Ergänzung zur Spezifikation gemäß *[gemSpec_TI-Messenger-FD]* gesehen werden.
+TIP: This guide can be seen as a supplement to the *[gemSpec_TI-Messenger-FD]* specification.
 
-Der TI-Messenger-Fachdienst besteht aus den Teilkomponenten:  
+The TI Messenger service consists of the subcomponents:  
 
 * Registrierungs-Dienst, 
 
-* Messenger-Service und
+* Messenger-Service and
 
 * Push-Gateway. 
 
-Der TI-Messenger-Fachdienst stellt verschiedene Schnittstellen bereit, um die Kommunikation mit den Teilkomponenten zu ermöglichen. In der folgenden Abbildung sind alle Schnittstellen, die der Fachdienst anbietet, mit der jeweiligen Teilkomponente, dargestellt.
+The TI-Messenger-Fachdienst provides various interfaces to enable communication with the subcomponents. The following figure shows all interfaces offered by the TI-Messenger-Fachdienst with the respective sub-components.
 
 ++++
 <p align="left">
@@ -38,34 +38,35 @@ Der TI-Messenger-Fachdienst stellt verschiedene Schnittstellen bereit, um die Ko
 ++++
 
 == Registrierungs-Dienst
-Über den Registrierungs-Dienst bekommt der TI-Messenger-Anbieter die Möglichkeit Messenger-Services automatisiert authentifizierten Organisationen zur Verfügung zu stellen und die Matrix-Domain der von ihm bereitgestellten Messenger-Services in deren Organisationsressource in das zentrale VZD-FHIR-Directory einzutragen. 
-Als weitere Funktion bietet der Registrierungs-Dienst eines TI-Messenger-Fachdienstes die Bereitstellung einer Föderationsliste für die Messenger Proxies seiner Messenger-Services an
+The Registrierungs-Dienst gives the TI messenger provider the opportunity to automatically make Messenger-Services available to authenticated organizations and to enter the matrix domain of the messenger services they provide in their organizational resource in the central VZD-FHIR directory.
+As a further function, the Registrierungs-Dienst of a TI-Messenger-Fachdienst offers the provision of a federation list for the Messenger Proxies of its Messenger-Services.
 
-TIP:  Für die Authentifizierung einer Organisation am Registrierungs-Dienst ist es erforderlich den zentrale IDP-Dienst gemäß *[gemSpec_IDP_FD]* zu verwenden
+TIP:  To authenticate an organization to the Registrierungs-Dienst, it is necessary to use the central IDP service according to *[gemSpec_IDP_FD]*
 
-Für die Umsetzung der beschriebenen Funktionen werden durch den Registrierungs-Dienst die beiden Schnittstellen `I_Registration` und `I_internVerification` implementiert. Diese werden im folgenden beschrieben. 
+For the implementation of the functions described, the two interfaces `I_Registration` and `I_internVerification` are implemented by the registration service. These are described below.
 
-=== Schnittstelle: I_Registration
-Die nicht durch die gematik normierte Schnittstelle wird über ein Frontend am Registrierungs-Dienst aufgerufen. Diese ermöglicht die Authentifizierung einer Organisation sowie die Administration und Bereitstellung von Messenger-Services. Hierbei erfolgt die Authentifizierung einer Organisation über deren Identität (SMC-B).
-Es ist zu empfehlen, diese Schnittstelle als eine REST-Schnittstelle zu implementieren.
+=== Interface: I_Registration
+The interface, which is not standardized by gematik, is accessed via a front end on the Registrierungs-Dienst. This enables the authentication of an organization as well as the administration and provision of Messenger-Services. An organization is authenticated via its identity (SMC-B).
+It is recommended to implement this interface as a REST interface.
 
-Für die Authentifizierung einer Organisation am Registrierungs-Dienst wird der zentrale IDP-Dienst der gematik benötigt. Hierfür wird das durch die gematik bereitgestellte Authenticator-Modul (siehe https://cloud.gematik.de/index.php/s/23ebxa75z3s7zGt?path=%2Fv2.1.0[[gematik Authenticator]]) verwendet, um  das Authentifizierungszertifikat der SMC-B in ein ID_TOKEN umzuwandeln. Der Authenticator wird in einer Windows-Systemumgebung zusammen mit dem Primärsystem betrieben. Der Registrierungs-Dienst  muss bei der Verifikation der Organisation das ID_TOKEN überprüfen. Um die Verifikation durchführen zu können, muss der Registrierungs-Dienst sowie das Frontend beim zentralen IDP-Dienst registriert sein. 
+The central IDP service of gematik is required for the authentication of an organization at the Registrierungs-Dienst. The Authenticator-Module provided by gematik (see https://cloud.gematik.de/index.php/s/23ebxa75z3s7zGt?path=%2Fv2.1.0[[gematik Authenticator]]) is used for this to authenticate the SMC-B to an ID_TOKEN. The authenticator runs in a Windows system environment together with the primary system. The Registrierungs-Dienst must check the ID_TOKEN when verifying the organization. In order to be able to carry out the verification, the registration service and the frontend must be registered with the central IDP service.
 
-Nach der erfolgreichen Authentifizierung der Organisation am Registrierungs-Dienst muss es über das Frontend des Registrierungs-Dienstes möglich sein einen Admin-Account für die Organisation anzulegen. Mit diesem Admin-Account können anschließend Messenger-Services erzeugt und bereitgestellt werden. 
+After the organization has been successfully authenticated at the Registrierungs-Dienst, it must be possible to create an admin account for the organization via the frontend of the Registrierungs-Dienst. Messenger-Services can then be generated and provided with this admin account.
 
-=== Schnittstelle: I_internVerification
-Bei der Schnittstelle `I_internVerification` handelt es sich um eine abstrakte interne Schnittstelle am Registrierungs-Dienst, mit der den Messenger-Proxies die folgenden  Funktionalitäten bereitgestellt werden:
+=== Interface: I_internVerification
+The interface `I_internVerification` is an abstract internal interface at the Registrierungs-Dienst, with which the following functionalities are provided to the Messenger-Proxies:
 
-- Bereitstellung der Föderationsliste, die alle verifizierten Matrix-Domains als Hashes enthält und
-- die Überprüfung von MXID-Einträgen im VZD-FHIR-Directory, um die Berechtigungsprüfung der Stufe 3 gemäß *[gemSpec_TI-Messenger-FD#Messenger-Proxy]* durchführen zu können.
+- Provision of the federation list containing all verified matrix domains as hashes and
+- the verification of MXID entries in the VZD-FHIR-Directory in order to be able to carry out the Level 3 authorization check according to *[gemSpec_TI-Messenger-FD#Messenger-Proxy]*.
 
-TIP: Die Umsetzung der bereitzustellenden Funktionalitäten Bereitstellung der Föderationsliste und Berechtigungsprüfung - Stufe 3 am Registrierungs-Dienst kann auch über separate Schnittstellen am Registrierungs-Dienst erfolgen.
+TIP: The implementation of the functionalities to be provided Provision of the federation list and Authorization check - Level 3 on the Registrierungs-Dienst can also be carried out via separate interfaces on the Registrierungs-Dienst.
 
-==== Funktionsmerkmal: Bereitstellung der Föderationsliste
-Für die Prüfung der Organisationszugehörigkeit ist es erforderlich, dass der Registrierungs-Dienst über die abstrakte Schnittstelle `I_internVerification` den Messenger-Proxies eine aktuelle Föderationsliste bereitstellt. Hierfür ist es erforderlich, dass der Registrierungs-Dienst die Operation `/tim-provider-services/getFederationList` am FHIR-Proxys des VZD-FHIR-Directory aufruft, um eine aktuelle Föderationsliste zu erhalten. 
-Im fogenden ist der Aufbau der Föderationsliste die vom FHIR-Proxy des VZD-FHIR-Directory bereitgestellt wird dargestellt.
+==== Feature: Provision of the federation list
+To verify organizational affiliation, the Registrierungs-Dienst must provide the Messenger-Proxies with an up-to-date federation list via the abstract interface `I_internVerification`. This requires the Registrierungs-Dienst to call the `/tim-provider-services/getFederationList` operation on the FHIR-Proxy of the VZD-FHIR directory in order to obtain a current federation list.
 
-*Aufbau der Föderationsliste*
+The structure of the federation list provided by the FHIR-Proxy of the VZD-FHIR-Directory is shown below.
+
+*Structure of the federation list*
 |====
 a|
 [source, yaml]
@@ -97,7 +98,7 @@ FederationList {
 ----
 |====
 
-*Beispiel einer HTTP Nachricht*
+*Example of an HTTP message*
 
 [cols="h,a",] 
 |===
@@ -116,7 +117,7 @@ Authorization: "provider-accesstoken"
 |===
 
 
-*Beispielabfrage:*
+*Sample query:*
 [source, bash]
 -----------------
 curl -X 'GET' \
@@ -124,14 +125,14 @@ curl -X 'GET' \
   -H 'accept: application/json'
 -----------------
 
-==== Funktionsmerkmal: Regelprüfung gemäß Berechtigungsprüfung - Stufe 3
-Der Registrierungs-Dienst muss den Messenger-Proxies des TI-Messenger-Fachdienstes eine Funktion über die Schnittstelle `I_internVerification` anbieten, mit der die Überprüfung auf MXID-Einträge im VZD-FHIR-Directory möglich ist. 
+==== Feature: Authorization check - Level 3
+The Registrierungs-Dienst must offer the Messenger-Proxies of the TI-Messenger-Fachdienst a function via the `I_internVerification` interface, with which it is possible to check for MXID entries in the VZD-FHIR directory.
 
-TIP: Gemäß der TI-Messenger Architektur dürfen nur die jeweiligen Registrierungs-Dienste eines TI-Messenger-Fachdienstes auf den VZD-FHIR-Directory zugreifen. 
+TIP: According to the TI Messenger architecture, only the respective registration services of a TI Messenger specialist service may access the VZD-FHIR directory. 
 
-Hierfür ist es erforderlich die Operation `/tim-provider-services/whereIs` mit den MXIDs der im `Invite-Event` gelisteten Akteuren am FHIR-Proxy aufrufen. Als Ergebnis wird vom FHIR-Proxy folgendes zurückgegeben. 
+For this it is necessary to call the operation `/tim-provider-services/whereIs` with the MXIDs of the actors listed in the `Invite-Event` on the FHIR-Proxy. As a result, the FHIR-Proxy returns the following:
 
-*Rückgabewert der Operation `whereIs`*
+*Return value of the operation `whereIs`*
 |====
 a|
 [source, yaml]
@@ -155,27 +156,27 @@ responses:
                     
 |====
 
-Das Ergebnis vom FHIR-Proxy muss an den anfragenenden Messenger-Proxy zurückgegeben werden.
+The result from the FHIR-Proxy must be returned to the requesting Messenger-Proxy.
 
 == Messenger-Service
-Der Messenger-Service besteht aus der Teilkomponente Messenger-Proxy und dem Matrix-Homeserver. Über den Messenger-Proxy werden immer alle Anfragen an den Matrix-Homeserver weitergeleitet. Die Bereitstellung eines Messenger-Services erfolgt durch einen Akteur über das Frontend des Registrierungs-Dienstes. 
+The Messenger-Service consists of the sub-component Messenger-Proxy and the Matrix-Homeserver. All requests are always forwarded to the Matrix-Homeserver via the Messenger-Proxy. A Messenger-Service is provided by an authorized actor via the front end of the Registrierungs-Dienst.
 
-TIP: Eine direkte Kommunikation zum Matrix-Homeserver ist nicht erlaubt. 
+TIP: Direct communication with the Matrix home server is not permitted. 
 
 === Messenger-Proxy
-Der Messenger-Proxy als Prüfinstanz aller eingehenden `Invite Events` ist für die Regelung der gemäß Matrix Client-Server-API und Matrix-Server-Server-API geltenden Aufrufe zuständig. Nach erfolgreicher Prüfung wird das `Invite Event` an den zuständigen Matrix-Homeserver weitergeleitet. Eine Übersich ist in *[gemSpec_TI-Messenger-Dienst#Stufen der Berechtigungsprüfung]* zu finden. Im folgenden werden die Funktionsmerkmale die der Messenger-Proxy umsetzen muss beschrieben. 
+The Messenger-Proxy, as the checking instance for all incoming `Invite Events`, is responsible for regulating the calls that apply in accordance with the Matrix Client-Server-API and Matrix-Server-Server-API. After a successful check, the `Invite Event` is forwarded to the responsible Matrix-Homeserver. An overview can be found in *[gemSpec_TI-Messenger-Dienst#Stufen der Berechtigungsprüfung]*. The functional features that the Messenger-Proxy must implement are described below.
 
-==== TLS-Kommunikation
-Am Messenger-Proxy wird die TLS-Kommunikation zwischen den TI-Messenger-Clients und dem Matrix-Homeserver terminiert. Für die Serverauthentisierung ist es erforderlich ein durch den Fachdienst-Anbieter bereitgestelltes X.509-Zertifikat zu verwenden. 
+==== TLS-Communication
+The TLS communication between the TI-Messenger-Clients and the Matrix-Homeserver is terminated at the Messenger-Proxy. For server authentication, it is necessary to use an X.509 certificate provided by the TI-Messenger-Fachdienst provider.
 
-TIP: Bei dem X.509-Zertifikat muss es sich um ein öffentliches Zertifkat handeln, welches durch einen vertrauswürdigen Herausgeber ausgestellt wurde.
+TIP: The X.509 certificate must be a public certificate issued by a trustworthy publisher.
 
-Der Messenger-Proxy prüft bei jeder Verbindung, anhand der `client_id`, ob es sich um einen zugelassenen TI-Messenger-Client handelt. Damit der TI-Messenger-Client mit dem Messenger-Proxy erfolgreich kommunizieren kann, ist es erforderlich, dass die `client_id` beim Messenger-Proxy bekannt ist. Hierfür muss der TI-Messenger-Client Hersteller die `client_id` beim TI-Messenger-Anbieter bekannt machen. Sollten unterschiedliche TI-Messenger-Clients vom Messenger-Proxy eines Anbieters unterstützt werden, so müssen alle `client_ids` an den TI-Messenger-Anbieter der Messenger-Proxies übermittelt werden. 
+With each connection, the Messenger-Proxy uses the `client_id` to check whether it is an approved TI-Messenger-Client. In order for the TI-Messenger-Client to successfully communicate with the Messenger-Proxy, it is necessary for the Messenger-Proxy to know the `client_id`. To do this, the TI-Messenger-Client manufacturer must make the `client_id` known to the TI-Messenger provider. If different TI-Messenger-Clients are supported by a provider's Messenger-Proxy, all `client_ids` must be transmitted to the TI-Messenger provider of the Messenger-Proxies.
 
-==== Authentifizierungsverfahren
-Neben der Authentifizierung mittels einer SMC-B oder eines HBA's können weitere Authentifizierungsverfahren vom Messenger-Service unterstützt werden. Dies ermöglicht es Akteuren bereits existierende Authentifizierungsverfahren in ihrer Organisation nachzunutzen. Beispielweise ein bestehendes Active Directory in einer Organisation.
+==== Authentication procedure
+In addition to authentication using an SMC-B or an HBA, other authentication methods can be supported by the Messenger-Service. This enables actors to reuse existing authentication methods in their organization. For example, an existing Active Directory in an organization.
 
-Um dies innerhalb einer Organisation für die Akteure bereitstellen zu können muss das bestehende Authentifizierungsverfahren in der Matrix-Homeserver Konfiguration eingerichtet werden. Beim Einsatz eines Synapse-Servers als Matrix-Homeserver kann zum Beispiel für eine LDAP-Authentifizierung das Modul `LDAP Auth Provider` gemäß https://github.com/matrix-org/matrix-synapse-ldap3[[LDAP Auth Provider]] verwendet werden. Hierfür muss die Synapse-Konfigurationsdatei `/etc/matrix-synapse/homeserver.yaml` wie folgt angepasst werden:
+In order to be able to provide this for the actors within an organization, the existing authentication procedure must be set up in the Matrix-Homeserver configuration. When using a Synapse server as a Matrix-Homeserver, for example, the `LDAP Auth Provider` module can be used for LDAP authentication according to https://github.com/matrix-org/matrix-synapse-ldap3[&#91;LDAP Auth Provider&#93;] be used. For this, the Synapse configuration file `/etc/matrix-synapse/homeserver.yaml` has to be adjusted as follows:
 
 [source, yaml]
 -----------------
@@ -192,23 +193,23 @@ modules:
        name: "givenName"
 -----------------
 
-Bei der Verwendung eines existierenden Authentifizierungsverfahrens muss zusätzich ein 2. Faktor hinzugezogen werden. Hier sind die Empfehlungen des BSIs gemäß https://www.bsi.bund.de/DE/Themen/Verbraucherinnen-und-Verbraucher/Informationen-und-Empfehlungen/Cyber-Sicherheitsempfehlungen/Accountschutz/Zwei-Faktor-Authentisierung/Bewertung-2FA-Verfahren/bewertung-2fa-verfahren_node.html[&#91;Technische Betrachtung&#93;] zu berücksichtigen. 
+When using an existing authentication method, a second factor must also be included. Here are the recommendations of the BSI, according to https://www.bsi.bund.de/DE/Themen/Verbraucherinnen-und-Verbraucher/Informationen-und-Empfehlungen/Cyber-Sicherheitsempfehlungen/Accountschutz/Zwei-Faktor-Authentisierung/Bewertung-2FA-Verfahren/bewertung-2fa-verfahren_node.html[&#91;Technische Betrachtung&#93;] to be taken into account.
 
-Mögliche 2. Faktoren wären:
+Possible 2nd factors would be:
 
-* Verifizierung über E-Mail
+* Verification via email
 
-* SMS-TAN Verfahren
+* SMS-TAN procedure
 
-==== Proxy für das Matrix-Protokoll
-Der Messenger-Proxy agiert als ein Reverse-Proxy und leitet alle Anfragen, die einer Matrix API entsprechen, nach einer Berechtigungsprüfung, an den Matrix Homeserver weiter. 
+==== Proxy for the Matrix-Protocol
+The messenger proxy acts as a Reverse-Proxy and, after an authorization check, forwards all requests that correspond to a Matrix API to the Matrix-Homeserver.
 
-==== Bereistellen und Administration der Freigabeliste
-Bei der Freigabeliste handelt es sich um eine Whitelist, die alle Akteure enthält, die vom jeweiligen Akteur berechtigt werden mit ihm Kontakt aufzunehmen. Die Liste kann in Form einer Lookup-Table implementiert werden. Für die Adminstration der Freigabeliste eines Akteurs ist es erforderlich, dass der Messenger Proxy die Schnittstelle `I_TiMessengerContactManagement` gemäß https://github.com/gematik/api-ti-messenger/blob/feature/fachdienst/src/openapi/TiMessengerContactManagement.yaml[&#91;TIMessengerContactManagement&#93;] bereitstellt.
+==== Provision and administration of Freigabeliste
+The release list is a whitelist that contains all actors who are authorized by the respective actor to contact him. The list can be implemented in the form of a lookup table. The administration of an actor's approval list requires that the Messenger Proxy provides the interface `I_TiMessengerContactManagement` according to https://github.com/gematik/api-ti-messenger/blob/feature/fachdienst/src/openapi/TiMessengerContactManagement.yaml[&#91;TIMessengerContactManagement&#93;]
 
-Für das Hinzufügen einer MXID eines Akteurs in die Freigabeliste ist die Operation  `createContactSetting` zu verwenden. 
+To add an actor's MXID to the approval list, use the `createContactSetting` operation.
 
-*Beispiel einer HTTP Nachricht*
+*Example of an HTTP message*
 
 [cols="h,a",] 
 |===
@@ -233,7 +234,7 @@ HTTP-Version: "HTTP/1.1"
 |===
 
 
-*Beispielabfrage:*
+*Sample query:*
 [source, bash]
 -----------------
 curl -X 'POST' \
@@ -250,12 +251,12 @@ curl -X 'POST' \
 }'
 ----------------- 
  
-Die Attribute  `start` und `end` geben den Zeitraum der Berechtigung vor. 
+The attributes `start` and `end` specify the period of authorization. 
  
-==== Prüfregeln
-TIP: Der Messenger-Proxy muss bei jedem `Invite-Event` die Anfrage an den Matrix-Homeserver auf Berechtigung prüfen. 
+==== Validation rules
+TIP: The messenger proxy must check the request to the Matrix-Homeserver for authorization for each `invite event`.
 
-Die Berechtigungsstufen sind in *[gemSpec_TI_Messenger-Dienst#Berechtigungskonzept]* beschrieben. Bei einer Clint-Server Kommunikation wird nur die Föderationszugehörigkeit (Stufe 1) geprüft. Bei einer Server-Server Kommunikation werden alle Berechtigungsstufen durchlaufen. 
+The authorization levels are described in *[gemSpec_TI-Messenger-Dienst#Berechtigungskonzept]*. In the case of a Clint-Server communication, only the federation membership (Level 1) is checked. In the case of Server-Server communication, all authorization levels are passed through.
 
 Zur Überpürfung gemäß der Berechtigungsstufe 1, ist es erforderlich, dass der Messenger-Proxy die Föderationsliste vom zuständigen Registrierungs-Dienst abruft. Dies ist in *[gemSpec_TI-Messenger-FD#Messenger-Proxy]* beschrieben. 
 
