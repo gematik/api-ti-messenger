@@ -150,7 +150,7 @@ Es ist erforderlich das der TI-Messenger-Client die Operationen der Schnittstell
 /tim-contact-mgmt/
 
 == Auth Modul
-
+Über dieses abstrakten Modul wird die Kommunikation mit dem IDP durchgeführt. Der TI-Messenger-Client authentisiert sich mittels OpenID-Connect um ein ID_TOKEN ausgestellt zu bekommen. Für die Authentisierung am IDP wird endweder eine SMC-B oder ein HBA verwendet.
 
 === OIDC / OAuth
 
