@@ -258,24 +258,24 @@ TIP: The messenger proxy must check the request to the Matrix-Homeserver for aut
 
 The authorization levels are described in *[gemSpec_TI-Messenger-Dienst#Berechtigungskonzept]*. In the case of a Clint-Server communication, only the federation membership (Level 1) is checked. In the case of Server-Server communication, all authorization levels are passed through.
 
-Zur Überpürfung gemäß der Berechtigungsstufe 1, ist es erforderlich, dass der Messenger-Proxy die Föderationsliste vom zuständigen Registrierungs-Dienst abruft. Dies ist in *[gemSpec_TI-Messenger-FD#Messenger-Proxy]* beschrieben. 
+For verification according to authorization Level 1, it is necessary for the Messenger-Proxy to call up the federation list from the responsible Registrierungs-Dienst. This is described in *[gemSpec_TI-Messenger-FD#Messenger-Proxy]*.
 
 === Matrix-Homeserver
-Die Teilkomponente Matrix-Homeserver ist eine Komponente die die Matrix-Spezifikation (Client-Server / Server-Server-API) umgesetzt haben muss. Ein bekannter Matrix-Homeserver ist https://matrix.org/docs/projects/server/synapse[[synapse]]. Generell muss diese komponente  nicht selbst entwickelt werden. Es genügt diese entsprechend den Anforderungen zu konfigurieren. 
+The subcomponent Matrix-Homeserver is a component that must have implemented the Matrix-Specification (Client-Server- / Server-Server-API). A well-known Matrix-Homeserver is https://matrix.org/docs/projects/server/synapse[[synapse]]. In general, this component does not have to be developed in-house. It is sufficient to configure them according to the requirements.
 
 === Push-Gateway
-Die Teilkomponente Push-Gateway muss gemäß der Matrix-Spezifikation implementiert werden. 
+The Push Gateway subcomponent must be implemented according to the Matrix specification.
 
-= Betriebliche Aspekte
-Der Betrieb des Fachdienstes wird durch den TI-Messenger-Anbieter verantwortet. Zentrale Komponenten, wie der Registrierungs-Dienst und das Push-Gateway werden zentral durch den TI-Messenger-Anbieter bereitgestellt und betrieben. Ein Messenger Service kann sowohl in einem Rechenzentrum des TI-Messenger-Anbieters als auch on Premise in den Räumlichkeiten einer Organisation durch den TI-Messenger-Anbieter betrieben werden.
+= Operational aspects
+The TI-Messenger provider is responsible for operating the TI-Messenger-Fachdienst. Central components such as the Registrierungs-Dienst and the Push-Gateway are provided and operated centrally by the TI-Messenger provider. A Messenger Service can be operated both in a data center of the TI-Messenger provider and on premise on the premises of an organization by the TI-Messenger provider.
 
 ???Deplyoment???
 
 = Referenzierte Dokumente
-Die nachfolgende Tabelle enthält die in der vorliegenden Online Dokumentation referenzierten Dokumente der gematik. Deren zu diesem Dokument jeweils gültige Versionsnummer entnehmen Sie bitte der aktuellen, auf der Internetseite der gematik veröffentlichten, Dokumentenlandkarte, in der die vorliegende Version aufgeführt wird.
+The table below contains the gematik documents referenced in this online documentation. The version number valid for this document can be found in the current document map published on the gematik website, in which the present version is listed.
 
 |===
-|[Quelle] |Herausgeber: Titel
+|[Source] |Editor: Title
 
 |*[gemSpec_TI-Messenger-FD]* |gematik: Spezifikation TI-Messenger-Fachdienst
 |*[gemSpec_IDP_FD]* | gematik: Spezifikation Identity Provider – Nutzungsspezifikation für Fachdienste 
