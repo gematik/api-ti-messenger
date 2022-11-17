@@ -1,5 +1,5 @@
 :imagesdir: /images/
-= TI-Messenger Dokumentation
+= TI-Messenger Documentation
 
 image::gematik_logo.svg[gematik,width="70%"]
 
