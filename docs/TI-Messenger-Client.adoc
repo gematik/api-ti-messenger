@@ -150,9 +150,10 @@ Es ist erforderlich das der TI-Messenger-Client die Operationen der Schnittstell
 /tim-contact-mgmt/
 
 == Auth Modul
-Über dieses abstrakte Modul wird die Kommunikation mit dem IDP durchgeführt. Der TI-Messenger-Client authentisiert  sich mittels OpenID-Connect um ein ID_TOKEN ausgestellt zu bekommen. Für die Authentisierung am IDP wird endweder eine SMC-B oder ein HBA verwendet. Der TI-Messenger-Client löst einen OAUTH2 Authorization Request unter Angabe des zu verwendenden sektoralen Identity Providers an den Authorization Endpoint des Authorization-Servers aus.
+Über dieses abstrakte Modul wird die Kommunikation mit dem IDP durchgeführt. Der TI-Messenger-Client authentisiert  sich mittels OpenID-Connect um ein ID_TOKEN ausgestellt zu bekommen. Für die Authentisierung am IDP wird endweder eine SMC-B oder ein HBA verwendet.
 
 === OIDC / OAuth
+Der TI-Messenger-Client löst einen OAUTH2 Authorization Request unter Angabe des zu verwendenden sektoralen Identity Providers an den Authorization Endpoint des Authorization-Servers aus.
 
 = Referenzierte Dokumente
 Die nachfolgende Tabelle enthält die in der vorliegenden Online Dokumentation referenzierten Dokumente der gematik. Deren zu diesem Dokument jeweils gültige Versionsnummer entnehmen Sie bitte der aktuellen, auf der Internetseite der gematik veröffentlichten, Dokumentenlandkarte, in der die vorliegende Version aufgeführt wird.
