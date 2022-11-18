@@ -40,7 +40,7 @@ A Messenger-Service consists of the sub-components Messenger-Proxy and a Matrix 
 * *Push-Gateway:* +
 The Push-Gateway provides the `Matrix-Push Gateway API` according to the Matrix specification. This enables notifications to be forwarded to actors in the TI Messenger Service.
 
-link:docs/TI-Messenger-Client.adoc[*TI-Messenger-Client*] +
+link:docs/TI-Messenger-Client.adoc[*TI Messenger Client*] +
 
 * The TI-Messenger-Client is based on the `Matrix-Client-Server API`. It is expanded by further functional features and calls up the interfaces on the TI-Messenger-backend and on the VZD FHIR directory.
 
@@ -94,12 +94,12 @@ The table below contains the gematik documents on the telematics infrastructure 
 link:docs/Anwendungsfaelle.adoc[- Anwendungsfälle] 
 
 *Product types* +
-link:docs/KIM_API.adoc[- TI-Messenger-Fachdienst] +
-link:docs/Fachdienst.adoc[- TI-Messenger-Client] +
+link:docs/KIM_API.adoc[- TI Messenger backend] +
+link:docs/Fachdienst.adoc[- TI Messenger Client] +
 link:docs/Verzeichnisdienst.adoc[- VZD-FHIR-Directory]
 
 *Primary system manufacturer Guideline* +
-link:docs/Primaersystem.adoc[- Primärsystem] 
+link:docs/Primaersystem.adoc[- Health Professional Software] 
 
 *Miscellaneous* +
 link:docs/Authentisierung.adoc[- Authentisierung] +
