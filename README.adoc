@@ -1,5 +1,5 @@
 :imagesdir: /images/
-= TI-Messenger Documentation
+= TI Messenger Documentation
 
 image::gematik_logo.svg[gematik,width="70%"]
 
@@ -29,7 +29,7 @@ The following picture gives an overview of the system architecture of the TI-Mes
 </p>
 ++++
 
-link:docs/TI-Messenger-Fachdienst.adoc[*TI-Messenger-Fachdienst*]
+link:docs/TI-Messenger-Fachdienst.adoc[*TI Messenger backend*]
 
 * *Registrierungs-Dienst:* +
 The Registration-Dienst offers two abstract interfaces. The `I_Registration` interface is called by the registration service frontend to authenticate an organization to the Registration-Dienst and to administrate Messenger-Services. The `I_internVerfification` interface is called by the Messenger-Proxies to retrieve the federation list and to check for existing VZD-FHIR entries of the actors involved in an intended communication.
