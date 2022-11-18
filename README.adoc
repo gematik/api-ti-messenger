@@ -31,8 +31,8 @@ The following picture gives an overview of the system architecture of the TI-Mes
 
 link:docs/TI-Messenger-Fachdienst.adoc[*TI Messenger backend*]
 
-* *Registrierungs-Dienst:* +
-The Registration-Dienst offers two abstract interfaces. The `I_Registration` interface is called by the registration service frontend to authenticate an organization to the Registration-Dienst and to administrate Messenger-Services. The `I_internVerfification` interface is called by the Messenger-Proxies to retrieve the federation list and to check for existing VZD-FHIR entries of the actors involved in an intended communication.
+* *Registration Service:* +
+The Registration Service offers two abstract interfaces. The `I_Registration` interface is called by the registration service frontend to authenticate an organization to the Registration Service and to administrate Messenger-Services. The `I_internVerfification` interface is called by the Messenger-Proxies to retrieve the federation list and to check for existing VZD-FHIR entries of the actors involved in an intended communication.
 
 * *Messenger-Service:* +
 A Messenger-Service consists of the sub-components Messenger-Proxy and a Matrix Homeserver. The sub-component  Matrix-Homeserver is based on the open communication protocol Matrix and offers the `Matrix-Client-Server API` and the `Matrix-Server-Server API`. Communication with a Matrix home server is always routed via the Messenger-Proxy, provided the authorization check was successful. This provides the interface `I_TiMessengerContactManagement` to enable the administration of an actor's release list (Freigabeliste).
@@ -46,7 +46,7 @@ link:docs/TI-Messenger-Client.adoc[*TI Messenger Client*] +
 
 link:docs/FHIR-Directory-searc-api.adoc[*VZD-FHIR-Directory*] +
 
-* The VZD-FHIR-Directory is a central TI directory service that enables organizations and actors in the TI-Messenger-Service to be searched throughout Germany. The VZD-FHIR-Directory is based on the FHIR standard and offers relevant interfaces for the TI-Messenger-Service. The `I_VZD_TiMessenger_services` interface is called by the Registrierungs-Dienst to download a federation list. The interfaces `tim-authenticate` and `owner-authenticate` are called by the TI messenger clients to enable a search or to make an entry in the VZD-FHIR directory.
+* The VZD-FHIR-Directory is a central TI directory service that enables organizations and actors in the TI-Messenger-Service to be searched throughout Germany. The VZD-FHIR-Directory is based on the FHIR standard and offers relevant interfaces for the TI-Messenger-Service. The `I_VZD_TiMessenger_services` interface is called by the Registration Service to download a federation list. The interfaces `tim-authenticate` and `owner-authenticate` are called by the TI messenger clients to enable a search or to make an entry in the VZD-FHIR directory.
 
 == Folder structure
 The organization of the folder structure is shown below.
