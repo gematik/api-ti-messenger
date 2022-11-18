@@ -15,8 +15,8 @@ image:https://img.shields.io/badge/TI&hyphen;Messenger&hyphen;Client-v1.1.0-gree
 == General
 The following documentation is based on the TI-Messenger v1.1 specification according to *[gemSpec_TI-Messenger-Dienst]. At this point, the components of the solution mentioned in the specification and their interfaces are presented and explained in order to provide manufacturers and providers with the best possible support. The range of functions of the TI Messenger in version 1.1 includes: +
 
-* the real-time communication between practitioners and practitioner institutions and
-* real-time communication directly between practitioners.
+* the real-time communication between Healthcare Provider and Healthcare Provider Institution and
+* real-time communication directly between Healthcare Providers.
 
 _Notice: With TI Messenger version v1.1 no insured persons can participate in the TI-Messenger service_
 
@@ -40,13 +40,13 @@ A Messenger-Service consists of the sub-components Messenger-Proxy and a Matrix 
 * *Push-Gateway:* +
 The Push-Gateway provides the `Matrix-Push Gateway API` according to the Matrix specification. This enables notifications to be forwarded to actors in the TI Messenger Service.
 
-link:docs/TI-Messenger-Fachdienst.adoc[*TI-Messenger-Client*] +
+link:docs/TI-Messenger-Client.adoc[*TI-Messenger-Client*] +
 
-* The TI-Messenger-Client is based on the `Matrix-Client-Server API`. It is expanded by further functional features and calls up the interfaces on the TI-Messenger-Fachdienst and on the VZD FHIR directory.
+* The TI-Messenger-Client is based on the `Matrix-Client-Server API`. It is expanded by further functional features and calls up the interfaces on the TI-Messenger-backend and on the VZD FHIR directory.
 
-link:docs/TI-Messenger-Fachdienst.adoc[*VZD-FHIR-Directory*] +
+link:docs/FHIR-Directory-searc-api.adoc[*VZD-FHIR-Directory*] +
 
-* The VZD-FHIR-Directory is a central TI directory service that enables organizations and actors in the TI-Messenger-Service to be searched throughout Germany. The VZD-FHIR-Directory is based on the FHIR standard and offers relevant interfaces for the TI Messenger service. The `I_VZD_TiMessenger_services` interface is called by the Registrierungs-Dienst to download a federation list. The interfaces `tim-authenticate` and `owner-authenticate` are called by the TI messenger clients to enable a search or to make an entry in the VZD-FHIR directory.
+* The VZD-FHIR-Directory is a central TI directory service that enables organizations and actors in the TI-Messenger-Service to be searched throughout Germany. The VZD-FHIR-Directory is based on the FHIR standard and offers relevant interfaces for the TI-Messenger-Service. The `I_VZD_TiMessenger_services` interface is called by the Registrierungs-Dienst to download a federation list. The interfaces `tim-authenticate` and `owner-authenticate` are called by the TI messenger clients to enable a search or to make an entry in the VZD-FHIR directory.
 
 == Folder structure
 The organization of the folder structure is shown below.
