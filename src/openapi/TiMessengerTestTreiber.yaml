@@ -71,7 +71,7 @@ paths:
     get:
       tags:
         - devices
-      description: "Returns the connected devices and the information of the deposited HBA/SMCB if existing"
+      description: "Returns the connected devices and the information of the deposited HBA/SMC-B if existing"
       operationId: getDevices
       responses:
         200:
@@ -165,7 +165,7 @@ paths:
           $ref: "#/components/responses/DefaultResponse"
 
     post:
-      description: "login to an account. If no login data is provided, a preconfigured account should be used. In case the device has a HBA/SMCB its data should be use"
+      description: "login to an account. If no login data is provided, a preconfigured account should be used. In case the device has a HBA/SMC-B its data should be used"
       tags:
         - login/logout
       operationId: login
@@ -1800,11 +1800,11 @@ components:
           example: "gematik GmbH"
         cn:
           type: string
-          description: "Common name of the deposited HBA/SMCB if existing"
+          description: "Common name of the deposited HBA/SMC-B if existing"
           example: "Dr Renate Grunner"
         telematikId:
           type: string
-          description: "TelematikId of the deposited HBA/SMCB if existing"
+          description: "TelematikId of the deposited HBA/SMC-B if existing"
           example: "Grunner-test-only"
         claimedUntil:
           type: string
@@ -1899,15 +1899,11 @@ components:
         password:
           type: string
           description: "Password that can be used to login to this account"
-          example: "SavePassword123"
+          example: "SafePassword123"
         displayName:
           type: string
           description: "The displayName"
           example: "some name"
-        organization:
-          type: string
-          description: "The organization of the account"
-          example: "some organization"
 
     FhirPractitionerSearchResult:
       description: "The result for a search request for practitioner"
