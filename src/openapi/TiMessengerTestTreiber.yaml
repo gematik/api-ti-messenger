@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: TiMessengerTestDriver
   description: REST interface to automate the test of a TI-Messenger client implementation.
-  version: 0.2.0
+  version: 0.3.0
   contact:
     name: gematik GmbH
     email: software-development@gematik.de
@@ -71,7 +71,7 @@ paths:
     get:
       tags:
         - devices
-      description: "Returns the connected devices."
+      description: "Returns the connected devices and the information of the deposited HBA/SMC-B if existing"
       operationId: getDevices
       responses:
         200:
@@ -165,7 +165,7 @@ paths:
           $ref: "#/components/responses/DefaultResponse"
 
     post:
-      description: "login to an existing account"
+      description: "login to an account. If no login data is provided, a preconfigured account should be used. In case the device has a HBA/SMC-B its data should be used"
       tags:
         - login/logout
       operationId: login
@@ -217,36 +217,6 @@ paths:
     parameters:
       - $ref: "#/components/parameters/deviceId"
 
-    post:
-      tags:
-        - account
-      description: "Create a TI-Messenger account"
-      operationId: createAccount
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/CreateAccountRequest"
-      responses:
-        "201":
-          description: "Successfully created a new account with the given data"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Account"
-        "400":
-          $ref: "#/components/responses/BadRequest"
-        "401":
-          $ref: "#/components/responses/Unauthorized"
-        "403":
-          $ref: "#/components/responses/Forbidden"
-        "404":
-          $ref: "#/components/responses/NotFound"
-        "409":
-          $ref: "#/components/responses/Conflict"
-        default:
-          $ref: "#/components/responses/DefaultResponse"
-
     get:
       tags:
         - account
@@ -259,53 +229,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Account"
-        "400":
-          $ref: "#/components/responses/BadRequest"
-        "401":
-          $ref: "#/components/responses/Unauthorized"
-        "403":
-          $ref: "#/components/responses/Forbidden"
-        "404":
-          $ref: "#/components/responses/NotFound"
-        default:
-          $ref: "#/components/responses/DefaultResponse"
-
-    put:
-      tags:
-        - account
-      description: "Update a TI-Messenger Account."
-      operationId: updateAccount
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/CreateAccountRequest"
-      responses:
-        "200":
-          description: "Successfully updated account data"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Account"
-        "400":
-          $ref: "#/components/responses/BadRequest"
-        "401":
-          $ref: "#/components/responses/Unauthorized"
-        "403":
-          $ref: "#/components/responses/Forbidden"
-        "404":
-          $ref: "#/components/responses/NotFound"
-        default:
-          $ref: "#/components/responses/DefaultResponse"
-
-    delete:
-      tags:
-        - account
-      description: "Delete the TI-Messenger account."
-      operationId: deleteAccount
-      responses:
-        "204":
-          description: "Account deleted"
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
@@ -1856,6 +1779,14 @@ components:
           type: string
           description: "Common name of claimers client cert"
           example: "gematik GmbH"
+        cn:
+          type: string
+          description: "Common name of the deposited HBA/SMC-B if existing"
+          example: "Dr Renate Grunner"
+        telematikId:
+          type: string
+          description: "TelematikId of the deposited HBA/SMC-B if existing"
+          example: "Grunner-test-only"
         claimedUntil:
           type: string
           format: date-time
@@ -1916,27 +1847,6 @@ components:
           description: "If authMethod is basicAuth, a password is required"
           example: "mySecretPassword"
 
-    CreateAccountRequest:
-      description: "Data to create a new account with"
-      required:
-        - authType
-      type: object
-      allOf:
-        - $ref: "#/components/schemas/BasicAuthStage"
-      properties:
-        # authentication data
-        authType:
-          $ref: "#/components/schemas/AuthStageName"
-        # account data
-        displayName:
-          type: string
-          description: "display name for this account"
-          example: "some name"
-        organization:
-          type: string
-          description: "organization of this account"
-          example: "some organization"
-
     Login:
       description: "Login data"
       type: object
@@ -1963,14 +1873,18 @@ components:
       allOf:
         - $ref: "#/components/schemas/MxId"
       properties:
+        username:
+          type: string
+          description: "Username that can be used to login to this account"
+          example: "ThomasMueller"
+        password:
+          type: string
+          description: "Password that can be used to login to this account"
+          example: "SafePassword123"
         displayName:
           type: string
           description: "The displayName"
           example: "some name"
-        organization:
-          type: string
-          description: "The organization of the account"
-          example: "some organization"
 
     FhirPractitionerSearchResult:
       description: "The result for a search request for practitioner"
@@ -2480,13 +2394,13 @@ components:
         display:
           type: string
 
-# Mutual TLS is used for authentication of clients. In openAPI 3.0.x is mTLS not supported. Therefore the security scheme is not used.
-#  securitySchemes:
-#    mTLS:
-#      type: mutualTLS
-#      
-#      
-#security:
-#  - mTLS:
-#  
+    # Mutual TLS is used for authentication of clients. In openAPI 3.0.x is mTLS not supported. Therefore the security scheme is not used.
+    #  securitySchemes:
+    #    mTLS:
+    #      type: mutualTLS
+    #
+    #
+    #security:
+    #  - mTLS:
+    #
     
