@@ -240,25 +240,6 @@ paths:
         default:
           $ref: "#/components/responses/DefaultResponse"
 
-    delete:
-      tags:
-        - account
-      description: "Delete the TI-Messenger account."
-      operationId: deleteAccount
-      responses:
-        "204":
-          description: "Account deleted"
-        "400":
-          $ref: "#/components/responses/BadRequest"
-        "401":
-          $ref: "#/components/responses/Unauthorized"
-        "403":
-          $ref: "#/components/responses/Forbidden"
-        "404":
-          $ref: "#/components/responses/NotFound"
-        default:
-          $ref: "#/components/responses/DefaultResponse"
-
   /devices/{deviceId}/fhir/fhirAuthenticate:
     parameters:
       - $ref: "#/components/parameters/deviceId"
