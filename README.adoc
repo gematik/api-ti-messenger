@@ -44,7 +44,7 @@ link:docs/TI-Messenger-Client.adoc[*TI Messenger Client*] +
 
 * The TI-Messenger-Client is based on the `Matrix-Client-Server API`. It is expanded by further functional features and calls up the interfaces on the TI-Messenger-backend and on the VZD FHIR directory.
 
-link:docs/FHIR-Directory-searc-api.adoc[*VZD-FHIR-Directory*] +
+link:docs/FHIR-Directory.adoc[*VZD-FHIR-Directory*] +
 
 * The VZD-FHIR-Directory is a central TI directory service that enables organizations and actors in the TI-Messenger-Service to be searched throughout Germany. The VZD-FHIR-Directory is based on the FHIR standard and offers relevant interfaces for the TI-Messenger-Service. The `I_VZD_TiMessenger_services` interface is called by the Registration Service to download a federation list. The interfaces `tim-authenticate` and `owner-authenticate` are called by the TI messenger clients to enable a search or to make an entry in the VZD-FHIR directory.
 
