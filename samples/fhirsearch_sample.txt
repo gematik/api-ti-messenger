@@ -1,36 +1,9 @@
-= FHIR-Directory Search-API
-:source-highlighter: highlight.js
-ifdef::env-github[]
-:toc: preamble
-endif::[]
-ifndef::env-github[]
-:toc: left
-endif::[]
-:toclevels: 3
-:toc-title: Table of content
-
-The FHIR-Directory contains entries for healthcare services provided by organizations as well as practitioner entries. This page describes how to use the FHIR-Directory /search endpoint. The https://fachportal.gematik.de/fachportal-import/files/gemSpec_VZD_FHIR_Directory_V1.1.0.pdf[specification of the FHIR-Directory] contains information about the endpoints and authentication methods.
-
-The FHIR Profiles are defined in the https://simplifier.net/vzd-fhir-directory[FHIR-Directory Simplifier project].
-
-In generell FHIR allows various search capabilities. The https://www.hl7.org/fhir/search.html[FHIR search] page describes in detail the search framework.
-
-== Authentication
-
-The /search endpoint requires a valid jwt in the Authorization header. In order to get the jwt the following steps must be performed.
-
-.*1. Login to the matrix homeserver*
-[%collapsible]
-====
-[source,]
-----
 REQUEST
 POST https://matrix.dev.service-ti.de/_matrix/client/r0/login
 HEADER
 {"User-Agent"=>"Faraday v2.6.0", "Content-Type"=>"application/json"}
 BODY
 {"type":"m.login.password","user":"@user:matrix.dev.service-ti.de","password":"password"}
-
 RESPONSE
 STATUS 200
 HEADER
@@ -42,21 +15,12 @@ BODY
   "home_server": "matrix.dev.service-ti.de",
   "device_id": "SRCDQZFMLS"
 }
-----
-====
-
-.*2. Get the Matrix OpenID Token*
-[%collapsible]
-====
-[source,]
-----
 REQUEST
 POST https://matrix.dev.service-ti.de/_matrix/client/v3/user/@ettr02:matrix.dev.service-ti.de/openid/request_token?access_token=matrix-accesstoken
 HEADER
 {"User-Agent"=>"Faraday v2.6.0", "Content-Type"=>"application/json"}
 BODY
 {}
-
 RESPONSE
 STATUS 200
 HEADER
@@ -68,19 +32,10 @@ BODY
   "matrix_server_name": "matrix.dev.service-ti.de",
   "expires_in": 3600
 }
-----
-====
-
-.*3. Get the jwt from the /tim-authenticate endpoint*
-[%collapsible]
-====
-[source,]
-----
 REQUEST
 GET https://fhir-directory-test.vzd.ti-dienste.de/tim-authenticate?mxId=matrix.dev.service-ti.de
 HEADER
 {"User-Agent"=>"Faraday v2.6.0", "Content-Type"=>"application/json", "X-Matrix-OpenID-Token"=>"matrix-openid-token", "X-Matrix-Server-Name"=>"matrix.dev.service-ti.de"}
-
 RESPONSE
 STATUS 200
 HEADER
@@ -91,40 +46,10 @@ BODY
   "token_type": "bearer",
   "expires_in": 86400
 }
-----
-====
-
-== FHIR /search Request
-
-It is important to understand how the entries in the FHIR-Directory are structured. The FHIR-Directory has two kinds of entries.
-An organization entry has the following structure.
-
-image:https://raw.githubusercontent.com/gematik/api-vzd/main/images/diagrams/ObjectDiagram.HealthcareService.svg[Organization entry]
-
-A practitioner entry has a similar structure.
-
-image:https://raw.githubusercontent.com/gematik/api-vzd/main/images/diagrams/ObjectDiagram.PractitionerRole.svg[Practitioner entry]
-
-Please refer to the https://www.hl7.org/fhir/healthcareservice.html#search[HL7 FHIR documentation] to find the possible search parameters of each FHIR ressource.
-
-If the goal of the search are organization entries then the search must start with */search/HealthcareService*. If practitioner entries are searched the search must start with */search/PractitionerRole*. In addition the FHIR-Directory /search endpoint verifies that only active organization entries or active practitioner entries are requested. Therefore the search must include a *organization.active=true* or a *practitioner.active=true* filter.
-
-The search response should include the referenced ressources (search parameter *_include=**).
-
-The matrix addresses of other users (mxid) are saved in HealthcareService.endpoint.address. The Endpoint ressource contains the mxid of a user or of a bot. Only active endpoints should be used (search parameter *endpoint.status=active*).
-
-The FHIR Endpoint ressources are also used for other TI Applications e.g. https://github.com/gematik/api-kim[KIM]. For TI-Messenger Clients it is recommended to use a search parameter *endpoint.connection-type=tim*. This way only Endpoints with TI-Messenger addresses are found.
-
-.*FHIR /search Request*
-[%collapsible]
-====
-[source,]
-----
 REQUEST
 GET https://fhir-directory-test.vzd.ti-dienste.de/search/HealthcareService?organization.active=true&endpoint.status=active&_include=*&_count=2&_pretty=true
 HEADER
 {"User-Agent"=>"Faraday v2.6.0", "Content-Type"=>"application/json", "Authorization"=>"Bearer tim-authenticate-token"}
-
 RESPONSE
 STATUS 200
 HEADER
@@ -537,17 +462,3 @@ BODY
     }
   ]
 }
-----
-====
-
-== Display search results
-
-The results of the search are summarized in a json FHIR Bundle structure. Each entry of the Bundle contains a FHIR ressource. The https://simplifier.net/VZD-FHIR-Directory/~introduction[FHIR-Directory simplifier page] specifies the _must support_ elements of the FHIR ressources. It is recommended to display at least those elements of the search results.
-
-TIP: The search results can also contain FHIR data which is not marked as _must support_.
-
-== Full text search
-
-IMPORTANT: Full text search is not yet supported by the FHIR-Directory
-
-The search parameters, *_text* and *_content*, are used for full text search.
