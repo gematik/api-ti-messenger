@@ -91,7 +91,7 @@ The table below contains the gematik documents on the telematics infrastructure 
 
 == Additional pages
 *Use cases* +
-link:docs/Anwendungsfaelle.adoc[- Anwendungsfälle] 
+link:docs/use-cases.adoc[- Use Cases and sequence diagrams] 
 
 *Product types* +
 link:docs/KIM_API.adoc[- TI Messenger backend] +
