@@ -1,0 +1,50 @@
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+:imagesdir: ../../images
+
+image:gematik_logo.svg[width=70%]
+
+=== AF_10103 Authentication of an organisation on the TI-Messenger service 
+.use case description
+[%collapsible%open]
+====
+[caption=]
+.Authentication of an organisation on the TI-Messenger service
+[%header, cols="1,1"]
+|===
+| |description
+|Actor |Representative of an organisation in the "Org Admin" role
+|Trigger |The administrator of the organisation (Org Admin) wants to make their organisation accessible by storing the MXIDs of the actors of the organisation in the VZD-FHIR directory.
+|Components a|
+              * TI-Messenger client (with advanced Org Admin functionality), 
+              * Authenticator
+              * IDP-Dienst
+              * VZD Auth service
+              * FHIR proxy
+              * FHIR directory
+|Preconditions a| 
+                  * A messenger service was provided to the organisation and a FHIR resource was created in the VZD-FHIR directory.
+                  * The organisation administrator has a TI-Messenger client (with advanced Org Admin functionality).
+                  * The VZD-FHIR directory is registered with a responsible IDP service.
+                  * The organisation administrator can authenticate themselves using a responsible IDP service.
+|Input data |SMC-B, FHIR organisation resources
+|Result |FHIR organisation resources updated, status
+|Output data |Updated VZD-FHIR directory records 
+|===
+====
+
+.sequence diagram
+[%collapsible%open]
+====
+++++
+<p align="center">
+  <img width="75%" src=../../images/diagrams/TI-Messenger-Dienst/Ressourcen/UC_10103_Seq.svg>
+</p>
+++++
+====

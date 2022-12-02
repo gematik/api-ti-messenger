@@ -44,120 +44,20 @@ Next to the SMC-B the user who is starting the process needs:
 * the SMC-B is plugged in the card terminal and unlocked
 * a valid domain for the TI-Messenger-Dienst
 
-After a successful Authentication with the SMC-B an Admin Account can be created and used to create a TI-Messenger Fachdienst for the organization.
+After a successful Authentication with the SMC-B an Admin Account can be created and used to create a TI-Messenger Fachdienst for the organization. +
 
-.AF_10103 use case description
-[%collapsible]
-====
-[caption=]
-.Authentication of an organisation on the TI-Messenger service
-[%header, cols="1,1"]
-|===
-| |description
-|Actor |Representative of an organisation in the "Org Admin" role
-|Trigger |The administrator of the organisation (Org Admin) wants to make their organisation accessible by storing the MXIDs of the actors of the organisation in the VZD-FHIR directory.
-|Components a|
-              * TI-Messenger client (with advanced Org Admin functionality), 
-              * Authenticator
-              * IDP-Dienst
-              * VZD Auth service
-              * FHIR proxy
-              * FHIR directory
-|Preconditions a| 
-                  * A messenger service was provided to the organisation and a FHIR resource was created in the VZD-FHIR directory.
-                  * The organisation administrator has a TI-Messenger client (with advanced Org Admin functionality).
-                  * The VZD-FHIR directory is registered with a responsible IDP service.
-                  * The organisation administrator can authenticate themselves using a responsible IDP service.
-|Input data |SMC-B, FHIR organisation resources
-|Result |FHIR organisation resources updated, status
-|Output data |Updated VZD-FHIR directory records 
-|===
-====
+link:use-cases/authenticate-organization.adoc[Use Case & Sequence diagram]
 
-.AF_10103 sequence diagram
-[%collapsible]
-====
-++++
-<p align="center">
-  <img width="75%" src=../images/diagrams/TI-Messenger-Dienst/Ressourcen/UC_10103_Seq.svg>
-</p>
-++++
-====
 
 === AF_10060 Provision of messenger service to an organisation
 After a successful authentication the user can use the admin credentials to log into the registration service. After a successful login the user is able to create new messenger services(TODO ref API) by providing a domain name. This domain name will be checked. (TODO list check examples). Afterwards a messenger service will be created and configured. To take part in the TI-messenger federation the new service domain has to be added to the federation list hosted at the VZD-FHIR directory. (TODO Ref auf provider access token and addtimessengerDomain Endpoint)
 
-.AF_10060 use case description
-[%collapsible]
-====
-[caption=]
-Provision of messenger service to an organisation
-[%header, cols="1,1"]
-|===
-| |description
-|Actor |Representative of an organisation in the "Org Admin" role
-|Trigger |An organisation of the German healthcare system wants to participate in the TI-Messenger service and needs to provide one or more messenger services
-|Components a|
-              * Front end of the registration service, 
-              * Registrierungs-Dienst, 
-              * VZD-FHIR directory,
-              * Messenger-Service 
-|Preconditions a| 
-                  * There is a contractual relationship with a TI-Messenger provider. 
-                  * The operator has a front end of the registration service for communication with the registration service.
-                  * The used front end of the registration service is registered with the responsible IDP service.
-                  * The SMC-B inserted in the eHealth card terminal is enabled.
-                  * The registration service can authenticate itself with the VZD-FHIR directory server for write access
-                    with OAuth2.
-|Input data |Admin account, identity of organisation (SMC-B)
-|Result a|
-            * The messenger service for the organisation has been created.
-            * The Matrix domain of the new messenger service was entered as an endpoint in the VZD-FHIR directory and  
-              included in the federation.
-|Output data |New messenger service for the organisation, status
-|===
-====
-.AF_10060 sequence diagram 
-[%collapsible]
-====
-++++
-<p align="center">
-  <img width="60%" src=../images/diagrams/TI-Messenger-Dienst/Ressourcen/UC_10060_Seq.svg>
-</p>
-++++
-====
+link:use-cases/provision-messenger-service.adoc[Use Case & Sequence diagram]
 
 === AF_10064 Check federation affiliation of a messenger service
 This use case checks whether a messenger service is part of the TI-Messenger federation and applies to all use cases that have to check the Matrix domain of another messenger service. For checking the affiliation of the Matrix domain with the TI-Messenger federation, the messenger proxy uses a federation list that is provided by the registration service of its TI-Messenger specialist service. The storage time of the messenger proxy federation list is limited. 
 
-.AF_10064 use case description
-[%collapsible]
-====
-[caption=]
-Check federation affiliation of a messenger service
-[%header, cols="1,1"]
-|===
-| |description
-|Actor |-
-|Trigger |The messenger proxy receives an Invite event and MUST check the MXIDs included in the request for domain belonging to the TI-Messenger federation.
-|Components a|
-              * Messenger proxy,
-              * Matrix home server 
-|Preconditions a| none
-|Input data |Invite Event
-|Result a|The messenger proxy uses the federation list to determine whether the Matrix domain of the other messenger service is part of the TI-Messenger federation.
-|Output data |Status of the Matrix home server and forwarding
-|===
-====
-.AF_10064 sequence diagram 
-[%collapsible]
-====
-++++
-<p align="center">
-  <img width="60%" src=../images/diagrams/TI-Messenger-Dienst/Ressourcen/UC_10064_Seq.svg>
-</p>
-++++
-====
+link:use-cases/check-federation.adoc[Use Case & Sequence diagram]
 
 ===  update of the federation list
 The following figure describes how the messenger proxy updates its locally maintained federation list. To update the federation list, the messenger proxy MUST request it from the registration service of its TI-Messenger specialist service. The frequency of requesting a new list is determined by the provider, the goal should be to have a federation list as up-to-date as possible (but at least once a day). Here, the messenger proxy transfers the saved version of the federation list to the registration service. If the version matches, no new federation list will be provided by the registration service for the messenger proxy. If the version is larger than the one passed by the messenger proxy, an updated federation list is provided by the registration service. Each time a messenger proxy is requested from the registration service for a current federation list, the registration service MUST also check the up-to-dateness of the FHIR proxy by handing over the version of the federation list it has saved when calling the FHIR proxy. A download of the federation list is only necessary if a newer version exists on the FHIR proxy. The structure of the federation list is described in [gemSpec_VZD_FHIR_Directory]. After retrieving the federation list from the registration service, through the messenger proxy, the latter MUST check the signature of the federation list. 

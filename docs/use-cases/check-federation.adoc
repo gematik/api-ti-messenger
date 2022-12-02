@@ -1,0 +1,45 @@
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+:imagesdir: ../../images
+:toc: macro
+:toclevels: 3
+:toc-title: table of content
+:numbered:
+
+image:gematik_logo.svg[width=70%]
+
+=== AF_10064 Check federation affiliation of a messenger service
+.use case description
+[%collapsible%open]
+====
+[caption=]
+Check federation affiliation of a messenger service
+[%header, cols="1,1"]
+|===
+| |description
+|Actor |-
+|Trigger |The messenger proxy receives an Invite event and MUST check the MXIDs included in the request for domain belonging to the TI-Messenger federation.
+|Components a|
+              * Messenger proxy,
+              * Matrix home server 
+|Preconditions a| none
+|Input data |Invite Event
+|Result a|The messenger proxy uses the federation list to determine whether the Matrix domain of the other messenger service is part of the TI-Messenger federation.
+|Output data |Status of the Matrix home server and forwarding
+|===
+====
+.sequence diagram 
+[%collapsible%open]
+====
+++++
+<p align="center">
+  <img width="60%" src=../../images/diagrams/TI-Messenger-Dienst/Ressourcen/UC_10064_Seq.svg>
+</p>
+++++
+====
