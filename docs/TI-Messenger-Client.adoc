@@ -111,9 +111,11 @@ as the resource type
 as the resource type
 |===
 
-TIP: Only resources with the status "active" may be displayed. For this reason, the [resource].active=true parameter must be specified for all search operations.
+TIP: Only resources with the status "active" shall be displayed. For this reason, the [resource].active=true parameter must be specified for all search operations.
 
 Ein Überblick über die unterstützten FHIR Parameter können hier https://github.com/gematik/api-vzd/blob/feature/ILF-FHIR_VZD/docs/gemILF_FHIR_VZD.adoc#fhir-search-organizations[[FHIR VZD implementation guide]] nachgelesen werden.
+
+An overview of all supported FHIR parameters is documented at https://github.com/gematik/api-vzd/blob/feature/ILF-FHIR_VZD/docs/gemILF_FHIR_VZD.adoc#fhir-search-organizations[[FHIR VZD implementation guide]]. 
 
 *Beispielabfrage:*
 [source, bash]
@@ -155,10 +157,11 @@ For patient-case-related communication, additional informations have to be added
 The TI Messenger client will use FHIR based resources as additional information for the matrix chat room. 
 
 Art des Events: state event
-Event state_key: <vom Sender festgelegt>
-Event type: "de.gematik.tim.casereference"
+Event state_key: <vom Sender festgelegt> +
+Event type: "de.gematik.tim.casereference" +
 Die FHIR-Ressourcen werden im Element content als json-Daten eingetragen und als FHIR-Bundle (type message) zusammengefasst.
-The FHIR-Ressources will be added as part of the content of an room state event. 
+
+The FHIR-Ressources will be added in the content part of a room state event. 
 
 *Example des Request*
 [source, bash]
@@ -169,10 +172,14 @@ POST 'https://{domain}/_matrix/client/v3/createRoom' \
 === I_Ti_MessengerContactManagement
 Es ist erforderlich das der TI-Messenger-Client die Operationen der Schnittstelle `I_TiMessengerContactManagement` aufruft. 
 
+For administration of the personal contact list the messenger proxy exposes the API `I_TiMessengerContactManagement`.
+
 /tim-contact-mgmt/
 
 == Auth Modul
 Über dieses abstrakte Modul wird die Kommunikation mit dem IDP durchgeführt. Der TI-Messenger-Client authentisiert  sich mittels OpenID-Connect um ein ID_TOKEN ausgestellt zu bekommen. Für die Authentisierung am IDP wird endweder eine SMC-B oder ein HBA verwendet.
+
+The auth module contains the functionality to authenticate a user with an SMC-B or HBA card. To interact with one of the mentioned cards the module needs a connection to a card terminal that is connected to a connector. The module reads the cards certificate information and sends the data to the gematik IDP. After successful authentication an ID_TOKEN will be issued by the gematik IDP which can be used to get an ACCESS_TOKEN for the FHIR-VZD. 
 
 === OIDC / OAuth
 Der TI-Messenger-Client löst einen OAUTH2 Authorization Request unter Angabe des zu verwendenden sektoralen Identity Providers an den Authorization Endpoint des Authorization-Servers aus.
