@@ -17,10 +17,7 @@ image:gematik_logo.svg[width=70%]
 toc::[]
 
 = TI-Messenger-Client
-Der TI-Messenger-Client basiert auf dem offenen Kommunikationsprotokoll Matrix und wird auf dem Endgerät eines Akteurs verwendet. Die Funktionalität des TI-Messenger-Clients kann in drei abstrakte Module unterteilt werden. In der folgende Abbildung wird dies verdeutlicht. 
-
-The TI Messenger Client is the client used to interact with the TI-Messenger Fachdienst and will be distributed on various platforms(i.e. Android, iOS, Windows, Linux, etc). The functionality of the TI Messenger Client can be divided into three abstract modules as illustrated in the following figure. 
-
+The TI-Messenger-Client is the client used to interact with the TI-Messenger Fachdienst and will be distributed on various platforms (i.e. Android, iOS, Windows, Linux, etc). The functionality of the TI Messenger Client can be divided into three abstract modules as illustrated in the following figure. 
 
 ++++
 <p align="left">
@@ -29,19 +26,13 @@ The TI Messenger Client is the client used to interact with the TI-Messenger Fac
 ++++
 
 == VZD-FHIR-Directory Modul
-Über dieses abstrakte Modul wird die Suche und die Pflege von Einträgen im FHIR-Directory ermöglicht. Der TI-Messenger-Client nutzt die Schnittstellen der Teilkomponenten Auth Services und FHIR-Proxy am VZD-FHIR-Directory. Für den Aufruf der beiden Schnittstellen am FHIR-Proxy werden Token benötigt, um die Berechtigung für den Zugriff nachzuweisen. Daher muss der TI-Messenger-Client zuvor am Auth Service des VZD-FHIR-Directory die notwendigen Token anfragen. Im folgenden werden die Aufrufe beschrieben. 
-
-This module enables the search and maintenance of entries in the FHIR directory. It interacts with the Auth Service provides by the VZD-FHIR-Directory to aquire a valid ACCESS_TOKEN that is needed for using the search and owner endpoints offered by the VZD-FHIR-Directory.
+This module enables the search and maintenance of entries in the FHIR Directory. It interacts with the Auth Service provides by the VZD-FHIR-Directory to aquire a valid ACCESS_TOKEN that is needed for using the search and owner endpoints offered by the VZD-FHIR-Directory.
 
 === Auth Service
-Der Auth Service des VZD-FHIR-Directory bietet zwei Schnittstellen an, um sich valide ACCESS TOKENS ausstellen zu lassen.
-
-The auth service offers 2 endpoints to request ACCESS TOKENS that are described in the following chapters. 
+The Auth Service offers two endpoints to request ACCESS_TOKENS that are described in the following chapters. 
 
 ==== /tim-authenticate
-Der Auth Service des VZD-FHIR-Directory bietet über den Endpunkt */tim-authenticate* die Möglichkeit an, sich ein `search-accesstoken` ausstellen zu lassen, welches am FHIR-Proxy für die Suche nach FHIR-Ressourcen am Endpunkt */search* notwendig ist. Bei Aufruf des Endpunktes */tim-authenticate* ist es erforderlich dass 3rd Party Token `Matrix-OpenID-Token` mit im Header zu übergeben, welches sich der TI-Messenger-Client zuvor vom zuständigen Matrix-Homeserver austellen lassen muss. Bei den Endpunkt */tim-authenticate* ist es zusätzlich erforderlich die MXID des Akteurs als Parameter `mxId` beim Aufruf mit zu übergeben. 
-
-The Auth Service of the VZD FHIR Directory provides the endpoint */tim-authenticate* to aquire a `search-accesstoken`, which is needed to use the search API for FHIR resources */search*. For requesting a `search-accesstoken` the TI-Messenger client must first have requested a 3rd party token `Matrix-OpenID-Token` from the Messenger-Server. This token needs to added in the http header while requesting the */tim-authenticate* endpoint. Next to the token the users MXID has to be added as a parameter. 
+The Auth Service of the VZD FHIR Directory provides the endpoint */tim-authenticate* to make out a `search-accesstoken`, which is needed to use the search API for FHIR resources */search*. For requesting a `search-accesstoken` the TI-Messenger client must first have requested a 3rd party token (`Matrix-OpenID-Token`) from the Matrix-Homeserver. This token needs to added in the http header while requesting the */tim-authenticate* endpoint. Next to the token the users `MXID` has to be added as a parameter. 
 
 *Example Request*
 [source, bash]
