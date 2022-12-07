@@ -21,7 +21,11 @@ image:https://img.shields.io/badge/TI&hyphen;Messenger&hyphen;Client-v1.1.0-gree
 ⭐️ If gematik change something in this repository you can to be notified when you like this repository!
 
 == General
-CAUTION: *Planned changes for TI-Messenger-Dienst version v1.1:* link:docs/changes/TI-Messenger_v1.1_changes.adoc[TI-Messenger v1.1 changes].
+---
+
+⚠️ ***Planned changes for TI-Messenger-Dienst version v1.1:* link:docs/changes/TI-Messenger_v1.1_changes.adoc[TI-Messenger v1.1 changes].**
+
+---
 
 The following documentation is based on the TI-Messenger-Dienst v1.1 specification according to *[gemSpec_TI-Messenger-Dienst]*. At this point, the components of the solution mentioned in the specification and their interfaces are presented and explained in order to provide manufacturers and providers with the best possible support. The range of functions of the TI Messenger in version 1.1 includes: +
 
