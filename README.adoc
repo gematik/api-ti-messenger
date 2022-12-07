@@ -117,7 +117,7 @@ link:docs/Primaersystem.adoc[- Health Professional Software]
 
 *Miscellaneous* +
 link:docs/Authentisierung.adoc[- Authentisierung] +
-link:docs/faq.adoc[- Questions and answers on the current specification &#91;FAQ&#93;]
+link:docs/faq.adoc[- Questions and answers on the current specification &#91;Q&A&#93;]
 
 *Reference implementations* +
 https://github.com/gematik/kim-attachment-service[-] +
