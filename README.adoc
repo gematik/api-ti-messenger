@@ -18,11 +18,11 @@ image:https://img.shields.io/badge/TI&hyphen;Messenger&hyphen;Dienst-v1.1.0-gree
 image:https://img.shields.io/badge/TI&hyphen;Messenger&hyphen;FD-v1.1.0-green?style=plastic&logo=github&logoColor=green[link="https://fachportal.gematik.de/fachportal-import/files/gemSpec_TI-Messenger-FD_V1.1.0.pdf"]
 image:https://img.shields.io/badge/TI&hyphen;Messenger&hyphen;Client-v1.1.0-green?style=plastic&logo=github&logoColor=green[link="https://fachportal.gematik.de/fachportal-import/files/gemSpec_TI-Messenger-Client_V1.1.0.pdf"]
 
-🔥 *Planned changes for TI-Messenger-Dienst version v1.1:* https://github.com/gematik/api-vzd/blob/develop/src/schema/FederationList.json[TI-Messenger v1.1 changes].
-
 ⭐️ If gematik change something in this repository you can to be notified when you like this repository!
 
 == General
+CAUTION: *Planned changes for TI-Messenger-Dienst version v1.1:* https://github.com/gematik/api-vzd/blob/develop/src/schema/FederationList.json[TI-Messenger v1.1 changes].
+
 The following documentation is based on the TI-Messenger-Dienst v1.1 specification according to *[gemSpec_TI-Messenger-Dienst]*. At this point, the components of the solution mentioned in the specification and their interfaces are presented and explained in order to provide manufacturers and providers with the best possible support. The range of functions of the TI Messenger in version 1.1 includes: +
 
 * the real-time communication between Healthcare Provider and Healthcare Provider Institution and
