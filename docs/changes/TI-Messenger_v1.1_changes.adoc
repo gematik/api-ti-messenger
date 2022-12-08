@@ -1,0 +1,267 @@
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+:imagesdir: ../../images
+:toc: macro
+:toclevels: 5
+:toc-title: Inhaltsverzeichnis
+:numbered:
+
+image:gematik_logo.svg[width=70%]
+
+toc::[]
+
+= TI-Messenger v1.1 changes
+== Zusammenfassung
+Die folgende Seite listet notwendige Änderungsvorschläge (CR) auf, die noch im Rahmen des TI-Messenger-Dienstes in der Version 1.1 gültig werden sollen. Bei den hier genannten Änderungen handelt es sich um Erkenntnisse aus der Entwicklung der Referenzimplementierung des TI-Messengers sowie aus den Vorschlägen der Industriegesprächen. Ziel ist es, alle Änderungsvorschläge transparent und allen interessierten Herstellern zur gemeinsamen Abstimmung zur Verfügung zu stellen.
+
+CAUTION: Die hier genannten Änderungen sind als Abstimmungsgrundlage zu verstehen.
+
+
+== Änderungsvorschläge
+Im Folgenden werden alle Änderungsvorschläge der gematik beschrieben, die für den TI-Messenger Dienst in der Version 1.1 erforderlich sind.
+
+=== CR_001 - Korrektur der Parameter am FHIR-Directory /tim-authenticate Endpoint
+
+Der Request am */tim-authenticate* Endpoint muss den Namen des Matrix Homeservers enthalten. In der bisherigen FHIR-Directory Implementierung wurde der Homeserver-Name als Teil der URL im Parameter `mxid` übergeben.
+
+*Beispiel alt*
+[source,]
+----
+GET https://fhir-directory-test.vzd.ti-dienste.de/tim-authenticate?mxId=matrix.dev.service-ti.de
+----
+
+Der Homeserver-Name wird nun im Header-Element `X-Matrix-Server-Name` des Requests übergeben.
+
+*Beispiel neu*
+[source, ruby]
+----
+GET https://fhir-directory-test.vzd.ti-dienste.de/tim-authenticate
+
+HEADER
+{
+ "User-Agent"=>"Faraday v2.6.0",
+ "Content-Type"=>"application/json",
+ "X-Matrix-OpenID-Token"=>"matrix-openid-token",
+ "X-Matrix-Server-Name"=>"matrix.dev.service-ti.de"
+}
+----
+
+=== CR_002 - Verhinderung der unauthorisierten Bestellung eines Messenger-Services
+Es ist technisch abgesichert, dass ein Messenger-Service nur bestellt werden kann, wenn der Besitz einer SMC-B nachgewiesen wurde. In einer Organisation des Gesundheitswesens kann es jedoch sein, dass Mitarbeiter unauthorisiert einen Messenger-Service bestellen. Es fehlt eine ergänzende Regelung, die eine unauthorisierte Bestellung eines Messenger-Service verhindert.
+
+*Lösungsidee:* Ein Messenger-Service kann, wie bisher spezifiziert, von einer Organisation des Gesundheitswesens bestellt werden. Der Vertrag über den bestellten Messenger-Service wird per Post an eine verifizierte Adresse der Organisation (z. B. durch Abfrage des FHIR-Directories ermittelte Anschrift der Organisation) gesendet. Erst nach Eingang des unterzeichneten Vertrages beim TI-Messenger-Anbieter wird der Messenger-Service aktiviert.
+
+=== CR_003 - Signatur der Föderationsliste
+In der aktuellen Spezifikation ist eine Signatur der Föderationsliste festgelegt. Die Signatur war bisher noch nicht in der OpenAPI Definition der Schnittstelle `I_VZD_TIM_Provider_Services` berücksichtigt. Dies wurde in der https://raw.githubusercontent.com/gematik/api-vzd/develop/src/openapi/I_VZD_TIM_Provider_Services.yaml[I_VZD_TIM_Provider_Services] in der Version 1.2.0 angepasst. Durch diese Änderung wurde es erforderlich die Struktur der Föderationsliste in einem JSON Schema festzulegen, da die Struktur nicht mehr in der OpenAPI Definition sichtbar ist (siehe hierzu bitte: https://github.com/gematik/api-vzd/blob/develop/src/schema/FederationList.json[JSON-Schema der Föderationsliste].
+
+=== CR_004 - Nachweis des Besitzes einer SMC-B beim Bestellprozess eines Messenger-Services
+
+Es wird vorgeschlagen, dass anstatt einer OIDC-Authentifizierung zum Nachweis des Besitzes einer SMC-B auch ein KIM-basiertes Verfahren genutzt werden kann.
+
+*Möglicher Ablauf:* +
+Im Bestellvorgang wird der Akteur (Org-Admin) darauf hingewiesen, dass ein Messenger-Service nur von einer verifizierten Organisation des Gesundheitswesens bestellt werden kann und daher eine Authentifizierung notwendig ist. Der Org-Admin wird aufgefordert seine KIM Mail-Adresse in eine Eingabemaske einzutragen. Der Registrierungs-Dienst fragt im VZD die `telematikID` sowie die `professionOID` zur angegebenen KIM-Adresse ab und prüft die `professionOID` (muss zu einer Organisation des Gesundheitswesens gehören). Der Registrierungs-Dienst sendet dem Akteur eine KIM-Nachricht mit einer URL an die angegebene KIM-Adresse und fordert den Org-Admin auf, die KIM-Nachricht zu öffnen und die darin befindliche URL zu öffnen. Durch das Öffnen des Links wird der Akteur wieder in den Bestellprozess zurückgeführt und die Authentisierung ist abgeschlossen (weil durch das Öffnen der KIM-Nachricht nachgewiesen ist, dass die E-Mail erfolgreich entschlüsselt werden konnte, was nur mit dem privaten Schlüssel der SMC-B möglich ist).
+
+*Rahmenbedingungen:* +
+TI-Messenger Anbieter benötigen für das oben vorgestellte Verfahren eine SMC-B Org sowie einen Konnektor und ein eHealth Kartenterminal. Die gematik wird die Voraussetzungen schaffen, dass TI-Messenger Anbieter auch eine SMC-B Org erhalten können.
+
+=== CR_005 - Authentisierung am FHIR-Directory /owner-authenticate Endpoint
+Bei der Authentisierung von Organisationen vertreten durch den Org-Admin am */owner-authenticate* Endpoint ist bisher vorgesehen, dass eine Authentisierung des Org-Admins mit Hilfe des TI-Messenger Registrierungs-Dienstes erfolgt und dass im zweiten Schritt eine SMC-B Authentisierung mittels OpenID-Connect erforderlich ist.
+
+Da ein Org-Admin-Account am Registrierungs-Dienst nur angelegt werden kann, wenn eine erfolgreiche Authentisierung einer Organisation mit Hilfe einer SMC-B durchgeführt wurde, ist eine erneute SMC-B Authentifizierung am FHIR-Directory nicht mehr erforderlich. Dies trifft zu, wenn das FHIR-Directory den Registrierungs-Diensten aller TI-Messenger-Anbieter vertraut und wenn die erforderlichen Daten (`telematikID` und `professionOID`) im *id_token* des Registrierungs-Denstes enthalten sind.
+
+Das Vertrauen zu den Registrierungsdiensten der TI-Messenger Anbieter wird hergestellt, wenn die TI-Messenger Anbieter Credentials beim FHIR-Directory für die Schnittstelle I_VZD_TIM_Provider_Services beantragen. Dabei übergibt der TI-Messenger Anbieter den hash des Signatur-Zertifikats, das für die Signatur des id_tokens verwendet wird an das FHIR-Directory.
+
+Der Org-Admin kann sich nach erfolgreicher Authentisierung
+Das vom Registrierungsdienst ausgestellte id_token wird durch das FHIR-Directory geprüft (Algorithmus, Signatur, Signaturzertifikat (Zertifikatstyp, technische Rolle, hash des Zertifikats)). Das zur Signatur des id_token verwendete Zertifikat muss aus der Komponenten-PKI der TI stammen (Zertifikatstyp C.FD.SIG, technische Rolle oid_tim). Das Zertifikat kann vom TI-Messenger Anbieter über einen Service der TI-Komponenten-PKI erzeugt werden. Der TI-Messenger Anbieter muss auch einen Download-Punkt für das Zertifikat bereitstellen, damit das FHIR-Directory für die Signaturprüfung des id_tokens, Zugriff auf das Zertifikat erhält.
+
+.Vereinfachter Ablauf zur Änderung der Einträge im FHIR-Directory
+image::diagrams/architecture/SequenceDiagram.FHIR-Directory.owner.svg[SequenceDiagram.FHIR-Directory.owner]
+
+Im Sequenzdiagramm ist dargestellt, dass für die Authentisierung des Org-Admin am Auth-Service nur noch das *id_token* vom Registrierungs-Dienst benötigt wird.
+
+Für Nutzer eines HBAs ändert sich nichts. Das heißt der `/owner-authenticate` Endpoint des Auth-Service unterstützt den OIDC Authorization Code Flow. Daher ist es möglich am Registrierungs-Dienst auch den Authentication Endpoint und den Token Endpoint eines IDP zu implementieren, um für Org-Admins den OIDC Authorization Code Flow verwenden zu können.
+
+*Aufbau des id_tokens*
+[source, ruby]
+----
+HEADER
+{
+  "alg": "RS256",
+  "typ": "JWT"
+  "x5u": "https://example.de/<certhash>"
+}
+PAYLOAD
+{
+  "sub": "1234567890",
+  "iss": "<url des Registrierungs-Dienst-Endpunkts, über den das Token ausgestellt wurde>",
+  "aud": "https://vzd-fhir-directory.vzd.ti-dienste.de/owner-authenticate",
+  "professionOID": "1.2.276.0.76.4.53",
+  "idNummer": "5-234567890",
+  "iat": "1516239022",
+  "exp": "1516239022"
+}
+----
+
+Die telematikID ist im Attribut "idNummer" angegeben.
+
+=== CR_006 - Prüfung auf Föderationszugehörigkeit
+Zur Prüfung der Föderationszugehörigkeit ist es ausreichend, wenn am Messenger-Proxy im Authorization-Header die "origin" bei eingehender und "destination" bei ausgehender Föderation geprüft werden. Siehe auch https://spec.matrix.org/latest/server-server-api/#authentication[Matrix Specification
+Server-Server API Authentication].
+
+=== CR_007 - Änderung der Prüfverfahren
+
+Im Produkttypsteckbrief des TI-Messenger-Clients sind viele Anforderungen dem Prüfverfahren Produktgutachten zugeordnet. Ein Produktgutachten ist jedoch sehr aufwändig und damit teuer. Die Anforderungen wurden durch die gematik neu bewertet und in den meisten Fällen einem anderen Prüfverfahren zugeordnet. Dadurch ist es gelungen, dass kein Produktgutachten durch die TI-Messenger Hersteller in Auftrag gegeben werden muss.
+
+Die Änderungen an den Anforderungen sind hier zusammengefasst.
+
+.*Neuzuordnung des Prüfverfahren*
+[cols="1,1,1,4"]
+|===
+|*Anforderung*|*Dokument*|*bisheriges Prüfverfahren*|*Änderung*
+
+|A_17124 TLS-Verbindungen (ECC-Migration)
+|gemSpec_Krypt
+|Produktgutachten
+|Das Prüfverfahren wird geändert in *Herstellererklärung*. Es muss durch den Hersteller dokumentiert werden, wie und wo die Umsetzung erfolgt ist. Der Test der Anforderung lässt sich mit der PKI Test-Suite automatisieren.
+
+|A_18464 TLS-Verbindungen, nicht Version 1.1
+|gemSpec_Krypt
+|Produktgutachten
+|Das Prüfverfahren wird geändert in *Herstellererklärung*. Es muss durch den Hersteller dokumentiert werden, wie und wo die Umsetzung erfolgt ist. Der Test der Anforderung lässt sich mit der PKI Test-Suite automatisieren.
+
+|A_18467 TLS-Verbindungen, Version 1.3
+|gemSpec_Krypt
+|Produktgutachten
+|Das Prüfverfahren wird geändert in *Herstellererklärung*. Es muss durch den Hersteller dokumentiert werden, wie und wo die Umsetzung erfolgt ist. Der Test der Anforderung lässt sich mit der PKI Test-Suite automatisieren.
+
+|A_21275-01 TLS-Verbindungen, zulässige Hashfunktionen bei Signaturen im TLS-Handshake
+|gemSpec_Krypt
+|Produktgutachten
+|Das Prüfverfahren wird geändert in *Herstellererklärung*. Es muss durch den Hersteller dokumentiert werden, wie und wo die Umsetzung erfolgt ist. Der Test der Anforderung lässt sich mit der PKI Test-Suite automatisieren.
+
+|GS-A_4359 X.509-Identitäten für die Durchführung einer TLS-Authentifizierung
+|gemSpec_Krypt
+|Produktgutachten
+|Das Prüfverfahren wird geändert in *Herstellererklärung*. Es muss durch den Hersteller dokumentiert werden, wie und wo die Umsetzung erfolgt ist. Der Test der Anforderung lässt sich mit der PKI Test-Suite automatisieren.
+
+|GS-A_4367 Zufallszahlengenerator
+|gemSpec_Krypt
+|Produktgutachten
+|Das Prüfverfahren wird geändert in *Herstellererklärung*. Es muss durch den Hersteller dokumentiert werden, wie und wo die Umsetzung erfolgt ist.
+
+|GS-A_4368 Schlüsselerzeugung
+|gemSpec_Krypt
+|Produktgutachten
+|Das Prüfverfahren wird geändert in *Herstellererklärung*. Es muss durch den Hersteller dokumentiert werden, wie und wo die Umsetzung erfolgt ist.
+
+|GS-A_4387 TLS-Verbindungen, nicht Version 1.0
+|gemSpec_Krypt
+|Produktgutachten
+|Das Prüfverfahren wird geändert in *Herstellererklärung*. Es muss durch den Hersteller dokumentiert werden, wie und wo die Umsetzung erfolgt ist. Der Test der Anforderung lässt sich mit der PKI Test-Suite automatisieren.
+
+|GS-A_5035 Nichtverwendung des SSL-Protokolls
+|gemSpec_Krypt
+|Produktgutachten
+|Das Prüfverfahren wird geändert in *Herstellererklärung*. Es muss durch den Hersteller dokumentiert werden, wie und wo die Umsetzung erfolgt ist. Der Test der Anforderung lässt sich mit der PKI Test-Suite automatisieren.
+
+|GS-A_5322 Weitere Vorgaben für TLS-Verbindungen
+|gemSpec_Krypt
+|Produktgutachten
+|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*. Der Test der Anforderung lässt sich mit der PKI Test-Suite automatisieren.
+
+|GS-A_4384-01 TLS-Verbindungen
+|gemSpec_Krypt
+|Produktgutachten
+|Ersetzt die alte Version von GS-A_4384. Das Prüfverfahren wird geändert in *Sicherheitsgutachten*. Der Test der Anforderung lässt sich mit der PKI Test-Suite automatisieren.
+
+|GS-A_4385 TLS-Verbindungen, Version 1.2
+|gemSpec_Krypt
+|Produktgutachten
+|Das Prüfverfahren wird geändert in *Herstellererklärung*. Es muss durch den Hersteller dokumentiert werden, wie und wo die Umsetzung erfolgt ist. Der Test der Anforderung lässt sich mit der PKI Test-Suite automatisieren.
+
+|GS-A_5339 TLS-Verbindungen, erweiterte Webbrowser-Interoperabilität
+|gemSpec_Krypt
+|Produktgutachten
+|Die Anforderung *entfällt*.
+
+|GS-A_5526 TLS-Renegotiation-Indication-Extension
+|gemSpec_Krypt
+|Produktgutachten
+|Das Prüfverfahren wird geändert in *Herstellererklärung*. Es muss durch den Hersteller dokumentiert werden, wie und wo die Umsetzung erfolgt ist. Der Test der Anforderung lässt sich evtl. mit der PKI Test-Suite automatisieren.
+
+|A_22718 Mandantenfähigkeit von TI-Messenger-Clients
+|gemSpec_TI-Messenger-Client
+|Produktgutachten
+|Die Anforderung *entfällt*.
+
+|A_22723 Versand von Dateien mittels Matrix
+|gemSpec_TI-Messenger-Client
+|Produktgutachten
+|Das Prüfverfahren wird geändert in *Herstellererklärung*. Es muss durch den Hersteller dokumentiert werden, wie und wo die Umsetzung erfolgt ist. Die Anforderung wird in zwei Anforderungen aufgeteilt (AV-Scanner, ausführbarer Code als eigene Afo).
+
+|A_22724 Abschottung der Inhalte im TI-Messenger-Client
+|gemSpec_TI-Messenger-Client
+|Produktgutachten
+|Das Prüfverfahren wird geändert in *Herstellererklärung*. Es muss durch den Hersteller dokumentiert werden, wie und wo die Umsetzung erfolgt ist.
+
+|A_22793 Ende-zu-Ende Verschlüsselung
+|gemSpec_TI-Messenger-Client
+|Produktgutachten
+|Das Prüfverfahren wird geändert in *Herstellererklärung*. Es muss durch den Hersteller dokumentiert werden, wie und wo die Umsetzung erfolgt ist. Der Test der Anforderung lässt sich mit der Referenzimplementierung automatisieren.
+
+|A_22795 Einbringung und Speicherung von Schlüsseln und Token
+|gemSpec_TI-Messenger-Client
+|Produktgutachten
+|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*.
+
+|A_22798 Privacy by Default
+|gemSpec_TI-Messenger-Client
+|Produktgutachten
+|Die Anforderung *entfällt*.
+
+|A_22799 Verwendung von OWASP Mobile
+|gemSpec_TI-Messenger-Client
+|Produktgutachten
+|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*. Inhaltlich wird die Anforderung geprüft, da einige Zuordnungen zu BSI Vorgaben nicht korrekt zu sein scheinen.
+
+|A_22800 Sicherheitsrisiken von Software Bibliotheken minimieren
+|gemSpec_TI-Messenger-Client
+|Produktgutachten
+|Das Prüfverfahren wird geändert in *Herstellererklärung*. Es muss durch den Hersteller dokumentiert werden, wie und wo die Umsetzung erfolgt ist.
+
+|A_22937 Einsatz nur von auditierter Verschlüsselung
+|gemSpec_TI-Messenger-Client
+|Produktgutachten
+|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*.
+
+|A_22955 Anforderungen-Gutachten aus der Konferenz der unabhängigen Datenschutzaufsichtsbehörden
+|gemSpec_TI-Messenger-Client
+|Produktgutachten
+|Die Anforderung *entfällt*.
+
+|A_22964 Zugriffsschutz auf Administrationsfunktionen
+|gemSpec_TI-Messenger-Client
+|Produktgutachten
+|Die Anforderung *entfällt*.
+
+|A_23114 App-Sperre TI-Messenger-Client
+|gemSpec_TI-Messenger-Client
+|Produktgutachten
+|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*.
+
+|A_23130 Nutzung von Daten durch Drittsysteme
+|gemSpec_TI-Messenger-Client
+|Produktgutachten
+|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*.
+
+|A_23115 Prüfung Device Integrität
+|gemSpec_TI-Messenger-Client
+|Produktgutachten
+|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*. Der zweite Satz der Anforderung wird gestrichen und als Hinweis aufgenommen.
+|===
