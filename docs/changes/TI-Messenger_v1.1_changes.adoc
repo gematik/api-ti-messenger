@@ -77,7 +77,7 @@ Bei der Authentisierung von Organisationen vertreten durch den Org-Admin am */ow
 - Mit dem id_token im Authentication Header ruft der Org-Admin-Client den */owner-authenticate* Endpoint am FHIR-Directory auf.
 - Nach Prüfung des id_token durch das FHIR-Directory wird der Org-Admin-Client zum Authorization Endpoint des IDP umgeleitet und damit eine OIDC Authentisierung eingeleitet.
 
-*Optimierung*
+*Optimierung* +
 Da ein Org-Admin-Account am Registrierungs-Dienst nur angelegt werden kann, wenn eine erfolgreiche Authentisierung einer Organisation mit Hilfe einer SMC-B durchgeführt wurde, ist eine erneute SMC-B Authentifizierung am FHIR-Directory nicht mehr erforderlich. Dies trifft zu, wenn das FHIR-Directory den Registrierungs-Diensten aller TI-Messenger-Anbieter vertraut und wenn die erforderlichen Daten (`telematikID` und `professionOID`) im *id_token* des Registrierungs-Denstes enthalten sind.
 
 Das Vertrauen zu den Registrierungsdiensten der TI-Messenger Anbieter wird hergestellt, wenn die TI-Messenger Anbieter Credentials beim FHIR-Directory für die Schnittstelle I_VZD_TIM_Provider_Services beantragen. Dabei übergibt der TI-Messenger Anbieter den hash des Signatur-Zertifikats, das für die Signatur des id_tokens verwendet wird an das FHIR-Directory.
