@@ -6,7 +6,7 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 
-:imagesdir: /images/
+:imagesdir: ./images/
 = TI Messenger Documentation
 
 image::gematik_logo.svg[gematik,width="70%"]
@@ -39,7 +39,7 @@ The following picture gives an overview of the system architecture of the TI-Mes
 
 ++++
 <p align="left">
-  <img width="100%" src=/images/System_overview.png>
+  <img width="100%" src=./images/System_overview.png>
 </p>
 ++++
 
