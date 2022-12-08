@@ -71,8 +71,13 @@ Im Bestellvorgang wird der Akteur (Org-Admin) darauf hingewiesen, dass ein Messe
 TI-Messenger Anbieter benötigen für das oben vorgestellte Verfahren eine SMC-B Org sowie einen Konnektor und ein eHealth Kartenterminal. Die gematik wird die Voraussetzungen schaffen, dass TI-Messenger Anbieter auch eine SMC-B Org erhalten können.
 
 === CR_005 - Authentisierung am FHIR-Directory /owner-authenticate Endpoint
-Bei der Authentisierung von Organisationen vertreten durch den Org-Admin am */owner-authenticate* Endpoint ist bisher vorgesehen, dass eine Authentisierung des Org-Admins mit Hilfe des TI-Messenger Registrierungs-Dienstes erfolgt und dass im zweiten Schritt eine SMC-B Authentisierung mittels OpenID-Connect erforderlich ist.
+Bei der Authentisierung von Organisationen vertreten durch den Org-Admin am */owner-authenticate* Endpoint ist bisher folgernder Ablauf vorgesehen:
 
+- Der Org-Admin-Client führt nach dem *login* des Org-Admins am TI-Messenger Registrierungsdienst ein */request_token* aus. Als Ergebnis erhält der Org-Admin-Client ein id_token.
+- Mit dem id_token im Authentication Header ruft der Org-Admin-Client den */owner-authenticate* Endpoint am FHIR-Directory auf.
+- Nach Prüfung des id_token durch das FHIR-Directory wird der Org-Admin-Client zum Authorization Endpoint des IDP umgeleitet und damit eine OIDC Authentisierung eingeleitet.
+
+*Optimierung*
 Da ein Org-Admin-Account am Registrierungs-Dienst nur angelegt werden kann, wenn eine erfolgreiche Authentisierung einer Organisation mit Hilfe einer SMC-B durchgeführt wurde, ist eine erneute SMC-B Authentifizierung am FHIR-Directory nicht mehr erforderlich. Dies trifft zu, wenn das FHIR-Directory den Registrierungs-Diensten aller TI-Messenger-Anbieter vertraut und wenn die erforderlichen Daten (`telematikID` und `professionOID`) im *id_token* des Registrierungs-Denstes enthalten sind.
 
 Das Vertrauen zu den Registrierungsdiensten der TI-Messenger Anbieter wird hergestellt, wenn die TI-Messenger Anbieter Credentials beim FHIR-Directory für die Schnittstelle I_VZD_TIM_Provider_Services beantragen. Dabei übergibt der TI-Messenger Anbieter den hash des Signatur-Zertifikats, das für die Signatur des id_tokens verwendet wird an das FHIR-Directory.
