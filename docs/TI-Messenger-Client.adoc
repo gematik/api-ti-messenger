@@ -164,7 +164,7 @@ The TI-Messenger-Client triggers an OAUTH2 authorization request to the authoriz
 The following table contains the gematik documents referenced in this online documentation. For the version number valid for this document, please refer to the current document map published on the gematik website, in which the present version is listed.
 
 |===
-|[Quelle] |Publisher: Title
+|[Source] |Editor: Title
 
 |*[Client-Server API]* | https://spec.matrix.org/latest/client-server-api/
 |*[API Playground]* | https://matrix.org/docs/api/#overview
