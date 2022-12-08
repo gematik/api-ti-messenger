@@ -1,0 +1,50 @@
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+:imagesdir: ../../images
+
+image:gematik_logo.svg[width=70%]
+
+=== AF_10057 Signing in to messenger service
+With this use case, an actor logs in to a messenger service responsible for the TI federation and registers their TI-Messenger client as the end device. The actor MUST be able to enter the Matrix domain of the desired messenger service directly into the TI-Messenger client. The input MAY be automated or supported by other tools such as a QR code scan. The authentication is performed according to the specifications of the respective organisation. After the successful login of an actor to the messenger service, the services offered by it MAY be used.
+
+.use case description
+[%collapsible%open]
+====
+[caption=]
+Signing in to messenger service
+[%header, cols="1,1"]
+|===
+| |description
+|Actor |Service provider, employee of an organisation in the "User/User-HBA" role
+|Trigger |An actor wants to register with a messenger service with their TI-Messenger client.
+|Components a|
+              * TI-Messenger-Client,
+              * Messenger proxy,
+              * Messenger home server, 
+              * Auth service (FHIR directory)
+|Preconditions a| 
+                  * The actor has a TI-Messenger client supported by the provider. 
+                  *	The actor knows the messenger service URL or the URL is already configured in their TI-Messenger client.
+                  *	The actor can identify themselves through an authentication process supported by the Matrix home server. If a separate authentication procedure is used by the organisation, a connection to the Matrix home server MUST have been made.
+                  *	The Matrix home server used is integrated into the federation (valid messenger service).
+|Input data |URL of the matrix home server
+|Result a|
+            A TI-Messenger account was created for an actor in the "User/User-HBA" role
+|Output data |Matrix-ACCESS_TOKEN, MXID, device_id, status
+|===
+====
+.sequence diagram 
+[%collapsible%open]
+====
+++++
+<p align="center">
+  <img width="55%" src=../../images/diagrams/TI-Messenger-Dienst/Ressourcen/UC_10057_Seq.svg>
+</p>
+++++
+====

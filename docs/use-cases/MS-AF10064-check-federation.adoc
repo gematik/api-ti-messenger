@@ -7,14 +7,12 @@ ifdef::env-github[]
 endif::[]
 
 :imagesdir: ../../images
-:toc: macro
-:toclevels: 3
-:toc-title: table of content
-:numbered:
 
 image:gematik_logo.svg[width=70%]
 
 === AF_10064 Check federation affiliation of a messenger service
+This use case checks whether a messenger service is part of the TI-Messenger federation and applies to all use cases that have to check the Matrix domain of another messenger service. For checking the affiliation of the Matrix domain with the TI-Messenger federation, the messenger proxy uses a federation list that is provided by the registration service of its TI-Messenger specialist service. The storage time of the messenger proxy federation list is limited.
+
 .use case description
 [%collapsible%open]
 ====
@@ -23,7 +21,7 @@ Check federation affiliation of a messenger service
 [%header, cols="1,1"]
 |===
 | |description
-|Actor |-
+|Actor |System
 |Trigger |The messenger proxy receives an Invite event and MUST check the MXIDs included in the request for domain belonging to the TI-Messenger federation.
 |Components a|
               * Messenger proxy,

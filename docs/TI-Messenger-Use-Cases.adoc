@@ -1,0 +1,63 @@
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+:imagesdir: ../images
+:toc: macro
+:toclevels: 3
+:toc-title: table of content
+:numbered:
+
+:usecasedir: use-cases
+
+image:gematik_logo.svg[width=70%]
+
+toc::[]
+
+= Use-Cases
+This page shall give the reader an overview of the most common use-cases for the TI-Messenger. Besides the introduction every chapter contains a link to a detailed use case description and a sequence diagram visualizing the interaction between the involved components.
+
+TIP: The service calls in the sequence diagrams may not include all parameters needed for the call. 
+     The sequence diagrams might also not include all failure cases. They focus on the most common failures for each individual use-case. 
+
+== Messenger service
+To start exchanging messages with other users the organisation needs a messenger service offered by the selected provider. The following use cases explain the provisioning of a messenger service, the federation checks, the management of the federation list and the different levels of authorization checks. 
+
+link:{usecasedir}/MS-AF10103-authenticate-organization.adoc[AF_10103 Authentication of an organisation on the TI-Messenger service ]
+
+link:{usecasedir}/MS-AF10060-provision-messenger-service.adoc[AF_10060 Provision of messenger service to an organisation ]
+
+link:{usecasedir}/MS-AF10064-check-federation.adoc[AF_10064 Check federation affiliation of a messenger service ]
+
+link:{usecasedir}/MS-update-federation-list.adoc[Update federation list ]
+
+link:{usecasedir}/MS-authorization-check.adoc[Authorization check ]
+
+== VZD Resource management
+The VZD-FHIR directory is the main address book for organizations and people in the german healtcare system. The following use cases explain in details what is needed to change the organization or practitioner information in the VZD-FHIR directory. The last use case describes the search in the VZD-FHIR directory
+
+link:{usecasedir}/VZD-AF10059-add-organization.adoc[AF_10059 Add organisation resources to directory service]
+
+link:{usecasedir}/VZD-AF10058-add-practitioner.adoc[AF_10058 Akteur (User-HBA) im Verzeichnisdienst hinzufügen]
+
+link:{usecasedir}/VZD-search.adoc[Search Entries in the VZD-FHIR directory]
+
+== User communication
+The following use cases describe the sign in workflow, the invitation of other users and the exchange of events. Both the invitations and the event exchange are explained from 2 perspectives. The first focusses on communication within an organization the second perspective shows the workflows for a communication with more than one home server involved.
+
+link:{usecasedir}/COM-AF10057-sign-in.adoc[AF_10057 Signing in to messenger service]
+
+link:{usecasedir}/COM-AF10104-invite-within.adoc[AF_10104 Invitation of actors within an organisation]
+
+link:{usecasedir}/COM-AF10063-events-within.adoc[AF_10063 Exchange of events between actors within an organisation]
+
+link:{usecasedir}/COM-AF10061-invite-outside.adoc[AF_10061 Invitation of actors outside an organisation]
+
+link:{usecasedir}/COM-AF10062-events-outside.adoc[AF_10062 Exchange of events between actors outside an organisation]
+
+
+

@@ -1,0 +1,52 @@
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+:imagesdir: ../../images
+
+image:gematik_logo.svg[width=70%]
+
+=== Search Entries in the VZD-FHIR directory
+The following figure describes how an actor searches for HealthcareService and PractitionerRole resources in the VZD-FHIR directory. This requires a successful login of the actor to a messenger service. The shown procedure displays all communication relationships that are necessary in principle. Further information on the procedure can be found in [gemSpec_VZD_FHIR_Directory].
+
+.use case description
+[%collapsible%open]
+====
+[caption=]
+Search Entries in the VZD-FHIR directory
+[%header, cols="1,1"]
+|===
+| |description
+|Actor |a user in the role "User/User-HBA"
+|Trigger |An actor in the "User"/"User-HBA" role want to search in the FHIR-VZD
+|Components a|
+              * TI-Messenger-Client,
+              * messenger proxy,
+              * Matrix-Homeserver
+              * FHIR Proxy, 
+              * Auth service,
+              * VZD-FHIR directory,
+|Preconditions a| 
+                  * The actor is logged in to a valid messenger service (see AF_10057). 
+                  *	The actor has an approved TI-Messenger client.
+                  * The Matrix Home Server is a trusted IDP
+                  * The actor can authenticate themselves using the matrix OpenID Token
+|Input data |Search, Matrix OpenID Token
+|Result a|The searched FHIR-Resources
+|Output data |FHIR Records
+|===
+
+====
+.sequence diagram
+[%collapsible%open]
+====
+++++
+<p align="center">
+  <img width="55%" src=../../images/diagrams/TI-Messenger-Dienst/Ressourcen/UC_Directory_search_Seq.svg>
+</p>
+++++
+====

@@ -7,20 +7,17 @@ ifdef::env-github[]
 endif::[]
 
 :imagesdir: ../../images
-:toc: macro
-:toclevels: 3
-:toc-title: table of content
-:numbered:
 
 image:gematik_logo.svg[width=70%]
 
-=== AF_10060 Provision of messenger service to an organisation
+=== AF_10059 Add organisation resources to directory service
+With the aquisition of the SMC-B an entry for the organisation will be created in the VZD-FHIR directory by the [TODO]. 
 
 .use case description
 [%collapsible%open]
 ====
 [caption=]
-Provision of messenger service to an organisation
+Add organisation resources to directory service
 [%header, cols="1,1"]
 |===
 | |description
@@ -46,12 +43,13 @@ Provision of messenger service to an organisation
 |Output data |New messenger service for the organisation, status
 |===
 ====
+
 .sequence diagram 
 [%collapsible%open]
 ====
 ++++
 <p align="center">
-  <img width="60%" src=../images/diagrams/TI-Messenger-Dienst/Ressourcen/UC_10060_Seq.svg>
+  <img width="60%" src=../../images/diagrams/TI-Messenger-Dienst/Ressourcen/UC_10059_Seq.svg>
 </p>
 ++++
 ====

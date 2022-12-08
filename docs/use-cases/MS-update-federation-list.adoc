@@ -1,0 +1,45 @@
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+:imagesdir: ../../images
+
+image:gematik_logo.svg[width=70%]
+
+===  Update federation list
+The following figure describes how the messenger proxy updates its locally maintained federation list. To update the federation list, the messenger proxy MUST request it from the registration service of its TI-Messenger specialist service. The frequency of requesting a new list is determined by the provider, the goal should be to have a federation list as up-to-date as possible (but at least once a day). Here, the messenger proxy transfers the saved version of the federation list to the registration service. If the version matches, no new federation list will be provided by the registration service for the messenger proxy. If the version is larger than the one passed by the messenger proxy, an updated federation list is provided by the registration service. Each time a messenger proxy is requested from the registration service for a current federation list, the registration service MUST also check the up-to-dateness of the FHIR proxy by handing over the version of the federation list it has saved when calling the FHIR proxy. A download of the federation list is only necessary if a newer version exists on the FHIR proxy. The structure of the federation list is described in [gemSpec_VZD_FHIR_Directory]. After retrieving the federation list from the registration service, through the messenger proxy, the latter MUST check the signature of the federation list. 
+
+.use case description
+[%collapsible%open]
+====
+[caption=]
+update of the federation list
+[%header, cols="1,1"]
+|===
+| |description
+|Actor |System
+|Trigger |-
+|Components a|
+              * Messenger proxy,
+              * registration service,
+              * FHIR-proxy
+              * Auth-Service VZD 
+|Preconditions a| none
+|Input data |actual version number
+|Result a|The messenger proxy retrieves a status if the current list is not outdated or a new federation list in case the proxy owns an older one
+|Output data |status, federation list
+|===
+====
+.sequence diagram 
+[%collapsible%open]
+====
+++++
+<p align="center">
+  <img width="60%" src=../../images/diagrams/TI-Messenger-Dienst/Ressourcen/UC_Update_Federationlist_Seq.svg>
+</p>
+++++
+====

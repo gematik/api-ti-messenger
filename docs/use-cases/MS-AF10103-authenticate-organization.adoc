@@ -11,6 +11,19 @@ endif::[]
 image:gematik_logo.svg[width=70%]
 
 === AF_10103 Authentication of an organisation on the TI-Messenger service 
+In case the organization has never been authenticated at the registration service, this is the first step that has to be taken. First the user has to identify that he acts in place of a valid organization in the german healthcare system. To do so the organization's SMC-B is needed to answer the authentication challenge of the central IDP-Service. 
+Next to the SMC-B the user who is starting the process needs: 
+[square]
+* access to the frontend of the registration service
+* the registration service frontend is registered at the central IDP-Service
+* a connector that is connected to the gematik network
+* a card terminal for the organization's SMC-B connected to the connector
+* an authenticator is available for the data exchange with the connector 
+* the SMC-B is plugged in the card terminal and unlocked
+* a valid domain for the TI-Messenger-Dienst
+
+After a successful Authentication with the SMC-B an Admin Account can be created and used to create a TI-Messenger Fachdienst for the organization. +
+
 .use case description
 [%collapsible%open]
 ====
@@ -27,7 +40,7 @@ image:gematik_logo.svg[width=70%]
               * IDP-Dienst
               * VZD Auth service
               * FHIR proxy
-              * FHIR directory
+              * VZD-FHIR directory
 |Preconditions a| 
                   * A messenger service was provided to the organisation and a FHIR resource was created in the VZD-FHIR directory.
                   * The organisation administrator has a TI-Messenger client (with advanced Org Admin functionality).

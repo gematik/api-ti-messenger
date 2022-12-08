@@ -91,22 +91,23 @@ The table below contains the gematik documents on the telematics infrastructure 
 
 == Additional pages
 *Use cases* +
-link:docs/use-cases.adoc[- Use Cases and sequence diagrams] 
+link:docs/TI-Messenger-Use-Cases.adoc[- Use Cases and sequence diagrams] 
 
 *Product types* +
-link:docs/KIM_API.adoc[- TI Messenger backend] +
-link:docs/Fachdienst.adoc[- TI Messenger Client] +
-link:docs/Verzeichnisdienst.adoc[- VZD-FHIR-Directory]
+link:docs/TI-Messenger-Fachdienst.adoc[- TI Messenger backend] +
+link:docs/TI-Messenger-Client.adoc[- TI Messenger Client] +
+link:docs/FHIR-Directory.adoc[- VZD-FHIR-Directory]
 
-*Primary system manufacturer Guideline* +
-link:docs/Primaersystem.adoc[- Health Professional Software] 
+*VZD-FHIR* +
+link:docs/FHIR-Directory-search-api.adoc[- VZD-FHIR Search] +
+link:docs/FHIR-Directory-owner-api.adoc[- VZD-FHIR Update] +
 
 *Miscellaneous* +
 link:docs/Authentisierung.adoc[- Authentisierung] +
 link:docs/faq.adoc[- Questions and answers on the current specification &#91;FAQ&#93;]
 
 *Reference implementations* +
-https://github.com/gematik/kim-attachment-service[-] +
+[coming soon]
 
 == License
 Copyright (c) 2022 gematik GmbH
