@@ -115,7 +115,7 @@ link:docs/TI-Messenger-Client.adoc[- TI-Messenger-Client] +
 link:docs/FHIR-Directory.adoc[- VZD-FHIR-Directory]
 
 *Miscellaneous* +
-link:docs/faq.adoc[- Questions and answers on the current specification &#91;Q&A&#93;]
+link:docs/Q&A.adoc[- Questions and answers on the current specification &#91;Q&A&#93;]
 
 *Reference implementations* +
 [coming soon]
