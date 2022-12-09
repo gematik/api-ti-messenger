@@ -9,7 +9,7 @@ endif::[]
 :imagesdir: ../images
 :toc: macro
 :toclevels: 3
-:toc-title: table of content
+:toc-title: Table of Contents
 :numbered:
 
 :usecasedir: use-cases
