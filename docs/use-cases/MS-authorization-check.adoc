@@ -11,7 +11,7 @@ endif::[]
 image:gematik_logo.svg[width=70%]
 
 === Authorisation check
-The following figure describes how to check the entitlement of incoming Matrix requests on the messenger proxy. The authorisation concept is based on a three-stage check, which is described in the "Authorisation concept" section. The mention of necessary authentications is omitted here.
+The following figure describes how to check the entitlement of incoming Matrix requests on the Messenger-Proxy. The authorisation concept is based on a three-stage check, which is described in the "Authorisation concept" section. The mention of necessary authentications is omitted here.
 
 .use case description
 [%collapsible%open]

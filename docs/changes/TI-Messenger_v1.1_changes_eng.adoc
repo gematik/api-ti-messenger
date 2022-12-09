@@ -66,27 +66,26 @@ In the current specification a signature of the federation list is defined but t
 It is proposed that instead of using OIDC authentication to prove possession of an SMC-B, a KIM-based workflow may be used.
 
 *Possible flow:* +
-In the ordering process, the actor (Org Admin) is informed that a TI-Messenger-Fachdienst can only be ordered by a verified healthcare organization and therefore authentication is required. The org admin is prompted to enter their KIM mail address into an input mask. The registration service queries the VZD-FHIR-directory for the `telematikID` as well as the `professionOID` for the given KIM address and checks the `professionOID` (must belong to a healthcare organization). The registration service sends the actor a KIM message with a URL to the specified KIM address and prompts the org admin to open the KIM message and open the URL therein. Opening the link returns the actor to the ordering process and authentication is complete (because opening the KIM message proves that the email could be successfully decrypted, which is only possible with the SMC-B private key).
+In the ordering process, the actor (Org-Admin) is informed that a TI-Messenger-Fachdienst can only be ordered by a verified healthcare organization and therefore authentication is required. The org admin is prompted to enter their KIM mail address into an input mask. The registration service queries the VZD-FHIR-directory for the `telematikID` as well as the `professionOID` for the given KIM address and checks the `professionOID` (must belong to a healthcare organization). The registration service sends the actor a KIM message with a URL to the specified KIM address and prompts the org admin to open the KIM message and open the URL therein. Opening the link returns the actor to the ordering process and authentication is complete (because opening the KIM message proves that the email could be successfully decrypted, which is only possible with the SMC-B private key).
 
 *Mandatory conditions:* +
 TI-Messenger providers require an SMC-B Org as well as a connector and an eHealth card terminal for the procedure presented above. gematik will create the conditions for TI-Messenger providers to also obtain an SMC-B Org.
 
 === CR_005 - Authentisierung am FHIR-Directory /owner-authenticate Endpoint
-Bei der Authentisierung von Organisationen vertreten durch den Org-Admin am */owner-authenticate* Endpoint ist bisher vorgesehen, dass eine Authentisierung des Org-Admins mit Hilfe des TI-Messenger Registrierungs-Dienstes erfolgt und dass im zweiten Schritt eine SMC-B Authentisierung mittels OpenID-Connect erforderlich ist.
+When authenticating organizations represented by the Org-Admin at the */owner-authenticate* endpoint, it has been provided up to now that an authentication of the Org-Admin is performed using the TI-Messenger registration service and that an SMC-B authentication using OpenID-Connect is required in the second step.
 
-Da ein Org-Admin-Account am Registrierungs-Dienst nur angelegt werden kann, wenn eine erfolgreiche Authentisierung einer Organisation mit Hilfe einer SMC-B durchgeführt wurde, ist eine erneute SMC-B Authentifizierung am FHIR-Directory nicht mehr erforderlich. Dies trifft zu, wenn das FHIR-Directory den Registrierungs-Diensten aller TI-Messenger-Anbieter vertraut und wenn die erforderlichen Daten (`telematikID` und `professionOID`) im *id_token* des Registrierungs-Denstes enthalten sind.
+Since an Org-Admin account can only be created at the Registration service if successful authentication of an organization using an SMC-B has been performed, a new SMC-B authentication at the VZD-FHIR-Directory is no longer required. This is true if the FHIR directory trusts the registration services of all TI messenger providers and if the required data (`telematikID` and `professionOID`) is included in the *id_token* of the registration service.
 
-Das Vertrauen zu den Registrierungsdiensten der TI-Messenger Anbieter wird hergestellt, wenn die TI-Messenger Anbieter Credentials beim FHIR-Directory für die Schnittstelle I_VZD_TIM_Provider_Services beantragen. Dabei übergibt der TI-Messenger Anbieter den hash des Signatur-Zertifikats, das für die Signatur des id_tokens verwendet wird an das FHIR-Directory.
+Trust to the TI-Messenger provider registration services is established when the TI-Messenger providers request credentials from the FHIR directory for the I_VZD_TIM_Provider_Services interface. In doing so, the TI-Messenger provider passes the hash of the signing certificate used to sign the id_token to the VZD-FHIR-Directory.
 
-Der Org-Admin kann sich nach erfolgreicher Authentisierung
-Das vom Registrierungsdienst ausgestellte id_token wird durch das FHIR-Directory geprüft (Algorithmus, Signatur, Signaturzertifikat (Zertifikatstyp, technische Rolle, hash des Zertifikats)). Das zur Signatur des id_token verwendete Zertifikat muss aus der Komponenten-PKI der TI stammen (Zertifikatstyp C.FD.SIG, technische Rolle oid_tim). Das Zertifikat kann vom TI-Messenger Anbieter über einen Service der TI-Komponenten-PKI erzeugt werden. Der TI-Messenger Anbieter muss auch einen Download-Punkt für das Zertifikat bereitstellen, damit das FHIR-Directory für die Signaturprüfung des id_tokens, Zugriff auf das Zertifikat erhält.
+The id_token issued by the registration service is verified by the VZD-FHIR-Directory (algorithm, signature, signing certificate (certificate type, technical role, hash of the certificate)). The certificate used to sign the id_token must come from the TI's component PKI (certificate type C.FD.SIG, technical role oid_tim). The certificate can be generated by the TI messenger provider via a service of the TI component PKI. The TI messenger provider must also provide a download point for the certificate so that the FHIR directory can access the certificate for signature verification of the id_token.
 
-.Vereinfachter Ablauf zur Änderung der Einträge im FHIR-Directory
+.Flow for changing VZD-FHIR-Directory entries
 image::diagrams/architecture/SequenceDiagram.FHIR-Directory.owner.svg[SequenceDiagram.FHIR-Directory.owner]
 
-Im Sequenzdiagramm ist dargestellt, dass für die Authentisierung des Org-Admin am Auth-Service nur noch das *id_token* vom Registrierungs-Dienst benötigt wird.
+The sequence diagram shows that only the *id_token* from the registration service is now required for authentication of the org admin at the auth service of the VZD-FHIR-Directory.
 
-Für Nutzer eines HBAs ändert sich nichts. Das heißt der `/owner-authenticate` Endpoint des Auth-Service unterstützt den OIDC Authorization Code Flow. Daher ist es möglich am Registrierungs-Dienst auch den Authentication Endpoint und den Token Endpoint eines IDP zu implementieren, um für Org-Admins den OIDC Authorization Code Flow verwenden zu können.
+Nothing changes for users of an HBA. This means that the `/owner-authenticate` endpoint of the Auth-Service supports the OIDC Authorization Code Flow. Therefore, it is possible to implement the authentication endpoint and the token endpoint of an IDP at the registration service as well in order to be able to use the OIDC authorization code flow for org admins.
 
 *Aufbau des id_tokens*
 [source, ruby]
@@ -109,15 +108,14 @@ PAYLOAD
 }
 ----
 
-Die telematikID ist im Attribut "idNummer" angegeben.
+The telematikID is defined in the attribute "idNummer".
 
-=== CR_006 - Prüfung auf Föderationszugehörigkeit
-Zur Prüfung der Föderationszugehörigkeit ist es ausreichend, wenn am Messenger-Proxy im Authorization-Header die "origin" bei eingehender und "destination" bei ausgehender Föderation geprüft werden. Siehe auch https://spec.matrix.org/latest/server-server-api/#authentication[Matrix Specification
-Server-Server API Authentication].
+=== CR_006 - federation checks
+To check the federation affiliation, it is sufficient to check the "origin" for incoming and "destination" for outgoing federation in the Authorization header at the messenger proxy. See also https://spec.matrix.org/latest/server-server-api/#authentication[Matrix Specification Server-Server API Authentication].
 
-=== CR_007 - Änderung der Prüfverfahren
+=== CR_007 - Prüfverfahren Changes
 
-Im Produkttypsteckbrief des TI-Messenger-Clients sind viele Anforderungen dem Prüfverfahren Produktgutachten zugeordnet. Ein Produktgutachten ist jedoch sehr aufwändig und damit teuer. Die Anforderungen wurden durch die gematik neu bewertet und in den meisten Fällen einem anderen Prüfverfahren zugeordnet. Dadurch ist es gelungen, dass kein Produktgutachten durch die TI-Messenger Hersteller in Auftrag gegeben werden muss.
+In the product type profile of the TI Messenger client, many requirements are assigned to the product expertise test procedure. However, a product expert opinion is very time-consuming and therefore expensive. The requirements were reassessed by gematik and in most cases assigned to a different test procedure. As a result, the TI Messenger manufacturers do not have to commission a product expert opinion.
 
 Die Änderungen an den Anforderungen sind hier zusammengefasst.
 
