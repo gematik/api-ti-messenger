@@ -9,7 +9,7 @@ endif::[]
 :imagesdir: ../images
 :toc: macro
 :toclevels: 5
-:toc-title: Inhaltsverzeichnis
+:toc-title: Table of Contents
 :numbered:
 
 image:gematik_logo.svg[width=70%]
