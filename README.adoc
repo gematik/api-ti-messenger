@@ -118,7 +118,7 @@ link:docs/FHIR-Directory.adoc[- VZD-FHIR-Directory]
 link:docs/Q&A.adoc[- Questions and answers on the current specification &#91;Q&A&#93;]
 
 *Reference implementations* +
-[coming soon]
+- [comming soon]
 
 == License
 Copyright (c) 2022 gematik GmbH
