@@ -23,19 +23,19 @@ image:https://img.shields.io/badge/TI&hyphen;Messenger&hyphen;Client-v1.1.0-gree
 == General
 ---
 
-⚠️ ***Planned changes for TI-Messenger-Dienst version v1.1:* link:docs/changes/TI-Messenger_v1.1_changes.adoc[TI-Messenger v1.1 changes].**
+⚠️ ***Planned change requests for:* link:docs/changes/TI-Messenger_v1.1_changes.adoc[TI-Messenger-Dienst v1.1].**
 
 ---
 
-The following documentation is based on the TI-Messenger-Dienst v1.1 specification according to *[gemSpec_TI-Messenger-Dienst]*. At this point, the components of the solution mentioned in the specification and their interfaces are presented and explained in order to provide manufacturers and providers with the best possible support. The range of functions of the TI Messenger in version 1.1 includes: +
+The following documentation is based on the TI-Messenger-Dienst v1.1 specification according to *[gemSpec_TI-Messenger-Dienst]*. At this point, the components of the solution mentioned in the specification and their interfaces are presented and explained in order to provide manufacturers and providers with the best possible support. The range of functions of the TI Messenger-Dienst v1.1 includes: +
 
 * the real-time communication between Healthcare Provider and Healthcare Provider Institution and
 * real-time communication directly between Healthcare Providers.
 
-💡 _With TI-Messenger-Dienst version v1.1 no insured persons can participate in the TI-Messenger service_
+💡 _With TI-Messenger-Dienst v1.1 no insured persons can participate in the TI-Messenger service_
 
 == System Overview
-The following picture gives an overview of the system architecture of the TI-Messenger-Dienst in version v1.1. The IDP services that are also necessary for the operation of the TI-Messenger service are not considered here.
+The following picture gives an overview of the system architecture of the TI-Messenger-Dienst v1.1. The IDP services that are also necessary for the operation of the TI-Messenger-Dienst are not considered here.
 
 ++++
 <p align="left">
@@ -43,24 +43,24 @@ The following picture gives an overview of the system architecture of the TI-Mes
 </p>
 ++++
 
-link:docs/TI-Messenger-Fachdienst.adoc[*TI Messenger backend*]
+link:docs/TI-Messenger-Fachdienst.adoc[*TI Messenger-Fachdienst*]
 
 * *Registrierungs-Dienst:* +
-The Registration Service offers two abstract interfaces. The `I_Registration` interface is called by the registration service frontend to authenticate an organization to the Registration Service and to administrate Messenger-Services. The `I_internVerfification` interface is called by the Messenger-Proxies to retrieve the federation list and to check for existing VZD-FHIR entries of the actors involved in an intended communication.
+The Registrierungs-Dienst offers two abstract interfaces. The interface `I_Registration` is called by the frontend of the Registrierungs-Dienst to authenticate an organization to the Registrierungs-Dienst and to administrate Messenger-Services. The interface `I_internVerfification` is called by the Messenger-Proxies to retrieve the federation list and to check for existing VZD-FHIR entries of the actors involved in an intended communication.
 
 * *Messenger-Service:* +
-A Messenger-Service consists of the sub-components Messenger-Proxy and a Matrix Homeserver. The sub-component  Matrix-Homeserver is based on the open communication protocol Matrix and offers the `Matrix-Client-Server API` and the `Matrix-Server-Server API`. Communication with a Matrix home server is always routed via the Messenger-Proxy, provided the authorization check was successful. This provides the interface `I_TiMessengerContactManagement` to enable the administration of an actor's release list (Freigabeliste).
+A Messenger-Service consists of the subcomponents Messenger-Proxy and a Matrix-Homeserver. The subcomponent Matrix-Homeserver is based on the open communication protocol Matrix and offers the `Matrix-Client-Server API` and the `Matrix-Server-Server API`. Communication with a Matrix-Homeserver is always routed via the Messenger-Proxy, provided the authorization check was successful. This provides the interface `I_TiMessengerContactManagement` to enable the administration of an actor's release list.
 
 * *Push-Gateway:* +
-The Push-Gateway provides the `Matrix-Push Gateway API` according to the Matrix specification. This enables notifications to be forwarded to actors in the TI Messenger Service.
+The Push-Gateway provides the `Matrix-Push Gateway API` according to the Matrix specification. This enables notifications to be forwarded to actors in the TI Messenger-Dienst.
 
-link:docs/TI-Messenger-Client.adoc[*TI Messenger Client*] +
+link:docs/TI-Messenger-Client.adoc[*TI Messenger-Client*] +
 
-* The TI-Messenger-Client is based on the `Matrix-Client-Server API`. It is expanded by further functional features and calls up the interfaces on the TI-Messenger-backend and on the VZD FHIR directory.
+* The TI-Messenger-Client is based on the `Matrix-Client-Server API`. It is expanded by further functional features and calls up the interfaces on the TI-Messenger-Fachdienst and on the VZD-FHIR--Directory.
 
 link:docs/FHIR-Directory.adoc[*VZD-FHIR-Directory*] +
 
-* The VZD-FHIR-Directory is a central TI directory service that enables organizations and actors in the TI-Messenger-Service to be searched throughout Germany. The VZD-FHIR-Directory is based on the FHIR standard and offers relevant interfaces for the TI-Messenger-Service. The `I_VZD_TiMessenger_services` interface is called by the Registration Service to download a federation list. The interfaces `tim-authenticate` and `owner-authenticate` are called by the TI messenger clients to enable a search or to make an entry in the VZD-FHIR directory.
+* The VZD-FHIR-Directory is a central TI-directory service that enables organizations and actors in the TI-Messenger-Dienst to be searched throughout Germany. The VZD-FHIR-Directory is based on the FHIR standard and offers relevant interfaces for the TI-Messenger-Dienst. The `I_VZD_TiMessenger_services` interface is called by the Registrierungs-Dienst to download a federation list. The interfaces `tim-authenticate` and `owner-authenticate` are called by the TI-Messenger-Clients to enable a search or to make an entry in the VZD-FHIR-Directory.
 
 == Folder structure
 The organization of the folder structure is shown below.
@@ -110,8 +110,8 @@ The table below contains the gematik documents on the telematics infrastructure 
 link:docs/TI-Messenger-Use-Cases.adoc[- Use Cases and sequence diagrams] 
 
 *Product types* +
-link:docs/TI-Messenger-Fachdienst.adoc[- TI Messenger backend] +
-link:docs/TI-Messenger-Client.adoc[- TI Messenger Client] +
+link:docs/TI-Messenger-Fachdienst.adoc[- TI-Messenger-Fachdienst] +
+link:docs/TI-Messenger-Client.adoc[- TI-Messenger-Client] +
 link:docs/FHIR-Directory.adoc[- VZD-FHIR-Directory]
 
 *VZD-FHIR* +
