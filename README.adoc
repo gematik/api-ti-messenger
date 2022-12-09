@@ -114,12 +114,7 @@ link:docs/TI-Messenger-Fachdienst.adoc[- TI-Messenger-Fachdienst] +
 link:docs/TI-Messenger-Client.adoc[- TI-Messenger-Client] +
 link:docs/FHIR-Directory.adoc[- VZD-FHIR-Directory]
 
-*VZD-FHIR* +
-link:docs/FHIR-Directory-search-api.adoc[- VZD-FHIR Search] +
-link:docs/FHIR-Directory-owner-api.adoc[- VZD-FHIR Update] +
-
 *Miscellaneous* +
-link:docs/Authentisierung.adoc[- Authentisierung] +
 link:docs/faq.adoc[- Questions and answers on the current specification &#91;Q&A&#93;]
 
 *Reference implementations* +
