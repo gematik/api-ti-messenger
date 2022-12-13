@@ -1,0 +1,48 @@
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+:imagesdir: ../../images
+
+image:gematik_logo.svg[width=70%]
+
+=== AF_10063 Exchange of events between actors within an organisation
+This use case allows actors who are in a common space within a messenger service to exchange messages and execute other actions (events) defined by the Matrix specification.
+
+.use case description
+[%collapsible%open]
+====
+[caption=]
+Exchange of events between actors within an organisation
+[%header, cols="1,1"]
+|===
+| |description
+|Actor |Service provider, employee of an organisation in the "User/User-HBA" role
+|Trigger |All Matrix events performed within an organisation's messenger service
+|Components a|
+              * TI-Messenger-Client A + B,
+              * Messenger proxy,
+              * Messenger home server, 
+              * Push gateway
+|Preconditions a| 
+                  * The actors are logged in to the same messenger service.
+                  * Each actor has an approved TI-Messenger client.
+                  *	The participants have joined a common space.
+|Input data | Matrix Event
+|Result a|Matrix event was successfully processed
+|Output data |Dependent on the matrix event
+|===
+====
+.sequence diagram 
+[%collapsible%open]
+====
+++++
+<p align="center">
+  <img width="55%" src=../../images/diagrams/TI-Messenger-Dienst/Ressourcen/UC_10063_Seq.svg>
+</p>
+++++
+====

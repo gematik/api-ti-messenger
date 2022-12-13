@@ -1,0 +1,50 @@
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+:imagesdir: ../../images
+
+image:gematik_logo.svg[width=70%]
+
+=== AF_10061 Invitation of actors outside an organisation
+In this use case, an actor outside an organisation is invited. The VZD-FHIR directory can be used to search for actors outside the organisation. If the MXID of the sought actor does not exist there, contact must also be made via a QR code scan. In contrast to an invitation of actors within an organisation (see "AF_10063 – Exchange of events within an organisation"), in this use case the messenger proxy of the invitee additionally checks the criteria defined in the"Authorisation concept" section (Stages 1-3).
+
+.use case description
+[%collapsible%open]
+====
+[caption=]
+Invitation of actors outside an organisation
+[%header, cols="1,1"]
+|===
+| |description
+|Actor |Service provider, employee of an organisation in the "User/User-HBA" role
+|Trigger |Actor A wants to set up a shared chat room with actor B outside an organisation.
+|Components a|
+              * TI-Messenger-Client A + B,
+              * Messenger proxy A + B,
+              * Messenger home server A + B, 
+              * VZD-FHIR directory,
+              * Push gateway B
+|Preconditions a| 
+                  * The actors have an approved TI-Messenger client.
+                  * The actors are logged into the messenger services (see AF_10057)
+                  * Both messenger services are part of the federation.
+|Input data | Matrix Invite Event
+|Result a|Actor A and actor B are both in a shared chat room.
+Optionally, a notification is sent to actor B about the invitation to the chat room.
+|Output data |status
+|===
+====
+.sequence diagram 
+[%collapsible%open]
+====
+++++
+<p align="center">
+  <img width="55%" src=../../images/diagrams/TI-Messenger-Dienst/Ressourcen/UC_10061_Seq.svg>
+</p>
+++++
+====

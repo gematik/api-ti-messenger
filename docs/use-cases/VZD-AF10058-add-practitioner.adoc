@@ -1,0 +1,56 @@
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+:imagesdir: ../../images
+
+image:gematik_logo.svg[width=70%]
+
+=== AF_10058 Akteur (User-HBA) im Verzeichnisdienst hinzufügen
+With this use case, an actor in the "User-HBA" role can be found and reached for other actors of other messenger services. For this purpose, FHIR resources with their respective MXID are stored in the person directory (PractitionerRole) of the VZD-FHIR directory. In addition, it is possible to limit visibility for other actors. This use case MAY be directly combined with the initial login process of an actor to the messenger service (see use case: "AF_10057 – Login of an actor to the messenger service"). For this purpose, the actor in the "User-HBA" role is asked by the TI-Messenger client during the login process whether they have an HBA.
+
+.use case description
+[%collapsible%open]
+====
+[caption=]
+Bereitstellung eines Messenger-Service für eine Organisation
+[%header, cols="1,1"]
+|===
+| |description
+|Actor |Service provider, a healthcare organisation employee in the "User-HBA" role
+|Trigger |An actor in the "User-HBA" role wants to be accessible in the person directory by storing their MXID in their Practitioner record in the VZD-FHIR directory.
+|Components a|
+              * TI-Messenger-Client,
+              * Authenticator,
+              * IDP service, 
+              * FHIR Proxy, 
+              * Auth service,
+              * VZD-FHIR directory,
+|Preconditions a| 
+                  * The actor is logged in to a valid messenger service (see AF_10057). 
+                  *	The actor has an approved TI-Messenger client.
+                  * The VZD-FHIR directory is registered with a responsible IDP service.
+                  * The actor can authenticate themselves using the IDP service.
+                  * The registration service can authenticate itself with the VZD-FHIR directory server for write access
+                    with OAuth2.
+|Input data |Admin account, identity of organisation (SMC-B)
+|Result a|
+            * The messenger service for the organisation has been created.
+            * The Matrix domain of the new messenger service was entered as an endpoint in the VZD-FHIR directory and  
+              included in the federation.
+|Output data |New messenger service for the organisation, status
+|===
+====
+.sequence diagram 
+[%collapsible%open]
+====
+++++
+<p align="center">
+  <img width="55%" src=../../images/diagrams/TI-Messenger-Dienst/Ressourcen/UC_10058_Seq.svg>
+</p>
+++++
+====
