@@ -178,7 +178,7 @@ The following example shows a search request to the VZD-FHIR-Directory
 ====
 [source,text]
 ----
-GET https://{domain}/search/HealthcareService?organization.active=true&endpoint.status=active&_include=*&_count=2&_pretty=true
+GET https://fhir-directory.vzd.ti-dienste.de/search/HealthcareService?organization.active=true&endpoint.status=active&_include=*&_count=2&_pretty=true
 ----
 ====
 
