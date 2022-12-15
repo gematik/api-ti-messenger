@@ -1,4 +1,4 @@
-/' 
+/'
 # TI-Messenger 1.1
 # TI-Messenger-Dienst
 # UC - 10103
@@ -48,61 +48,75 @@ ActorFontName Aapex
 alt#LightGrey #AliceBlue <size:16>Organisation nicht am Registrierungs-Dienst authentisiert</size>
 |||
       oa -> wb: Organisation verifizieren
-        activate wb
-      wb -> rd:POST /register 
-      note right: <size:16>Schnittstelle wird nicht \n<size:16>durch die gematik spezifiziert</size>
-        activate rd
-      rd --> wb: Redirect to IDP Authorization Endpoint
-        deactivate rd
+      alt#LightGrey #LightBlue <size:16>Verfahren 1</size>
+          activate wb
+        wb -> rd:POST /register
+        note right: <size:16>Schnittstelle wird nicht \n<size:16>durch die gematik spezifiziert</size>
+          activate rd
+        rd --> wb: Redirect to IDP Authorization Endpoint
+          deactivate rd
+        |||
+        wb -> ip: GET /authorize
+          activate au
+          activate ip
+        ip -> au: Authentication challenge
+        au -> ko: SignDocument
+          activate ko
+        ko -> kt: SICCT command
+          activate kt
+        kt --> ko
+          deactivate kt
+        ko --> au: Response \nsignedDocument
+        |||
+          deactivate ko
+
+      opt #MistyRose <size:15>Abbruch</size>
+        au -> oa: SMC-B nicht freigeschaltet
+        |||
+      end
+        |||
+        au -->ip: Authentication response
+          deactivate au
+        ip --> wb: Authorization code
+          deactivate ip
+        |||
+        wb -> rd: POST /register (Authorization code)
+          activate rd
+        rd -> ip: POST /tokenEndpoint\n{authorization code}
+          activate ip
+        ip --> rd: id_token
+          deactivate ip
+        |||
+        rd -> rd: enthaltene \nProfessionOID auf \ngültige Organisation \nprüfen
+        |||
+      else <size:16>Verfahren 2</size>
+        oa -> rd: KIM-Adresse in Eingabemaske eintragen
+        rd -> rd: Abfrage des LDAP-Directory\nEintrags zur KIM-Adresse
+        |||
+        rd -> rd: Speicherung der telematikId\nund der professionOID
+        |||
+        rd -> rd: ProfessionOID auf\ngültige Organisation\nprüfen
+        |||
+        rd -> oa: KIM Nachricht mit URL
+        oa -> rd: URL in KIM-Nachricht öffnen
+        |||
+      end
       |||
-      wb -> ip: GET /authorize
-        activate au
-        activate ip
-      ip -> au: Authentication challenge
-      au -> ko: SignDocument
-        activate ko
-      ko -> kt: SICCT command
-        activate kt
-      kt --> ko
-        deactivate kt
-      ko --> au: Response \nsignedDocument
-      |||
-        deactivate ko
-    
-    opt #MistyRose <size:15>Abbruch</size>
-      au -> oa: SMC-B nicht freigeschaltet 
-      |||
-    end
-      |||
-      au -->ip: Authentication response
-        deactivate au
-      ip --> wb: Authorization code
-        deactivate ip
-      |||
-      wb -> rd: POST /register (Authorization code)
-        activate rd
-      rd -> ip: POST /tokenEndpoint\n{authorization code}
-        activate ip
-      ip --> rd: id_token
-        deactivate ip
-      |||
-      rd -> rd: enthaltene \nProfessionOID auf \ngültige Organisation \nprüfen
-      |||
-      
+
     opt #MistyRose <size:15>Abbruch</size>
       rd -> wb: keine gültige ProfessionOID gefunden
       wb -> oa: Authentisierung fehlgeschlagen
       |||
-    end  
-    
+    end
+
       |||
       rd-> rd: Organisation \nauthentifizieren
-      rd --> wb: status, id_token
+      rd --> wb: status
         deactivate rd
       wb --> oa: Verifizierung erfolgreich
         deactivate wb
-      |||  
-      
+      |||
+
       else <size:16>Organisation am Registrierungs-Dienst authentisiert</size>
         |||
         oa -> wb: Admin Account anlegen
@@ -111,14 +125,14 @@ alt#LightGrey #AliceBlue <size:16>Organisation nicht am Registrierungs-Dienst au
          opt #MistyRose <size:15>Abbruch</size>
          wb -> oa: Admin Account existiert bereits
          |||
-        end  
+        end
          |||
         wb -> rd: POST /register (id_token, Client-Credentials)
           activate rd
-        rd -> rd: id_token prüfen
+        rd -> rd: Client-Credentials-Policy prüfen
         |||
-        rd -> rd: Admin Account \nfür die Organisation \nanlegen
-        rd --> wb: status, Admin-Account
+        rd -> rd: Org-Admin Account\nfür die Organisation \nanlegen
+        rd --> wb: status
           deactivate rd
         wb --> oa: Account angelegt
           deactivate wb
