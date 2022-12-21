@@ -270,3 +270,6 @@ Die Änderungen an den Anforderungen sind hier zusammengefasst.
 |Produktgutachten
 |Das Prüfverfahren wird geändert in *Sicherheitsgutachten*. Der zweite Satz der Anforderung wird gestrichen und als Hinweis aufgenommen.
 |===
+
+=== CR_008 - User-Agent für TI-M Clients
+
