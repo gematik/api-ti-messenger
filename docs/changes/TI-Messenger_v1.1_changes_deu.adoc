@@ -276,4 +276,4 @@ Der TI-Messenger Client soll bestimmte Kennungsparameter an den TI-Messenger Fac
 
 *A_23104-01 - TI-M Client User-Agent*
 
-Der TI-Messenger-Client für Akteure und der TI-Messenger-Client mit Administrationsfunktionen (Org-Admin-Client) MUSS folgende User-Agent-Kennung bei jedem Verbindungsaufbau zum TI-Messenger-Fachdienst übermitteln:  User-Agent: $Produkttypversion,$Produktversion,$Auspraegung,$Plattform,$OS,$OS-Version,$client_id  Zur Beschreibung der jeweiligen Datenfelder, siehe [gemSpec_Perf#A_22940]. <=
+Der TI-Messenger-Client und der TI-Messenger-Client mit Administrationsfunktionen (Org-Admin-Client) MUSS folgende User-Agent-Kennung bei jedem Verbindungsaufbau zum TI-Messenger-Fachdienst übermitteln:  User-Agent: $Produkttypversion,$Produktversion,$Auspraegung,$Plattform,$OS,$OS-Version,$client_id  Zur Beschreibung der jeweiligen Datenfelder, siehe [gemSpec_Perf#A_22940]. <=
