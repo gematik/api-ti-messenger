@@ -269,4 +269,39 @@ Die Änderungen an den Anforderungen sind hier zusammengefasst.
 |gemSpec_TI-Messenger-Client
 |Produktgutachten
 |Das Prüfverfahren wird geändert in *Sicherheitsgutachten*. Der zweite Satz der Anforderung wird gestrichen und als Hinweis aufgenommen.
+
+|A_22809 Flächendeckende Verwendung von TLS für Hersteller
+|gemSpec_TI-Messenger-FD
+|Produktgutachten
+|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*. 
+
+|A_22818 Sicherheitsrisiken von Software-Bibliotheken minimieren
+|gemSpec_TI-Messenger-FD
+|Produktgutachten
+|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*. 
+
+|A_22816 Device Verification, Cross-Signing und SSSS für TI-Messenger-Fachdienste
+|gemSpec_TI-Messenger-FD
+|Produktgutachten
+|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*. 
+
+|A_22812 Interoperabilität von Zusatzfunktionen für den TI-Messenger-Fachdienst
+|gemSpec_TI-Messenger-FD
+|Produktgutachten
+|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*.
+
+|A_22808 Push-Benachrichtigungen Messenger-Service
+|gemSpec_TI-Messenger-FD
+|Produktgutachten
+|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*. 
+
+|A_22811 Löschfristen für Matrix-Homeserver
+|gemSpec_TI-Messenger-FD
+|Produktgutachten
+|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*. 
+
+|A_22810 Abweichungen vom Matrix-Standard
+|gemSpec_TI-Messenger-FD
+|Produktgutachten
+|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*. 
 |===
