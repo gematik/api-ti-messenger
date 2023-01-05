@@ -28,7 +28,7 @@ else LE mit HBA und TI-Messenger Client
 cl -> au: GET /owner-authenticate
 au -> au: Erzeuge PKCE Code für verifier und challenge
 au --> cl: Redirect to IDP Authorization Endpoint
-cl -> idp: GET /authorize
+cl -> idp: POST /authorize
 idp --> cl: Authentication challenge
 activate aa
 aa -> aa: Authentication
