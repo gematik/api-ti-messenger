@@ -64,16 +64,11 @@ alt#LightGrey #AliceBlue <size:16>kein gültiges owner-accesstoken für Schreibz
   |||
   C->Auth: GET /owner-authenticate (Auth Header mit RegService-OpenID-Token)
     activate Auth
-  Auth -> RD: OIDC Userinfo Endpoint (RegService-OpenID-Token)
-    activate RD
-  RD --> Auth: userid des Org-Admins auf dem Reg-Service
-    deactivate RD
+  Auth -> Auth: Prüfung der Tokensignatur
   |||
-  Auth -> Auth: Prüfung Response.userid ==\nRegService-OpenID-Token.userid
-    |||
     opt#LightGrey #MistyRose <size:16>Abbruch</size>
-    Auth --> C: Unbekannte userid
-   C --> U: keine Berechtigung
+    Auth --> C: Tokensignatur fehlerhaft
+    C --> U: keine Berechtigung
     |||
     end
   |||
