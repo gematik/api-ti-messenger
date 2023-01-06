@@ -3,7 +3,7 @@
 # TI-Messenger-Dienst
 # UC - 10059
 # Sequence Diagram
-# Name: Bereitstellung eines Messenger-Service für eine Organisation
+# Name: Organisationsressourcen im Verzeichnisdienst hinzufügen
 '/
 
 @startuml
@@ -35,18 +35,16 @@ ActorFontName Aapex
     actor U as "Akteur in der Rolle\nOrg-Admin"
     box <size:18>Endgerät</size>\n #WhiteSmoke 
     participant C as "TI-Messenger-Client\n mit Org-Admin \nFunktionalität"
-    participant A as "Authenticator \ndes IDP-Dienst"
     end box
-    participant I as "IDP-Dienst" 
     box <size:18>VZD-FHIR-Directory</size> #WhiteSmoke
       participant FP as "FHIR-Proxy"
       participant Auth as "Auth-Service"
       participant VZD as "FHIR-Directory"
     end box
-    participant RD as "TI-Messenger\nRegistrierungsdienst"
+    participant RD as "Registrierungs-Dienst"
 
 |||
-note over U, I: <size:17>Die Organisation hat einen Messenger-Service bereitgestellt bekommen, \n<size:17>der Teil der Föderation ist</size>
+note over U, C: <size:17>Die Organisation hat einen Messenger-Service\n<size:17>bereitgestellt bekommen, der Teil der Föderation ist</size>
 |||
 
 U->C: FHIR Ressourcen im \nVZD-FHIR-Directory \nhinzufügen
@@ -54,70 +52,36 @@ U->C: FHIR Ressourcen im \nVZD-FHIR-Directory \nhinzufügen
 C->C: Prüfung, ob gültiges \nowner-accesstoken \nvorliegt
 
 |||
-opt#LightGrey #AliceBlue <size:16>kein gültiges owner-accesstoken</size>
+alt#LightGrey #AliceBlue <size:16>kein gültiges owner-accesstoken für Schreibzugriff vorhanden</size>
 |||
-group <size:16>Prüfung valider Org-Admin User</size>
-|||
-C->C: Prüfung, ob gültiges \nRegService-OpenID-Token\nvorliegt
-|||
-opt#LightGrey #AliceBlue <size:16>kein gültiges RegService-OpenID-Token</size>
-|||
-  C -> RD: POST /regservice/user/{userId}/request_token
-  activate RD
-  RD --> C: HTTP 200 OK, Result body {"access_token": "RegService-OpenID-Token",..., "reg_server_url": "https://regserver.example.com/openid/userinfo/"; "userid": "admin-userid"}
-  deactivate RD
-|||
-  end
-|||
+  note over U, C: <size:17>Der Akteur ist auf dem Registrierungs-Dienst angmeldet</size>
+  |||
+  C -> RD: OIDC (z. B. GET /regserv/request_Token)
+    activate RD
+  RD -> RD: Verifizierung des \nAkteurs
+  RD --> C: RegService-OpenID-Token {userid...}
+    deactivate RD
+  |||
   C->Auth: GET /owner-authenticate (Auth Header mit RegService-OpenID-Token)
-    Activate Auth
-  Auth -> RD: GET /openid/userinfo/?\naccess_token=RegService-OpenID-Token)
-  activate RD
-  RD --> Auth: HTTP 200 OK\n(userid des Org-Admin)
-  deactivate RD
-  Auth -> Auth: verify Response.userid=\nRegService-OpenID-Token.userid
-  opt#LightGrey #MistyRose <size:16>Abbruch</size>
-  Auth --> C: Unbekannte userid
-  C --> U: keine Berechtigung
+    activate Auth
+  Auth -> RD: OIDC Userinfo Endpoint (RegService-OpenID-Token)
+    activate RD
+  RD --> Auth: userid des Org-Admins auf dem Reg-Service
+    deactivate RD
   |||
-  end
-  |||
-end group
-|||
-  Auth->Auth: Erzeuge PKCE Code \nfür verifier und challenge
-  Auth-->C: Redirect to IDP Authorization Endpoint (PKCE Code)
-
-  C->I: GET /authorize
-    Activate A
-    Activate I
-  I-->C: Authentication \nchallenge
-  |||
-  A->U: Aufforderung zur \nAuthentifizierung
-  U->A: Eingabe tätigen
-  |||
-  A->A: Authentication
-  A->I: Authentication \nchallenge response
-    Deactivate A
-  |||
-  I-->C: Authorization Response with Authorization Code
-    Deactivate I
-      
-  |||    
-  C->Auth: GET /owner-authenticate with Authorization code (PKCE Code)
-  |||
-  Auth-->I: POST /tokenEndpoint (authorization code)
-    Activate I
-  I-->Auth: id_token
-    Deactivate I
-  Auth->Auth: prüfe id_token
+  Auth -> Auth: Prüfung Response.userid ==\nRegService-OpenID-Token.userid
+    |||
+    opt#LightGrey #MistyRose <size:16>Abbruch</size>
+    Auth --> C: Unbekannte userid
+   C --> U: keine Berechtigung
+    |||
+    end
   |||
   Auth->Auth: erzeuge \nowner-accesstoken
   Auth-->C: owner-accesstoken
   ||| 
-    
-    Deactivate Auth
+    deactivate Auth
 end
-      
 |||
 
 group <size:16>FHIR-Directory Eintrag erstellen</size>
