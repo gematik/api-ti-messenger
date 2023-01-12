@@ -137,57 +137,57 @@ Die Änderungen an den Anforderungen sind hier zusammengefasst.
 |A_18464 TLS-Verbindungen, nicht Version 1.1
 |gemSpec_Krypt
 |Produktgutachten
-|Das Prüfverfahren wird geändert in *Herstellererklärung*. Es muss durch den Hersteller dokumentiert werden, wie und wo die Umsetzung erfolgt ist. Der Test der Anforderung lässt sich mit der PKI Test-Suite automatisieren.
+|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*. Es muss durch den Sicherheitsgutachter geprüft werden, wie und wo die Umsetzung erfolgt ist. Die Möglichkeit zur Automatisierung des Tests dieser Anforderung mittels PKI Test-Suite befindet sich in der Prüfung.
 
 |A_18467 TLS-Verbindungen, Version 1.3
 |gemSpec_Krypt
 |Produktgutachten
-|Das Prüfverfahren wird geändert in *Herstellererklärung*. Es muss durch den Hersteller dokumentiert werden, wie und wo die Umsetzung erfolgt ist. Der Test der Anforderung lässt sich mit der PKI Test-Suite automatisieren.
+|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*. Es muss durch den Sicherheitsgutachter geprüft werden, wie und wo die Umsetzung erfolgt ist. Die Möglichkeit zur Automatisierung des Tests dieser Anforderung mittels PKI Test-Suite befindet sich in der Prüfung.
 
 |A_21275-01 TLS-Verbindungen, zulässige Hashfunktionen bei Signaturen im TLS-Handshake
 |gemSpec_Krypt
 |Produktgutachten
-|Das Prüfverfahren wird geändert in *Herstellererklärung*. Es muss durch den Hersteller dokumentiert werden, wie und wo die Umsetzung erfolgt ist. Der Test der Anforderung lässt sich mit der PKI Test-Suite automatisieren.
+|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*. Es muss durch den Sicherheitsgutachter geprüft werden, wie und wo die Umsetzung erfolgt ist. Die Möglichkeit zur Automatisierung des Tests dieser Anforderung mittels PKI Test-Suite befindet sich in der Prüfung.
 
 |GS-A_4359 X.509-Identitäten für die Durchführung einer TLS-Authentifizierung
 |gemSpec_Krypt
 |Produktgutachten
-|Das Prüfverfahren wird geändert in *Herstellererklärung*. Es muss durch den Hersteller dokumentiert werden, wie und wo die Umsetzung erfolgt ist. Der Test der Anforderung lässt sich mit der PKI Test-Suite automatisieren.
+|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*. Es muss durch den Sicherheitsgutachter geprüft werden, wie und wo die Umsetzung erfolgt ist. Die Möglichkeit zur Automatisierung des Tests dieser Anforderung mittels PKI Test-Suite befindet sich in der Prüfung.
 
 |GS-A_4367 Zufallszahlengenerator
 |gemSpec_Krypt
 |Produktgutachten
-|Das Prüfverfahren wird geändert in *Herstellererklärung*. Es muss durch den Hersteller dokumentiert werden, wie und wo die Umsetzung erfolgt ist.
+|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*. Es muss durch den Sicherheitsgutachter geprüft werden, wie und wo die Umsetzung erfolgt ist.
 
 |GS-A_4368 Schlüsselerzeugung
 |gemSpec_Krypt
 |Produktgutachten
-|Das Prüfverfahren wird geändert in *Herstellererklärung*. Es muss durch den Hersteller dokumentiert werden, wie und wo die Umsetzung erfolgt ist.
+|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*. Es muss durch den Sicherheitsgutachter geprüft werden, wie und wo die Umsetzung erfolgt ist.
 
 |GS-A_4387 TLS-Verbindungen, nicht Version 1.0
 |gemSpec_Krypt
 |Produktgutachten
-|Das Prüfverfahren wird geändert in *Herstellererklärung*. Es muss durch den Hersteller dokumentiert werden, wie und wo die Umsetzung erfolgt ist. Der Test der Anforderung lässt sich mit der PKI Test-Suite automatisieren.
+|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*. Es muss durch den Sicherheitsgutachter geprüft werden, wie und wo die Umsetzung erfolgt ist. Die Möglichkeit zur Automatisierung des Tests dieser Anforderung mittels PKI Test-Suite befindet sich in der Prüfung.
 
 |GS-A_5035 Nichtverwendung des SSL-Protokolls
 |gemSpec_Krypt
 |Produktgutachten
-|Das Prüfverfahren wird geändert in *Herstellererklärung*. Es muss durch den Hersteller dokumentiert werden, wie und wo die Umsetzung erfolgt ist. Der Test der Anforderung lässt sich mit der PKI Test-Suite automatisieren.
+|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*. Es muss durch den Sicherheitsgutachter geprüft werden, wie und wo die Umsetzung erfolgt ist. Die Möglichkeit zur Automatisierung des Tests dieser Anforderung mittels PKI Test-Suite befindet sich in der Prüfung.
 
 |GS-A_5322 Weitere Vorgaben für TLS-Verbindungen
 |gemSpec_Krypt
 |Produktgutachten
-|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*. Der Test der Anforderung lässt sich mit der PKI Test-Suite automatisieren.
+|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*. Die Möglichkeit zur Automatisierung des Tests dieser Anforderung mittels PKI Test-Suite befindet sich in der Prüfung.
 
 |GS-A_4384-01 TLS-Verbindungen
 |gemSpec_Krypt
 |Produktgutachten
-|Ersetzt die alte Version von GS-A_4384. Das Prüfverfahren wird geändert in *Sicherheitsgutachten*. Der Test der Anforderung lässt sich mit der PKI Test-Suite automatisieren.
+|Ersetzt die alte Version von GS-A_4384. Das Prüfverfahren wird geändert in *Sicherheitsgutachten*. Die Möglichkeit zur Automatisierung des Tests dieser Anforderung mittels PKI Test-Suite befindet sich in der Prüfung.
 
 |GS-A_4385 TLS-Verbindungen, Version 1.2
 |gemSpec_Krypt
 |Produktgutachten
-|Das Prüfverfahren wird geändert in *Herstellererklärung*. Es muss durch den Hersteller dokumentiert werden, wie und wo die Umsetzung erfolgt ist. Der Test der Anforderung lässt sich mit der PKI Test-Suite automatisieren.
+|Das Prüfverfahren wird geändert in *Herstellererklärung*. Es muss durch den Hersteller dokumentiert werden, wie und wo die Umsetzung erfolgt ist. Die Möglichkeit zur Automatisierung des Tests dieser Anforderung mittels PKI Test-Suite befindet sich in der Prüfung.
 
 |GS-A_5339 TLS-Verbindungen, erweiterte Webbrowser-Interoperabilität
 |gemSpec_Krypt
@@ -202,7 +202,7 @@ Die Änderungen an den Anforderungen sind hier zusammengefasst.
 |A_22718 Mandantenfähigkeit von TI-Messenger-Clients
 |gemSpec_TI-Messenger-Client
 |Produktgutachten
-|Die Anforderung *entfällt*.
+|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*. Es muss durch den Sicherheitsgutachter geprüft werden, wie und wo die Umsetzung erfolgt ist.
 
 |A_22723 Versand von Dateien mittels Matrix
 |gemSpec_TI-Messenger-Client
@@ -212,12 +212,12 @@ Die Änderungen an den Anforderungen sind hier zusammengefasst.
 |A_22724 Abschottung der Inhalte im TI-Messenger-Client
 |gemSpec_TI-Messenger-Client
 |Produktgutachten
-|Das Prüfverfahren wird geändert in *Herstellererklärung*. Es muss durch den Hersteller dokumentiert werden, wie und wo die Umsetzung erfolgt ist.
+|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*. Es muss durch den Sicherheitsgutachter geprüft werden, wie und wo die Umsetzung erfolgt ist.
 
 |A_22793 Ende-zu-Ende Verschlüsselung
 |gemSpec_TI-Messenger-Client
 |Produktgutachten
-|Das Prüfverfahren wird geändert in *Herstellererklärung*. Es muss durch den Hersteller dokumentiert werden, wie und wo die Umsetzung erfolgt ist. Der Test der Anforderung lässt sich mit der Referenzimplementierung automatisieren.
+|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*. Es muss durch den Sicherheitsgutachter geprüft werden, wie und wo die Umsetzung erfolgt ist. Der Test der Anforderung soll sich mit der Referenzimplementierung automatisieren lassen.
 
 |A_22795 Einbringung und Speicherung von Schlüsseln und Token
 |gemSpec_TI-Messenger-Client
@@ -232,7 +232,7 @@ Die Änderungen an den Anforderungen sind hier zusammengefasst.
 |A_22799 Verwendung von OWASP Mobile
 |gemSpec_TI-Messenger-Client
 |Produktgutachten
-|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*. Inhaltlich wird die Anforderung geprüft, da einige Zuordnungen zu BSI Vorgaben nicht korrekt zu sein scheinen.
+|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*. Inhaltlich wird die Anforderung geprüft, da einige Zuordnungen zu BSI-Vorgaben nicht korrekt zu sein scheinen.
 
 |A_22800 Sicherheitsrisiken von Software Bibliotheken minimieren
 |gemSpec_TI-Messenger-Client
@@ -247,12 +247,12 @@ Die Änderungen an den Anforderungen sind hier zusammengefasst.
 |A_22955 Anforderungen-Gutachten aus der Konferenz der unabhängigen Datenschutzaufsichtsbehörden
 |gemSpec_TI-Messenger-Client
 |Produktgutachten
-|Die Anforderung *entfällt*.
+|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*. Weiterhin wird die Anforderung aufgeteilt und zum besseren Verständnis inhaltlich angepasst.
 
 |A_22964 Zugriffsschutz auf Administrationsfunktionen
 |gemSpec_TI-Messenger-Client
 |Produktgutachten
-|Die Anforderung *entfällt*.
+|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*. Weiterhin wird die Anforderung zum besseren Verständnis inhaltlich angepasst.
 
 |A_23114 App-Sperre TI-Messenger-Client
 |gemSpec_TI-Messenger-Client
