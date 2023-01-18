@@ -68,7 +68,7 @@ alt#LightGrey #AliceBlue <size:16>kein gültiges owner-accesstoken für Schreibz
     |||
   end
   |||
-  C -> RD: ACCESS_TOKEN anfragen (z. B. GET /regserv/request_Token)
+  C -> RD: ID_TOKEN anfragen (z. B. GET /regserv/request_Token)
   note right: <size:16>Schnittstelle wird nicht \n<size:16>durch die gematik spezifiziert</size>
     activate RD 
   RD -> RD: Verifizierung des \nAkteurs \n(Anhand des \nNutzer-Accounts)
@@ -86,7 +86,7 @@ alt#LightGrey #AliceBlue <size:16>kein gültiges owner-accesstoken für Schreibz
       deactivate RD
     end
   |||
-  Auth -> Auth: Prüfung der Tokensignatur
+  Auth -> Auth: Prüfung des Token
   |||
     opt#LightGrey #MistyRose <size:16>Abbruch</size>
     Auth --> C: Tokensignatur fehlerhaft
