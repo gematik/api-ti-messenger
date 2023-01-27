@@ -44,37 +44,59 @@ ActorFontName Aapex
     end box
 
   |||
-  MP->RD: GET /FederationList 
+  MP->RD: GET /I_internVerification (Version) 
+  note right: <size:16>Schnittstelle wird nicht \n<size:16>durch die gematik spezifiziert</size>
+  |||
     Activate MP
     Activate RD
 
-  RD->AS: GET /authenticate (client_id, client_secret) \n(OAuth Client credentials flow)
-    Activate AS
-  AS->AS: prüfe client_id und \nclient_secret
-  AS-->RD: status, provider-accesstoken 
-    Deactivate AS  
+
+  alt#LightGrey #AliceBlue <size:16>kein gültiges provider-accesstoken</size>
+    |||
+    RD->AS: GET /authenticate (client_id, client_secret) \n(OAuth Client credentials flow)
+      Activate AS
+    AS->AS: prüfe client_id und \nclient_secret
+    AS-->RD: status, provider-accesstoken 
+      Deactivate AS  
+    |||
+  end
 
   |||
-  RD->FP: GET /tim-provider-services/getFederationList \n(provider-accesstoken, version)
+  RD->FP: GET /tim-provider-services/getFederationList \n(provider-accesstoken, Version)
     Activate FP
   FP->FP: prüfe \nprovider-accesstoken
   |||
   FP->FP: prüfe übergebene \nVersion
 
 |||
-alt#LightGrey #AliceBlue <size:16>Version ist aktuell</size>
-|||    
 
-    FP-->RD: status
-    RD-->MP: status
+  FP-->RD: status (aktuell oder nicht aktuell)
+  |||
+  
+alt#LightGrey #AliceBlue <size:16>Version vom Registrierungs-Dienst ist aktuell</size>
+    |||
+    RD->RD: Prüfung der Version \nRegistrierungs-Dienst \nund Messenger-Proxy
+      
+      |||
+      alt#LightGrey #LightBlue <size:16>Version vom Messenger-Proxy ist aktuell</size>
+      ||| 
+          RD-->MP: status
+          |||
+          
+          else <size:16>Version ist nicht aktuell</size>
+            RD-->MP: Föderationsliste[]
+            |||
+            MP->MP: Signatur der Föderationsliste prüfen
+            |||
+      end
     |||
     
-    else <size:16>Version ist nicht aktuell</size>
+    else <size:16>Version vom Registrierungs-Dienst ist nicht aktuell</size>
        FP-->RD: Föderationsliste[]
         Deactivate FP
-       |||
       RD-->MP: Föderationsliste[]
         Deactivate RD
+      |||
       MP->MP: Signatur der Föderationsliste prüfen
       'Needed for correct deactivation in case last message is message to itself
       MP-[hidden]->MP
