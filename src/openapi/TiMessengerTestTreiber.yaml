@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: TiMessengerTestDriver
   description: REST interface to automate the test of a TI-Messenger client implementation.
-  version: 0.3.0
+  version: 0.4.0
   contact:
     name: gematik GmbH
     email: software-development@gematik.de
@@ -37,6 +37,8 @@ tags:
     description: OrgAdmin operations of Locations of an organization to FHIR-VZD
   - name: practitionerFhirAdministration
     description: operations for practitioner to write to FHIR-VZD
+  - name: searchOnHomeserver
+    description: Search internally on homeserver
   - name: searchInFhirDirectory
     description: Search for TIOrganization or TIPractitioner entries (VZD-FHIR-Directory)
   - name: message
@@ -665,6 +667,41 @@ paths:
         default:
           $ref: "#/components/responses/DefaultResponse"
 
+  /devices/{deviceId}/homeserver/search:
+    parameters:
+      - $ref: "#/components/parameters/deviceId"
+
+    get:
+      tags:
+        - searchOnHomeserver
+      description: "Returns a list of users on same homeserver that matches search parameters"
+      operationId: searchOnHomeserver
+      parameters:
+        - name: displayName
+          in: query
+          description: "Display name of account"
+          schema:
+            type: string
+        - name: mxId
+          in: query
+          description: "MxId of account"
+          schema:
+            type: string
+
+      responses:
+        "200":
+          description: "search result for given parameters"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HomeserverSearchResultList"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
   /devices/{deviceId}/fhir/searchTIOrganizationInFhirDirectory:
     parameters:
       - $ref: "#/components/parameters/deviceId"
@@ -732,8 +769,41 @@ paths:
           $ref: "#/components/responses/Unauthorized"
         "403":
           $ref: "#/components/responses/Forbidden"
-        "404":
-          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+  /devices/{deviceId}/fhir/searchHealthcareServiceEndpontInFhirDirectory:
+    parameters:
+      - $ref: "#/components/parameters/deviceId"
+
+    get:
+      tags:
+        - searchInFhirDirectory
+      description: "Returns the found endpoints of healthcareservices matching query."
+      operationId: searchHsEndpointInFhirDirectory
+      parameters:
+        - name: name
+          in: query
+          description: "The name of the endpoint"
+          schema:
+            type: string
+        - name: mxId
+          in: query
+          description: "MxId standing in address field of the endpoint"
+          schema:
+            type: string
+
+      responses:
+        "200":
+          description: "search result for given parameters"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FhirHsEndpointSearchResultList"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
         default:
           $ref: "#/components/responses/DefaultResponse"
 
@@ -1499,7 +1569,7 @@ components:
         homeserver:
           type: string
           description: "Name des zuständigen Homeservers"
-          example: "matrix.org"
+          example: "gematik.de"
         contact:
           $ref: "#/components/schemas/ContactInfo"
         clientInfo:
@@ -1886,6 +1956,35 @@ components:
           description: "The displayName"
           example: "some name"
 
+    HomeserverSearchResultList:
+      description: "The result for a search request for on homeserver"
+      readOnly: true
+      type: object
+      properties:
+        totalSearchResults:
+          description: "Total result count for this search. The number of entries in searchResults may be less or equal this number."
+          type: integer
+          example: 42
+        searchResults:
+          description: "The list of search results. Its size May be smaller than totalSearchResults, if there are many results."
+          type: array
+          items:
+            $ref: "#/components/schemas/HomeserverSearchResult"
+
+    HomeserverSearchResult:
+      description: "A flat description of an endpoint with belonging healthcare service and organization"
+      readOnly: true
+      type: object
+      properties:
+        mxId:
+          description: "The Matrix-ID of an account"
+          type: string
+          example: "@someone:gematik.de"
+        displayName:
+          description: "The displayName"
+          type: string
+          example: "some name"
+
     FhirPractitionerSearchResult:
       description: "The result for a search request for practitioner"
       readOnly: true
@@ -1915,6 +2014,21 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/FhirOrganizationSearchResult"
+
+    FhirHsEndpointSearchResultList:
+      description: "The result for a search request for organisations"
+      readOnly: true
+      type: object
+      properties:
+        totalSearchResults:
+          description: "Total result count for this search. The number of entries in searchResults may be less or equal this number."
+          type: integer
+          example: 42
+        searchResults:
+          description: "The list of search results. Its size May be smaller than totalSearchResults, if there are many results."
+          type: array
+          items:
+            $ref: "#/components/schemas/FhirEndpoint"
 
     FhirOrganizationSearchResult:
       description: "A flat description of an endpoint with belonging healthcare service and organization"
@@ -2154,7 +2268,7 @@ components:
         address:
           description: "The technical base address for connecting to this endpoint (MXID)"
           type: string
-          example: "@gematik:matrix.org"
+          example: "@gematik:gematik.de"
 
     FhirEndpoints:
       type: object
@@ -2348,8 +2462,7 @@ components:
         mxid:
           type: string
           description: "ID of the contact (mxid)."
-          #example: "@you:example.org"
-          example: "matrix:u/you:example.org"
+          example: "@someone:gematik.de"
         inviteSettings:
           type: object
           properties:
