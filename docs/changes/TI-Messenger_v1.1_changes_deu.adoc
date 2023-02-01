@@ -27,30 +27,19 @@ CAUTION: Die hier genannten Änderungen sind als Abstimmungsgrundlage zu versteh
 Im Folgenden werden alle Änderungsvorschläge der gematik beschrieben, die für den TI-Messenger Dienst in der Version 1.1 erforderlich sind.
 
 === CR_001 - Korrektur der Parameter am FHIR-Directory /tim-authenticate Endpoint
+IMPORTANT: Die vorgesehenen Änderungen für den CR_001 werden zurückgestellt und für eine zukünftige Version des FHIR-Directory vorgesehen. Für die Zulassung des TI-Messengers ist der */tim-authenticate* Endpoint wie folgt zu bedienen, um ein Search-Access-Token ausgestellt zu bekommen.
 
-Der Request am */tim-authenticate* Endpoint muss den Namen des Matrix Homeservers enthalten. In der bisherigen FHIR-Directory Implementierung wurde der Homeserver-Name als Teil der URL im Parameter `mxid` übergeben.
-
-*Beispiel alt*
+*Beispiel*
 [source,]
 ----
 GET https://fhir-directory-test.vzd.ti-dienste.de/tim-authenticate?mxId=matrix.dev.service-ti.de
-----
-
-Der Homeserver-Name wird nun im Header-Element `X-Matrix-Server-Name` des Requests übergeben.
-
-*Beispiel neu*
-[source, ruby]
-----
-GET https://fhir-directory-test.vzd.ti-dienste.de/tim-authenticate
 
 HEADER
 {
- "User-Agent"=>"Faraday v2.6.0",
- "Content-Type"=>"application/json",
- "X-Matrix-OpenID-Token"=>"matrix-openid-token",
- "X-Matrix-Server-Name"=>"matrix.dev.service-ti.de"
+  X-Matrix-OpenID-Token:(Vom Homeserver ausgestelltes Matrix-Openid-Token)
 }
 ----
+Ein ausführlicher Ablauf zum Token-Austauch ist in der API Dokumentation zum FHIR-Directory beschrieben: https://github.com/gematik/api-vzd/blob/feature/ILF-FHIR_VZD/docs/gemILF_FHIR_VZD.adoc#211-authentication
 
 === CR_002 - Verhinderung der unauthorisierten Bestellung eines Messenger-Services
 Es ist technisch abgesichert, dass ein Messenger-Service nur bestellt werden kann, wenn der Besitz einer SMC-B nachgewiesen wurde. In einer Organisation des Gesundheitswesens kann es jedoch sein, dass Mitarbeiter unauthorisiert einen Messenger-Service bestellen. Es fehlt eine ergänzende Regelung, die eine unauthorisierte Bestellung eines Messenger-Service verhindert.
