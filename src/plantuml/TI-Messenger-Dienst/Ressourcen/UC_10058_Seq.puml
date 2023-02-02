@@ -77,7 +77,7 @@ alt#LightGrey #AliceBlue <size:16>kein gültigess owner-accesstoken</size>
     Deactivate I
        
   |||          
-  C->Auth: GET /owner-authenticate with Authorization code (PKCE Code)
+  C->Auth: GET /signin-gematik-idp-dienst with Authorization code (PKCE Code)
     Activate Auth
   |||
   Auth-->I: POST /tokenEndpoint\n(authorization code)
@@ -113,7 +113,7 @@ group <size:16>VZD-FHIR-Directory Eintrag</size>
   |||
   group <size:16>FHIR-Ressourcen schreiben</size>
   |||
-  C->FP: FHIR-Operationen um eigenen Datensatz zu verwalten \nAuthorization Bearer owner-accesstoken \n(Optional: setze Flag für Sichtbarkeit)
+  C->FP: FHIR-Operationen um eigenen Datensatz zu verwalten \nAuthorization Bearer owner-accesstoken \n(Optional: setze Flag für Sichtbarkeit des Endpoints)
     Activate FP
   FP->FP: prüfe \nowner-accesstoken
   FP->VZD: HTTPS Forward
