@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: TiMessengerTestDriver
   description: REST interface to automate the test of a TI-Messenger client implementation.
-  version: 0.4.0
+  version: 0.4.1
   contact:
     name: gematik GmbH
     email: software-development@gematik.de
@@ -1376,6 +1376,13 @@ paths:
         - media
       description: "Uploads a file and returns its file-id"
       operationId: postMediaFile
+      parameters:
+        - in: header
+          name: Content-Type
+          required: true
+          description: Define type of the sent media. Should be in compliance with RFC6838
+          schema:
+            type: string
       requestBody:
         required: true
         content:
