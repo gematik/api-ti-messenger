@@ -311,4 +311,7 @@ Der TI-Messenger Client soll bestimmte Kennungsparameter an den TI-Messenger Fac
 |Dienst 
 |In Abbildung 20 wird bei einigen Aufrufen nach Erhalt des SearchAccessToken die MXID des Users verwendet. Diese wird für die Authentisierung nicht benötigt und die Rückgabe an den Client wird ein FHIR Bundle sein. 
 |https://github.com/gematik/api-ti-messenger/blob/feature/C_11306/images/diagrams/TI-Messenger-Dienst/Ressourcen/UC_Directory_search_Seq.png
+|Dienst 
+|In Kapitel 5.6 "Pro HealthcareService darf nur eine Endpoint-Ressource für den payloadType "TI-Messenger chat" existieren.
+|Diese Einschränkung wird gestrichen.
 |===
