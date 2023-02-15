@@ -98,8 +98,6 @@ paths:
                 $ref: "#/components/schemas/Contact"
         "400":
           $ref: "#/components/responses/BadRequest"
-        "404":
-          $ref: "#/components/responses/NotFound"
         default:
           $ref: "#/components/responses/DefaultResponse"
 
