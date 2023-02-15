@@ -7,10 +7,20 @@ ifdef::env-github[]
 endif::[]
 
 :imagesdir: ../../images
+:toc: macro
+:toclevels: 5
+:toc-title: Inhaltsverzeichnis 
+:numbered:
 
 image:gematik_logo.svg[width=70%]
 
-=== AF_10103 Authentication of an organisation on the TI-Messenger service 
+
+
+*AF_10103 - Authentication of an organisation on the TI-Messenger service* +
+
+toc::[]
+
+== Miscellaneous
 In case the organization has never been authenticated at the registration service, this is the first step that has to be taken. First the user has to identify that he acts in place of a valid organization in the german healthcare system. For this, the possession of a valid SMC-B of the organization have to be proven. The following procedures may be used:
 
 ------
@@ -28,6 +38,7 @@ CAUTION: 2-factor authentication must be used to authenticate the actor in the "
 
 The use case is shown in the following sequence diagram.
 
+== Sequence diagram
 .sequence diagram
 ====
 ++++
@@ -36,3 +47,9 @@ The use case is shown in the following sequence diagram.
 </p>
 ++++
 ====
+
+== References
+
+* https://fachportal.gematik.de/schnelleinstieg/smartcards-und-identitaeten-in-der-ti/smartcards/security-module-card-typ-b/security-module-card-fuer-organisationen[SMC-B ORG]
+
+* https://fachportal.gematik.de/anwendungen/kommunikation-im-medizinwesen[KIM]
