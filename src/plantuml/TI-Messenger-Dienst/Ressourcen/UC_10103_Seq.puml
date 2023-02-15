@@ -128,8 +128,10 @@ alt#LightGrey #AliceBlue <size:16>Organisation nicht am Registrierungs-Dienst au
          |||
         end
          |||
-        wb -> rd: POST /register (id_token, Client-Credentials)
+        wb -> rd: POST I_Registration (id_token, Client-Credentials)
+        note right: <size:16>Schnittstelle wird nicht \n<size:16>durch die gematik spezifiziert</size>
           activate rd
+        |||
         rd -> rd: Client-Credentials-Policy prüfen
         |||
         rd -> rd: Org-Admin Account\nfür die Organisation \nanlegen
