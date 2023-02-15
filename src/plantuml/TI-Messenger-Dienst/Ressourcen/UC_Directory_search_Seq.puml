@@ -67,21 +67,17 @@ alt#LightGrey #AliceBlue <size:16>kein gültiges search-accesstoken vorhanden</s
       deactivate mp
       
     |||
-    cl->au: GET /tim-authenticate... (Auth Header mit Matrix-OpenID-Token)
+    cl->au: GET /tim-authenticate?MatrixServerName (Auth Header mit Matrix-OpenID-Token)
       activate au
-    au->au: Prüfe ob \nMatrix-Domain aus dem \nMatrix-OpenID-Token in \nFöderation enthalten ist
+    au->au: Prüfe ob \nMatrix Server Name in \nder Föderation enthalten ist
 
 |||
-alt#LightGrey #LightBlue <size:16>Matrix-Domain nicht in der Föderation enthalten</size>
+opt#LightGrey #MistyRose <size:16>Abbruch</size>
 |||    
+    au-->cl: <size:16>Matrix Server Name nicht in der Föderation enthalten</size>
+end
 
-    au-->cl: HTTP 401 \nUnauthorized
-    cl->cl: Session beenden
-    cl-->U: Suche nicht erfolgreich
-    
-    |||
-    else <size:16>matrix_server_name in der Föderation enthalten</size>
-    |||
+|||
         au->mp: GET /openid/userinfo/?Matrix-OpenID-Token)
           activate mp
         mp->hs: HTTP(S) Forward
@@ -92,15 +88,15 @@ alt#LightGrey #LightBlue <size:16>Matrix-Domain nicht in der Föderation enthalt
         mp-->au: HTTP(S) Forward
           deactivate mp
         au->au: erzeuge \nsearch-accesstoken 
-        au-->cl: search-accesstoken (inklusive MXID des Nutzers)
+        au-->cl: search-accesstoken
           deactivate au
           deactivate fp
-    |||
-    end
+|||
 end
 
+
     |||
-    cl->fp: POST /search?... (Auth Header mit search-accesstoken inkl. MXID)
+    cl->fp: POST /search?... (Auth Header mit search-accesstoken)
     |||
       activate fp
     fp->fp: prüfe search-accesstoken
@@ -115,7 +111,7 @@ alt#LightGrey #AliceBlue <size:16>HealthcareService-Einträge werden gesucht</si
 |||
     fp->fd: POST /search/HealthcareService/? \nFinde Datensatz für TelematikID 
       activate fd
-    fd-->fp: Result Body json
+    fd-->fp: Suchergebnis (FHIR Bundle)
       deactivate fd
 |||
 end
@@ -123,26 +119,17 @@ end
 |||
 alt#LightGrey #AliceBlue <size:16>PractitionerRole-Einträge werden gesucht</size>
 |||
-    fp->fd: POST /search/PractitionerRole/? ...<MXID des anfragenden Nutzers> 
+    fp->fd: POST /search/PractitionerRole/? \n Finde Datensatz für MXID 
       activate fd
-    fd->fd: Prüfung, ob MXID im \nTIEndpoint-Eintrag \nvorhanden ist
-    fd-->fp: Result Body json mit TIPractitioner-Eintrag
+    fd-->fp: Suchergebnis (FHIR Bundle)
       deactivate fd
 |||
 end
 |||
 
-  fp->fp: Prüfung, ob MXID enthalten \nund \nTIEndpoint.status == active
-  |||
-  opt#LightGrey #MistyRose <size:16>Abbruch</size>
-    fp-->cl: kein passender Eintrag gefunden \noder TIEndpoint.status == false
-    |||
-  end
-  |||
-
-  fp-->cl: MXID des gesuchten Akteurs
+  fp-->cl: Suchergebnis (FHIR Bundle)
   deactivate fp
-  cl-->U: status
+  cl-->U: Suchergebnis (FHIR Bundle)
    |||
     
     deactivate cl
