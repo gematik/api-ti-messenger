@@ -69,6 +69,3 @@ jobs:
         uses: EndBug/add-and-commit@v8
         with:
           add: 'images/diagrams/'
-      
-      - name: asciidoctor-ghpages
-        uses: manoelcampos/asciidoctor-ghpages-action@v2
