@@ -47,10 +47,10 @@ ActorFontName Aapex
 |||
 alt#LightGrey #AliceBlue <size:16>Organisation nicht am Registrierungs-Dienst authentisiert</size>
 |||
-      oa -> wb: Organisation verifizieren
+      oa -> wb: Organisation verifizieren \n(Verfahren auswählen)
       alt#LightGrey #LightBlue <size:16>OpenID Connect</size>
           activate wb
-        wb -> rd:POST /register
+        wb -> rd:POST I_Registration
         note right: <size:16>Schnittstelle wird nicht \n<size:16>durch die gematik spezifiziert</size>
           activate rd
         rd --> wb: Redirect to IDP Authorization Endpoint
@@ -91,7 +91,7 @@ alt#LightGrey #AliceBlue <size:16>Organisation nicht am Registrierungs-Dienst au
         |||
       else <size:16>KIM - Verfahren</size>
         |||
-        oa -> rd: KIM-Adresse in Eingabemaske eintragen
+        oa -> rd: KIM-Adresse in Eingabemaske eintragen (POST I_Registration)
         rd -> rd: Abfrage des LDAP-Directory\nEintrags zur KIM-Adresse
         |||
         rd -> rd: Speicherung der telematikId\nund der professionOID
