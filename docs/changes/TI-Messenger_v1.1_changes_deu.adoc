@@ -300,3 +300,18 @@ Der TI-Messenger Client soll bestimmte Kennungsparameter an den TI-Messenger Fac
 *A_23104-01 - TI-M Client User-Agent*
 
 Der TI-Messenger-Client und der TI-Messenger-Client mit Administrationsfunktionen (Org-Admin-Client) MUSS folgende User-Agent-Kennung bei jedem Verbindungsaufbau zum TI-Messenger-Fachdienst übermitteln:  User-Agent: $Produkttypversion,$Produktversion,$Auspraegung,$Plattform,$OS,$OS-Version,$client_id  Zur Beschreibung der jeweiligen Datenfelder, siehe [gemSpec_Perf#A_22940]. <=
+
+=== CR_009 - Spezifikationsoptimierungen
+Der TI-Messenger Client soll bestimmte Kennungsparameter an den TI-Messenger Fachdienst im HTTP-Header übermitteln. Die Übermittlung wird mit der folgenden Änderung an gängige Standards angepasst.
+
+.*Spezifikationsoptimierungen*
+[cols="1,1,3"]
+|===
+|*Dokument*|*Alt*|*Neu*
+|Dienst 
+|In Abbildung 20 wird bei einigen Aufrufen nach Erhalt des SearchAccessToken die MXID des Users verwendet. Diese wird für die Authentisierung nicht benötigt und die Rückgabe an den Client wird ein FHIR Bundle sein. 
+|https://github.com/gematik/api-ti-messenger/blob/feature/C_11306/images/diagrams/TI-Messenger-Dienst/Ressourcen/UC_Directory_search_Seq.png
+|Dienst 
+|In Kapitel 5.6 "Pro HealthcareService darf nur eine Endpoint-Ressource für den payloadType "TI-Messenger chat" existieren.
+|Diese Einschränkung wird gestrichen.
+|===

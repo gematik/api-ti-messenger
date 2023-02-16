@@ -23,7 +23,7 @@ image:https://img.shields.io/badge/TI&hyphen;Messenger&hyphen;Client-v1.1.0-gree
 == General
 ---
 
-⚠️ ***Planned change requests for:* link:docs/changes/TI-Messenger_v1.1_changes.adoc[TI-Messenger-Dienst v1.1].**
+⚠️ ***Planned change requests for:* link:docs/changes/TI-Messenger_v1.1_changes_deu.adoc[TI-Messenger-Dienst v1.1].**
 
 ---
 
