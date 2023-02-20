@@ -112,34 +112,31 @@ alt#LightGrey #AliceBlue <size:16>Organisation nicht am Registrierungs-Dienst au
 
       |||
       rd-> rd: Organisation \nauthentifizieren
+      |||
+      rd -> rd : Prüfung auf existierenden Admin Account
+      |||
+        opt #MistyRose <size:15>Abbruch</size>
+         rd -> oa: Organisation bereits authentifiziert und ein Admin-Account existiert bereits
+         |||
+        end
+      |||
       rd --> wb: status
         deactivate rd
       wb --> oa: Verifizierung erfolgreich
-        deactivate wb
       |||
-
-      else <size:16>Organisation am Registrierungs-Dienst authentisiert</size>
-        |||
-        oa -> wb: Admin Account anlegen
-          activate wb
-        wb -> wb: Prüfung auf existierenden Admin Account
-         opt #MistyRose <size:15>Abbruch</size>
-         wb -> oa: Admin Account existiert bereits
-         |||
-        end
-         |||
-        wb -> rd: POST I_Registration (id_token, Client-Credentials)
-        note right: <size:16>Schnittstelle wird nicht \n<size:16>durch die gematik spezifiziert</size>
-          activate rd
-        |||
-        rd -> rd: Client-Credentials-Policy prüfen
-        |||
-        rd -> rd: Org-Admin Account\nfür die Organisation \nanlegen
-        rd --> wb: status
-          deactivate rd
-        wb --> oa: Account angelegt
-          deactivate wb
-        |||
+      oa -> wb: Admin Account anlegen \n(Passwort + 2. Faktor)
+      wb -> rd: POST I_Registration (Admin-Account Credentials + 2. Faktor)
+      note right: <size:16>Schnittstelle wird nicht \n<size:16>durch die gematik spezifiziert</size>
+        activate rd
+      |||
+      rd -> rd: Credentials-Policy prüfen
+      |||
+      rd -> rd: Org-Admin Account\nfür die Organisation \nanlegen
+      rd --> wb: status
+       deactivate rd
+      wb --> oa: Account angelegt
+       deactivate wb
+      |||
 end
 |||
 @enduml
