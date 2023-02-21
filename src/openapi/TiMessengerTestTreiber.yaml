@@ -1541,6 +1541,15 @@ components:
         format: uuid
         example: 81add1c5-675b-4785-9405-a2e75b660b2e
 
+    testcaseIdHeader:
+      in: header
+      name: Test-Case-Id
+      required: false
+      description: Parameter to identify running test case (name/id). Can be used for debugging purpose
+      example: "@TCID:TIM_11_AF_401/e800424f-b37d-4fa9-969e-894ddc0b2362"
+      schema:
+        type: string
+
   responses:
     DefaultResponse:
       description: "The default error response"
