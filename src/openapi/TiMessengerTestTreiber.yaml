@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: TiMessengerTestDriver
   description: REST interface to automate the test of a TI-Messenger client implementation.
-  version: 0.4.1
+  version: 0.4.2
   contact:
     name: gematik GmbH
     email: software-development@gematik.de
@@ -88,6 +88,7 @@ paths:
   /devices/{deviceId}/claim:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/testcaseIdHeader"
 
     post:
       tags:
@@ -117,6 +118,7 @@ paths:
   /devices/{deviceId}/unclaim:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/testcaseIdHeader"
 
     post:
       tags:
@@ -142,6 +144,7 @@ paths:
   /devices/{deviceId}/login:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/testcaseIdHeader"
 
     get:
       description: "Retrieve list of possible authentication flows"
@@ -197,6 +200,7 @@ paths:
   /devices/{deviceId}/logout:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/testcaseIdHeader"
 
     post:
       description: "logout"
@@ -218,6 +222,7 @@ paths:
   /devices/{deviceId}/account:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/testcaseIdHeader"
 
     get:
       tags:
@@ -245,6 +250,7 @@ paths:
   /devices/{deviceId}/fhir/fhirAuthenticate:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/testcaseIdHeader"
 
     post:
       tags:
@@ -269,6 +275,7 @@ paths:
   /devices/{deviceId}/fhir/org:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/testcaseIdHeader"
     get:
       tags:
         - orgAdminFhirOrganization
@@ -287,6 +294,7 @@ paths:
   /devices/{deviceId}/fhir/org/healthcareService:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/testcaseIdHeader"
 
     get:
       tags:
@@ -328,6 +336,7 @@ paths:
   /devices/{deviceId}/fhir/org/healthcareService/{hsId}:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/testcaseIdHeader"
       - $ref: "#/components/parameters/healthcareServiceId"
 
     get:
@@ -387,6 +396,7 @@ paths:
   /devices/{deviceId}/fhir/org/healthcareService/{hsId}/location:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/testcaseIdHeader"
       - $ref: "#/components/parameters/healthcareServiceId"
 
     get:
@@ -433,6 +443,7 @@ paths:
   /devices/{deviceId}/fhir/org/healthcareService/{hsId}/location/{locId}:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/testcaseIdHeader"
       - $ref: "#/components/parameters/healthcareServiceId"
       - $ref: "#/components/parameters/locationId"
 
@@ -494,6 +505,7 @@ paths:
   /devices/{deviceId}/fhir/org/healthcareService/{hsId}/endpoint:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/testcaseIdHeader"
       - $ref: "#/components/parameters/healthcareServiceId"
 
     get:
@@ -540,6 +552,7 @@ paths:
   /devices/{deviceId}/fhir/org/healthcareService/{hsId}/endpoint/{endId}:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/testcaseIdHeader"
       - $ref: "#/components/parameters/healthcareServiceId"
       - $ref: "#/components/parameters/endpointId"
 
@@ -599,6 +612,7 @@ paths:
   /devices/{deviceId}/fhir/mxidInFhirDirectory:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/testcaseIdHeader"
 
     post:
       tags:
@@ -670,6 +684,7 @@ paths:
   /devices/{deviceId}/homeserver/search:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/testcaseIdHeader"
 
     get:
       tags:
@@ -705,6 +720,7 @@ paths:
   /devices/{deviceId}/fhir/searchTIOrganizationInFhirDirectory:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/testcaseIdHeader"
 
     get:
       tags:
@@ -775,6 +791,7 @@ paths:
   /devices/{deviceId}/fhir/searchHealthcareServiceEndpontInFhirDirectory:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/testcaseIdHeader"
 
     get:
       tags:
@@ -810,6 +827,7 @@ paths:
   /devices/{deviceId}/fhir/searchTIPractitionerInFhirDirectory:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/testcaseIdHeader"
 
     get:
       tags:
@@ -865,6 +883,7 @@ paths:
   /devices/{deviceId}/sendMessage:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/testcaseIdHeader"
 
     post:
       tags:
@@ -897,6 +916,7 @@ paths:
   /devices/{deviceId}/rooms:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/testcaseIdHeader"
 
     get:
       tags:
@@ -950,6 +970,7 @@ paths:
   /devices/{deviceId}/rooms/public:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/testcaseIdHeader"
 
     get:
       tags:
@@ -982,6 +1003,7 @@ paths:
   /devices/{deviceId}/rooms/{roomId}:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/testcaseIdHeader"
       - $ref: "#/components/parameters/roomId"
     get:
       tags:
@@ -1052,6 +1074,7 @@ paths:
   /devices/{deviceId}/rooms/{roomId}/messages:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/testcaseIdHeader"
       - $ref: "#/components/parameters/roomId"
 
     get:
@@ -1106,6 +1129,7 @@ paths:
   /devices/{deviceId}/rooms/{roomId}/messages/{messageId}:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/testcaseIdHeader"
       - $ref: "#/components/parameters/roomId"
       - $ref: "#/components/parameters/messageId"
 
@@ -1180,6 +1204,7 @@ paths:
   /devices/{deviceId}/rooms/{roomId}/invite:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/testcaseIdHeader"
       - $ref: "#/components/parameters/roomId"
 
     post:
@@ -1213,6 +1238,7 @@ paths:
   /devices/{deviceId}/rooms/{roomId}/join:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/testcaseIdHeader"
       - $ref: "#/components/parameters/roomId"
 
     post:
@@ -1239,6 +1265,7 @@ paths:
   /devices/{deviceId}/rooms/{roomId}/leave:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/testcaseIdHeader"
       - $ref: "#/components/parameters/roomId"
 
     post:
@@ -1265,6 +1292,7 @@ paths:
   /devices/{deviceId}/contacts:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/testcaseIdHeader"
 
     get:
       tags:
@@ -1334,6 +1362,7 @@ paths:
   /devices/{deviceId}/contacts/{mxid}:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/testcaseIdHeader"
       - $ref: "#/components/parameters/mxidInPath"
 
     get:
@@ -1371,6 +1400,7 @@ paths:
   /devices/{deviceId}/media:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/testcaseIdHeader"
     post:
       tags:
         - media
@@ -1401,6 +1431,7 @@ paths:
   /devices/{deviceId}/media/{mediaId}:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/testcaseIdHeader"
       - $ref: "#/components/parameters/mediaId"
     get:
       tags:
@@ -1509,6 +1540,15 @@ components:
         type: string
         format: uuid
         example: 81add1c5-675b-4785-9405-a2e75b660b2e
+
+    testcaseIdHeader:
+      in: header
+      name: Test-Case-Id
+      required: false
+      description: Parameter to identify running test case (name/id). Can be used for debugging purpose
+      example: "@TCID:TIM_11_AF_401/e800424f-b37d-4fa9-969e-894ddc0b2362"
+      schema:
+        type: string
 
   responses:
     DefaultResponse:
