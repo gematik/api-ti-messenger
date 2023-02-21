@@ -1556,7 +1556,7 @@ components:
         - title
         - clientInfo
         - fachdienstInfo
-        - testdriverVersion
+        - testDriverVersion
       readOnly: true
       type: object
       properties:
