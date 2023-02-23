@@ -40,7 +40,7 @@ tags:
   - name: searchOnHomeserver
     description: Search internally on homeserver
   - name: searchInFhirDirectory
-    description: Search for TIOrganization or TIPractitioner entries (VZD-FHIR-Directory)
+    description: Search for Organization or Practitioner entries (VZD-FHIR-Directory)
   - name: message
     description: message operations
   - name: room
@@ -617,7 +617,7 @@ paths:
     post:
       tags:
         - practitionerFhirAdministration
-      description: "Set the MXID in the own TIPractitioner FHIR resource."
+      description: "Set the MXID in the own Practitioner FHIR resource."
       operationId: setMxidInFhirDirectory
       responses:
         "201":
@@ -665,7 +665,7 @@ paths:
     delete:
       tags:
         - practitionerFhirAdministration
-      description: "Remove the MXID in the own TIPractitioner FHIR resource."
+      description: "Remove the MXID in the own Practitioner FHIR resource."
       operationId: removeMxidInFhirDirectory
       responses:
         "204":
@@ -717,7 +717,7 @@ paths:
         default:
           $ref: "#/components/responses/DefaultResponse"
 
-  /devices/{deviceId}/fhir/searchTIOrganizationInFhirDirectory:
+  /devices/{deviceId}/fhir/searchOrganizationInFhirDirectory:
     parameters:
       - $ref: "#/components/parameters/deviceId"
       - $ref: "#/components/parameters/testcaseIdHeader"
@@ -725,8 +725,8 @@ paths:
     get:
       tags:
         - searchInFhirDirectory
-      description: "Returns the found TIOrganization entries."
-      operationId: searchTIOrganizationInFhirDirectory
+      description: "Returns the found Organization entries."
+      operationId: searchOrganizationInFhirDirectory
       parameters:
         - name: healthcareServiceName
           in: query
@@ -735,42 +735,42 @@ paths:
             type: string
         - name: name
           in: query
-          description: "Name of the TIOrganization"
+          description: "Name of the Organization"
           schema:
             type: string
         - name: address
           in: query
-          description: "Address of the TIOrganization."
+          description: "Address of the Organization."
           schema:
             type: string
         - name: telematikId
           in: query
-          description: "The telematikId of the TIOrganization."
+          description: "The telematikId of the Organization."
           schema:
             type: string
         - name: typeCode
           in: query
-          description: "The type of the TIOrganization (TIOrganizationTypeVS.Code)."
+          description: "The type of the Organization (OrganizationTypeVS.Code)."
           schema:
             type: string
         - name: typeDisplay
           in: query
-          description: "The type of the TIOrganization (TIOrganizationTypeVS.Display)."
+          description: "The type of the Organization (OrganizationTypeVS.Display)."
           schema:
             type: string
         - name: contactMxid
           in: query
-          description: "MXID of the TIOrganization.contact."
+          description: "MXID of the Organization.contact."
           schema:
             type: string
         - name: contactName
           in: query
-          description: "Name of the TIOrganization.contact."
+          description: "Name of the Organization.contact."
           schema:
             type: string
         - name: contactPurpose
           in: query
-          description: "Purpose of the TIOrganization.contact."
+          description: "Purpose of the Organization.contact."
           schema:
             type: string
 
@@ -788,7 +788,7 @@ paths:
         default:
           $ref: "#/components/responses/DefaultResponse"
 
-  /devices/{deviceId}/fhir/searchHealthcareServiceEndpontInFhirDirectory:
+  /devices/{deviceId}/fhir/searchHealthcareServiceEndpointInFhirDirectory:
     parameters:
       - $ref: "#/components/parameters/deviceId"
       - $ref: "#/components/parameters/testcaseIdHeader"
@@ -824,7 +824,7 @@ paths:
         default:
           $ref: "#/components/responses/DefaultResponse"
 
-  /devices/{deviceId}/fhir/searchTIPractitionerInFhirDirectory:
+  /devices/{deviceId}/fhir/searchPractitionerInFhirDirectory:
     parameters:
       - $ref: "#/components/parameters/deviceId"
       - $ref: "#/components/parameters/testcaseIdHeader"
@@ -832,37 +832,37 @@ paths:
     get:
       tags:
         - searchInFhirDirectory
-      description: "Returns the found TIPractitioner entries."
-      operationId: searchTIPractitionerInFhirDirectory
+      description: "Returns the found Practitioner entries."
+      operationId: searchPractitionerInFhirDirectory
       parameters:
         - name: name
           in: query
-          description: "Name of the TIPractitioner"
+          description: "Name of the Practitioner"
           schema:
             type: string
         - name: address
           in: query
-          description: "Address of the TIPractitioner."
+          description: "Address of the Practitioner."
           schema:
             type: string
         - name: telematikId
           in: query
-          description: "The telematikId of the TIPractitioner."
+          description: "The telematikId of the Practitioner."
           schema:
             type: string
         - name: typeCode
           in: query
-          description: "The type of the TIPractitioner (TIPractitionerQualificationProfessionOidVS.Code)."
+          description: "The type of the Practitioner (PractitionerQualificationProfessionOidVS.Code)."
           schema:
             type: string
         - name: typeDisplay
           in: query
-          description: "The type of the TIPractitioner (TIPractitionerQualificationProfessionOidVS.Display)."
+          description: "The type of the Practitioner (PractitionerQualificationProfessionOidVS.Display)."
           schema:
             type: string
         - name: mxid
           in: query
-          description: "MXID of the TIPractitioner."
+          description: "MXID of the Practitioner."
           schema:
             type: string
 
