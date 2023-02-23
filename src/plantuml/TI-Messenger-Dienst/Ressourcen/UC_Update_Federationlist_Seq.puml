@@ -33,74 +33,148 @@ ActorFontColor black
 ActorFontSize 20
 ActorFontName Aapex
 }
-    box <size:18>Messenger-Service\n #WhiteSmoke
-    participant MP as "Messenger-Proxy"
-    participant MH as "Matrix-Homeserver"
-    end box
-    participant RD as "Registrierungs-Dienst"
-    box <size:18>VZD-FHIR-Directory</size> #WhiteSmoke
-      participant FP as "FHIR-Proxy"
-      participant AS as "OAuth-Service"
-    end box
 
-  |||
-  MP->RD: GET /I_internVerification (Version) 
-  note right: <size:16>Schnittstelle wird nicht \n<size:16>durch die gematik spezifiziert</size>
-  |||
-    Activate MP
-    Activate RD
+box <size:18>Messenger-Service\n #WhiteSmoke
+participant MP as "Messenger-Proxy"
+participant MH as "Matrix-Homeserver"
+end box
+participant RD as "Registrierungs-Dienst"
+box <size:18>VZD-FHIR-Directory</size> #WhiteSmoke
+  participant FP as "FHIR-Proxy"
+  participant AS as "OAuth-Service"
+end box
 
+legend bottom right
+    __Legende__
+    <font color=blue>optionaler Bestandteil in dieser Spezifikation</font>
+    <font color=red>noch zu klären</font>
+endlegend
 
-  alt#LightGrey #AliceBlue <size:16>kein gültiges provider-accesstoken</size>
-    |||
-    RD->AS: GET /authenticate (client_id, client_secret) \n(OAuth Client credentials flow)
+== <size:16>scheduled</size> ==
+
+loop#LightGrey #AliceBlue <size:16>alle 1h</size>
+  alt <size:16>HealthState_VZD=gesund</size>
+    activate RD
+    RD->AS: GET /authenticate (client_id, client_secret) {<10s := HealthState_VZD=gesund}
       Activate AS
-    AS->AS: prüfe client_id und \nclient_secret
-    AS-->RD: status, provider-accesstoken 
+    AS->AS: prüfe(client_id, client_secret)
+    AS-->RD: provider-accesstoken 
+    Deactivate AS  
+    RD->FP++: GET /tim-provider-services/getFederationList (provider-accesstoken)\n{<10s := HealthState_VZD=gesund}
+    FP->FP: prüfe(provider-accesstoken)
+    break#LightGrey #LightPink <size:16>provider-accesstoken nicht akzeptiert</size>
+      FP-->RD: ResponseType=Unauthorized
+    end 
+    return Föderationsliste, x5c-Zertifikatsliste
+    RD->RD++: Föderationsliste aktualisieren(Föderationsliste)
+    note right: <font color=red>Vertraut RD dem FP?</font>
+    return Föderationsliste
+    RD-[hidden]> RD
+  else <size:16>HealthState_VZD!=gesund</size>
+    RD ->?: erzeuge Incident bei VZD-Anbieter()
+    RD->RD++: puffere letzte vorhandene Föderationsliste() {Dauer=24h}
+    return <font color=red>Föderationsliste_Puffer</font>
+    RD-[hidden]> RD
+    deactivate RD
+  end
+end
+
+== <size:16>on request</size> ==
+
+MP <-?: Föderationsliste \naktualisieren()
+activate MP
+MP->RD: GET /I_internVerification(FLVersion_MP) 
+note right: <size:16>Schnittstelle wird nicht \n<size:16>durch die gematik spezifiziert</size>
+|||
+  Activate RD
+
+alt <size:16>HealthState_VZD=gesund</size>
+
+  alt#LightGrey #AliceBlue <size:16>kein gültiges provider-accesstoken vorhanden</size>
+    |||
+    RD->AS: GET /authenticate (client_id, client_secret) {<10s := HealthState_VZD=gesund}
+    note right
+      <size:16>OAuth Client credentials flow</size>
+    end note
+      Activate AS
+    AS->AS: prüfe(client_id, client_secret)
+    AS-->RD: <font color=red>status, </font>provider-accesstoken 
       Deactivate AS  
     |||
   end
 
   |||
-  RD->FP: GET /tim-provider-services/getFederationList \n(provider-accesstoken, Version)
+  RD->FP: GET /tim-provider-services/getFederationList (provider-accesstoken, FLVersion_RD)\n{<10s := HealthState_VZD=gesund}
     Activate FP
-  FP->FP: prüfe \nprovider-accesstoken
+  FP->FP: prüfe(provider-accesstoken)
+
+  break#LightGrey #LightPink <size:16>provider-accesstoken nicht akzeptiert</size>
+    FP-->RD: ResponseType=Unauthorized
+  end 
   |||
-  FP->FP: prüfe übergebene \nVersion
+  FP<-?: FLVersion_Main
+  FP->FP++: vergleiche Versionen\n(FLVersion_RD, FLVersion_Main)
+  return Vergleichsergebnis_FP
 
 |||
 
-  FP-->RD: status (aktuell oder nicht aktuell)
-  |||
-  
-alt#LightGrey #AliceBlue <size:16>Version vom Registrierungs-Dienst ist aktuell</size>
+  alt#LightGrey #AliceBlue <size:16>Vergleichsergebnis_FP=identisch</size>
+    FP-->RD: FLStatus_RD=aktuell
     |||
-    RD->RD: Prüfung der Version \nRegistrierungs-Dienst \nund Messenger-Proxy
+  else <size:16>Vergleichsergebnis_FP!=identisch</size>
+    FP-->RD: Föderationsliste, x5c-Zertifikatsliste
+        Deactivate FP
+    RD->RD++: Föderationsliste aktualisieren(Föderationsliste)
+    note right: <font color=red>Vertraut RD dem FP?</font>
+    return Föderationsliste, FLÄnderungsFlag
+    |||
+  end
+  |||
+
+else <size:16>HealthState_VZD!=gesund</size>
+    RD->RD: <font color=red>FLStatus_RD=aktuell</font>
+
+end
+
+alt#LightGrey #AliceBlue <size:16>FLStatus_RD=aktuell</size>
+    RD->RD++: vergleiche Versionen\n(FLVersion_MP, FLVersion_RD)
+    return Vergleichsergebnis_RD
       
-      |||
-      alt#LightGrey #LightBlue <size:16>Version vom Messenger-Proxy ist aktuell</size>
+      alt#LightGrey #LightBlue <size:16>Vergleichsergebnis_RD=identisch</size>
       ||| 
-          RD-->MP: status
+        RD-->MP: FLStatus_MP=aktuell
           |||
           
-          else <size:16>Version ist nicht aktuell</size>
-            RD-->MP: Föderationsliste[]
-            |||
-            MP->MP: Signatur der Föderationsliste prüfen
-            |||
+      else <size:16>Vergleichsergebnis_RD!=identisch</size>
+        RD-->MP: Föderationsliste, x5c-Zertifikatsliste
+        MP->MP++: Signatur der Föderationsliste prüfen(Föderationsliste, x5c-Zertifikatsliste[1])
+        return Signaturprüfergebnis
+        |||
+        loop#LightGrey #LightSteelBlue <size:16><font color=blue>für jeden Eintrag von x5c-Zertifikatsliste</font></size>
+          MP->?: <font color=blue>Public-OCSP-Zertifikatsprüf-Request stellen(x5c-Zertifikat)</font>
+          MP <--?: <font color=blue>OCSP-Response</font>
+        end
+        alt#LightGrey #LightSteelBlue <size:16>Signaturprüfergebnis=gültig <font color=blue>UND jeder OCSP-Response.CertificateStatusValue=good</font></size>
+          MP->MP: Föderationsliste aktualisieren(Föderationsliste)
+        end
+        |||
       end
     |||
     
-    else <size:16>Version vom Registrierungs-Dienst ist nicht aktuell</size>
-       FP-->RD: Föderationsliste[]
-        Deactivate FP
-      RD-->MP: Föderationsliste[]
+    else <size:16>FLÄnderungsFlag vorhanden</size>
+      RD-->MP: Föderationsliste, x5c-Zertifikatsliste
         Deactivate RD
-      |||
-      MP->MP: Signatur der Föderationsliste prüfen
-      'Needed for correct deactivation in case last message is message to itself
-      MP-[hidden]->MP
-        deactivate MP
+        MP->MP++: Signatur der Föderationsliste prüfen(Föderationsliste, x5c-Zertifikatsliste[1])
+        return Signaturprüfergebnis
+        |||
+        loop#LightGrey #LightSteelBlue <size:16><font color=blue>für jeden Eintrag von x5c-Zertifikatsliste</font></size>
+          MP->?: <font color=blue>Public-OCSP-Zertifikatsprüf-Request stellen(x5c-Zertifikat)</font>
+          MP <--?: <font color=blue>OCSP-Response</font>
+        end
+        alt#LightGrey #LightSteelBlue <size:16>Signaturprüfergebnis=gültig <font color=blue>UND jeder OCSP-Response.CertificateStatusValue=good</font></size>
+          MP->MP: Föderationsliste aktualisieren(Föderationsliste)
+        end
+        |||
     |||
 end
 @enduml
