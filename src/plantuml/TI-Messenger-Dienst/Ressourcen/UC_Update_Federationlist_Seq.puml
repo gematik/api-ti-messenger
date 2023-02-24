@@ -1,5 +1,5 @@
 /' 
-# TI-Messenger 1.1
+# TI-Messenger 1.1.1
 # TI-Messenger-Dienst
 # UC - 10064
 # Sequence Diagram
@@ -139,7 +139,9 @@ else <size:16>HealthState_VZD!=gesund ODER Alter_Föderationsliste<1h</size>
 end
 
 break#LightGrey #LightPink <size:16>Alter_Föderationsliste>TTL_Föderationsliste</size>
-RD-->MP: FLStatus_RD=veraltet
+  RD-->MP: FLStatus_RD=veraltet
+  MP->MP: unterbinde Registrierungsdienst-Requests(Dauer=1h)
+  |||
 end
 
 alt#LightGrey #AliceBlue <size:16>FLStatus_RD=aktuell</size>
@@ -147,9 +149,9 @@ alt#LightGrey #AliceBlue <size:16>FLStatus_RD=aktuell</size>
     return Vergleichsergebnis_RD
       
       alt#LightGrey #LightBlue <size:16>Vergleichsergebnis_RD=identisch</size>
-      ||| 
+        ||| 
         RD-->MP: FLStatus_MP=aktuell
-          |||
+        |||
           
       else <size:16>Vergleichsergebnis_RD!=identisch</size>
         RD-->MP: Föderationsliste, x5c-Zertifikatsliste
