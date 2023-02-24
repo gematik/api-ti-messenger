@@ -45,9 +45,8 @@ box <size:18>VZD-FHIR-Directory</size> #WhiteSmoke
 end box
 
 legend bottom right
-    __Legende__
-    <font color=blue>optionaler Bestandteil in dieser Spezifikation</font>
-    <font color=red>noch zu klären</font>
+    <size:16>__Legende__</size>
+    <size:16><font color=blue>noch optionaler Bestandteil in dieser Spezifikationsversion</font></size>
 endlegend
 
 == <size:16>scheduled</size> ==
@@ -55,12 +54,12 @@ endlegend
 loop#LightGrey #AliceBlue <size:16>alle 1h</size>
   alt <size:16>HealthState_VZD=gesund ODER Alter_Föderationsliste>=1h</size>
     activate RD
-    RD->AS: GET /authenticate (client_id, client_secret) {<10s := HealthState_VZD=gesund}
+    RD->AS: GET /authenticate(client_id, client_secret) \n{<10s := HealthState_VZD=gesund}
       Activate AS
     AS->AS: Credentials prüfen\n(client_id, client_secret)
     AS-->RD: provider-accesstoken 
     Deactivate AS  
-    RD->FP++: GET /tim-provider-services/getFederationList (provider-accesstoken)\n{<10s := HealthState_VZD=gesund}
+    RD->FP++: GET /tim-provider-services/FederationList/federationList.jws\n(provider-accesstoken)\n{<10s := HealthState_VZD=gesund}
     FP->FP: Token prüfen(provider-accesstoken)
     break#LightGrey #LightPink <size:16>provider-accesstoken nicht akzeptiert</size>
       FP-->RD: ResponseType=Unauthorized
@@ -68,7 +67,6 @@ loop#LightGrey #AliceBlue <size:16>alle 1h</size>
     return Föderationsliste, x5c-Zertifikatsliste
     alt#LightGrey #LightBlue <size:16>HealthState_VZD=gesund</size>
       RD->RD++: Föderationsliste aktualisieren(Föderationsliste)
-      note right: <font color=red>Vertraut RD dem FP?</font>
       return Föderationsliste
       RD->RD: Alter_Föderationsliste zurücksetzen(Alter_Föderationsliste=0s)
     end 
@@ -90,23 +88,23 @@ note right: <size:16>Schnittstelle wird nicht \n<size:16>durch die gematik spezi
 |||
   Activate RD
 
-alt <size:16>HealthState_VZD=gesund UND Alter_Föderationsliste>=1h </size>
+alt#LightGrey <size:16>HealthState_VZD=gesund UND Alter_Föderationsliste>=1h </size>
 
   alt#LightGrey #AliceBlue <size:16>kein gültiges provider-accesstoken vorhanden</size>
     |||
-    RD->AS: GET /authenticate (client_id, client_secret) {<10s := HealthState_VZD=gesund}
-    note right
+    RD->AS: GET /authenticate(client_id, client_secret) \n{<10s := HealthState_VZD=gesund}
+    note left
       <size:16>OAuth Client credentials flow</size>
     end note
       Activate AS
     AS->AS: Credentials prüfen\n(client_id, client_secret)
-    AS-->RD: <font color=red>status, </font>provider-accesstoken 
+    AS-->RD: provider-accesstoken 
       Deactivate AS  
     |||
   end
 
   |||
-  RD->FP: GET /tim-provider-services/getFederationList (provider-accesstoken, FLVersion_RD)\n{<10s := HealthState_VZD=gesund}
+  RD->FP: GET /tim-provider-services/FederationList/federationList.jws\n(provider-accesstoken, FLVersion_RD)\n{<10s := HealthState_VZD=gesund}
     Activate FP
   FP->FP: Token prüfen(provider-accesstoken)
 
@@ -127,7 +125,6 @@ alt <size:16>HealthState_VZD=gesund UND Alter_Föderationsliste>=1h </size>
     FP-->RD: Föderationsliste, x5c-Zertifikatsliste
         Deactivate FP
     RD->RD++: Föderationsliste aktualisieren(Föderationsliste)
-    note right: <font color=red>Vertraut RD dem FP?</font>
     return Föderationsliste, FLÄnderungsFlag
     RD->RD: Alter_Föderationsliste zurücksetzen(Alter_Föderationsliste=0s)
     |||
@@ -155,7 +152,7 @@ alt#LightGrey #AliceBlue <size:16>FLStatus_RD=aktuell</size>
           
       else <size:16>Vergleichsergebnis_RD!=identisch</size>
         RD-->MP: Föderationsliste, x5c-Zertifikatsliste
-        MP->MP++: Signatur der Föderationsliste prüfen(Föderationsliste, x5c-Zertifikatsliste[1])
+        MP->MP++: Signatur der Föderationsliste prüfen\n(Föderationsliste, x5c-Zertifikatsliste[1])
         return Signaturprüfergebnis
         |||
         loop#LightGrey #LightSteelBlue <size:16><font color=blue>für jeden Eintrag von x5c-Zertifikatsliste</font></size>
@@ -172,7 +169,7 @@ alt#LightGrey #AliceBlue <size:16>FLStatus_RD=aktuell</size>
     else <size:16>FLÄnderungsFlag vorhanden</size>
       RD-->MP: Föderationsliste, x5c-Zertifikatsliste
         Deactivate RD
-        MP->MP++: Signatur der Föderationsliste prüfen(Föderationsliste, x5c-Zertifikatsliste[1])
+        MP->MP++: Signatur der Föderationsliste prüfen\n(Föderationsliste, x5c-Zertifikatsliste[1])
         return Signaturprüfergebnis
         |||
         loop#LightGrey #LightSteelBlue <size:16><font color=blue>für jeden Eintrag von x5c-Zertifikatsliste</font></size>
