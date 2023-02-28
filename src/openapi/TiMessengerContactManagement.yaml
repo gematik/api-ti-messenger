@@ -21,8 +21,12 @@ info:
     TI-Messenger-Client ---> Messenger-Proxy
 
     # Contact
-  version: 1.0.0
-  # initiale Version
+  version: 1.0.1
+  ### 1.0.1
+  # - raised patch number in server url due to bugfixing
+  # - removed pointless 404 response while createContactSetting
+  ### 1.0.0
+  # - initial version
   contact:
     name: gematik GmbH
     email: software-development@gematik.de
@@ -36,7 +40,7 @@ externalDocs:
   url: https://github.com/gematik/api-ti-messenger
 
 servers:
-  - url: https://localhost/tim-contact-mgmt/v1.0/
+  - url: https://localhost/tim-contact-mgmt/v1.0.1/
 tags:
   - name: info
     description: This operation returns meta data about this interface and the status of available resources
