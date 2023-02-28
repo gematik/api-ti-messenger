@@ -1,9 +1,9 @@
 /' 
 # TI-Messenger 1.1.1
 # TI-Messenger-Dienst
-# UC - 10064
+# UC - 
 # Sequence Diagram
-# Name: Föderationszugehörigkeit eines Messenger-Service prüfen
+# Name: Föderationsliste aktualisieren
 '/
 
 @startuml
@@ -51,28 +51,18 @@ endlegend
 
 == <size:16>scheduled</size> ==
 
-loop#LightGrey #AliceBlue <size:16>alle 1h</size>
-  alt <size:16>HealthState_VZD=gesund ODER Alter_Föderationsliste>=1h</size>
-    activate RD
-    RD->AS: GET /authenticate(client_id, client_secret) \n{<10s := HealthState_VZD=gesund}
-      Activate AS
-    AS->AS: Credentials prüfen\n(client_id, client_secret)
-    AS-->RD: provider-accesstoken 
-    Deactivate AS  
-    RD->FP++: GET /tim-provider-services/FederationList/federationList.jws\n(provider-accesstoken)\n{<10s := HealthState_VZD=gesund}
-    FP->FP: Token prüfen(provider-accesstoken)
-    break#LightGrey #LightPink <size:16>provider-accesstoken nicht akzeptiert</size>
-      FP-->RD: ResponseType=Unauthorized
-    end 
-    return Föderationsliste, x5c-Zertifikatsliste
-    alt#LightGrey #LightBlue <size:16>HealthState_VZD=gesund</size>
-      RD->RD++: Föderationsliste aktualisieren(Föderationsliste)
-      return Föderationsliste
-      RD->RD: Alter_Föderationsliste zurücksetzen(Alter_Föderationsliste=0s)
-    end 
+loop#LightGrey <size:16>alle 1h</size>
+  alt#LightGrey <size:16>HealthState_VZD=gesund ODER Alter_Föderationsliste>=1h</size>
+  activate RD
+  |||
+  ref over AS, FP, RD
+    <size:16>Provider authentifizieren und Föderationsliste abrufen</size>
+  end ref
+  |||
+
   else <size:16>HealthState_VZD!=gesund</size>
-    RD ->?: erzeuge Incident bei VZD-Anbieter()
-    RD->RD++: letzte vorhandene Föderationsliste puffern() {TTL_Föderationsliste=24h}
+    RD ->?: Incident-Event erzeugen()
+    RD->RD++: letzte vorhandene Föderationsliste puffern() \n{TTL_Föderationsliste=24h}
     return Föderationsliste
     RD-[hidden]> RD
     deactivate RD
@@ -90,49 +80,17 @@ note right: <size:16>Schnittstelle wird nicht \n<size:16>durch die gematik spezi
 
 alt#LightGrey <size:16>HealthState_VZD=gesund UND Alter_Föderationsliste>=1h </size>
 
-  alt#LightGrey #AliceBlue <size:16>kein gültiges provider-accesstoken vorhanden</size>
-    |||
-    RD->AS: GET /authenticate(client_id, client_secret) \n{<10s := HealthState_VZD=gesund}
-    note left
-      <size:16>OAuth Client credentials flow</size>
-    end note
-      Activate AS
-    AS->AS: Credentials prüfen\n(client_id, client_secret)
-    AS-->RD: provider-accesstoken 
-      Deactivate AS  
-    |||
-  end
-
   |||
-  RD->FP: GET /tim-provider-services/FederationList/federationList.jws\n(provider-accesstoken, FLVersion_RD)\n{<10s := HealthState_VZD=gesund}
-    Activate FP
-  FP->FP: Token prüfen(provider-accesstoken)
-
-  break#LightGrey #LightPink <size:16>provider-accesstoken nicht akzeptiert</size>
-    FP-->RD: ResponseType=Unauthorized
-  end 
+  ref over AS, FP, RD
+    <size:16>Provider authentifizieren und Föderationsliste abrufen</size>
+  end ref
   |||
-  FP<-?: FLVersion_Main
-  FP->FP++: vergleiche Versionen\n(FLVersion_RD, FLVersion_Main)
-  return Vergleichsergebnis_FP
-
-|||
-
-  alt#LightGrey #AliceBlue <size:16>Vergleichsergebnis_FP=identisch</size>
-    FP-->RD: FLStatus_RD=aktuell
-    |||
-  else <size:16>Vergleichsergebnis_FP!=identisch</size>
-    FP-->RD: Föderationsliste, x5c-Zertifikatsliste
-        Deactivate FP
-    RD->RD++: Föderationsliste aktualisieren(Föderationsliste)
-    return Föderationsliste, FLÄnderungsFlag
-    RD->RD: Alter_Föderationsliste zurücksetzen(Alter_Föderationsliste=0s)
-    |||
-  end
-  |||
-
+  
+'else <size:16>HealthState_VZD!=gesund ODER Alter_Föderationsliste<1h</size>
 else <size:16>HealthState_VZD!=gesund ODER Alter_Föderationsliste<1h</size>
-    RD->RD: FLStatus_RD=aktuell
+
+  RD->RD: FLStatus_RD=aktuell
+
 end
 
 break#LightGrey #LightPink <size:16>Alter_Föderationsliste>TTL_Föderationsliste</size>
