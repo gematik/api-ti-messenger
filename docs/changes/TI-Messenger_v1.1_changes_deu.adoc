@@ -314,4 +314,16 @@ Der TI-Messenger Client soll bestimmte Kennungsparameter an den TI-Messenger Fac
 |Dienst 
 |In Kapitel 5.6 "Pro HealthcareService darf nur eine Endpoint-Ressource für den payloadType "TI-Messenger chat" existieren.
 |Diese Einschränkung wird gestrichen.
+|Client und Fachdienst 
+|AFO A_22955 hat bisher zwei Anforderungen formuliert, die beide schwer verständlich waren. Weiterhin war eine davon (Verschlüsselung) in der angegeben Form nicht sinnvoll erfüllbar, während die andere (Zwangsbeendigung von Sitzungen) durch den Fachdienst zu iplementieren ist.
+|Diese AFO wurde aufgeteilt in eine AFO für den Client, welche die Maßnahmen zum Schutz der gespeicherten Daten spezifiziert, sowie eine weitere AFO für den Fachdienst, welche die Zwangsterminierung von aktiven Sitzungen behandelt.
+|Client
+|A_22802 fordert unter anderem die Ausgabe einer Prüfsumme zur Verifikation der Integrität einer installierten Version des TI-Messenger-Clients. Dies ist jedoch nicht zweckmäßig.
+|A_22802 wird abgelöst durch eine andere AFO, welche die Ausgabe jener Prüfsumme nicht mehr fordert.
+|Client und Fachdienst
+|Es gab bisher keine Anforderungen zur Komplexität von Passwörtern und Mechanismen zur Verhinderung von deren Wiederverwendung.
+|Client und Fachdienst wurden um Anforderungen ergänzt (A_23611, A_23612), die Vorgaben zur Wahl von Passwortrichtlinien machen, sowie zur Implementierung von Mechanismen im Client, die eine Wiederverwendung von Passwörtern an den Stellen verhindern, wo sie dem Homeserver das Brechen der E2EE ermöglichen würden.
+|Client und Fachdienst
+|Bisher haben die Spezifikationen von Client und Fachdienst Anforderungen enthalten, die eine CC-Evaluierung als Ersatz für das Produktgutachten ermöglichten. Ohne Notwendigkeit für ein Produktgutachten sind diese Anforderungen jedoch ncht zweckmäßig.
+|Die Anforderungen sind entfallen.
 |===
