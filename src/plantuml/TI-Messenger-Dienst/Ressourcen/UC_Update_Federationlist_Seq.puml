@@ -44,11 +44,6 @@ box <size:18>VZD-FHIR-Directory</size> #WhiteSmoke
   participant AS as "OAuth-Service"
 end box
 
-legend bottom right
-    <size:16>__Legende__</size>
-    <size:16><font color=blue>noch optionaler Bestandteil in dieser Spezifikationsversion</font></size>
-endlegend
-
 == <size:16>scheduled</size> ==
 
 loop#LightGrey <size:16>alle 1h</size>
@@ -61,10 +56,28 @@ loop#LightGrey <size:16>alle 1h</size>
   |||
 
   else <size:16>HealthState_VZD!=gesund</size>
-    RD ->?: Incident-Event erzeugen()
-    RD->RD++: letzte vorhandene Föderationsliste puffern() \n{TTL_Föderationsliste=24h}
-    return Föderationsliste
-    RD-[hidden]> RD
+    RD->RD: HealthStateCheck einleiten(HealthStateCheck_VZD=0)
+    loop#LightGrey <size:16>alle 5min UND HealthStateCheck_VZD<=3</size>
+      |||
+      ref over AS, FP, RD
+        <size:16>Provider authentifizieren und Föderationsliste abrufen</size>
+      end ref
+      |||
+      alt#LightGrey <size:16>HealthState_VZD=gesund</size>
+        break#LightGrey #LightPink
+          RD->RD: HealthStateCheck_VZD abbrechen()
+        end
+      else <size:16>HealthState_VZD!=gesund</size>
+        RD->RD: HealthStateCheck_VZD erhöhen\n(HealthStateCheck_VZD+1)
+        alt#LightGrey <size:16>HealthStateCheck_VZD=3</size>
+          RD ->?: Incident-Event erzeugen()
+          RD->RD++: letzte vorhandene Föderationsliste puffern() \n{TTL_Föderationsliste=24h}
+          return Föderationsliste
+        |||
+        end
+      end
+    end 
+    'RD-[hidden]> RD
     deactivate RD
   end
 end
@@ -87,58 +100,44 @@ alt#LightGrey <size:16>HealthState_VZD=gesund UND Alter_Föderationsliste>=1h </
   |||
   
 'else <size:16>HealthState_VZD!=gesund ODER Alter_Föderationsliste<1h</size>
-else <size:16>HealthState_VZD!=gesund ODER Alter_Föderationsliste<1h</size>
+'else <size:16>Alter_Föderationsliste<1h ODER TTL_Föderationsliste vorhanden</size>
 
-  RD->RD: FLStatus_RD=aktuell
+  'RD->RD: FLStatus_RD=aktuell
 
 end
 
 break#LightGrey #LightPink <size:16>Alter_Föderationsliste>TTL_Föderationsliste</size>
-  RD-->MP: FLStatus_RD=veraltet
+  'RD-->MP: FLStatus_RD=veraltet
+  RD-->MP: <font color=red>ResponseType=outdated bzw. FLStatus_RD=veraltet</font>
   MP->MP: unterbinde Registrierungsdienst-Requests(Dauer=1h)
   |||
 end
 
-alt#LightGrey #AliceBlue <size:16>FLStatus_RD=aktuell</size>
-    RD->RD++: vergleiche Versionen\n(FLVersion_MP, FLVersion_RD)
-    return Vergleichsergebnis_RD
-      
-      alt#LightGrey #LightBlue <size:16>Vergleichsergebnis_RD=identisch</size>
-        ||| 
-        RD-->MP: FLStatus_MP=aktuell
-        |||
-          
-      else <size:16>Vergleichsergebnis_RD!=identisch</size>
-        RD-->MP: Föderationsliste, x5c-Zertifikatsliste
-        MP->MP++: Signatur der Föderationsliste prüfen\n(Föderationsliste, x5c-Zertifikatsliste[1])
-        return Signaturprüfergebnis
-        |||
-        loop#LightGrey #LightSteelBlue <size:16><font color=blue>für jeden Eintrag von x5c-Zertifikatsliste</font></size>
-          MP->?: <font color=blue>Public-OCSP-Zertifikatsprüf-Request stellen(x5c-Zertifikat)</font>
-          MP <--?: <font color=blue>OCSP-Response</font>
-        end
-        alt#LightGrey #LightSteelBlue <size:16>Signaturprüfergebnis=gültig <font color=blue>UND jeder OCSP-Response.CertificateStatusValue=good</font></size>
-          MP->MP: Föderationsliste aktualisieren(Föderationsliste)
-        end
-        |||
-      end
-    |||
+alt#LightGrey <size:16>Alter_Föderationsliste<1h ODER TTL_Föderationsliste vorhanden</size>
+  RD->RD++: vergleiche Versionen\n(FLVersion_MP, FLVersion_RD)
+  return Vergleichsergebnis_RD
     
-    else <size:16>FLÄnderungsFlag vorhanden</size>
-      RD-->MP: Föderationsliste, x5c-Zertifikatsliste
-        Deactivate RD
-        MP->MP++: Signatur der Föderationsliste prüfen\n(Föderationsliste, x5c-Zertifikatsliste[1])
-        return Signaturprüfergebnis
-        |||
-        loop#LightGrey #LightSteelBlue <size:16><font color=blue>für jeden Eintrag von x5c-Zertifikatsliste</font></size>
-          MP->?: <font color=blue>Public-OCSP-Zertifikatsprüf-Request stellen(x5c-Zertifikat)</font>
-          MP <--?: <font color=blue>OCSP-Response</font>
-        end
-        alt#LightGrey #LightSteelBlue <size:16>Signaturprüfergebnis=gültig <font color=blue>UND jeder OCSP-Response.CertificateStatusValue=good</font></size>
-          MP->MP: Föderationsliste aktualisieren(Föderationsliste)
-        end
-        deactivate MP
-        |||
+  alt#LightGrey <size:16>Vergleichsergebnis_RD=identisch</size>
+    ||| 
+    RD-->MP: <font color=red>ResponseType=no Content bzw. FLStatus_MP=aktuell</font>
     |||
+      
+  else <size:16>Vergleichsergebnis_RD!=identisch</size>
+    RD-->MP: Föderationsliste, x5c-Zertifikatsliste
+    ref over MP
+      <size:16>Signatur der Föderationsliste prüfen</size>
+    end ref
+    |||
+  end
+  |||
+  
+else <size:16>FLÄnderungsFlag vorhanden <font color=red>ODER FL_Version_MP=NULL</font></size>
+  RD-->MP: Föderationsliste, x5c-Zertifikatsliste
+  Deactivate RD
+  ref over MP
+    <size:16>Signatur der Föderationsliste prüfen</size>
+  end ref
+  MP-[hidden]> MP
+  deactivate MP
 end
 @enduml

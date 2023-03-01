@@ -41,9 +41,7 @@ box <size:18>VZD-FHIR-Directory</size> #WhiteSmoke
 end box
 
 alt#LightGrey <size:16>kein gültiges provider-accesstoken vorhanden</size>
-
   activate RD
-
   alt#LightGrey <size:16>Benötigt IDP-TI-Provider-Accesstoken</size>
       RD -> AS: GET /token(client-ID, client_secret)\nfür Realm "ti-provider"\n{<10s := HealthState_VZD=gesund}
       activate AS
@@ -53,14 +51,12 @@ alt#LightGrey <size:16>kein gültiges provider-accesstoken vorhanden</size>
       AS --> RD: IDP-TI-Provider-Accesstoken
       deactivate AS
   end
-
   RD -> FP: GET /ti-provider-authenticate\n(IDP-TI-Provider-Accesstoken)\n{<10s := HealthState_VZD=gesund}
   activate FP
   FP -> FP: Token prüfen und ClientID auslesen\n(IDP-TI-Provider-Accesstoken)
   FP -> FP: provider-accesstoken erzeugen
   FP --> RD: provider-accesstoken
   deactivate FP
-
 end
 
 |||
@@ -73,9 +69,7 @@ break#LightGrey #LightPink <size:16>Abruf der Föderationsliste nicht möglich</
 end 
 
 |||
-
-FP->FP: Auf neuere Version der Föderationsliste prüfen\n(FLVersion_RD)
-
+FP->FP: Auf neuere Version der \nFöderationsliste prüfen\n(FLVersion_RD)
 |||
 
 alt#LightGrey <size:16>keine neuere Version der Föderationsliste vorhanden</size>
