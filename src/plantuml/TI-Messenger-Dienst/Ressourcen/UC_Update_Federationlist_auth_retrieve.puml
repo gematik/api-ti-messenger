@@ -76,7 +76,7 @@ alt#LightGrey <size:16>keine neuere Version der Föderationsliste vorhanden</siz
   FP-->RD: ResponseType=No Content
   RD->RD: Alter_Föderationsliste zurücksetzen(Alter_Föderationsliste=0s)
   |||
-else <size:16>neuere Version der Föderationsliste vorhanden ODER FLVersion_FD=NULL</size>
+else <size:16>neuere Version der Föderationsliste vorhanden ODER FLVersion_RD=NULL</size>
   FP-->RD: Föderationsliste, x5c-Zertifikatsliste
       Deactivate FP
   RD->RD++: Föderationsliste aktualisieren(Föderationsliste)

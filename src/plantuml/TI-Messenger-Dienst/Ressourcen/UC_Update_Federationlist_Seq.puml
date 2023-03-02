@@ -108,8 +108,9 @@ end
 
 break#LightGrey #LightPink <size:16>Alter_Föderationsliste>TTL_Föderationsliste</size>
   'RD-->MP: FLStatus_RD=veraltet
-  RD-->MP: <font color=red>ResponseType=outdated bzw. FLStatus_RD=veraltet</font>
+  RD-->MP: FLStatus_RD=veraltet
   MP->MP: unterbinde Registrierungsdienst-Requests(Dauer=1h)
+  MP->MP: blockiere Kommunikation zu anderen Homeservern()
   |||
 end
 
@@ -119,7 +120,7 @@ alt#LightGrey <size:16>Alter_Föderationsliste<1h ODER TTL_Föderationsliste vor
     
   alt#LightGrey <size:16>Vergleichsergebnis_RD=identisch</size>
     ||| 
-    RD-->MP: <font color=red>ResponseType=no Content bzw. FLStatus_MP=aktuell</font>
+    RD-->MP: FLStatus_MP=aktuell
     |||
       
   else <size:16>Vergleichsergebnis_RD!=identisch</size>
@@ -131,7 +132,7 @@ alt#LightGrey <size:16>Alter_Föderationsliste<1h ODER TTL_Föderationsliste vor
   end
   |||
   
-else <size:16>FLÄnderungsFlag vorhanden <font color=red>ODER FL_Version_MP=NULL</font></size>
+else <size:16>FLÄnderungsFlag vorhanden ODER FLVersion_MP=NULL</size>
   RD-->MP: Föderationsliste, x5c-Zertifikatsliste
   Deactivate RD
   ref over MP
