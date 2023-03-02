@@ -47,7 +47,7 @@ Es ist technisch abgesichert, dass ein Messenger-Service nur bestellt werden kan
 *Lösungsidee:* Ein Messenger-Service kann, wie bisher spezifiziert, von einer Organisation des Gesundheitswesens bestellt werden. Der Vertrag über den bestellten Messenger-Service wird per Post an eine verifizierte Adresse der Organisation (z. B. durch Abfrage des FHIR-Directories ermittelte Anschrift der Organisation) gesendet. Erst nach Eingang des unterzeichneten Vertrages beim TI-Messenger-Anbieter wird der Messenger-Service aktiviert.
 
 === CR_003 - Signatur der Föderationsliste
-In der aktuellen Spezifikation ist eine Signatur der Föderationsliste festgelegt. Die Signatur war bisher noch nicht in der OpenAPI Definition der Schnittstelle `I_VZD_TIM_Provider_Services` berücksichtigt. Dies wurde in der https://raw.githubusercontent.com/gematik/api-vzd/develop/src/openapi/I_VZD_TIM_Provider_Services.yaml[I_VZD_TIM_Provider_Services] in der Version 1.2.0 angepasst. Durch diese Änderung wurde es erforderlich die Struktur der Föderationsliste in einem JSON Schema festzulegen, da die Struktur nicht mehr in der OpenAPI Definition sichtbar ist (siehe hierzu bitte: https://github.com/gematik/api-vzd/blob/develop/src/schema/FederationList.json[JSON-Schema der Föderationsliste].
+In der aktuellen Spezifikation ist eine Signatur der Föderationsliste festgelegt. Die Signatur war bisher noch nicht in der OpenAPI Definition der Schnittstelle `I_VZD_TIM_Provider_Services` berücksichtigt. Dies wurde in der https://raw.githubusercontent.com/gematik/api-vzd/develop/src/openapi/I_VZD_TIM_Provider_Services.yaml[I_VZD_TIM_Provider_Services] in der Version 1.2.0 angepasst. Durch diese Änderung wurde es erforderlich die Struktur der Föderationsliste in einem JSON Schema festzulegen, da die Struktur nicht mehr in der OpenAPI Definition sichtbar ist (siehe hierzu bitte: https://github.com/gematik/api-vzd/blob/develop/src/schema/FederationList.json[JSON-Schema der Föderationsliste]. Der link:../use-cases/MS-update-federation-list.adoc[Use Case zur Aktualisierung der Föderationsliste] hat sich verändert und wurde erweitert.
 
 === CR_004 - Nachweis des Besitzes einer SMC-B beim Bestellprozess eines Messenger-Services
 
@@ -126,22 +126,22 @@ Die Änderungen an den Anforderungen sind hier zusammengefasst.
 |A_18464 TLS-Verbindungen, nicht Version 1.1
 |gemSpec_Krypt
 |Produktgutachten
-|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*. Es muss durch den Sicherheitsgutachter geprüft werden, wie und wo die Umsetzung erfolgt ist. 
+|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*. Es muss durch den Sicherheitsgutachter geprüft werden, wie und wo die Umsetzung erfolgt ist.
 
 |A_18467 TLS-Verbindungen, Version 1.3
 |gemSpec_Krypt
 |Produktgutachten
-|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*. Es muss durch den Sicherheitsgutachter geprüft werden, wie und wo die Umsetzung erfolgt ist. 
+|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*. Es muss durch den Sicherheitsgutachter geprüft werden, wie und wo die Umsetzung erfolgt ist.
 
 |A_21275-01 TLS-Verbindungen, zulässige Hashfunktionen bei Signaturen im TLS-Handshake
 |gemSpec_Krypt
 |Produktgutachten
-|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*. Es muss durch den Sicherheitsgutachter geprüft werden, wie und wo die Umsetzung erfolgt ist. 
+|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*. Es muss durch den Sicherheitsgutachter geprüft werden, wie und wo die Umsetzung erfolgt ist.
 
 |GS-A_4359 X.509-Identitäten für die Durchführung einer TLS-Authentifizierung
 |gemSpec_Krypt
 |Produktgutachten
-|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*. Es muss durch den Sicherheitsgutachter geprüft werden, wie und wo die Umsetzung erfolgt ist. 
+|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*. Es muss durch den Sicherheitsgutachter geprüft werden, wie und wo die Umsetzung erfolgt ist.
 
 |GS-A_4367 Zufallszahlengenerator
 |gemSpec_Krypt
@@ -156,27 +156,27 @@ Die Änderungen an den Anforderungen sind hier zusammengefasst.
 |GS-A_4387 TLS-Verbindungen, nicht Version 1.0
 |gemSpec_Krypt
 |Produktgutachten
-|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*. Es muss durch den Sicherheitsgutachter geprüft werden, wie und wo die Umsetzung erfolgt ist. 
+|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*. Es muss durch den Sicherheitsgutachter geprüft werden, wie und wo die Umsetzung erfolgt ist.
 
 |GS-A_5035 Nichtverwendung des SSL-Protokolls
 |gemSpec_Krypt
 |Produktgutachten
-|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*. Es muss durch den Sicherheitsgutachter geprüft werden, wie und wo die Umsetzung erfolgt ist. 
+|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*. Es muss durch den Sicherheitsgutachter geprüft werden, wie und wo die Umsetzung erfolgt ist.
 
 |GS-A_5322 Weitere Vorgaben für TLS-Verbindungen
 |gemSpec_Krypt
 |Produktgutachten
-|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*. 
+|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*.
 
 |GS-A_4384-01 TLS-Verbindungen
 |gemSpec_Krypt
 |Produktgutachten
-|Ersetzt die alte Version von GS-A_4384. Das Prüfverfahren wird geändert in *Sicherheitsgutachten*. 
+|Ersetzt die alte Version von GS-A_4384. Das Prüfverfahren wird geändert in *Sicherheitsgutachten*.
 
 |GS-A_4385 TLS-Verbindungen, Version 1.2
 |gemSpec_Krypt
 |Produktgutachten
-|Das Prüfverfahren wird geändert in *Herstellererklärung*. Es muss durch den Hersteller dokumentiert werden, wie und wo die Umsetzung erfolgt ist. 
+|Das Prüfverfahren wird geändert in *Herstellererklärung*. Es muss durch den Hersteller dokumentiert werden, wie und wo die Umsetzung erfolgt ist.
 
 |GS-A_5339 TLS-Verbindungen, erweiterte Webbrowser-Interoperabilität
 |gemSpec_Krypt
@@ -186,7 +186,7 @@ Die Änderungen an den Anforderungen sind hier zusammengefasst.
 |GS-A_5526 TLS-Renegotiation-Indication-Extension
 |gemSpec_Krypt
 |Produktgutachten
-|Das Prüfverfahren wird geändert in *Herstellererklärung*. Es muss durch den Hersteller dokumentiert werden, wie und wo die Umsetzung erfolgt ist. 
+|Das Prüfverfahren wird geändert in *Herstellererklärung*. Es muss durch den Hersteller dokumentiert werden, wie und wo die Umsetzung erfolgt ist.
 
 |A_22718 Mandantenfähigkeit von TI-Messenger-Clients
 |gemSpec_TI-Messenger-Client
@@ -196,7 +196,7 @@ Die Änderungen an den Anforderungen sind hier zusammengefasst.
 |A_22723 Versand von Dateien mittels Matrix
 |gemSpec_TI-Messenger-Client
 |Produktgutachten
-|Das Prüfverfahren wird geändert in *Herstellererklärung*. Es muss durch den Hersteller dokumentiert werden, wie und wo die Umsetzung erfolgt ist. 
+|Das Prüfverfahren wird geändert in *Herstellererklärung*. Es muss durch den Hersteller dokumentiert werden, wie und wo die Umsetzung erfolgt ist.
 
 |A_22724 Abschottung der Inhalte im TI-Messenger-Client
 |gemSpec_TI-Messenger-Client
@@ -236,7 +236,7 @@ Die Änderungen an den Anforderungen sind hier zusammengefasst.
 |A_22955 Anforderungen-Gutachten aus der Konferenz der unabhängigen Datenschutzaufsichtsbehörden
 |gemSpec_TI-Messenger-Client
 |Produktgutachten
-|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*. 
+|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*.
 
 |A_22964 Zugriffsschutz auf Administrationsfunktionen
 |gemSpec_TI-Messenger-Client
@@ -261,17 +261,17 @@ Die Änderungen an den Anforderungen sind hier zusammengefasst.
 |A_22809 Flächendeckende Verwendung von TLS für Hersteller
 |gemSpec_TI-Messenger-FD
 |Produktgutachten
-|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*. 
+|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*.
 
 |A_22818 Sicherheitsrisiken von Software-Bibliotheken minimieren
 |gemSpec_TI-Messenger-FD
 |Produktgutachten
-|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*. 
+|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*.
 
 |A_22816 Device Verification, Cross-Signing und SSSS für TI-Messenger-Fachdienste
 |gemSpec_TI-Messenger-FD
 |Produktgutachten
-|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*. 
+|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*.
 
 |A_22812 Interoperabilität von Zusatzfunktionen für den TI-Messenger-Fachdienst
 |gemSpec_TI-Messenger-FD
@@ -281,17 +281,17 @@ Die Änderungen an den Anforderungen sind hier zusammengefasst.
 |A_22808 Push-Benachrichtigungen Messenger-Service
 |gemSpec_TI-Messenger-FD
 |Produktgutachten
-|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*. 
+|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*.
 
 |A_22811 Löschfristen für Matrix-Homeserver
 |gemSpec_TI-Messenger-FD
 |Produktgutachten
-|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*. 
+|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*.
 
 |A_22810 Abweichungen vom Matrix-Standard
 |gemSpec_TI-Messenger-FD
 |Produktgutachten
-|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*. 
+|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*.
 |===
 
 === CR_008 - User-Agent für TI-M Clients
@@ -308,13 +308,13 @@ Der TI-Messenger Client soll bestimmte Kennungsparameter an den TI-Messenger Fac
 [cols="1,1,3"]
 |===
 |*Dokument*|*Alt*|*Neu*
-|Dienst 
-|In Abbildung 20 wird bei einigen Aufrufen nach Erhalt des search-accesstoken die MXID des Users verwendet. Diese wird für die Authentisierung nicht benötigt und die Rückgabe an den Client wird ein FHIR Bundle sein. 
+|Dienst
+|In Abbildung 20 wird bei einigen Aufrufen nach Erhalt des search-accesstoken die MXID des Users verwendet. Diese wird für die Authentisierung nicht benötigt und die Rückgabe an den Client wird ein FHIR Bundle sein.
 |https://github.com/gematik/api-ti-messenger/blob/feature/C_11306/images/diagrams/TI-Messenger-Dienst/Ressourcen/UC_Directory_search_Seq.png
-|Dienst 
+|Dienst
 |In Kapitel 5.6 "Pro HealthcareService darf nur eine Endpoint-Ressource für den payloadType "TI-Messenger chat" existieren.
 |Diese Einschränkung wird gestrichen.
-|Client und Fachdienst 
+|Client und Fachdienst
 |AFO A_22955 hat bisher zwei Anforderungen formuliert, die beide schwer verständlich waren. Weiterhin war eine davon (Verschlüsselung) in der angegeben Form nicht sinnvoll erfüllbar, während die andere (Zwangsbeendigung von Sitzungen) durch den Fachdienst zu iplementieren ist.
 |Diese AFO wurde aufgeteilt in eine AFO für den Client, welche die Maßnahmen zum Schutz der gespeicherten Daten spezifiziert, sowie eine weitere AFO für den Fachdienst, welche die Zwangsterminierung von aktiven Sitzungen behandelt.
 |Client
