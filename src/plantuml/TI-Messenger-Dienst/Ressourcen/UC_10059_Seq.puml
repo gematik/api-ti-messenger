@@ -83,7 +83,7 @@ alt#LightGrey #AliceBlue <size:16>kein gültiges owner-accesstoken vorhanden</si
   note right: <size:16>Die Prüfschritte sind der \n<size:16>gemSpec_VZD_FHIR_Directory \n<size:16>zu entnehmen</size>
   |||
     opt#LightGrey #MistyRose <size:16>Abbruch</size>
-    Auth --> C: Tokensignatur fehlerhaft
+    Auth --> C: Tokenprüfung fehlgeschlagen
     C --> U: keine Berechtigung
     |||
     end
