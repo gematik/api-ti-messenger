@@ -73,8 +73,8 @@ Das Vertrauen zu den Registrierungsdiensten der TI-Messenger Anbieter wird herge
 
 Das vom Registrierungsdienst ausgestellte id_token wird durch das FHIR-Directory geprüft (Algorithmus, Signatur, Signaturzertifikat (Zertifikatstyp, technische Rolle, hash des Zertifikats, OCSP)). Das zur Signatur des id_token verwendete Zertifikat muss aus der Komponenten-PKI der TI stammen (Zertifikatstyp C.FD.SIG, technische Rolle oid_tim). Das Zertifikat kann vom TI-Messenger Anbieter über einen Service der TI-Komponenten-PKI erzeugt werden. Der TI-Messenger Anbieter muss auch einen Download-Punkt für das Zertifikat bereitstellen, damit das FHIR-Directory für die Signaturprüfung des id_tokens, Zugriff auf das Zertifikat erhält.
 
-.Vereinfachter Ablauf zur Änderung der Einträge im FHIR-Directory
-image::diagrams/architecture/SequenceDiagram.FHIR-Directory.owner.svg[SequenceDiagram.FHIR-Directory.owner]
+.Vereinfachter Ablauf zur Änderung der Organisations Einträge im FHIR-Directory
+image::diagrams/TI-Messenger-Dienst/Ressourcen/UC_10059_Seq.svg[FHIR-Directory owner organization]
 
 Im Sequenzdiagramm ist dargestellt, dass für die Authentisierung des Org-Admin am Auth-Service nur noch das *id_token* vom Registrierungs-Dienst benötigt wird.
 
