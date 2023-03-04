@@ -9,7 +9,7 @@
 @startuml
 skinparam sequenceMessageAlign direction
 skinparam minClassWidth 200
-skinparam BoxPadding 1
+skinparam BoxPadding 5
 skinparam sequenceReferenceHeaderBackgroundColor palegreen
 scale max 2048 width
 
@@ -41,7 +41,9 @@ ActorFontName Aapex
       participant Auth as "Auth-Service"
       participant VZD as "FHIR-Directory"
     end box
+    box <size:18>Ti-Messenger-Fachdienst</size> #WhiteSmoke
     participant RD as "Registrierungs-Dienst"
+    end box
 
 |||
 note over U, C: <size:17>Die Organisation hat einen Messenger-Service\n<size:17>bereitgestellt bekommen, der Teil der Föderation ist</size>
@@ -52,25 +54,25 @@ U->C: FHIR Ressourcen im \nVZD-FHIR-Directory \nhinzufügen
 C->C: Prüfung, ob gültiges \nowner-accesstoken \nvorliegt
 
 |||
-alt#LightGrey #AliceBlue <size:16>kein gültiges owner-accesstoken für Schreibzugriff vorhanden</size>
+alt#LightGrey #AliceBlue <size:16>kein gültiges owner-accesstoken vorhanden</size>
 |||
   alt#LightGrey #LightBlue <size:16>Akteur ist nicht am Registrierungs-Dienst angemeldet</size>
     |||
-    U->C: Mit einem Admin-Account \nam Registrierungs-Dienst \nanmelden
-    C->RD: POST /login (Client-Credential)
+    U->C: Mit Admin-Account \nam Registrierungs-Dienst \nanmelden
+    C->RD: Login mit Client-Credentials + 2.Faktor
     note right: <size:16>Schnittstelle wird nicht \n<size:16>durch die gematik spezifiziert</size>
       activate RD
-    RD->RD: prüfe \nClient-Credential
+    RD->RD: prüfe Client-Credentials\nund 2. Faktor
     RD-->C: status
       deactivate RD
     C-->U: Erfolgreich angemeldet
     |||
   end
   |||
-  C -> RD: ID_TOKEN anfragen (z. B. GET /regserv/request_Token)
+  C -> RD: RegService-OpenID-Token anfragen (z. B. GET /regserv/request_Token)
   note right: <size:16>Schnittstelle wird nicht \n<size:16>durch die gematik spezifiziert</size>
     activate RD 
-  RD -> RD: Verifizierung des \nAkteurs \n(Anhand des \nNutzer-Accounts)
+  RD -> RD: Verifizierung des\nangemeldeten Akteurs 
   RD --> C: RegService-OpenID-Token {telematikID, professionOID, Signaturzertifikat (x5c)}
     deactivate RD
   |||
@@ -78,6 +80,7 @@ alt#LightGrey #AliceBlue <size:16>kein gültiges owner-accesstoken für Schreibz
     activate Auth
     |||
   Auth -> Auth: Prüfung des Token
+  note right: <size:16>Die Prüfschritte sind der \n<size:16>gemSpec_VZD_FHIR_Directory \n<size:16>zu entnehmen</size>
   |||
     opt#LightGrey #MistyRose <size:16>Abbruch</size>
     Auth --> C: Tokensignatur fehlerhaft
@@ -96,13 +99,13 @@ group <size:16>FHIR-Directory Eintrag erstellen</size>
   |||
   group <size:16>FHIR-Ressource der Organisation anzeigen</size>
   |||
-  C->FP: POST /owner/HealthcareService/?... \nFinde Datensatz für eigene TelematikID \nAuthorization Bearer owner-accesstoken
+  C->FP: FHIR-Operation um eigenen Datensatz anzuzeigen\nAuthorization Bearer owner-accesstoken
     Activate FP
   FP->FP: prüfe \nowner-accesstoken
   FP->VZD: HTTPS Forward
     Activate VZD
-  VZD->VZD: suche Eintrag
-  VZD-->FP: result body json
+  VZD->VZD: Eintrag suchen
+  VZD-->FP: FHIR Bundle
     Deactivate VZD
   FP-->C: HTTPS Forward
     Deactivate FP
@@ -112,13 +115,13 @@ group <size:16>FHIR-Directory Eintrag erstellen</size>
   |||
   group <size:16>FHIR-Ressource der Organisation erstellen/ändern</size>
   |||
-  C->FP: FHIR-Operationen um eigenen Datensatz zu verwalten \nAuthorization Bearer owner-accesstoken
+  C->FP: FHIR-Operationen um eigenen Datensatz zu bearbeiten\nAuthorization Bearer owner-accesstoken
     Activate FP
   FP->FP: prüfe \nowner-accesstoken
   FP->VZD: HTTPS Forward
     Activate VZD
-  VZD->VZD: Eintrag hinzufügen
-  VZD-->FP: result body json
+  VZD->VZD: Eintrag bearbeiten
+  VZD-->FP: Status
     Deactivate VZD
   FP-->C: HTTPS Forward
      Deactivate FP

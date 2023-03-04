@@ -10,37 +10,34 @@ endif::[]
 
 image:gematik_logo.svg[width=70%]
 
-=== AF_10059 Add organisation resources to directory service
-With the aquisition of the SMC-B an entry for the organisation will be created in the VZD-FHIR directory by the [TODO]. 
+=== AF_10059 Add organization resources to directory service
+With this use case, an actor in the role of "Org-Admin" makes actors of his organization discoverable and reachable for other actors in the TI Messenger service. For this purpose, FHIR endpoint resources with the MXID are stored in the organization directory (HealthcareService) of the VZD FHIR directory. Organizations CAN administer several FHIR resources per organization and thus structure incoming communication processes organizationally and thematically (see [gemSpec_VZD_FHIR_Directory]).
 
 .use case description
 [%collapsible%open]
 ====
 [caption=]
-Add organisation resources to directory service
+Add organization resources to directory service
 [%header, cols="1,1"]
 |===
 | |description
 |Actor |Representative of an organisation in the "Org Admin" role
-|Trigger |An organisation of the German healthcare system wants to participate in the TI-Messenger service and needs to provide one or more messenger services
+|Trigger |The administrator of the organization (Org-Admin) wants to make his organization accessible by storing the MXIDs of the actors of the organization in the VZD-FHIR directory.
 |Components a|
-              * Front end of the registration service, 
-              * Registrierungs-Dienst, 
-              * VZD-FHIR directory,
-              * Messenger-Service 
+              * TI-Messenger-Client with Org-Admin-Funktionality
+              * TI-Messenger Registration Service
+              * Auth-Service 
+              * FHIR-Proxy
+              * FHIR-Directory
 |Preconditions a| 
-                  * There is a contractual relationship with a TI-Messenger provider. 
-                  * The operator has a front end of the registration service for communication with the registration service.
-                  * The used front end of the registration service is registered with the responsible IDP service.
-                  * The SMC-B inserted in the eHealth card terminal is enabled.
-                  * The registration service can authenticate itself with the VZD-FHIR directory server for write access
-                    with OAuth2.
-|Input data |Admin account, identity of organisation (SMC-B)
+                  * A messenger service has been provided for the organization and an entry of the organization exists in the FHIR directory 
+                  * The organization's administrator has a TI Messenger client (with enhanced Org Admin functionality). 
+                  * A trust relationship exists between TI-Messenger registration service and the FHIR directory
+                  * The organization's administrator can authenticate at its responsible IDP service registration service.
+|Input data |FHIR organization ressources
 |Result a|
-            * The messenger service for the organisation has been created.
-            * The Matrix domain of the new messenger service was entered as an endpoint in the VZD-FHIR directory and  
-              included in the federation.
-|Output data |New messenger service for the organisation, status
+            updated FHIR organization ressources, status
+|Output data | updated FHIR organization ressources
 |===
 ====
 
