@@ -326,4 +326,7 @@ Der TI-Messenger Client soll bestimmte Kennungsparameter an den TI-Messenger Fac
 |Client und Fachdienst
 |Bisher haben die Spezifikationen von Client und Fachdienst Anforderungen enthalten, die eine CC-Evaluierung als Ersatz für das Produktgutachten ermöglichten. Ohne Notwendigkeit für ein Produktgutachten sind diese Anforderungen jedoch ncht zweckmäßig.
 |Die Anforderungen sind entfallen.
+|Client
+|Bisher hat die Spezifikation des Clients die Generierung datenschutzfreundlicher MXIDs (A_22719) gefordert und ein entsprechendes Anzeptanzkriterium (ML-124045) formuliert. Die Anzeige der MXID wurde per normativem Fließtext untersagt.
+|Die Anforderung und das Akzeptanzkriterium sind entfallen und der normative Fließtext schreibt nun sogar die Anzeige der MXID vor, wenn sich Akteure mit identischen Displaynamen in einem Raum befinden.
 |===
