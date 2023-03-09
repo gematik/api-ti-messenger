@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: TiMessengerTestDriver
   description: REST interface to automate the test of a TI-Messenger client implementation.
-  version: 0.4.5
+  version: 0.4.6
   contact:
     name: gematik GmbH
     email: software-development@gematik.de
@@ -1762,6 +1762,10 @@ components:
           $ref: "#/components/schemas/ApplicationType"
         contact:
           $ref: "#/components/schemas/ContactInfo"
+        matrixVersion:
+          type: string
+          example: "1.3"
+          description: Implemented version of matrix protocol https://spec.matrix.org/latest/
 
     ClientSoftwareInfo:
       description: "General information about the client software"
