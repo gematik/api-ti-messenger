@@ -36,7 +36,6 @@ ActorFontName Aapex
 
 box <size:18>Messenger-Service\n #WhiteSmoke
 participant MP as "Messenger-Proxy"
-participant MH as "Matrix-Homeserver"
 end box
 participant RD as "Registrierungs-Dienst"
 box <size:18>VZD-FHIR-Directory</size> #WhiteSmoke
@@ -71,13 +70,12 @@ loop#LightGrey <size:16>alle 1h</size>
         RD->RD: HealthStateCheck_VZD erhöhen\n(HealthStateCheck_VZD+1)
         alt#LightGrey <size:16>HealthStateCheck_VZD=3</size>
           RD ->?: Incident-Event erzeugen()
-          RD->RD++: letzte vorhandene Föderationsliste puffern() \n{TTL_Föderationsliste=24h}
+          RD->RD++: letzte vorhandene Föderationsliste puffern() \n{TTL_Föderationsliste=48h}
           return Föderationsliste
         |||
         end
       end
     end 
-    'RD-[hidden]> RD
     deactivate RD
   end
 end
@@ -98,16 +96,9 @@ alt#LightGrey <size:16>HealthState_VZD=gesund UND Alter_Föderationsliste>=1h </
     <size:16>Provider authentifizieren und Föderationsliste abrufen</size>
   end ref
   |||
-  
-'else <size:16>HealthState_VZD!=gesund ODER Alter_Föderationsliste<1h</size>
-'else <size:16>Alter_Föderationsliste<1h ODER TTL_Föderationsliste vorhanden</size>
-
-  'RD->RD: FLStatus_RD=aktuell
-
 end
 
 break#LightGrey #LightPink <size:16>Alter_Föderationsliste>TTL_Föderationsliste</size>
-  'RD-->MP: FLStatus_RD=veraltet
   RD-->MP: FLStatus_RD=veraltet
   MP->MP: unterbinde Registrierungsdienst-Requests(Dauer=1h)
   MP->MP: blockiere Kommunikation zu anderen Homeservern()
