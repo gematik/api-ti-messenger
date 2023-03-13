@@ -51,6 +51,7 @@ C->MP: Invite-Event
 == <font color=green><size:16>  Berechtigungskonzept - Stufe 1</size></font> == 
     |||
       ref over MP, MP: <size:17>**AF_10064** - \tFöderationszugehörigkeit eines \n<size:17>        \tMessenger-Service prüfen</size>\n 
+      note right: <size:16>Stufe 1 - Prüfung gemäß </size>\n<size:16>Client-Server Kommunikation</size>
     |||
 
 alt#LightGrey #MISTYROSE  <size:16>Matrix-Domain nicht in der Föderation enthalten</size>
@@ -83,7 +84,10 @@ MH->MH: Prüfung auf \nOrganisationszugehörigkeit
    |||
       MH->MP: Matrix-Invite-Event \nwird weitergeleitet
       deactivate MH
-      |||
+        |||
+        ref over MP, MP: <size:17>**AF_10064** - \tFöderationszugehörigkeit eines \n<size:17>        \tMessenger-Service prüfen</size>\n 
+        note left: <size:16>Stufe 1 - Prüfung gemäß </size>\n<size:16>Server-Server Kommunikation</size>
+        |||
       MP->MP2: Matrix-Invite-Event \nwird weitergeleitet
       activate MP2 #SALMON
       
@@ -92,6 +96,7 @@ MH->MH: Prüfung auf \nOrganisationszugehörigkeit
       |||
 
         ref over MP2, MP2: <size:17>**AF_10064** - \tFöderationszugehörigkeit eines \n<size:17>        \tMessenger-Service prüfen</size>\n 
+        note right: <size:16>Stufe 1 - Prüfung gemäß </size>\n<size:16>Server-Server Kommunikation</size>
         |||
      
         alt#LightGrey #MISTYROSE  <size:16>Matrix-Domain nicht in der Föderation enthalten</size>
