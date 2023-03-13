@@ -70,7 +70,7 @@ loop#LightGrey <size:16>alle 1h</size>
         RD->RD: HealthStateCheck_VZD erhöhen\n(HealthStateCheck_VZD+1)
         alt#LightGrey <size:16>HealthStateCheck_VZD=3</size>
           RD ->?: Incident-Event erzeugen()
-          RD->RD++: letzte vorhandene Föderationsliste puffern() \n{TTL_Föderationsliste=48h}
+          RD->RD++: letzte vorhandene Föderationsliste puffern() \n{TTL_Föderationsliste=72h}
           return Föderationsliste
         |||
         end
