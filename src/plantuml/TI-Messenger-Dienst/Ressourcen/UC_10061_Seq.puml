@@ -102,8 +102,9 @@ note over U2, MP2: \n<size:17>Der Akteur B ist erfolgreich beim Messenger Servic
     
     |||
       ref over MP1, MP1: <size:17>**AF_10064** - \tFöderationszugehörigkeit eines \n<size:17>        \tMessenger-Service prüfen</size>\n 
+      note right: <size:16>Stufe 1 - Prüfung gemäß </size>\n<size:16>Client-Server Kommunikation</size>
     |||
-      opt#LightGrey #MistyRose <size:16>Abbruch</size>
+      break#LightGrey #MistyRose <size:16>Abbruch</size>
       |||
       MP1-->C1: HTTP 401 \nUnauthorized
       |||
@@ -120,13 +121,17 @@ note over U2, MP2: \n<size:17>Der Akteur B ist erfolgreich beim Messenger Servic
     MH1->MP1: POST /_matrix/federation/v1\n/invite/{roomId}/{eventId} 
       deactivate MH1
     |||
+    ref over MP1, MP1: <size:17>**AF_10064** - \tFöderationszugehörigkeit eines \n<size:17>        \tMessenger-Service prüfen</size>\n 
+    note left: <size:16>Stufe 1 - Prüfung gemäß </size>\n<size:16>Server-Server Kommunikation</size>
+    |||
     MP1->MP2: HTTP(S) Forward
+    note right: <size:16>Stufe 1 - Prüfung gemäß </size>\n<size:16>Server-Server Kommunikation</size>
     |||
       activate MP2
       ref over MP2, MP2: <size:17>**AF_10064** - \tFöderationszugehörigkeit eines \n<size:17>        \tMessenger-Service prüfen</size>\n 
     |||
 
-      opt#LightGrey #MistyRose <size:16>Abbruch</size>
+      break#LightGrey #MistyRose <size:16>Abbruch</size>
       |||
       MP2-->MP1: HTTP 401 \nUnauthorized
       |||
@@ -139,7 +144,7 @@ note over U2, MP2: \n<size:17>Der Akteur B ist erfolgreich beim Messenger Servic
       end
 
     |||
-      ref over MP2, MH2 : <size:16>Anhang B - Stufen der Berechtigungsprüfung</size>\n
+      ref over MP2, MH2 : <size:16>Anhang B - Stufen der Berechtigungsprüfung</size>\n <size:16>Stufe 2 und 3</size>\n
     |||
     MP2->MH2: HTTP(S) Foward
       activate MH2
