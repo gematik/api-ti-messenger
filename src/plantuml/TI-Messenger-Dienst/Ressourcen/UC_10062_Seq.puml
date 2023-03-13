@@ -55,19 +55,25 @@ note over U1, U2: \n<size:17>Die Akteure sind auf dem selben Messenger-Service a
     activate C1 #AliceBlue
   C1-[#red]>MP1: Matrix-Request
     activate MP1
-
   MP1-[#red]>MH1: HTTP(S) Forward
     activate MH1
   MH1->MH1: Event \nverarbeiten
   |||
   MH1->MP1: Matrix-Request
     deactivate MH1
-  |||
+    |||
+    ref over MP1, MP1: <size:17>**AF_10064** - \tFöderationszugehörigkeit eines \n<size:17>        \tMessenger-Service prüfen</size>\n 
+    note left: <size:16>Stufe 1 - Prüfung gemäß </size>\n<size:16>Server-Server Kommunikation</size>
+  |||  
   MP1-[#red]>MP2: HTTP(S) Forward
     activate MP2
-
+  |||
+  ref over MP2, MP2: <size:17>**AF_10064** - \tFöderationszugehörigkeit eines \n<size:17>        \tMessenger-Service prüfen</size>\n 
+  note right: <size:16>Stufe 1 - Prüfung gemäß </size>\n<size:16>Server-Server Kommunikation</size>
+  |||
   MP2-[#red]>MH2: HTTP(S) Foward
   |||
+
     activate MH2
   MH2->MH2: Event \nverarbeiten
   |||
