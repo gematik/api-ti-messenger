@@ -42,7 +42,7 @@ ActorFontName Aapex
 
 |||
     Activate MP
-  MP->MP: prüfe im Event\nob Matrix-Domain \nder MXID \nin der Föderationsliste \nvorhanden ist
+  MP->MP: prüfe im Event\nob Matrix-Domain(s) \nin der Föderationsliste \nvorhanden ist/sind
 
 |||
 alt#LightGrey #AliceBlue <size:16>Matrix-Domain ist nicht in der Föderationsliste enthalten</size>
