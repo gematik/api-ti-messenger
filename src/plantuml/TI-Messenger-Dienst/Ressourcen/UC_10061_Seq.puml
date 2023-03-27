@@ -106,11 +106,9 @@ note over U2, MP2: \n<size:17>Der Akteur B ist erfolgreich beim Messenger Servic
     |||
       break#LightGrey #MistyRose <size:16>Abbruch</size>
       |||
-      MP1-->C1: HTTP 401 \nUnauthorized
+      MP1-->C1: HTTP 403 \nForbidden
       |||
-      C1-->C1: Abmeldung der Session
-      |||
-      C1-->U1: Anmeldung nicht \nerfolgreich
+      C1-->U1: Einladung nicht \nerfolgreich
       |||
       end
       |||
@@ -133,13 +131,11 @@ note over U2, MP2: \n<size:17>Der Akteur B ist erfolgreich beim Messenger Servic
 
       break#LightGrey #MistyRose <size:16>Abbruch</size>
       |||
-      MP2-->MP1: HTTP 401 \nUnauthorized
+      MP2-->MP1: HTTP 403 \nForbidden
       |||
       MP1-->C1: HTTP(S) forward
       |||
-      C1-->C1: Abmeldung der Session
-      |||
-      C1-->U1: Anmeldung nicht \nerfolgreich
+      C1-->U1: Einladung nicht \nerfolgreich
       |||
       end
 
