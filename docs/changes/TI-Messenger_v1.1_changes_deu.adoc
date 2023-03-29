@@ -104,8 +104,11 @@ PAYLOAD
 Die telematikID ist im Attribut "idNummer" angegeben.
 
 === CR_006 - Prüfung auf Föderationszugehörigkeit
-Zur Prüfung der Föderationszugehörigkeit ist es ausreichend, wenn am Messenger-Proxy im Authorization-Header die "origin" bei eingehender und "destination" bei ausgehender Föderation geprüft werden. Siehe auch https://spec.matrix.org/latest/server-server-api/#authentication[Matrix Specification
-Server-Server API Authentication].
+
+In der aktuellen Spezifikation (TI-Messenger v1.1.0) ist die Prüfung auf Föderation unzureichend, da zum Beispiel nach der erfolgreichen Einladung einer Person in einem gemeinsamen Chatraum anschließend die beteiligten Matrix-Homeserver nicht mehr auf Föderationszugehörigkeit geprüft werden.
+
+*Lösungsidee:* Die Prüfung auf Domainzugehörigkeit muss bei der Client-Server API bei jedem `Invite` und `createRoom` Event erfolgen. Bei einem `cresteRoom`-Event können zum Beispiel Invites integriert worden sein. Ebenfalls muss bei der Server-Server API die Föderationsprüfung bei jedem Matrix-Event erfolgen, damit nicht mehr zur Föderation gehörende Matrix-Homeserver weiter kontaktiert werden können. Hierfür ist vorgesehen, dass am Messenger-Proxy im Authorization-Header die "origin" bei eingehender und "destination" bei ausgehender Föderation geprüft werden. Siehe auch https://spec.matrix.org/latest/server-server-api/#authentication[Matrix Specification
+Server-Server API Authentication]. Der Messenger-Proxy muss entsprechend angepasst werden.
 
 === CR_007 - Änderung der Prüfverfahren
 
