@@ -1,0 +1,24 @@
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+:imagesdir: ../../images
+
+image:gematik_logo.svg[width=70%]
+
+==== *HOWTO: Authenticate as an organization to the VZD-FHIR-Directory*
+
+Only the owner of an SMC-B is able to change the organization entry in the VZD-FHIR-Directory. The card and an the entry are connected by the telematik-ID. So it would be necessary to use the SMC-B card to authenticate oneself as an organization in the german healthcare system every time access to the organization ressourcec in the VZD-FHIR-Directory is needed. Besides the card itself a card terminal and a connector need to be also in place. 
+
+The more user friendly approach...
+
+====
+. register the Registrierung-Dienst with the VZD-FHIR-Directory
+. store the telematik-ID used while ordering the TI-Messenger service
+. create an RegService-OpenID-Token for the Org-Admin
+. exchange the RegService-OpenID-Token for an owneraccess-Token
+. 

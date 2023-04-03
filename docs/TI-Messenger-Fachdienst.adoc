@@ -157,6 +157,9 @@ responses:
 
 The result from the FHIR-Proxy must be returned to the requesting Messenger-Proxy.
 
+=== Interface: I_requestToken
+The Interface I_requestToken shall be provided by the Registrierungs-Dienst to request an RegService-OpenID-Token that can be exchanged for an owner-accesstoken for organization ressources. The interface is only accessable for Org-Admin users.  
+
 == Messenger-Service
 The Messenger-Service consists of the subcomponent Messenger-Proxy and the Matrix-Homeserver. All requests are always forwarded to the Matrix-Homeserver via the Messenger-Proxy. A Messenger-Service is provided by an authorized actor via the frontend of the Registrierungs-Dienst.
 
