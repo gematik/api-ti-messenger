@@ -60,9 +60,10 @@ PAYLOAD
   "iat": "1516239022", 
   "exp": "1516239022"
 }
-For the signature of the token the C.FD.SIG certificates private key has to be used and the certificate must be included in the JWT HEADER.  
 ----
+For the signature of the token the C.FD.SIG certificates private key has to be used and the certificate must be included in the JWT HEADER.  
+
 === Exchange the RegService-OpenID-Token for an owneraccess-Token
-The RegService-OpenID-Token can be exchanged for an owneraccess-Token by authenticating oneself with the token against the /owner-authenticate endpoint of the VZD-FHIR-Directory. For further details, please check...https://github.com/gematik/api-vzd/blob/feature/ILF-FHIR_VZD/docs/gemILF_FHIR_VZD.adoc#211-authentication[VZD-FHIR-DIRECTORY-ENDPOINTS] TODO: Replace with final Link after Release
+The RegService-OpenID-Token can be exchanged for an owneraccess-Token by authenticating oneself with the token against the /owner-authenticate endpoint of the VZD-FHIR-Directory. For further details, please check: https://github.com/gematik/api-vzd/blob/feature/ILF-FHIR_VZD/docs/gemILF_FHIR_VZD.adoc#211-authentication[VZD-FHIR-DIRECTORY-ENDPOINTS] TODO: Replace with final Link after Release
 
 
