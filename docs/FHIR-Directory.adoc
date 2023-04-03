@@ -238,7 +238,7 @@ The ways to authenticate differ depending on the entry type (organization / prac
 
 *Organization entry*
 
-The */owner* endpoint requires a valid JSON Web Token (`owner-authenticate-token`) in the Authorization header. To get the token you need a 3rd Party Token from a permitted Registrierungs-Dienst (`registration-service-token`). With this token you can get the `owner-authenticate-token` from the */owner-authenticate* endpoint from the VZD-FHIR-Directory Auth Service. There are two steps necessary:
+The */owner* endpoint requires a valid JSON Web Token (`owner-accesstoken`) in the Authorization header. To get the token you need a 3rd Party Token from a permitted Registrierungs-Dienst (`RegService-OpenID-Token`). With this token you can get the `owner-accesstoken` from the */owner-authenticate* endpoint from the VZD-FHIR-Directory Auth Service. To get access to the FHIR ressources of the organization two steps are necessary:
 
 .*1. Login to the Registrierungs-Dienst as Org-Admin*
 
@@ -247,42 +247,12 @@ This is a proprietary interface. Only healthcare organizations are permitted to 
 .*2. Request a 3rd Party Token from the Registrierungs-Dienst*
 
 After login the Org-Admin requests a token from the Registrierungs-Dienst.
+This RegService-OpenID-Token can be exchanged for an owner-accesstoken by calling the /owner/authenticate endpoint of the VZD-FHIR-Directory.
 
-Now, the following example shows the call to the */owner-authenticate* endpoint to get the `owner-authenticate-token`.
 
-*REQUEST*
-====
-[source,text]
-----
-GET https://fhir-directory-test.vzd.ti-dienste.de/owner-authenticate
-----
-====
-
-====
-[source,yaml]
-----
-HEADER
-{
-  "User-Agent": "Faraday v2.6.0", 
-  "Content-Type": "application/json", 
-  "X-RegService-Token": "registration-service-token", 
-  "X-Registration-Server-Name": "registration-service.dev.service-ti.de"
-}
-----
-====
-
-*RESPONSE*
-====
-[source,yaml]
-----
-...
-BODY
-{
-  "jwt": "owner-authenticate-token",
-  "token_type": "bearer",
-  "expires_in": 86400
-}
-----
-====
+TIP: For further details on the process and what actions need to take place in advance... link:../docs/howtos/Fhir_Directory_authenticate_organization.adoc[Owner Authenticate]
 
 *Practitioner entry*
+
+
+

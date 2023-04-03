@@ -69,9 +69,9 @@ Bei der Authentisierung von Organisationen vertreten durch den Org-Admin am */ow
 *Optimierung* +
 Da ein Org-Admin-Account am Registrierungs-Dienst nur angelegt werden kann, wenn eine erfolgreiche Authentisierung einer Organisation mit Hilfe einer SMC-B durchgeführt wurde, ist eine erneute SMC-B Authentifizierung am FHIR-Directory nicht mehr erforderlich. Dies trifft zu, wenn das FHIR-Directory den Registrierungs-Diensten aller TI-Messenger-Anbieter vertraut und wenn die erforderlichen Daten (`telematikID` und `professionOID`) im *id_token* des Registrierungs-Denstes enthalten sind.
 
-Das Vertrauen zu den Registrierungsdiensten der TI-Messenger Anbieter wird hergestellt, wenn die TI-Messenger Anbieter Credentials beim FHIR-Directory für die Schnittstelle I_VZD_TIM_Provider_Services beantragen. Dabei übergibt der TI-Messenger Anbieter den hash des Signatur-Zertifikats, das für die Signatur des id_tokens verwendet wird an das FHIR-Directory.
+Das Vertrauen zu den Registrierungsdiensten der TI-Messenger Anbieter wird hergestellt, wenn die TI-Messenger Anbieter Credentials beim FHIR-Directory für die Schnittstelle I_VZD_TIM_Provider_Services beantragen. Dabei übergibt der TI-Messenger Anbieter den hash des Signatur-Zertifikats, das für die Signatur des id_tokens verwendet wird, an das FHIR-Directory.
 
-Das vom Registrierungsdienst ausgestellte id_token wird durch das FHIR-Directory geprüft (Algorithmus, Signatur, Signaturzertifikat (Zertifikatstyp, technische Rolle, hash des Zertifikats, OCSP)). Das zur Signatur des id_token verwendete Zertifikat muss aus der Komponenten-PKI der TI stammen (Zertifikatstyp C.FD.SIG, technische Rolle oid_tim). Das Zertifikat kann vom TI-Messenger Anbieter über einen Service der TI-Komponenten-PKI erzeugt werden. Der TI-Messenger Anbieter muss auch einen Download-Punkt für das Zertifikat bereitstellen, damit das FHIR-Directory für die Signaturprüfung des id_tokens, Zugriff auf das Zertifikat erhält.
+Das vom Registrierungsdienst ausgestellte id_token wird durch das FHIR-Directory geprüft (Algorithmus, Signatur, Signaturzertifikat (Zertifikatstyp, technische Rolle, hash des Zertifikats, OCSP)). Die genauen Prüfschritte sind der Spezifikation zum VZD-FHIR-Directory zu entnehmen. Das zur Signatur des id_token verwendete Zertifikat muss aus der Komponenten-PKI der TI stammen (Zertifikatstyp C.FD.SIG, technische Rolle oid_tim) und im JWT HEADER hinterlegt werden. Das Zertifikat kann vom TI-Messenger Anbieter über einen Service der TI-Komponenten-PKI erzeugt werden. 
 
 .Vereinfachter Ablauf zur Änderung der Organisations Einträge im FHIR-Directory
 image::diagrams/TI-Messenger-Dienst/Ressourcen/UC_10059_Seq.svg[FHIR-Directory owner organization]
@@ -85,17 +85,19 @@ Für Nutzer eines HBAs ändert sich nichts. Das heißt der `/owner-authenticate`
 ----
 HEADER
 {
-  "alg": "RS256",
+  "alg": "ES256",
   "typ": "JWT"
-  "x5u": "https://example.de/<certhash>"
+  "x5c": [
+     "<X.509 Sig-Cert, base64-encoded DER>",
+     "<X.509 CA-Cert, base64-encoded DER>"
 }
 PAYLOAD
 {
   "sub": "1234567890",
   "iss": "<url des Registrierungs-Dienst-Endpunkts, über den das Token ausgestellt wurde>",
   "aud": "https://vzd-fhir-directory.vzd.ti-dienste.de/owner-authenticate",
-  "professionOID": "1.2.276.0.76.4.53",
-  "idNummer": "5-234567890",
+  "professionOID": "<professionOID der Organisation>",
+  "idNummer": "<telematikID der Organisation>",
   "iat": "1516239022",
   "exp": "1516239022"
 }
