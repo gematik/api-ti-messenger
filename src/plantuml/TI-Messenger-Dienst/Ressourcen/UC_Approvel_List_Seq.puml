@@ -57,7 +57,7 @@ C->MP: Invite-Event
 alt#LightGrey #MISTYROSE  <size:16>Matrix-Domain nicht in der Föderation enthalten</size>
 |||
     |||
-    MP-->C: HTTP 401 \nUnauthorized
+    MP-->C: HTTP 403 \nForbidden
      activate C
     |||
     C-->C: Abmeldung der Session
@@ -102,7 +102,7 @@ MH->MH: Prüfung auf \nOrganisationszugehörigkeit
         alt#LightGrey #MISTYROSE  <size:16>Matrix-Domain nicht in der Föderation enthalten</size>
         |||
             |||
-            MP2-->MP: HTTP 401 \nUnauthorized
+            MP2-->MP: HTTP 403 \nForbidden
             MP-->C: HTTP(S) forward
              activate C
             |||
