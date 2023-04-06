@@ -317,15 +317,14 @@ Der TI-Messenger Client soll bestimmte Kennungsparameter an den TI-Messenger Fac
 |Dienst
 |In Abbildung 20 wird bei einigen Aufrufen nach Erhalt des search-accesstoken die MXID des Users verwendet. Diese wird für die Authentisierung nicht benötigt und die Rückgabe an den Client wird ein FHIR Bundle sein.
 |https://github.com/gematik/api-ti-messenger/blob/feature/C_11306/images/diagrams/TI-Messenger-Dienst/Ressourcen/UC_Directory_search_Seq.png
-|
-|Dienst
-|In Kapitel 5.6 "Pro HealthcareService darf nur eine Endpoint-Ressource für den payloadType "TI-Messenger chat" existieren.
-|Diese Einschränkung wird gestrichen.
-
 |5
 |Client und Fachdienst
 |Bisher haben die Spezifikationen von Client und Fachdienst Anforderungen enthalten, die eine CC-Evaluierung als Ersatz für das Produktgutachten ermöglichten. Ohne Notwendigkeit für ein Produktgutachten sind diese Anforderungen jedoch ncht zweckmäßig.
 |Die Anforderungen sind entfallen.
+|6
+|Dienst
+|In Kapitel 5.6 "Pro HealthcareService darf nur eine Endpoint-Ressource für den payloadType "TI-Messenger chat" existieren.
+|Diese Einschränkung wird gestrichen.
 |8
 |Client und Fachdienst
 |Es gab bisher keine Anforderungen zur Komplexität von Passwörtern und Mechanismen zur Verhinderung von deren Wiederverwendung.
