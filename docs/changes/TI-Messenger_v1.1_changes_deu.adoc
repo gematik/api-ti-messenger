@@ -310,40 +310,56 @@ Der TI-Messenger-Client und der TI-Messenger-Client mit Administrationsfunktione
 Der TI-Messenger Client soll bestimmte Kennungsparameter an den TI-Messenger Fachdienst im HTTP-Header übermitteln. Die Übermittlung wird mit der folgenden Änderung an gängige Standards angepasst.
 
 .*Spezifikationsoptimierungen*
-[cols="1,1,3"]
+[cols="1,1,1,3"]
 |===
-|*Dokument*|*Alt*|*Neu*
+|*interne laufende Nummer*|*Dokument*|*Alt*|*Neu*
+|1
 |Dienst
 |In Abbildung 20 wird bei einigen Aufrufen nach Erhalt des search-accesstoken die MXID des Users verwendet. Diese wird für die Authentisierung nicht benötigt und die Rückgabe an den Client wird ein FHIR Bundle sein.
 |https://github.com/gematik/api-ti-messenger/blob/feature/C_11306/images/diagrams/TI-Messenger-Dienst/Ressourcen/UC_Directory_search_Seq.png
+|
 |Dienst
 |In Kapitel 5.6 "Pro HealthcareService darf nur eine Endpoint-Ressource für den payloadType "TI-Messenger chat" existieren.
 |Diese Einschränkung wird gestrichen.
-|Client und Fachdienst
-|AFO A_22955 hat bisher zwei Anforderungen formuliert, die beide schwer verständlich waren. Weiterhin war eine davon (Verschlüsselung) in der angegeben Form nicht sinnvoll erfüllbar, während die andere (Zwangsbeendigung von Sitzungen) durch den Fachdienst zu iplementieren ist.
-|Diese AFO wurde aufgeteilt in eine AFO für den Client, welche die Maßnahmen zum Schutz der gespeicherten Daten spezifiziert, sowie eine weitere AFO für den Fachdienst, welche die Zwangsterminierung von aktiven Sitzungen behandelt.
-|Client
-|A_22802 fordert unter anderem die Ausgabe einer Prüfsumme zur Verifikation der Integrität einer installierten Version des TI-Messenger-Clients. Dies ist jedoch nicht zweckmäßig.
-|A_22802 wird abgelöst durch eine andere AFO, welche die Ausgabe jener Prüfsumme nicht mehr fordert.
-|Client und Fachdienst
-|Es gab bisher keine Anforderungen zur Komplexität von Passwörtern und Mechanismen zur Verhinderung von deren Wiederverwendung.
-|Client und Fachdienst wurden um Anforderungen ergänzt (A_23611, A_23612), die Vorgaben zur Wahl von Passwortrichtlinien machen, sowie zur Implementierung von Mechanismen im Client, die eine Wiederverwendung von Passwörtern an den Stellen verhindern, wo sie dem Homeserver das Brechen der E2EE ermöglichen würden.
+
+|5
 |Client und Fachdienst
 |Bisher haben die Spezifikationen von Client und Fachdienst Anforderungen enthalten, die eine CC-Evaluierung als Ersatz für das Produktgutachten ermöglichten. Ohne Notwendigkeit für ein Produktgutachten sind diese Anforderungen jedoch ncht zweckmäßig.
 |Die Anforderungen sind entfallen.
+|8
+|Client und Fachdienst
+|Es gab bisher keine Anforderungen zur Komplexität von Passwörtern und Mechanismen zur Verhinderung von deren Wiederverwendung.
+|Client und Fachdienst wurden um Anforderungen ergänzt (A_23611, A_23612), die Vorgaben zur Wahl von Passwortrichtlinien machen, sowie zur Implementierung von Mechanismen im Client, die eine Wiederverwendung von Passwörtern an den Stellen verhindern, wo sie dem Homeserver das Brechen der E2EE ermöglichen würden.
+|9
+|Client
+|A_22802 fordert unter anderem die Ausgabe einer Prüfsumme zur Verifikation der Integrität einer installierten Version des TI-Messenger-Clients. Dies ist jedoch nicht zweckmäßig.
+|A_22802 wird abgelöst durch eine andere AFO, welche die Ausgabe jener Prüfsumme nicht mehr fordert.
+|10
+|Client und Fachdienst
+|AFO A_22955 hat bisher zwei Anforderungen formuliert, die beide schwer verständlich waren. Weiterhin war eine davon (Verschlüsselung) in der angegeben Form nicht sinnvoll erfüllbar, während die andere (Zwangsbeendigung von Sitzungen) durch den Fachdienst zu iplementieren ist.
+|Diese AFO wurde aufgeteilt in eine AFO für den Client, welche die Maßnahmen zum Schutz der gespeicherten Daten spezifiziert, sowie eine weitere AFO für den Fachdienst, welche die Zwangsterminierung von aktiven Sitzungen behandelt.
+|11
 |Client
 |Bisher hat die Spezifikation des Clients die Generierung datenschutzfreundlicher MXIDs (A_22719) gefordert und ein entsprechendes Anzeptanzkriterium (ML-124045) formuliert. Die Anzeige der MXID wurde per normativem Fließtext untersagt.
 |Die Anforderung und das Akzeptanzkriterium sind entfallen und der normative Fließtext schreibt nun sogar die Anzeige der MXID vor, wenn sich Akteure mit identischen Displaynamen in einem Raum befinden.
+|12
 |Dienst
 |Bisher erfolgte die Zulassung auf Basis von Nachweisen und Tests in TU/RU.
 |Zulassung bedarf nun der Teilnahme an einer kontrollierten Inbetriebnahme und der Erbringung von Nachweisen in der Produktivumgebung, um Interoparbilitätsproblemen vorzubeugen.
+|14
 |Client
 |Bedeutung der Mandantenfähigkeit und des Zugriffschutzes für Administrationsfunktionen hat sich in bisherigen Gesprächen als unklar erwiesen, im besonderen die der "separaten User-Interfaces". Anforderungen wurden unterschiedlich interpretiert.
 |Ergänzung der bestehenden Anforderungen zur Mandantenfähigkeit und zum Zugriffsschutz für Administrationsfunktionen für die Verbesserung des Verständnisses. 
+|15
 |Client und Fachdienst
 |Spezifikation hat bisher in allen Fällen Ende-zu-Ende-Verschlüsselung (E2EE) gefordert, die bei öffentlichen Räumen aber nicht immer notwendig ist und bei hohen Teilnehmerzahlen (in Räumen) zu starken Performance-Einbußen führen kann.
 |Die Erlaubnis des Verzichts auf E2EE bei öffentlichen Räumen ist nun per Anforderung und normativem Fließtext geregelt.
+|16
 |Client
 |Anforderung zur Umsetzung von Löschfristen am Client hat bisher eine technisch kaum/nicht realisierbare Verfahrensweise gefordert.
 |Anforderung wurde umgeschrieben, um das reine Löschverhalten zu spezifizieren. Weiterhin wurde eine zusätzliche Anforderung eingebracht, die eine fristbasierte Benachrichtigung der Nutzer zur Datenbereinigung vorschreibt, sodass diese fallbasiert über die Löschung entscheiden können. Dies dient vor allem der Vermeidung logischer Fehler und schlechter Nutzererfahrung. Sollten Räume lokal gelöscht werden, denen jeweilige Nutzer noch angehören, würden diese jegliche Möglichkeit zur Wiederaufnahme der Kommunikation verlieren, weil die lokale Datenbasis entfernt wurde, während RÄume und Inhalte server-seitig noch existieren.
+|18
+|Client
+|Anforderung zur Berücksichtigung der OWASP Mobile Top 10 beinhaltet fehlerhafte Referenzenz auf Prüfvorschrift für den Produktgutachter des "ePA-Frontend des Versicherten" und des "E-Rezept-Frontend des Versicherten".
+|Der Verweis auf die genannten Prüfvorschrift wurde entfernt, weil die Umsetzung geeigneter Maßnahmen zur Abwehr der OWASP Mobile Top 10 Risiken dem Hersteller obliegt. Der Nachweis über Wahl und Umsetzung geeigneter Maßnahmen ist im Rahmen des geforderten Sicherheitsgutachtens zu erbringen und bedarf keiner dedizierten Prüfvorschrift.
 |===
