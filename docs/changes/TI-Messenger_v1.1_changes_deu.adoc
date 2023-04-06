@@ -317,6 +317,10 @@ Der TI-Messenger Client soll bestimmte Kennungsparameter an den TI-Messenger Fac
 |Dienst
 |In Abbildung 20 wird bei einigen Aufrufen nach Erhalt des search-accesstoken die MXID des Users verwendet. Diese wird für die Authentisierung nicht benötigt und die Rückgabe an den Client wird ein FHIR Bundle sein.
 |https://github.com/gematik/api-ti-messenger/blob/feature/C_11306/images/diagrams/TI-Messenger-Dienst/Ressourcen/UC_Directory_search_Seq.png
+|3
+|Client
+|In der Client Spezifikation war beschrieben, dass TI-Messenger Clients die MXID verstecken MÜSSEN.
+|Das verstecken müssen wurde entfernt und explizit erlaubt Matrix konform die MXID zu verwenden, um bei gleichem Displaynamen einen User eindeutig identifizieren zu können.
 |5
 |Client und Fachdienst
 |Bisher haben die Spezifikationen von Client und Fachdienst Anforderungen enthalten, die eine CC-Evaluierung als Ersatz für das Produktgutachten ermöglichten. Ohne Notwendigkeit für ein Produktgutachten sind diese Anforderungen jedoch ncht zweckmäßig.
@@ -361,4 +365,8 @@ Der TI-Messenger Client soll bestimmte Kennungsparameter an den TI-Messenger Fac
 |Client
 |Anforderung zur Berücksichtigung der OWASP Mobile Top 10 beinhaltet fehlerhafte Referenzenz auf Prüfvorschrift für den Produktgutachter des "ePA-Frontend des Versicherten" und des "E-Rezept-Frontend des Versicherten".
 |Der Verweis auf die genannten Prüfvorschrift wurde entfernt, weil die Umsetzung geeigneter Maßnahmen zur Abwehr der OWASP Mobile Top 10 Risiken dem Hersteller obliegt. Der Nachweis über Wahl und Umsetzung geeigneter Maßnahmen ist im Rahmen des geforderten Sicherheitsgutachtens zu erbringen und bedarf keiner dedizierten Prüfvorschrift.
+|19
+|Client
+|Im Anwendungsfall 6.5 Akteuer(User-HBA) im Verzeichnisdienst hinzufügen wird bei der Übergabe des Auth Code an das VZD-FHIR-Directory der Endpunkt /owner-authenticate verwendet.
+|Das VZD-FHIR-Directory bietet die Übergabe des Auth Code über den Endpunkt /signin-gematik-idp-dienst an. Das Sequentzdiagramm zum Anwendungsfall wurde entsprechend angepasst. https://github.com/gematik/api-ti-messenger/blob/feature/C_11306/docs/use-cases/VZD-AF10058-add-practitioner.adoc 
 |===
