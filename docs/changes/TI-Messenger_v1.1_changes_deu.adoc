@@ -334,4 +334,16 @@ Der TI-Messenger Client soll bestimmte Kennungsparameter an den TI-Messenger Fac
 |Client
 |Bisher hat die Spezifikation des Clients die Generierung datenschutzfreundlicher MXIDs (A_22719) gefordert und ein entsprechendes Anzeptanzkriterium (ML-124045) formuliert. Die Anzeige der MXID wurde per normativem Fließtext untersagt.
 |Die Anforderung und das Akzeptanzkriterium sind entfallen und der normative Fließtext schreibt nun sogar die Anzeige der MXID vor, wenn sich Akteure mit identischen Displaynamen in einem Raum befinden.
+|Dienst
+|Bisher erfolgte die Zulassung auf Basis von Nachweisen und Tests in TU/RU.
+|Zulassung bedarf nun der Teilnahme an einer kontrollierten Inbetriebnahme und der Erbringung von Nachweisen in der Produktivumgebung, um Interoparbilitätsproblemen vorzubeugen.
+|Client
+|Bedeutung der Mandantenfähigkeit und des Zugriffschutzes für Administrationsfunktionen hat sich in bisherigen Gesprächen als unklar erwiesen, im besonderen die der "separaten User-Interfaces". Anforderungen wurden unterschiedlich interpretiert.
+|Ergänzung der bestehenden Anforderungen zur Mandantenfähigkeit und zum Zugriffsschutz für Administrationsfunktionen für die Verbesserung des Verständnisses. 
+|Client und Fachdienst
+|Spezifikation hat bisher in allen Fällen Ende-zu-Ende-Verschlüsselung (E2EE) gefordert, die bei öffentlichen Räumen aber nicht immer notwendig ist und bei hohen Teilnehmerzahlen (in Räumen) zu starken Performance-Einbußen führen kann.
+|Die Erlaubnis des Verzichts auf E2EE bei öffentlichen Räumen ist nun per Anforderung und normativem Fließtext geregelt.
+|Client
+|Anforderung zur Umsetzung von Löschfristen am Client hat bisher eine technisch kaum/nicht realisierbare Verfahrensweise gefordert.
+|Anforderung wurde umgeschrieben, um das reine Löschverhalten zu spezifizieren. Weiterhin wurde eine zusätzliche Anforderung eingebracht, die eine fristbasierte Benachrichtigung der Nutzer zur Datenbereinigung vorschreibt, sodass diese fallbasiert über die Löschung entscheiden können. Dies dient vor allem der Vermeidung logischer Fehler und schlechter Nutzererfahrung. Sollten Räume lokal gelöscht werden, denen jeweilige Nutzer noch angehören, würden diese jegliche Möglichkeit zur Wiederaufnahme der Kommunikation verlieren, weil die lokale Datenbasis entfernt wurde, während RÄume und Inhalte server-seitig noch existieren.
 |===
