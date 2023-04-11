@@ -361,12 +361,16 @@ Der TI-Messenger Client soll bestimmte Kennungsparameter an den TI-Messenger Fac
 |Client
 |Anforderung zur Umsetzung von Löschfristen am Client hat bisher eine technisch kaum/nicht realisierbare Verfahrensweise gefordert.
 |Anforderung wurde umgeschrieben, um das reine Löschverhalten zu spezifizieren. Weiterhin wurde eine zusätzliche Anforderung eingebracht, die eine fristbasierte Benachrichtigung der Nutzer zur Datenbereinigung vorschreibt, sodass diese fallbasiert über die Löschung entscheiden können. Dies dient vor allem der Vermeidung logischer Fehler und schlechter Nutzererfahrung. Sollten Räume lokal gelöscht werden, denen jeweilige Nutzer noch angehören, würden diese jegliche Möglichkeit zur Wiederaufnahme der Kommunikation verlieren, weil die lokale Datenbasis entfernt wurde, während RÄume und Inhalte server-seitig noch existieren.
+|17
+|Dienst
+|Im Anwendungsfall 6.5 Akteuer(User-HBA) im Verzeichnisdienst hinzufügen wird bei der Übergabe des Auth Code an das VZD-FHIR-Directory der Endpunkt /owner-authenticate verwendet.
+|Das VZD-FHIR-Directory bietet die Übergabe des Auth Code über den Endpunkt /signin-gematik-idp-dienst an. Das Sequentzdiagramm zum Anwendungsfall wurde entsprechend angepasst. https://github.com/gematik/api-ti-messenger/blob/feature/C_11306/docs/use-cases/VZD-AF10058-add-practitioner.adoc 
 |18
 |Client
 |Anforderung zur Berücksichtigung der OWASP Mobile Top 10 beinhaltet fehlerhafte Referenzenz auf Prüfvorschrift für den Produktgutachter des "ePA-Frontend des Versicherten" und des "E-Rezept-Frontend des Versicherten".
 |Der Verweis auf die genannten Prüfvorschrift wurde entfernt, weil die Umsetzung geeigneter Maßnahmen zur Abwehr der OWASP Mobile Top 10 Risiken dem Hersteller obliegt. Der Nachweis über Wahl und Umsetzung geeigneter Maßnahmen ist im Rahmen des geforderten Sicherheitsgutachtens zu erbringen und bedarf keiner dedizierten Prüfvorschrift.
 |19
-|Client
-|Im Anwendungsfall 6.5 Akteuer(User-HBA) im Verzeichnisdienst hinzufügen wird bei der Übergabe des Auth Code an das VZD-FHIR-Directory der Endpunkt /owner-authenticate verwendet.
-|Das VZD-FHIR-Directory bietet die Übergabe des Auth Code über den Endpunkt /signin-gematik-idp-dienst an. Das Sequentzdiagramm zum Anwendungsfall wurde entsprechend angepasst. https://github.com/gematik/api-ti-messenger/blob/feature/C_11306/docs/use-cases/VZD-AF10058-add-practitioner.adoc 
+|Dienst
+|In der Beschreibung zur Suche wird im Sequenzdiagramm beschrieben, dass vom VZD-FHIR-Directory eine Anfrage an den Messenger Proxy gestellt wird, um den übegebenen Token prüfen zu lassen. Hierbei ist kein Port angegeben, die für die Zulassung bereitgestellte Variante des Directories wird allerdings nur Anfragen an Port 8448 stellen können.
+|In die Dienst-Spezifikation wurde aufgenommen, dass das VZD-FHIR-Directory für die Prüfung des übergebenen Tokens Zugriff auf den Endpunkt /_matrix/federation/v1/openid/userinfo über Port 8448 benötigt.
 |===

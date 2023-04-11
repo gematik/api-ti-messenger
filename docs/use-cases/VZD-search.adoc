@@ -35,6 +35,7 @@ Search Entries in the VZD-FHIR directory
                   *	The actor has an approved TI-Messenger client.
                   * The Matrix Home Server is a trusted IDP
                   * The actor can authenticate themselves using the matrix OpenID Token
+                  * The messenger proxy allows connections to the /_matrix/federation/v1/openid/userinfo endpoint via port 8448
 |Input data |Search, Matrix OpenID Token
 |Result a|The searched FHIR-Resources
 |Output data |FHIR Records

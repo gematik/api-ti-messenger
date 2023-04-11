@@ -67,7 +67,7 @@ alt#LightGrey #AliceBlue <size:16>kein gültiges search-accesstoken vorhanden</s
       deactivate mp
       
     |||
-    cl->au: GET /tim-authenticate?MatrixServerName (Auth Header mit Matrix-OpenID-Token)
+    cl->au: GET /tim-authenticate?mxId=... (Auth Header mit Matrix-OpenID-Token)
       activate au
     au->au: Prüfe ob \nMatrix Server Name in \nder Föderation enthalten ist
 
@@ -78,7 +78,7 @@ opt#LightGrey #MistyRose <size:16>Abbruch</size>
 end
 
 |||
-        au->mp: GET /openid/userinfo/?Matrix-OpenID-Token)
+        au->mp: GET /openid/userinfo?access_token=Matrix-OpenID-Token)
           activate mp
         mp->hs: HTTP(S) Forward
           activate hs
