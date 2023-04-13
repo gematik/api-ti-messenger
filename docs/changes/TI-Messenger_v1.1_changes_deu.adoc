@@ -373,4 +373,8 @@ Der TI-Messenger Client soll bestimmte Kennungsparameter an den TI-Messenger Fac
 |Dienst
 |In der Beschreibung zur Suche wird im Sequenzdiagramm beschrieben, dass vom VZD-FHIR-Directory eine Anfrage an den Messenger Proxy gestellt wird, um den übegebenen Token prüfen zu lassen. Hierbei ist kein Port angegeben, die für die Zulassung bereitgestellte Variante des Directories wird allerdings nur Anfragen an Port 8448 stellen können.
 |In die Dienst-Spezifikation wurde aufgenommen, dass das VZD-FHIR-Directory für die Prüfung des übergebenen Tokens Zugriff auf den Endpunkt /_matrix/federation/v1/openid/userinfo über Port 8448 benötigt.
+|20
+|Client
+|Die Afo A_23112 thematisiert die Bearbeitung und Löschung von Nachrichteninhalten. Ein Bearbeiten ist mit der Matrix Spezifikation 1.3 nicht möglich.
+|Die Afo wurde angepasst und der Teil bezogen auf die Bearbeitung von Inhalten entfernt. 
 |===
