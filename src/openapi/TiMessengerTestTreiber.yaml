@@ -271,7 +271,7 @@ paths:
       tags:
         - orgAdminFhirOrganization
       description: "Get organization from the selected device"
-      operationId: "Get organization"
+      operationId: "GetOrganization"
       responses:
         "200":
           description: "Data of organization from claimed client"
