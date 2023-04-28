@@ -373,7 +373,7 @@ paths:
       tags:
         - orgAdminFhirHealthcareService
       description: "Delete specific healthcareService regarding"
-      operationId: DeleteHealthcareService"
+      operationId: DeleteHealthcareService
       responses:
         "204":
           description: "Successfully delete healthcare service"
