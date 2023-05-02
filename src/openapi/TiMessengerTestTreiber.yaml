@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: TiMessengerTestDriver
   description: REST interface to automate the test of a TI-Messenger client implementation.
-  version: 0.3.0
+  version: 0.4.6
   contact:
     name: gematik GmbH
     email: software-development@gematik.de
@@ -37,8 +37,10 @@ tags:
     description: OrgAdmin operations of Locations of an organization to FHIR-VZD
   - name: practitionerFhirAdministration
     description: operations for practitioner to write to FHIR-VZD
+  - name: searchOnHomeserver
+    description: Search internally on homeserver
   - name: searchInFhirDirectory
-    description: Search for TIOrganization or TIPractitioner entries (VZD-FHIR-Directory)
+    description: Search for Organization or Practitioner entries (VZD-FHIR-Directory)
   - name: message
     description: message operations
   - name: room
@@ -86,6 +88,7 @@ paths:
   /devices/{deviceId}/claim:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/transactionIdHeader"
 
     post:
       tags:
@@ -115,6 +118,7 @@ paths:
   /devices/{deviceId}/unclaim:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/transactionIdHeader"
 
     post:
       tags:
@@ -140,6 +144,7 @@ paths:
   /devices/{deviceId}/login:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/transactionIdHeader"
 
     get:
       description: "Retrieve list of possible authentication flows"
@@ -195,6 +200,7 @@ paths:
   /devices/{deviceId}/logout:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/transactionIdHeader"
 
     post:
       description: "logout"
@@ -216,6 +222,7 @@ paths:
   /devices/{deviceId}/account:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/transactionIdHeader"
 
     get:
       tags:
@@ -243,6 +250,7 @@ paths:
   /devices/{deviceId}/fhir/fhirAuthenticate:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/transactionIdHeader"
 
     post:
       tags:
@@ -267,11 +275,12 @@ paths:
   /devices/{deviceId}/fhir/org:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/transactionIdHeader"
     get:
       tags:
         - orgAdminFhirOrganization
       description: "Get organization from the selected device"
-      operationId: "Get organization"
+      operationId: "GetOrganization"
       responses:
         "200":
           description: "Data of organization from claimed client"
@@ -285,6 +294,7 @@ paths:
   /devices/{deviceId}/fhir/org/healthcareService:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/transactionIdHeader"
 
     get:
       tags:
@@ -326,6 +336,7 @@ paths:
   /devices/{deviceId}/fhir/org/healthcareService/{hsId}:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/transactionIdHeader"
       - $ref: "#/components/parameters/healthcareServiceId"
 
     get:
@@ -373,7 +384,7 @@ paths:
       tags:
         - orgAdminFhirHealthcareService
       description: "Delete specific healthcareService regarding"
-      operationId: DeleteHealthcareService"
+      operationId: DeleteHealthcareService
       responses:
         "204":
           description: "Successfully delete healthcare service"
@@ -385,6 +396,7 @@ paths:
   /devices/{deviceId}/fhir/org/healthcareService/{hsId}/location:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/transactionIdHeader"
       - $ref: "#/components/parameters/healthcareServiceId"
 
     get:
@@ -431,6 +443,7 @@ paths:
   /devices/{deviceId}/fhir/org/healthcareService/{hsId}/location/{locId}:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/transactionIdHeader"
       - $ref: "#/components/parameters/healthcareServiceId"
       - $ref: "#/components/parameters/locationId"
 
@@ -492,6 +505,7 @@ paths:
   /devices/{deviceId}/fhir/org/healthcareService/{hsId}/endpoint:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/transactionIdHeader"
       - $ref: "#/components/parameters/healthcareServiceId"
 
     get:
@@ -538,6 +552,7 @@ paths:
   /devices/{deviceId}/fhir/org/healthcareService/{hsId}/endpoint/{endId}:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/transactionIdHeader"
       - $ref: "#/components/parameters/healthcareServiceId"
       - $ref: "#/components/parameters/endpointId"
 
@@ -597,11 +612,12 @@ paths:
   /devices/{deviceId}/fhir/mxidInFhirDirectory:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/transactionIdHeader"
 
     post:
       tags:
         - practitionerFhirAdministration
-      description: "Set the MXID in the own TIPractitioner FHIR resource."
+      description: "Set the MXID in the own Practitioner FHIR resource."
       operationId: setMxidInFhirDirectory
       responses:
         "201":
@@ -649,7 +665,7 @@ paths:
     delete:
       tags:
         - practitionerFhirAdministration
-      description: "Remove the MXID in the own TIPractitioner FHIR resource."
+      description: "Remove the MXID in the own Practitioner FHIR resource."
       operationId: removeMxidInFhirDirectory
       responses:
         "204":
@@ -665,15 +681,52 @@ paths:
         default:
           $ref: "#/components/responses/DefaultResponse"
 
-  /devices/{deviceId}/fhir/searchTIOrganizationInFhirDirectory:
+  /devices/{deviceId}/homeserver/search:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/transactionIdHeader"
+
+    get:
+      tags:
+        - searchOnHomeserver
+      description: "Returns a list of users on same homeserver that matches search parameters"
+      operationId: searchOnHomeserver
+      parameters:
+        - name: displayName
+          in: query
+          description: "Display name of account"
+          schema:
+            type: string
+        - name: mxId
+          in: query
+          description: "MxId of account"
+          schema:
+            type: string
+
+      responses:
+        "200":
+          description: "search result for given parameters"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HomeserverSearchResultList"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+  /devices/{deviceId}/fhir/searchOrganizationInFhirDirectory:
+    parameters:
+      - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/transactionIdHeader"
 
     get:
       tags:
         - searchInFhirDirectory
-      description: "Returns the found TIOrganization entries."
-      operationId: searchTIOrganizationInFhirDirectory
+      description: "Returns the found Organization entries."
+      operationId: searchOrganizationInFhirDirectory
       parameters:
         - name: healthcareServiceName
           in: query
@@ -682,42 +735,42 @@ paths:
             type: string
         - name: name
           in: query
-          description: "Name of the TIOrganization"
+          description: "Name of the Organization"
           schema:
             type: string
         - name: address
           in: query
-          description: "Address of the TIOrganization."
+          description: "Address of the Organization."
           schema:
             type: string
         - name: telematikId
           in: query
-          description: "The telematikId of the TIOrganization."
+          description: "The telematikId of the Organization."
           schema:
             type: string
         - name: typeCode
           in: query
-          description: "The type of the TIOrganization (TIOrganizationTypeVS.Code)."
+          description: "The type of the Organization (OrganizationTypeVS.Code)."
           schema:
             type: string
         - name: typeDisplay
           in: query
-          description: "The type of the TIOrganization (TIOrganizationTypeVS.Display)."
+          description: "The type of the Organization (OrganizationTypeVS.Display)."
           schema:
             type: string
         - name: contactMxid
           in: query
-          description: "MXID of the TIOrganization.contact."
+          description: "MXID of the Organization.contact."
           schema:
             type: string
         - name: contactName
           in: query
-          description: "Name of the TIOrganization.contact."
+          description: "Name of the Organization.contact."
           schema:
             type: string
         - name: contactPurpose
           in: query
-          description: "Purpose of the TIOrganization.contact."
+          description: "Purpose of the Organization.contact."
           schema:
             type: string
 
@@ -732,49 +785,84 @@ paths:
           $ref: "#/components/responses/Unauthorized"
         "403":
           $ref: "#/components/responses/Forbidden"
-        "404":
-          $ref: "#/components/responses/NotFound"
         default:
           $ref: "#/components/responses/DefaultResponse"
 
-  /devices/{deviceId}/fhir/searchTIPractitionerInFhirDirectory:
+  /devices/{deviceId}/fhir/searchHealthcareServiceEndpointInFhirDirectory:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/transactionIdHeader"
 
     get:
       tags:
         - searchInFhirDirectory
-      description: "Returns the found TIPractitioner entries."
-      operationId: searchTIPractitionerInFhirDirectory
+      description: "Returns the found endpoints of healthcareservices matching query."
+      operationId: searchHsEndpointInFhirDirectory
       parameters:
         - name: name
           in: query
-          description: "Name of the TIPractitioner"
+          description: "The name of the endpoint"
+          schema:
+            type: string
+        - name: mxId
+          in: query
+          description: "MxId standing in address field of the endpoint"
+          schema:
+            type: string
+
+      responses:
+        "200":
+          description: "search result for given parameters"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FhirHsEndpointSearchResultList"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+  /devices/{deviceId}/fhir/searchPractitionerInFhirDirectory:
+    parameters:
+      - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/transactionIdHeader"
+
+    get:
+      tags:
+        - searchInFhirDirectory
+      description: "Returns the found Practitioner entries."
+      operationId: searchPractitionerInFhirDirectory
+      parameters:
+        - name: name
+          in: query
+          description: "Name of the Practitioner"
           schema:
             type: string
         - name: address
           in: query
-          description: "Address of the TIPractitioner."
+          description: "Address of the Practitioner."
           schema:
             type: string
         - name: telematikId
           in: query
-          description: "The telematikId of the TIPractitioner."
+          description: "The telematikId of the Practitioner."
           schema:
             type: string
         - name: typeCode
           in: query
-          description: "The type of the TIPractitioner (TIPractitionerQualificationProfessionOidVS.Code)."
+          description: "The type of the Practitioner (PractitionerQualificationProfessionOidVS.Code)."
           schema:
             type: string
         - name: typeDisplay
           in: query
-          description: "The type of the TIPractitioner (TIPractitionerQualificationProfessionOidVS.Display)."
+          description: "The type of the Practitioner (PractitionerQualificationProfessionOidVS.Display)."
           schema:
             type: string
         - name: mxid
           in: query
-          description: "MXID of the TIPractitioner."
+          description: "MXID of the Practitioner."
           schema:
             type: string
 
@@ -795,6 +883,7 @@ paths:
   /devices/{deviceId}/sendMessage:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/transactionIdHeader"
 
     post:
       tags:
@@ -827,6 +916,7 @@ paths:
   /devices/{deviceId}/rooms:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/transactionIdHeader"
 
     get:
       tags:
@@ -880,6 +970,7 @@ paths:
   /devices/{deviceId}/rooms/public:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/transactionIdHeader"
 
     get:
       tags:
@@ -912,6 +1003,7 @@ paths:
   /devices/{deviceId}/rooms/{roomId}:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/transactionIdHeader"
       - $ref: "#/components/parameters/roomId"
     get:
       tags:
@@ -982,6 +1074,7 @@ paths:
   /devices/{deviceId}/rooms/{roomId}/messages:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/transactionIdHeader"
       - $ref: "#/components/parameters/roomId"
 
     get:
@@ -1016,7 +1109,7 @@ paths:
             schema:
               $ref: "#/components/schemas/MessageContent"
       responses:
-        "201":
+        "200":
           description: "Message sent"
           content:
             application/json:
@@ -1036,6 +1129,7 @@ paths:
   /devices/{deviceId}/rooms/{roomId}/messages/{messageId}:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/transactionIdHeader"
       - $ref: "#/components/parameters/roomId"
       - $ref: "#/components/parameters/messageId"
 
@@ -1110,6 +1204,7 @@ paths:
   /devices/{deviceId}/rooms/{roomId}/invite:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/transactionIdHeader"
       - $ref: "#/components/parameters/roomId"
 
     post:
@@ -1143,6 +1238,7 @@ paths:
   /devices/{deviceId}/rooms/{roomId}/join:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/transactionIdHeader"
       - $ref: "#/components/parameters/roomId"
 
     post:
@@ -1169,6 +1265,7 @@ paths:
   /devices/{deviceId}/rooms/{roomId}/leave:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/transactionIdHeader"
       - $ref: "#/components/parameters/roomId"
 
     post:
@@ -1195,6 +1292,7 @@ paths:
   /devices/{deviceId}/contacts:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/transactionIdHeader"
 
     get:
       tags:
@@ -1264,6 +1362,7 @@ paths:
   /devices/{deviceId}/contacts/{mxid}:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/transactionIdHeader"
       - $ref: "#/components/parameters/mxidInPath"
 
     get:
@@ -1301,11 +1400,19 @@ paths:
   /devices/{deviceId}/media:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/transactionIdHeader"
     post:
       tags:
         - media
       description: "Uploads a file and returns its file-id"
       operationId: postMediaFile
+      parameters:
+        - in: header
+          name: Content-Type
+          required: true
+          description: Define type of the sent media. Should be in compliance with RFC6838
+          schema:
+            type: string
       requestBody:
         required: true
         content:
@@ -1324,6 +1431,7 @@ paths:
   /devices/{deviceId}/media/{mediaId}:
     parameters:
       - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/transactionIdHeader"
       - $ref: "#/components/parameters/mediaId"
     get:
       tags:
@@ -1433,6 +1541,15 @@ components:
         format: uuid
         example: 81add1c5-675b-4785-9405-a2e75b660b2e
 
+    transactionIdHeader:
+      in: header
+      name: Transaction-Id
+      required: false
+      description: Parameter to identify running transaction (name/id). Can be used for debugging purpose
+      example: "@TCID:TIM_11_AF_401/e800424f-b37d-4fa9-969e-894ddc0b2362"
+      schema:
+        type: string
+
   responses:
     DefaultResponse:
       description: "The default error response"
@@ -1479,7 +1596,7 @@ components:
         - title
         - clientInfo
         - fachdienstInfo
-        - testdriverVersion
+        - testDriverVersion
       readOnly: true
       type: object
       properties:
@@ -1499,7 +1616,7 @@ components:
         homeserver:
           type: string
           description: "Name des zuständigen Homeservers"
-          example: "matrix.org"
+          example: "gematik.de"
         contact:
           $ref: "#/components/schemas/ContactInfo"
         clientInfo:
@@ -1645,6 +1762,10 @@ components:
           $ref: "#/components/schemas/ApplicationType"
         contact:
           $ref: "#/components/schemas/ContactInfo"
+        matrixVersion:
+          type: string
+          example: "1.3"
+          description: Implemented version of matrix protocol https://spec.matrix.org/latest/
 
     ClientSoftwareInfo:
       description: "General information about the client software"
@@ -1886,6 +2007,35 @@ components:
           description: "The displayName"
           example: "some name"
 
+    HomeserverSearchResultList:
+      description: "The result for a search request for on homeserver"
+      readOnly: true
+      type: object
+      properties:
+        totalSearchResults:
+          description: "Total result count for this search. The number of entries in searchResults may be less or equal this number."
+          type: integer
+          example: 42
+        searchResults:
+          description: "The list of search results. Its size May be smaller than totalSearchResults, if there are many results."
+          type: array
+          items:
+            $ref: "#/components/schemas/HomeserverSearchResult"
+
+    HomeserverSearchResult:
+      description: "A flat description of an endpoint with belonging healthcare service and organization"
+      readOnly: true
+      type: object
+      properties:
+        mxId:
+          description: "The Matrix-ID of an account"
+          type: string
+          example: "@someone:gematik.de"
+        displayName:
+          description: "The displayName"
+          type: string
+          example: "some name"
+
     FhirPractitionerSearchResult:
       description: "The result for a search request for practitioner"
       readOnly: true
@@ -1915,6 +2065,21 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/FhirOrganizationSearchResult"
+
+    FhirHsEndpointSearchResultList:
+      description: "The result for a search request for organisations"
+      readOnly: true
+      type: object
+      properties:
+        totalSearchResults:
+          description: "Total result count for this search. The number of entries in searchResults may be less or equal this number."
+          type: integer
+          example: 42
+        searchResults:
+          description: "The list of search results. Its size May be smaller than totalSearchResults, if there are many results."
+          type: array
+          items:
+            $ref: "#/components/schemas/FhirEndpoint"
 
     FhirOrganizationSearchResult:
       description: "A flat description of an endpoint with belonging healthcare service and organization"
@@ -2154,7 +2319,7 @@ components:
         address:
           description: "The technical base address for connecting to this endpoint (MXID)"
           type: string
-          example: "@gematik:matrix.org"
+          example: "@gematik:gematik.de"
 
     FhirEndpoints:
       type: object
@@ -2348,8 +2513,7 @@ components:
         mxid:
           type: string
           description: "ID of the contact (mxid)."
-          #example: "@you:example.org"
-          example: "matrix:u/you:example.org"
+          example: "@someone:gematik.de"
         inviteSettings:
           type: object
           properties:
