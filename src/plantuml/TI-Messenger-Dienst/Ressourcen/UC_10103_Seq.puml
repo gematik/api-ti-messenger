@@ -60,13 +60,13 @@ alt#LightGrey #AliceBlue <size:16>Organisation nicht am Registrierungs-Dienst au
           activate au
           activate ip
         ip -> au: Authentication challenge
-        au -> ko: SignDocument
+        au -> ko: ExternalAuthenticate
           activate ko
         ko -> kt: SICCT command
           activate kt
         kt --> ko
           deactivate kt
-        ko --> au: Response \nsignedDocument
+        ko --> au: Response \nExternalAuthenticate
         |||
           deactivate ko
 
