@@ -243,7 +243,8 @@ components:
           example: "Musterfrau, Erika"
         mxid:
           type: string
-          description: "ID of the contact (mxid))."
+          description: "ID of the contact (Matrix URI scheme))."
+          example: matrix:u/testuser:tim.test.gematik.de 
         inviteSettings:
           type: object
           properties:
