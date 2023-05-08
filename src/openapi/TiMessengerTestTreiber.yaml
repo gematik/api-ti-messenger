@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: TiMessengerTestDriver
   description: REST interface to automate the test of a TI-Messenger client implementation.
-  version: 0.4.6
+  version: 0.4.7
   contact:
     name: gematik GmbH
     email: software-development@gematik.de
@@ -2178,7 +2178,7 @@ components:
       type: object
       required:
         - providedBy
-        - name
+        - healthcareServiceName
       properties:
         healthcareServiceId:
           description: "The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes."
@@ -2204,7 +2204,7 @@ components:
             $ref: "#/components/schemas/Telecom"
         serviceProvisionCode:
           type: array
-          example: free
+          example: [ free ]
           items:
             enum: [ payed, free ]
         communication:
