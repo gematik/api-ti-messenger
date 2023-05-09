@@ -80,11 +80,9 @@ else <size:16>neuere Version der Föderationsliste vorhanden ODER FLVersion_RD=N
   FP-->RD: Föderationsliste, x5c-Zertifikatsliste
       Deactivate FP
   RD->RD++: Föderationsliste aktualisieren(Föderationsliste)
-  return Föderationsliste, FLÄnderungsFlag
+  return Föderationsliste
   RD->RD: Alter_Föderationsliste zurücksetzen(Alter_Föderationsliste=0s)
   |||
 end
 |||
-
-
 @enduml

@@ -106,7 +106,7 @@ break#LightGrey #LightPink <size:16>Alter_Föderationsliste>TTL_Föderationslist
   |||
 end
 
-alt#LightGrey <size:16>Alter_Föderationsliste<1h ODER TTL_Föderationsliste vorhanden</size>
+'alt#LightGrey <size:16>Alter_Föderationsliste<1h ODER TTL_Föderationsliste vorhanden</size>
   RD->RD++: vergleiche Versionen\n(FLVersion_MP, FLVersion_RD)
   return Vergleichsergebnis_RD
 
@@ -123,14 +123,7 @@ alt#LightGrey <size:16>Alter_Föderationsliste<1h ODER TTL_Föderationsliste vor
     |||
   end
   |||
-
-else <size:16>FLÄnderungsFlag vorhanden ODER FLVersion_MP=NULL</size>
-  RD-->MP: Föderationsliste, x5c-Zertifikatsliste
   Deactivate RD
-  ref over MP
-    <size:16>Signatur der Föderationsliste prüfen</size>
-  end ref
   MP-[hidden]> MP
   deactivate MP
-end
 @enduml
