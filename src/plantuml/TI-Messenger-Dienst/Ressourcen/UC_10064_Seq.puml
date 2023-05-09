@@ -33,6 +33,9 @@ ActorFontColor black
 ActorFontSize 20
 ActorFontName Aapex
 }
+
+autonumber
+
     box <size:18>Messenger-Service\n#WhiteSmoke
     participant MP as "Messenger-Proxy"
     participant MH as "Matrix-Homeserver"
@@ -45,19 +48,28 @@ ActorFontName Aapex
   MP->MP: prüfe im Event\nob Matrix-Domain(s) \nin der Föderationsliste \nvorhanden ist/sind
 
 |||
-alt#LightGrey #AliceBlue <size:16>Matrix-Domain ist nicht in der Föderationsliste enthalten</size>
-|||  
+alt#LightGrey  <size:16>Matrix-Domain ist in der Föderationsliste enthalten ODER Matrix-Domain des Senders = Matrix-Domain des Empfängers</size>
+    ||| 
+    MP->MH: HTTP(S) Forward
+      Activate MH
+    MH-->MP: Status
+      Deactivate MH
+      'Deactivate MP
+    ||| 
 
+
+  else <size:16>Matrix-Domain ist nicht in der Föderationsliste enthalten</size> 
+  |||  
   ref over MP, VZD: <size:17>**Anhang B** - Aktualisierung der Föderationsliste</size>\n 
   |||
   MP->MP: prüfe ob Matrix-Domain \nder MXID \nin der **aktualisierten** \nFöderationsliste vorhanden ist
   |||
 
-    alt#LightGrey #LightBlue <size:16>Matrix-Domain ist nicht in der Föderationsliste enthalten</size>
+    alt#LightGrey #LightBlue <size:16>Matrix-Domain ist nicht in der aktualisierten Föderationsliste enthalten</size>
       |||
       MP->MP: <font color=red>Abbruch, Verbindung wird abgelehnt</font>
       ||| 
-      else <size:16>Matrix-Domain ist in der Föderationsliste enthalten</size>
+      else <size:16>Matrix-Domain ist in der aktualisierten Föderationsliste enthalten</size>
       |||
          MP->MH: HTTP(S) Forward
           Activate MH
@@ -67,14 +79,6 @@ alt#LightGrey #AliceBlue <size:16>Matrix-Domain ist nicht in der Föderationslis
     end
 
   |||
-  else <size:16>Matrix-Domain ist in der Föderationsliste enthalten</size>
-    ||| 
-    MP->MH: HTTP(S) Forward
-      Activate MH
-    MH-->MP: Status
-      Deactivate MH
-      Deactivate MP
-    ||| 
 
 end
 |||

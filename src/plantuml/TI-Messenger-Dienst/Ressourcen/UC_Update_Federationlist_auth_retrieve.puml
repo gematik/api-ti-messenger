@@ -34,6 +34,8 @@ ActorFontSize 20
 ActorFontName Aapex
 }
 
+autonumber
+
 participant RD as "Registrierungs-Dienst"
 box <size:18>VZD-FHIR-Directory</size> #WhiteSmoke
   participant FP as "FHIR-Proxy"
