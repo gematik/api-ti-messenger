@@ -49,7 +49,6 @@ alt#LightGrey <size:16>kein gültiges provider-accesstoken vorhanden</size>
       activate AS
       AS -> AS: Credentials prüfen \n(client-ID, client_secret)
       AS -> AS: IDP-TI-Provider-Accesstoken\nerstellen
-      note left: <size:16>Payload beinhaltet ClientID + TelematikID</size>
       AS --> RD: IDP-TI-Provider-Accesstoken
       deactivate AS
   end
