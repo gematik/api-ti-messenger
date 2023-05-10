@@ -103,12 +103,12 @@ end
 
 break#LightGrey #LightPink <size:16>Alter_Föderationsliste>TTL_Föderationsliste</size>
   RD-->MP: FLStatus_RD=veraltet
+  RD ->?: Incident-Event erzeugen()
   MP->MP: unterbinde Registrierungsdienst-Requests(Dauer=1h)
   MP->MP: blockiere Kommunikation zu anderen Homeservern()
   |||
 end
 
-'alt#LightGrey <size:16>Alter_Föderationsliste<1h ODER TTL_Föderationsliste vorhanden</size>
   RD->RD++: vergleiche Versionen\n(FLVersion_MP, FLVersion_RD)
   return Vergleichsergebnis_RD
 
