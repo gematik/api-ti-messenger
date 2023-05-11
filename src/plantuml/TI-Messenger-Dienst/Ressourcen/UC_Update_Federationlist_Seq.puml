@@ -34,6 +34,8 @@ ActorFontSize 20
 ActorFontName Aapex
 }
 
+autonumber
+
 box <size:18>Messenger-Service\n #WhiteSmoke
 participant MP as "Messenger-Proxy"
 end box
@@ -70,7 +72,7 @@ loop#LightGrey <size:16>alle 1h</size>
         RD->RD: HealthStateCheck_VZD erhöhen\n(HealthStateCheck_VZD+1)
         alt#LightGrey <size:16>HealthStateCheck_VZD=3</size>
           RD ->?: Incident-Event erzeugen()
-          RD->RD++: letzte vorhandene Föderationsliste puffern() \n{TTL_Föderationsliste=72h}
+          RD->RD++: letzte vorhandene Föderationsliste puffern()
           return Föderationsliste
         |||
         end
@@ -101,12 +103,12 @@ end
 
 break#LightGrey #LightPink <size:16>Alter_Föderationsliste>TTL_Föderationsliste</size>
   RD-->MP: FLStatus_RD=veraltet
+  RD ->?: Incident-Event erzeugen()
   MP->MP: unterbinde Registrierungsdienst-Requests(Dauer=1h)
   MP->MP: blockiere Kommunikation zu anderen Homeservern()
   |||
 end
 
-alt#LightGrey <size:16>Alter_Föderationsliste<1h ODER TTL_Föderationsliste vorhanden</size>
   RD->RD++: vergleiche Versionen\n(FLVersion_MP, FLVersion_RD)
   return Vergleichsergebnis_RD
 
@@ -123,14 +125,7 @@ alt#LightGrey <size:16>Alter_Föderationsliste<1h ODER TTL_Föderationsliste vor
     |||
   end
   |||
-
-else <size:16>FLÄnderungsFlag vorhanden ODER FLVersion_MP=NULL</size>
-  RD-->MP: Föderationsliste, x5c-Zertifikatsliste
   Deactivate RD
-  ref over MP
-    <size:16>Signatur der Föderationsliste prüfen</size>
-  end ref
   MP-[hidden]> MP
   deactivate MP
-end
 @enduml

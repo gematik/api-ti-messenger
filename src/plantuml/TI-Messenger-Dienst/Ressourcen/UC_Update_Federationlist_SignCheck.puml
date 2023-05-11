@@ -34,6 +34,8 @@ ActorFontSize 20
 ActorFontName Aapex
 }
 
+autonumber
+
 box <size:18>Messenger-Service\n #WhiteSmoke
 participant MP as "Messenger-Proxy"
 end box
@@ -41,7 +43,9 @@ participant OCSP as "<font color=blue>Public OCSP-Responder</font>"
 
 legend bottom right
     <size:16>__Legende__</size>
-    <size:16><font color=blue>noch optionaler Bestandteil in dieser Spezifikationsversion</font></size>
+    <size:16><font color=blue>nicht anzuwenden in dieser Spezifikationsversion,</font></size>
+    <size:16><font color=blue>sondern erst, sobald der Public OCSP-Responder verfügbar ist</font></size>
+    <size:16><font color=blue>(bezieht sich auf die im diesem Diagramm blau dargestellten Prüfungen und Komponenten)</font></size>
 endlegend
 
 activate MP

@@ -22,12 +22,12 @@ Check federation affiliation of a messenger service
 |===
 | |description
 |Actor |System
-|Trigger |The messenger proxy receives an Invite event and MUST check the MXIDs included in the request for domain belonging to the TI-Messenger federation.
+|Trigger |The messenger proxy sends or receives a Matrix event and MUST check the MXIDs included in the request for domain belonging to the TI-Messenger federation.
 |Components a|
               * Messenger proxy,
               * Matrix home server 
 |Preconditions a| none
-|Input data |Invite Event
+|Input data |Matrix Event
 |Result a|The messenger proxy uses the federation list to determine whether the Matrix domain of the other messenger service is part of the TI-Messenger federation.
 |Output data |Status of the Matrix home server and forwarding
 |===
