@@ -33,17 +33,21 @@ ActorFontColor black
 ActorFontSize 20
 ActorFontName Aapex
 }
-    actor U as "Akteur in der Rolle\nUser-HBA"
-    box <size:18>Endgerät</size> #WhiteSmoke
-      participant C as "TI-Messenger-Client"
-      participant A as "Authenticator \ndes IDP-Dienst"
-    end box
-    participant I as "IDP-Dienst" 
-    box <size:18>VZD-FHIR-Directory</size> #WhiteSmoke
-      participant FP as "FHIR-Proxy"
-      participant Auth as "Auth-Service"
-      participant VZD as "FHIR-Directory"
-    end box
+
+autonumber
+
+actor U as "Akteur in der Rolle\nUser-HBA"
+box <size:18>Endgerät</size> #WhiteSmoke
+  participant C as "TI-Messenger-Client"
+  participant A as "Authenticator \ndes IDP-Dienst"
+end box
+participant konnektor as "Konnektor"
+participant I as "IDP-Dienst" 
+box <size:18>VZD-FHIR-Directory</size> #WhiteSmoke
+  participant FP as "FHIR-Proxy"
+  participant Auth as "Auth-Service"
+  participant VZD as "FHIR-Directory"
+end box
 
 |||
 note over U, I: \n<size:17>Der Akteur ist bei einem Messenger Service angemeldet (siehe AF_10057)</size>\n
@@ -57,20 +61,24 @@ C->C: Prüfung, ob gültiges \nowner-accesstoken \nvorliegt
 alt#LightGrey #AliceBlue <size:16>kein gültigess owner-accesstoken</size>
 |||
 
+  C->U: Liste verfügbarer IDPs
+  U->C: ausgewählter IDP
+
   C->Auth: GET /owner-authenticate
     Activate Auth
   Auth->Auth: Erzeuge PKCE Code \nfür verifier und challenge
   Auth-->C: Redirct to IDP Authorization Endpoint (PKCE Code)
     Deactivate Auth
 
-  C->U: Liste verfügbarer IDPs
-  U->C: ausgewählter IDP
-    
   C->I: GET /authorize
-    Activate A
     Activate I
   I-->C: Authentication challenge
-  A->A: Authentication
+  A -> konnektor++: ExternalAuthenticate
+
+  Activate A
+  konnektor --> A: ExternalAuthenticateResponse
+  deactivate konnektor
+  
   A->I: Authentication \nchallenge response
     Deactivate A
   I-->C: Authorization Response with Authorization Code
