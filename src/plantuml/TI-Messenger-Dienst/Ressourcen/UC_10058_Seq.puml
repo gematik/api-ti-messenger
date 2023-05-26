@@ -42,7 +42,7 @@ box <size:18>Endgerät</size> #WhiteSmoke
   participant A as "Authenticator \ndes IDP-Dienst"
 end box
 participant konnektor as "Konnektor"
-participant I as "IDP-Dienst" 
+participant I as "zentraler IDP-Dienst" 
 box <size:18>VZD-FHIR-Directory</size> #WhiteSmoke
   participant FP as "FHIR-Proxy"
   participant Auth as "Auth-Service"
@@ -58,7 +58,7 @@ U->C: FHIR Ressourcen im \nVZD-FHIR-Directory \nhinzufügen (MXID)
 C->C: Prüfung, ob gültiges \nowner-accesstoken \nvorliegt
 
 |||
-alt#LightGrey #AliceBlue <size:16>kein gültigess owner-accesstoken</size>
+alt#LightGrey #AliceBlue <size:16>kein gültiges owner-accesstoken vorhanden</size>
 |||
 
   C->U: Liste verfügbarer IDPs
@@ -67,34 +67,38 @@ alt#LightGrey #AliceBlue <size:16>kein gültigess owner-accesstoken</size>
   C->Auth: GET /owner-authenticate
     Activate Auth
   Auth->Auth: Erzeuge PKCE Code \nfür verifier und challenge
-  Auth-->C: Redirct to IDP Authorization Endpoint (PKCE Code)
-    Deactivate Auth
+  Auth-->C: HTTP 302 Redirect to IDP Authorization Endpoint
+  Deactivate Auth
 
-  C->I: GET /authorize
-    Activate I
-  I-->C: Authentication challenge
-  A -> konnektor++: ExternalAuthenticate
+  C->A++: Deeplink authenticator://...
+  A->I: GET {auth_endpoint}
+  Activate I
 
-  Activate A
+  'C->I: GET /authorize
+  I-->A: Authentication challenge
+  A->konnektor++: ExternalAuthenticate
+
+  'Activate A
   konnektor --> A: ExternalAuthenticateResponse
   deactivate konnektor
   
-  A->I: Authentication \nchallenge response
+  A->I: Authentication challenge response
+  I-->A: HTTP 302 Redirect(auth_code)
+  Deactivate I
+  A-->C: {client_callback_uri}(auth_code)
+'checkpoint
+
     Deactivate A
-  I-->C: Authorization Response with Authorization Code
-    Deactivate I
        
   |||          
-  C->Auth: GET /signin-gematik-idp-dienst with Authorization code (PKCE Code)
+  C->Auth: GET /signin-gematik-idp-dienst(auth_code)
     Activate Auth
   |||
-  Auth-->I: POST /tokenEndpoint\n(authorization code)
-    Activate I
-  I->Auth: id_token
-    Deactivate I
-  Auth->Auth: prüfe id_token
-  |||
-  Auth->Auth: erzeuge \nowner-accesstoken
+  Auth->I: POST /tokenEndpoint(auth_code, verifier)
+  Activate I
+  return id_token
+  Deactivate I
+  Auth->Auth: erzeuge \nowner-accesstoken(id_token)
   Auth-->C: owner-accesstoken
     Deactivate Auth
   |||
