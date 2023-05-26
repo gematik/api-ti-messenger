@@ -40,7 +40,8 @@ ActorFontName Aapex
     end box
     participant R as "Registrierungs-Dienst"
     box <size:18>VZD-FHIR-Directory</size> #WhiteSmoke
-    participant Auth as "OAuth-Service"
+    participant Auth as "OAuth"
+    participant AuthService as "Auth-Service"
     participant FP as "FHIR-Proxy"
     participant VZD as "FHIR-Directory"
     end box
@@ -87,13 +88,19 @@ loop <size:16>1..n</size>
     
     group <size:16>Messenger-Service in die Föderation aufnehmen</size>
     |||
-      R->Auth: POST /authenticate (client_id, client_secret) \n(OAuth Client credentials flow)
+      R->Auth: POST /auth/realms/TI-Provider/protocol/openid-connect/token \n(client_id, client_secret) 
         Activate Auth
       Auth->Auth: prüfe client_id und \nclient_secret
-      Auth-->R: provider-accesstoken
+      Auth-->R: ti-provider-accesstoken
         Deactivate Auth
       |||
-      R->FP: POST /tim-provider-services/addTiMessengerDomain \n(provider-accesstoken, Matrix-Domain, TelematikID, isEnsurance)
+      R->AuthService: GET /ti-provider-authenticate \n(Authorization: "Bearer ti-provider-accesstoken")
+        Activate AuthService
+      AuthService->AuthService: prüfe ti-provider-accesstoken
+      AuthService-->R: provider-accesstoken
+        Deactivate AuthService
+      |||
+      R->FP: POST /tim-provider-services/federation \n(ti-provider-accesstoken, Matrix-Domain, TelematikID, isEnsurance)
         Activate FP
       FP->FP: prüfe \nprovider-accesstoken
       FP->VZD: HTTPS Forward
