@@ -23,7 +23,6 @@ skinparam sequence {
 
   ParticipantBorderColor Motivation
   ParticipantBackgroundColor Motivation
-  ParticipantFontName Impact
   ParticipantFontSize 20
   ParticipantFontColor black
   ParticipantBorderColor Black
@@ -32,7 +31,6 @@ skinparam sequence {
   ActorBackgroundColor Gainsboro
   ActorFontColor black
   ActorFontSize 20
-  ActorFontName Aapex
 }
 
 actor oa as "Akteur in der Rolle\nOrg-Admin"
