@@ -22,16 +22,13 @@ LifeLineBackgroundColor Gainsboro
 
 ParticipantBorderColor Motivation
 ParticipantBackgroundColor Motivation
-ParticipantFontName Impact
 ParticipantFontSize 20
 ParticipantFontColor black
 ParticipantBorderColor Black
-ParticipantBackgroundColor MOTIVATION
 
 ActorBackgroundColor Gainsboro
 ActorFontColor black
 ActorFontSize 20
-ActorFontName Aapex
 }
 
 autonumber
@@ -39,7 +36,7 @@ autonumber
 actor U as "Akteur in der Rolle\nUser-HBA"
 box <size:18>Endgerät</size> #WhiteSmoke
   participant C as "TI-Messenger-Client"
-  participant A as "Authenticator \ndes IDP-Dienst"
+  participant A as "Authenticator"
 end box
 participant konnektor as "Konnektor"
 participant I as "zentraler IDP-Dienst" 
@@ -60,9 +57,6 @@ C->C: Prüfung, ob gültiges \nowner-accesstoken \nvorliegt
 |||
 alt#LightGrey #AliceBlue <size:16>kein gültiges owner-accesstoken vorhanden</size>
 |||
-
-  C->U: Liste verfügbarer IDPs
-  U->C: ausgewählter IDP
 
   C->Auth: GET /owner-authenticate
     Activate Auth
