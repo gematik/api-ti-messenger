@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-05-30T06:05:58.858Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101 Firefox/102.0" etag="_GXwcoGQISzEqjHcn-GI" version="21.3.5" type="github">
+<mxfile host="app.diagrams.net" modified="2023-05-30T06:08:30.791Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101 Firefox/102.0" etag="zxMewkPHhlVIEgdaQlbJ" version="21.3.5" type="github">
   <diagram name="Registrierungs-Dienst" id="Jt1kmCQGUOwaI04WHO9y">
     <mxGraphModel dx="1050" dy="538" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -97,7 +97,7 @@
             <mxGeometry x="41.5" y="324" width="156" height="28" as="geometry" />
           </mxCell>
         </UserObject>
-        <UserObject label="&lt;div style=&quot;font-size: 15px;&quot;&gt;&lt;font style=&quot;font-size: 15px; font-family: Calibri; color: rgb(0, 0, 0); direction: ltr; letter-spacing: 0px; line-height: 120%; opacity: 1;&quot;&gt;Frontend des &lt;br&gt;Registrierungs-Dienstes / &lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 15px;&quot;&gt;&lt;font style=&quot;font-size: 15px; font-family: Calibri; color: rgb(0, 0, 0); direction: ltr; letter-spacing: 0px; line-height: 120%; opacity: 1;&quot;&gt;Org-Admin-Client&lt;br&gt;&lt;/font&gt;&lt;/div&gt;" tags="Hintergrund" id="BjHA2RIbMJTQsHLxXjxR-37">
+        <UserObject label="&lt;div style=&quot;font-size: 15px;&quot;&gt;&lt;font style=&quot;font-size: 15px; font-family: Calibri; color: rgb(0, 0, 0); direction: ltr; letter-spacing: 0px; line-height: 120%; opacity: 1;&quot;&gt;Frontend des &lt;br&gt;Registrierungs-Dienstes&lt;br&gt;&lt;/font&gt;&lt;/div&gt;" tags="Hintergrund" id="BjHA2RIbMJTQsHLxXjxR-37">
           <mxCell style="verticalAlign=middle;align=center;vsdxID=83;fillColor=none;gradientColor=none;shape=stencil(nZBLDoAgDERP0z3SIyjew0SURgSD+Lu9kMZoXLhwN9O+tukAlrNpJg1SzDH4QW/URgNYgZTkjA4UkwJUgGXng+6DX1zLfmoymdXo17xh5zmRJ6Q42BWCfc2oJfdAr+Yv+AP9Cb7OJ3H/2JG1HNGz/84klThPVCc=);strokeColor=none;points=[];labelBackgroundColor=none;rounded=0;html=1;whiteSpace=wrap;" parent="1" vertex="1">
             <mxGeometry x="23.5" y="94" width="187" height="28" as="geometry" />
           </mxCell>
