@@ -88,7 +88,7 @@ alt#LightGrey #AliceBlue <size:16>kein gültiges owner-accesstoken vorhanden</si
   C->Auth: GET /signin-gematik-idp-dienst(auth_code)
     Activate Auth
   |||
-  Auth->I: POST /{tokenEndpoint}(auth_code, verifier)
+  Auth->I: POST {tokenEndpoint}(auth_code, verifier)
   Activate I
   return id_token
   Deactivate I
