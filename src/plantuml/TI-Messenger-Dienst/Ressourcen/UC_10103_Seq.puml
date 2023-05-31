@@ -73,12 +73,12 @@ alt#LightGrey #AliceBlue <size:16>Organisation nicht am Registrierungs-Dienst au
         |||
         au -->ip: Authentication response
           deactivate au
-        ip --> wb: Authorization code
+        ip --> wb: auth_code
           deactivate ip
         |||
-        wb -> rd: POST /register (Authorization code)
+        wb -> rd: POST /register(auth_code)
           activate rd
-        rd -> ip: POST /tokenEndpoint\n{authorization code}
+        rd -> ip: POST {tokenEndpoint}(auth_code)
           activate ip
         ip --> rd: id_token
           deactivate ip
