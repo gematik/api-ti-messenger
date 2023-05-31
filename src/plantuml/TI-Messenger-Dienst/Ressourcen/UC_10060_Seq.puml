@@ -23,7 +23,6 @@ LifeLineBackgroundColor Gainsboro
 
 ParticipantBorderColor Motivation
 ParticipantBackgroundColor Motivation
-ParticipantFontName Impact
 ParticipantFontSize 20
 ParticipantFontColor black
 ParticipantBorderColor Black
@@ -32,15 +31,17 @@ ParticipantBackgroundColor MOTIVATION
 ActorBackgroundColor Gainsboro
 ActorFontColor black
 ActorFontSize 20
-ActorFontName Aapex
 }
+
+autonumber
+
     actor U as "Akteur in der Rolle\nOrg-Admin"
     box <size:18>Endgerät</size> #WhiteSmoke
       participant C as "Frontend des\nRegistrierungs-Dienstes"
     end box
     participant R as "Registrierungs-Dienst"
     box <size:18>VZD-FHIR-Directory</size> #WhiteSmoke
-    participant Auth as "OAuth"
+    participant Auth as "OAuth-Service"
     participant AuthService as "Auth-Service"
     participant FP as "FHIR-Proxy"
     participant VZD as "FHIR-Directory"
@@ -94,13 +95,13 @@ loop <size:16>1..n</size>
       Auth-->R: ti-provider-accesstoken
         Deactivate Auth
       |||
-      R->AuthService: GET /ti-provider-authenticate \n(Authorization: "Bearer ti-provider-accesstoken")
+      R->AuthService: GET /ti-provider-authenticate(ti-provider-accesstoken)
         Activate AuthService
       AuthService->AuthService: prüfe ti-provider-accesstoken
       AuthService-->R: provider-accesstoken
         Deactivate AuthService
       |||
-      R->FP: POST /tim-provider-services/federation \n(ti-provider-accesstoken, Matrix-Domain, TelematikID, isEnsurance)
+      R->FP: POST /tim-provider-services/federation \n(provider-accesstoken, Matrix-Domain, TelematikID, isEnsurance)
         Activate FP
       FP->FP: prüfe \nprovider-accesstoken
       FP->VZD: HTTPS Forward
