@@ -22,7 +22,6 @@ LifeLineBackgroundColor Gainsboro
 
 ParticipantBorderColor Motivation
 ParticipantBackgroundColor Motivation
-ParticipantFontName Impact
 ParticipantFontSize 20
 ParticipantFontColor black
 ParticipantBorderColor Black
@@ -31,39 +30,37 @@ ParticipantBackgroundColor MOTIVATION
 ActorBackgroundColor Gainsboro
 ActorFontColor black
 ActorFontSize 20
-ActorFontName Aapex
 }
 
 autonumber
 
 participant RD as "Registrierungs-Dienst"
 box <size:18>VZD-FHIR-Directory</size> #WhiteSmoke
+  participant Oauth as "OAuth-Service"
+  participant AuthService as "Auth-Service"
   participant FP as "FHIR-Proxy"
-  participant AS as "OAuth-Service"
 end box
 
 alt#LightGrey <size:16>kein gültiges provider-accesstoken vorhanden</size>
   activate RD
   alt#LightGrey <size:16>Benötigt IDP-TI-Provider-Accesstoken</size>
-      RD -> AS: GET /token(client-ID, client_secret)\nfür Realm "ti-provider"\n{<10s := HealthState_VZD=gesund}
-      activate AS
-      AS -> AS: Credentials prüfen \n(client-ID, client_secret)
-      AS -> AS: IDP-TI-Provider-Accesstoken\nerstellen
-      AS --> RD: IDP-TI-Provider-Accesstoken
-      deactivate AS
+      RD -> Oauth: POST /auth/realms/TI-Provider/protocol/openid-connect/token\n(client_id, client_secret)\n{<10s := HealthState_VZD=gesund}
+      activate Oauth
+      Oauth -> Oauth: Credentials prüfen \n(client_id, client_secret)
+      Oauth --> RD: ti-provider-accesstoken
+      deactivate Oauth
   end
-  RD -> FP: GET /ti-provider-authenticate\n(IDP-TI-Provider-Accesstoken)\n{<10s := HealthState_VZD=gesund}
-  activate FP
-  FP -> FP: Token prüfen und ClientID auslesen\n(IDP-TI-Provider-Accesstoken)
-  FP -> FP: provider-accesstoken erzeugen
-  FP --> RD: provider-accesstoken
-  deactivate FP
+  RD -> AuthService: GET /ti-provider-authenticate(ti-provider-accesstoken)\n{<10s := HealthState_VZD=gesund}
+  activate AuthService
+  AuthService -> AuthService: Token prüfen\n(ti-provider-accesstoken)
+  AuthService --> RD: provider-accesstoken
+  deactivate AuthService
 end
 
 |||
 RD->FP: GET /tim-provider-services/FederationList/federationList.jws\n(provider-accesstoken, FLVersion_RD)\n{<10s := HealthState_VZD=gesund}
   Activate FP
-FP->FP: Token prüfen(provider-accesstoken)
+FP->FP: Token prüfen\n(provider-accesstoken)
 
 break#LightGrey #LightPink <size:16>Abruf der Föderationsliste nicht möglich</size>
   FP-->RD: ResponseType=Bad Request ODER \nResponseType=Unauthorized ODER \nResponseType=Forbidden ODER \nResponseType=Not Found
