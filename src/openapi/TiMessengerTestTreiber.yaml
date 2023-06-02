@@ -2458,6 +2458,8 @@ components:
     RoomProperties:
       description: "Some general properties of a room"
       type: object
+      required:
+        - name
       properties:
         name:
           type: string
