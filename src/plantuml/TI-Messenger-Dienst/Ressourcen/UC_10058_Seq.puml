@@ -92,6 +92,7 @@ alt#LightGrey #AliceBlue <size:16>kein gültiges owner-accesstoken vorhanden</si
   Activate I
   return id_token
   Deactivate I
+  Auth->Auth: ID_TOKEN validieren(id_token)
   Auth->Auth: erzeuge \nowner-accesstoken(id_token)
   Auth-->C: owner-accesstoken
     Deactivate Auth
