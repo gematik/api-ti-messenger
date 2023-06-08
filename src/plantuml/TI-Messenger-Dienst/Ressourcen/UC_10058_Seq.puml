@@ -68,11 +68,9 @@ alt#LightGrey #AliceBlue <size:16>kein gültiges owner-accesstoken vorhanden</si
   A->I: GET {auth_endpoint}
   Activate I
 
-  'C->I: GET /authorize
   I-->A: Authentication challenge
   A->konnektor++: ExternalAuthenticate
 
-  'Activate A
   konnektor --> A: ExternalAuthenticateResponse
   deactivate konnektor
   
@@ -80,7 +78,6 @@ alt#LightGrey #AliceBlue <size:16>kein gültiges owner-accesstoken vorhanden</si
   I-->A: HTTP 302 Redirect(auth_code)
   Deactivate I
   A-->C: {client_callback_uri}(auth_code)
-'checkpoint
 
     Deactivate A
        
