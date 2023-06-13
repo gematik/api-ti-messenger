@@ -16,7 +16,19 @@ externalDocs:
   url: https://github.com/gematik/api-ti-messenger
 
 servers:
-  - url: https://localhost/ti-messenger-testdriver/
+  - url: '{protocol}://{host}:{port}/{api}/'
+    variables:
+      protocol:
+        enum:
+          - http
+          - https
+        default: https
+      host:
+        default: 'localhost'
+      port:
+        default: '443'
+      api:
+        default: 'ti-messenger-testdriver'
 
 tags:
   - name: info
