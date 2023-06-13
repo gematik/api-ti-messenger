@@ -1597,6 +1597,8 @@ components:
         - clientInfo
         - fachdienstInfo
         - testDriverVersion
+        - homeserver
+        - contact
       readOnly: true
       type: object
       properties:
@@ -1632,6 +1634,8 @@ components:
       readOnly: true
       description: "Die Kontaktinformationen für diese Schnittstelle."
       type: object
+      required:
+        - name
       properties:
         name:
           type: string
