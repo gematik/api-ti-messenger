@@ -280,7 +280,7 @@ paths:
       tags:
         - orgAdminFhirOrganization
       description: "Get organization from the selected device"
-      operationId: "GetOrganization"
+      operationId: getOrganization
       responses:
         "200":
           description: "Data of organization from claimed client"
@@ -300,7 +300,7 @@ paths:
       tags:
         - orgAdminFhirHealthcareService
       description: "Get healthcareServices regarding the named organizationId"
-      operationId: GetHealthcareServices
+      operationId: getHealthcareServices
       responses:
         "200":
           description: "List of all healthcareServices associated with organization"
@@ -315,7 +315,7 @@ paths:
       tags:
         - orgAdminFhirHealthcareService
       description: "Created new healthcare service"
-      operationId: CreateHealthcareService
+      operationId: createHealthcareService
       requestBody:
         content:
           application/json:
@@ -343,7 +343,7 @@ paths:
       tags:
         - orgAdminFhirHealthcareService
       description: "Get specific healthcareService regarding"
-      operationId: GetHealthcareService
+      operationId: getHealthcareService
       responses:
         "200":
           description: "Data of healthcareService associated with healthcareServiceId"
@@ -360,7 +360,7 @@ paths:
       tags:
         - orgAdminFhirHealthcareService
       description: ""
-      operationId: UpdateHealthcareService
+      operationId: updateHealthcareService
       requestBody:
         content:
           application/json:
@@ -384,7 +384,7 @@ paths:
       tags:
         - orgAdminFhirHealthcareService
       description: "Delete specific healthcareService regarding"
-      operationId: DeleteHealthcareService
+      operationId: deleteHealthcareService
       responses:
         "204":
           description: "Successfully delete healthcare service"
@@ -403,7 +403,7 @@ paths:
       tags:
         - orgAdminFhirLocations
       description: "Get all locations for healthcare service"
-      operationId: "GetLocations"
+      operationId: getLocations
       responses:
         "200":
           description: "Successfully get all locations for healthcare service"
@@ -420,7 +420,7 @@ paths:
       tags:
         - orgAdminFhirLocations
       description: "Create location"
-      operationId: "CreateLocation"
+      operationId: createLocation
       requestBody:
         content:
           application/json:
@@ -450,7 +450,7 @@ paths:
     get:
       tags:
         - orgAdminFhirLocations
-      operationId: "GetLocation"
+      operationId: getLocation
       responses:
         "200":
           description: "Successfully get Location"
@@ -467,7 +467,7 @@ paths:
       tags:
         - orgAdminFhirLocations
       description: "Updates a Location"
-      operationId: "UpdateLocation"
+      operationId: updateLocation
       requestBody:
         content:
           application/json:
@@ -491,7 +491,7 @@ paths:
       tags:
         - orgAdminFhirLocations
       description: "Deletes a location"
-      operationId: "DeleteLocation"
+      operationId: deleteLocation
       responses:
         "204":
           description: "Successfully delete location"
@@ -512,7 +512,7 @@ paths:
       tags:
         - orgAdminFhirEndpoints
       description: "Get all endpoints for healthcare service"
-      operationId: "GetEndpoints"
+      operationId: getEndpoints
       responses:
         "200":
           description: "Successfully get all endpoints for healthcare service"
@@ -529,7 +529,7 @@ paths:
       tags:
         - orgAdminFhirEndpoints
       description: "Create endpoint"
-      operationId: "CreateEndpoint"
+      operationId: createEndpoint
       requestBody:
         content:
           application/json:
@@ -559,7 +559,7 @@ paths:
     get:
       tags:
         - orgAdminFhirEndpoints
-      operationId: "GetEndpoint"
+      operationId: getEndpoint
       responses:
         "200":
           description: "Successfully get endpoint"
@@ -576,7 +576,7 @@ paths:
       tags:
         - orgAdminFhirEndpoints
       description: "Updates an endpoint"
-      operationId: "UpdateEndpoint"
+      operationId: updateEndpoint
       requestBody:
         content:
           application/json:
@@ -600,7 +600,7 @@ paths:
       tags:
         - orgAdminFhirEndpoints
       description: "Deletes a endpoint"
-      operationId: "DeleteEndpoint"
+      operationId: deleteEndpoint
       responses:
         "204":
           description: "Successfully delete endpoint"
@@ -1009,7 +1009,7 @@ paths:
       tags:
         - room
       description: "Get the room settings."
-      operationId: getRoomsettings
+      operationId: getRoomSettings
       responses:
         "200":
           description: OK
