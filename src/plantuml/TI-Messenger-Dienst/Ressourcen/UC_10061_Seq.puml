@@ -68,38 +68,54 @@ note over U2, MP2: \n<size:17>Der Akteur B ist erfolgreich beim Messenger Servic
           activate C2 #TECHNOLOGY
          C2-[#red]>C1: GET /scan
          C1--[#0000FF]>C2: MXID (Akteur A)
+         |||
+           group <size:16>MXID in Freigabeliste eintragen</size>
+             |||
+             C2->MP2: POST /tim-contact-mgmt/createContactSetting \n(MXID, start, end, Matrix-OpenID-Token)
+             activate MP2
+             |||
+             MP2->MH2: GET /openid/userinfo/\n?Matrix-OpenID-Token
+             activate MH2
+             MH2->MH2: prüfe \nMatrix-OpenID-Token
+             MH2-->MP2: status
+             deactivate MH2
+             |||
+             MP2->MP2: MXID von Akteur A \nin Freigabeliste \nfür Akteur B \naufnehmen
+             |||
+             MP2-->C2: status
+             deactivate MP2
+            |||
+           end
+         |||
          U2-[#red]>C2: QR-Code teilen
          U1-[#0000FF]>C1: QR-Code scannen
          C1-[#0000FF]>C2: GET /scan
          C2--[#red]>C1: MXID (Akteur B)
-         autonumber stop
+         deactivate C2
          |||
-         
-         opt#LightGrey #AliceBlue <size:16>Eintrag in Freigabeliste erzeugen</size>
-         |||
-           C2->MP2: POST /tim-contact-mgmt/createContactSetting (MXID, start, end, Matrix-OpenID-Token)
-           activate MP2
-           |||
-           MP2->MH2: GET /openid/userinfo/\n?Matrix-OpenID-Token
-           activate MH2
-           MH2->MH2: prüfe \nMatrix-OpenID-Token
-           MH2-->MP2: status
-           deactivate MH2
-           |||
-           MP2->MP2: MXID von Akteur A \nin Freigabeliste \nfür Akteur B \naufnehmen
-           |||
-           MP2-->C2: status
-           deactivate MP2
-           deactivate C2
+           group <size:16>MXID in Freigabeliste eintragen</size>
+            |||
+             C1->MP1: POST /tim-contact-mgmt/createContactSetting \n(MXID, start, end, Matrix-OpenID-Token)
+             activate MP1
+             MP1->MH1: GET /openid/userinfo/\n?Matrix-OpenID-Token
+             activate MH1
+             MH1->MH1: prüfe \nMatrix-OpenID-Token
+             MH1-->MP1: status
+             deactivate MH1
+             |||
+             MP1->MP1: MXID von Akteur B \nin Freigabeliste \nfür Akteur A \naufnehmen
+             |||
+             MP1-->C1: status
+             deactivate MP2
+             deactivate C2
+            |||
+          end
           |||
-        end
-        |||
     end
+    autonumber stop
     
     |||
     C1->MP1: POST /_matrix/client/r0/\nrooms/{roomId}/invite 
-      activate MP1
-    
     |||
       ref over MP1, MP1: <size:17>**AF_10064** - \tFöderationszugehörigkeit eines \n<size:17>        \tMessenger-Service prüfen</size>\n 
       note right: <size:16>Stufe 1 - Prüfung gemäß </size>\n<size:16>Client-Server Kommunikation</size>
