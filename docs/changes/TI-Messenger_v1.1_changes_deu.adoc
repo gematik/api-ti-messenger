@@ -317,10 +317,18 @@ Der TI-Messenger Client soll bestimmte Kennungsparameter an den TI-Messenger Fac
 |Dienst
 |In Abbildung 20 wird bei einigen Aufrufen nach Erhalt des search-accesstoken die MXID des Users verwendet. Diese wird für die Authentisierung nicht benötigt und die Rückgabe an den Client wird ein FHIR Bundle sein.
 |https://github.com/gematik/api-ti-messenger/blob/feature/C_11306/images/diagrams/TI-Messenger-Dienst/Ressourcen/UC_Directory_search_Seq.png
+|2
+|Fachdienst
+|Beim Anlegen eines Kontakt beschreibt die API den Response Code 404(Not Found). Dieser sollte beim Anlegen nicht auftreten können. 
+|Der Response Code wurde beim "create" entfernt und ein Beispiel für das Format der MXID hinterlegt: https://github.com/gematik/api-ti-messenger/blob/feature/C_11306/src/openapi/TiMessengerContactManagement.yaml
 |3
 |Client
 |In der Client Spezifikation war beschrieben, dass TI-Messenger Clients die MXID verstecken MÜSSEN.
 |Das verstecken müssen wurde entfernt und explizit erlaubt Matrix konform die MXID zu verwenden, um bei gleichem Displaynamen einen User eindeutig identifizieren zu können.
+|4
+|Dienst
+|Im Anwendungsfall AF_10061 fehlt in der tabellarischen Beschreibung eines der Akzeptzanzkriterien.
+|Das Akzeptanzkriterium wird auch in der Tabelle noch hinzugefügt. 
 |5
 |Client und Fachdienst
 |Bisher haben die Spezifikationen von Client und Fachdienst Anforderungen enthalten, die eine CC-Evaluierung als Ersatz für das Produktgutachten ermöglichten. Ohne Notwendigkeit für ein Produktgutachten sind diese Anforderungen jedoch ncht zweckmäßig.
@@ -349,6 +357,10 @@ Der TI-Messenger Client soll bestimmte Kennungsparameter an den TI-Messenger Fac
 |Dienst
 |Bisher erfolgte die Zulassung auf Basis von Nachweisen und Tests in TU/RU.
 |Zulassung bedarf nun der Teilnahme an einer kontrollierten Inbetriebnahme und der Erbringung von Nachweisen in der Produktivumgebung, um Interoparbilitätsproblemen vorzubeugen.
+|13
+|Client
+|Bisher wurde im Falle eines QR-Codes Austausches der Inhalt des Codes nicht definiert.
+|Der Inhalt des QR-Codes ist in Anlehnung an ISO/IEC 18004:2006 in der Client Spezifikation beschrieben. 
 |14
 |Client
 |Bedeutung der Mandantenfähigkeit und des Zugriffschutzes für Administrationsfunktionen hat sich in bisherigen Gesprächen als unklar erwiesen, im besonderen die der "separaten User-Interfaces". Anforderungen wurden unterschiedlich interpretiert.
@@ -371,10 +383,14 @@ Der TI-Messenger Client soll bestimmte Kennungsparameter an den TI-Messenger Fac
 |Der Verweis auf die genannten Prüfvorschrift wurde entfernt, weil die Umsetzung geeigneter Maßnahmen zur Abwehr der OWASP Mobile Top 10 Risiken dem Hersteller obliegt. Der Nachweis über Wahl und Umsetzung geeigneter Maßnahmen ist im Rahmen des geforderten Sicherheitsgutachtens zu erbringen und bedarf keiner dedizierten Prüfvorschrift.
 |19
 |Dienst
-|In der Beschreibung zur Suche wird im Sequenzdiagramm beschrieben, dass vom VZD-FHIR-Directory eine Anfrage an den Messenger Proxy gestellt wird, um den übegebenen Token prüfen zu lassen. Hierbei ist kein Port angegeben, die für die Zulassung bereitgestellte Variante des Directories wird allerdings nur Anfragen an Port 8448 stellen können.
-|In die Dienst-Spezifikation wurde aufgenommen, dass das VZD-FHIR-Directory für die Prüfung des übergebenen Tokens Zugriff auf den Endpunkt /_matrix/federation/v1/openid/userinfo über Port 8448 benötigt.
+|In der Beschreibung zur Suche wird im Sequenzdiagramm beschrieben, dass vom VZD-FHIR-Directory eine Anfrage an den Messenger Proxy gestellt wird, um den übegebenen Token prüfen zu lassen. Hierbei ist kein Port angegeben.
+|In die Dienst-Spezifikation wurde aufgenommen, dass das VZD-FHIR-Directory als Default den Port 443 für die Anfrage verwenden wird. Es ist möglich diesen Port anzupassen, indem der Homeserver eine well-known Datei bereitstellt die den gewünschten Port enthält. 
 |20
 |Client
 |Die Afo A_23112 thematisiert die Bearbeitung und Löschung von Nachrichteninhalten. Ein Bearbeiten ist mit der Matrix Spezifikation 1.3 nicht möglich.
 |Die Afo wurde angepasst und der Teil bezogen auf die Bearbeitung von Inhalten entfernt. 
+|21
+|Fachdienst
+|Inhalt der Föderationsliste die der Registrierungs-Dienst über die Schnittstelle den Messenger-Proxies bereitstellen MUSS, sind die Hashes aller an der Föderation beteiligten Matrix-Domainnamen.
+|Da die Matrix-Domainnamen in Zukunft vom FHIR-Directory im Klartext bereitgestellt werden, ist an dieser Stelle auch kein Hashing mehr nötig und wird aus der Spezifikation entfernt.
 |===
