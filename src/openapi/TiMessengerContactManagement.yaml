@@ -36,7 +36,20 @@ externalDocs:
   url: https://github.com/gematik/api-ti-messenger
 
 servers:
-  - url: https://localhost/tim-contact-mgmt/v1.0/
+  - url: '{protocol}://{host}:{port}/{api}/'
+    variables:
+      protocol:
+        enum:
+          - http
+          - https
+        default: https
+      host:
+        default: 'localhost'
+      port:
+        default: '443'
+      api:
+        default: 'tim-contact-mgmt/v1.0'
+
 tags:
   - name: info
     description: This operation returns meta data about this interface and the status of available resources
