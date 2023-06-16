@@ -102,7 +102,7 @@ group <size:16>VZD-FHIR-Directory Eintrag</size>
   |||
   group <size:16>FHIR-Ressourcen lesen</size>
   |||
-  C->FP: POST /owner/PractitionerRole/?... \nFinde Datensatz für eigene TelematikID(owner-accesstoken)
+  C->FP: GET /owner/PractitionerRole/?... \nFinde Datensatz für eigene TelematikID(owner-accesstoken)
     Activate FP
   FP->FP: prüfe \nowner-accesstoken
   FP->VZD: HTTPS Forward
