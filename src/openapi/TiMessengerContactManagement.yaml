@@ -25,6 +25,7 @@ info:
   ### 1.0.1
   # - raised patch number in server url due to bugfixing
   # - removed pointless 404 response while createContactSetting
+  # - added MXID description & example
   ### 1.0.0
   # - initial version
   contact:
