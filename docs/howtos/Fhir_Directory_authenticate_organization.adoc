@@ -32,7 +32,7 @@ The more user friendly approach...
 
 === Register the Registrierung-Dienst with the VZD-FHIR-Directory
 . First of all a certificate is needed that can be obtained by creating a service request in the gematik TI-ITSM portal. The certificate must must have the type C.FD.SIG and the technical role "oid_tim" Please contact your Transisiton Manager for further details. 
-. The hash of the certificated (sha256(certificate as pem)) is provided while creating another service request in the gematik TI-ITSM portal for the TIM-Provider-Services credentials. Please contact your Transisiton Manager for further details. While creating the service request you will be askt for the hash of the certificate. This ensures that only registered TI-Messenger service providers are able to exchange Token with the VZD-FHIR-Directory.
+. The certificate then needs to be provided while creating another service request in the gematik TI-ITSM portal for the TIM-Provider-Services credentials. Please contact your Transisiton Manager for further details. While creating the service request you will be asked for the certificate. This ensures that only registered TI-Messenger service providers are able to create exchange Token with the VZD-FHIR-Directory.
 
 === Store the Telematik-ID used while ordering the TI-Messenger service
 The Telematik-ID is needed as part of the RegService-OpenID-Token that is descriped in the next paragraph. The VZD-FHIR-Directory needs that information to identify for which FHIR-Ressources an owneraccess-Token will be provided.
