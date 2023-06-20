@@ -218,11 +218,6 @@ Die Änderungen an den Anforderungen sind hier zusammengefasst.
 |Produktgutachten
 |Das Prüfverfahren wird geändert in *Sicherheitsgutachten*.
 
-|A_22798 Privacy by Default
-|gemSpec_TI-Messenger-Client
-|Produktgutachten
-|Die Anforderung *entfällt*.
-
 |A_22799 Verwendung von OWASP Mobile
 |gemSpec_TI-Messenger-Client
 |Produktgutachten
