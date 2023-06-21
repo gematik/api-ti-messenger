@@ -22,7 +22,6 @@ LifeLineBackgroundColor Gainsboro
 
 ParticipantBorderColor Motivation
 ParticipantBackgroundColor Motivation
-ParticipantFontName Impact
 ParticipantFontSize 20
 ParticipantFontColor black
 ParticipantBorderColor Black
@@ -31,7 +30,6 @@ ParticipantBackgroundColor MOTIVATION
 ActorBackgroundColor Gainsboro
 ActorFontColor black
 ActorFontSize 20
-ActorFontName Aapex
 }
     actor U1 as "\nAkteur - A in der Rolle\nUser / User-HBA\n"
     participant C1 as "TI-Messenger-\nClient" #AliceBlue
@@ -57,17 +55,17 @@ note over U2, MP2: \n<size:17>Der Akteur B ist erfolgreich beim Messenger Servic
       ref over U1, MH1 : <size:16>Anhang B - Einträge im VZD-FHIR-Directory suchen</size>\n
       |||
     
-      else <size:16>Direktaustausch (QR-Code Scan)</size>
+      else <size:16>Direktaustausch über QR-Code Scan</size>
          |||
-         note over U1, U2: \n<size:16>Akteur A und Akteur B treffen sich in Person\n
+         note over U1, U2: \n<size:16>Akteur A und Akteur B treffen sich persönlich\n
          |||
          autonumber
          U1-[#0000FF]>C1: QR-Code teilen
           activate C1 #AliceBlue
-         U2-[#red]>C2: QR-Code scannen
+         U2-[#DarkGreen]>C2: QR-Code scannen
           activate C2 #TECHNOLOGY
-         C2-[#red]>C1: GET /scan
-         C1--[#0000FF]>C2: MXID (Akteur A)
+         C2-[#DarkGreen]>C1: GET /scan
+         C1--[#0000FF]>C2: MXID von Akteur A
          |||
            group <size:16>MXID in Freigabeliste eintragen</size>
              |||
@@ -87,10 +85,10 @@ note over U2, MP2: \n<size:17>Der Akteur B ist erfolgreich beim Messenger Servic
             |||
            end
          |||
-         U2-[#red]>C2: QR-Code teilen
+         U2-[#DarkGreen]>C2: QR-Code teilen
          U1-[#0000FF]>C1: QR-Code scannen
          C1-[#0000FF]>C2: GET /scan
-         C2--[#red]>C1: MXID (Akteur B)
+         C2--[#DarkGreen]>C1: MXID von Akteur B
          deactivate C2
          |||
            group <size:16>MXID in Freigabeliste eintragen</size>
@@ -112,7 +110,8 @@ note over U2, MP2: \n<size:17>Der Akteur B ist erfolgreich beim Messenger Servic
           end
           |||
     end
-    autonumber stop
+    |||
+    note over U1, MH1: \n<size:17>Ein Chatraum wurde bereits durch den Akteur A eingerichtet.</size>\n
     
     |||
     C1->MP1: POST /_matrix/client/r0/\nrooms/{roomId}/invite 
@@ -158,7 +157,7 @@ note over U2, MP2: \n<size:17>Der Akteur B ist erfolgreich beim Messenger Servic
     |||
       ref over MP2, MH2 : <size:16>Anhang B - Stufen der Berechtigungsprüfung</size>\n <size:16>Stufe 2 und 3</size>\n
     |||
-    MP2->MH2: HTTP(S) Foward
+    MP2->MH2: HTTP(S) Forward
       activate MH2
       MH2->MH2: Invite verarbeiten
       |||
