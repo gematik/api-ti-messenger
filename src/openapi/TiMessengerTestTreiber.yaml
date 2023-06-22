@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: TiMessengerTestDriver
   description: REST interface to automate the test of a TI-Messenger client implementation.
-  version: 0.4.7
+  version: 0.4.8
   contact:
     name: gematik GmbH
     email: software-development@gematik.de
@@ -2222,7 +2222,7 @@ components:
           type: array
           example: [ free ]
           items:
-            enum: [ payed, free ]
+            enum: [ free, disc, cost ]
         communication:
           description: "The language that this service is offered in"
           type: array
@@ -2276,7 +2276,7 @@ components:
           type: array
           example: free
           items:
-            enum: [ payed, free ]
+            enum: [ free, disc, cost ]
         communication:
           description: "The language that this service is offered in"
           type: array
