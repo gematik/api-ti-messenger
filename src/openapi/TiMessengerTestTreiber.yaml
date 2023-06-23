@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: TiMessengerTestDriver
   description: REST interface to automate the test of a TI-Messenger client implementation.
-  version: 0.4.8
+  version: 0.4.9
   contact:
     name: gematik GmbH
     email: software-development@gematik.de
@@ -2390,7 +2390,6 @@ components:
 
     MessageContent:
       description: "Content of a message"
-      readOnly: true
       type: object
       required:
         - body
