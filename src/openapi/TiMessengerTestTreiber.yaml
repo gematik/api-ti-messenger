@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: TiMessengerTestDriver
   description: REST interface to automate the test of a TI-Messenger client implementation.
-  version: 0.4.9
+  version: 0.4.10
   contact:
     name: gematik GmbH
     email: software-development@gematik.de
@@ -311,7 +311,7 @@ paths:
     get:
       tags:
         - orgAdminFhirHealthcareService
-      description: "Get healthcareServices regarding the named organizationId"
+      description: "Get healthcareServices regarding the organization that belongs to the claimed device"
       operationId: getHealthcareServices
       responses:
         "200":
@@ -2431,7 +2431,6 @@ components:
 
     DirectMessage:
       description: "A direct message to an other account."
-      readOnly: true
       type: object
       properties:
         toAccount:
