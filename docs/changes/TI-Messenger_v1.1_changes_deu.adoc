@@ -88,8 +88,7 @@ HEADER
   "alg": "ES256",
   "typ": "JWT"
   "x5c": [
-     "<X.509 Sig-Cert, base64-encoded DER>",
-     "<X.509 CA-Cert, base64-encoded DER>"
+     "<X.509 Sig-Cert, base64-encoded DER>" ]
 }
 PAYLOAD
 {
