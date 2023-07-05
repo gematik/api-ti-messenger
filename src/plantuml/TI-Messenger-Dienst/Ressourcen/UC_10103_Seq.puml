@@ -6,7 +6,7 @@
 # Name: Authentisieren einer Organisation am TI-Messenger-Dienst
 '/
 
-@startuml "Authentisieren einer Organisation am TI-Messenger-Dienst"
+@startuml
 skinparam sequenceMessageAlign direction
 skinparam WrapWidth 300
 skinparam minClassWidth 150
@@ -57,30 +57,24 @@ alt#LightGrey #AliceBlue <size:16>Organisation nicht am Registrierungs-Dienst au
         rd --> wb: Redirect to IDP Authorization Endpoint
           deactivate rd
         |||
-        wb -> ip: GET {auth_endpoint}
+        wb -> au: Deeplink authenticator://...
+        activate au
+        au -> ip: GET {authorization_endpoint}
         activate ip
         ip -> au: Authentication challenge
-        activate au
         au -> ko: ExternalAuthenticate
           activate ko
         ko --> au: ExternalAuthenticateResponse
-        |||
           deactivate ko
-      
-      break #MistyRose <size:15>SMC-B nicht freigeschaltet</size>
-        au -> wb: Fehlernachricht
-        wb -> oa: Fehlernachricht
-        |||
-      end
-        |||
         au -->ip: Authentication challenge response
-          deactivate au
-        ip --> wb: auth_code
+        ip -->au: HTTP 302 Redirect(auth_code)
           deactivate ip
+        au -->wb: {client_callback_uri}\n(Redirect + auth_code)
+          deactivate au
         |||
         wb -> rd: POST I_Registration(auth_code)
           activate rd
-        rd -> ip: POST {tokenEndpoint}(auth_code, verifier)
+        rd -> ip: POST {token_endpoint}(auth_code, verifier)
           activate ip
         ip --> rd: id_token
           deactivate ip
