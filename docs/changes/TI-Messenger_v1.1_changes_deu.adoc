@@ -125,7 +125,7 @@ Die Änderungen an den Anforderungen sind hier zusammengefasst.
 |A_17124 TLS-Verbindungen (ECC-Migration)
 |gemSpec_Krypt
 |Produktgutachten
-|Das Prüfverfahren wird geändert in *Herstellererklärung*. Es muss durch den Hersteller dokumentiert werden, wie und wo die Umsetzung erfolgt ist.
+|Das Prüfverfahren für die sicherheitstechnische Eignung wird geändert in *Sicherheitsgutachten*. Weiterhin muss Konformität für TLS-Server im Rahmen eines Funktionstests nachgewiesen werden. Anmerkung: Die Anforderung wird abgelöst durch ihren direkten Nachfolger, A_17124-01
 
 |A_18464 TLS-Verbindungen, nicht Version 1.1
 |gemSpec_Krypt
@@ -180,7 +180,7 @@ Die Änderungen an den Anforderungen sind hier zusammengefasst.
 |GS-A_4385 TLS-Verbindungen, Version 1.2
 |gemSpec_Krypt
 |Produktgutachten
-|Das Prüfverfahren wird geändert in *Herstellererklärung*. Es muss durch den Hersteller dokumentiert werden, wie und wo die Umsetzung erfolgt ist.
+|Das Prüfverfahren für die sicherheitstechnische Eignung wird geändert in *Sicherheitsgutachten*. Weiterhin muss Konformität für TLS-Server im Rahmen eines Funktionstests nachgewiesen werden.
 
 |GS-A_5339 TLS-Verbindungen, erweiterte Webbrowser-Interoperabilität
 |gemSpec_Krypt
@@ -190,7 +190,7 @@ Die Änderungen an den Anforderungen sind hier zusammengefasst.
 |GS-A_5526 TLS-Renegotiation-Indication-Extension
 |gemSpec_Krypt
 |Produktgutachten
-|Das Prüfverfahren wird geändert in *Herstellererklärung*. Es muss durch den Hersteller dokumentiert werden, wie und wo die Umsetzung erfolgt ist.
+|Das Prüfverfahren für die sicherheitstechnische Eignung wird geändert in *Sicherheitsgutachten*. Weiterhin muss Konformität für TLS-Server im Rahmen eines Funktionstests nachgewiesen werden.
 
 |A_22718 Mandantenfähigkeit von TI-Messenger-Clients
 |gemSpec_TI-Messenger-Client
@@ -200,7 +200,7 @@ Die Änderungen an den Anforderungen sind hier zusammengefasst.
 |A_22723 Versand von Dateien mittels Matrix
 |gemSpec_TI-Messenger-Client
 |Produktgutachten
-|Das Prüfverfahren wird geändert in *Herstellererklärung*. Es muss durch den Hersteller dokumentiert werden, wie und wo die Umsetzung erfolgt ist.
+|Das Prüfverfahren wird geändert in *Herstellererklärung*. Es muss durch den Hersteller dokumentiert werden, wie und wo die Umsetzung erfolgt ist. Weiterhin muss Konformität im Rahmen von tests für die einzelnen Aspekte nachgewiesen werden.
 
 |A_22724 Abschottung der Inhalte im TI-Messenger-Client
 |gemSpec_TI-Messenger-Client
@@ -225,7 +225,7 @@ Die Änderungen an den Anforderungen sind hier zusammengefasst.
 |A_22800 Sicherheitsrisiken von Software Bibliotheken minimieren
 |gemSpec_TI-Messenger-Client
 |Produktgutachten
-|Das Prüfverfahren wird geändert in *Herstellererklärung*. Es muss durch den Hersteller dokumentiert werden, wie und wo die Umsetzung erfolgt ist.
+|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*. Es muss durch den Sicherheitsgutachter geprüft werden, wie und wo die Umsetzung erfolgt ist.
 
 |A_22937 Einsatz nur von auditierter Verschlüsselung
 |gemSpec_TI-Messenger-Client
