@@ -200,7 +200,7 @@ Die Änderungen an den Anforderungen sind hier zusammengefasst.
 |A_22723 Versand von Dateien mittels Matrix
 |gemSpec_TI-Messenger-Client
 |Produktgutachten
-|Das Prüfverfahren wird geändert in *Herstellererklärung*. Es muss durch den Hersteller dokumentiert werden, wie und wo die Umsetzung erfolgt ist. Weiterhin muss Konformität im Rahmen von tests für die einzelnen Aspekte nachgewiesen werden.
+|Das Prüfverfahren wird geändert in *Sicherheitsgutachten*. Es muss durch den Hersteller dokumentiert werden, wie und wo die Umsetzung erfolgt ist. Weiterhin muss Konformität im Rahmen von Tests einzelner Teilanforderungen nachgewiesen werden.
 
 |A_22724 Abschottung der Inhalte im TI-Messenger-Client
 |gemSpec_TI-Messenger-Client
