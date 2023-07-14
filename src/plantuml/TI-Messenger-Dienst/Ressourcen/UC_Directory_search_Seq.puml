@@ -29,16 +29,19 @@ ParticipantBackgroundColor MOTIVATION
 ActorBackgroundColor Gainsboro
 ActorFontColor black
 ActorFontSize 20
+
 }
-    actor U as "Akteur in der Rolle\nUser / User-HBA"
-    participant cl as "TI-Messenger-Client"
-    participant mp as "Messenger Proxy"
-    participant hs as "Matrix-Homeserver"
-    box <size:18>VZD-FHIR-Directory</size> #WhiteSmoke
-      participant fp as "FHIR-Proxy"
-      participant au as "Auth-Service"
-      participant fd as "FHIR-Directory"
-    end box
+autonumber
+
+actor U as "Akteur in der Rolle\nUser / User-HBA"
+participant cl as "TI-Messenger-Client"
+participant mp as "Messenger Proxy"
+participant hs as "Matrix-Homeserver"
+box <size:18>VZD-FHIR-Directory</size> #WhiteSmoke
+  participant fp as "FHIR-Proxy"
+  participant au as "Auth-Service"
+  participant fd as "FHIR-Directory"
+end box
 
 |||
 note over U, hs: \n<size:17>Der Akteur ist erfolgreich beim Messenger-Service angemeldet</size>\n
@@ -76,7 +79,7 @@ opt#LightGrey #MistyRose <size:16>Abbruch</size>
 end
 
 |||
-        au->mp: GET /openid/userinfo?access_token=Matrix-OpenID-Token)
+        au->mp: GET /openid/userinfo?access_token=Matrix-OpenID-Token
           activate mp
         mp->hs: HTTP(S) Forward
           activate hs
