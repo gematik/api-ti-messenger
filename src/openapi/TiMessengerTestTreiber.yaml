@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: TiMessengerTestDriver
   description: REST interface to automate the test of a TI-Messenger client implementation.
-  version: 0.4.10
+  version: 0.4.11
   contact:
     name: gematik GmbH
     email: software-development@gematik.de
@@ -1440,11 +1440,11 @@ paths:
               schema:
                 $ref: "#/components/schemas/MediaFileId"
 
-  /devices/{deviceId}/media/{mediaId}:
+  /devices/{deviceId}/media/{fileId}:
     parameters:
       - $ref: "#/components/parameters/deviceId"
       - $ref: "#/components/parameters/transactionIdHeader"
-      - $ref: "#/components/parameters/mediaId"
+      - $ref: "#/components/parameters/fileId"
     get:
       tags:
         - media
@@ -1543,8 +1543,8 @@ components:
         type: string
         example: 81add1c5-675b-4785-9405-a2e75b660b2e
 
-    mediaId:
-      name: mediaId
+    fileId:
+      name: fileId
       in: path
       description: "ID of media file"
       required: true
@@ -1890,7 +1890,7 @@ components:
         - deviceId
         - deviceName
         - deviceStatus
-        - claimer
+        - claimerName
         - claimedUntil
       readOnly: true
       type: object
@@ -1908,7 +1908,7 @@ components:
           type: string
           enum: [ claimed, free ]
           description: "Status of the device"
-        claimer:
+        claimerName:
           type: string
           description: "Name of the claimer"
           example: "some name"
@@ -2009,6 +2009,10 @@ components:
       type: object
       allOf:
         - $ref: "#/components/schemas/MxId"
+      required:
+        - username
+        - password
+        - displayName
       properties:
         username:
           type: string
@@ -2428,6 +2432,7 @@ components:
         fileId:
           type: string
           format: uuid
+          example: "74738ff5-5367-5958-9aee-98fffdcd1876"
 
     DirectMessage:
       description: "A direct message to an other account."
