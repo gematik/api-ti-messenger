@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: TiMessengerTestDriver
   description: REST interface to automate the test of a TI-Messenger client implementation.
-  version: 0.4.11
+  version: 0.4.12
   contact:
     name: gematik GmbH
     email: software-development@gematik.de
@@ -1301,6 +1301,33 @@ paths:
         default:
           $ref: "#/components/responses/DefaultResponse"
 
+  /devices/{deviceId}/rooms/{roomId}/state:
+    parameters:
+      - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/transactionIdHeader"
+      - $ref: "#/components/parameters/roomId"
+
+    get:
+      tags:
+        - room
+      description: "Returns all state events of the room"
+      operationId: "Get state events"
+      responses:
+        "200":
+          description: "Get room state events"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RoomStates"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
   /devices/{deviceId}/contacts:
     parameters:
       - $ref: "#/components/parameters/deviceId"
@@ -2526,6 +2553,46 @@ components:
           description: "associated accounts of the room and their states"
           items:
             $ref: "#/components/schemas/RoomMember"
+
+    RoomState:
+      description: "Description of a room state event"
+      type: object
+      required:
+        - type
+        - roomId
+        - eventId
+      properties:
+        content:
+          type: string
+          format: json
+          description: "This value is very custom. Should be json formatted"
+          example: "{ join_rule: public }"
+        eventId:
+          type: string
+          description: "Id of the event"
+          example: "$143273582443PhrSn:example.org"
+        roomId:
+          type: string
+          description: "Id of belonging room"
+          example: "!636q39766251:example.com"
+        sender:
+          type: string
+          description: "@example:example.org"
+          example: "MxId of the creator"
+        stateKey:
+          type: string
+          description: "Present if, and only if, this event is a state event. The key making this piece of state unique in the room. Note that it is often an empty string."
+          example: ""
+        type:
+          type: string
+          description: "The type of the event"
+          example: "de.gematik.tim.room.casereference.v1"
+
+    RoomStates:
+      description: "List of room states"
+      type: array
+      items:
+        $ref: "#/components/schemas/RoomState"
 
     Contact:
       description: "Contact settings."
