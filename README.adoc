@@ -36,7 +36,7 @@ The documentation of the TI-Messenger-Dienst is provided on the following branch
 - *feature/**: These branches are used to prepare and discuss new topics that are not yet under development. These documents may be incomplete and may change until completion.
 
 == System Overview
-The following picture gives an overview of the system architecture of the TI-Messenger-Dienst v1.1. The IDP services that are also necessary for the operation of the TI-Messenger-Dienst are not considered here.
+The following picture gives an overview of the system architecture of the TI-Messenger-Dienst v1.1.1 (with attention to the interfaces). The IDP services that are also necessary for the operation of the TI-Messenger-Dienst are not considered here.
 
 ++++
 <p align="left">
