@@ -106,6 +106,9 @@ The table below contains the gematik documents on the telematics infrastructure 
 |*[gemSpec_VZD_FHIR_Directory]* |gematik: Spezifikation Verzeichnisdienst FHIR-Directory
 |===
 
+== 💡 Onboarding
+Manufacturers and providers of a TI-Messenger-Dienst can use the https://gematikde.sharepoint.com/:w:/s/PTNeo/EczX7AFGfBdNrCYghzGsHz4BbSoYhV63QMmDCdz7x9zLpg?e=7wG3c[Welcome Package] provided by gematik for onboarding. This _Welcome Package_ is intended as a "step-by-step" guide to help you carry out the onboarding of the TI-Messenger-Dienst.
+
 == Additional pages
 *Use cases* +
 link:docs/TI-Messenger-Use-Cases.adoc[- Use Cases and sequence diagrams] 
@@ -116,6 +119,7 @@ link:docs/TI-Messenger-Client.adoc[- TI-Messenger-Client] +
 link:docs/FHIR-Directory.adoc[- VZD-FHIR-Directory]
 
 *Miscellaneous* +
+https://gematikde.sharepoint.com/:w:/s/PTNeo/EczX7AFGfBdNrCYghzGsHz4BbSoYhV63QMmDCdz7x9zLpg?e=7wG3c[- Welcome Package] +
 https://gematikde.sharepoint.com/sites/EXTAuthenticator/Freigegebene%20Dokumente/Forms/AllItems.aspx?id=%2Fsites%2FEXTAuthenticator%2FFreigegebene%20Dokumente%2FVer%C3%B6ffentlichte%20Version%20%2D%20gematik%20Authenticator&p=true&ga=1[- gematik Authenticator] +
 link:docs/Q&A.adoc[- Questions and answers &#91;Q&A&#93;]
 
@@ -123,7 +127,7 @@ link:docs/Q&A.adoc[- Questions and answers &#91;Q&A&#93;]
 - [comming soon]
 
 == License
-Copyright (c) 2022 gematik GmbH
+Copyright (c) 2023 gematik GmbH
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
