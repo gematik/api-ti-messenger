@@ -19,3 +19,8 @@ toc::[]
 = Q&A-List
 This Q&A-List is intended to help developers and providers to implement the components of the TI-Messenger-Dienst interoperably. Here you will find 
 frequently asked questions with the corresponding answers in order to provide interested developers and providers with the best possible support.
+
+[qanda]
+What is Asciidoctor?::
+An implementation of the AsciiDoc processor in Ruby.
+What is the answer to the Ultimate Question?:: 42
