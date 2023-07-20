@@ -1,9 +1,14 @@
 name: GeneratePlantumlImages
 
 on:
+  workflow_dispatch:
+
   push:
-    branches: [ '*' ]
-    paths: [ 'src/plantuml/**' ]
+    branches: 
+    - '*'
+    paths: 
+    - 'src/plantuml/**'
+  
 
 jobs:
   build:
