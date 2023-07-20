@@ -1,0 +1,31 @@
+name: LocalizeContent
+
+#on:
+#  push:
+#    branches:
+#    - feature/localizecontent
+
+on: workflow_dispatch
+
+
+jobs:
+
+#  performLocalization:
+#    - name: Translation Action
+#      uses: fabasoad/translation-action@v2.1.3
+
+  google:
+    name: Google
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: fabasoad/translation-action@main
+        id: google-step
+        with:
+          provider: google
+          lang: ms-en
+          source: Kemenangan
+      - name: Print the result
+        run: echo "Translation is '${{ steps.google-step.outputs.text }}'"
+        shell: sh
+
