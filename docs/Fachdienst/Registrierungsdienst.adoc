@@ -10,7 +10,7 @@ endif::[]
 :docsdir: ../../docs
 :toc: macro
 :toclevels: 5
-:toc-title: Table of Contents
+:toc-title: Inhaltsverzeichnis
 :numbered:
 
 image:gematik_logo.svg[width=70%]
