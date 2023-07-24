@@ -1,0 +1,44 @@
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+:imagesdir: ../../images
+:toc: macro
+:toclevels: 5
+:toc-title: Table of Contents
+:numbered:
+
+image:gematik_logo.svg[width=70%]
+
+toc::[]
+= TI-Messenger-Fachdienst
+== Überblick
+Die folgende Seite gibt Implementierungshinweise für die Entwicklung eines eigenen _TI-Messenger-Fachdienstes_.
+
+TIP: Die Seite ergänzt die *[gemSpec_TI-Messenger-FD]* Spezifikation, die als Grundlage für das Verständnis vorrausgesetzt wird. 
+
+Der _TI-Messenger-Fachdienst_ besteht aus unterschiedlichen Teilkomponenten und Schnittstellen. Die nachfolge Abbildung verdeutlicht den Zusammenhang zwischen den Komponenten und den Kommunikationsschnittstellen. 
+
+++++
+<p align="left">
+  <img width="100%" src=../../images/I_Fachdienst.png>
+</p>
+++++
+
+Der _TI-Messenger-Fachdienst_ besteht aus den folgenden Teilkomponenten :  
+
+* link:Registrierungsdienst.adoc[Registrierungs-Dienst], 
+
+* link:Messengerservice.adoc[Messenger-Service] 
+
+NOTE: Die Teilkomponente _Push-Gateway_ ist nach der  Matrix Spezifikation https://spec.matrix.org/latest/push-gateway-api/[&#91;Push Gateway API&#93;] zu implementieren und wird deshalb in dieser Implementierungshilfe nicht detaillierter beschrieben.
+
+== Vorraussetzungen 
+- gematik TI-ITSM...
+- RegDienst am IDP 
+- Zugang VZD 
+

@@ -1,0 +1,166 @@
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+:imagesdir: ../images
+:toc: macro
+:toclevels: 5
+:toc-title: Inhaltsverzeichnis
+:numbered:
+
+image:gematik_logo.svg[width=70%]
+
+toc::[]
+
+= TI-Messenger-Client
+Der TI-Messenger-Client basiert auf dem offenen Kommunikationsprotokoll Matrix und wird auf dem Endgerät eines Akteurs verwendet. Die Funktionalität des TI-Messenger-Clients kann in drei abstrakte Module unterteilt werden. In der folgende Abbildung wird dies verdeutlicht. 
+
+
+++++
+<p align="left">
+  <img width="100%" src=../images/I_Client.png>
+</p>
+++++
+
+== VZD-FHIR-Directory Modul
+Über dieses abstrakte Modul wird die Suche und die Pflege von Einträgen im FHIR-Directory ermöglicht. Der TI-Messenger-Client nutzt die Schnittstellen der Teilkomponenten Auth Services und FHIR-Proxy am VZD-FHIR-Directory. Für den Aufruf der beiden Schnittstellen am FHIR-Proxy werden Token benötigt, um die Berechtigung für den Zugriff nachzuweisen. Daher muss der TI-Messenger-Client zuvor am Auth Service des VZD-FHIR-Directory die notwendigen Token anfragen. Im folgenden werden die Aufrufe beschrieben. 
+
+=== Auth Service
+Der Auth Service des VZD-FHIR-Directory bietet zwei Schnittstellen an, um sich valide ACCESS TOKENS ausstellen zu lassen.
+
+==== /tim-authenticate
+Der Auth Service des VZD-FHIR-Directory bietet über den Endpunkt */tim-authenticate* die Möglichkeit an, sich ein `search-accesstoken` ausstellen zu lassen, welches am FHIR-Proxy für die Suche nach FHIR-Ressourcen am Endpunkt */search* notwendig ist. Bei Aufruf des Endpunktes */tim-authenticate* ist es erforderlich dass 3rd Party Token `Matrix-OpenID-Token` mit im Header zu übergeben, welches sich der TI-Messenger-Client zuvor vom zuständigen Matrix-Homeserver austellen lassen muss. Bei den Endpunkt */tim-authenticate* ist es zusätzlich erforderlich die MXID des Akteurs als Parameter `mxId` beim Aufruf mit zu übergeben. 
+
+*Aufbau des Requests*
+[source, bash]
+-----------------
+curl -X GET \
+'https://[FHIRbaseUrl]/tim-authenticate?mxId={MXID}' \
+-H 'X-Matrix-OpenID-Token: {Matrix-OpenID-Token}'
+-----------------
+
+*Beispielantwort*
+[source, ruby]
+-----------------
+Code: 200
+{
+ "jwt": "search-accesstoken",
+ "token_type": "bearer",
+ "expires_in": 86400
+}
+-----------------
+
+==== /owner-authenticate
+Der Auth Service des VZD-FHIR-Directory bietet über den Endpunkt */owner-authenticate* die Möglichkeit an, sich ein `owner-accesstoken` ausstellen zu lassen, welches am FHIR-Proxy für das Eintragen von FHIR-Ressourcen eines Akteurs am Endpunkt */owner* notwendig ist. Bei Aufruf des Endpunktes */owner-authenticate* ist es erforderlich dass 3rd Party Token `registration-service-token` im Header mit zu übergeben, welches sich der TI-Messenger-Client zurvor vom zuständigen Registrierungs-Dienst austellen lassen muss. Ebenfalls ist es erforderlich im Header den Server Namen (`Registration-Server-Name`) des ausstelenden Registrierungs-Dienstes beim Aufruf mit zu übergeben. Am Endpunkt */owner-authenticate* ist es ebenfalls erforderlich die MXID des Akteurs als Parameter `mxId` im Aufruf mit zu übergeben. 
+
+*Aufbau des Requests*
+[source, bash]
+-----------------
+curl -X GET \
+'https://[FHIRbaseUrl]/owner-authenticate?mxId={MXID}' \
+-H 'X-RegService-Token: {registration-service-token}', \
+-H 'X-Registration-Server-Name: {Service-Name}'
+-----------------
+
+*Beispielantwort*
+[source, ruby]
+-----------------
+Code: 200
+{
+  "jwt": "owner-accesstoken",
+  "token_type": "bearer",
+  "expires_in": 86400
+}
+-----------------
+
+=== FHIR Proxy
+
+==== /search
+Der FHIR Proxy des VZD-FHIR-Directory bietet über die Schnittstelle *FHIRDirectorySearchAPI* den Endpunkt */search* an, um FHIR-Ressourcen im FHIR-Directory zu suchen. Um den Endpunkt */search* aufrufen zu können, wird ein `search-accesstoken` im Authorization Header benötigt. 
+
+*Aufbau des Requests*
+[source, bash]
+-----------------
+GET https://[baseUrl]/search/[resourceType]?organization.active=true&[optional parameters] \
+-H "Authorization: Bearer {search-accesstoken}
+-----------------
+
+*Ressourcen Types*
+|===
+|resourceType | description
+
+|HealthcareService | To search for organizations, use "HealthcareService" + 
+as the resource type
+|PractitionerRole | To search for people, use "PractitionerRole" + 
+as the resource type
+|===
+
+TIP: Only resources with the status "active" may be displayed. For this reason, the [resource].active=true parameter must be specified for all search operations.
+
+Ein Überblick über die unterstützten FHIR Parameter können hier https://github.com/gematik/api-vzd/blob/feature/ILF-FHIR_VZD/docs/gemILF_FHIR_VZD.adoc#fhir-search-organizations[[FHIR VZD implementation guide]] nachgelesen werden.
+
+*Beispielabfrage:*
+[source, bash]
+-----------------
+curl -X GET "https://fhir-directory-test.vzd.ti-dienste.de/search/HealthcareService?organization.active=true&_count=1" \
+    -H "Authorization: Bearer {search-accesstoken}
+-----------------
+
+==== /owner
+Der FHIR Proxy des VZD-FHIR-Directory bietet über die Schnittstelle *FHIRDirectoryOwnerAPI* den Endpunkt */owner* an, um FHIR-Ressourcen im FHIR-Directory für einen Akteur einzutragen. Um den Endpunkt */owner* aufrufen zu können, wird ein `owner-accesstoken` im Authorization Header benötigt. 
+
+*Aufbau des Requests*
+[source, bash]
+-----------------
+POST https://[baseUrl]/owner/[resourceType]&[optional parameters] \
+-H "Authorization: Bearer {owner-accesstoken}
+-----------------
+
+Erst GET (Datensatz suchen) -> PUT (Datensatz ändern)
+
+!!!TODO!!!
+
+== TI-Messenger Modul
+Über dieses abstrakte Modul wird die eigentliche Ad-Hoc Kommunikation durchgeführt. Der TI-Messenger-Client kommuniziert mit dem Messenger Service des TI-Messenger-Fachdienstes über die Matrix - Client-Server Schnittstelle, um Events auszutauschen. Für die Administration einer Freigabeliste stellt der Messenger Service die Schnittstelle `I_Ti_MessengerContactManagement` bereit. Der Aufruf der Schnittstellen erfolgt immer über den Messenger Proxy. Im folgenden werden die Schnittstellen beschrieben. 
+
+=== Matrix - Client-Server API
+Der Matrix Homeserver muss die Schnittstelle gemäß der Matrix https://spec.matrix.org/latest/[[Client-Server API]] anbieten, welche der TI-Messenger Client aufruft. Der Aufruf der einzelnen Endpunkte kann dort nachgelesen werden. Ein Überblick über die einzelnen Endpunkte der Schnittstelle ist hier https://matrix.org/docs/api/#overview[[API Playground]] einsehbar. 
+
+Für die Fallbezogene Kommunikation ist es erforderlich etwas am Event xyz anzupassen!!!!
+Es ist erforderlich, dass der TI-Messenger-Client FHIR-Ressourcen in den Room-State eines existierenden Chatraumes hinzufügt. 
+
+Art des Events: state event
+Event state_key: <vom Sender festgelegt>
+Event type: "de.gematik.tim.casereference"
+Die FHIR-Ressourcen werden im Element content als json-Daten eingetragen und als FHIR-Bundle (type message) zusammengefasst.
+
+*Aufbau des Requests*
+[source, bash]
+-----------------
+POST 'https://{domain}/_matrix/client/v3/createRoom' \
+-----------------
+
+=== I_Ti_MessengerContactManagement
+Es ist erforderlich das der TI-Messenger-Client die Operationen der Schnittstelle `I_TiMessengerContactManagement` aufruft. 
+
+/tim-contact-mgmt/
+
+== Auth Modul
+Über dieses abstrakte Modul wird die Kommunikation mit dem IDP durchgeführt. Der TI-Messenger-Client authentisiert  sich mittels OpenID-Connect um ein ID_TOKEN ausgestellt zu bekommen. Für die Authentisierung am IDP wird endweder eine SMC-B oder ein HBA verwendet.
+
+=== OIDC / OAuth
+Der TI-Messenger-Client löst einen OAUTH2 Authorization Request unter Angabe des zu verwendenden sektoralen Identity Providers an den Authorization Endpoint des Authorization-Servers aus.
+
+= Referenzierte Dokumente
+Die nachfolgende Tabelle enthält die in der vorliegenden Online Dokumentation referenzierten Dokumente der gematik. Deren zu diesem Dokument jeweils gültige Versionsnummer entnehmen Sie bitte der aktuellen, auf der Internetseite der gematik veröffentlichten, Dokumentenlandkarte, in der die vorliegende Version aufgeführt wird.
+
+|===
+|[Quelle] |Herausgeber: Titel
+
+|*[Client-Server API]* | https://spec.matrix.org/latest/client-server-api/
+|*[API Playground]* | https://matrix.org/docs/api/#overview
+|===
