@@ -1,0 +1,63 @@
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+:imagesdir: ../images
+:toc: macro
+:toclevels: 3
+:toc-title: Inhaltsverzeichnis
+:numbered:
+
+:usecasedir: use-cases
+
+image:gematik_logo.svg[width=70%]
+
+toc::[]
+
+= Anwendungsfälle
+Diese Seite soll dem Leser einen Überblick über die häufigsten Anwendungsfälle für den TI-Messenger geben. Neben der Einleitung enthält jedes Kapitel einen Link zu einer detaillierten Anwendungsfallbeschreibung und einem Sequenzdiagramm, das die Interaktion zwischen den beteiligten Komponenten visualisiert.
+
+TIP: Die Serviceaufrufe in den Sequenzdiagrammen enthalten möglicherweise nicht alle für den Aufruf erforderlichen Parameter. Die Sequenzdiagramme umfassen möglicherweise auch nicht alle Fehlerfälle. Sie konzentrieren sich auf die häufigsten Fehler für jeden einzelnen Anwendungsfall.
+
+
+== Messenger-Service
+Um mit anderen Benutzern Nachrichten austauschen zu können, benötigt die Organisation einen Messenger-Dienst des ausgewählten Anbieters. Die folgenden Anwendungsfälle erläutern die Bereitstellung eines Messenger-Dienstes, die Föderations-Prüfungen, die Verwaltung der Föderationsliste und die verschiedenen Ebenen der Berechtigungsprüfungen.
+
+link:{usecasedir}/MS-AF10103-authenticate-organization.adoc[AF_10103 Authentisieren einer Organisation am TI-Messenger-Dienst]
+
+link:{usecasedir}/MS-AF10060-provision-messenger-service.adoc[AF_10060 Provision of messenger service to an organisation ]
+
+link:{usecasedir}/MS-AF10064-check-federation.adoc[AF_10064 Check federation affiliation of a messenger service ]
+
+link:{usecasedir}/MS-update-federation-list.adoc[Update federation list ]
+
+link:{usecasedir}/MS-authorization-check.adoc[Authorization check ]
+
+== VZD-FHIR-Directory
+Das VZD-FHIR-Directory ist das zentrale Adressbuch für Organisationen und Personen im deutschen Gesundheitswesen. In den folgenden Anwendungsfällen wird detailliert erläutert, was erforderlich ist, um die Organisations- oder Practitioner-Informationen im VZD-FHIR-Directory zu ändern. Der letzte Anwendungsfall beschreibt die Suche im VZD-FHIR-Directory.
+
+link:{usecasedir}/VZD-AF10059-add-organization.adoc[AF_10059 Add organisation resources to directory service]
+
+link:{usecasedir}/VZD-AF10058-add-practitioner.adoc[AF_10058 Akteur (User-HBA) im Verzeichnisdienst hinzufügen]
+
+link:{usecasedir}/VZD-search.adoc[Search Entries in the VZD-FHIR directory]
+
+== User Kommunikation
+Die folgenden Anwendungsfälle beschreiben den Anmeldevorgang, die Einladung anderer Benutzer und den Austausch von Nachrichten. Sowohl die Einladungen als auch der Nachrichtenaustausch werden aus 2 Perspektiven erklärt. Die erste Perspektive konzentriert sich auf die Kommunikation innerhalb einer Organisation, die zweite Perspektive zeigt die Abläufe für eine Kommunikation mit mehr als einem beteiligten Homeserver.
+
+link:{usecasedir}/COM-AF10057-sign-in.adoc[AF_10057 Anmeldung eines Akteurs am Messenger-Service]
+
+link:{usecasedir}/COM-AF10104-invite-within.adoc[AF_10104 Invitation of actors within an organisation]
+
+link:{usecasedir}/COM-AF10063-events-within.adoc[AF_10063 Exchange of events between actors within an organisation]
+
+link:{usecasedir}/COM-AF10061-invite-outside.adoc[AF_10061 Einladung von Akteuren außerhalb einer Organisation]
+
+link:{usecasedir}/COM-AF10062-events-outside.adoc[AF_10062 Exchange of events between actors outside an organisation]
+
+
+

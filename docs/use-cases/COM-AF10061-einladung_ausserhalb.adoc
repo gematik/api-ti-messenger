@@ -1,0 +1,51 @@
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+:imagesdir: ../../images
+
+image:gematik_logo.svg[width=70%]
+
+=== AF_10061 Einladung von Akteuren außerhalb einer Organisation
+In diesem Anwendungsfall wird ein Akteur außerhalb einer Organisation eingeladen. Für die Suche von Akteuren außerhalb der Organisation kann das VZD-FHIR-Directory verwendet werden. Ist die MXID des gesuchten Akteurs dort nicht vorhanden muss es die Möglichkeit geben, die Kontaktaufnahme auch auf andere Wege zu ermöglichen. Es muss mindestens die Kontaktaufnahme mit Hilfe eines QR-Code Scans angeboten werden. Weitere Optionen zur Eingabe der MXID (z. B. manuelle Eingabe) sind zulässig. Im Gegensatz zu einer Einladung von Akteuren innerhalb einer Organisation (siehe AF_10104 - Einladung von Akteuren innerhalb einer Organisation), prüft in diesem Anwendungsfall der Messenger-Proxy zusätzlich die im Kapitel 3.5 - Berechtigungskonzept festgelegten Kriterien der Server-Server Kommunikation (Stufe 1 - 3). 
+
+.Anwendungsfallbeschreibung
+[%collapsible%open]
+====
+[caption=]
+Einladung von Akteuren außerhalb einer Organisation
+[%header, cols="1,1"]
+|===
+| |Beschreibung
+|Akteur |Leistungserbringer, Mitarbeiter einer Organisation im Gesundheitswesen in der "Rolle User / User-HBA"
+|Auslöser |Akteur A möchte mit Akteur B außerhalb einer Organisation einen gemeinsamen Chatraum einrichten.
+|Komponenten a|
+              * TI-Messenger-Client A + B,
+              * Messenger-Proxy A + B,
+              * Messenger-Homeserver A + B, 
+              * VZD-FHIR-Directory,
+              * Push-Gateway B
+|Vorbedingungen a| 
+                  * Die Akteure verfügen über einen zugelassenen TI-Messenger-Client.
+                  * Die Akteure kennen die URL ihres Messenger-Service oder die URL ist bereits in ihren TI-Messenger-Clients konfiguriert.
+                  * Die Akteure sind am Messenger-Services angemeldet
+                  * Die verwendeten Messenger-Services sind Bestandteile der TI-Messenger-Föderation.
+|Eingangsdaten | Matrix Invite Event
+|Ergebnis a|Actor A and actor B are both in a shared chat room.
+Optionally, a notification is sent to actor B about the invitation to the chat room.
+|Ausgangsdaten |status
+|===
+====
+.Sequenzdiagramm
+[%collapsible%open]
+====
+++++
+<p align="center">
+  <img width="55%" src=../../images/diagrams/TI-Messenger-Dienst/Ressourcen/UC_10061_Seq.svg>
+</p>
+++++
+====

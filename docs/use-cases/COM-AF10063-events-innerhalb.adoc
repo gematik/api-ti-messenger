@@ -1,0 +1,48 @@
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+:imagesdir: ../../images
+
+image:gematik_logo.svg[width=70%]
+
+=== AF_10063 Austausch von Events zwischen Akteuren innerhalb einer Organisation
+Dieser Anwendungsfall ermöglicht es Akteuren, welche sich in einem gemeinsamen Raum innerhalb eines Messenger-Service befinden, Nachrichten auszutauschen und weitere durch die Matrix-Spezifikation festgelegte Aktionen (Events) auszuführen.
+
+.Anwendungsfallbeschreibung
+[%collapsible%open]
+====
+[caption=]
+Austausch von Events zwischen Akteuren innerhalb einer Organisation
+[%header, cols="1,1"]
+|===
+| |Beschreibung
+|Aktuer |Leistungserbringer, Mitarbeiter einer Organisation im Gesundheitswesen in der Rolle "User / User-HBA"
+|Auslöser |Alle Matrix-Events die innerhalb eines Messenger-Service einer Organisation ausgeführt werden
+|Komponenten a|
+              * TI-Messenger-Client A + B,
+              * Messenger-Proxy,
+              * Messenger-Homeserver, 
+              * Push-Gateway
+|Vorbedingungen a| 
+                  * Die Akteure sind am selben Messenger-Service angemeldet.
+                  * Jeder Akteur hat einen zugelassenen TI-Messenger-Client.
+                  * Die Teilnehmer sind einem gemeinsamen Raum beigetreten.
+|Eingangsdaten | Matrix-Event
+|Ergebnis a|Matrix-Event wurde erfolgreich verarbeitet
+|Ausgangsdaten |Abhängig vom Matrix-Event
+|===
+====
+.Sequenzdiagramm
+[%collapsible%open]
+====
+++++
+<p align="center">
+  <img width="55%" src=../../images/diagrams/TI-Messenger-Dienst/Ressourcen/UC_10063_Seq.svg>
+</p>
+++++
+====
