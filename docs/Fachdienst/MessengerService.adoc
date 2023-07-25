@@ -15,3 +15,10 @@ endif::[]
 image:gematik_logo.svg[width=70%]
 
 toc::[]
+
+= Messenger-Service
+== Überblick
+Ein Messenger-Service besteht aus den Teilkomponenten Matrix-Homeserver und Messenger-Proxy. Die Teilkomponente Matrix-Homeserver basiert auf dem offenen Kommunikationsprotokoll Matrix. Der Messenger-Proxy dient als Prüfinstanz und leitet Anfragen an den Matrix-Homeserver weiter. Welche APIs der Matrix-Spezifikation im Messenger-Service nachgenutzt werden, ist in der folgenden Abbildung dargestellt:
+
+link: TODO
+
