@@ -42,7 +42,7 @@ Die folgende Abbildung gibt einen Überblick über die Systemarchitektur des TI-
 </p>
 ++++
 
-link:docs/TI-Messenger-Fachdienst.adoc[*TI Messenger-Fachdienst*]
+link:docs/Fachdienst/Fachdienst.adoc[*TI Messenger-Fachdienst*]
 
 * *Registrierungs-Dienst:* +
 Der Registrierungs-Dienst bietet zwei abstrakte Schnittstellen an. Die Schnittstelle `I_Registration` wird vom Frontend des Registrierungs-Dienstes aufgerufen, um eine Organisation beim Registrierungs-Dienst zu authentifizieren und Messenger-Services zu administrieren. Die Schnittstelle `I_internVerfification` wird von den Messenger-Proxies aufgerufen, um die Föderationsliste abzurufen und für die Prüfung auf existierende VZD-FHIR-Einträge der beteiligten Akteure einer beabsichtigten Kommunikation.
