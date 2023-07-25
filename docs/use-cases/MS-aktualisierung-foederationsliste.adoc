@@ -1,0 +1,91 @@
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+:imagesdir: ../../images
+
+image:gematik_logo.svg[width=70%]
+
+===  Aktualisierung der Föderationsliste
+Die folgenden Abbildungen beschreiben, wie der Messenger-Proxy seine lokal verwaltete Föderationsliste aktualisiert. Um die Federation-Liste zu aktualisieren, MUSS der Messenger-Proxy diese beim Registrierungs-Dienst seines TI-Messenger-Spezialdienstes anfordern. Die Häufigkeit der Anforderung einer neuen Liste wird vom Anbieter bestimmt. Ziel ist es, eine möglichst aktuelle Föderationsliste zu haben. Dabei übermittelt der Messenger-Proxy die gespeicherte Version der Federation-Liste an den Registrierungsdienst. Wenn die Version übereinstimmt, wird vom Registrierungsdienst keine neue Föderationsliste für den Messenger-Proxy bereitgestellt. Wenn die Version größer ist als die vom Messenger-Proxy übergebene, wird vom Registrierungsdienst eine aktualisierte Föderationsliste bereitgestellt. Ein Download der Federation-Liste ist nur erforderlich, wenn eine neuere Version auf dem FHIR-Proxy vorhanden ist. Die Struktur der Föderationsliste wird in https://github.com/gematik/api-vzd/blob/develop/src/schema/FederationList.json[dieser JSON-Schemadefinition] beschrieben. Nach dem Abrufen der Föderationsliste vom Registrierungsdienst über den Messenger-Proxy MUSS der Messenger-Proxy die Signatur der Föderationsliste überprüfen.
+
+Der Registrierungs-Dienst MUSS stündlich die Aktualität der Föderationsliste im VZD-FHIR-Directory überprüfen. Wenn das VZD-FHIR-Directory nicht innerhalb einer definierten Antwortzeit erreicht werden kann und weitere Aktualisierungsversuche ebenfalls erfolglos bleiben („HealthState_VZD“ und „HealthStateCheck_VZD“), MUSS der Registrierungsdienst seine eigene Aufbewahrungszeit der Föderationsliste auf einen angegebenen Wert von 72 Stunden („TTL_Federationsliste“) verlängern und es SOLL ein Inzidentereignis erstellt werden, das von einem Drittsystem (z. B. einem ITSM-System) abgefangen werden kann.
+
+TIP: Aus Sicherheitsgründen ist es sinnvoll, eine aktuelle Liste der Föderationen zu führen, um das Zeitfenster klein zu halten, in dem ein Messenger-Dienst „unwissentlich“ mit einem anderen Messenger-Dienst interagiert, der nicht mehr Teil der Föderation ist. Die Wahl einer geeigneten Frist, innerhalb derer die Arbeit mit einer alten Liste noch vertretbar ist, da diese nicht aktualisiert werden konnte, berücksichtigt den voraussichtlichen Zeitaufwand für die Wiederherstellung bei Nichtverfügbarkeit des VZD und ist nicht großzügiger gewählt als Fristen, die für andere Kommunikationsdienste innerhalb der TI eingeräumt werden.
+
+Sobald der Messenger-Proxy eine Anfrage zur Aktualisierung der Föderationsliste beim Registrierungsdienst initiiert, MUSS der Registrierungsdienst die aktuelle Liste vom FHIR-Proxy abholen, wenn die vom Registrierungsdienst gehaltene Liste zu alt ist („Alter_Föderationsliste“). Wenn die Liste des Registrierungsdienstes nicht zu alt ist, MUSS seine Föderationsliste an den Messenger-Proxy übermittelt werden. Dies geschieht jedoch nur, wenn die Liste des Registrierungsdienstes aktueller ist als die des Messenger-Proxys. Wenn der Messenger-Proxy eine aktuelle Federation-Liste erhält, MUSS lokal eine Signaturprüfung mit dem mitgelieferten Signaturzertifikat durchgeführt werden. Das Signaturzertifikat ist das erste Element aus der x5c-Zertifikatsliste – es wird zusammen mit der Federation-Liste übertragen.
+
+Um die Verbundliste abzurufen, muss der Registrierungsdienst durch ein „Provider-Accesstoken“ autorisiert werden. Eine vorherige Authentifizierung mit dem OAuth2-Client-Anmeldeinformationsfluss ist erforderlich, damit der Registrierungsdienst über die Schnittstelle „/tim-provider-services“ des FHIR-Proxys auf das VZD-FHIR-Verzeichnis zugreifen kann. Der TI-Messenger-Anbieter MUSS die erforderlichen Kundenzugangsdaten für seinen Registrierungsdienst beim VZD-FHIR-Verzeichnisanbieter beantragen. Die Anfrage erfolgt über eine Serviceanfrage im TI-ITSM-System. Nach erfolgreicher Authentifizierung erhält der Registrierungsdienst einen „provider-accesstoken“, der beim Aufruf der Schnittstelle „/tim-provider-services“ enthalten sein MUSS. Der Authentifizierungsprozess besteht aus den aufeinanderfolgenden Aufrufen der Operationen „/token“ auf dem Auth-Service VZD einerseits und „/ti-provider-authenticate“ andererseits. Die Client-Anmeldeinformationen werden beim ersten Vorgangsaufruf und ein IDP-TI-Provider-Accesstoken beim zweiten Aufruf übergeben.
+
+Die unten stehende Laufzeitansicht des Aktualisierungsprozesses der Föderationsliste definiert die folgenden Typen, die beim Registrierungsdienst verwaltet werden MÜSSEN.
+
+[caption=]
+Variablen, die vom Registrierungsdienst unterstützt werden müssen.
+[%header, cols="1,1,2,1"]
+|===
+|Name|Type|Beschreibung|Wertebereich
+|`HealthState_VZD`|state|Hält den Gesundheitsstatus von Komponenten des VZD-FHIR-Directory in Abhängigkeit vom erhaltenen Antwortverhalten|[gesund, ungesund]
+|`HealthStateCheck_VZD`|Counter|Hält die Anzahlt der Versuche den Gesundheitsstatus des VZD-FHIR-Directory zu ermitteln|0\<= `HealthStateCheck_VZD`\<=3
+|`Alter_Föderationsliste`|Time in s |Hält das aktuelle Alter der Föderationsliste in Sekunden seit der letzten erfolgreichen Aktualisierung.
+|min: 0s
+|`TTL_Föderationsliste`|Time in h|Beschreibt das maximal erlaubte Alter der Föderationsliste.|Fester Wert: 72h
+|===
+
+
+
+.Anwendungsfallbeschreibung
+[%collapsible%open]
+====
+[caption=]
+Aktualisierung der Föderationsliste
+[%header, cols="1,2"]
+|===
+| |Beschreibung
+|Akteur |System
+|Auslöser a|
+            * Scheduler
+            * Schnittstellenaufruf
+|Komponenten a|
+              * Messenger-Proxy, 
+              * Registrierungs-Dienst,
+              * FHIR-Proxy,
+              * Auth-Service 
+|Vorbedingungen a| keine
+|Eingangsdaten | Versionsnummer
+|Ergebnis | Der Messenger-Proxy erhält die Information eine aktuelle Liste zu besitzen oder eine neue Föderationsliste, sofern eine aktuellere Version vorliegt.
+|Ausgangsdaten |status, Föderationsliste, x5c-Zertifikatsliste
+|===
+====
+.Sequenzdiagramm "Föderationsliste aktualisieren"
+[%collapsible%open]
+====
+++++
+<p align="center">
+  <img width="60%" src=../../images/diagrams/TI-Messenger-Dienst/Ressourcen/UC_Update_Federationlist_Seq.svg>
+</p>
+++++
+====
+
+.Sequenzdiagramm "Provider authentifizieren und Föderationsliste abrufen"
+[%collapsible%open]
+====
+++++
+<p align="center">
+  <img width="60%" src=../../images/diagrams/TI-Messenger-Dienst/Ressourcen/UC_Update_Federationlist_auth_retrieve.svg>
+</p>
+++++
+====
+
+.Sequenzdiagramm "Signatur der Föderationsliste prüfen"
+[%collapsible%open]
+====
+++++
+<p align="center">
+  <img width="40%" src=../../images/diagrams/TI-Messenger-Dienst/Ressourcen/UC_Update_Federationlist_SignCheck.svg>
+</p>
+++++
+====
