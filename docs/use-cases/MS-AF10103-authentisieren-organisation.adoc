@@ -1,0 +1,60 @@
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+:imagesdir: ../../images
+
+image:gematik_logo.svg[width=70%]
+
+=== AF_10103 - Authentisieren einer Organisation am TI-Messenger-Dienst
+Mit diesem Anwendungsfall authentisiert ein Akteur, in der Rolle "Org-Admin", seine Organisation bei einem TI-Messenger-Anbieter. Für die Authentisierung einer Organisation stellt der TI-Messenger-Fachdienst eine Schnittstelle an seinem Registrierungs-Dienst bereit. Diese wird über das Frontend des Registrierungs-Dienstes für die Authentisierung verwendet. Die Authentisierung der Organisation erfolgt individuell und nutzungsabhängig durch einen Akteur in der Rolle "Org-Admin". Durch die Authentifizierung MUSS der Besitz einer gültigen SMC-B nachgewiesen werden, da nur Organisationen des Gesundheitswesens berechtigt sind einen Messenger-Service zu erhalten. Als Nachweis MUSS eins der folgenden Verfahren verwendet werden. Für die Verifizierung der Organisation MUSS
+
+    Verfahren 1: bei der Authentisierung am zentralen IDP-Dienst eine freigeschaltete SMC-B verwendet werden oder
+    Verfahren 2: eine KIM-Nachricht an die Adresse der Organisation mit der freigeschalteten SMC-B gesendet werden. 
+
+
+Als Nachweis zur Prüfung auf eine gültige Organisation MUSS der Registrierungs-Dienst in beiden Verfahren prüfen, ob die ProfessionOID zu einer Organisation des Gesundheitswesens gehört. Bei erfolgreicher Verifizierung der Organisation wird ein Administrator-Account für die Organisation am Registrierungs-Dienst angelegt. Dies ermöglicht es einem Administrator Messenger-Services zu registrieren und seiner Organisation am TI-Messenger-Dienst teilzunehmen.
+
+.Anwendungsfallbeschreibung
+[%collapsible%open]
+====
+[caption=]
+Authentisieren einer Organisation am TI-Messenger-Dienst
+[%header, cols="1,1"]
+|===
+| |Beschreibung
+|Akteur |Beauftragter Mitarbeiter einer Organisation in der Rolle "Org-Admin"
+|Auslöser |Eine Organisation des deutschen Gesundheitswesens möchte am TI-Messenger-Dienst teilnehmen und benötigt die Berechtigung einen Messenger-Service zu registrieren
+|Komponents a|
+              * Frontend des Registrierungs-Dienstes,
+              * Authenticator (Optional bei Verfahren 2),
+              * Konnektor,
+              * eHealth Kartenterminal mit gesteckter SMC-B,
+              * Registrierungs-Dienst,
+              * zentraler IDP-Dienst (Optional bei Verfahren 2)
+              * KIM-Clientmodul und Mailclient (Optional bei Verfahren 1)
+|Vorbedingungen a| 
+              * Der Akteur kann über ein Frontend des Registrierungs-Dienstes für die Kommunikation auf den Registrierungs-Dienst zugreifen.
+              * Verifizierung der Organisation:
+              ** Verfahren 1: Der Akteur kann den Authenticator verwenden sowie das verwendete Frontend des Registrierungs-Dienstes, welches beim zentralen IDP-Dienst registriert ist.
+              ** Verfahren 2: Der Anbieter des TI-Messenger verfügt über eine SMC-B Org und eine KIM-Adresse sowie ein eHealth Kartenterminal und einen Konnektor mit TI-Zugang. Der Akteur verfügt über eine SMC-B und eine KIM-Adresse sowie ein eHealth Kartenterminal und einen Konnektor mit TI-Zugang.
+              * Die im eHealth Kartenterminal gesteckte SMC-B ist freigeschaltet.
+|Eingangsdaten |Identität der Organisation, SMC-B, Alternativ KIM-Adresse
+|Ergebnis a|Die Organisation wurde am Registrierungs-Dienst des TI-Messenger-Fachdienstes verifiziert
+|Ausgangsdaten |Admin-Account, Status
+|===
+====
+.Sequenzdiagramm
+[%collapsible%open]
+====
+++++
+<p align="center">
+  <img width="75%" src=../../images/diagrams/TI-Messenger-Dienst/Ressourcen/UC_10103_Seq.svg>
+</p>
+++++
+====
+
