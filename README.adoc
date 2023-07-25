@@ -20,7 +20,7 @@ image:https://img.shields.io/badge/TI&hyphen;Messenger&hyphen;Client-v1.1.1-gree
 
 ⭐️ If gematik change something in this repository you can to be notified. Please star!
 
-== General
+== Überblick
 Die folgende Dokumentation baut auf die Spezifikation TI-Messenger-Dienst v1.1.1 gemäß *[gemSpec_TI-Messenger-Dienst]* auf. An dieser Stelle werden insbesondere die in der Spezifikation genannten Komponenten der Lösung sowie deren Schnittstellen weiter dargestellt und erläutert, um Herstellern und Anbietern bestmöglich zu unterstützen. Der Funktionsumfang des TI Messenger-Dienst v1.1.1 beinhaltet: +
 
 * die Echtzeit-Kommunikation zwischen Leistungserbringern und Leistungserbringerinstitutionen und
@@ -35,7 +35,7 @@ Für die Dokumentation des TI-Messenger-Dienstes werden die folgenden Branches v
 - *develop*: enthält die Dokumentation der in Entwicklung befindlichen Features 
 - *feature/**: Dieser Branch wird zur Vorbereitung und Diskussion neuer Themen, die noch nicht in der Entwicklung sind, verwendet. Diese Dokumente können unvollständig sein und sich bis zur Fertigstellung noch ändern.
 
-== System Overview
+== Systemübersicht
 Die folgende Abbildung gibt einen Überblick über die Systemarchitektur des TI-Messenger-Dienst v1.1.1. Die ebenfalls für den Betreib des TI-Messenger Dienstes notwendigen IDP-Dienste werden an dieser Stelle nicht betrachtet.
 
 ++++
@@ -107,23 +107,23 @@ Die nachfolgende Tabelle enthält die in der vorliegenden Online Dokumentation r
 |===
 
 == 💡 Onboarding
-Manufacturers and providers of a TI-Messenger-Dienst can use the https://gematikde.sharepoint.com/:w:/s/PTNeo/EczX7AFGfBdNrCYghzGsHz4BbSoYhV63QMmDCdz7x9zLpg?e=7wG3c[Welcome Package] provided by gematik for onboarding. This _Welcome Package_ is intended as a "step-by-step" guide to help you carry out the onboarding of the TI-Messenger-Dienst.
+Hersteller und Anbieter eines TI-Messenger-Dienstes können das von der gematik bereitgestellte https://gematikde.sharepoint.com/:w:/s/PTNeo/EczX7AFGfBdNrCYghzGsHz4BbSoYhV63QMmDCdz7x9zLpg?e=7wG3c[Welcome Package] zum Onboarding nutzen. Dieses Welcome Package ist als "Schritt-für-Schritt"-Anleitung gedacht, um Hersteller und Anbieter beim Onboarding des TI-Messenger-Dienstes zu unterstützen.
 
-== Additional pages
-*Use cases* +
+== Weiterführende Seiten
+*Anwendungsfäll* +
 link:docs/TI-Messenger-Use-Cases.adoc[- Use Cases and sequence diagrams] 
 
-*Product types* +
+*Produkttypen* +
 link:docs/TI-Messenger-Fachdienst.adoc[- TI-Messenger-Fachdienst] +
 link:docs/TI-Messenger-Client.adoc[- TI-Messenger-Client] +
 link:docs/FHIR-Directory.adoc[- VZD-FHIR-Directory]
 
-*Miscellaneous* +
+*Diverses* +
 https://gematikde.sharepoint.com/:w:/s/PTNeo/EczX7AFGfBdNrCYghzGsHz4BbSoYhV63QMmDCdz7x9zLpg?e=7wG3c[- Welcome Package] +
 https://gematikde.sharepoint.com/sites/EXTAuthenticator/Freigegebene%20Dokumente/Forms/AllItems.aspx?id=%2Fsites%2FEXTAuthenticator%2FFreigegebene%20Dokumente%2FVer%C3%B6ffentlichte%20Version%20%2D%20gematik%20Authenticator&p=true&ga=1[- gematik Authenticator] +
 link:docs/Q&A.adoc[- Questions and answers &#91;Q&A&#93;]
 
-*Reference implementations* +
+*Referenz-Implementierungen* +
 - [comming soon]
 
 == License
