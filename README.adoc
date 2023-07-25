@@ -18,8 +18,6 @@ image:https://img.shields.io/badge/TI&hyphen;Messenger&hyphen;Dienst-v1.1.1-gree
 image:https://img.shields.io/badge/TI&hyphen;Messenger&hyphen;FD-v1.1.1-green?style=plastic&logo=github&logoColor=green[link="https://fachportal.gematik.de/fachportal-import/files/gemSpec_TI-Messenger-FD_V1.1.0.pdf"]
 image:https://img.shields.io/badge/TI&hyphen;Messenger&hyphen;Client-v1.1.1-green?style=plastic&logo=github&logoColor=green[link="https://fachportal.gematik.de/fachportal-import/files/gemSpec_TI-Messenger-Client_V1.1.0.pdf"]
 
-⭐️ Wenn die gematik etwas in diesem Repository ändert, können Sie sich benachrichtigen lassen. Bitte abonnieren Sie das Repository!
-
 == Überblick
 Die folgende Dokumentation baut auf die Spezifikation TI-Messenger-Dienst v1.1.1 gemäß *[gemSpec_TI-Messenger-Dienst]* auf. An dieser Stelle werden insbesondere die in der Spezifikation genannten Komponenten der Lösung sowie deren Schnittstellen weiter dargestellt und erläutert, um Herstellern und Anbietern bestmöglich zu unterstützen. Der Funktionsumfang des TI Messenger-Dienst v1.1.1 beinhaltet: +
 
