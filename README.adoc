@@ -29,11 +29,11 @@ Die folgende Dokumentation baut auf die Spezifikation TI-Messenger-Dienst v1.1.1
 💡 _Hinweis: In der TI-Messenger-Dienst v1.1.1 können keine Versicherten an dem TI-Messenger Dienst teilnehmen_
 
 == Branches
-The documentation of the TI-Messenger-Dienst is provided on the following branches:
+Für die Dokumentation des TI-Messenger-Dienstes werden die folgenden Branches verwendet:
 
-- *main*: contains the documentation for the currently published release 
-- *develop*: contains the documentation of the further development 
-- *feature/**: These branches are used to prepare and discuss new topics that are not yet under development. These documents may be incomplete and may change until completion.
+- *main*: enthält die Dokumentation für die aktuell veröffentlichte Version gemäß *[gemSpec_TI-Messenger-Dienst]*
+- *develop*: enthält die Dokumentation der in Entwicklung befindlichen Features 
+- *feature/**: Dieser Branch wird zur Vorbereitung und Diskussion neuer Themen, die noch nicht in der Entwicklung sind, verwendet. Diese Dokumente können unvollständig sein und sich bis zur Fertigstellung noch ändern.
 
 == System Overview
 Die folgende Abbildung gibt einen Überblick über die Systemarchitektur des TI-Messenger-Dienst v1.1.1. Die ebenfalls für den Betreib des TI-Messenger Dienstes notwendigen IDP-Dienste werden an dieser Stelle nicht betrachtet.
@@ -63,7 +63,7 @@ link:docs/FHIR-Directory.adoc[*VZD-FHIR-Directory*] +
 
 * Beim VZD-FHIR-Directory handelt es sich um einen zentralen Verzeichnisdient der TI, der die deutschlandweite Suche von Organisationen und Akteuren des TI-Messenger-Dienstes ermöglicht. Das VZD-FHIR-Directory basiert auf dem FHIR-Standard und bietet für den TI-Messenger-Dienst relevante Schnittstellen an. Die Schnittstelle `I_VZD_TiMessenger_services` wird vom Registrierungs-Dienst aufgerufen, um eine Föderationsliste herunterzuladen. Die Schnittstellen `tim-authenticate` und `owner-authenticate` werden von den TI-Messenger-Clients aufgerufen, um eine Suche bzw. einen Eintrag im VZD-FHIR-Directory zu ermöglichen.
 
-== Folder structure
+== Ordnerstruktur
 Im Folgenden ist die Organisation der Ordnerstruktur dargestellt.
 
 ----
@@ -94,8 +94,8 @@ TI-Messenger Dokumentation
 └── ReleaseNotes.md
 ----
 
-== Referenced documents
-The table below contains the gematik documents on the telematics infrastructure referenced in this online documentation. The version number valid for this document can be found in the current document map published on the gematik website, in which the present version is listed.
+== Refferenzierte Dokumente
+Die nachfolgende Tabelle enthält die in der vorliegenden Online Dokumentation referenzierten Dokumente der gematik zur Telematikinfrastruktur. Deren zu diesem Dokument jeweils gültige Versionsnummer entnehmen Sie bitte der aktuellen, auf der Internetseite der gematik veröffentlichten, Dokumentenlandkarte, in der die vorliegende Version aufgeführt wird.
 
 |===
 |[Source] |Editor: Title
