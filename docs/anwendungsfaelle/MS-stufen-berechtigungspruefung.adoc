@@ -1,0 +1,74 @@
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+:imagesdir: ../../images
+:toc: macro
+:toclevels: 5
+:toc-title: Inhaltsverzeichnis
+:numbered:
+:sectnumlevels: 5
+
+image:gematik_logo.svg[width=70%]
+
+toc::[]
+
+=== Stufen der Berechtigungsprüfung
+Die folgende Abbildung beschreibt, wie die Berechtigungsprüfung eingehender und ausgehender Matrix-Events am Messenger-Proxy erfolgen muss. Das Berechtigungskonzept basiert auf einer dreistufigen Prüfung:
+
+==== Prüfregeln Client-Server Kommunikation
+===== Stufe 1 Prüfung der TI-Föderationszugehörigkeit
+Bei der Client-Server Kommunikation prüft der Messenger-Proxy im Invite- und CreateRoom-Event enthaltene Matrix-Domains auf Föderationszugehörigkeit. Hierbei ist zu beachten, dass beim CreateRoom -Event das Attribut 'invite' nur mit maximal einem Element befüllt sein darf. Nach erfolgreicher Prüfung wird das Event an den Matrix-Homeserver des Einladenden weitergeleitet. Der Matrix-Homeserver prüft daraufhin, ob die beteiligten Akteure auf demselben Matrix-Homeserver registriert sind. Ist dies nicht der Fall, wird das Invite-Event an den zuständigen Messenger-Proxy des Einzuladenden gerichtet, wobei die Regeln der Server-Server Kommunikation durchzuführen sind.  
+
+==== Prüfregeln Server-Server Kommunikation
+Der Messenger-Proxy muss Prüfregeln für Server-Server Anfragen unterstützen und bei jedem Event den Inhalt der Anfrage prüfen. Im Folgenden werden die Prüfregeln beschrieben.  
+
+===== Stufe 1 Prüfung der TI-Föderationszugehörigkeit
+In der 1. Stufe der Server-Server Kommunikation muss der Messenger-Proxy für alle Events eine Prüfung durchführen, die feststellt, ob die im Event enthaltenen Matrix-Domains zur TI-Föderation gehören. Zur Prüfung der Föderationszugehörigkeit muss der Messenger-Proxy im Authorization-Header die im Attribut "origin“ enthaltene Domain (bei eingehender Kommunikation) und die im Attribut "destination" enthaltene Domain (bei ausgehender Kommunikation) gegen die Domains in der Föderationsliste prüfen. Bei erfolgreicher Prüfung erfolgt dann die Weiterverarbeitung gemäß der Stufe 2. 
+
+===== Stufe 2 Prüfung der Freigabeliste
+In dieser Stufe prüft der Messenger-Proxy des Einzuladenden auf eine vorliegende Freigabe. Hierbei handelt es sich um eine Lookup-Table, in der alle erlaubten Akteure hinterlegt sind, von denen man eine Einladung in einen Chatraum akzeptiert. Ist ein Eintrag vom einladenden Akteur vorhanden, dann muss die beabsichtigte Einladung des Akteurs zugelassen werden. Ist dies nicht der Fall, muss die weitere Überprüfung gemäß der 3. Stufe erfolgen.
+
+===== Stufe 3 Prüfung auf existierenden VZD-FHIR-Directory Eintrag 
+In der letzten Stufe erfolgt die Prüfung ausgehend von den Einträgen der beteiligten Akteure im VZD-FHIR-Directory. Die Einladung muss zugelassen werden, wenn:
+
+    - die MXID des einzuladenden Akteurs im Organisationsverzeichnis hinterlegt und seine Sichtbarkeit in diesem Verzeichnis nicht eingeschränkt ist oder
+    - der einladende sowie der einzuladende Akteur im Personenverzeichnis hinterlegt sind und der einzuladende Akteur seine Sichtbarkeit in diesem Verzeichnis nicht eingeschränkt hat
+
+Ist die Prüfung nicht erfolgreich, dann muss die beabsichtigte Einladung des Akteurs vom Messenger-Proxy abgelehnt werden.
+
+
+.Anwendungsfallbeschreibung
+[%collapsible%open]
+====
+[caption=]
+Stufen der Berechtigungsprüfung
+[%header, cols="1,1"]
+|===
+| |Beschreibung
+|Akteur |messenger proxy
+|Auslöser | Matrix-Event
+|Komponenten a|
+              * TI-Messenger-Client
+              * Messenger-Proxy A+B,
+              * Matrix-Homeserver A+B,
+              * Registrierungsdienst,
+              * VZD-FHIR-Directory 
+|Vorbedingungen a| Der Akteur ist bei seinem Homeserver angemeldet.
+|Eingangsdaten |Matrix Event
+|Ergebnis a|Der Client erhält die Information, ob die Einladung erfolgreich prozessiert werden konnte. 
+|Ausgangsdaten |status
+====
+.sequence diagram 
+[%collapsible%open]
+====
+++++
+<p align="center">
+  <img width="60%" src=../../images/diagrams/TI-Messenger-Dienst/Ressourcen/UC_Approvel_List_Seq.svg>
+</p>
+++++
+====
