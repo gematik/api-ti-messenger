@@ -109,7 +109,7 @@ Hersteller und Anbieter eines TI-Messenger-Dienstes können das von der gematik 
 
 == Weiterführende Seiten
 *Anwendungsfäll* +
-link:docs/TI-Messenger-Use-Cases.adoc[- Use Cases and sequence diagrams] 
+link:docs/TI-Messenger-Anwendungsfaelle.adoc[- Anwendungsfälle] 
 
 *Produkttypen* +
 link:docs/TI-Messenger-Fachdienst.adoc[- TI-Messenger-Fachdienst] +
@@ -119,7 +119,7 @@ link:docs/FHIR-Directory.adoc[- VZD-FHIR-Directory]
 *Diverses* +
 https://gematikde.sharepoint.com/:w:/s/PTNeo/EczX7AFGfBdNrCYghzGsHz4BbSoYhV63QMmDCdz7x9zLpg?e=7wG3c[- Welcome Package] +
 https://gematikde.sharepoint.com/sites/EXTAuthenticator/Freigegebene%20Dokumente/Forms/AllItems.aspx?id=%2Fsites%2FEXTAuthenticator%2FFreigegebene%20Dokumente%2FVer%C3%B6ffentlichte%20Version%20%2D%20gematik%20Authenticator&p=true&ga=1[- gematik Authenticator] +
-link:docs/Q&A.adoc[- Questions and answers &#91;Q&A&#93;]
+link:docs/Q&A.adoc[- Fragen und Antworten zur aktuellen Spezifikation &#91;FAQ&#93;]
 
 *Referenz-Implementierungen* +
 - [comming soon]
