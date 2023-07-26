@@ -19,9 +19,9 @@ toc::[]
 
 = Registrierungs-Dienst
 == Überblick
-Der _Registrierungs-Dienst_ gibt dem _TI-Messenger-Fachdienst_-Anbieter die Möglichkeit, _Messenger-Dienste_ automatisch authentifizierten Organisationen zur Verfügung zu stellen und die Matrixdomäne der _Messenger-Dienste_ in die Föderationsliste des _VZD-FHIR-Verzeichnisses_ aufzunehmen. Als weitere Funktion bietet der _Registrierungs-Dienst_ eines _TI-Messenger-Fachdienstes_ die Bereitstellung einer Föderationsliste für die _Messenger-Proxies_ seiner _Messenger-Services_ an.
+Der *Registrierungs-Dienst* gibt dem *TI-Messenger-Fachdienst*-Anbieter die Möglichkeit, *Messenger-Dienste* automatisch authentifizierten Organisationen zur Verfügung zu stellen und die Matrixdomäne der *Messenger-Dienste* in die Föderationsliste des *VZD-FHIR-Verzeichnisses* aufzunehmen. Als weitere Funktion bietet der *Registrierungs-Dienst* eines *TI-Messenger-Fachdienstes* die Bereitstellung einer Föderationsliste für die *Messenger-Proxies* seiner _Messenger-Services_ an.
 
-Das folgende Bild zeigt die Schnittstellen des _Registrierungs-Dienstes_, die im Folgenden ausführlich beschrieben werden.
+Das folgende Bild zeigt die Schnittstellen des *Registrierungs-Dienstes*, die im Folgenden ausführlich beschrieben werden.
 
 ++++
 <p align="left">
@@ -31,10 +31,11 @@ Das folgende Bild zeigt die Schnittstellen des _Registrierungs-Dienstes_, die im
 
 == Schnittstelle: I_Registration
 Die abstrakte Schnittstelle `I_Registration` muss die folgenden Funktionalitäten anbieten: 
-====
-. Authentisieren einer Organisation am _TI-Messenger-Dienst_ link:{docsdir}/use-cases/MS-AF10103-authenticate-organization.adoc[AF_10103]
-. Bereitstellung eines _Messenger-Services_ für eine Organisation link:{docsdir}/use-cases/MS-AF10060-provision-messenger-service.adoc[AF_10060]
-====
+
+TIP: 1) Die Authentisierung einer Organisation am *TI-Messenger-Dienst* (siehe link:{docsdir}/use-cases/MS-AF10103-authenticate-organization.adoc[AF_10103]) und +
+     2) Die Möglichkeit der Bereitstellung eines *Messenger-Services* für eine Organisation (siehe link:{docsdir}/use-cases/MS-AF10060-provision-messenger-service.adoc[AF_10060])
+
+Im folgenden werden die umzusetzenden Funktioanlitäten der Schnittstelle beschrieben. 
 
 === Bereitstellung von Webschnittstellen
 Die von der abstrakten Schnittstelle `I_Registration` angebotene Funktionalität soll als Webschnittstelle bereitgestellt werden, die von einem Akteur über einen Webclient (genannt _Frontend des Registrierungs-Dienstes_) genutzt wird. Die abstrakte Schnittstelle `I_Registration` muss für alle Benutzer im Internet verfügbar sein.
