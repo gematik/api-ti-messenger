@@ -49,22 +49,54 @@ jobs:
               outdir=$(dirname $fullname | sed s+src/plantuml+${imagedir}+)
               echo "Outdir: ${outdir}"
               mkdir -p $outdir
+              plantoutdir="${PWD}/${outdir}"
+              echo "PlantOutdir: ${plantoutdir}"
               
+              # PlantUML arguments:
+              # -v for verbose output (Debugging)
+              # -checkmetadata checks whether the target png/svg has the same source
+              # and if there are no changes, doesn't regenerate the image file
+              # -o sets the output folder for the png/svg files
+              plantargs="-v -checkmetadata -o ${plantoutdir} ${fullname}"
               
-              # local method
-              # cp $fullname tmp.puml  # because of filename bug in plantuml.jar (dots in filename are not suppoerted)
-              # tmpname=$dir/tmp.puml
-              # java -jar plantuml.jar -tpng -checkmetadata -o $outdir $tmpname
-              # mv ${outdir}/${tmpname} ${outdir}/${base}.png
-              # java -jar plantuml.jar -tsvg -checkmetadata -o $outdir $tmpname
-              # mv ${outdir}/${tmpname} ${outdir}/${base}.svg
-              # rm -f $dir/tmp.puml
-              
+              # separate calls are needed, because only one file type can be set
+              # per call
+              java -jar plantuml.jar -tpng ${plantargs} 
+              java -jar plantuml.jar -tsvg ${plantargs}
+
               # method with pipes
-              cat "${fullname}" | java -jar plantuml.jar -p -tpng -checkmetadata  > "${outdir}/${base}.png"
-              cat "${fullname}" | java -jar plantuml.jar -p -tsvg -checkmetadata  > "${outdir}/${base}.svg"
+              #cat "${fullname}" | java -jar plantuml.jar -p -tpng -checkmetadata  > "${outdir}/${base}.png"
+              #cat "${fullname}" | java -jar plantuml.jar -p -tsvg -checkmetadata  > "${outdir}/${base}.svg"
           done
-          tree ./
+          tree ./images
+      
+      # creates png files from draw io image files
+      - name: Export drawio files as png
+        uses: rlespinasse/drawio-export-action@v2
+        with:
+          path: ./src/drawio/ 
+          output: .
+          format: png
+          action-mode: all
+
+      # creates svg files from draw io image files
+      - name: Export drawio files 
+        uses: rlespinasse/drawio-export-action@v2
+        with:
+          path: ./src/drawio/ 
+          output: .
+          format: svg
+          action-mode: all
+
+      # copies the created png & svg files to the images/diagrams folder and deletes the drawio files
+      - name: Copy draw io
+        run: |
+          imagedir=images/diagrams
+          cp -RT ./src/drawio $imagedir
+          find $imagedir -name '*.drawio' -exec rm -rv {} \;
+          tree ./images
+      
+      # add and commit the new generated files
       - name: Add & Commit
         uses: EndBug/add-and-commit@v9
         with:
