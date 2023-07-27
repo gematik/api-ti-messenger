@@ -3,10 +3,12 @@ name: GeneratePlantumlImages
 on:
   push:
     branches: 
-    - '*'
-    - '*/*'
+    - '**'
     paths: 
     - 'src/plantuml/**'
+    - 'src/drawio/**'
+
+  workflow_dispatch:
 
 jobs:
   build:
