@@ -17,14 +17,28 @@ image:gematik_logo.svg[width=70%]
 toc::[]
 
 = TI-Messenger-Client
+== Überblick
 Der TI-Messenger-Client basiert auf dem offenen Kommunikationsprotokoll Matrix und wird auf dem Endgerät eines Akteurs verwendet. Die Funktionalität des TI-Messenger-Clients kann in drei abstrakte Module unterteilt werden. In der folgende Abbildung wird dies verdeutlicht. 
-
 
 ++++
 <p align="left">
-  <img width="100%" src=../images/I_Client.png>
+  <img width="100%" src=../../images/I_Client.png>
 </p>
 ++++
+
+== TI-Messenger Modul
+Über dieses abstrakte Modul wird die Ad-Hoc Kommunikation durchgeführt. Der *TI-Messenger-Client* kommuniziert mit dem *Messenger-Service* des *TI-Messenger-Fachdienstes* über die Matrix - Client-Server Schnittstelle, um Events auszutauschen. Für die Administration einer Freigabeliste stellt der *Messenger-Service* die Schnittstelle link:../../docs/Fachdienst/MessengerService.adoc#i_timessengercontactmanagement[I_Ti_MessengerContactManagement] bereit. Der Aufruf der Schnittstellen erfolgt immer über den *Messenger-Proxy*. Im folgenden werden die Schnittstellen beschrieben. 
+
+=== Matrix - Client-Server API
+Der Matrix Homeserver muss die Schnittstelle gemäß der Matrix https://spec.matrix.org/latest/[[Client-Server API]] anbieten, welche der TI-Messenger Client aufruft. Der Aufruf der einzelnen Endpunkte kann dort nachgelesen werden. Ein Überblick über die einzelnen Endpunkte der Schnittstelle ist hier https://matrix.org/docs/api/#overview[[API Playground]] einsehbar. 
+
+Für die Fallbezogene Kommunikation ist es erforderlich etwas am Event xyz anzupassen!!!!
+Es ist erforderlich, dass der TI-Messenger-Client FHIR-Ressourcen in den Room-State eines existierenden Chatraumes hinzufügt. 
+
+Art des Events: state event
+Event state_key: <vom Sender festgelegt>
+Event type: "de.gematik.tim.casereference"
+Die FHIR-Ressourcen werden im Element content als json-Daten eingetragen und als FHIR-Bundle (type message) zusammengefasst.
 
 == VZD-FHIR-Directory Modul
 Über dieses abstrakte Modul wird die Suche und die Pflege von Einträgen im FHIR-Directory ermöglicht. Der TI-Messenger-Client nutzt die Schnittstellen der Teilkomponenten Auth Services und FHIR-Proxy am VZD-FHIR-Directory. Für den Aufruf der beiden Schnittstellen am FHIR-Proxy werden Token benötigt, um die Berechtigung für den Zugriff nachzuweisen. Daher muss der TI-Messenger-Client zuvor am Auth Service des VZD-FHIR-Directory die notwendigen Token anfragen. Im folgenden werden die Aufrufe beschrieben. 
@@ -124,19 +138,7 @@ Erst GET (Datensatz suchen) -> PUT (Datensatz ändern)
 
 !!!TODO!!!
 
-== TI-Messenger Modul
-Über dieses abstrakte Modul wird die eigentliche Ad-Hoc Kommunikation durchgeführt. Der TI-Messenger-Client kommuniziert mit dem Messenger Service des TI-Messenger-Fachdienstes über die Matrix - Client-Server Schnittstelle, um Events auszutauschen. Für die Administration einer Freigabeliste stellt der Messenger Service die Schnittstelle `I_Ti_MessengerContactManagement` bereit. Der Aufruf der Schnittstellen erfolgt immer über den Messenger Proxy. Im folgenden werden die Schnittstellen beschrieben. 
 
-=== Matrix - Client-Server API
-Der Matrix Homeserver muss die Schnittstelle gemäß der Matrix https://spec.matrix.org/latest/[[Client-Server API]] anbieten, welche der TI-Messenger Client aufruft. Der Aufruf der einzelnen Endpunkte kann dort nachgelesen werden. Ein Überblick über die einzelnen Endpunkte der Schnittstelle ist hier https://matrix.org/docs/api/#overview[[API Playground]] einsehbar. 
-
-Für die Fallbezogene Kommunikation ist es erforderlich etwas am Event xyz anzupassen!!!!
-Es ist erforderlich, dass der TI-Messenger-Client FHIR-Ressourcen in den Room-State eines existierenden Chatraumes hinzufügt. 
-
-Art des Events: state event
-Event state_key: <vom Sender festgelegt>
-Event type: "de.gematik.tim.casereference"
-Die FHIR-Ressourcen werden im Element content als json-Daten eingetragen und als FHIR-Bundle (type message) zusammengefasst.
 
 *Aufbau des Requests*
 [source, bash]
