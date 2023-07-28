@@ -125,13 +125,46 @@ Der *TI-Messenger-Client* ruft den `{Authorization Endpoint}` am *zentralen IDP-
 ===== Signin-gematik-idp-dienst
 An dem Endpunkt `/signin-gematik-idp-dienst` übergibt der *TI-Messenger-Client* den `AuthorizationCode` um sich ein `owner-accesstoken` ausstellen zu lassen. Der `AuthorizationCode` wird vom *Auth-Service* an den *zentralen-IDP-Dienst* weitergeleitet, um das für die passende Smartcard gehörende `ID_TOKEN` zu erhalten. Die darin enthaltenen `TelematikID` und `ProfessionOID` werden im Rahmen der Ausstllung des `owner-accesstoken` verwendet. 
 
+=== weitere Festlegungen
+==== Sichbarkeit 
+*TI-Messenger-Clients* müssen über eine Funktion verfügen die die Sichtbarkeit eines Akteurs für den *TI-Messenger-Dienst* im Personenverzeichnis über den `/owner` Endpunkt des *VZD-FHIR-Directory* ein bzw. ausschalten kann. Wenn ein Akteur den status seines Endpunktes von `active` nach `off` link:https://github.com/gematik/api-vzd/blob/feature/gemILF_VZD_FHIR_Directory/docs/FHIR_VZD_HOWTO_Owner.adoc#232-update-endpoint-put[ändert], muss der TI-Messenger-Client prüfen, ob diese `MXID` auch im Organisationsverzeichnis eingetragen ist. Wird die `MXID` ebenfalls im Organisationsverzeichnis gefunden und ist der hinterlegte status in diesem Verzeichnis active, dann ist im TI-Messenger-Client dem Akteur ein entsprechender Hinweis anzuzeigen, dass eine Inkonsistenz in der hinterlegten Sichtbarkeit vorliegt. 
+
+IMPORTANT: Aus dem Hinweis muss hervorgehen, dass ein Kontaktieren des Administrators seiner Organisation notwendig ist, um die gewünschte Sichtbarkeit ebenfalls im Organisationsverzeichnis zu hinterlegen. 
+
+==== Kontaktdatenaustausch mit 2D-Barcode
+Der *TI-Messenger-Client* stellt eine Funktion bereit, um Kontaktdaten mittels 2D-Barcodes auszutauschen. 
+
+Hierbei muss der 2D-Code in eine QR-Code-Darstellung gemäß ISO/IEC 18004:2006 kodiert werden.
+[source, text]
+----
+BEGIN:VCARD
+  VERSION:4.0 
+  N:<Nachname>;<Vorname>;<zusätzliche Vornamen>;<Titel>;<Namenszusätze> 
+  FN:<Vorname><Nachname> 
+  IMPP:matrix://<MXID> 
+END:VCARD
+----
+Der Aufbau der Matrix-URI muss gemäß link:https://spec.matrix.org/v1.3/appendices/#uris[Matrix-Appendices#uris] gebildet werden.
+
+TIP: Bei dem gezeigten VCARD Beispiel handelt es sich um die geforderte Mindestbefüllung, die Verwendung weiterer Felder ist zulässig.
+
+Der TI-Messenger muss den eingescannten 2D-Code gemäß ISO/IEC 18004:2006 decodieren und mindestens den vollständigen Namen sowie die Matrix-User-ID aus den Parameter N und IMPP dem Akteur anzeigen, damit dieser die Aufnahme in die Freigabeliste bestätigen oder ablehnen kann. siehe link:docs/anwendungsfaelle/COM-AF10061-einladung-ausserhalb.adoc[Einladung von Akteuren außerhalb der Organisation]
+
+==== Editierbarkeit von Displaynamen
+
 == TI-Messenger-Client mit Administrationsfunktionen 
 === Überblick
+Der TI-Messenger-Client mit Administrationsfunktionen ist ein Client für Akteure in der Rolle Org-Admin einer Organisation. Dieser wird im TI-Messenger-Kontext auch als *Org-Admin-Client* bezeichnet. Der Org-Admin-Client dient zur komfortablen Verwaltung der Messenger-Services bei einem TI-Messenger-Fachdienst. Die im folgenden Beschriebenen Funktionalitäten für einen Org-Admin Client können separat oder in einen *TI-Messenger-Client* integriert sein.
+
 === Org-Admin Funktionalität
+Mit dem *Org-Admin-Client* haben Administratoren einer Organisation die Möglichkeit Benutzer und Geräte auf dem jeweiligen Messenger-Service zu verwalten. Darüber hinaus besteht die Möglichkeit, über den *Org-Admin-Client* Sessions von angemeldeten Geräten auf dem Messenger-Service zu verifizieren oder zu invalidieren. Das bedeutet zum Beispiel, dass ein Akteur in der Rolle "Org-Admin" einen *TI-Messenger-Client* eines Akteurs bei Bedarf abmelden kann.
+
 ==== Auth owner-authenticate
+Für den Zugriff auf die `/owner` Schnittstelle wird ein `owner-accesstoken` benötigt, dass vom `/owner-authenticate`` Endpunkt des *VZD-FHIR-Directory ausgestellt wird. Zur Authentisierung am Endpunkt fragt der *Org-Admin-Client* beim zuständigen *Registrierungs-Dienst* einen `RegService-OpenID-Token` an, welcher am `/owner-authenticate` Endpunkt gegen ein owner-accesstoken ausgetauscht wird. Ein Beispiel ist link:https://github.com/gematik/api-vzd/blob/feature/gemILF_VZD_FHIR_Directory/docs/FHIR_VZD_HOWTO_Authenticate.adoc#231-authenticate-with-an-regservice-openid-token[hier] zu finden.
 
 ==== Organisationsressourcen im VZD-FHIR-Directory bearbeiten
-
+Mit dem Org-Admin-Client besteht die Möglichkeit, im Namen der Organisation FHIR-Ressourcen zur Verfügung zu stellen oder zu bearbeiten.
+Funktionsaccounts
 
 = Referenzierte Dokumente
 Die nachfolgende Tabelle enthält die in der vorliegenden Online Dokumentation referenzierten Dokumente der gematik. Deren zu diesem Dokument jeweils gültige Versionsnummer entnehmen Sie bitte der aktuellen, auf der Internetseite der gematik veröffentlichten, Dokumentenlandkarte, in der die vorliegende Version aufgeführt wird.
