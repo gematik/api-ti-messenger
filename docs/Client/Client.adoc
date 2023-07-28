@@ -6,7 +6,7 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 
-:imagesdir: ../images
+:imagesdir: ../../images
 :toc: macro
 :toclevels: 5
 :toc-title: Inhaltsverzeichnis
@@ -19,7 +19,7 @@ toc::[]
 
 = TI-Messenger-Client
 == Überblick
-Der TI-Messenger-Client basiert auf dem offenen Kommunikationsprotokoll Matrix und wird auf dem Endgerät eines Akteurs verwendet. Die Funktionalität des TI-Messenger-Clients kann in drei abstrakte Module unterteilt werden. In der folgende Abbildung wird dies verdeutlicht. 
+Der TI-Messenger-Client basiert auf dem offenen Kommunikationsprotokoll Matrix und wird auf dem Endgerät eines Akteurs verwendet. Die Funktionalität des TI-Messenger-Clients kann in drei abstrakte Module unterteilt werden. In der folgenden Abbildung wird dies verdeutlicht. 
 
 ++++
 <p align="left">
@@ -29,45 +29,56 @@ Der TI-Messenger-Client basiert auf dem offenen Kommunikationsprotokoll Matrix u
 
 == Abstrakte Module 
 === TI-Messenger Modul
-Über dieses abstrakte Modul wird die Ad-Hoc Kommunikation durchgeführt. Der *TI-Messenger-Client* kommuniziert mit dem *Messenger-Service* des *TI-Messenger-Fachdienstes* über die Matrix - Client-Server Schnittstelle, um Events auszutauschen. Für die Administration einer Freigabeliste stellt der *Messenger-Service* die Schnittstelle link:../../docs/Fachdienst/MessengerService.adoc#i_timessengercontactmanagement[I_Ti_MessengerContactManagement] bereit. Der Aufruf der vom *Matrix-Homeserver* angebotenen Schnittstellen erfolgt immer über den *Messenger-Proxy*. Im folgenden werden die Schnittstellen beschrieben. 
+Über dieses abstrakte Modul wird die Ad-Hoc Kommunikation durchgeführt. Der *TI-Messenger-Client* kommuniziert mit dem *Messenger-Proxy* eines *Messenger-Services* über die Matrix - Client-Server Schnittstelle, um Events auszutauschen. Ebenfalls bietet der *Messenger-Proxy* für die Administration der Freigabeliste die Schnittstelle I_Ti_MessengerContactManagement bereit. 
+
+NOTE: Der Aufruf der vom *Matrix-Homeserver* angebotenen Schnittstellen erfolgt immer über den *Messenger-Proxy*. 
+
+In den folgenden Kapiteln werden die Schnittstellen und deren bereitzustellenden Funktionen beschrieben. 
 
 ==== Matrix - Client-Server API
-Der Matrix Homeserver muss die Schnittstelle gemäß der Matrix https://spec.matrix.org/v1.3/client-server-api/[[Client-Server API]] anbieten, welche der *TI-Messenger-Client* aufruft. Der Aufruf der einzelnen Endpunkte kann dort nachgelesen werden. Ein Überblick über die einzelnen Endpunkte der Schnittstelle ist hier https://matrix.org/docs/api/#overview[[API Playground]] einsehbar. 
+Der *Matrix-Homeserver* muss die REST-Schnittstellen gemäß der Matrix https://spec.matrix.org/v1.3/client-server-api/[[Client-Server API]] für den *TI-Messenger-Client* anbieten. Der TI-Messenger-Client muss die in der Matrix-Client-Server API clientspezifischen verhaltensweisen implementieren (Beispiel: https://spec.matrix.org/v1.3/client-server-api/#client-behaviour-21[Client Verhalten für den Direktnachrichtenaustausch]). 
 
-CAUTION: Der Playground bildet immer die aktuellste Version der Spezifikation ab und stimmt somit nicht mit der v1.3 überein. 
+Für ein Überblick und für testzwecke der REST-Schnittstellen der Matrix-Client-Server API kann der von der Matrix Foundation bereitgestellte https://matrix.org/docs/api/#overview[[API Playground]] verwendet werden. 
+
+CAUTION: Der Playground bildet immer die aktuellste Version der Spezifikation ab und stimmt somit ggf. nicht mit der aktuell von der gematik geforderten Version der Matrix-API überein. 
+
+Im Rahmen der Verwendung des Matrix-Protokoll im deutschen Gesundheitswesen ist es notwendig dies um weitere Vorgaben zu erweitern. Hierzu trifft die gematik die folgenden weiteren Festlegungen.
 
 ===== CreateRoom 
-Beim Anlegen eines Raumes(link:https://spec.matrix.org/v1.3/client-server-api/#post_matrixclientv3createroom[createRoom]) über die Client-Server-API ist darauf zu achten, dass im Invite Feld maximal eine Matrix-ID einer einzuladenden Person angegeben werden darf. (siehe link:../../docs/anwendungsfaelle/MS-stufen-berechtigungspruefung.adoc#stufe-1-pr%C3%BCfung-der-ti-f%C3%B6derationszugeh%C3%B6rigkeit[Proxy Berechtigungsprüfung])
+Beim Anlegen eines Raumes (link:https://spec.matrix.org/v1.3/client-server-api/#post_matrixclientv3createroom[createRoom]) über die Client-Server-API ist darauf zu achten, dass im `invite` Feld maximal eine Matrix-ID (`MXID`) einer einzuladenden Person angegeben werden darf. Die Vorgabe muss eingehalten werden, damit diese bei der link:../../docs/anwendungsfaelle/MS-stufen-berechtigungspruefung.adoc#stufe-1-pr%C3%BCfung-der-ti-f%C3%B6derationszugeh%C3%B6rigkeit[Proxy Berechtigungsprüfung] validiert werden kann.
 
 ===== Custom Room Types 
-Das Matrix-Protokoll erlaubt während der Erstellung eines Chatraumes einen eigene Raumtyp (Custom Room Type) für diesen mit Hilfe einer Typinitialisierung im /createRoom Endpunkt zu definieren, um spezielle Raumeigenschaften (Room State) für diesen Custom Room Type zu verwenden. Die gematik definiert für föderierte und fallbezogene Kommunikation die folgenden Raumtypen. 
+Das Matrix-Protokoll erlaubt während der Erstellung eines Chatraumes einen eigene Raumtyp (_Custom Room Type_) für diesen mit Hilfe einer Typinitialisierung im `/createRoom`-Endpunkt zu definieren, um spezielle Raumeigenschaften (_Room State Events_) für diesen _Custom Room Type_ zu verwenden. Die gematik definiert für föderierte und fallbezogene Kommunikation die folgenden Raumtypen. 
 
 - *de.gematik.tim.roomtype.default.v1*
 - *de.gematik.tim.room.casereference.v1*
 
-Es ist vorgesehen den Raumtyp *de.gematik.tim.roomtype.default.v1* für alle föderierten Kommunikation beim Anlegen entsprechend zu setzen.  
-
+Es ist vorgesehen den Raumtyp *de.gematik.tim.roomtype.default.v1* für alle föderierten Kommunikation beim Anlegen entsprechend zu setzen. 
 Der Raumtyp *de.gematik.tim.room.casereference.v1* ist für die spätere Verwendung im Context von Fallbezogenen Kommunikationen vorgesehen.
 
-TIP: Details zu den Raumtypen finden sich in *[gemSpec_Ti-Messenger-Client]#5.4.17* und *[gemSpec_Ti-Messenger-Client#5.4.16]*  
+TIP: Weitere Informationen mit den Umgang der Raumtypen finden sich in *[gemSpec_Ti-Messenger-Client]#5.4.17* und *[gemSpec_Ti-Messenger-Client#5.4.16]*  
 
-NOTE: In der vorliegenden Spezifikationsversion 1.1.1 wird die produktive Verwendung der Custom Room Types aktuell nicht gefordert, da die notwendigen Vorbedingungen für den produktiven Einsatz seitens des Matrix-Protokolls noch nicht vollständig erfüllt sind.
+NOTE: In der veröffentlichten und zulassungsrelevanten Spezifikationsversion v1.1.1 wird die produktive Verwendung der _Custom Room Types_ aktuell nicht gefordert, da die notwendigen Vorbedingungen für den produktiven Einsatz seitens des Matrix-Protokolls noch nicht vollständig erfüllt sind.
 
 ===== Custom State Events
-Das Matrix-Protokoll erlaubt die Eigenschaften eines Chatraumes mit State Events zu erweitern bzw. zu ändern. Typische State Events, die ein Room State definieren und die durch das Matrix-Protokoll definiert sind, sind zum Beispiel m.room.name oder m.room.topic. Das Matrix-Protokoll erlaubt auch benutzerdefinierte State Events (Custom State Events) zu verwenden. In der vorliegenden Dokumentation werden bereits erste Custom Room Types sowie Custom State Events mit von der gematik definierten Event Types und Event Content definiert. 
+Das Matrix-Protokoll erlaubt die Eigenschaften eines Chatraumes mit _State Events_ zu erweitern bzw. zu ändern. Typische _State Events_, die ein _Room State_ definieren und die durch das Matrix-Protokoll definiert sind, sind zum Beispiel `m.room.name` oder `m.room.topic`. Das Matrix-Protokoll erlaubt auch benutzerdefinierte State Events (_Custom State Events_) zu verwenden. In der vorliegenden Dokumentation werden bereits erste _Custom Room Types_ sowie _Custom State Events_ mit von der gematik definierten _Event Type_s und _Event Content_ definiert. 
 
-- *de.gematik.tim.room.topic*
 - *de.gematik.tim.room.name*
+- *de.gematik.tim.room.topic*
 - *de.gematik.tim.room.default.v1*
 - *de.gematik.tim.room.casereference.v1*
 
-Für die Fallbezogene Kommunikation sind die beiden Custom State Events *de.gematik.tim.room.topic* und *de.gematik.tim.room.name* vorgesehen, um eine verschlüsselte Abbildung der beiden Standardfelder m.room.topic und m.room.name zu relasieren, da im Fallbezogenen Context ein hoher Datenschutzbedarf besteht. Im Kontext der fallbezogenen Kommunikation ist es notwendig zusätzliche Patientbezogene Informationen bereitzustellen, hierfür ist das Custom State Event *de.gematik.tim.room.casereference.v1* vorgesehen, in welchem vorgesehen ist den folgenden link:https://simplifier.net/tim[FHIR-Datensatz] zu hinterlegen.  
+Für die Fallbezogene Kommunikation sind die beiden _Custom State Events_ *de.gematik.tim.room.name* und *de.gematik.tim.room.topic* vorgesehen, um eine verschlüsselte Abbildung der beiden Standardfelder `m.room.name` und `m.room.topic`zu relasieren, da im Fallbezogenen Kontext ein hoher Datenschutzbedarf besteht. Im Kontext der fallbezogenen Kommunikation ist es notwendig zusätzliche patientbezogene Informationen bereitzustellen. Hierfür ist das _Custom State Event_ *de.gematik.tim.room.casereference.v1* vorgesehen, um in diesem den folgenden link:https://simplifier.net/tim[FHIR-Datensatz] zu hinterlegen.  
 
-Das Custom State Event *de.gematik.tim.room.default.v1* ist vorgesehen für den verschlüsselte Information im Kontext von intersektoraler Kommunikation. In diesem Fall sind die Informationen zu Name und Topic des Raumes ebenfalls über die Events *de.gematik.tim.room.topic* und *de.gematik.tim.room.name* abzubilden. 
+Das _Custom State Event_ *de.gematik.tim.room.default.v1* ist vorgesehen, um verschlüsselte Information im Kontext von intersektoraler Kommunikation zu ermöglichen. In diesem Fall sind die Informationen zu "Name" und "Topic" des Raumes ebenfalls über die Events *de.gematik.tim.room.topic* und *de.gematik.tim.room.name* abzubilden. 
 
-TIP: Details zu den Custom State Events finden sich in *[gemSpec_Ti-Messenger-Client]#5.4.17* und *[gemSpec_Ti-Messenger-Client#5.4.16]*  
+TIP: Weitere Informationen zu den _Custom State Events_ finden sich in *[gemSpec_Ti-Messenger-Client]#5.4.17* und *[gemSpec_Ti-Messenger-Client#5.4.16]*  
 
-NOTE: In der vorliegenden Spezifikationsversion 1.1.1 wird die produktive Verwendung der Custom State Events aktuell nicht gefordert, da die notwendigen Vorbedingungen für den produktiven Einsatz seitens des Matrix-Protokolls noch nicht vollständig erfüllt sind.
+NOTE: In der vorliegenden zulassungsreleventane Spezifikationsversion v1.1.1 wird die produktive Verwendung der _Custom State Events_ aktuell nicht gefordert, da die notwendigen Vorbedingungen für den produktiven Einsatz seitens des Matrix-Protokolls noch nicht vollständig erfüllt sind.
+
+==== I_Ti_MessengerContactManagement
+link:../../docs/Fachdienst/MessengerService.adoc#i_timessengercontactmanagement[I_Ti_MessengerContactManagement]
+
 
 === VZD-FHIR-Directory Modul
 Über dieses abstrakte Modul wird die Suche und die Pflege von Einträgen im FHIR-Directory ermöglicht. Der TI-Messenger-Client nutzt die Schnittstellen der Teilkomponenten Auth Services und FHIR-Proxy am VZD-FHIR-Directory. Für den Aufruf der beiden Schnittstellen am FHIR-Proxy werden Token benötigt, um die Berechtigung für den Zugriff nachzuweisen. Daher muss der TI-Messenger-Client zuvor am Auth Service des VZD-FHIR-Directory die notwendigen Token anfragen. Im folgenden werden die Aufrufe beschrieben. 
