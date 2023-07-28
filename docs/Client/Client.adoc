@@ -77,8 +77,7 @@ TIP: Weitere Informationen zu den _Custom State Events_ finden sich in *[gemSpec
 NOTE: In der vorliegenden zulassungsreleventane Spezifikationsversion v1.1.1 wird die produktive Verwendung der _Custom State Events_ aktuell nicht gefordert, da die notwendigen Vorbedingungen für den produktiven Einsatz seitens des Matrix-Protokolls noch nicht vollständig erfüllt sind.
 
 ==== I_Ti_MessengerContactManagement
-link:../../docs/Fachdienst/MessengerService.adoc#i_timessengercontactmanagement[I_Ti_MessengerContactManagement]
-
+Über die vom *Messenger-Proxy* bereitgestellte Schnittstelle `I_Ti_MessengerContactManagement` wird die für einen Nutzer erzeugte Freigabeliste administriert. Die Freigabeliste wird in link:docs/anwendungsfaelle/COM-AF10061-einladung-ausserhalb.adoc[AF10061 - Einladung von Akteuren außerhalb einer Organisation] benötigt, wenn sich zwei Akteure ihre Kontaktdaten mittels QR-Scan austauschen. Weitere Informationen zu der Schittstelle sind link:../../docs/Fachdienst/MessengerService.adoc#i_timessengercontactmanagement[hier] zu finden.
 
 === VZD-FHIR-Directory Modul
 Über dieses abstrakte Modul wird die Suche und die Pflege von Einträgen im FHIR-Directory ermöglicht. Der TI-Messenger-Client nutzt die Schnittstellen der Teilkomponenten Auth Services und FHIR-Proxy am VZD-FHIR-Directory. Für den Aufruf der beiden Schnittstellen am FHIR-Proxy werden Token benötigt, um die Berechtigung für den Zugriff nachzuweisen. Daher muss der TI-Messenger-Client zuvor am Auth Service des VZD-FHIR-Directory die notwendigen Token anfragen. Im folgenden werden die Aufrufe beschrieben. 
