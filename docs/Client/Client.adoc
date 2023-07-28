@@ -50,11 +50,11 @@ Beim Anlegen eines Raumes (link:https://spec.matrix.org/v1.3/client-server-api/#
 ===== Custom Room Types 
 Das Matrix-Protokoll erlaubt während der Erstellung eines Chatraumes einen eigene Raumtyp (_Custom Room Type_) für diesen mit Hilfe einer Typinitialisierung im `/createRoom`-Endpunkt zu definieren, um spezielle Raumeigenschaften (_Room State Events_) für diesen _Custom Room Type_ zu verwenden. Die gematik definiert für föderierte und fallbezogene Kommunikation die folgenden Raumtypen. 
 
-- *de.gematik.tim.roomtype.default.v1*
-- *de.gematik.tim.room.casereference.v1*
+- `de.gematik.tim.roomtype.default.v1`
+- `de.gematik.tim.room.casereference.v1`
 
-Es ist vorgesehen den Raumtyp *de.gematik.tim.roomtype.default.v1* für alle föderierten Kommunikation beim Anlegen entsprechend zu setzen. 
-Der Raumtyp *de.gematik.tim.room.casereference.v1* ist für die spätere Verwendung im Context von Fallbezogenen Kommunikationen vorgesehen.
+Es ist vorgesehen den Raumtyp `de.gematik.tim.roomtype.default.v1` für alle föderierten Kommunikation beim Anlegen entsprechend zu setzen. 
+Der Raumtyp `de.gematik.tim.room.casereference.v1` ist für die spätere Verwendung im Context von Fallbezogenen Kommunikationen vorgesehen.
 
 TIP: Weitere Informationen mit den Umgang der Raumtypen finden sich in *[gemSpec_Ti-Messenger-Client]#5.4.17* und *[gemSpec_Ti-Messenger-Client#5.4.16]*  
 
@@ -63,14 +63,14 @@ NOTE: In der veröffentlichten und zulassungsrelevanten Spezifikationsversion v1
 ===== Custom State Events
 Das Matrix-Protokoll erlaubt die Eigenschaften eines Chatraumes mit _State Events_ zu erweitern bzw. zu ändern. Typische _State Events_, die ein _Room State_ definieren und die durch das Matrix-Protokoll definiert sind, sind zum Beispiel `m.room.name` oder `m.room.topic`. Das Matrix-Protokoll erlaubt auch benutzerdefinierte State Events (_Custom State Events_) zu verwenden. In der vorliegenden Dokumentation werden bereits erste _Custom Room Types_ sowie _Custom State Events_ mit von der gematik definierten _Event Type_s und _Event Content_ definiert. 
 
-- *de.gematik.tim.room.name*
-- *de.gematik.tim.room.topic*
-- *de.gematik.tim.room.default.v1*
-- *de.gematik.tim.room.casereference.v1*
+- `de.gematik.tim.room.name`
+- `de.gematik.tim.room.topic`
+- `de.gematik.tim.room.default.v1`
+- `de.gematik.tim.room.casereference.v1`
 
-Für die Fallbezogene Kommunikation sind die beiden _Custom State Events_ *de.gematik.tim.room.name* und *de.gematik.tim.room.topic* vorgesehen, um eine verschlüsselte Abbildung der beiden Standardfelder `m.room.name` und `m.room.topic`zu relasieren, da im Fallbezogenen Kontext ein hoher Datenschutzbedarf besteht. Im Kontext der fallbezogenen Kommunikation ist es notwendig zusätzliche patientbezogene Informationen bereitzustellen. Hierfür ist das _Custom State Event_ *de.gematik.tim.room.casereference.v1* vorgesehen, um in diesem den folgenden link:https://simplifier.net/tim[FHIR-Datensatz] zu hinterlegen.  
+Für die Fallbezogene Kommunikation sind die beiden _Custom State Events_ `de.gematik.tim.room.name` und `de.gematik.tim.room.topic` vorgesehen, um eine verschlüsselte Abbildung der beiden Standardfelder `m.room.name` und `m.room.topic` zu relasieren, da im Fallbezogenen Kontext ein hoher Datenschutzbedarf besteht. Im Kontext der fallbezogenen Kommunikation ist es notwendig zusätzliche patientbezogene Informationen bereitzustellen. Hierfür ist das _Custom State Event_ `de.gematik.tim.room.casereference.v1` vorgesehen, um in diesem den folgenden link:https://simplifier.net/tim[FHIR-Datensatz] zu hinterlegen.  
 
-Das _Custom State Event_ *de.gematik.tim.room.default.v1* ist vorgesehen, um verschlüsselte Information im Kontext von intersektoraler Kommunikation zu ermöglichen. In diesem Fall sind die Informationen zu "Name" und "Topic" des Raumes ebenfalls über die Events *de.gematik.tim.room.topic* und *de.gematik.tim.room.name* abzubilden. 
+Das _Custom State Event_ `de.gematik.tim.room.default.v1` ist vorgesehen, um verschlüsselte Information im Kontext von intersektoraler Kommunikation zu ermöglichen. In diesem Fall sind die Informationen zu "Name" und "Topic" des Raumes ebenfalls über die Events `de.gematik.tim.room.topic` und `de.gematik.tim.room.name` abzubilden. 
 
 TIP: Weitere Informationen zu den _Custom State Events_ finden sich in *[gemSpec_Ti-Messenger-Client]#5.4.17* und *[gemSpec_Ti-Messenger-Client#5.4.16]*  
 
