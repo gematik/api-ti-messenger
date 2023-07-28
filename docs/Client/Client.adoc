@@ -23,7 +23,7 @@ Der TI-Messenger-Client basiert auf dem offenen Kommunikationsprotokoll Matrix u
 
 ++++
 <p align="left">
-  <img width="100%" src=../../images/I_Client.png>
+  <img width="80%" src=../../images/I_Client.png>
 </p>
 ++++
 
