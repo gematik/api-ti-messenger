@@ -53,7 +53,7 @@ Ein Messenger-Service besteht aus den Teilkomponenten Messenger-Proxy und einem 
 * *Push-Gateway:* +
 Das Push-Gateway stellt die `Matrix-Push Gateway API` gemäß der Matrix Spezifikation bereit. Dieses ermöglicht die Weiterleitung von Benachrichtigungen an Akteure des TI-Messenger-Dienstes.
 
-link:docs/TI-Messenger-Client.adoc[*TI Messenger-Client*] +
+link:docs/Client/Client.adoc[*TI Messenger-Client*] +
 
 * Der TI-Messenger-Client basiert auf der `Matrix-Client-Server API`. Er wird durch weitere Funktionsmerkmale erweitert und ruft die Schnittstellen am TI-Messenger-Fachdienst sowie am VZD-FHIR-Directory auf.
 
@@ -112,8 +112,8 @@ Hersteller und Anbieter eines TI-Messenger-Dienstes können das von der gematik 
 link:docs/TI-Messenger-Anwendungsfaelle.adoc[- Anwendungsfälle] 
 
 *Produkttypen* +
-link:docs/TI-Messenger-Fachdienst.adoc[- TI-Messenger-Fachdienst] +
-link:docs/TI-Messenger-Client.adoc[- TI-Messenger-Client] +
+link:docs/Fachdienst/Fachdienst.adoc[- TI-Messenger-Fachdienst] +
+link:docs/Client/Client.adoc[- TI-Messenger-Client] +
 link:docs/FHIR-Directory.adoc[- VZD-FHIR-Directory]
 
 *Diverses* +
