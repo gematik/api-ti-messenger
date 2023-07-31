@@ -21,7 +21,7 @@ The FHIR-Directory contains entries for healthcare services provided by organiza
 
 ++++
 <p align="left">
-  <img width="75%" src=../images/I_VZD_FHIR_Directory.png>
+  <img width="100%" src=../images/I_VZD_FHIR_Directory.png>
 </p>
 ++++
 
