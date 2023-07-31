@@ -75,6 +75,7 @@ Weitere Informationen zu den Verzeichnistypen können link:https://github.com/ge
 
 == OAuth-Service
 Der *OAuth-Service* stellt ein `ti-provider-accesstoken` aus, welches am `/ti-provider-authenticate`-Endpunkt übergeben werden muss. Hierfür muss sich ein Anbieter eines *TI-Messenger-Fachdienstes* mittels seiner Zugangsdaten am OAuth-Service authentisieren. 
+Der Aufruf des https://github.com/gematik/api-vzd/blob/feature/gemILF_VZD_FHIR_Directory/docs/FHIR_VZD_HOWTO_Authenticate.adoc#22-authenticate-for-the-provider-api[Endpunktes] kann dort nachgelesen werden.
 
 == Auth-Service
 Der *Auth-Service* stellt ACCESS_TOKEN aus, die für den Zugriff auf die Endpunkte am *FHIR-Proxy* benötigt werden. Der Aufruf der link:https://github.com/gematik/api-vzd/blob/feature/gemILF_VZD_FHIR_Directory/docs/FHIR_VZD_HOWTO_Authenticate.adoc#2-fhirdirectoryauthenticationapis[Endpunkte] am *Auth-Service* ist dort beschrieben. 
