@@ -17,7 +17,18 @@ image:gematik_logo.svg[width=70%]
 toc::[]
 
 = VZD-FHIR-Directory
-The FHIR-Directory contains entries for healthcare services provided by organizations as well as practitioner entries. This page describes how to use the FHIR-Directory endpoints. See more information in https://fachportal.gematik.de/fachportal-import/files/gemSpec_VZD_FHIR_Directory_V1.1.0.pdf[[gemSpec_VZD_FHIR_Directory]].  It contains information about the endpoints and authentication methods.
+Beim *VZD-FHIR-Directory* handelt es sich um einen zentralen Verzeichnisdient der TI. Im Rahmen des *TI-Messenger-Dienstes* wird das *VZD-FHIR-Directory* für die deutschlandweite Suche von Organisationen und Akteuren sowie der Bereitstellung einer sektorenübergreifende Kommunikation, verwendet. 
+
+Dabei besteht das *VZD-FHIR-Directory* aus den Teilkomponenten:
+
+* FHIR-Directory, 
+* OAuth-Service,
+* Auth-Service und
+* FHIR-Proxy
+
+die benötigt werden, um alle Funktionsmerkmale abbilden zu können.
+
+In der folgenden Abbildung sind die Teilkomponenten sowie deren Schnittstellen und für deren Zugriff benötigten ACCESS_TOKEN dargestellt:
 
 ++++
 <p align="left">
@@ -25,15 +36,12 @@ The FHIR-Directory contains entries for healthcare services provided by organiza
 </p>
 ++++
 
-== FHIR Profiles
-The FHIR Profiles are defined in the Simplifier project https://simplifier.net/vzd-fhir-directory[VZD-FHIR-Directory]. 
+== FHIR-Directory / Verzeichnistypen
+Das *FHIR-Directory* basiert auf link:https://hl7.org/fhir/R4/[FHIR R4] und stellt die zwei Verzeichnisse `HealthcareServiceDirectory`- und `PractitionerRoleDirectory` bereit. Die Profilierung der FHIR-Ressourcen ist im link:https://simplifier.net/vzd-fhir-directory[Simplifier] aufrufbar. 
 
-TIP: In generell FHIR allows various search capabilities. The https://www.hl7.org/fhir/search.html[FHIR search] page describes in detail the search framework.
+Im folgenden sind die beiden Verzeichnisse mit deren Struktur beispielhaft dargestellt: 
 
-== Logical data structure
-The FHIR-Directory has two kinds of entries, a organization and a practitioner entry. 
-
-An *organization* entry has the following structure.
+* HealthcareService
 
 ++++
 <p align="left">
@@ -41,7 +49,7 @@ An *organization* entry has the following structure.
 </p>
 ++++
 
-A *practitioner* entry has a similar structure.
+* PractitionerRole
 
 ++++
 <p align="left">
@@ -49,210 +57,41 @@ A *practitioner* entry has a similar structure.
 </p>
 ++++
 
-The *Endpoint* ressource contains the Matrix-User-ID (MXID) of a user or of a bot. The MXID are saved in the `HealthcareService.endpoint.address`.
+Im Rahmen des TI-Messenger-Dienstes sollen die folgenden Attribute eines Endpoints eines `HealthcareService` oder `PractitionerRole` wie folgt gesetzt werden:
 
-For more information please have a look into https://github.com/gematik/api-vzd[[api-vzd]]
+[options="header"]
+|=================================================================================================================
+| Attribut                | Wert          | Beschreibung                                      
+| `endpoint.status`         | `active`        | Sichtbarkeit des Endpunktes im Verzeichnisidienst 
+| `endpoint.connectionType` | `tim`           | Gibt an, um welche Anwendung es sich handelt      
+| `endpoint.name`          | `<Bezeichnung>` | Identifier des Endpoints                          
+| `endpoint.PayloadType`    | `tim-chat`      | Kennung der Übertragenen Inhalte                  
+| `endpoint.address`        |`MXID`          | Matrix-UserID eines Akteurs                       
+|=================================================================================================================
 
-== REST Service Endpoints
-The VZD-FHIR-Directory provides three endpoints: +
+Beispiel: * `HealthcareService.endpoint.address = <MXID>`
 
-* `/search`, 
-* `/owner` and 
-* `tim-provider-services`. 
+Weitere Informationen zu den Verzeichnistypen können link:https://github.com/gematik/api-vzd/blob/main/docs/Fachkonzept_FHIR-Directory.adoc#datenstruktur-im-fhir-directory[hier] nachgelesen werden. 
 
-=== Endpoint: /search
-The */search* endpoint is provided by the FHIR-Proxy to search for directory entries. This chapter describes how to use the FHIR-Proxy endpoint.
+== OAuth-Service
+Der *OAuth-Service* stellt ein `ti-provider-accesstoken` aus, welches am `/ti-provider-authenticate`-Endpunkt übergeben werden muss. Hierfür muss sich ein Anbieter eines *TI-Messenger-Fachdienstes* mittels seiner Zugangsdaten am OAuth-Service authentisieren. 
 
-==== Authentication
-The */search* endpoint requires a valid JSON Web Token (`tim-authenticate-token`) in the Authorization header. To get the token you need a 3rd Party Token from a permitted matrix-homeserver (`matrix-openid-token`) . With this token you can get the `tim-authenticate-token` from the */tim-authenticate* endpoint from the VZD-FHIR-Directory Auth Service. There are two steps necessary:
+== Auth-Service
+Der *Auth-Service* stellt ACCESS_TOKEN aus, die für den Zugriff auf die Endpunkte am *FHIR-Proxy* benötigt werden. Der Aufruf der link:https://github.com/gematik/api-vzd/blob/feature/gemILF_VZD_FHIR_Directory/docs/FHIR_VZD_HOWTO_Authenticate.adoc#2-fhirdirectoryauthenticationapis[Endpunkte] am *Auth-Service* ist dort beschrieben. 
 
-*1) Login to the matrix homeserver* 
+== FHIR-Proxy
+Der *FHIR-Proxy* gibt Zugriff auf das *FHIR-Directory* unter Vorlage eines validen ACCESS_TOKEN und somit auf die FHIR-Ressourcen. Die vom *FHIR-Proxy* zur Verfügung gestellten Endpunkte werden für die Suche und Pflege von FHIR-Ressourcen verwendet sowie zur Pflege eigener TIM Provider Einträge. Der Aufruf der Endpunkte am *FHIR-Proxy* sind hier bechrieben:
 
-*REQUEST*
-====
-[source,text]
-----
-POST https://{domain}/_matrix/client/r0/login
-----
-====
+* https://github.com/gematik/api-vzd/blob/feature/gemILF_VZD_FHIR_Directory/docs/FHIR_VZD_HOWTO_Search.adoc#21-fhirdirectorysearchapi-search-for-practitioners-and-organizations[/search]
+* https://github.com/gematik/api-vzd/blob/feature/gemILF_VZD_FHIR_Directory/docs/FHIR_VZD_HOWTO_Owner.adoc#2-fhirdirectoryownerapi[/owner]
+* https://github.com/gematik/api-vzd/blob/feature/gemILF_VZD_FHIR_Directory/docs/FHIR_VZD_HOWTO_Provider.adoc#2-fhirdirectoryproviderapi[/tim-provider-services]
 
-*RESPONSE*
-====
-[source,yaml]
-----
-...
-BODY
-{
-  "user_id": "@user:matrix.dev.service-ti.de",
-  "access_token": "matrix-accesstoken",
-  "home_server": "matrix.dev.service-ti.de",
-  "device_id": "SRCDQZFMLS"
-}
-----
-====
-
-*2) Request a 3rd Party Token from the matrix homeserver*
-
-*REQUEST*
-====
-[source,text]
-----
-POST https://{domain}/_matrix/client/v3/user/{userid}/openid/request_token?access_token=matrix-accesstoken
-----
-====
-
-*RESPONSE*
-====
-[source,yaml]
-----
-...
-BODY
-{
-  "access_token": "matrix-openid-token",
-  "token_type": "Bearer",
-  "matrix_server_name": "matrix.dev.service-ti.de",
-  "expires_in": 3600
-}
-----
-====
-
-Now, the following example shows the call to the */tim-authenticate* endpoint to get the `tim-authenticate-token`.
-
-*REQUEST*
-[source, text]
------------------
-GET https://fhir-directory-test.vzd.ti-dienste.de/tim-authenticate?mxId=matrix.dev.service-ti.de
------------------
-
-====
-[source,yaml]
-----
-HEADER
-{
-  "User-Agent": "Faraday v2.6.0", 
-  "Content-Type": "application/json", 
-  "X-Matrix-OpenID-Token": "matrix-openid-token", 
-  "X-Matrix-Server-Name": "matrix.dev.service-ti.de"
-}
-----
-====
-
-*RESPONSE*
-[source, yaml]
------------------
-...
-BODY
-{
-  "jwt": "tim-authenticate-token",
-  "token_type": "bearer",
-  "expires_in": 86400
-}
------------------
- 
-The Response Body from the */tim-authenticate* endpoint contains the necessary JSON Web Token `jwt": "tim-authenticate-token`
-
-==== /search Request
-You can search two types of entries as discribed in the subchapter "Logical data structure"
-
-To search for an organization entrie use: +
-
-- */search/HealthcareService*
-
-To search for a practitioner entrie use: +
-
-- */search/PractitionerRole*
-
-Organization entries and practitioner entries have status types. Only if the status is active you will find an entry. In the search-Request you have to include the search-parameter: `organization.active=true` or `practitioner.active=true` to realized that. 
-
-TIP: The search response should include the referenced ressources (search parameter *_include=**).
-
-TIP: For the */search* Request only active endpoints should be used (search parameter `endpoint.status=active`).
-
-The FHIR Endpoint ressources are also used for other TI Applications e.g. https://github.com/gematik/api-kim[KIM]. For TI-Messenger-Clients it is recommended to use a search-parameter `endpoint.connection-type=tim`. This way only Endpoints with TI-Messenger addresses are found.
-
-Please refer to the https://www.hl7.org/fhir/healthcareservice.html#search[HL7 FHIR documentation] to find the possible search parameters of each FHIR ressource.
-
-The following example shows a search request to the VZD-FHIR-Directory
-
-*REQUEST*
-====
-[source,text]
-----
-GET https://fhir-directory.vzd.ti-dienste.de/search/HealthcareService?organization.active=true&endpoint.status=active&_include=*&_count=2&_pretty=true
-----
-====
-
-====
-[source,yaml]
-----
-HEADER
-{
-  "User-Agent": "Faraday v2.6.0", 
-  "Content-Type": "application/json", 
-  "Authorization": "Bearer tim-authenticate-token"
-}
-----
-====
-
-*RESPONSE*
-====
-[source,yaml]
-----
-...
-BODY
-{
-  "resourceType": "Bundle",
-  "id": "0bd92f43-f603-4aab-b821-75043768da2c",
-  "meta": {
-    "lastUpdated": "2022-10-27T11:22:39.178+02:00"
-  },
-  "type": "searchset",
-  "total": 2,
-  "entry": 
-  [
-    {
-      ...
-      ...
-      ...
-     }
-  ]
-----
-====
-
-==== Display search results
-The results of the search-request are summarized in a JSON FHIR Bundle structure. Each entry of the Bundle contains a FHIR ressource. The https://simplifier.net/VZD-FHIR-Directory/~introduction[FHIR-Directory simplifier page] specifies the _must support_ elements of the FHIR ressources. It is recommended to display at least those elements of the search results.
-
-TIP: The search results can also contain FHIR data which is not marked as _must support_.
-
-==== Full text search
-IMPORTANT: Full text search is not yet supported by the FHIR-Directory
-
-The search parameters, *_text* and *_content*, are used for full text search.
+IMPORTANT: Volltextsuche wird aktuell nicht vom *VZD-FHIR-Directory* unterstützt. Hierfür können die folgenden RegEx *_text* and *_content* verwendet werden. Für mehr Informationen kann die folgende  link:http://hl7.org/fhir/R4/search.html#content[Dokumentation] verwendet werden. 
 
 
-=== Endpoint: /owner
-The */owner* endpoint is provided by the FHIR-Proxy to change directory entries by the owner of the entry. This chapter describes how to use the FHIR-Proxy endpoint.
-
-==== Authentication
-The ways to authenticate differ depending on the entry type (organization / practitioner entry). The https://fachportal.gematik.de/fachportal-import/files/gemSpec_VZD_FHIR_Directory_V1.1.0.pdf[specification of the FHIR-Directory] contains information about the endpoint and authentication methods.
-
-*Organization entry*
-
-The */owner* endpoint requires a valid JSON Web Token (`owner-accesstoken`) in the Authorization header. To get the token you need a 3rd Party Token from a permitted Registrierungs-Dienst (`RegService-OpenID-Token`). With this token you can get the `owner-accesstoken` from the */owner-authenticate* endpoint from the VZD-FHIR-Directory Auth Service. To get access to the FHIR ressources of the organization two steps are necessary:
-
-.*1. Login to the Registrierungs-Dienst as Org-Admin*
-
-This is a proprietary interface. Only healthcare organizations are permitted to take part in the TI-Messenger federation. Each TI-Messenger provider implements a way to authenticate a healthcare organization with OIDC and OAuth2. After the successful authentication the healthcare organization may create Org-Admin Accounts on the Registrierungsdienst.
-
-.*2. Request a 3rd Party Token from the Registrierungs-Dienst*
-
-After login the Org-Admin requests a token from the Registrierungs-Dienst.
-This RegService-OpenID-Token can be exchanged for an owner-accesstoken by calling the /owner/authenticate endpoint of the VZD-FHIR-Directory.
 
 
-TIP: For further details on the process and what actions need to take place in advance... link:../docs/howtos/Fhir_Directory_authenticate_organization.adoc[Owner Authenticate]
 
-*Practitioner entry*
 
 
 
