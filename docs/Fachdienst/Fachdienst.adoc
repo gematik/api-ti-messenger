@@ -38,7 +38,17 @@ Der _TI-Messenger-Fachdienst_ besteht aus den folgenden Teilkomponenten :
 NOTE: Die Teilkomponente _Push-Gateway_ ist nach der  Matrix Spezifikation https://spec.matrix.org/latest/push-gateway-api/[&#91;Push Gateway API&#93;] zu implementieren und wird deshalb in dieser Implementierungshilfe nicht detaillierter beschrieben.
 
 == Vorraussetzungen 
-- gematik TI-ITSM...
-- RegDienst am IDP 
-- Zugang VZD 
+
+=== Zugang zum TI-ITSM
+
+=== Zugang zum PKI-Management-System
+
+=== Bekanntmachung des Registrierungs-Dienstes am VZD-FHIR-Directory
+Zunächst wird ein Zertifikat benötigt, das durch Erstellung einer Serviceanfrage im gematik TI-ITSM-Portal erworben werden kann. Das Zertifikat muss den Typ "C.FD.SIG" und die technische Rolle "oid_tim" haben. Bitte wenden Sie sich für weitere Details an Ihren Transitionmanager.
+
+=== Beantragung der TI-Provider-Credentials
+Das Zertifikat muss dann beim Erstellen einer weiteren Serviceanfrage im gematik TI-ITSM-Portal für die TIM-Provider-Services-Zugangsdaten bereitgestellt werden. Für weitere Einzelheiten wenden Sie sich bitte an Ihren Transititon Manager. Beim Erstellen der Serviceanfrage werden Sie nach dem Zertifikat gefragt. Dadurch wird sichergestellt, dass nur registrierte TI-Messenger-Dienstanbieter Austausch-Token mit dem *VZD-FHIR-Directory* erstellen können.
+
+=== Bekanntmachung des Registrierungs-Dienstes am zentralen IDP-Dienst
+
 
