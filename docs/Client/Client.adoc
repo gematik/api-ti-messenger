@@ -199,6 +199,6 @@ Die nachfolgende Tabelle enthält die in der vorliegenden Online Dokumentation r
 |===
 |[Quelle] |Herausgeber: Titel
 
-|*[Client-Server API]* | https://spec.matrix.org/latest/client-server-api/
-|*[API Playground]* | https://matrix.org/docs/api/#overview
+|*[Client-Server API]* | https://spec.matrix.org/v1.3/client-server-api/
+|*[API Playground]* | https://playground.matrix.org/#overview
 |===
