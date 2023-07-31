@@ -156,28 +156,45 @@ TIP: Bei dem gezeigten vCard-Object handelt es sich um die geforderte Mindestbef
 Der *TI-Messenger-Client* muss den eingescannten 2D-Code gemäß [ISO/IEC 18004:2006] decodieren und mindestens den vollständigen Namen sowie die `MXID` aus den Parameter `N` und `IMPP` dem Akteur anzeigen, damit dieser die Aufnahme in die Freigabeliste bestätigen oder ablehnen kann. siehe link:docs/anwendungsfaelle/COM-AF10061-einladung-ausserhalb.adoc[Einladung von Akteuren außerhalb der Organisation]
 
 ==== Editierbarkeit von Displaynamen
-TODO
+Der *TI-Messenger-Client* muss bei der initialen Vergabe des Displayname die folgende Bildungsregel durchsetzen: `[Name], [Vorname]`. Der *TI-Messenger-Client* darf dem Akteur nach der initialen Vergabe des Displaynamen nicht die Möglichkeit anbieten, diesen zu ändern. Hierfür darf der *TI-Messenger-Client* nicht die REST-Schnittstelle `/_matrix/client/v3/profile/{userId}/displayname` der [Client-Server API] aufrufen. 
+
+CAUTION: Das Ändern des Displaynamens eines Akteurs ist nur mittels des *TI-Messenger-Clients* mit Administrationsfunktionen möglich.
 
 == TI-Messenger-Client mit Administrationsfunktionen 
 === Überblick
-Der *TI-Messenger-Client* mit Administrationsfunktionen ist ein Client für Akteure in der Rolle Org-Admin einer Organisation. Dieser wird im TI-Messenger-Kontext auch als *Org-Admin-Client* bezeichnet. Der Org-Admin-Client dient zur komfortablen Verwaltung der Messenger-Services bei einem TI-Messenger-Fachdienst. Die im folgenden Beschriebenen Funktionalitäten für einen Org-Admin Client können separat oder in einen *TI-Messenger-Client* integriert sein.
+Der *TI-Messenger-Client* mit Administrationsfunktionen ist ein Client für Akteure in der Rolle "Org-Admin" einer Organisation. Dieser wird im Kontext des TI-Messenger-Dienstes auch als *Org-Admin-Client* bezeichnet. Der *Org-Admin-Client* dient zur komfortablen Verwaltung der *Messenger-Services* bei einem *TI-Messenger-Fachdienst*. Die im folgenden beschriebenen Funktionalitäten für einen *Org-Admin-Client* können separat oder im *TI-Messenger-Client* für Akteure integriert sein. Hierbei ist darauf zu achten, dass separate User-Interfaces für die jeweilige Rolle (die gerade angemeldet ist) angeboten werden, die nur die relevanten Informationen für die Rolle bereitstellen. 
 
-=== Org-Admin Funktionalität
-Mit dem *Org-Admin-Client* haben Administratoren einer Organisation die Möglichkeit Benutzer und Geräte auf dem jeweiligen Messenger-Service zu verwalten. Darüber hinaus besteht die Möglichkeit, über den *Org-Admin-Client* Sessions von angemeldeten Geräten auf dem Messenger-Service zu verifizieren oder zu invalidieren. Das bedeutet zum Beispiel, dass ein Akteur in der Rolle "Org-Admin" einen *TI-Messenger-Client* eines Akteurs bei Bedarf abmelden kann.
-
-==== Auth owner-authenticate
-Für den Zugriff auf die `/owner` Schnittstelle wird ein `owner-accesstoken` benötigt, dass vom `/owner-authenticate`` Endpunkt des *VZD-FHIR-Directory ausgestellt wird. Zur Authentisierung am Endpunkt fragt der *Org-Admin-Client* beim zuständigen *Registrierungs-Dienst* einen `RegService-OpenID-Token` an, welcher am `/owner-authenticate` Endpunkt gegen ein owner-accesstoken ausgetauscht wird. Ein Beispiel ist link:https://github.com/gematik/api-vzd/blob/feature/gemILF_VZD_FHIR_Directory/docs/FHIR_VZD_HOWTO_Authenticate.adoc#231-authenticate-with-an-regservice-openid-token[hier] zu finden.
+=== Funktionalitäten
+Mit dem *Org-Admin-Client* haben Administratoren einer Organisation die Möglichkeit Akteure und Endgeräte auf dem jeweiligen *Messenger-Service* der Organisation zu verwalten. Zu dem Funktionsumfag des *Org-Admin-Client* gehören:
+    
+* Benutzerverwaltung (Liste aller Akteure, Anlegen, Bearbeiten, Löschen),
+* Geräteverwaltung (Anzeigen, Abmelden, Löschen aller Geräte eines Messenger-Service seiner Organisation),
+* die Verwaltung von Einträgen im VZD-FHIR-Directory,
+* Systemmeldungen an Akteure eines Messenger-Services senden (z. B. Wartungsfenster bekannt machen) und
+* Einrichtung von Funktionsaccounts.
 
 ==== Organisationsressourcen im VZD-FHIR-Directory bearbeiten
-Mit dem Org-Admin-Client besteht die Möglichkeit, im Namen der Organisation FHIR-Ressourcen zur Verfügung zu stellen oder zu bearbeiten.
-Funktionsaccounts
+Der Administrator einer Organisation (Org-Admin) verwaltet mittels des *Org-Admin-Clients* die FHIR-Ressourcen für seine Organisation im *VZD-FHIR-Directory*. Siehe link:docs/anwendungsfaelle/VZD-AF10059-organisation-hinzufuegen.adoc[AF_10059 Organisationsressourcen im Verzeichnisdienst hinzufügen].
+
+*Authentisierung*
+Für den Zugriff auf die `/owner`-Schnittstelle am *FHIR-Proxy* wird ein `owner-accesstoken` benötigt, dass vom `/owner-authenticate`-Endpunkt des *Auth-Service* ausgestellt wird. Zur Authentisierung am Endpunkt fragt der *Org-Admin-Client* beim zuständigen *Registrierungs-Dienst* einen `RegService-OpenID-Token` an, welcher am `/owner-authenticate` Endpunkt gegen ein `owner-accesstoken` ausgetauscht wird. Ein Beispiel für die Authentisierung ist link:https://github.com/gematik/api-vzd/blob/feature/gemILF_VZD_FHIR_Directory/docs/FHIR_VZD_HOWTO_Authenticate.adoc#231-authenticate-with-an-regservice-openid-token[hier] zu finden.
+
+*Bearbeitung*
+Zur Pflege der FHIR-Ressourcen ist es erforderlich, dass der *Org-Admin-Client* den den Endpunkt `/owner` unter Verwendung des owner-accesstoken` (welches im Authorization Header mit übergeben werden muss) aufruft. Eine beispielhafte Verwendung der Schnittstelle zur Pflege der FHIR-Ressourcen ist in der link:https://github.com/gematik/api-vzd/blob/feature/gemILF_VZD_FHIR_Directory/docs/FHIR_VZD_HOWTO_Owner.adoc[owner API examples] beschrieben. Der vom *Org-Admin-Client* angebotene Funktionsumfang ist:
+
+* Verwaltung von link:https://github.com/gematik/api-vzd/blob/feature/gemILF_VZD_FHIR_Directory/docs/FHIR_VZD_HOWTO_Owner.adoc#22-administration-of-resource-healthcareservice[HealthcareServices]
+* Verwaltung von link:https://github.com/gematik/api-vzd/blob/feature/gemILF_VZD_FHIR_Directory/docs/FHIR_VZD_HOWTO_Owner.adoc#23-administration-of-resource-endpoint--metatagoriginowner[Endpoints] 
+
+==== Funktionsaccounts
+Einrichtungen im Gesundheitswesen sind sehr unterschiedlich strukturiert und wollen hinsichtlich ihrer Erreichbarkeit flexibel eigene Strukturen abbilden können. Daher sind beim *TI-Messenger-Dienst* Funktionsaccounts notwendig, die es ermöglichen, Akteure unterhalb der Struktur erreichbar zu machen. Hierfür ist es erforderlich das über den *Org-Admin-Client* ein `Endpoint` im *FHIR-Directory* angelegt wird. 
+
+TIP: Für den `Endpoint` sollte ein sprechender Name verwendet werden. Sprechende Namen wären zum Beispiel Kardiologie für eine Abteilung oder Krankenhaus am Feld. 
+
+Wenn der Funktionsaccount über ein Chatbot realsiert wird, ist folgende Bildungsregel für den Displaynamen zu verwenden: 
+`[Name des Funktionsaccounts] (Chatbot)`.
 
 = Referenzierte Dokumente
 Die nachfolgende Tabelle enthält die in der vorliegenden Online Dokumentation referenzierten Dokumente der gematik. Deren zu diesem Dokument jeweils gültige Versionsnummer entnehmen Sie bitte der aktuellen, auf der Internetseite der gematik veröffentlichten, Dokumentenlandkarte, in der die vorliegende Version aufgeführt wird.
-
-
-
-
 
 |===
 |[Quelle] |Herausgeber: Titel
