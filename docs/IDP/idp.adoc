@@ -18,12 +18,18 @@ image:gematik_logo.svg[width=70%]
 toc::[]
 
 = Zentraler IDP-Dienst
-== General
+== Überblick
+Der zentrale IDP-Dienst ermöglicht die sichere Identifikation der Akteure anhand der ihnen bereitgestellten Identifikationsmittel (SMC-B / HBA). Die Identifikation des Akteurs wird anhand einer Smartcard und der Auswertung des vom Authenticator-Modul an den IDP-Dienst übergebenen Authentifizierungszertifikats (aus der Smartcard) sichergestellt.
 
-The _Zentraler IDP-Dienst_ of gematik is required for the authentication of an organization at the _Registrierungs-Dienst_. The Authenticator-Module provided by gematik (see https://cloud.gematik.de/index.php/s/23ebxa75z3s7zGt?path=%2Fv2.1.0[[gematik Authenticator]]) is used for this to authenticate the SMC-B to an ID_TOKEN. The authenticator runs in a Windows system environment together with the primary system. The _Registrierungs-Dienst_ must check the ID_TOKEN when verifying the organization. In order to be able to carry out the verification, the _Registrierungs-Dienst_ and the frontend of the _Registrierungs-Dienst_ must be registered with the _Zentraler IDP-Dienst_.
+== Registrierung
 
-TIP:  To authenticate an organization to the Registrierungs-Dienst, it is necessary to use the central IDP-Service according to *[gemSpec_IDP_FD]*
-This interface, which is not standardized by gematik, is accessed via a Frontend of the Registrierungs-Dienst. This enables the authentication of an organization as well as the administration and provision of Messenger-Services. An organization is authenticated via its identity (SMC-B).
-It is recommended to implement this interface as a REST interface.
 
-== gematik Authenticator
+
+
+* Endpunkte: +
+RU: https://idp-ref.app.ti-dienste.de +
+PU: https://idp.app.ti-dienste.de/
+
+
+
+= gematik Authenticator
