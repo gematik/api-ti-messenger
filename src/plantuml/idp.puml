@@ -1,0 +1,92 @@
+@startuml
+title "Anpassung des Authenticators um die Kontrolle wieder zurück zum TIM Client zu übergeben:\nAuth-Änderung ("RPC" Callback von Authenticator zu TIM")"
+actor User as "Akteur in der Rolle\nUser-HBA"
+box Endgerät #WhiteSmoke
+participant TimClient as "TIM Client"
+participant Authenticator as "<font color=gray>Authenticator App aka. \n<font color=gray>gematik Authenticator aka.\n Authenticator \ndes IDP-Dienst\n<font color=red>Erweiterung der Mock-Version"
+end box
+participant "gematik IDP-Dienst" as IdpDienst
+box VZD-FHIR-Directory #WhiteSmoke
+participant "<font color=gray>VZD Auth aka.</font>\n Auth-Service" as VzdAuth
+end box
+User->TimClient: FHIR Ressourcen im \nVZD-FHIR-Directory \nhinzufügen (MXID)
+TimClient->TimClient: Prüfung, ob gültiges \nowner-accesstoken \nvorliegt
+alt#LightGrey kein gültiges owner-accesstoken
+|||
+TimClient -> VzdAuth: GET /owner-authenticate
+VzdAuth -> VzdAuth: Erzeuge PKCE
+note right
+<:warning:>vzd_code_verifier
+vzd_code_challenge
+end note
+TimClient <-- VzdAuth: 302 Redirect
+note right
+Location: {auth_endpoint}
+response_type=code
+client_id={vzd_client_id}
+scope=fhir-vzd openid
+redirect_uri={vzd_redirect_uri}
+state={vzd_state}
+code_challenge={vzd_code_challenge}
+code_challenge_method=S256
+end note
+TimClient -[#red]> Authenticator: Deeplink authenticator://...
+note left
+auth_endpoint={auth_endpoint}
+response_type=code
+client_id={vzd_client_id}
+scope=fhir-vzd openid
+redirect_uri={vzd_redirect_uri}
+state={vzd_state}
+code_challenge={vzd_code_challenge}
+code_challenge_method=S256
+<color:red>callback={client_callback_uri}
+end note
+note right
+Liste der zulässigen URLs (client_callback)
+wird nach Absprache mit Akquinet
+in Mock-Version des Authenticators
+fest verdrahtet.
+Anmerkung: Nicht http:// URL-Schemes werden
+ebenfalls unterstützt (z.B. tim://)
+end note
+Authenticator -> IdpDienst: GET {auth_endpoint}?...
+note left
+response_type=code
+client_id={vzd_client_id}
+scope=fhir-vzd openid
+redirect_uri={vzd_redirect_uri}
+state={random_state}
+code_challenge={random_code_challenge}
+code_challenge_method=S256
+end note
+Authenticator <-- IdpDienst: challenge
+Authenticator -> Authenticator: sign challenge
+Authenticator -> IdpDienst: signed challenge
+Authenticator <-- IdpDienst: 302 Redirect
+note right
+Location: {vzd_redirect_uri}
+code={auth_code}
+state={vzd_state}
+end note
+Authenticator -[#red]> TimClient: <color:red>{client_callback_uri}?...
+note right
+<color:red>code={auth_code}
+<color:red>state={vzd_state}
+end note
+TimClient -[#red]> VzdAuth: <color:red>GET {vzd_redirect_uri}
+note left
+<color:red>code={auth_code}
+<color:red>state={vzd_state}
+end note
+VzdAuth -> IdpDienst: get token inkl. Härtung
+note right
+<:warning:>vzd_code_verifier
+auth_code
+end note
+VzdAuth <-- IdpDienst: ID_TOKEN
+VzdAuth -> VzdAuth: erzeuge owner_access_token
+TimClient <-- VzdAuth: owner_access_token
+end
+== ...fachlicher flow... ==
+@enduml
