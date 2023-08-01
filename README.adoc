@@ -110,6 +110,7 @@ Die nachfolgende Tabelle enthält die in der vorliegenden Online Dokumentation r
 |*[gemSpec_TI-Messenger-FD]* |gematik: Spezifikation TI-Messenger-Fachdienst
 |*[gemSpec_TI-Messenger-Client]* |gematik: Spezifikation TI-Messenger-Client
 |*[gemSpec_VZD_FHIR_Directory]* |gematik: Spezifikation Verzeichnisdienst FHIR-Directory
+|*[gemSpec_IDP_Dienst]* |gematik: Spezifikation Identity Provider-Dienst
 |===
 
 == 💡 Onboarding
@@ -122,11 +123,13 @@ link:docs/TI-Messenger-Anwendungsfaelle.adoc[- Anwendungsfälle]
 *Produkttypen* +
 link:docs/Fachdienst/Fachdienst.adoc[- TI-Messenger-Fachdienst] +
 link:docs/Client/Client.adoc[- TI-Messenger-Client] +
-link:docs/FHIR-Directory.adoc[- VZD-FHIR-Directory]
+link:docs/FHIR-Directory/FHIR-Directory.adoc[- VZD-FHIR-Directory] +
+link:docs/IDP/idp.adoc[- Zentraler IDP-Dienst] +
 
 *Diverses* +
 https://gematikde.sharepoint.com/:w:/s/PTNeo/EczX7AFGfBdNrCYghzGsHz4BbSoYhV63QMmDCdz7x9zLpg?e=7wG3c[- Welcome Package] +
 https://gematikde.sharepoint.com/sites/EXTAuthenticator/Freigegebene%20Dokumente/Forms/AllItems.aspx?id=%2Fsites%2FEXTAuthenticator%2FFreigegebene%20Dokumente%2FVer%C3%B6ffentlichte%20Version%20%2D%20gematik%20Authenticator&p=true&ga=1[- gematik Authenticator] +
+https://github.com/gematik/TI-Messenger-Testsuite[- TI-Messenger-Testsuite] +
 link:docs/Q&A.adoc[- Fragen und Antworten zur aktuellen Spezifikation &#91;FAQ&#93;]
 
 *Referenz-Implementierungen* +
