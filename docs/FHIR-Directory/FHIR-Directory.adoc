@@ -6,7 +6,7 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 
-:imagesdir: ../images
+:imagesdir: ../../images
 :toc: macro
 :toclevels: 5
 :toc-title: Table of Contents
@@ -32,7 +32,7 @@ In der folgenden Abbildung sind die Teilkomponenten sowie deren Schnittstellen u
 
 ++++
 <p align="left">
-  <img width="100%" src=../images/I_VZD_FHIR_Directory.png>
+  <img width="100%" src=../../images/I_VZD_FHIR_Directory.png>
 </p>
 ++++
 
@@ -82,14 +82,16 @@ Der *Auth-Service* stellt ACCESS_TOKEN aus, die für den Zugriff auf die Endpunk
 
 == FHIR-Proxy
 Der *FHIR-Proxy* gibt Zugriff auf das *FHIR-Directory* unter Vorlage eines validen ACCESS_TOKEN und somit auf die FHIR-Ressourcen. Die vom *FHIR-Proxy* zur Verfügung gestellten Endpunkte werden für die Suche und Pflege von FHIR-Ressourcen verwendet sowie zur Pflege eigener TIM Provider Einträge. Der Aufruf der Endpunkte am *FHIR-Proxy* sind hier bechrieben:
-
-* https://github.com/gematik/api-vzd/blob/feature/gemILF_VZD_FHIR_Directory/docs/FHIR_VZD_HOWTO_Search.adoc#21-fhirdirectorysearchapi-search-for-practitioners-and-organizations[/search]
-* https://github.com/gematik/api-vzd/blob/feature/gemILF_VZD_FHIR_Directory/docs/FHIR_VZD_HOWTO_Owner.adoc#2-fhirdirectoryownerapi[/owner]
+ 
 * https://github.com/gematik/api-vzd/blob/feature/gemILF_VZD_FHIR_Directory/docs/FHIR_VZD_HOWTO_Provider.adoc#2-fhirdirectoryproviderapi[/tim-provider-services]
 
-IMPORTANT: Volltextsuche wird aktuell nicht vom *VZD-FHIR-Directory* unterstützt. Hierfür können die folgenden RegEx *_text* and *_content* verwendet werden. Für mehr Informationen kann die folgende  link:http://hl7.org/fhir/R4/search.html#content[Dokumentation] verwendet werden. 
+TIP: Die Anbieter eines *TI-Messenger-Fachdienstes* nutzen die Schnittstelle `/tim-provider-services`, um die Föderationsliste des TI-Messenger-Dienstes abzufragen und um die Domains der von ihnen betriebenen Messenger-Services als Teil der TI-Messenger Föderation zu verwalten.
 
+* https://github.com/gematik/api-vzd/blob/feature/gemILF_VZD_FHIR_Directory/docs/FHIR_VZD_HOWTO_Search.adoc#21-fhirdirectorysearchapi-search-for-practitioners-and-organizations[/search]
 
+* https://github.com/gematik/api-vzd/blob/feature/gemILF_VZD_FHIR_Directory/docs/FHIR_VZD_HOWTO_Owner.adoc#2-fhirdirectoryownerapi[/owner]
+
+IMPORTANT: Die Volltextsuche über die Schnittstellen `/search` und `/owner` wird aktuell nicht vom *VZD-FHIR-Directory* unterstützt. Hierfür können die folgenden RegEx *_text* and *_content* verwendet werden. Für mehr Informationen kann die folgende  link:http://hl7.org/fhir/R4/search.html#content[Dokumentation] verwendet werden.
 
 
 
