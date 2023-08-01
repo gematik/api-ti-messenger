@@ -22,13 +22,20 @@ toc::[]
 Der zentrale IDP-Dienst ermöglicht die sichere Identifikation der Akteure anhand der ihnen bereitgestellten Identifikationsmittel (SMC-B / HBA). Die Identifikation des Akteurs wird anhand einer Smartcard und der Auswertung des vom Authenticator-Modul an den IDP-Dienst übergebenen Authentifizierungszertifikats (aus der Smartcard) sichergestellt.
 
 == Registrierung
-
-
-
-
 * Endpunkte: +
 RU: https://idp-ref.app.ti-dienste.de +
 PU: https://idp.app.ti-dienste.de/
+
+== Authorization Code Flow
+
+=== AF_10103 - Authentisieren einer Organisation am TI-Messenger-Dienst
+Registrierungs-Dienst 
+
+
+=== AF_10058 - Akteur (User-HBA) im Verzeichnisdienst hinzufügen
+Auth-Service
+
+
 
 
 
