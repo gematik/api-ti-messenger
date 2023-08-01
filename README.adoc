@@ -61,7 +61,7 @@ link:docs/FHIR-Directory/FHIR-Directory.adoc[*VZD-FHIR-Directory*] +
 
 * Beim VZD-FHIR-Directory handelt es sich um einen zentralen Verzeichnisdient der TI, der die deutschlandweite Suche von Organisationen und Akteuren des TI-Messenger-Dienstes ermöglicht. Das VZD-FHIR-Directory basiert auf dem FHIR-Standard und bietet für den TI-Messenger-Dienst relevante Schnittstellen an. Die Schnittstelle `I_VZD_TiMessenger_services` wird vom Registrierungs-Dienst aufgerufen, um eine Föderationsliste herunterzuladen. Die Schnittstellen `tim-authenticate` und `owner-authenticate` werden von den TI-Messenger-Clients aufgerufen, um eine Suche bzw. einen Eintrag im VZD-FHIR-Directory zu ermöglichen.
 
-link:docs/FHIR-Directory.adoc[*IDP-Dienst*] +
+link:docs/IDP/idp.adoc[*IDP-Dienst*] +
 
 * *Zentraler IDP-Dienst:* +
 Der zentralen IDP-Dienst der gematik übernimmt die Aufgabe der smartcard-basierten Authentisierung eines Akteures. Hierbei fast der IDP-Dienst aus der Smartcard notwendige Attribute (z. B. `TelematikID`, `ProfessionOID`) in signierten JSON Web Token (ID_TOKEN) zusammen, um Zugriff auf angebotene Daten zu erhalten
