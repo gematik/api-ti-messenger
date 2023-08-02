@@ -1,8 +1,10 @@
 @startuml
+
 skinparam sequenceMessageAlign direction
 skinparam WrapWidth 300
 skinparam minClassWidth 150
 skinparam BoxPadding 1
+skinparam ParticipantPadding 50
 skinparam sequenceReferenceHeaderBackgroundColor palegreen
 scale max 2048 width
 
@@ -33,118 +35,96 @@ actor oa as "Akteur in der Rolle\nOrg-Admin"
   participant au as "Authenticator"
   end box
 participant ko as "Konnektor"
-participant rd as "Registrierungs-Dienst \n Relying Party"
+participant rd as "Registrierungs-Dienst \n(Relying Party)"
 participant ip as "zentraler \nIDP-Dienst"
 
+oa -> wb: Organisation authentisieren 
 
  activate wb
 wb -> rd:POST I_Registration
  
  activate rd
-rd->rd: Erzeuge PKCE Code \nfür verifier und challenge
-
-
- 
-          note right
-  redirect_uri={registrierungs_dienst_redirect_uri} 
-  state={SESSIONID}
-  response_type=code
-  client_id={Registrierungs-DienstID}
-  code_challenge={registrierungs_dienst_code_challenge} 
-  code_challenge_method=S256
-  end note
- 
+rd->rd: Erzeuge PKCE (Code verifier und challenge)
+rd->rd: Erstellung der Authentication Request URL\nmit den Request Parametern
         |||
-          opt#LightGrey #AliceBlue <size:16>Download der Konfiguration des IDP-Dienstes</size>
+          opt#LightGrey #AliceBlue <size:16>Download des IDP Discovery Dokumentes</size>
           |||        
-            rd -> ip:GET /.well-known/openid-configuration
-            ip -> rd:openid-configuration (base64)
+            rd -> ip:GET [HOSTNAME]/.well-known/openid-configuration
+            activate ip
+            ip --> rd:signierte base64 kodierte openid-configuration 
+            deactivate ip
+            rd -> rd:Prüfung der Signatur der openid-configuration
           |||
           end
-
-          note right
-Location: {Auth_Endpoint}
-  end note
-
-
-rd --> wb: Redirect to IDP Authorization Endpoint
+|||
+rd --> wb: Redirect zu Authentication Request URL 
  deactivate rd
 
-        wb -> au: Deeplink \nauthenticator://?challenge_path=\nhttps://idp.app.ti-dienste.de/auth?
-        activate au
-        
-          note left
-  response_type=code
-  client_id={Registrierungs-DienstID}
-  scope=ti-messenger openid  
-  redirect_uri={registrierungs_dienst_redirect_uri} 
-  state={SESSION}
-  code_challenge={tim_code_challenge} 
-  code_challenge_method=S256
-  end note
-        
-          opt#LightGrey #AliceBlue <size:16>Download der Konfiguration des IDP-Dienstes</size>
+        wb -> au: Aufruf Deeplink \nauthenticator://?challenge_path=\n{Authentication Request URL} 
+        activate au        
+          opt#LightGrey #AliceBlue <size:16>Download des IDP Discovery Dokumentes</size>
           |||        
-            au -> ip:GET /.well-known/openid-configuration
-            ip -> au:openid-configuration (base64)
+            au -> ip:GET [HOSTNAME]/.well-known/openid-configuration
+            activate ip
+            ip --> au:signierte base64 kodierte openid-configuration 
+            deactivate ip
+            au -> au:Prüfung der Signatur der openid-configuration
           |||
           end
-        
-        
-        au -> ip: GET {authorization_endpoint}
+        |||
+        au -> ip: GET {Authentication Request URL}
         activate ip
         ip -> ip: SESSION_ID anlegen
         ip -> ip: Erstellung der Authentication challenge
-        
-        
+                
         ip -> au: Authentication challenge
-        au -> ko: getCards(Aufrufkontext)
+        deactivate ip
+        |||
+        au -> ko: ""getCards(Aufrufkontext)""
          activate ko
-        ko --> au: Status, Liste der Verfügbaren Smartkarten
+        ko --> au: Status, Liste der verfügbaren CardHandles
         au -> au: Auswahl der gesteckten SMC-B --> CardHandle
-        au -> ko: GetPinStatus (Aufrufkontext, CardHandle, PinType (PIN.SMC))
+        |||
+        au -> ko: ""GetPinStatus (Aufrufkontext, CardHandle, PinType (PIN.SMC))""
         ko --> au: Status, PinStatus
+        |||
           opt#LightGrey #AliceBlue <size:16>Karte nicht freigeschaltet </size>
           |||
-            au -> ko: VerifyPin (Aufrufkontext, CardHandle, PinType (PIN.SMC))
-            ko -> oa: Aufforderung der PIN-Eingabe
+            au -> ko: ""VerifyPin (Aufrufkontext, CardHandle, PinType (PIN.SMC))""
+            ko --> oa: Aufforderung der PIN-Eingabe
             oa -> ko: PIN-Eingabe
-            ko -> au: Status
+            ko --> au: Status
           |||
           end
-        au -> ko: ExternalAuthenticate (Aufrufkontext, CardHandle, C.HCI.AUT, Authentication challenge)
+        |||
+        au -> ko: ""ExternalAuthenticate\n(Aufrufkontext, CardHandle,\nC.HCI.AUT, Authentication challenge)""
         ko --> au: Signierte Authentication challenge
           deactivate ko
-     
+        |||
         au -> au: Verschlüsselung der signierten Authentication challenge mit dem \nöffentlichen Schlüssel PuK_IDP_ENC vom IDP-Dienst
-        au -->ip: Authentication challenge, C.HCI.AUT der SMC-B übertragen
+        au ->ip: Authentication challenge, C.HCI.AUT der SMC-B übertragen
+        activate ip
         ip -> ip: Entschlüsselung mit PuK_IDP_SIG des IDP-Dienstes \nund Valedierung der Signierten challenge anhand des \nim x5c-Header mitgelieferten Authentifizierungszertifikats
         ip -> ip: Erstellung des AUTHORIZATION_CODE
-        ip --> au: AUTHORIZATION_CODE, redirect_uri={registrierungs_dienst_redirect_uri}
+        ip --> au: Redirect zur redirect_uri\ndes Registrierungs-Dienstes\nmit AUTHORIZATION_CODE
           deactivate ip
-        au --> wb: AUTHORIZATION_CODE, redirect_uri={registrierungs_dienst_redirect_uri}
+        au --> wb: Redirect zur redirect_uri\ndes Registrierungs-Dienstes\nmit AUTHORIZATION_CODE
           deactivate au
         |||
-        wb -> rd: GET /redirect_uri(AUTHORIZATION_CODE)
+        wb -> rd: GET /redirect_uri?code={AUTHORIZATION_CODE}
           activate rd
         rd -> rd: Erzeugung AES256-"Token-Key"
-        rd -> rd: KEY_VERIFIE mit PUK_IDP_ENC verschlüsseln
-        rd -> ip: GET {authorization_endpoint}(AUTHORIZATION_CODE, KEY_VERIFIE)
+        rd -> rd: KEY_VERIFIER mit PUK_IDP_ENC verschlüsseln
+        rd -> ip: POST {token_endpoint}\n(AUTHORIZATION_CODE, KEY_VERIFIER)
          activate ip
-        ip -> ip: AUTHORIZATION_CODE entschlüsseln und \nValedierung mittels PUK_IDP_SIG Authorization-Endpunkte
-        ip -> ip: Enzschlüsselung und Valedierung des KEY_VERIFIE
-        ip -> ip: Erzeugung des ID_TOKEN und Signieren mittels PrK_IDP_SIG sowie Verschlüsselung mittels Token-Key
+        ip -> ip: AUTHORIZATION_CODE\nentschlüsseln und\nValidierung mittels PUK_IDP_SIG\ndes Authorization-Endpunktes
+        ip -> ip: Entschlüsselung und Validierung des KEY_VERIFIER
+        ip -> ip: Erzeugung des ID_TOKEN und\nSignieren mittels PrK_IDP_SIG\nsowie Verschlüsselung mittels Token-Key
         ip --> rd: ID_TOKEN
-         activate ip
-        rd -> rd:  Entschlüsselung des Token mit Token-Key und Valedierung mit PUK_IDP_SIG
-
-        
-        
-        
-          
-          
-        rd -> ip: POST {token_endpoint}(auth_code, verifier)
-          activate ip
-        ip --> rd: id_token
-          deactivate ip
+         deactivate ip
+        rd -> rd:  Entschlüsselung des Token\nmit Token-Key und Validierung\nmit PUK_IDP_SIG
+        rd -> rd: Prüfung der im Token\nenthaltenen ProfessionOID
+        rd --> wb: Status der Authentisierung
+         deactivate rd
+        wb --> oa: Organisation erfolgreich Authentifiziert
 @enduml
