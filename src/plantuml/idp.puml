@@ -1,92 +1,132 @@
 @startuml
-title "Anpassung des Authenticators um die Kontrolle wieder zurück zum TIM Client zu übergeben:\nAuth-Änderung ("RPC" Callback von Authenticator zu TIM")"
-actor User as "Akteur in der Rolle\nUser-HBA"
-box Endgerät #WhiteSmoke
-participant TimClient as "TIM Client"
-participant Authenticator as "<font color=gray>Authenticator App aka. \n<font color=gray>gematik Authenticator aka.\n Authenticator \ndes IDP-Dienst\n<font color=red>Erweiterung der Mock-Version"
-end box
-participant "gematik IDP-Dienst" as IdpDienst
-box VZD-FHIR-Directory #WhiteSmoke
-participant "<font color=gray>VZD Auth aka.</font>\n Auth-Service" as VzdAuth
-end box
-User->TimClient: FHIR Ressourcen im \nVZD-FHIR-Directory \nhinzufügen (MXID)
-TimClient->TimClient: Prüfung, ob gültiges \nowner-accesstoken \nvorliegt
-alt#LightGrey kein gültiges owner-accesstoken
-|||
-TimClient -> VzdAuth: GET /owner-authenticate
-VzdAuth -> VzdAuth: Erzeuge PKCE
-note right
-<:warning:>vzd_code_verifier
-vzd_code_challenge
-end note
-TimClient <-- VzdAuth: 302 Redirect
-note right
-Location: {auth_endpoint}
-response_type=code
-client_id={vzd_client_id}
-scope=fhir-vzd openid
-redirect_uri={vzd_redirect_uri}
-state={vzd_state}
-code_challenge={vzd_code_challenge}
-code_challenge_method=S256
-end note
-TimClient -[#red]> Authenticator: Deeplink authenticator://...
-note left
-auth_endpoint={auth_endpoint}
-response_type=code
-client_id={vzd_client_id}
-scope=fhir-vzd openid
-redirect_uri={vzd_redirect_uri}
-state={vzd_state}
-code_challenge={vzd_code_challenge}
-code_challenge_method=S256
-<color:red>callback={client_callback_uri}
-end note
-note right
-Liste der zulässigen URLs (client_callback)
-wird nach Absprache mit Akquinet
-in Mock-Version des Authenticators
-fest verdrahtet.
-Anmerkung: Nicht http:// URL-Schemes werden
-ebenfalls unterstützt (z.B. tim://)
-end note
-Authenticator -> IdpDienst: GET {auth_endpoint}?...
-note left
-response_type=code
-client_id={vzd_client_id}
-scope=fhir-vzd openid
-redirect_uri={vzd_redirect_uri}
-state={random_state}
-code_challenge={random_code_challenge}
-code_challenge_method=S256
-end note
-Authenticator <-- IdpDienst: challenge
-Authenticator -> Authenticator: sign challenge
-Authenticator -> IdpDienst: signed challenge
-Authenticator <-- IdpDienst: 302 Redirect
-note right
-Location: {vzd_redirect_uri}
-code={auth_code}
-state={vzd_state}
-end note
-Authenticator -[#red]> TimClient: <color:red>{client_callback_uri}?...
-note right
-<color:red>code={auth_code}
-<color:red>state={vzd_state}
-end note
-TimClient -[#red]> VzdAuth: <color:red>GET {vzd_redirect_uri}
-note left
-<color:red>code={auth_code}
-<color:red>state={vzd_state}
-end note
-VzdAuth -> IdpDienst: get token inkl. Härtung
-note right
-<:warning:>vzd_code_verifier
-auth_code
-end note
-VzdAuth <-- IdpDienst: ID_TOKEN
-VzdAuth -> VzdAuth: erzeuge owner_access_token
-TimClient <-- VzdAuth: owner_access_token
-end
-== ...fachlicher flow... ==
+skinparam sequenceMessageAlign direction
+skinparam WrapWidth 300
+skinparam minClassWidth 150
+skinparam BoxPadding 1
+skinparam sequenceReferenceHeaderBackgroundColor palegreen
+scale max 2048 width
+
+skinparam sequence {
+ArrowColor black
+ArrowFontSize 17
+ActorBorderColor black
+LifeLineBorderColor black
+LifeLineBackgroundColor Gainsboro
+
+ParticipantBorderColor Motivation
+ParticipantBackgroundColor Motivation
+ParticipantFontSize 20
+ParticipantFontColor black
+ParticipantBorderColor Black
+ParticipantBackgroundColor MOTIVATION
+
+ActorBackgroundColor Gainsboro
+ActorFontColor black
+ActorFontSize 20
+}
+
+autonumber
+
+actor oa as "Akteur in der Rolle\nOrg-Admin"
+  box <size:19>Endgerät</size> #WhiteSmoke
+  participant wb as "Frontend des \nRegistrierungs-Dienstes"
+  participant au as "Authenticator"
+  end box
+participant ko as "Konnektor"
+participant rd as "Registrierungs-Dienst \n Relying Party"
+participant ip as "zentraler \nIDP-Dienst"
+
+
+ activate wb
+wb -> rd:POST I_Registration
+ 
+ activate rd
+rd->rd: Erzeuge PKCE Code \nfür verifier und challenge
+
+
+ 
+          note right
+  redirect_uri={registrierungs_dienst_redirect_uri} 
+  state={SESSIONID}
+  response_type=code
+  client_id={Registrierungs-DienstID}
+  code_challenge={registrierungs_dienst_code_challenge} 
+  code_challenge_method=S256
+  end note
+ 
+        |||
+        
+rd -> ip:GET /.well-known/openid-configuration
+ip -> rd:openid-configuration (base64)
+
+          note right
+Location: {Auth_Endpoint}
+  end note
+
+
+rd --> wb: Redirect to IDP Authorization Endpoint
+ deactivate rd
+
+        wb -> au: Deeplink \nauthenticator://?challenge_path=\nhttps://idp.app.ti-dienste.de/auth?
+        activate au
+        
+          note left
+  response_type=code
+  client_id={Registrierungs-DienstID}
+  scope=ti-messenger openid  
+  redirect_uri={registrierungs_dienst_redirect_uri} 
+  state={SESSION}
+  code_challenge={tim_code_challenge} 
+  code_challenge_method=S256
+  end note
+        
+        au -> ip: GET {authorization_endpoint}
+        activate ip
+        ip -> ip: SESSION_ID anlegen
+        ip -> ip: Erstellung der Authentication challenge
+        
+        
+        ip -> au: Authentication challenge
+        au -> oa: Aufforderung der PIN-Eingabe
+        oa -> au: PIN-Eingabe
+                
+        au -> ko: ExternalAuthenticate
+          activate ko
+        ko --> au: ExternalAuthenticateResponse
+          deactivate ko
+          
+          
+        au -> au: signieren der Authentication challenge \nmit dem C.HCI.OSIG Zertifikat 
+        au -> au: Verschlüsselung der Authentication challenge mit dem \nöffentlichen Schlüssel PuK_IDP_ENC vom IDP-Dienst
+
+        au -->ip: Authentication challenge, C.HCI.AUTH der SMC-B übertragen
+        ip -> ip: Entschlüsselung mit PuK_IDP_SIG des IDP-Dienstes \nund Valedierung der Signierten challenge anhand des \nim x5c-Header mitgelieferten Authentifizierungszertifikats
+        ip -> ip: Erstellung des AUTHORIZATION_CODE
+        ip --> au: AUTHORIZATION_CODE, redirect_uri={registrierungs_dienst_redirect_uri}
+          deactivate ip
+        au --> wb: AUTHORIZATION_CODE, redirect_uri={registrierungs_dienst_redirect_uri}
+          deactivate au
+        |||
+        wb -> rd: GET /redirect_uri(AUTHORIZATION_CODE)
+          activate rd
+        rd -> rd: Erzeugung AES256-"Token-Key"
+        rd -> rd: KEY_VERIFIE mit PUK_IDP_ENC verschlüsseln
+        rd -> ip: GET {authorization_endpoint}(AUTHORIZATION_CODE, KEY_VERIFIE)
+         activate ip
+        ip -> ip: AUTHORIZATION_CODE entschlüsseln und \nValedierung mittels PUK_IDP_SIG Authorization-Endpunkte
+        ip -> ip: Enzschlüsselung und Valedierung des KEY_VERIFIE
+        ip -> ip: Erzeugung des ID_TOKEN und Signieren mittels PrK_IDP_SIG sowie Verschlüsselung mittels Token-Key
+        ip --> rd: ID_TOKEN
+         activate ip
+        rd -> rd:  Entschlüsselung des Token mit Token-Key und Valedierung mit PUK_IDP_SIG
+
+        
+        
+        
+          
+          
+        rd -> ip: POST {token_endpoint}(auth_code, verifier)
+          activate ip
+        ip --> rd: id_token
+          deactivate ip
 @enduml
