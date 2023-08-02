@@ -85,26 +85,26 @@ rd --> wb: Redirect zu Authentication Request URL
         ko --> au: Status, Liste der verfügbaren CardHandles
         au -> au: Auswahl der gesteckten SMC-B --> CardHandle
         |||
-        au -> ko: ""GetPinStatus (Aufrufkontext, CardHandle, PinType (PIN.SMC))""
+        au -> ko: ""GetPinStatus (Aufrufkontext, CardHandle,""\n""PinType (PIN.SMC))""
         ko --> au: Status, PinStatus
         |||
           opt#LightGrey #AliceBlue <size:16>Karte nicht freigeschaltet </size>
           |||
-            au -> ko: ""VerifyPin (Aufrufkontext, CardHandle, PinType (PIN.SMC))""
+            au -> ko: ""VerifyPin (Aufrufkontext, CardHandle,""\n""PinType (PIN.SMC))""
             ko --> oa: Aufforderung der PIN-Eingabe
             oa -> ko: PIN-Eingabe
             ko --> au: Status
           |||
           end
         |||
-        au -> ko: ""ExternalAuthenticate\n(Aufrufkontext, CardHandle,\nC.HCI.AUT, Authentication challenge)""
+        au -> ko: ""ExternalAuthenticate""\n""(Aufrufkontext, CardHandle,""\n""C.HCI.AUT, Authentication challenge)""
         ko --> au: Signierte Authentication challenge
           deactivate ko
         |||
         au -> au: Verschlüsselung der signierten Authentication challenge mit dem \nöffentlichen Schlüssel PuK_IDP_ENC vom IDP-Dienst
         au ->ip: Authentication challenge, C.HCI.AUT der SMC-B übertragen
         activate ip
-        ip -> ip: Entschlüsselung mit PuK_IDP_SIG des IDP-Dienstes \nund Valedierung der Signierten challenge anhand des \nim x5c-Header mitgelieferten Authentifizierungszertifikats
+        ip -> ip: Entschlüsselung mit PuK_IDP_SIG\ndes IDP-Dienstes\nund Validierung der Signierten challenge\nanhand des im x5c-Header mitgelieferten\nAuthentifizierungszertifikats
         ip -> ip: Erstellung des AUTHORIZATION_CODE
         ip --> au: Redirect zur redirect_uri\ndes Registrierungs-Dienstes\nmit AUTHORIZATION_CODE
           deactivate ip
@@ -118,7 +118,7 @@ rd --> wb: Redirect zu Authentication Request URL
         rd -> ip: POST {token_endpoint}\n(AUTHORIZATION_CODE, KEY_VERIFIER)
          activate ip
         ip -> ip: AUTHORIZATION_CODE\nentschlüsseln und\nValidierung mittels PUK_IDP_SIG\ndes Authorization-Endpunktes
-        ip -> ip: Entschlüsselung und Validierung des KEY_VERIFIER
+        ip -> ip: Entschlüsselung und Validierung\ndes KEY_VERIFIER
         ip -> ip: Erzeugung des ID_TOKEN und\nSignieren mittels PrK_IDP_SIG\nsowie Verschlüsselung mittels Token-Key
         ip --> rd: ID_TOKEN
          deactivate ip
