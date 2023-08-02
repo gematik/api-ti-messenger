@@ -55,9 +55,12 @@ rd->rd: Erzeuge PKCE Code \nfür verifier und challenge
   end note
  
         |||
-        
-rd -> ip:GET /.well-known/openid-configuration
-ip -> rd:openid-configuration (base64)
+          opt#LightGrey #AliceBlue <size:16>Download der Konfiguration des IDP-Dienstes</size>
+          |||        
+            rd -> ip:GET /.well-known/openid-configuration
+            ip -> rd:openid-configuration (base64)
+          |||
+          end
 
           note right
 Location: {Auth_Endpoint}
@@ -80,6 +83,14 @@ rd --> wb: Redirect to IDP Authorization Endpoint
   code_challenge_method=S256
   end note
         
+          opt#LightGrey #AliceBlue <size:16>Download der Konfiguration des IDP-Dienstes</size>
+          |||        
+            au -> ip:GET /.well-known/openid-configuration
+            ip -> au:openid-configuration (base64)
+          |||
+          end
+        
+        
         au -> ip: GET {authorization_endpoint}
         activate ip
         ip -> ip: SESSION_ID anlegen
@@ -87,19 +98,26 @@ rd --> wb: Redirect to IDP Authorization Endpoint
         
         
         ip -> au: Authentication challenge
-        au -> oa: Aufforderung der PIN-Eingabe
-        oa -> au: PIN-Eingabe
-                
-        au -> ko: ExternalAuthenticate
-          activate ko
-        ko --> au: ExternalAuthenticateResponse
+        au -> ko: getCards(Aufrufkontext)
+         activate ko
+        ko --> au: Status, Liste der Verfügbaren Smartkarten
+        au -> au: Auswahl der gesteckten SMC-B --> CardHandle
+        au -> ko: GetPinStatus (Aufrufkontext, CardHandle, PinType (PIN.SMC))
+        ko --> au: Status, PinStatus
+          opt#LightGrey #AliceBlue <size:16>Karte nicht freigeschaltet </size>
+          |||
+            au -> ko: VerifyPin (Aufrufkontext, CardHandle, PinType (PIN.SMC))
+            ko -> oa: Aufforderung der PIN-Eingabe
+            oa -> ko: PIN-Eingabe
+            ko -> au: Status
+          |||
+          end
+        au -> ko: ExternalAuthenticate (Aufrufkontext, CardHandle, C.HCI.AUT, Authentication challenge)
+        ko --> au: Signierte Authentication challenge
           deactivate ko
-          
-          
-        au -> au: signieren der Authentication challenge \nmit dem C.HCI.OSIG Zertifikat 
-        au -> au: Verschlüsselung der Authentication challenge mit dem \nöffentlichen Schlüssel PuK_IDP_ENC vom IDP-Dienst
-
-        au -->ip: Authentication challenge, C.HCI.AUTH der SMC-B übertragen
+     
+        au -> au: Verschlüsselung der signierten Authentication challenge mit dem \nöffentlichen Schlüssel PuK_IDP_ENC vom IDP-Dienst
+        au -->ip: Authentication challenge, C.HCI.AUT der SMC-B übertragen
         ip -> ip: Entschlüsselung mit PuK_IDP_SIG des IDP-Dienstes \nund Valedierung der Signierten challenge anhand des \nim x5c-Header mitgelieferten Authentifizierungszertifikats
         ip -> ip: Erstellung des AUTHORIZATION_CODE
         ip --> au: AUTHORIZATION_CODE, redirect_uri={registrierungs_dienst_redirect_uri}
