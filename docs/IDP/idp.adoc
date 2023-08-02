@@ -30,6 +30,11 @@ PU: https://idp.app.ti-dienste.de/
 
 === AF_10103 - Authentisieren einer Organisation am TI-Messenger-Dienst
 Registrierungs-Dienst 
+++++
+<p align="left">
+  <img width="100%" src=../../images/diagrams/idp.svg>
+</p>
+++++
 
 
 === AF_10058 - Akteur (User-HBA) im Verzeichnisdienst hinzufügen
