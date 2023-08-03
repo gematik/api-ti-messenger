@@ -19,9 +19,9 @@ toc::[]
 
 = Zentrale IDP-Dienst
 == Überblick
-Der zentrale IDP-Dienst ermöglicht die sichere Identifikation der Akteure anhand der ihnen bereitgestellten Identifikationsmittel einer Smartcard (SMC-B / HBA). Hierfür fasst der IDP-Dienst, die im AUT-Zertifikat befindlichen Attribute in signierten JSON Web Token (ID_TOKEN) zusammen und stellt diese dem anfragenden Fachdienst aus.
+Der zentrale *IDP-Dienst* ermöglicht die sichere Identifikation der Akteure anhand der ihnen bereitgestellten Identifikationsmittel einer Smartcard (SMC-B / HBA). Hierfür fasst der *IDP-Dienst*, die im AUT-Zertifikat befindlichen Attribute in signierten JSON Web Token (ID_TOKEN) zusammen und stellt diese dem anfragenden Fachdienst aus.
 
-Der zentrale IDP-Dienst stellt die folgenden Endpunkte bereit:
+Der *zentrale IDP-Dienst* stellt die folgenden Endpunkte bereit:
 
 * Discovery-Endpunkt
 * Redirection-Endpunkt
@@ -52,7 +52,7 @@ Fachdienstbetreiber müssen ihren Authorization-Server beim Federation Master re
 
 == Rollen
 
-== Relying Party 
+=== Relying Party 
 Registrierungs-Dienst / Auth-Servie
 
 Das Relying Party muss einen CODE_VERIFIER (Zufallswert) gemäß [RFC7636 # section-4.1] und hierüber einen Hash, die CODE_CHALLENGE, gemäß [RFC7636 # section-4.2] mit dem Algorithmus S256 gemäß [RFC7636 # section-4.2] erzeugen.
