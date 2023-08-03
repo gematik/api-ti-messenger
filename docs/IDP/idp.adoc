@@ -75,51 +75,59 @@ Der Authorization-Endpunkt erzeugt eine Authentication Challenge (`CHALLENGE_TOK
 Auf der Clientseite wird der vom *IDP-Dienst* ausgestellte `CHALLENGE_TOKEN` unter Verwendung des `C.HCI.AUT` oder `C.HP.AUT`-Zertifikates am Konnektor signiert. Anschließend wird der `CHALLENGE_TOKEN` unter Verwendung des öffentlichen Schlüssels `PuK_IDP_ENC` des *IDP-Dienstes* verschlüsselt. Nach der erfolgreicher Verschlüsselung wird das signierte `CHALLENGE_TOKEN` mit das mitgelieferte Zertifikat der Smartcard (`C.HCI.AUT` oder `C.HP.AUT`) an den Authorization-Endpunkt übermittelt. 
 
 Der *IDP-Dienst* entschlüsselt unter Verwendung seines privaten `PuK_IDP_ENC`-Schlüssels das übertragene `CHALLENGE_TOKEN`. Anschließend 
-prüft der *IDP-Dienst* die Signatur des `CHALLENGE_TOKEN` und das mitgelieferte Zertifikat der Smartcard mittels OCSP/TSL der PKI der Telematikinfrastruktur. Sind alle im Claim geforderten Attribute vorhanden und die Gültigkeit der Attribute geprüft, erstellt der Authorization-Endpunkt einen `AUTHORIZATION_CODE` signiert diesen mit dem Schlüssel `PuK_IDP_SIG` und erschlüsselt diesen mit eigenem Schlüsselmaterial. Anschließend wird der `AUTHORIZATION_CODE` und die vom Client aufzurufende `redirect_url` vom *Reyling Party* an den Authenticator des anfragenden Client übermittelt. 
+prüft der *IDP-Dienst* die Signatur des `CHALLENGE_TOKEN` und das mitgelieferte Zertifikat der Smartcard mittels OCSP/TSL der PKI der Telematikinfrastruktur. Sind alle im Claim geforderten Attribute vorhanden und die Gültigkeit der Attribute geprüft, erstellt der Authorization-Endpunkt einen `AUTHORIZATION_CODE` signiert diesen mit dem Schlüssel `PuK_IDP_SIG` und verschlüsselt diesen mit eigenem Schlüsselmaterial. Anschließend wird der `AUTHORIZATION_CODE` und die vom Client aufzurufende `redirect_url` vom *Reyling Party* an den Authenticator des anfragenden Client übermittelt. 
 
 == Token-Endpunkt
 CAUTION: Im folgenden wird davon ausgegangen, dass der Client die `redirect_url` vom *Reyling Party* aufruft.
 
+Die *Relying Party* erzeugt einen AES256 `Token-Key`, verknüpft diesen mit dem `CODE_VERFIER` zum `KEY_VERIFIER` und sendet diesen verschlüsselt unter Nutzung des öffentlichen Schlüssels `PUK_IDP_ENC`zusammen mit dem `AUTHORIZATION_CODE` zum Token-Endpunkt des *IDP-Dienstes*.
 
+Am *IDP-Dienst* wird der `AUTHORIZATION_CODE` mit dem zuvor im Kapitel Authorization Endpunkt beschriebenen erzeugten eigenem Schlüsselmaterial entschlüsselt. Anschließend prüft der *IDP-Dienst* die Signatur des `AUTHORIZATION_CODE` unter Verwendung des Schlüssels `PuK_IDP_SIG`. Als nächstes extrahiert der *IDP-Dienst* den `CODE_VERIFIER` aus dem mittels `PuK_IDP_ENC` verschlüsselten `KEY_VERIFIER` und prüft diesen gegen die `CODE_CHALLENGE`. Das bedeutet, dass der eingereichte `CODE_VERIFIER` bei Nutzung des Hash-Verfahrens S256 zum bitgleichen Hash-Wert führt. Stimmt der Hash-Wert aus dem initialen Aufruf des Authenticator - die `CODE_CHALLENGE` - mit dem gebildeten Hash-Wert überein, ist sichergestellt, dass dieser und der initialer Aufruf von der *Relying Party* initiiert wurden. 
 
+Daraufhin extrahiert der *IDP-Dienst* die aus dem eingereichten Authentifizierungszertifikat der Smartcard (AUT-Zertifikat) enthaltenen Attribute in ein JSON WEB TOKEN (`ID_TOKEN`). Um die Integrität des `ID_TOKENS` sicherzustellen und eine eineindeutige Erklärung über die Herkunft des Tokens abzugeben, wird dies mit dem privaten Schlüssel `PrK_IDP_SIG` signiert. Abschließend verschlüsselt der *IDP-Dienst* das `ID_TOKEN` mit den von der *Relying Party* übermittelten `Token_Key` und sendet dieses verschlüsselt an die *Relying Party* zurück. 
 
+TIP: Der Token-Endpunkt DARF `ID_TOKEN` mit einer Gültigkeitsdauer von mehr als 86400 Sekunden (24 Stunden) NICHT ausstellen.
 
-Das Anwendungsfrontend reicht den AUTHORIZATION_CODE zusammen mit dem CODE_VERIFIER beim Token-Endpunkt ein.
+== Aufbau der Authorization Request URI
+Die Authorization Request URI wird von der *Relying Party* generiert, um beim *IDP-Dienst* sich ein `ID_TOKEN` ausstellen zu lassen. 
 
-Die Token werden am Token-Endpunkt zum Download bereitgestellt, wo das jeweilige Anwendungsfrontend diese gegen gleichzeitige Vorlage von AUTHORIZATION_CODE und des eigenen code_verifier, auf welchem der bereits vorliegende Hash-Wert beruht, erhält.
+*Beispiel eines Authorization Requests:*
+[source,text]
+----
+https://idp-ref.app.ti-dienste.de/auth? 
+client_id=GEMgematAut5zGBeGaqR&
+response_type=code&
+redirect_uri=https%3A%2F%2Fgstopdh4.top.local%3A8090%2Fcallback&
+state=f1bQrZ4SEsiKCRV4VNqG&
+code_challenge=JvcJb54WkEm38N3U1IYQsP2Lqvv4Nx23D2mU7QePWEw&
+code_challenge_method=S256&
+scope=openid ti-messenger&
+nonce=MbwsuHIExDKyqKDKSsPp
+----
 
-Der Token-Endpunkt des IDP-Dienstes nimmt die Anfrage des Anwendungsfrontends bzw. Fachdienstes entgegen und prüft neben deren Integrität, ob der eingereichte CODE_VERIFIER bei Nutzung des Hash-Verfahrens S256 (nach [RFC7636 # section-4.2]) zum bitgleichen Hash-Wert führt. Stimmt der Hash-Wert aus dem initialen Aufruf des Authenticator-Moduls - die CODE_CHALLENGE - mit dem gebildeten Hash-Wert überein, ist sichergestellt, dass Aufrufer und Initiator identisch sind. Der Token-Endpunkt gibt daraufhin das ID_TOKEN / ACCESS_TOKEN an das anfragende System heraus.
+[options="header"]
+|=============================================================================================================================================================================================================================================================================================================
+| Attribut              | Beschreibung                                                                                                                                                                                                                                                                        
+| `client_id`             | Die `client_id` der *Relying Party*. Wird bei Registrierung beim IDP vergeben.                                                                                                                                                                                                                
+| `response_type`         | Referenziert den erwarteten Response-Type des Flow
+Muss immer 'code' lauten.
+Damit wird angezeigt, dass es sich hierbei um einen Authorization Code Flow handelt.
+Für eine nähere Erläuterung siehe OpenID-Spezifikation.                                                         
+| `redirect_uri`          | Die URL wird vom *Relying Party* beim Registrierungsprozess im *IDP-Dienst* hinterlegt und leitet die Antwort des Servers an diese Adresse um.                                                                                                                                                           
+| `state`                 | Der state der Session. Sollte dem zufällig generierten state-Wert aus der initialen Anfrage entsprechen.                                                                                                                                                                            
+| `code_challenge`        | Der Hashwert des `Code-Verifiers` wird zum *IDP-Dienst* als `Code-Challenge` gesendet.                                                                                                                                                                                                           
+| `code_challenge_method` | Der *Relying Party* generiert einen `Code-Verifier` und erzeugt darüber einen Hash im Verfahren SHA-256.                                                                                                                                         
+| `scope`                 | Der `Scope` entspricht dem zwischen der *Relying Party* und dem *IDP-Dienst* festgelegten Wert.
 
-Am Token-Endpunkt nimmt der Authorization-Server den AUTHORIZATION_CODE, welchen er selbst am Authorization-Endpunkt ausgegeben hat, entgegen. Da beide vom Authorization-Server selbst erstellt wurden, ist deren Prüfung auf Integrität keine besondere Herausforderung. Allerdings muss der Token-Endpunkt beim Einreichen eines AUTHORIZATION_CODE das dabei mit übertragene CODE_VERIFIER verarbeiten, um mittels Vergleich der Hash-Werte die Übereinstimmung des den AUTHORIZATION_CODE einreichenden mit dem ursprünglich authentisierten Client sicherzustellen. Das verwendete Hash-Verfahren ist im Authorization Request anzugeben.
+Der Scope besteht grundsätzlich aus drei Paramete +
 
-TIP: Der Token-Endpunkt DARF ID_TOKEN mit einer Gültigkeitsdauer von mehr als 86400 Sekunden (24 Stunden) NICHT ausstellen.
-
-Der Token-Endpunkt MUSS den vom Anwendungsfrontend übertragenen AUTHORIZATION_CODE und den KEY_VERIFIER des Anwendungsfrontend annehmen. Der AUTHORIZATION_CODE ist dabei mittels eines durch den IDP-Dienst für Authorization-Endpunkt und Token-Endpunkt definierten Verfahren zu entschlüsseln. 
-
-Der Token-Endpunkt MUSS die Signatur des AUTHORIZATION_CODE unter Verwendung des Schlüssels PuK_IDP_SIG prüfen.
-
-Der Token-Endpunkt MUSS den CODE_VERIFIER aus dem mittels PuK_IDP_ENC verschlüsselten KEY_VERIFIER extrahieren und die Überprüfung gegen die CODE_CHALLENGE mit S256 (Algorithmus nach [RFC7636 # section-4.2]) durchführen.
-
-Der Token-Endpunkt MUSS den "Token-Key" aus dem mittels PuK_IDP_ENC verschlüsselten KEY_VERIFIER extrahieren.
-
-Der Token-Endpunkt MUSS benötigte Attribute in Claims für das auszustellende ACCESS_TOKEN und das ID_TOKEN ausschließlich aus dem ihm mit dem signierten CHALLENGE_TOKEN eingereichten Authentifizierungszertifikat der Smartcard (eGK, HBA oder SMC-B) beziehen. Der Claim amr MUSS entsprechend des ursprünglich zur Authentisierung verwendeten Authentisierungsmittels belegt werden.
-Der Token-Endpunkt MUSS das Attribut given_name und family_name der juristischen und natürlichen Personen sowie die Attribute organizationName,professionOID und idNummer entsprechend dem Datenformat der Informationsquelle (Zertifikat) wie folgt befüllen:
-
-Der Token-Endpunkt MUSS alle erstellten ID_TOKEN und ACCESS_TOKEN, um deren Integrität sicherzustellen und eine eineindeutige Erklärung über deren Herkunft abzugeben, mit seinem privaten Schlüssel PrK_IDP_SIG signieren. [RFC7523 # section-3  Spiegelpunkt 9] ist zu gewährleisten. Als Algorithmus ist dementsprechend "BP256R1" zu wählen.
-
-== Anfrage des ID_TOKEN
-Der Request wird hierbei vom Registrierungs-Dienst oder Auth-Service generiert. Die Adressierung des IDP-Dienstes ist als Parameter in einer Konfigurationsdatei oder direkt im Quellcode hinterlegt.
+    `openid` +
+    `ti-messenger`
+| `nonce`                 | String zur Verhinderung von CSRF-Attacke
+Dieser Wert ist optional. Wenn er mitgegeben wird muss der gleiche Wert im abschließend ausgegebenen `ID-Token` wieder auftauchen.                                                                                                         
+|=============================================================================================================================================================================================================================================================================================================
 
 Die Anfrage wird dann über das Authenticator-Modul an den Authorization-Endpunkt des IDP-Dienstes geleitet.
-
-Inhalt der Anfrage ist: [gemF_eRp_Fed]
-
-    die redirect_uri sowie der Scope (Attributsumfang) der Anfrage,
-    Die client_id als Identifikation des Anfragenden Systems
-    die eigene Hersteller-ID, Programmkürzel und Versionsnummer,
-    der über den eigenen CODE_VERIFIER [RFC7636 # section-4.1] gebildete Hash code_challenge [RFC7636 # section-4.2] mit Angabe des Algorithmus code_challenge_method [RFC7636 # section-4.3],
-    der state-Parameter [RFC8252 # section-8.9] wird genutzt, um CSRF (Cross-Site-Request-Forgery) zu verhindern.
-    der nonce-Parameter openid-connect-core#Authentication Request] kann zusätzlich genutzt werden um den Erhalt des korrekten ID_TOKEN zu verifizieren.
 
 Das Anwendungsfrontend überträgt seinen Authorization Request inklusive der generierten Werte  CODE_CHALLENGE, State und Nonce gemäß [RFC8252 # Anhang B] an das Authenticator-Modul.
 
