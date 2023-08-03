@@ -67,17 +67,23 @@ Die folgende Tabelle enthält die Abkürzungen für die öffentliche Schlüssel 
 | `PuK_IDP_ENC`  | Wird für die Verschlüsselung der signierten Challenge durch das Authenticator-Modul und für die Verschlüsselung des `KEY_VERIFIER` durch den Relying Party benötigt.
 |========================================================================================================================================================================
 
+TIP: In der oben gezeigten Tabelle sind nur die vom Hersteller eines *TI-Messenger-Clients* / *TI-Messenger-Fachdienstes* zu verwendenen Schlüssel gelistet
+
 == Authorization Endpunkt
 Der Authorization-Endpunkt erzeugt eine Authentication Challenge (`CHALLENGE_TOKEN`) - die auf Clientseite signiert wird - anhand der in der Authorization Request URL des Authenticator mitgelieferten Daten (`code_challenge` und `scope`). Hierfür prüft der *IDP-Dienst* die bei der organisatorischen Registrierung der Anwendung hinterlegten `redirect_uri` der *Relying Party* mit der `redirect_uri` aus der Authorization Request URI. Stimmen diese nicht überein, werden keine Token ausgestellt und die weitere Verarbeitung mit einem Fehler Response abgebrochen. Darüberhinaus prüft der *IDP-Dienst* ob die in der Authorization Request URI enthaltene `client_id` und `scope` bekannt und in dieser Kombination zulässig sind. Bei erfolg wird das `CHALLENGE_TOKEN` an dem Authenticator zur Signierung übermittelt. 
 
 Auf der Clientseite wird der vom *IDP-Dienst* ausgestellte `CHALLENGE_TOKEN` unter Verwendung des `C.HCI.AUT` oder `C.HP.AUT`-Zertifikates am Konnektor signiert. Anschließend wird der `CHALLENGE_TOKEN` unter Verwendung des öffentlichen Schlüssels `PuK_IDP_ENC` des *IDP-Dienstes* verschlüsselt. Nach der erfolgreicher Verschlüsselung wird das signierte `CHALLENGE_TOKEN` mit das mitgelieferte Zertifikat der Smartcard (`C.HCI.AUT` oder `C.HP.AUT`) an den Authorization-Endpunkt übermittelt. 
 
 Der *IDP-Dienst* entschlüsselt unter Verwendung seines privaten `PuK_IDP_ENC`-Schlüssels das übertragene `CHALLENGE_TOKEN`. Anschließend 
-prüft der *IDP-Dienst* die Signatur des `CHALLENGE_TOKEN` und das mitgelieferte Zertifikat der Smartcard mittels OCSP/TSL der PKI der Telematikinfrastruktur. Sind alle im Claim geforderten Attribute vorhanden und die Gültigkeit der Attribute geprüft, erstellt der Authorization-Endpunkt einen `AUTHORIZATION_CODE` signiert diesen mit dem Schlüssel `PuK_IDP_SIG` und erschlüsselt diesen mit eigenem Schlüsselmaterial und 
-sendet diesen an den Authenticator des anfragenden Client.
+prüft der *IDP-Dienst* die Signatur des `CHALLENGE_TOKEN` und das mitgelieferte Zertifikat der Smartcard mittels OCSP/TSL der PKI der Telematikinfrastruktur. Sind alle im Claim geforderten Attribute vorhanden und die Gültigkeit der Attribute geprüft, erstellt der Authorization-Endpunkt einen `AUTHORIZATION_CODE` signiert diesen mit dem Schlüssel `PuK_IDP_SIG` und erschlüsselt diesen mit eigenem Schlüsselmaterial. Anschließend wird der `AUTHORIZATION_CODE` und die vom Client aufzurufende `redirect_url` vom *Reyling Party* an den Authenticator des anfragenden Client übermittelt. 
+
+== Token-Endpunkt
+CAUTION: Im folgenden wird davon ausgegangen, dass der Client die `redirect_url` vom *Reyling Party* aufruft.
 
 
-== Token-Endpunk
+
+
+
 Das Anwendungsfrontend reicht den AUTHORIZATION_CODE zusammen mit dem CODE_VERIFIER beim Token-Endpunkt ein.
 
 Die Token werden am Token-Endpunkt zum Download bereitgestellt, wo das jeweilige Anwendungsfrontend diese gegen gleichzeitige Vorlage von AUTHORIZATION_CODE und des eigenen code_verifier, auf welchem der bereits vorliegende Hash-Wert beruht, erhält.
