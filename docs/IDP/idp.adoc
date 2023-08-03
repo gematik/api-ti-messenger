@@ -6,7 +6,7 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 
-:imagesdir: ../images
+:imagesdir: ../../images
 :docsdir: ../docs
 :toc: macro
 :toclevels: 5
@@ -119,8 +119,7 @@ Für eine nähere Erläuterung siehe OpenID-Spezifikation.
 | `code_challenge_method` | Der *Relying Party* generiert einen `Code-Verifier` und erzeugt darüber einen Hash im Verfahren SHA-256.                                                                                                                                         
 | `scope`                 | Der `Scope` entspricht dem zwischen der *Relying Party* und dem *IDP-Dienst* festgelegten Wert.
 
-Der Scope besteht grundsätzlich aus drei Paramete +
-
+Der Scope besteht grundsätzlich aus drei Parameter: +
     `openid` +
     `ti-messenger`
 | `nonce`                 | String zur Verhinderung von CSRF-Attacke
@@ -130,14 +129,6 @@ Dieser Wert ist optional. Wenn er mitgegeben wird muss der gleiche Wert im absch
 Die Anfrage wird dann über das Authenticator-Modul an den Authorization-Endpunkt des IDP-Dienstes geleitet.
 
 Das Anwendungsfrontend überträgt seinen Authorization Request inklusive der generierten Werte  CODE_CHALLENGE, State und Nonce gemäß [RFC8252 # Anhang B] an das Authenticator-Modul.
-
-3. Das Authenticator-Modul überträgt den Authorization Request weiter an den Authorization-Endpunkt des IDP-Dienstes.
-
-
-
-
-
-
 
 == Authorization Code Flow
 
