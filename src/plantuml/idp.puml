@@ -48,11 +48,12 @@ wb -> rd:POST I_Registration
             activate ip
             ip --> rd:signierte Base64-kodierte openid-configuration 
             deactivate ip
+            |||
             rd -> rd:Prüfung der Signatur der openid-configuration
           |||
           end
 |||
-rd->rd: Erzeuge PKCE (Code verifier und challenge) \n""code_challenge""\n""code_challenge_method""
+rd->rd: Erzeugung ""CODE_VERIFIER"" und Bildung \ndarüber den Hash ""code_challenge"" mit \nHash-Algorithmus S256
 
      
 |||
