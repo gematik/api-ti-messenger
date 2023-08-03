@@ -77,6 +77,8 @@ rd --> wb: Redirect zu Authentication Request URL
         |||
         au -> ip: GET {Authentication Request URL}
         activate ip
+        ip -> ip: Prüfung ob ""client_id"" und ""scope"" \nbekannt und in dieser Kombination \nzulässig sind
+        ip -> ip: Prüfung der claim ""redirect_uri"" \n gegen die registrierten ""redirect_uris""
         ip -> ip: SESSION_ID anlegen
         ip -> ip: Erstellung der Authentication challenge
                 
@@ -109,7 +111,7 @@ rd --> wb: Redirect zu Authentication Request URL
         au -> au: Verschlüsselung der signierten Authentication challenge mit dem \nöffentlichen Schlüssel PuK_IDP_ENC vom IDP-Dienst
         au ->ip: Authentication challenge, C.HCI.AUT der SMC-B übertragen
         activate ip
-        ip -> ip: Entschlüsselung mit PuK_IDP_SIG\ndes IDP-Dienstes\nund Validierung der Signierten challenge\nanhand des im x5c-Header mitgelieferten\nAuthentifizierungszertifikats
+        ip -> ip: Entschlüsselung mit ""PrK_IDP_ENC""\ndes IDP-Dienstes\nund Validierung der Signierten challenge\nanhand des im x5c-Header mitgelieferten\nAuthentifizierungszertifikats
         ip -> ip: Erstellung des AUTHORIZATION_CODE
         ip --> au: Redirect zur redirect_uri\ndes Registrierungs-Dienstes\nmit AUTHORIZATION_CODE
           deactivate ip
