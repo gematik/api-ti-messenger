@@ -17,14 +17,118 @@ image:gematik_logo.svg[width=70%]
 
 toc::[]
 
-= Zentraler IDP-Dienst
+= Zentrale IDP-Dienst
 == Überblick
-Der zentrale IDP-Dienst ermöglicht die sichere Identifikation der Akteure anhand der ihnen bereitgestellten Identifikationsmittel (SMC-B / HBA). Die Identifikation des Akteurs wird anhand einer Smartcard und der Auswertung des vom Authenticator-Modul an den IDP-Dienst übergebenen Authentifizierungszertifikats (aus der Smartcard) sichergestellt.
+Der zentrale IDP-Dienst ermöglicht die sichere Identifikation der Akteure anhand der ihnen bereitgestellten Identifikationsmittel einer Smartcard (SMC-B / HBA). Hierfür fasst der IDP-Dienst, die im AUT-Zertifikat befindlichen Attribute in signierten JSON Web Token (ID_TOKEN) zusammen und stellt diese dem anfragenden Fachdienst aus.
+
+Der zentrale IDP-Dienst stellt die folgenden Endpunkte bereit:
+
+* Discovery-Endpunkt
+* Redirection-Endpunkt
+* Authorization-Endpunkt
+* Token-Endpunkt
+
+== Schlüsselmaterial des IDP-Dienstes?
 
 == Registrierung
+Vorbereitende Maßnahmen: Das Anwendungsfrontend und der Fachdienst haben sich im Zuge eines organisatorischen Prozesses beim IDP-Dienst registriert. Das Anwendungsfrontend und das Authenticator-Modul haben das Discovery Dokument eingelesen und kennen damit die Uniform Resource Identifier (URI) und die öffentlichen Schlüssel der vom IDP-Dienst angebotenen Endpunkte. Der Fachdienst hat bei der Registrierung am IDP-Dienst seinen öffentlichen Schlüssel hinterlegt.
+
+
+Die Registrierung des Anwendungsfrontends ist im Dokument *[gemSpec_IDP_Frontend]* beschrieben. Anbieter von Fachdiensten müssen ebenfalls die Registrierung ihres Fachdienstes über einen organisatorischen Prozess beim IDP-Dienst durchführen.
+
+Ergänzung: Diese Registrierung erfolgt einmalig für die Anwendung bzw. den Dienst und muss bei Updates nicht wiederholt werden. Die Registrierung des Fachdienstes beinhaltet dabei auch die Abstimmung der Claims und die Gültigkeitsdauer der erstellten Token (siehe [gemSpec_IDP_FD#Kapitel 4]), wobei der Fachdienst seinen Bedarf an den gewünschten Attributen erklärt. Anpassungen an den Claims bedürfen einer erneuten Abstimmung und Registrierung.
+
+Der Anbieter des IDP-Dienstes MUSS bei der organisatorischen Registrierung des Anwendungsfrontends diesem eine eindeutige client_id zur Nutzung des IDP-Dienstes zuweisen.
+
 * Endpunkte: +
 RU: https://idp-ref.app.ti-dienste.de +
 PU: https://idp.app.ti-dienste.de/
+
+== Rollen
+
+== Relying Party 
+Registrierungs-Dienst / Auth-Servie
+
+Das Relying Party muss einen CODE_VERIFIER (Zufallswert) gemäß [RFC7636 # section-4.1] und hierüber einen Hash, die CODE_CHALLENGE, gemäß [RFC7636 # section-4.2] mit dem Algorithmus S256 gemäß [RFC7636 # section-4.2] erzeugen.
+
+== Discovery Dokument
+Aufbau:
+    "issuer" (hier ist der IdP-Dienst erreichbar) 
+    "jwks_uri" (für den Abruf von „PUK_IDP_ENC“ sowie des öffentlichen Schlüssels und des Zertifikats von „PUK_IDP_SIG“ entsprechend TAB_IDP_DIENST_0003   [RFC7517] – identifiziert anhand der „kid“-Parameter (puk_idp_enc / puk_idp_sig)
+    "uri_disc" (URI, unter welcher das Discovery Document bereitgestellt wird)
+    "authorization_endpoint" (URI des Dienstes und des öffentlichen Verschlüsselungsschlüssels des Authorization-Endpunktes gemäß [RFC6749])
+    "sso_endpoint“ (URI des Authorization-Endpunktes für Requests mit SSO-Token)
+    "auth_pair_endpoint“ (URI des Authorization-Endpunktes für Requests mit Pairing-Daten)
+    "token_endpoint" (URI des Token-Endpunktes gemäß [RFC6749 ])
+    "uri_puk_idp_enc“ und „uri_puk_idp_sig“ (URI der JWK Objekte für die zwei Schlüssel und des Zertifikates).
+
+Der Discovery-Endpunkt MUSS das Discovery Document regelmäßig alle 24 Stunden oder nach durchgeführten Änderungen umgehend neu erstellen, mit dem PrK_DISC_SIG signieren und am mit der gematik vereinbarten Downloadpunkt URI_DISC bereitstellen.
+
+
+== Anfrage des ID_TOKEN
+Der Request wird hierbei vom Registrierungs-Dienst oder Auth-Service generiert. Die Adressierung des IDP-Dienstes ist als Parameter in einer Konfigurationsdatei oder direkt im Quellcode hinterlegt.
+
+Die Anfrage wird dann über das Authenticator-Modul an den Authorization-Endpunkt des IDP-Dienstes geleitet.
+
+Inhalt der Anfrage ist: [gemF_eRp_Fed]
+
+    die redirect_uri sowie der Scope (Attributsumfang) der Anfrage,
+    Die client_id als Identifikation des Anfragenden Systems
+    die eigene Hersteller-ID, Programmkürzel und Versionsnummer,
+    der über den eigenen CODE_VERIFIER [RFC7636 # section-4.1] gebildete Hash code_challenge [RFC7636 # section-4.2] mit Angabe des Algorithmus code_challenge_method [RFC7636 # section-4.3],
+    der state-Parameter [RFC8252 # section-8.9] wird genutzt, um CSRF (Cross-Site-Request-Forgery) zu verhindern.
+    der nonce-Parameter openid-connect-core#Authentication Request] kann zusätzlich genutzt werden um den Erhalt des korrekten ID_TOKEN zu verifizieren.
+
+Das Anwendungsfrontend überträgt seinen Authorization Request inklusive der generierten Werte  CODE_CHALLENGE, State und Nonce gemäß [RFC8252 # Anhang B] an das Authenticator-Modul.
+
+3. Das Authenticator-Modul überträgt den Authorization Request weiter an den Authorization-Endpunkt des IDP-Dienstes.
+
+== Authorization Endpunkt
+Der Authorization-Endpunkt nimmt die Anfrage an und überprüft ob client_id und scope bekannt und in dieser Kombination zulässig sind.
+
+Im Fall einer Authentisierung mittels Smartcard sendet der Authorization-Endpunkt eine CHALLENGE an das Authenticator-Modul und prüft anschließend die Signatur der CHALLENGE und das mitgelieferte Zertifikat der Smartcard des Nutzers mittels OCSP/TSL der PKI der Telematikinfrastruktur, [der PKI der Telematikinfrastuktur? Vorschlag: der Telematikinfrastuktur (TI) PKI] bevor er die benötigten Attribute ausliest.
+
+Sind alle im Claim geforderten Attribute vorhanden und die Gültigkeit der Attribute geprüft, erstellt der Authorization-Endpunkt einen AUTHORIZATION_CODE und sendet diesen an das Anwendungsfrontend.
+
+Das Anwendungsfrontend reicht den AUTHORIZATION_CODE zusammen mit dem CODE_VERIFIER beim Token-Endpunkt ein.
+
+Der Authorization-Endpunkt MUSS die im Authorization Request des Authenticator-Moduls mitgelieferten CODE_CHALLENGE und den SCOPE annehmen.
+
+Der IDP-Dienst MUSS die bei der organisatorischen Registrierung der App hinterlegten redirect_uri mit der redirect_uri aus dem Claim des CHALLENGE_TOKEN prüfen. Stimmen diese nicht überein, werden keine Token ausgestellt und die weitere Verarbeitung mit einem Fehler Response abgebrochen (vgl. https://openid.net/specs/openid-connect-core-1_0.html#AuthError).
+
+Der Authorization-Endpunkt MUSS die Signatur des vom Authenticator-Modul übertragenen, signierten CHALLENGE_TOKEN anhand des mitgelieferten Authentifizierungs-Zertifikats überprüfen. Die Überprüfung MUSS neben der Signatur auch das Authentifizierungszertifikat anhand von OCSP umfassen.
+
+Der IDP-Dienst MUSS die ihm vorliegenden Session-Informationen (z.B. SESSION_ID, CODE_CHALLENGE, SCOPE und alle Informationen über Anwendungsfrontend und Authenticator-Modul) mit seinem privaten Schlüssel PrK_IDP_SIG und der technischen Rolle "oid_idpd“ gemäß [gemSpec_OID # Abschnitt 3.5.4] signieren und als JWT ergänzt um die USER_CONSENT-Anfrage an das Authenticator-Modul senden. Als Algorithmus ist dementsprechend "BP256R1" zu wählen.
+
+Konnten alle Prüfungen des eingereichten Consent erfolgreich abgeschlossen werden, erstellt der Authorization-Endpunkt ein ID_TOKEN, ACCESS_TOKEN, ergänzt durch ein SSO_TOKEN. Die Übertragung der Token erfolgt jedoch nicht direkt über das Authenticator-Modul, sondern in Form eines AUTHORIZATION_CODE. Die Token werden am Token-Endpunkt zum Download bereitgestellt, wo das jeweilige Anwendungsfrontend diese gegen gleichzeitige Vorlage von AUTHORIZATION_CODE und des eigenen code_verifier, auf welchem der bereits vorliegende Hash-Wert beruht, erhält.
+
+Der Authorization-Endpunkt erzeugt den AUTHORIZATION_CODE anhand der vom Authenticator-Modul übergebenen Daten im CHALLENGE.
+
+Der Authorization-Endpunkt des IdP-Dienstes MUSS den AUTHORIZATION_CODE für den Token-Endpunkt mit eigenem Schlüsselmaterial verschlüsseln, welches den Anforderungen aus [gemSpec_Krypt] genügt.
+
+Der IDP-Dienst MUSS den AUTHORIZATION_CODE für die Authentisierung mit einem Zertifikat des Typs FD.SIG und der technischen Rolle „oid_idpd“ gemäß [gemSpec_OID # Abschnitt 3.5.4] signieren, damit das Authenticator-Modul sicher gewährleisten kann, dass der eingehende AUTHORIZATION_CODE tatsächlich vom IDP-Dienst stammt [RFC7519 # section-7.1].
+
+== Token Endpunk
+Der Token-Endpunkt des IDP-Dienstes nimmt die Anfrage des Anwendungsfrontends bzw. Fachdienstes entgegen und prüft neben deren Integrität, ob der eingereichte CODE_VERIFIER bei Nutzung des Hash-Verfahrens S256 (nach [RFC7636 # section-4.2]) zum bitgleichen Hash-Wert führt. Stimmt der Hash-Wert aus dem initialen Aufruf des Authenticator-Moduls - die CODE_CHALLENGE - mit dem gebildeten Hash-Wert überein, ist sichergestellt, dass Aufrufer und Initiator identisch sind. Der Token-Endpunkt gibt daraufhin das ID_TOKEN / ACCESS_TOKEN an das anfragende System heraus.
+
+Am Token-Endpunkt nimmt der Authorization-Server den AUTHORIZATION_CODE, welchen er selbst am Authorization-Endpunkt ausgegeben hat, entgegen. Da beide vom Authorization-Server selbst erstellt wurden, ist deren Prüfung auf Integrität keine besondere Herausforderung. Allerdings muss der Token-Endpunkt beim Einreichen eines AUTHORIZATION_CODE das dabei mit übertragene CODE_VERIFIER verarbeiten, um mittels Vergleich der Hash-Werte die Übereinstimmung des den AUTHORIZATION_CODE einreichenden mit dem ursprünglich authentisierten Client sicherzustellen. Das verwendete Hash-Verfahren ist im Authorization Request anzugeben.
+
+TIP: Der Token-Endpunkt DARF ID_TOKEN mit einer Gültigkeitsdauer von mehr als 86400 Sekunden (24 Stunden) NICHT ausstellen.
+
+Der Token-Endpunkt MUSS den vom Anwendungsfrontend übertragenen AUTHORIZATION_CODE und den KEY_VERIFIER des Anwendungsfrontend annehmen. Der AUTHORIZATION_CODE ist dabei mittels eines durch den IDP-Dienst für Authorization-Endpunkt und Token-Endpunkt definierten Verfahren zu entschlüsseln. 
+
+Der Token-Endpunkt MUSS die Signatur des AUTHORIZATION_CODE unter Verwendung des Schlüssels PuK_IDP_SIG prüfen.
+
+Der Token-Endpunkt MUSS den CODE_VERIFIER aus dem mittels PuK_IDP_ENC verschlüsselten KEY_VERIFIER extrahieren und die Überprüfung gegen die CODE_CHALLENGE mit S256 (Algorithmus nach [RFC7636 # section-4.2]) durchführen.
+
+Der Token-Endpunkt MUSS den "Token-Key" aus dem mittels PuK_IDP_ENC verschlüsselten KEY_VERIFIER extrahieren.
+
+Der Token-Endpunkt MUSS benötigte Attribute in Claims für das auszustellende ACCESS_TOKEN und das ID_TOKEN ausschließlich aus dem ihm mit dem signierten CHALLENGE_TOKEN eingereichten Authentifizierungszertifikat der Smartcard (eGK, HBA oder SMC-B) beziehen. Der Claim amr MUSS entsprechend des ursprünglich zur Authentisierung verwendeten Authentisierungsmittels belegt werden.
+Der Token-Endpunkt MUSS das Attribut given_name und family_name der juristischen und natürlichen Personen sowie die Attribute organizationName,professionOID und idNummer entsprechend dem Datenformat der Informationsquelle (Zertifikat) wie folgt befüllen:
+
+Der Token-Endpunkt MUSS alle erstellten ID_TOKEN und ACCESS_TOKEN, um deren Integrität sicherzustellen und eine eineindeutige Erklärung über deren Herkunft abzugeben, mit seinem privaten Schlüssel PrK_IDP_SIG signieren. [RFC7523 # section-3  Spiegelpunkt 9] ist zu gewährleisten. Als Algorithmus ist dementsprechend "BP256R1" zu wählen.
+
+
 
 == Authorization Code Flow
 
@@ -36,12 +140,16 @@ Registrierungs-Dienst
 </p>
 ++++
 
+*Beschreibung:*
+Für die Signatur der Challenge wird die Funktion "externalAuthenticate" des Konnektors verwendet,
 
 === AF_10058 - Akteur (User-HBA) im Verzeichnisdienst hinzufügen
 Auth-Service
 
 
 
-
-
 = gematik Authenticator
+Das Authenticator-Modul liefert die Daten zur Authentifizierung des Nutzers an den IDP-Dienst.
+
+Hinweis: Der genaue Aufbau des vom Authenticator-Modul übertragenen, signierten CHALLENGE_TOKEN findet sich in [gemSpec_IDP_Dienst#Kapitel 7.3 Authentication Request].
+
