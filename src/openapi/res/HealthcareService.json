@@ -1,0 +1,4049 @@
+{
+    "resourceType": "Bundle",
+    "id": "3e9ce541-f149-4be6-8746-990d3325778f",
+    "meta": {
+        "lastUpdated": "2023-07-20T13:59:30.746+02:00"
+    },
+    "type": "searchset",
+    "total": 100,
+    "entry": [
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/7225ff72-3f63-480b-a603-e0a447a46f63",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "7225ff72-3f63-480b-a603-e0a447a46f63",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+                    "source": "#7NrF0r8A4TyXUqsp",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory",
+                        "http://hl7.org/fhir/StructureDefinition/HealthcareService"
+                    ]
+                },
+                "text": {
+                    "status": "generated",
+                    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Organisation 1-2arvtst-ap000000 Volkenschwand Bayern DE Schloßstr. 45</div>"
+                },
+                "identifier": [
+                    {
+                        "system": "http://hl7.org/fhir/sid/us-npi",
+                        "value": "616b557d-5b04-41ca-abc1-6c1a51d35805"
+                    }
+                ],
+                "providedBy": {
+                    "reference": "Organization/370c14c5-2f4c-4926-b47b-638f0a07d6ed"
+                },
+                "location": [
+                    {
+                        "reference": "Location/27119e63-b618-4ff5-941f-3bdea975928b"
+                    }
+                ],
+                "endpoint": [
+                    {
+                        "reference": "Endpoint/8f105916-13f6-40e5-88b8-c828714902b6"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/af524641-4b4f-426a-b0af-dad939ed65fb",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "af524641-4b4f-426a-b0af-dad939ed65fb",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+                    "source": "#7NrF0r8A4TyXUqsp",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory",
+                        "http://hl7.org/fhir/StructureDefinition/HealthcareService"
+                    ]
+                },
+                "text": {
+                    "status": "generated",
+                    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Organisation 1-2arvtst-ap000001 Mengerskirchen Hessen DE Dillhäuser Str. 36</div>"
+                },
+                "identifier": [
+                    {
+                        "system": "http://hl7.org/fhir/sid/us-npi",
+                        "value": "ec723575-dcf2-4890-ba6f-0d8ab374e77f"
+                    }
+                ],
+                "providedBy": {
+                    "reference": "Organization/85e52ce9-aa6c-4801-8182-e1568650df0a"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.5",
+                                "code": "KIN",
+                                "display": "Kinderpflege"
+                            }
+                        ]
+                    },
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.5",
+                                "code": "ERN",
+                                "display": "Ernährung und Diätetik"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/62c6f779-1050-40b6-9b09-a70aec2217ae"
+                    }
+                ],
+                "endpoint": [
+                    {
+                        "reference": "Endpoint/c5565249-fc94-484b-8ed9-05779ce4ac62"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/911bd183-f114-4705-a65f-4ac441f5bc3d",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "911bd183-f114-4705-a65f-4ac441f5bc3d",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+                    "source": "#7NrF0r8A4TyXUqsp",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory",
+                        "http://hl7.org/fhir/StructureDefinition/HealthcareService"
+                    ]
+                },
+                "text": {
+                    "status": "generated",
+                    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Organisation 1-2arvtst-ap000002 Blankenheim Nordrhein-Westfalen DE Im Acker 45</div>"
+                },
+                "identifier": [
+                    {
+                        "system": "http://hl7.org/fhir/sid/us-npi",
+                        "value": "11cd93e2-e5a8-4fb9-819a-2abaeec2370a"
+                    }
+                ],
+                "providedBy": {
+                    "reference": "Organization/b447c98e-f9db-454f-a924-0c408346d37e"
+                },
+                "location": [
+                    {
+                        "reference": "Location/8636a395-ee84-4058-9889-8041d863c2d9"
+                    }
+                ],
+                "endpoint": [
+                    {
+                        "reference": "Endpoint/64512fa2-38bd-4272-a5fc-5a8eb8eddc52"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/2e096899-bfb6-4d91-93e2-4a6026445102",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "2e096899-bfb6-4d91-93e2-4a6026445102",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+                    "source": "#7NrF0r8A4TyXUqsp",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory",
+                        "http://hl7.org/fhir/StructureDefinition/HealthcareService"
+                    ]
+                },
+                "text": {
+                    "status": "generated",
+                    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Organisation 1-2arvtst-ap000003 Ensdorf Saarland DE Drosselweg 1</div>"
+                },
+                "identifier": [
+                    {
+                        "system": "http://hl7.org/fhir/sid/us-npi",
+                        "value": "dadf978f-bce9-4783-8345-687c14f9a850"
+                    }
+                ],
+                "providedBy": {
+                    "reference": "Organization/cc9a5adc-5e17-4eb0-8448-b58fba5da2d1"
+                },
+                "location": [
+                    {
+                        "reference": "Location/dbe6076f-a146-411d-b147-055f0b7bb179"
+                    }
+                ],
+                "endpoint": [
+                    {
+                        "reference": "Endpoint/71c3b255-e0e6-4ec6-8a2b-5ab448ec4954"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/0b6801e7-a88f-43e4-93b4-d7750ef0b5a0",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "0b6801e7-a88f-43e4-93b4-d7750ef0b5a0",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+                    "source": "#7NrF0r8A4TyXUqsp",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory",
+                        "http://hl7.org/fhir/StructureDefinition/HealthcareService"
+                    ]
+                },
+                "text": {
+                    "status": "generated",
+                    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Organisation 1-2arvtst-ap000004 Engstingen Baden-Württemberg DE Kohlstetter Str. 2</div>"
+                },
+                "identifier": [
+                    {
+                        "system": "http://hl7.org/fhir/sid/us-npi",
+                        "value": "e5665e03-a790-4bb7-86ea-efac446905a5"
+                    }
+                ],
+                "providedBy": {
+                    "reference": "Organization/61392700-88db-4d3b-afbe-dda178256f23"
+                },
+                "location": [
+                    {
+                        "reference": "Location/edfd838e-de47-48e3-b183-25edb0e77915"
+                    }
+                ],
+                "endpoint": [
+                    {
+                        "reference": "Endpoint/7aafc111-1663-4584-9d0c-a896b0bc8de1"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/5b0e7353-ba75-44ec-a017-ec98819ea31b",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "5b0e7353-ba75-44ec-a017-ec98819ea31b",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+                    "source": "#7NrF0r8A4TyXUqsp",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory",
+                        "http://hl7.org/fhir/StructureDefinition/HealthcareService"
+                    ]
+                },
+                "text": {
+                    "status": "generated",
+                    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Organisation 1-2arvtst-ap000005 Forchheim Bayern DE Liebessteig 24</div>"
+                },
+                "identifier": [
+                    {
+                        "system": "http://hl7.org/fhir/sid/us-npi",
+                        "value": "6713d9c0-1f05-4454-89c3-779a184302f6"
+                    }
+                ],
+                "providedBy": {
+                    "reference": "Organization/47d339ae-3def-4ffb-9154-86db7fbfc233"
+                },
+                "location": [
+                    {
+                        "reference": "Location/37474079-6cf7-4cf7-a77c-d5a1ce1fb4fd"
+                    }
+                ],
+                "endpoint": [
+                    {
+                        "reference": "Endpoint/74264a58-8c8c-493c-80be-2ed42c1edf10"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/cd12996e-a3b5-4671-b0f7-480564a65548",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "cd12996e-a3b5-4671-b0f7-480564a65548",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+                    "source": "#7NrF0r8A4TyXUqsp",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory",
+                        "http://hl7.org/fhir/StructureDefinition/HealthcareService"
+                    ]
+                },
+                "text": {
+                    "status": "generated",
+                    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Organisation 1-2arvtst-ap000006 Baesweiler Nordrhein-Westfalen DE Hügelstr. 39</div>"
+                },
+                "identifier": [
+                    {
+                        "system": "http://hl7.org/fhir/sid/us-npi",
+                        "value": "e9600195-f931-49bc-95d9-6f7bfcc84d9c"
+                    }
+                ],
+                "providedBy": {
+                    "reference": "Organization/4cdae56c-ab45-4720-bc0f-8aa04b41f5d0"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "ANAE",
+                                "display": "Anästhesiologie"
+                            }
+                        ]
+                    },
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "NEPH",
+                                "display": "Nephrologie"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/6f0f02d2-0350-44ac-8646-cab770e2af64"
+                    }
+                ],
+                "endpoint": [
+                    {
+                        "reference": "Endpoint/73fad8a7-59dd-458a-8b01-e85ef7de3f8c"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/7c126738-f3e6-4e67-a9c2-9e851399e3d0",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "7c126738-f3e6-4e67-a9c2-9e851399e3d0",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+                    "source": "#7NrF0r8A4TyXUqsp",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory",
+                        "http://hl7.org/fhir/StructureDefinition/HealthcareService"
+                    ]
+                },
+                "text": {
+                    "status": "generated",
+                    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Organisation 1-2arvtst-ap000007 Heppenheim (Bergstraße) Hessen DE Paul-Geheeb-Str. 31</div>"
+                },
+                "identifier": [
+                    {
+                        "system": "http://hl7.org/fhir/sid/us-npi",
+                        "value": "532e72f5-c6b3-4c44-b1f2-03d4de46c865"
+                    }
+                ],
+                "providedBy": {
+                    "reference": "Organization/6ccc0b82-6f24-4e2f-a396-85e813fb287f"
+                },
+                "location": [
+                    {
+                        "reference": "Location/e7b6ac95-f4ed-4635-bec5-054d4b472dd4"
+                    }
+                ],
+                "endpoint": [
+                    {
+                        "reference": "Endpoint/f4cdb73e-bfbd-4ce9-a853-45762e27b211"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/d95dd99d-6cd5-4ddb-9beb-ce86fdb4e75a",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "d95dd99d-6cd5-4ddb-9beb-ce86fdb4e75a",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+                    "source": "#7NrF0r8A4TyXUqsp",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory",
+                        "http://hl7.org/fhir/StructureDefinition/HealthcareService"
+                    ]
+                },
+                "text": {
+                    "status": "generated",
+                    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Organisation 1-2arvtst-ap000008 Erlenbach bei Dahn Rheinland-Pfalz DE Ortsstr. 45</div>"
+                },
+                "identifier": [
+                    {
+                        "system": "http://hl7.org/fhir/sid/us-npi",
+                        "value": "0c73f0fc-85bd-4af2-a229-76b03a35194a"
+                    }
+                ],
+                "providedBy": {
+                    "reference": "Organization/01f9db3d-e0d5-4a85-9939-d4a9dfd38d5b"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "HAEM",
+                                "display": "Hämatologie und internistische Onkologie"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/9528ba71-2d28-46ad-9499-26741ecabc97"
+                    }
+                ],
+                "endpoint": [
+                    {
+                        "reference": "Endpoint/3b6c5b9e-a033-49af-b0e0-2d70cf1ff20c"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/8289c46f-355c-4ef0-bdca-5eae9a24e270",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "8289c46f-355c-4ef0-bdca-5eae9a24e270",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+                    "source": "#7NrF0r8A4TyXUqsp",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory",
+                        "http://hl7.org/fhir/StructureDefinition/HealthcareService"
+                    ]
+                },
+                "text": {
+                    "status": "generated",
+                    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Organisation 1-2arvtst-ap000009 Lotte Nordrhein-Westfalen DE Hasetal 41</div>"
+                },
+                "identifier": [
+                    {
+                        "system": "http://hl7.org/fhir/sid/us-npi",
+                        "value": "8e50e1d7-0eb4-45ca-baa1-0af2c8289161"
+                    }
+                ],
+                "providedBy": {
+                    "reference": "Organization/6d38b685-45b8-403c-94b0-1be5232ae9e8"
+                },
+                "location": [
+                    {
+                        "reference": "Location/ce29404f-0ce9-442d-b21e-e9904392a6d0"
+                    }
+                ],
+                "endpoint": [
+                    {
+                        "reference": "Endpoint/abc196e5-e6b0-40f5-96b4-9a1028b89585"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/65486806-a7ac-4f07-a5dc-4fdf669ed06f",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "65486806-a7ac-4f07-a5dc-4fdf669ed06f",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+                    "source": "#7NrF0r8A4TyXUqsp",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory",
+                        "http://hl7.org/fhir/StructureDefinition/HealthcareService"
+                    ]
+                },
+                "text": {
+                    "status": "generated",
+                    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Organisation 1-2arvtst-ap000010 Lengede Niedersachsen DE Holzkamp 30</div>"
+                },
+                "identifier": [
+                    {
+                        "system": "http://hl7.org/fhir/sid/us-npi",
+                        "value": "babba2bc-8bb1-4dd9-9608-71c433186d62"
+                    }
+                ],
+                "providedBy": {
+                    "reference": "Organization/8fc0281c-8d13-4d12-b9a7-1638551531cd"
+                },
+                "location": [
+                    {
+                        "reference": "Location/da1b864e-5bba-47d7-923c-e403c8cfaffb"
+                    }
+                ],
+                "endpoint": [
+                    {
+                        "reference": "Endpoint/5f82d1fe-1c88-4847-9102-de043443b2c8"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/d25fe08a-b742-4799-80df-5813be837dde",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "d25fe08a-b742-4799-80df-5813be837dde",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+                    "source": "#7NrF0r8A4TyXUqsp",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory",
+                        "http://hl7.org/fhir/StructureDefinition/HealthcareService"
+                    ]
+                },
+                "text": {
+                    "status": "generated",
+                    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Organisation 1-2arvtst-ap000011 Hagen am Teutoburger Wald Niedersachsen DE Theodor-Heuss-Str. 24</div>"
+                },
+                "identifier": [
+                    {
+                        "system": "http://hl7.org/fhir/sid/us-npi",
+                        "value": "909d6151-fba5-44d2-8e0e-556c5274254e"
+                    }
+                ],
+                "providedBy": {
+                    "reference": "Organization/1751c523-570b-4f06-9a45-eac73606c6d2"
+                },
+                "location": [
+                    {
+                        "reference": "Location/2ec139ae-72bd-49a4-819e-e20446c0c40f"
+                    }
+                ],
+                "endpoint": [
+                    {
+                        "reference": "Endpoint/a651d16f-fd12-4135-8f23-807775716ff9"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/a754a531-cddc-471a-9532-13cffec6588f",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "a754a531-cddc-471a-9532-13cffec6588f",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+                    "source": "#7NrF0r8A4TyXUqsp",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory",
+                        "http://hl7.org/fhir/StructureDefinition/HealthcareService"
+                    ]
+                },
+                "text": {
+                    "status": "generated",
+                    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Organisation 1-2arvtst-ap000012 Höslwang Bayern DE Sonnering-Schmiedfeld 17</div>"
+                },
+                "identifier": [
+                    {
+                        "system": "http://hl7.org/fhir/sid/us-npi",
+                        "value": "25bf4999-5dbd-48a6-95d9-17cacd339bff"
+                    }
+                ],
+                "providedBy": {
+                    "reference": "Organization/ea190836-2bcc-4755-b89b-6cb704df7062"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.5",
+                                "code": "ALT",
+                                "display": "Altenpflege"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/a6c4b1c4-0323-4286-94ed-6ce92f27b40e"
+                    }
+                ],
+                "endpoint": [
+                    {
+                        "reference": "Endpoint/02654642-4c51-4a81-a3a1-6de892f45030"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/a26e004e-2dc3-453a-8113-47d3f8953133",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "a26e004e-2dc3-453a-8113-47d3f8953133",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+                    "source": "#7NrF0r8A4TyXUqsp",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory",
+                        "http://hl7.org/fhir/StructureDefinition/HealthcareService"
+                    ]
+                },
+                "text": {
+                    "status": "generated",
+                    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Organisation 1-2arvtst-ap000013 Icking Bayern DE Ulrichstr. 29</div>"
+                },
+                "identifier": [
+                    {
+                        "system": "http://hl7.org/fhir/sid/us-npi",
+                        "value": "5dc5d85e-9a4c-453b-ba05-b3ba01062c78"
+                    }
+                ],
+                "providedBy": {
+                    "reference": "Organization/0f92ed9e-48c0-49ea-bddb-a4b6201b1350"
+                },
+                "location": [
+                    {
+                        "reference": "Location/17717828-aab9-4e7c-8ec0-432a9b8ecbcd"
+                    }
+                ],
+                "endpoint": [
+                    {
+                        "reference": "Endpoint/fdd2ef30-9ec1-4ab5-a73e-ef2dd47c76f8"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/82f3a515-f5a6-4bc6-b252-e1a633d15789",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "82f3a515-f5a6-4bc6-b252-e1a633d15789",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+                    "source": "#7NrF0r8A4TyXUqsp",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory",
+                        "http://hl7.org/fhir/StructureDefinition/HealthcareService"
+                    ]
+                },
+                "text": {
+                    "status": "generated",
+                    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Organisation 1-2arvtst-ap000014 Waldlaubersheim Rheinland-Pfalz DE Hellerweg 35</div>"
+                },
+                "identifier": [
+                    {
+                        "system": "http://hl7.org/fhir/sid/us-npi",
+                        "value": "6faae437-e238-4701-9baf-0a5a17f8e6a6"
+                    }
+                ],
+                "providedBy": {
+                    "reference": "Organization/971581b0-7550-4c91-a79e-7462b71134c8"
+                },
+                "location": [
+                    {
+                        "reference": "Location/31a2798a-469d-4404-a6ac-e7392d8dc2c3"
+                    }
+                ],
+                "endpoint": [
+                    {
+                        "reference": "Endpoint/024c2557-1df8-4993-bb48-e7476c922790"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/d66d8cab-5181-45a4-8ded-512fc28a99e6",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "d66d8cab-5181-45a4-8ded-512fc28a99e6",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+                    "source": "#7NrF0r8A4TyXUqsp",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory",
+                        "http://hl7.org/fhir/StructureDefinition/HealthcareService"
+                    ]
+                },
+                "text": {
+                    "status": "generated",
+                    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Organisation 1-2arvtst-ap000015 Stuttgart Baden-Württemberg DE Südendstr. 12</div>"
+                },
+                "identifier": [
+                    {
+                        "system": "http://hl7.org/fhir/sid/us-npi",
+                        "value": "86b24ef4-ec05-43d2-9ed0-25e06ee7773e"
+                    }
+                ],
+                "providedBy": {
+                    "reference": "Organization/c5686770-a177-4cb3-9708-47464192acb0"
+                },
+                "location": [
+                    {
+                        "reference": "Location/d6325e69-9afe-4579-ba6c-119856a576e2"
+                    }
+                ],
+                "endpoint": [
+                    {
+                        "reference": "Endpoint/724cbf22-0476-4a5b-99bc-3c0fe3c25bef"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/8d5d490c-4369-4de7-8114-f950fc637fd4",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "8d5d490c-4369-4de7-8114-f950fc637fd4",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+                    "source": "#7NrF0r8A4TyXUqsp",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory",
+                        "http://hl7.org/fhir/StructureDefinition/HealthcareService"
+                    ]
+                },
+                "text": {
+                    "status": "generated",
+                    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Organisation 1-2arvtst-ap000016 Flensburg Schlewig-Holstein DE Tilsiter Str. 37</div>"
+                },
+                "identifier": [
+                    {
+                        "system": "http://hl7.org/fhir/sid/us-npi",
+                        "value": "2672a87d-84f7-4135-9965-14dd5972fc31"
+                    }
+                ],
+                "providedBy": {
+                    "reference": "Organization/1fb3240c-76c2-473b-ab57-f73fa4a013b8"
+                },
+                "location": [
+                    {
+                        "reference": "Location/cb3a2dd5-e287-41bf-87f1-036cdd8f6a7f"
+                    }
+                ],
+                "endpoint": [
+                    {
+                        "reference": "Endpoint/10642f91-e062-44c9-8e3b-902e16ef8437"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/948fd658-045c-4e02-94dd-3759bd7b0a69",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "948fd658-045c-4e02-94dd-3759bd7b0a69",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+                    "source": "#7NrF0r8A4TyXUqsp",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory",
+                        "http://hl7.org/fhir/StructureDefinition/HealthcareService"
+                    ]
+                },
+                "text": {
+                    "status": "generated",
+                    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Organisation 1-2arvtst-ap000017 Stauchitz Sachsen DE Am Wasserwerk 33</div>"
+                },
+                "identifier": [
+                    {
+                        "system": "http://hl7.org/fhir/sid/us-npi",
+                        "value": "84ad4cae-3f06-465e-8b23-6fbe0e3a85b6"
+                    }
+                ],
+                "providedBy": {
+                    "reference": "Organization/a07bbcf6-1c09-4773-ad24-58c383273e68"
+                },
+                "location": [
+                    {
+                        "reference": "Location/5f0438c4-52b1-41cd-aeee-4e9f78af4d99"
+                    }
+                ],
+                "endpoint": [
+                    {
+                        "reference": "Endpoint/daa593bb-40aa-44b5-b86f-0bdf54b704c2"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/2377da20-6469-4c1e-bd7b-12239f3ae980",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "2377da20-6469-4c1e-bd7b-12239f3ae980",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+                    "source": "#7NrF0r8A4TyXUqsp",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory",
+                        "http://hl7.org/fhir/StructureDefinition/HealthcareService"
+                    ]
+                },
+                "text": {
+                    "status": "generated",
+                    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Organisation 1-2arvtst-ap000018 Bissendorf Niedersachsen DE Westerholder Weg 36</div>"
+                },
+                "identifier": [
+                    {
+                        "system": "http://hl7.org/fhir/sid/us-npi",
+                        "value": "94be99cb-3eef-4d41-8233-a143cce2ac3c"
+                    }
+                ],
+                "providedBy": {
+                    "reference": "Organization/614049b8-d220-432a-9626-e0865a933db8"
+                },
+                "location": [
+                    {
+                        "reference": "Location/3487cf41-2ab5-483e-bc85-3f95021d9b5d"
+                    }
+                ],
+                "endpoint": [
+                    {
+                        "reference": "Endpoint/b6252b72-6c67-4b0c-8685-6979f205fbc7"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/c31c5f63-b482-4bb6-88f2-3f08ceb75975",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "c31c5f63-b482-4bb6-88f2-3f08ceb75975",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+                    "source": "#7NrF0r8A4TyXUqsp",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory",
+                        "http://hl7.org/fhir/StructureDefinition/HealthcareService"
+                    ]
+                },
+                "text": {
+                    "status": "generated",
+                    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Organisation 1-2arvtst-ap000019 Langenhahn Rheinland-Pfalz DE Westerburger Str. 37</div>"
+                },
+                "identifier": [
+                    {
+                        "system": "http://hl7.org/fhir/sid/us-npi",
+                        "value": "7dfd91f4-ac3f-45bc-a2af-85f7180c60db"
+                    }
+                ],
+                "providedBy": {
+                    "reference": "Organization/293ceffa-0760-4feb-a3da-ddc2c72a17b4"
+                },
+                "location": [
+                    {
+                        "reference": "Location/c3598c9f-735c-4eab-b703-5cba2fe93c71"
+                    }
+                ],
+                "endpoint": [
+                    {
+                        "reference": "Endpoint/a1cf77e9-585b-4853-bbce-cbea033c205c"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/698f0ad2-0b01-4079-a62c-57a331d46a63",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "698f0ad2-0b01-4079-a62c-57a331d46a63",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+                    "source": "#7NrF0r8A4TyXUqsp",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory",
+                        "http://hl7.org/fhir/StructureDefinition/HealthcareService"
+                    ]
+                },
+                "text": {
+                    "status": "generated",
+                    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Organisation 1-2arvtst-ap000020 Bayerbach b. Ergoldsbach Bayern DE Kleinfeuchten 36</div>"
+                },
+                "identifier": [
+                    {
+                        "system": "http://hl7.org/fhir/sid/us-npi",
+                        "value": "02548bc7-e159-4ca2-a9ba-218557aefb6d"
+                    }
+                ],
+                "providedBy": {
+                    "reference": "Organization/9f4f4b07-d4f8-4c29-9b28-152926d89427"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "KARD",
+                                "display": "Kardiologie"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/f2d3ec8d-05f1-471c-b717-563233cda0ce"
+                    }
+                ],
+                "endpoint": [
+                    {
+                        "reference": "Endpoint/21609612-711a-450b-abcf-08bb87b7ff8a"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/ded98153-7272-4ac6-96d1-358a6e0e6ef6",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "ded98153-7272-4ac6-96d1-358a6e0e6ef6",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+                    "source": "#7NrF0r8A4TyXUqsp",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory",
+                        "http://hl7.org/fhir/StructureDefinition/HealthcareService"
+                    ]
+                },
+                "text": {
+                    "status": "generated",
+                    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Organisation 1-2arvtst-ap000021 Gerichshain Sachsen DE Ringstr. 28</div>"
+                },
+                "identifier": [
+                    {
+                        "system": "http://hl7.org/fhir/sid/us-npi",
+                        "value": "cdf620fa-211f-4b36-abff-822f9d8ed571"
+                    }
+                ],
+                "providedBy": {
+                    "reference": "Organization/b23db004-33bd-45b7-9826-e4d76e77946a"
+                },
+                "location": [
+                    {
+                        "reference": "Location/52a5c3a1-1119-493b-a40a-f16f700cf8bb"
+                    }
+                ],
+                "endpoint": [
+                    {
+                        "reference": "Endpoint/af586044-33ad-4f24-9cfd-5a0798902155"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/42266cb5-6b98-44c5-af7a-6429909dcd70",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "42266cb5-6b98-44c5-af7a-6429909dcd70",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+                    "source": "#7NrF0r8A4TyXUqsp",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory",
+                        "http://hl7.org/fhir/StructureDefinition/HealthcareService"
+                    ]
+                },
+                "text": {
+                    "status": "generated",
+                    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Organisation 1-2arvtst-ap000022 Dierhagen, Ostseebad Mecklenburg-Vorpommern DE Heideweg 11</div>"
+                },
+                "identifier": [
+                    {
+                        "system": "http://hl7.org/fhir/sid/us-npi",
+                        "value": "97c4e0b4-02ca-47b7-8233-f9b9deb8f33e"
+                    }
+                ],
+                "providedBy": {
+                    "reference": "Organization/31333e32-c369-42b0-bd7e-ed4443b53441"
+                },
+                "location": [
+                    {
+                        "reference": "Location/bcfd256c-a0c5-4454-a861-37bd19f79fc1"
+                    }
+                ],
+                "endpoint": [
+                    {
+                        "reference": "Endpoint/ecf5817c-b6ff-4fe8-be0a-4ec46be75f1b"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/4f133296-8a00-4dc9-bc5a-290b81ae03a5",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "4f133296-8a00-4dc9-bc5a-290b81ae03a5",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+                    "source": "#7NrF0r8A4TyXUqsp",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory",
+                        "http://hl7.org/fhir/StructureDefinition/HealthcareService"
+                    ]
+                },
+                "text": {
+                    "status": "generated",
+                    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Organisation 1-2arvtst-ap000023 Wiesloch Baden-Württemberg DE Kirchstr. 7</div>"
+                },
+                "identifier": [
+                    {
+                        "system": "http://hl7.org/fhir/sid/us-npi",
+                        "value": "0d98a7f9-aa28-4991-a58e-5f13c31d0b17"
+                    }
+                ],
+                "providedBy": {
+                    "reference": "Organization/2b33f3ff-8cb2-4d79-8f3e-39510866cdf3"
+                },
+                "location": [
+                    {
+                        "reference": "Location/887cd0fa-36cd-4800-b4e5-f4f20d2169bf"
+                    }
+                ],
+                "endpoint": [
+                    {
+                        "reference": "Endpoint/1cc77cf1-09f5-4fde-abb7-88f4cf6dd65a"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/9fa2b3af-ba87-4d66-b9a1-6e2853f22a3a",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "9fa2b3af-ba87-4d66-b9a1-6e2853f22a3a",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+                    "source": "#7NrF0r8A4TyXUqsp",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory",
+                        "http://hl7.org/fhir/StructureDefinition/HealthcareService"
+                    ]
+                },
+                "text": {
+                    "status": "generated",
+                    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Organisation 1-2arvtst-ap000024 Heilsbronn Bayern DE Ansbacher Str. 33</div>"
+                },
+                "identifier": [
+                    {
+                        "system": "http://hl7.org/fhir/sid/us-npi",
+                        "value": "0844916a-330e-402b-93eb-59907edb00a8"
+                    }
+                ],
+                "providedBy": {
+                    "reference": "Organization/1368bd5c-aa09-4edb-b7bb-19f829f3a308"
+                },
+                "location": [
+                    {
+                        "reference": "Location/6528b131-1e5e-4a02-b8ba-903e7420f3e1"
+                    }
+                ],
+                "endpoint": [
+                    {
+                        "reference": "Endpoint/b6519eb7-c943-4f34-809c-5dfa1721eb74"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/87a7ca69-9e1a-4650-bb7b-72eb793a6793",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "87a7ca69-9e1a-4650-bb7b-72eb793a6793",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+                    "source": "#7NrF0r8A4TyXUqsp",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory",
+                        "http://hl7.org/fhir/StructureDefinition/HealthcareService"
+                    ]
+                },
+                "text": {
+                    "status": "generated",
+                    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Organisation 1-2arvtst-ap000025 Bellingen Rheinland-Pfalz DE Waldstr. 3</div>"
+                },
+                "identifier": [
+                    {
+                        "system": "http://hl7.org/fhir/sid/us-npi",
+                        "value": "2aca67f2-1ea7-4d4b-bf27-5df5da19949e"
+                    }
+                ],
+                "providedBy": {
+                    "reference": "Organization/2ce75e35-5f5e-435a-940e-d187b592ad41"
+                },
+                "location": [
+                    {
+                        "reference": "Location/7c5d1b8d-ae05-4f72-a76a-c77d0e2a0d0d"
+                    }
+                ],
+                "endpoint": [
+                    {
+                        "reference": "Endpoint/f2e4f7c3-c231-4fed-88ea-72234d9bea39"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/06c2f787-348f-4fcc-b0c8-469336c789f9",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "06c2f787-348f-4fcc-b0c8-469336c789f9",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+                    "source": "#7NrF0r8A4TyXUqsp",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory",
+                        "http://hl7.org/fhir/StructureDefinition/HealthcareService"
+                    ]
+                },
+                "text": {
+                    "status": "generated",
+                    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Organisation 1-2arvtst-ap000026 Schwarzach Bayern DE Tiefendorf 9</div>"
+                },
+                "identifier": [
+                    {
+                        "system": "http://hl7.org/fhir/sid/us-npi",
+                        "value": "40f7ad72-551e-453a-aeac-ef812922c394"
+                    }
+                ],
+                "providedBy": {
+                    "reference": "Organization/144491f3-1d2f-46e4-ab2a-feca39405491"
+                },
+                "location": [
+                    {
+                        "reference": "Location/4472c01d-176b-42b7-b388-66cfdfc587c7"
+                    }
+                ],
+                "endpoint": [
+                    {
+                        "reference": "Endpoint/efaf5d59-7c40-49ac-becd-82ac92c83581"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/86a269ab-971d-4d1f-868b-6869c271c61c",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "86a269ab-971d-4d1f-868b-6869c271c61c",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+                    "source": "#7NrF0r8A4TyXUqsp",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory",
+                        "http://hl7.org/fhir/StructureDefinition/HealthcareService"
+                    ]
+                },
+                "text": {
+                    "status": "generated",
+                    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Organisation 1-2arvtst-ap000027 Winhöring Bayern DE Kronberg 6</div>"
+                },
+                "identifier": [
+                    {
+                        "system": "http://hl7.org/fhir/sid/us-npi",
+                        "value": "6c7c27af-9cce-4d65-a6fb-d295d3dc7d0a"
+                    }
+                ],
+                "providedBy": {
+                    "reference": "Organization/e09df034-e464-406a-9727-ffc5c205202e"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.5",
+                                "code": "KIN",
+                                "display": "Kinderpflege"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/7f1aaf22-b03d-442c-ac0b-675e7a0d0976"
+                    }
+                ],
+                "endpoint": [
+                    {
+                        "reference": "Endpoint/15c8895c-4f2d-43c3-b8de-815687475109"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/c4b509a0-60eb-4df8-ac05-57aa3762b212",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "c4b509a0-60eb-4df8-ac05-57aa3762b212",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+                    "source": "#7NrF0r8A4TyXUqsp",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory",
+                        "http://hl7.org/fhir/StructureDefinition/HealthcareService"
+                    ]
+                },
+                "text": {
+                    "status": "generated",
+                    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Organisation 1-2arvtst-ap000028 Bollschweil Baden-Württemberg DE Am Kupferacker 28</div>"
+                },
+                "identifier": [
+                    {
+                        "system": "http://hl7.org/fhir/sid/us-npi",
+                        "value": "27530b42-20cc-41d2-ac0c-1cfa13fa2e27"
+                    }
+                ],
+                "providedBy": {
+                    "reference": "Organization/9294585d-5886-4d56-9612-07faa1192764"
+                },
+                "location": [
+                    {
+                        "reference": "Location/663f4010-d0a0-4e1a-bebc-455fb12e11e6"
+                    }
+                ],
+                "endpoint": [
+                    {
+                        "reference": "Endpoint/74be3a73-c387-4409-b5f5-9dcda9b7d62b"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/47b01027-a8d6-42b9-8fe3-dd8126e458be",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "47b01027-a8d6-42b9-8fe3-dd8126e458be",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+                    "source": "#7NrF0r8A4TyXUqsp",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory",
+                        "http://hl7.org/fhir/StructureDefinition/HealthcareService"
+                    ]
+                },
+                "text": {
+                    "status": "generated",
+                    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Organisation 1-2arvtst-ap000029 Bad Rappenau Baden-Württemberg DE Buchäckerring 34</div>"
+                },
+                "identifier": [
+                    {
+                        "system": "http://hl7.org/fhir/sid/us-npi",
+                        "value": "d0880d75-c28b-4e05-b39b-b8eef62059ba"
+                    }
+                ],
+                "providedBy": {
+                    "reference": "Organization/28e827e1-f190-493e-b7e3-aef4f42a57a7"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.5",
+                                "code": "ERN",
+                                "display": "Ernährung und Diätetik"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/9d371f5b-85fc-4f62-a837-73c02ec367bd"
+                    }
+                ],
+                "endpoint": [
+                    {
+                        "reference": "Endpoint/78cdcdf2-bdca-41dc-a2ee-d0f0a3136486"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/f1e9e335-377a-4dea-932a-0bf96f52a8e1",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "f1e9e335-377a-4dea-932a-0bf96f52a8e1",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+                    "source": "#7NrF0r8A4TyXUqsp",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory",
+                        "http://hl7.org/fhir/StructureDefinition/HealthcareService"
+                    ]
+                },
+                "text": {
+                    "status": "generated",
+                    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Organisation 1-2arvtst-ap000030 Ruhpolding Bayern DE Bojern 6</div>"
+                },
+                "identifier": [
+                    {
+                        "system": "http://hl7.org/fhir/sid/us-npi",
+                        "value": "f2b3b2f4-5a38-463d-b371-acde8e427d9c"
+                    }
+                ],
+                "providedBy": {
+                    "reference": "Organization/cf8146cd-59ac-41e5-b6a0-8d4fb3a8953f"
+                },
+                "location": [
+                    {
+                        "reference": "Location/6b390652-d7cb-4c4b-bbc0-2abced443945"
+                    }
+                ],
+                "endpoint": [
+                    {
+                        "reference": "Endpoint/da3fcd7d-8095-4166-b0bf-a74be8a9f309"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/2f10359c-ffac-4e56-823f-26da444cd336",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "2f10359c-ffac-4e56-823f-26da444cd336",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+                    "source": "#7NrF0r8A4TyXUqsp",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory",
+                        "http://hl7.org/fhir/StructureDefinition/HealthcareService"
+                    ]
+                },
+                "text": {
+                    "status": "generated",
+                    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Organisation 1-2arvtst-ap000031 Rosenthal am Rennsteig Thüringen DE Kießlinger Str. 44</div>"
+                },
+                "identifier": [
+                    {
+                        "system": "http://hl7.org/fhir/sid/us-npi",
+                        "value": "fcb600ae-e71c-4aad-8205-42d362f97d13"
+                    }
+                ],
+                "providedBy": {
+                    "reference": "Organization/12c9ed8a-6421-411e-8ace-18ff5d7588b6"
+                },
+                "location": [
+                    {
+                        "reference": "Location/1df071bb-8230-42db-9a7f-66acd132f79f"
+                    }
+                ],
+                "endpoint": [
+                    {
+                        "reference": "Endpoint/217b8e5a-da28-4df2-8f3f-f14ae8230dd3"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/2758c211-79f2-4a67-b9e2-8f93615780fb",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "2758c211-79f2-4a67-b9e2-8f93615780fb",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+                    "source": "#7NrF0r8A4TyXUqsp",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory",
+                        "http://hl7.org/fhir/StructureDefinition/HealthcareService"
+                    ]
+                },
+                "text": {
+                    "status": "generated",
+                    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Organisation 1-2arvtst-ap000032 Irsch Rheinland-Pfalz DE Zerfer Str. 27</div>"
+                },
+                "identifier": [
+                    {
+                        "system": "http://hl7.org/fhir/sid/us-npi",
+                        "value": "4be96bf0-e636-48cb-b8e8-e1e2603ac2b8"
+                    }
+                ],
+                "providedBy": {
+                    "reference": "Organization/f65e23ae-be45-43b8-992b-72e5c5e65c5b"
+                },
+                "location": [
+                    {
+                        "reference": "Location/cf6a808f-083c-4edd-ad05-973256f31306"
+                    }
+                ],
+                "endpoint": [
+                    {
+                        "reference": "Endpoint/b34f7c7b-d757-4386-bf03-bc16ef12b84d"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/5cb40d09-d18f-4440-abdd-933715263102",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "5cb40d09-d18f-4440-abdd-933715263102",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+                    "source": "#7NrF0r8A4TyXUqsp",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory",
+                        "http://hl7.org/fhir/StructureDefinition/HealthcareService"
+                    ]
+                },
+                "text": {
+                    "status": "generated",
+                    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Organisation 1-2arvtst-ap000033 Niederalteich Bayern DE Hengersberger Str. 22</div>"
+                },
+                "identifier": [
+                    {
+                        "system": "http://hl7.org/fhir/sid/us-npi",
+                        "value": "43252ff8-9e55-4956-8f03-3244263eff9a"
+                    }
+                ],
+                "providedBy": {
+                    "reference": "Organization/bbe61fcd-231b-4232-b1e4-26af95a47255"
+                },
+                "location": [
+                    {
+                        "reference": "Location/55e7ca8d-1187-4d62-8782-56a0287ea1d7"
+                    }
+                ],
+                "endpoint": [
+                    {
+                        "reference": "Endpoint/8e8a6ed8-5048-42e2-9747-8cd9806af4ee"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/55dc5e96-a61f-4b57-8e50-9d5c5785b35b",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "55dc5e96-a61f-4b57-8e50-9d5c5785b35b",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+                    "source": "#7NrF0r8A4TyXUqsp",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory",
+                        "http://hl7.org/fhir/StructureDefinition/HealthcareService"
+                    ]
+                },
+                "text": {
+                    "status": "generated",
+                    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Organisation 1-2arvtst-ap000034 Altenmünster Bayern DE Dorfanger 31</div>"
+                },
+                "identifier": [
+                    {
+                        "system": "http://hl7.org/fhir/sid/us-npi",
+                        "value": "eebd0378-5d3b-4ef9-bdb0-d3a8d2eaa0ef"
+                    }
+                ],
+                "providedBy": {
+                    "reference": "Organization/f0c79e87-bf94-435d-be68-414e1d7bf8f4"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "ARBE",
+                                "display": "Arbeitsmedizin"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/8d040326-e969-4ff2-a160-e9d3ad00522c"
+                    }
+                ],
+                "endpoint": [
+                    {
+                        "reference": "Endpoint/40d97dde-ca76-4412-85c6-deea90152808"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/6fc970e5-863f-4998-85bd-7b2f8fb1a827",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "6fc970e5-863f-4998-85bd-7b2f8fb1a827",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+                    "source": "#7NrF0r8A4TyXUqsp",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory",
+                        "http://hl7.org/fhir/StructureDefinition/HealthcareService"
+                    ]
+                },
+                "text": {
+                    "status": "generated",
+                    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Organisation 1-2arvtst-ap000035 Wirges Rheinland-Pfalz DE Hans-Böckler-Str. 22</div>"
+                },
+                "identifier": [
+                    {
+                        "system": "http://hl7.org/fhir/sid/us-npi",
+                        "value": "8d7beda8-b10d-4244-887e-bcedb78089af"
+                    }
+                ],
+                "providedBy": {
+                    "reference": "Organization/82f05267-a04d-4433-ab27-5ea5b9c6f4d1"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "AUGE",
+                                "display": "Augenheilkunde"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/12ba55f4-d9fd-4df9-9ba1-486e70a934d0"
+                    }
+                ],
+                "endpoint": [
+                    {
+                        "reference": "Endpoint/0f39812d-98f7-4f0f-924c-4fe767ace98b"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/0e225fae-aec0-42d5-bc8a-c7c1c08bc0b2",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "0e225fae-aec0-42d5-bc8a-c7c1c08bc0b2",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+                    "source": "#7NrF0r8A4TyXUqsp",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory",
+                        "http://hl7.org/fhir/StructureDefinition/HealthcareService"
+                    ]
+                },
+                "text": {
+                    "status": "generated",
+                    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Organisation 1-2arvtst-ap000036 Ballrechten-Dottingen Baden-Württemberg DE Bächleweg 9</div>"
+                },
+                "identifier": [
+                    {
+                        "system": "http://hl7.org/fhir/sid/us-npi",
+                        "value": "c37cf877-809d-4ca4-9be1-2c940a28d552"
+                    }
+                ],
+                "providedBy": {
+                    "reference": "Organization/8f45eefe-97d4-42c1-b66c-696ca2d5728f"
+                },
+                "location": [
+                    {
+                        "reference": "Location/5a514d9a-48d5-4d73-929a-e24ede07b24c"
+                    }
+                ],
+                "endpoint": [
+                    {
+                        "reference": "Endpoint/6ba41b7c-d919-4f25-863f-d8b6d3cb00e5"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/cae68856-7bbc-4c13-8f77-a762a6720991",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "cae68856-7bbc-4c13-8f77-a762a6720991",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+                    "source": "#7NrF0r8A4TyXUqsp",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory",
+                        "http://hl7.org/fhir/StructureDefinition/HealthcareService"
+                    ]
+                },
+                "text": {
+                    "status": "generated",
+                    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Organisation 1-2arvtst-ap000037 Zemmer Rheinland-Pfalz DE Töpferstr. 1</div>"
+                },
+                "identifier": [
+                    {
+                        "system": "http://hl7.org/fhir/sid/us-npi",
+                        "value": "e392f840-561b-4e0f-bcb5-61ab3faa6eb0"
+                    }
+                ],
+                "providedBy": {
+                    "reference": "Organization/dd7f7757-6529-4026-8b06-f0343b7feb1c"
+                },
+                "location": [
+                    {
+                        "reference": "Location/17879a7f-c624-45ad-b53c-c30f9c1e1d78"
+                    }
+                ],
+                "endpoint": [
+                    {
+                        "reference": "Endpoint/ee5e94a1-5e58-4103-99bc-84f6e0486949"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/e5457218-066c-4548-9ea0-bd412239d528",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "e5457218-066c-4548-9ea0-bd412239d528",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+                    "source": "#7NrF0r8A4TyXUqsp",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory",
+                        "http://hl7.org/fhir/StructureDefinition/HealthcareService"
+                    ]
+                },
+                "text": {
+                    "status": "generated",
+                    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Organisation 1-2arvtst-ap000038 Haßfurt Bayern DE Lampertsgraben 45</div>"
+                },
+                "identifier": [
+                    {
+                        "system": "http://hl7.org/fhir/sid/us-npi",
+                        "value": "3639a2e3-0a18-4134-a728-ddeaec6c26b3"
+                    }
+                ],
+                "providedBy": {
+                    "reference": "Organization/310e7fdb-e1eb-4f79-b2be-f25aa6fdfaeb"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "HAEM",
+                                "display": "Hämatologie und internistische Onkologie"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/c374111b-970b-471a-8143-1ac7e38d657f"
+                    }
+                ],
+                "endpoint": [
+                    {
+                        "reference": "Endpoint/426da927-4b35-4e50-ad12-a758df0b45df"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/bfcf17fe-ba89-47b1-adc8-ff9a08431b77",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "bfcf17fe-ba89-47b1-adc8-ff9a08431b77",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+                    "source": "#7NrF0r8A4TyXUqsp",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory",
+                        "http://hl7.org/fhir/StructureDefinition/HealthcareService"
+                    ]
+                },
+                "text": {
+                    "status": "generated",
+                    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Organisation 1-2arvtst-ap000039 Auerbach i.d.OPf. Bayern DE Bergknappenstr. 37</div>"
+                },
+                "identifier": [
+                    {
+                        "system": "http://hl7.org/fhir/sid/us-npi",
+                        "value": "f686e662-f36a-4f6c-9853-60cea8dcac27"
+                    }
+                ],
+                "providedBy": {
+                    "reference": "Organization/0146a908-1c6b-4f24-be10-72062402c3ff"
+                },
+                "location": [
+                    {
+                        "reference": "Location/dbf0e180-20d1-4cc5-a8fd-52598ce51aeb"
+                    }
+                ],
+                "endpoint": [
+                    {
+                        "reference": "Endpoint/5dcbb417-ebf3-45a1-8bf7-69a40d8eb63d"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/8131ad52-0a2d-4995-b8c0-3f3d3f74b596",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "8131ad52-0a2d-4995-b8c0-3f3d3f74b596",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+                    "source": "#7NrF0r8A4TyXUqsp",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory",
+                        "http://hl7.org/fhir/StructureDefinition/HealthcareService"
+                    ]
+                },
+                "text": {
+                    "status": "generated",
+                    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Organisation 1-2arvtst-ap000040 Kirchzarten Baden-Württemberg DE Maria-Theresia-Str. 9</div>"
+                },
+                "identifier": [
+                    {
+                        "system": "http://hl7.org/fhir/sid/us-npi",
+                        "value": "702a857b-afc5-4430-b3cf-257432d07a89"
+                    }
+                ],
+                "providedBy": {
+                    "reference": "Organization/37dbd8e2-283e-4bb1-a80f-500053072b9f"
+                },
+                "location": [
+                    {
+                        "reference": "Location/65a89f68-4a24-48c3-bf60-4260787945a4"
+                    }
+                ],
+                "endpoint": [
+                    {
+                        "reference": "Endpoint/20f107cb-0246-4de4-a38e-99d22b0437a9"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/6f07d713-44cc-4dec-8b1e-118d84b3f2fa",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "6f07d713-44cc-4dec-8b1e-118d84b3f2fa",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+                    "source": "#7NrF0r8A4TyXUqsp",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory",
+                        "http://hl7.org/fhir/StructureDefinition/HealthcareService"
+                    ]
+                },
+                "text": {
+                    "status": "generated",
+                    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Organisation 1-2arvtst-ap000041 Ganderkesee Niedersachsen DE Alte Dorfstr. 35</div>"
+                },
+                "identifier": [
+                    {
+                        "system": "http://hl7.org/fhir/sid/us-npi",
+                        "value": "964809cd-60bc-4776-b14a-5a4fcde91407"
+                    }
+                ],
+                "providedBy": {
+                    "reference": "Organization/d1705114-7d4a-4dc8-a6e0-8004589d2e2a"
+                },
+                "location": [
+                    {
+                        "reference": "Location/95b1f761-5aa5-4f6f-9485-98a6916efb9d"
+                    }
+                ],
+                "endpoint": [
+                    {
+                        "reference": "Endpoint/a589d31f-2107-490d-94b2-43436a8bf210"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/9a24baef-4cf9-491b-8e50-86e1bbd5ac11",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "9a24baef-4cf9-491b-8e50-86e1bbd5ac11",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/84050bea-8cbb-4996-96eb-5d3218a56e30"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "RADI",
+                                "display": "Radiologie"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/d36a8c2f-0727-47e2-a3eb-608b4bbaa91f"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/3a626d7b-25ea-4682-a574-fd676814ab4b",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "3a626d7b-25ea-4682-a574-fd676814ab4b",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/bf0051e4-4ae7-4632-86d6-61af2b1cacdf"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "ALLG",
+                                "display": "Allgemeinmedizin"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/61a1890e-8cff-471e-8659-db6dc43f0093"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/2ae6b26f-41d6-4eeb-b9dd-b47547588351",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "2ae6b26f-41d6-4eeb-b9dd-b47547588351",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/41dba9db-16a1-4608-9524-f3062c3a78ef"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "ALLG",
+                                "display": "Allgemeinmedizin"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/c98cea37-8ed1-48c5-8c5f-397c6d452b20"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/ececefb3-bcff-4b7d-9955-ed140f7babd5",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "ececefb3-bcff-4b7d-9955-ed140f7babd5",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/08b10455-7ea6-45d4-b1a1-ce06ef713c35"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "PSYC",
+                                "display": "Psychiatrie und Psychotherapie"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/458bfcb8-da0a-4c35-b0c5-45a482d50a3b"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/ec9392e1-8484-4caf-b20a-f4010aac5458",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "ec9392e1-8484-4caf-b20a-f4010aac5458",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/f8459a64-d9c6-4b37-b182-dde214523bff"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "ALLG",
+                                "display": "Allgemeinmedizin"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/e0187ef8-d20c-42bd-a8b8-2649a39d17bd"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/9db6225e-44fa-4545-abac-67ce9a871fca",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "9db6225e-44fa-4545-abac-67ce9a871fca",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/1bde65f9-5c14-40fc-8a92-1fb4067d7e99"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "ALLG",
+                                "display": "Allgemeinmedizin"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/acc1010a-e484-4487-a9b3-29441409b8da"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/8d5ddc3c-b966-45e1-8e7a-58acec821960",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "8d5ddc3c-b966-45e1-8e7a-58acec821960",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/cc49f0bb-a98e-4292-9353-132043dc155c"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "ALLG",
+                                "display": "Allgemeinmedizin"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/58ac0d4e-cb01-4a33-82ae-715c3a9c95c8"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/531c3207-a15e-48e7-9d3b-c0054748c428",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "531c3207-a15e-48e7-9d3b-c0054748c428",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/e79c135a-e358-4ecc-9bd8-84b87becec82"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "ALLG",
+                                "display": "Allgemeinmedizin"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/f161d202-d19f-4bad-adb0-aa72b98689e5"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/92d9715d-61e0-4f6d-a9ee-a890c8895dea",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "92d9715d-61e0-4f6d-a9ee-a890c8895dea",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/7736a941-bd5b-4e83-9c1c-cdea0b2374b3"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "FRAU",
+                                "display": "Frauenheilkunde und Geburtshilfe"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/28d8537a-f536-4fbd-bbc0-8fb6b4e98d87"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/fe269ad3-8e7b-457f-9c8d-fad405df5804",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "fe269ad3-8e7b-457f-9c8d-fad405df5804",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/6b40d75b-23b7-4722-af48-d11e78570497"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "NRCH",
+                                "display": "Neurochirurgie"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/b545fe5c-254e-4761-9ce1-48db165fd80c"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/5d5f9823-8319-43bf-83c8-cb09d9b11422",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "5d5f9823-8319-43bf-83c8-cb09d9b11422",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/be3d81aa-210e-4012-9fef-90ef2654089d"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "ALLG",
+                                "display": "Allgemeinmedizin"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/a46d3e88-c38b-4952-9804-3a323f53b187"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/b753a8f3-ec2d-4331-9e4e-07562e2fd12e",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "b753a8f3-ec2d-4331-9e4e-07562e2fd12e",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/a28cc4b8-a872-4bb3-b1be-79c400466896"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "HNOH",
+                                "display": "Hals-Nasen-Ohrenheilkunde"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/61bd6f62-129c-49dd-ab90-5d7de57b0222"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/413b6392-1b6f-4149-9d40-5a1ab5942b8c",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "413b6392-1b6f-4149-9d40-5a1ab5942b8c",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/05880cb7-0501-414f-b669-f930daef8577"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "GESU",
+                                "display": "Öffentliches Gesundheitswesen"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/6381a069-e872-4256-a3ac-8b28ae70f81b"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/3e92f92e-08c1-4f5d-90da-f71688d1d688",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "3e92f92e-08c1-4f5d-90da-f71688d1d688",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/cd339803-df07-4439-8b21-f48646e23600"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "ALLG",
+                                "display": "Allgemeinmedizin"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/e874096a-fe54-453b-b375-3776a0237941"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/a050739f-ed0c-430b-aced-c758663a843a",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "a050739f-ed0c-430b-aced-c758663a843a",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/2f73b46d-057e-4f70-9292-da943928f56f"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "ALLG",
+                                "display": "Allgemeinmedizin"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/9f191518-6ecc-4534-9029-c91ee0c8a387"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/681b5ade-e06a-4713-8e77-7e61055c1154",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "681b5ade-e06a-4713-8e77-7e61055c1154",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/ac42e6f6-3e4c-4ad6-9cbb-cccf9147011a"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "NEPH",
+                                "display": "Nephrologie"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/4ef597bd-c13c-4940-9f08-be152f9d4849"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/1cbafbb3-ebdc-4fef-8362-85cb49e19884",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "1cbafbb3-ebdc-4fef-8362-85cb49e19884",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/171dce68-388a-467d-ab0c-4544a290261c"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "ALLG",
+                                "display": "Allgemeinmedizin"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/9824cb0e-0767-4b48-aa98-71277450d6c9"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/9c802a3b-4faa-445d-b110-ee389e15cf12",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "9c802a3b-4faa-445d-b110-ee389e15cf12",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/4ff15c4b-41c0-41f5-a458-b0771f4568e3"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "FRAU",
+                                "display": "Frauenheilkunde und Geburtshilfe"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/6a763ec0-dd61-45e9-aa11-1c092a522770"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/ef974e8f-d397-4cde-88b1-76efac2f9ab9",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "ef974e8f-d397-4cde-88b1-76efac2f9ab9",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/77e2c1df-e569-4ec5-a28d-97eec039fddf"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "ALLG",
+                                "display": "Allgemeinmedizin"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/5e731e8a-a654-44cc-b019-9ee8c6e944f4"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/9a6ee4fc-52c2-4826-8694-ef9cb7a0e936",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "9a6ee4fc-52c2-4826-8694-ef9cb7a0e936",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/a00511cb-9d61-4da2-a100-c525daa96bee"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "ALLG",
+                                "display": "Allgemeinmedizin"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/22ce9999-8a64-40a3-8a91-b3c4d2cfb7fb"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/0829a016-d7bf-4dd0-b369-1d811fd8ffa5",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "0829a016-d7bf-4dd0-b369-1d811fd8ffa5",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/15da8983-4c1f-45bc-8d9b-0965f74ecd33"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "ALLG",
+                                "display": "Allgemeinmedizin"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/889b6200-de24-4ef4-9184-025435b9fe84"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/d04dc987-13fe-4c26-8f46-2b884719c855",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "d04dc987-13fe-4c26-8f46-2b884719c855",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/6f9a03d6-3248-444c-818e-3920c45beca5"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "PSYC",
+                                "display": "Psychiatrie und Psychotherapie"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/d28260e4-c204-40ff-8173-d3888c17c36f"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/b10caf52-900e-4487-b3da-46642b4c6199",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "b10caf52-900e-4487-b3da-46642b4c6199",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/b246ede6-a37c-4575-aff0-e871daa6bf1f"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "KIJU",
+                                "display": "Kinder- und Jugendmedizin"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/ca553236-380b-4d99-ab50-1a77065f4fec"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/12b9ce10-1987-4962-a139-fb0769d14485",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "12b9ce10-1987-4962-a139-fb0769d14485",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/4c4a9f42-5cc9-4888-9fda-3a4b41d0f3d3"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "FRAU",
+                                "display": "Frauenheilkunde und Geburtshilfe"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/e8d90645-44fe-4491-b709-b041cff4fbe4"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/0e4cd962-86c4-491b-92d2-88d5d7620507",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "0e4cd962-86c4-491b-92d2-88d5d7620507",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/f337b34e-02a4-4d70-a863-214338bfb986"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "PSYM",
+                                "display": "Psychosomatische Medizin und Psychotherapie"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/62225409-88e0-4e2f-833f-0f354753e1ee"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/fa2d185e-3835-452c-9d78-52d0b6bfd575",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "fa2d185e-3835-452c-9d78-52d0b6bfd575",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/03ec18fb-ba4a-41e0-b500-01ddca0a47ef"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "HNOH",
+                                "display": "Hals-Nasen-Ohrenheilkunde"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/e533529f-e920-495f-9700-6e4b0f8cfde4"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/b2c22cd1-46ed-4668-aa2d-7097639c09dd",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "b2c22cd1-46ed-4668-aa2d-7097639c09dd",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/c7905694-1ce5-403e-9513-3e37b092aa40"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "ALLG",
+                                "display": "Allgemeinmedizin"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/02a40dd5-28c5-4222-a935-464bfca77c36"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/3c16c590-3f20-490f-975b-cb30a047634d",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "3c16c590-3f20-490f-975b-cb30a047634d",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/3afd1f2c-e6c2-4bf3-9bfa-ee96bddd59f4"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "ORTH",
+                                "display": "Orthopädie"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/871fbca7-75f0-4826-8dbb-38f488881258"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/161cd8f0-40e7-4894-bda3-ac65e8392d8a",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "161cd8f0-40e7-4894-bda3-ac65e8392d8a",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/ea60a4ef-4fb3-4432-aac8-104d55317275"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "ALLG",
+                                "display": "Allgemeinmedizin"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/53933a85-c47c-4592-8119-f7a2181465d0"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/67c92f14-45ae-4311-8312-0ec14b5ae371",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "67c92f14-45ae-4311-8312-0ec14b5ae371",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/a7909fdb-6b2e-49a9-989b-717fe2003256"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "ALLG",
+                                "display": "Allgemeinmedizin"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/e3cd9d8d-62bd-4060-8fa4-56330b042c44"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/9bdc2d34-ccf8-4fb0-b44f-255145f1e948",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "9bdc2d34-ccf8-4fb0-b44f-255145f1e948",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/0506c6fe-ec7f-481c-804d-e73fba9299a1"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "HAUT",
+                                "display": "Haut- und Geschlechtskrankheiten"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/67e6568c-9574-4444-8c45-a114f0ca5f99"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/a788a536-fc5d-436b-a31d-dce9e10baea6",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "a788a536-fc5d-436b-a31d-dce9e10baea6",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/f2a1afa2-9c21-49ed-95d9-76b63a44a06e"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "ANAE",
+                                "display": "Anästhesiologie"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/7cfa76c6-d3d5-49ad-a7b0-2f8900f58c9d"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/4b734cee-a38f-4792-bc6a-adb9f98a6588",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "4b734cee-a38f-4792-bc6a-adb9f98a6588",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/5cf64ab8-2e50-42a3-9850-8818b2fa4536"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "ALLG",
+                                "display": "Allgemeinmedizin"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/f84fa3d1-81a5-408c-bab8-fa507497e2c1"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/4236ca94-9ac5-4a05-a7a3-bd3c13f744b7",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "4236ca94-9ac5-4a05-a7a3-bd3c13f744b7",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/e7a3ae33-4e65-40fe-bd31-36d73c2722a5"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "ALLG",
+                                "display": "Allgemeinmedizin"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/52bec82b-174f-4be9-89a7-64ced88d7a6f"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/6a4d242c-437b-43f0-9060-9b261d6e4568",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "6a4d242c-437b-43f0-9060-9b261d6e4568",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/e4070a5a-f90c-42c6-98b7-601918afdc72"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "PNEU",
+                                "display": "Pneumologie"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/92933690-7845-4089-80a9-2d898cbf52c0"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/9fa0a462-831c-43d2-b7b9-c9fcb411c113",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "9fa0a462-831c-43d2-b7b9-c9fcb411c113",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/323435ff-055f-46e5-a1c3-8375e756ec77"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "KARD",
+                                "display": "Kardiologie"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/47b9aaec-20a1-4d0f-8d6b-f5e5c73e8c11"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/0d207edf-25aa-4479-a5bd-0b26b567e6f5",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "0d207edf-25aa-4479-a5bd-0b26b567e6f5",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/21aa4dc7-b80c-4758-8f75-f34a997b1483"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "ALLG",
+                                "display": "Allgemeinmedizin"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/bb346208-98a6-43cd-bd14-88d776394311"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/a4163ac9-f176-4f00-83e5-b0559d411e34",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "a4163ac9-f176-4f00-83e5-b0559d411e34",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/ebc557d0-7ed9-4e2d-ba3d-cd7b4106773f"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "ALLG",
+                                "display": "Allgemeinmedizin"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/21483d8e-1cb2-4cf1-ae81-d3d2decd2c45"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/d58aa9df-7d41-40c2-b9bb-8b669361f975",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "d58aa9df-7d41-40c2-b9bb-8b669361f975",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/934602df-e0c7-4a4d-8d0b-180bdb420f20"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "CHIR",
+                                "display": "Chirurgie"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/e6f2424e-3808-4745-b0db-7429a6e13f0e"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/5565db96-ff9d-4bec-a441-2144c087f8f7",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "5565db96-ff9d-4bec-a441-2144c087f8f7",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/ea9277c4-1516-42f9-a9bf-071b4dae7029"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "REHA",
+                                "display": "Physikalische und Rehabilitative Medizin"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/439239b2-e421-4857-bea4-b47d44c8c0f6"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/39849921-f26c-4ef0-bf3d-b607f7503da9",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "39849921-f26c-4ef0-bf3d-b607f7503da9",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/91c831ad-a324-42f6-90e9-5a19309f94fa"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "ALLG",
+                                "display": "Allgemeinmedizin"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/01e151fa-be5f-490a-87d9-b782004e21bf"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/21ed1138-2d64-49ff-a37a-a5a84b79cb56",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "21ed1138-2d64-49ff-a37a-a5a84b79cb56",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/ce001380-85a8-49d8-8091-94ec5cfd6344"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "PSYM",
+                                "display": "Psychosomatische Medizin und Psychotherapie"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/40704134-2902-44be-903d-e290721c1726"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/69151c28-bf4c-4b4a-88ca-0eb283c0bbc1",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "69151c28-bf4c-4b4a-88ca-0eb283c0bbc1",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/eebd771f-0d0d-4102-bce0-b923b7abecf0"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "FRAU",
+                                "display": "Frauenheilkunde und Geburtshilfe"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/2a55bf08-6f24-4a54-b50d-f04ecafedc8a"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/3ab9a603-9b79-4eee-bf25-2980cb554788",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "3ab9a603-9b79-4eee-bf25-2980cb554788",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/3341baa8-35b9-46e1-b90e-351eb8e5462a"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "ALLG",
+                                "display": "Allgemeinmedizin"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/ecb7638b-a45c-4ab0-aeb2-4a9fc37ecb94"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/e43af87e-35e1-4f13-b9e1-3c5fb51cd586",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "e43af87e-35e1-4f13-b9e1-3c5fb51cd586",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/39bb75e2-ab25-402e-9431-d3764fdb20f0"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "ALLG",
+                                "display": "Allgemeinmedizin"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/9e79a336-3637-4dc8-a43f-e689d7c89b94"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/41ff35ee-882e-4f2b-9105-0b9ef21bde92",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "41ff35ee-882e-4f2b-9105-0b9ef21bde92",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/36046c0a-796c-4b69-a688-62cc77734f80"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "NEUR",
+                                "display": "Neurologie"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/bf1bd6a4-85af-4fc8-a71f-7b40e5102936"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/6c7dae8b-15a7-4da1-832a-14aa83b1b308",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "6c7dae8b-15a7-4da1-832a-14aa83b1b308",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/c6cc9a8e-0287-431a-a34a-c61ad5f94c82"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "ALLG",
+                                "display": "Allgemeinmedizin"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/6baaec9e-cedc-42a4-bfc6-c23c9608eadc"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/488ac28b-2a7b-491a-b5b9-1ce5d8bf7b9c",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "488ac28b-2a7b-491a-b5b9-1ce5d8bf7b9c",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/8239a16b-2257-4203-b3ed-de6f110908b1"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "PSYM",
+                                "display": "Psychosomatische Medizin und Psychotherapie"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/a55c30a0-2169-4795-bb15-0814d69310a1"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/91fc1fd0-c4df-40ac-b351-58444a45c726",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "91fc1fd0-c4df-40ac-b351-58444a45c726",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/3a3e80e4-c324-44b0-b8d6-3fff9fcfe3d3"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "KIJU",
+                                "display": "Kinder- und Jugendmedizin"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/e73be2af-aedd-4f92-9e43-7e61e18bf104"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/29dfbc1f-eda7-42ad-99c8-5907ba04d639",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "29dfbc1f-eda7-42ad-99c8-5907ba04d639",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/a9b6cb98-b3f7-4805-a6a9-e8156a1fd0ea"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "ALLG",
+                                "display": "Allgemeinmedizin"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/9641e629-819a-4a4a-b5bb-19db71bb0236"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/7d6fa85b-fa0a-4513-8c37-f22696092234",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "7d6fa85b-fa0a-4513-8c37-f22696092234",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/6f148559-394d-47da-9cbe-7c3538f577c5"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "GERI",
+                                "display": "Geriatrie"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/05878c4b-681c-49f3-9682-1e831be751c3"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/107a8f36-2856-40f6-838a-e77cfe6e037a",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "107a8f36-2856-40f6-838a-e77cfe6e037a",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/310dc890-b572-476e-a9d6-8fc94e5f50f2"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "ALLG",
+                                "display": "Allgemeinmedizin"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/ab8670cd-4977-4c32-886c-dc6dc3f90911"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/044dce3a-6b90-4d08-82c8-facd4bf3eef2",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "044dce3a-6b90-4d08-82c8-facd4bf3eef2",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/8e206072-b5a8-4e6a-bd6d-fcf5ac0b2e19"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "ALLG",
+                                "display": "Allgemeinmedizin"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/1410de6b-566e-4379-b60d-31dceb77336e"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/40ddfe5b-f0ce-481d-9bdf-faae493e7b7f",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "40ddfe5b-f0ce-481d-9bdf-faae493e7b7f",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/68b5f007-1b74-44ca-abec-cf87a072360d"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "ALLG",
+                                "display": "Allgemeinmedizin"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/1bbe9248-978b-45e5-8672-455caab83951"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/488cf9ec-6cf0-4d57-9ec1-4a15b2900ca7",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "488cf9ec-6cf0-4d57-9ec1-4a15b2900ca7",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/4e839664-c197-4f4f-9f11-317e5a3e404b"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "INNE",
+                                "display": "Innere Medizin"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/0b5911d8-eb19-4b16-88d4-c7829bc0c0f7"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/0ced806b-bec8-406a-a86b-e76d528e1c16",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "0ced806b-bec8-406a-a86b-e76d528e1c16",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/edcc8705-e3d0-46f4-8fae-8777d00de8c9"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "GESU",
+                                "display": "Öffentliches Gesundheitswesen"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/be3e3376-8719-468e-9af1-89ec5484a792"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/5cb6f97e-001e-4a3f-87da-4adccb758068",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "5cb6f97e-001e-4a3f-87da-4adccb758068",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/9eb3dafb-46da-41d4-a234-d35b61fedd2c"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "PSYC",
+                                "display": "Psychiatrie und Psychotherapie"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/85765032-fbdd-4cd8-bb32-75e0c8029742"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        },
+        {
+            "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/HealthcareService/45430351-00e4-45ee-8a79-ef3c5e88d66e",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "45430351-00e4-45ee-8a79-ef3c5e88d66e",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-03-23T14:11:18.305+01:00",
+                    "source": "#LoC3XWhbd1RRCLAQ",
+                    "profile": [
+                        "https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory"
+                    ]
+                },
+                "providedBy": {
+                    "reference": "Organization/aa451727-a448-43a3-9c38-91468afe3497"
+                },
+                "specialty": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.4",
+                                "code": "GESU",
+                                "display": "Öffentliches Gesundheitswesen"
+                            }
+                        ]
+                    }
+                ],
+                "location": [
+                    {
+                        "reference": "Location/e03289ba-060a-439b-b2fa-61314f7b8177"
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            }
+        }
+    ]
+}

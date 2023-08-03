@@ -1,0 +1,4711 @@
+{
+  "resourceType": "Bundle",
+  "id": "dead3b98-662e-4712-9fbc-a62bebb713e7",
+  "meta": {
+    "lastUpdated": "2023-07-20T13:59:03.096+02:00"
+  },
+  "type": "searchset",
+  "total": 100,
+  "entry": [
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/984d50ec-e6cc-40b1-b007-16ac50269dbb",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "984d50ec-e6cc-40b1-b007-16ac50269dbb",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Wetzel Sebastián Dr. St. Georgen im Schwarzwald Baden-Württemberg DE Im Hochwald 19</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "a65ef450-1848-4c50-afa4-861917963426"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/2d2e519a-c8a4-4a6d-9529-6bc32e8506c9"
+        },
+        "location": [
+          {
+            "reference": "Location/74fcd9a8-746b-4852-98f3-61724bec34e2"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/7225ff72-3f63-480b-a603-e0a447a46f63"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/5d0c1d98-d979-4194-840f-713206690895"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/ec9d5cb2-34ad-49a6-a891-fe9dae8b5347",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "ec9d5cb2-34ad-49a6-a891-fe9dae8b5347",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Hoefler Kersta Dr. Prof. Korschenbroich Nordrhein-Westfalen DE Am Heyerhof 40</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "d64b54a0-2769-439d-8973-eb495b9cb44f"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/f74d1e5f-25fa-4c8b-8959-cba3e32479f2"
+        },
+        "location": [
+          {
+            "reference": "Location/a980d933-85d0-40a0-a3a7-6b092e8b92dc"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/7225ff72-3f63-480b-a603-e0a447a46f63"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/62741ad8-e5c2-4f3a-9ff8-38c8dcad7482"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/d7274bf7-ef25-48a9-927e-02f9e849d759",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "d7274bf7-ef25-48a9-927e-02f9e849d759",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Keller Karl Dr. med. Rülzheim Rheinland-Pfalz DE Raiffeisenstr. 42</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "779598cb-898b-4097-baf9-d9980f8a9fec"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/a39f90ae-f8ee-42b6-877c-00f4c99b6895"
+        },
+        "location": [
+          {
+            "reference": "Location/505640f7-b3fc-41d2-92d7-898c8b0d0e84"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/af524641-4b4f-426a-b0af-dad939ed65fb"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/6c9951f1-92fd-4b3b-a42c-674ac6b7fdd2"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/10dfdf7f-a38b-40ab-94b7-ec6caf9a1ef3",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "10dfdf7f-a38b-40ab-94b7-ec6caf9a1ef3",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Beyersdorf Annalene Dr. dent. Osternienburger Land Sachsen-Anhalt DE Friedrichstr. 38</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "8c31a27d-241f-45fc-b680-9fe96c35cfa1"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/b944d8d7-2ce1-45fc-9bb1-00e13ab269d0"
+        },
+        "location": [
+          {
+            "reference": "Location/d6b4ec5f-ecbd-4667-b09f-b37f59735f9e"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/af524641-4b4f-426a-b0af-dad939ed65fb"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/3d21cdb4-ece4-4b28-b847-3dc536bce313"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/c231b7a1-e877-4174-97a1-eed580b2693d",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "c231b7a1-e877-4174-97a1-eed580b2693d",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Gensch Swenja  Saarbrücken Saarland DE Schwarzeich 37</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "fb773a8f-470b-46f8-8a45-2bb5ca3cf7a5"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/52520932-c686-4c9f-9b5f-d153bcd57820"
+        },
+        "location": [
+          {
+            "reference": "Location/7148f352-4fe3-416b-a70b-45195bd855ba"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/911bd183-f114-4705-a65f-4ac441f5bc3d"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/19c92ea7-438d-46e5-8739-8d5c5abfe339"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/abbe2862-382f-4a0a-9e72-84f60cd00cf8",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "abbe2862-382f-4a0a-9e72-84f60cd00cf8",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Küchler Jana Maria  Gießen Hessen DE Georg-Haas-Str. 32</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "72cc1cfc-37bc-4060-b61c-5c4049961315"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/b5f8cd23-7453-4ff7-a86d-ef5f6b7f6267"
+        },
+        "location": [
+          {
+            "reference": "Location/aa4ddbb3-67b4-49d7-b492-3c52ce0ec7e5"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/911bd183-f114-4705-a65f-4ac441f5bc3d"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/b2b820a7-2394-41a0-93db-fca7c2c29936"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/bb37ec60-a51b-42b7-9aed-d7a33942cd15",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "bb37ec60-a51b-42b7-9aed-d7a33942cd15",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Hummel Kim Dr. Weißenburg i.Bay. Bayern DE Eichfeldstr. 35</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "09f051b7-c6d8-4427-a249-9c06e216c76a"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/01c44143-ed14-478b-a466-c9bb3608f82b"
+        },
+        "location": [
+          {
+            "reference": "Location/a6a5a082-b9a0-45b5-999d-ca82803c9b0c"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/2e096899-bfb6-4d91-93e2-4a6026445102"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/000e83bc-691e-49cc-b812-8caeec338b66"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/49bd6210-10b8-4d8b-b682-3dd61305d207",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "49bd6210-10b8-4d8b-b682-3dd61305d207",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Schmidt Tim Dr. Prof. Stetten am kalten Markt Baden-Württemberg DE Mühlweg 10</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "7c20650a-4a5b-45da-bffe-32315cdd7a7f"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/2871ee98-837f-4647-b057-9b5e7aed1685"
+        },
+        "location": [
+          {
+            "reference": "Location/6c85ea1c-32ff-4be1-97e0-0ce42a66f8bc"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/2e096899-bfb6-4d91-93e2-4a6026445102"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/25e16c9a-231d-4b16-a052-dcbeb087f858"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/702e9fa3-fbc0-46f7-9cd9-df0f0301e684",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "702e9fa3-fbc0-46f7-9cd9-df0f0301e684",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Baumgarten Leny Dr. med. Burgstädt Sachsen DE Franz-Schubert-Str. 32</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "ca0eb77b-2c50-4be5-8320-9e5bf344e5c1"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/9cd0064f-37dd-4908-87d7-d6d35f92e297"
+        },
+        "location": [
+          {
+            "reference": "Location/26c49122-ee73-4ba9-81eb-3f1e15904642"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/0b6801e7-a88f-43e4-93b4-d7750ef0b5a0"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/e021712c-3c35-4d53-8fd4-ef97f763aee5"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/89ba0020-38b0-49d8-8af0-813d5a5f5a78",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "89ba0020-38b0-49d8-8af0-813d5a5f5a78",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Sauter Sisanja Dr. dent. Dülmen Nordrhein-Westfalen DE Fleigenkamp 27</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "8db4564e-0f71-4c67-b7fa-21645946e120"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/5ee5fc6d-85ae-457c-976d-5df612164619"
+        },
+        "location": [
+          {
+            "reference": "Location/37f70193-7f0f-4550-9948-d39c9ffda646"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/0b6801e7-a88f-43e4-93b4-d7750ef0b5a0"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/f7a007d1-3c21-4e56-acd2-7508d9a62c78"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/f9017e6c-11c6-44e4-9740-ebbf9433b6d1",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "f9017e6c-11c6-44e4-9740-ebbf9433b6d1",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Klein Degenhard  Homberg Hessen DE Schmiedegasse 18</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "264ea861-bc1f-4a0f-8e1b-0ad57769942c"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/32369f43-71ed-4164-b4c9-4170a0c8653a"
+        },
+        "location": [
+          {
+            "reference": "Location/2b7e8f1b-d976-40ad-aefa-d77c8973e72a"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/5b0e7353-ba75-44ec-a017-ec98819ea31b"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/c681b056-0e5c-417f-849e-5a6d65ef69da"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/890aca4c-790e-4be8-a93f-23bdc211e1f4",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "890aca4c-790e-4be8-a93f-23bdc211e1f4",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Drechsler Marieka  Egestorf Niedersachsen DE Ostende 13</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "3b252fda-856a-4786-9a13-d69160c5f8e0"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/962c5b75-bd57-4577-8f82-355e5f921393"
+        },
+        "location": [
+          {
+            "reference": "Location/e41df7c6-2e8c-426b-8681-fe592c1decaf"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/5b0e7353-ba75-44ec-a017-ec98819ea31b"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/68c38161-d455-420a-8c7f-bca9cd5be8e6"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/6cdf681d-7fed-4ff4-9d7e-fae71eb5fbe0",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "6cdf681d-7fed-4ff4-9d7e-fae71eb5fbe0",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Groß Waldo Dr. Völklingen Saarland DE Auf Großscheid 32</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "29314b20-2590-48e0-895b-c546fbe73b0f"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/20b1662a-8a78-4807-ba7f-bf605935671d"
+        },
+        "location": [
+          {
+            "reference": "Location/6d2e1fda-3a21-4a29-940d-a0bd231c9a8c"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/cd12996e-a3b5-4671-b0f7-480564a65548"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/38e2e117-e2ff-4185-b753-daa8e8ef5fa5"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/b11198d0-5baa-4643-990c-2e5dde42311f",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "b11198d0-5baa-4643-990c-2e5dde42311f",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Schuchardt Fenja Dr. Prof. Walldorf Baden-Württemberg DE Käthe-Kollwitz-Str. 31</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "5ba1f994-e56b-4276-8bfa-218481bcec50"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/8c4150bc-8dc9-4065-bdc8-88edf833292e"
+        },
+        "location": [
+          {
+            "reference": "Location/b369e589-2546-4643-9b19-9ae2ebfe0b70"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/cd12996e-a3b5-4671-b0f7-480564a65548"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/91575cde-b1db-4ee3-8dc4-9ee882f4c94d"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/3361f75e-3422-4683-8b30-ebf672a02195",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "3361f75e-3422-4683-8b30-ebf672a02195",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Muller Karl Dr. med. Königswinter Nordrhein-Westfalen DE Auf der Alten Burg 20</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "aaccaeca-ec8f-48d0-9e20-7fbc6dc0ec2f"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/b020479e-4976-434a-bd73-b9dc294d7cf2"
+        },
+        "location": [
+          {
+            "reference": "Location/df0cbe01-0be9-4b89-92c7-78657366c7d1"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/7c126738-f3e6-4e67-a9c2-9e851399e3d0"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/421b7c65-f90b-4ea2-9160-16dc767271db"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/4bbd79b3-6ac9-4bd0-899b-06a6a1c11baa",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "4bbd79b3-6ac9-4bd0-899b-06a6a1c11baa",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Wörner Schana Dr. dent. Graben-Neudorf Baden-Württemberg DE Rosenweg 44</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "344f9623-db31-4199-81ec-0bb3722c5013"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/80d20f7e-9c66-4636-98f3-9079e86ca35a"
+        },
+        "location": [
+          {
+            "reference": "Location/81d5af11-4a61-4258-93af-4f968f7121f6"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/7c126738-f3e6-4e67-a9c2-9e851399e3d0"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/eaf5fbfe-3baf-4b58-bc90-6bbe7de6d8a0"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/00363f3c-a7ec-416e-8e25-63db5d92dac1",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "00363f3c-a7ec-416e-8e25-63db5d92dac1",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Lange Emilyna  Leizen Mecklenburg-Vorpommern DE Plauer Chaussee 3</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "f3546116-78bc-4978-9b62-3cf54e56c4d1"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/c4111103-37e2-43e0-9599-da78868f9326"
+        },
+        "location": [
+          {
+            "reference": "Location/87da15f8-3d17-4a05-9447-0b902565666a"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/d95dd99d-6cd5-4ddb-9beb-ce86fdb4e75a"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/9d85ee54-cf67-4b14-938c-4cf8a7b1614d"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/7bfa134c-aab9-487e-9272-dff557084f2b",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "7bfa134c-aab9-487e-9272-dff557084f2b",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Koch Luisa  Buttstädt Thüringen DE Safrangarten 39</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "4b168ada-2c3a-4f7e-8780-4dcf02ffb892"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/f4945c73-875b-45a3-8974-66fe8a71e66a"
+        },
+        "location": [
+          {
+            "reference": "Location/52985656-08a1-4a80-bb95-796af7126e31"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/d95dd99d-6cd5-4ddb-9beb-ce86fdb4e75a"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/70f8737a-369c-4bd6-9529-95bfc518a058"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/f4244683-94b3-40fb-a4c8-1e4b2c345928",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "f4244683-94b3-40fb-a4c8-1e4b2c345928",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Frank Alex Dr. Recklinghausen Nordrhein-Westfalen DE Leibnizstr. 24</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "937f0ad0-a094-4ef4-b1d4-fe5131b467dd"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/f8bcb5ec-5138-462b-864a-6262ffa52699"
+        },
+        "location": [
+          {
+            "reference": "Location/0843ac93-bdb3-4275-8d22-00828f67af25"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/8289c46f-355c-4ef0-bdca-5eae9a24e270"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/c3385ffd-a46e-4203-bfc5-be467a070c94"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/d5a34504-b3e8-41c2-82a4-51db0cc3ce34",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "d5a34504-b3e8-41c2-82a4-51db0cc3ce34",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Otto Sunke Dr. Prof. Nienburg (Weser) Niedersachsen DE Dickensweg 37</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "57d4aedf-9e7b-4732-9e67-dcedaa3f4dc7"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/a1b95546-dfa8-4a4a-8115-2230ba18b9ec"
+        },
+        "location": [
+          {
+            "reference": "Location/ae9fe2ec-15ba-4747-94f4-52944afbd9bc"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/8289c46f-355c-4ef0-bdca-5eae9a24e270"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/6b81b49f-e13e-47a8-8729-de45b8992c32"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/faa88b6e-aecb-4072-833a-f765090c1950",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "faa88b6e-aecb-4072-833a-f765090c1950",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Lehmann Gundbert Dr. med. Ochsenhausen Baden-Württemberg DE Hexenweg 20</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "4753fcb3-0231-4226-ac79-b3902e58285c"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/de494ff2-9ea8-40a6-88cb-44ceaaa18bd4"
+        },
+        "location": [
+          {
+            "reference": "Location/2c3aa437-11a8-4227-82ca-5ca5c0d7e42e"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/65486806-a7ac-4f07-a5dc-4fdf669ed06f"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/1e8a6985-d49b-4073-9368-bced643ffb9e"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/89fffecb-269a-49a9-a6a9-328a5b476f21",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "89fffecb-269a-49a9-a6a9-328a5b476f21",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Schuchert Dirke Dr. dent. Schweinfurt Bayern DE Amsterdamstr. 30</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "9b7885e9-2d43-4474-82b0-fc136cead020"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/c3b251fc-cb17-45fb-94c3-2183af3d35e6"
+        },
+        "location": [
+          {
+            "reference": "Location/184df038-7f48-4120-91cd-125f4eea9d00"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/65486806-a7ac-4f07-a5dc-4fdf669ed06f"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/6fe33967-f409-488b-9133-0b30e5844b5a"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/3d4cdb5e-66a0-4517-809a-b0cb87cdb261",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "3d4cdb5e-66a0-4517-809a-b0cb87cdb261",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Kaufmann Meissa  Clausthal-Zellerfeld Niedersachsen DE L`Aigler Platz 27</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "9bb15911-b725-4d5f-b76c-7c1ee99eca87"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/73ec0324-242b-437f-ada7-aa127dcb77f0"
+        },
+        "location": [
+          {
+            "reference": "Location/c561f649-dce4-40df-a7d1-2b082fd1f614"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/d25fe08a-b742-4799-80df-5813be837dde"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/0d2061b6-dac4-4f14-89ff-30596d0c2c04"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/02782927-9588-46c4-a16e-2af8b69da902",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "02782927-9588-46c4-a16e-2af8b69da902",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Kalb Angelia  Laufen Bayern DE Erlach 23</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "b5c5e7b6-f1be-495b-9faf-483fc0d489bb"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/5268db65-ca06-42e5-96ca-39d29c33f54a"
+        },
+        "location": [
+          {
+            "reference": "Location/c47819ad-880c-4726-8fbf-febf71469137"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/d25fe08a-b742-4799-80df-5813be837dde"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/072cff65-e5df-4ca7-83b2-9e19ac3d1947"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/d1700a43-3a63-4d2d-82b4-0d101f7bec7e",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "d1700a43-3a63-4d2d-82b4-0d101f7bec7e",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Giehl Maxine Dr. Reichenschwand Bayern DE Am Alten Bahnhof 20</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "93c0c70a-9e56-4c53-b587-ab6d4d5a4918"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/379dc84d-5535-42e9-a201-770c6581e6de"
+        },
+        "location": [
+          {
+            "reference": "Location/f38402fb-defa-4e37-9e8c-d02229340069"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/a754a531-cddc-471a-9532-13cffec6588f"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/bbc0735d-1021-4726-b095-3551cec7c03a"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/1aaa1871-3ca4-485c-9aa5-674de9b1770d",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "1aaa1871-3ca4-485c-9aa5-674de9b1770d",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Weber Lunas Dr. Prof. Herscheid Nordrhein-Westfalen DE Nelkenweg 7</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "db8a0f77-2577-4fff-8148-c280a7c5a43d"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/94af21f8-50ef-43cc-9ebc-a2541c0ba232"
+        },
+        "location": [
+          {
+            "reference": "Location/e8dd1406-ae08-4ae2-856c-ea0acba3a54a"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/a754a531-cddc-471a-9532-13cffec6588f"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/32d6e830-f04c-465c-82d9-efa6f6426a70"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/f3c03e40-2573-4588-82c6-c73221904acb",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "f3c03e40-2573-4588-82c6-c73221904acb",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Reich Lennert Dr. med. Volkach Bayern DE Obere Spitalgasse 7</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "8f58b124-daef-49d2-83f3-d68e1335c9b7"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/8b7d261d-6625-491b-ba2e-29760cc7bc34"
+        },
+        "location": [
+          {
+            "reference": "Location/f7dafb80-bc22-4817-88ab-6f0adf500834"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/a26e004e-2dc3-453a-8113-47d3f8953133"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/8e1d85be-572c-41a1-842d-b25a1eda09c9"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/b465ce9f-3b24-4580-ade2-3cf684624ff1",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "b465ce9f-3b24-4580-ade2-3cf684624ff1",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Falkenrath Fenja Dr. dent. Bretzfeld Baden-Württemberg DE Müllersteige 38</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "71d89b19-55c1-493b-aa7b-093173450057"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/76f1591f-468d-4e0e-8122-268971097fd3"
+        },
+        "location": [
+          {
+            "reference": "Location/1f6f694a-b871-4a8b-b61f-0004f7c9a2c4"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/a26e004e-2dc3-453a-8113-47d3f8953133"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/cb7c6b68-d98e-44a4-975b-adbf05aab243"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/745d9e7d-7e1b-4125-9f1d-b5ec8acc1235",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "745d9e7d-7e1b-4125-9f1d-b5ec8acc1235",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Busch Adelbrand  Nordenham Niedersachsen DE Görlitzer Str. 24</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "cc6d6d19-5236-4c72-8cca-554c789b0ec7"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/729ecac8-698d-4cbc-b0d1-8c444b2ad737"
+        },
+        "location": [
+          {
+            "reference": "Location/6edc40b0-ba64-4ec4-8665-143e9cba64a8"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/82f3a515-f5a6-4bc6-b252-e1a633d15789"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/13892f4c-0eaf-4eef-b2a0-9aca85d11dc5"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/8d67664c-3dc0-4f2c-b53a-80ca098d4a90",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "8d67664c-3dc0-4f2c-b53a-80ca098d4a90",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Schubert Widorna  Kirchberg i.Wald Bayern DE Auackerstr. 15</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "9acf2aff-a3d3-4520-a0a1-de007ce8f0d8"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/67a22fd9-6d48-48d6-a2a7-2911aa92eed2"
+        },
+        "location": [
+          {
+            "reference": "Location/ec7b767a-d6e3-4c2f-8a82-7bd4808a7d4d"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/82f3a515-f5a6-4bc6-b252-e1a633d15789"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/76713ed2-1748-4689-853d-fdcd5c1a6093"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/6a8fbfac-b8bf-4664-8e12-9476df15284e",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "6a8fbfac-b8bf-4664-8e12-9476df15284e",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Wirth Clara Dr. Windeck Nordrhein-Westfalen DE Rostepfuhl 8</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "e3d41910-dc3a-4bfc-954b-fdf9425faac5"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/939536e0-b082-4705-a806-5e6f41a6d8a2"
+        },
+        "location": [
+          {
+            "reference": "Location/e7a82984-edca-409b-8783-d3549086fa69"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/d66d8cab-5181-45a4-8ded-512fc28a99e6"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/04f5de4a-7267-4c35-8e3f-259c3c03e71a"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/f57f4202-8030-4752-b276-9647db5b0649",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "f57f4202-8030-4752-b276-9647db5b0649",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Vogt Arnfried Dr. Prof. Unterpleichfeld Bayern DE Pfarrer-Ort-Str. 41</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "b6e66d79-6f82-402a-a7d9-092eaa42b289"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/91c31054-412c-426f-9aec-02359aa9c26c"
+        },
+        "location": [
+          {
+            "reference": "Location/b562804e-49b5-4d37-8ad4-27cd5f52bd36"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/d66d8cab-5181-45a4-8ded-512fc28a99e6"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/58a68fa8-6379-4c10-a362-0cd8d0fa3bea"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/06a16ccc-1df1-425f-907a-4f6973777169",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "06a16ccc-1df1-425f-907a-4f6973777169",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Neumann Dominick Dr. med. Braunlage Niedersachsen DE Königskrug 38</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "d4278120-d20c-4944-bc03-94e33491951c"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/3b67123d-dde9-42f8-a49c-45eaf5f26d7b"
+        },
+        "location": [
+          {
+            "reference": "Location/0206d162-7da3-4edf-9d33-1829f0285bed"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/8d5d490c-4369-4de7-8114-f950fc637fd4"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/833440fc-27c6-46ed-aa22-8ba73097df01"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/f17ade4b-fd96-4c07-9b31-e989248ee2ec",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "f17ade4b-fd96-4c07-9b31-e989248ee2ec",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Bauer Erdmut Dr. dent. Suhl Thüringen DE Hofgasse 34</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "59fd0a92-d3f1-4de7-8ca7-42f6d17745ee"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/79374530-3bba-4261-a836-74c7f0f285b2"
+        },
+        "location": [
+          {
+            "reference": "Location/0e09fab6-5ea9-4d3a-8dc2-1ce8a27b2208"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/8d5d490c-4369-4de7-8114-f950fc637fd4"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/931b26f2-a67d-44d2-b913-d41417a2e461"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/aa9af627-aa6f-4d7f-90c3-8466319e6bfd",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "aa9af627-aa6f-4d7f-90c3-8466319e6bfd",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Messerli Nemo  Güsten Sachsen-Anhalt DE Neues Leben 36</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "512f3e27-8102-448a-8c7a-415af83ddc20"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/53d0c1db-aa90-41b9-8eba-3e4054cea765"
+        },
+        "location": [
+          {
+            "reference": "Location/092836dd-c7cb-43aa-88f5-bef0634194e4"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/948fd658-045c-4e02-94dd-3759bd7b0a69"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/6215a256-cbef-46b4-a80e-f597af4592c3"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/c80436ef-d3d2-41e0-9e12-c638badafe84",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "c80436ef-d3d2-41e0-9e12-c638badafe84",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Gotti Sirko  Blomberg Nordrhein-Westfalen DE Schollenberg 41</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "2f4c7562-262c-47e6-99a0-443848458d78"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/fe045d64-29b2-4b7a-9aed-5b82d8dd0de6"
+        },
+        "location": [
+          {
+            "reference": "Location/c45cc670-751a-4903-8433-18eaf32c2bca"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/948fd658-045c-4e02-94dd-3759bd7b0a69"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/83c78417-6f92-4d77-95aa-c24369140bc5"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/0bb43526-f190-4f58-b595-90eecaf6dca6",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "0bb43526-f190-4f58-b595-90eecaf6dca6",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Bauers Nordbert Dr. Töging a. Inn Bayern DE Eichendorffstr. 40</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "22d17bed-5728-48da-a987-fb0eea8f96e1"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/efb0df87-2f70-4988-8703-1ba70863632a"
+        },
+        "location": [
+          {
+            "reference": "Location/6054505d-bb02-459a-8d81-b9ec5484d57f"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/2377da20-6469-4c1e-bd7b-12239f3ae980"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/c8a3950c-e3ed-472a-8718-9fdf23644457"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/004d0534-ae7e-47f9-a0c1-0469450a04f8",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "004d0534-ae7e-47f9-a0c1-0469450a04f8",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Schneider Fredehelmus Dr. Prof. Kempten (Allgäu) Bayern DE Glatzer Weg 28</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "0b6f403a-88f8-4ba5-9553-e0b64d3fe31d"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/0ce422c8-42f9-41fb-85aa-ce0edc856d45"
+        },
+        "location": [
+          {
+            "reference": "Location/05f6f19c-1112-4f46-b1fe-5a3c2eda6fee"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/2377da20-6469-4c1e-bd7b-12239f3ae980"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/0ea5475a-0d57-4593-8d16-524f02dbff95"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/27a2bbf4-b912-42fa-954b-ecaf89ced95d",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "27a2bbf4-b912-42fa-954b-ecaf89ced95d",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Weiß Serafine Dr. med. Stephanskirchen Bayern DE Walderinger Str. 26</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "fb8af5b2-22bc-45ae-8974-7e67385ce3d3"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/a2efd3e7-e52c-4cad-a6c7-a5e521022740"
+        },
+        "location": [
+          {
+            "reference": "Location/631efe74-e558-4692-bdde-f8673ea5ac52"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/c31c5f63-b482-4bb6-88f2-3f08ceb75975"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/511e7b95-f85c-4ea9-9679-5906bd483081"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/114699bb-a7a1-4b08-aa16-60b49b786fa9",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "114699bb-a7a1-4b08-aa16-60b49b786fa9",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Vogel Theodebald Dr. dent. Kitzingen Bayern DE Kirchplatz 28</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "4a9b15ed-74d6-4a20-84a4-b799ccd2a064"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/cf4ddf1a-dee3-4d88-bbc9-c7df75310420"
+        },
+        "location": [
+          {
+            "reference": "Location/b414c83d-2226-4d79-89ab-d674abb66f41"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/c31c5f63-b482-4bb6-88f2-3f08ceb75975"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/84c8948c-4c6e-460e-949a-68a63c0d5a18"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/1c934b4f-875e-456d-9ad4-1a42cdfca3a9",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "1c934b4f-875e-456d-9ad4-1a42cdfca3a9",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Werner Arnica  Michendorf Brandenburg DE An den Bergen 45</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "ce73ea46-11f6-4ff3-ab3f-9ff704096557"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/fccfcf82-08b2-4271-b28c-5b27b66ae84c"
+        },
+        "location": [
+          {
+            "reference": "Location/ab6900bb-4a02-490e-a8b0-b6f6fba08e20"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/698f0ad2-0b01-4079-a62c-57a331d46a63"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/e2e57ead-5fb1-48f4-a174-a79b6c005340"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/80d4dd3d-6df8-40ca-80fd-346633d2ffc2",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "80d4dd3d-6df8-40ca-80fd-346633d2ffc2",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Essert Idis  Verl Nordrhein-Westfalen DE Eckernkamp 28</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "f192768b-d1e1-4914-b0b5-6249e4a380f7"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/46f82be1-49c1-4150-b09d-f5438747e4a7"
+        },
+        "location": [
+          {
+            "reference": "Location/abcb5cdf-d733-405b-b39d-2cafb2892600"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/698f0ad2-0b01-4079-a62c-57a331d46a63"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/3403f152-3725-46e8-b3b2-f913ea959884"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/b300c2a4-a780-483e-a8ba-bb93d0ae65fe",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "b300c2a4-a780-483e-a8ba-bb93d0ae65fe",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Leitner Heimberta Dr. Troisdorf Nordrhein-Westfalen DE Forsthaus Telegraf 21</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "bb374a40-0488-4572-852f-1f51c5a965f4"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/80e65b14-d83c-4216-a2ae-063ed6531359"
+        },
+        "location": [
+          {
+            "reference": "Location/e67a46fa-79a6-4269-b2ff-422c30104373"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/ded98153-7272-4ac6-96d1-358a6e0e6ef6"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/047b1aa5-d00d-444f-9707-a265966aff95"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/dd575b39-1196-4d4f-99a9-07abcc273d25",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "dd575b39-1196-4d4f-99a9-07abcc273d25",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Werner Raimer Dr. Prof. Kirchseeon Bayern DE Zum Ausblick 25</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "c776298a-ded9-4381-a176-f7ce73a286df"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/d684016a-f460-4ee9-923e-f95001ba4deb"
+        },
+        "location": [
+          {
+            "reference": "Location/ae6502f4-5f39-4d4b-83a7-7f274114c776"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/ded98153-7272-4ac6-96d1-358a6e0e6ef6"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/7eff03df-bbc5-4262-9ed1-f8bf05d45fa7"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/155274c6-91e1-448a-a965-2661904f07a3",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "155274c6-91e1-448a-a965-2661904f07a3",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Baumgarten Daniel Dr. med. Berghülen Baden-Württemberg DE Weiherweg 19</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "c5451002-8e72-41a6-9c42-bd3136c1dc7b"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/248efdc6-9ef1-4358-a1a9-f21a282d71f7"
+        },
+        "location": [
+          {
+            "reference": "Location/1f63584a-72bc-4fee-92fb-5e9988eb99ba"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/42266cb5-6b98-44c5-af7a-6429909dcd70"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/53d92e7f-2180-41cb-bc7c-b1e6dc539cf5"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/9cd3b77f-30f4-47c3-87c3-c2f14cf97acc",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "9cd3b77f-30f4-47c3-87c3-c2f14cf97acc",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Holzmann Wilibald Dr. dent. Sindelfingen Baden-Württemberg DE Schillingstr. 23</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "a59d8874-970d-4b91-9c4f-29c7a05d1eb7"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/b2100ceb-ca1f-49da-a27b-6520adb10fe7"
+        },
+        "location": [
+          {
+            "reference": "Location/e61ef3ea-134f-4bf8-9803-bb6bbb5b258d"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/42266cb5-6b98-44c5-af7a-6429909dcd70"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/128cf7f5-fbc1-4c66-b5b9-0a8be91839b4"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/b76d1945-dc2e-4d0e-8aee-ef4c1b904c3f",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "b76d1945-dc2e-4d0e-8aee-ef4c1b904c3f",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Rot Gumpert  Bad Soden-Salmünster Hessen DE Tulpenweg 36</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "7c2465a1-4765-4797-baa4-2ae5e7c51644"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/2f2718f7-b29b-4241-ae0a-a5a7f16373a6"
+        },
+        "location": [
+          {
+            "reference": "Location/1d2759da-12a0-4d0e-920b-5b261dd10e25"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/4f133296-8a00-4dc9-bc5a-290b81ae03a5"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/80240f40-3038-47cf-935c-7ba8191bbfbd"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/c681abd3-6a92-4594-b490-85976f714279",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "c681abd3-6a92-4594-b490-85976f714279",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Köhler Melanie  Schmelz Saarland DE Homrichstr. 35</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "f7798458-5d21-4fd8-bb53-34cf0c761160"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/3ee0feff-dff5-4923-852c-7a12501a89d6"
+        },
+        "location": [
+          {
+            "reference": "Location/e53678f3-ac2e-49c4-9148-484970bf9ce1"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/4f133296-8a00-4dc9-bc5a-290b81ae03a5"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/9dfd505a-28e4-4b01-bcaa-8fe973109c2b"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/e242f23a-092b-4ad0-9cd1-0d45bb828925",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "e242f23a-092b-4ad0-9cd1-0d45bb828925",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Spitz Simon Dr. Aspach Baden-Württemberg DE Stegmühle 37</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "6dc69747-f9c8-4a0c-a196-dcc070aa1a82"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/1bf1794c-28f5-4b13-b8dd-48094bef417e"
+        },
+        "location": [
+          {
+            "reference": "Location/978e3d29-a41a-4dbb-be5a-0f6c7a093b09"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/9fa2b3af-ba87-4d66-b9a1-6e2853f22a3a"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/4ac1e062-9539-4485-ad87-6755453c0983"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/fd575e8f-fa9b-4fa4-bc4d-493f1cec4896",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "fd575e8f-fa9b-4fa4-bc4d-493f1cec4896",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Schulte Denise Dr. Prof. Bad Oeynhausen Nordrhein-Westfalen DE Büjäger 27</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "4555c772-303e-42db-aba9-88ba9d99f6e9"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/5d76ad3c-cd6a-4361-a15c-bda685d6628c"
+        },
+        "location": [
+          {
+            "reference": "Location/e41786c7-b9b6-4302-965b-38b3b952982b"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/9fa2b3af-ba87-4d66-b9a1-6e2853f22a3a"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/665bf21b-0eca-48e4-b632-0dd19d7d8b39"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/b991ecbe-6624-441e-9c69-4bd8f4311085",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "b991ecbe-6624-441e-9c69-4bd8f4311085",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Gerhard Seike Dr. med. Rodgau Hessen DE Eppertshäuser Weg 16</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "dfe61f19-6ac3-4345-829c-970cf7031d37"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/979fc649-999a-4503-b113-2ed1742cac96"
+        },
+        "location": [
+          {
+            "reference": "Location/2abea364-f8bf-4e09-91bc-1fba55d8d61a"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/87a7ca69-9e1a-4650-bb7b-72eb793a6793"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/7fedf5ba-5f16-4c7a-a0ae-726f1869588a"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/2a7a7a95-a3fe-4b26-84ac-2fbef6d21b9b",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "2a7a7a95-a3fe-4b26-84ac-2fbef6d21b9b",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Krüger Kunz Dr. dent. Obergurig Sachsen DE Waldstr. 43</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "e84065cb-0fdd-46e4-be50-30ddde7d16a8"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/15459f6c-da7f-4aca-bd3d-8faacfc10bec"
+        },
+        "location": [
+          {
+            "reference": "Location/c6d69e45-8638-4f12-9aba-3a52d82e8595"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/87a7ca69-9e1a-4650-bb7b-72eb793a6793"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/21b90137-086f-4a21-9dcd-42908ac3017a"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/c677b62a-32c7-4ccd-a594-4d8fd8926a25",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "c677b62a-32c7-4ccd-a594-4d8fd8926a25",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Nuremberg Florian  Hamburg DE Lütte Raak 4</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "b0263c2d-baf6-46e2-95e7-14e39f82dbb0"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/d8440456-1099-4033-97b7-622f7004693e"
+        },
+        "location": [
+          {
+            "reference": "Location/55afcbc2-c232-4787-b409-0dedb7478c73"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/06c2f787-348f-4fcc-b0c8-469336c789f9"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/0c2a4b86-5fa1-45e9-8456-74f2c3727d34"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/4c7da46c-8af1-40ef-8a18-076d0c5f839a",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "4c7da46c-8af1-40ef-8a18-076d0c5f839a",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Schweitzer Peter  Drochtersen Niedersachsen DE Kirchenstr. 11</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "323c3bc3-e361-43c6-acb7-1ef0bac152be"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/fa2e8c7c-4c88-4763-9cc3-77464f922872"
+        },
+        "location": [
+          {
+            "reference": "Location/cbeba9f2-27ab-4c66-ad0a-add79db287ac"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/06c2f787-348f-4fcc-b0c8-469336c789f9"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/5645a9b0-6e88-4fc7-b208-f7ebaffcc72e"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/741e85e7-ab22-4ede-a491-dab89d0e8300",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "741e85e7-ab22-4ede-a491-dab89d0e8300",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Zimmermann Binny Dr. Sankt Augustin Nordrhein-Westfalen DE Helene-Lange-Str. 24</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "2fcc7b36-aec5-4d87-a71e-3ce20213bb61"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/3c1ea96e-5acd-494a-84d9-92aec365cff2"
+        },
+        "location": [
+          {
+            "reference": "Location/f61078e2-abdd-45b0-9891-46824fc74d61"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/86a269ab-971d-4d1f-868b-6869c271c61c"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/55f4e454-0286-4039-845f-fa1d66b741a5"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/d63d4dfe-b571-4fc2-b2d1-4f942e0ea019",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "d63d4dfe-b571-4fc2-b2d1-4f942e0ea019",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Schlimme Agimund Dr. Prof. Am Ettersberg Thüringen DE Karlsplatz 5</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "7f1bed0d-079b-4099-9080-ba4cb171aa81"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/fc473d30-99c4-4de9-b885-ba0cc9077a1c"
+        },
+        "location": [
+          {
+            "reference": "Location/9de4c399-348d-4cc1-8dbf-f70c257866b9"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/86a269ab-971d-4d1f-868b-6869c271c61c"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/7f34348e-bf2a-4193-93c9-22657efad107"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/e99e5206-c7e5-40dc-9fe8-ff847abe25c3",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "e99e5206-c7e5-40dc-9fe8-ff847abe25c3",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Schräder Eckard Dr. med. Preetz Schlewig-Holstein DE Cathrinplatz 45</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "583d60e9-7626-4b00-a871-7bf098d80023"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/fa85ee8c-2988-4a4d-8b7d-331781dc3a37"
+        },
+        "location": [
+          {
+            "reference": "Location/9d6ddcc0-894a-49bb-a93a-e30061e0a5fc"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/c4b509a0-60eb-4df8-ac05-57aa3762b212"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/81675434-dea6-4955-8537-fb05af1c0d3a"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/5416cbe4-32f4-489b-869d-7a02bd132709",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "5416cbe4-32f4-489b-869d-7a02bd132709",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Vogel Tordis Dr. dent. Wandlitz Brandenburg DE Koloniestr. 44</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "7fa08354-4b5c-458b-b3b6-4f35d1a69a99"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/8f62c216-1ceb-471d-961d-24138c7586c8"
+        },
+        "location": [
+          {
+            "reference": "Location/3d216d8b-5aab-414f-acaa-fb1abf1eed7b"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/c4b509a0-60eb-4df8-ac05-57aa3762b212"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/a4f5e04a-3fc6-4352-9b5e-3dbd83029e96"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/798cbd03-9d7a-4d93-8048-cd5f3fcb2363",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "798cbd03-9d7a-4d93-8048-cd5f3fcb2363",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Sommer Emko  Gaimersheim Bayern DE Westendstr. 31</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "21338fb3-cbc9-4202-befc-e25bec01fa78"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/7fe5e533-2c90-472f-a183-696be8a7a773"
+        },
+        "location": [
+          {
+            "reference": "Location/1999a042-745d-424c-a7b6-8e13945aa7f1"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/47b01027-a8d6-42b9-8fe3-dd8126e458be"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/7dfde9c4-f510-48d5-9c98-77e01337a454"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/047d2eef-b4e6-4cb1-b0ec-2df4ab8624f3",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "047d2eef-b4e6-4cb1-b0ec-2df4ab8624f3",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Vogel Mioljetta  Rosche Niedersachsen DE Dorfstr. 24</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "13aa8946-8113-4921-bb9f-c0018360354e"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/8aab0ce0-6bb4-41dd-b509-2ffec7b8d2e5"
+        },
+        "location": [
+          {
+            "reference": "Location/e7814a63-af64-4d72-9bf8-16b6500fda65"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/47b01027-a8d6-42b9-8fe3-dd8126e458be"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/a5b78961-ee8b-4306-b60c-11b04be06c07"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/3e59c1d3-81f2-4280-9b88-3a5b79d24624",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "3e59c1d3-81f2-4280-9b88-3a5b79d24624",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Achilles Lonneke Dr. Bodenbach Rheinland-Pfalz DE Talweg 43</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "aee5c3f4-9ba9-49a8-92b0-ffd42e40ad71"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/92571765-48d0-44c1-ab78-cf79de4610f7"
+        },
+        "location": [
+          {
+            "reference": "Location/b5699982-9ca7-465e-842d-9d0ad8b69080"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/f1e9e335-377a-4dea-932a-0bf96f52a8e1"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/9f6c2344-cde4-4390-bc86-ce83918e86eb"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/ede983d3-201d-48be-800a-1fb53a12d2a7",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "ede983d3-201d-48be-800a-1fb53a12d2a7",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Schirmer Sabrina Dr. Prof. Vögelsen Niedersachsen DE Friedhofsweg 32</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "4fd3f4b2-4785-4356-b7c3-2309832598d5"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/79b0951b-5b7e-46ac-86ce-3e8308ff97f4"
+        },
+        "location": [
+          {
+            "reference": "Location/615b3d5a-8c5d-4790-9264-d46f592bd923"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/f1e9e335-377a-4dea-932a-0bf96f52a8e1"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/c7d064a1-3fee-40f4-a417-641dc0536f41"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/106911fa-45c6-48bd-b3f1-1397f229061e",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "106911fa-45c6-48bd-b3f1-1397f229061e",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Schwartz Pía Dr. med. Hankensbüttel Niedersachsen DE Arthur-Müller-Str. 31</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "43467bb4-f99e-4832-b8f1-018c0e622c8b"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/d737a5fa-154c-420a-bef2-4e3b7ff4f8a9"
+        },
+        "location": [
+          {
+            "reference": "Location/97c82644-7aa4-4552-9c85-47eb96181921"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/2f10359c-ffac-4e56-823f-26da444cd336"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/71107fc5-932e-4cfa-811f-1c165edcac1d"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/27852ae2-26d6-418b-b42e-d1c907cc8661",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "27852ae2-26d6-418b-b42e-d1c907cc8661",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Becker Romy Dr. dent. Konz Rheinland-Pfalz DE Auf der Hödstatt 41</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "faf6480a-c1a0-47f0-b831-84930c2d78e8"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/67eb42a4-fac8-4994-8f04-dc33772d3aba"
+        },
+        "location": [
+          {
+            "reference": "Location/e55d672e-fc00-4d45-97e2-0dd2007b6abb"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/2f10359c-ffac-4e56-823f-26da444cd336"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/ac397882-ec8f-47a2-b268-c59fc2abda80"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/91bd0f88-98f9-4ce6-aa13-9729c2c5e73a",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "91bd0f88-98f9-4ce6-aa13-9729c2c5e73a",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Schlimme Lars  Quedlinburg Sachsen-Anhalt DE Breite Str. 2</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "8f0785ba-26c3-4c44-b13f-a5e5d49827b4"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/0ae3c329-5ba7-4a01-90a2-a9789f50795f"
+        },
+        "location": [
+          {
+            "reference": "Location/4d5cc120-b6a9-4131-af99-f6e03192e324"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/2758c211-79f2-4a67-b9e2-8f93615780fb"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/dc19d71d-979a-4760-bd89-5a221f059829"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/6367bd31-1ac4-49c3-b7ec-b999572dad95",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "6367bd31-1ac4-49c3-b7ec-b999572dad95",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Klein Gritt  Recklinghausen Nordrhein-Westfalen DE Muesfeldstr. 1</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "eeaad39d-f135-4f8b-8d9a-9bd07ae9cd04"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/20f28e94-97d9-48cd-864f-9214699a6df5"
+        },
+        "location": [
+          {
+            "reference": "Location/cfe67638-c271-496d-ab7c-a1d499223fbb"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/2758c211-79f2-4a67-b9e2-8f93615780fb"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/78cf1ab4-f637-41c5-839e-13508b1de5a4"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/1ace577c-e901-4241-a0a7-6bc90b1c1420",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "1ace577c-e901-4241-a0a7-6bc90b1c1420",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Gerhard Relindis Dr. Gronau (Westf.) Nordrhein-Westfalen DE Konermanns Weide 38</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "48b9c8b7-729f-4ddb-a650-096bea738d1f"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/07a4c990-13c2-464a-b4fd-3407ff57b7ee"
+        },
+        "location": [
+          {
+            "reference": "Location/07a59606-773b-428e-a4cb-8b001f98918a"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/5cb40d09-d18f-4440-abdd-933715263102"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/55e81b5e-b848-4c81-9c0c-43e86aea7313"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/d2e8457f-d265-4dba-a81f-c8f0a2bff511",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "d2e8457f-d265-4dba-a81f-c8f0a2bff511",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Schuchardt Florian Dr. Prof. Trostberg Bayern DE Josef-Seiler-Str. 7</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "a4068372-1e12-4fa3-85b9-79c5069d707d"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/dbf42973-ef5d-4abe-a983-ca7b77babbe5"
+        },
+        "location": [
+          {
+            "reference": "Location/c1832c03-20b9-4c5e-8805-b9e9a3e757b2"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/5cb40d09-d18f-4440-abdd-933715263102"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/9c13a809-ca28-4341-9936-8d9876b6676b"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/69b394c0-8d43-462a-a7f8-f5054788b029",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "69b394c0-8d43-462a-a7f8-f5054788b029",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Kästner Male Dr. med. Ammerndorf Bayern DE Cadolzburger Str. 5</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "a8d48633-eb14-4b4c-a31e-908fd20c8707"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/ceaacc3c-ca4e-49c9-ad02-89f8dd27ca7a"
+        },
+        "location": [
+          {
+            "reference": "Location/7b75efeb-5cf5-41f5-afd7-3f4ef83d018d"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/55dc5e96-a61f-4b57-8e50-9d5c5785b35b"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/2531e285-62cf-452a-b1ff-7d6e2a5263b9"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/84be9c55-834a-40a9-a00b-3b9f3788fac0",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "84be9c55-834a-40a9-a00b-3b9f3788fac0",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Schulte Nela Dr. dent. Maxdorf Rheinland-Pfalz DE Birkenstr. 13</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "ae83998d-0bbe-463e-aa4b-14786d040b0e"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/89150de5-9a29-4247-a238-dc4f5548140e"
+        },
+        "location": [
+          {
+            "reference": "Location/49e4fe0d-d791-4061-955a-03c114966135"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/55dc5e96-a61f-4b57-8e50-9d5c5785b35b"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/ac671fd9-d208-4437-86d1-5bce8d8f2ed9"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/08cdad01-9624-4d64-9194-c9f6b52d1a45",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "08cdad01-9624-4d64-9194-c9f6b52d1a45",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Gott Rul  Neu Wulmstorf Niedersachsen DE Am Stuvenwald 20</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "59ef89a8-f912-40e1-85c5-3951ed39ebbd"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/e2479c7a-0a7c-40c7-8612-20eba3c1cd1f"
+        },
+        "location": [
+          {
+            "reference": "Location/526d08f5-6b0e-4730-87c7-3b03ac63c9ab"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/6fc970e5-863f-4998-85bd-7b2f8fb1a827"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/fdf67186-1e9f-4e4c-a7f5-b880a3e14279"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/186a3ab9-8a82-497d-b12b-b3db79807499",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "186a3ab9-8a82-497d-b12b-b3db79807499",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Schlösser Mamke  Karlsruhe Baden-Württemberg DE Eisenacher Str. 36</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "c7f6eda4-e44c-4204-b75b-85cfc3cfefae"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/27cbe037-88cc-43ec-9264-58ad0868be47"
+        },
+        "location": [
+          {
+            "reference": "Location/15b46c42-dc91-450d-8c5d-4d7d3a346ea1"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/6fc970e5-863f-4998-85bd-7b2f8fb1a827"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/52ff7c14-4d81-432e-820a-479d6dc89045"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/bc3e8f31-4dec-48b5-8a24-b9db3c28388d",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "bc3e8f31-4dec-48b5-8a24-b9db3c28388d",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Koch Wigbrecht Dr. Waren (Müritz) Mecklenburg-Vorpommern DE Amselweg 3</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "36c38309-8903-4d95-9945-6008840f104d"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/d70769b2-8ead-44a7-926c-0752e7c80154"
+        },
+        "location": [
+          {
+            "reference": "Location/dc60e1cf-0c44-4b22-98b7-8c85f7620f50"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/0e225fae-aec0-42d5-bc8a-c7c1c08bc0b2"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/06d44fde-3f62-47f5-af26-2073243335d5"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/8a2fd5bf-185a-4b5b-8ece-5f3fbdaad708",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "8a2fd5bf-185a-4b5b-8ece-5f3fbdaad708",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Wetzel Philemon Dr. Prof. Extertal Nordrhein-Westfalen DE Theodor-Storm-Str. 43</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "be927bb7-97cf-42cb-b285-62344bc5d7dd"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/d0aaa4f3-45d5-4f16-ad8d-8116d7c570f5"
+        },
+        "location": [
+          {
+            "reference": "Location/5533d8a2-f4de-409b-bcb3-b317585fa2fb"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/0e225fae-aec0-42d5-bc8a-c7c1c08bc0b2"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/eb947e55-921c-4048-a63d-8c3ceefceb23"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/fbf83123-0119-4350-b799-f3b34d9955c7",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "fbf83123-0119-4350-b799-f3b34d9955c7",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Muller Björdis Dr. med. Maselheim Baden-Württemberg DE Schulweg 43</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "92a409fc-fb6b-46ea-bcdf-c04cb2d11263"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/ac6eba86-0f16-4acd-94ca-18b5f9dc0a1a"
+        },
+        "location": [
+          {
+            "reference": "Location/603167a6-7b2f-4247-977f-e23a4194ab28"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/cae68856-7bbc-4c13-8f77-a762a6720991"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/7955a038-2205-48bc-be65-89c4d446d0f2"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/9789bbf0-bade-4d4c-ae89-565772dadf5b",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "9789bbf0-bade-4d4c-ae89-565772dadf5b",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Baumhauer Isabell Dr. dent. München Bayern DE Liesl-Karlstadt-Str. 14</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "8ebc38cb-62c9-4128-b4da-2c267274ffec"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/988e8cd2-53d6-4d24-8920-41a3f5c9d135"
+        },
+        "location": [
+          {
+            "reference": "Location/925940d1-9875-4af7-9c61-4d0fb4c2e57f"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/cae68856-7bbc-4c13-8f77-a762a6720991"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/f5f7433a-06e5-4f6d-b8c9-aa4c8ba5dfcd"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/c3a5c627-6c37-43f9-923b-a9ce45dfc413",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "c3a5c627-6c37-43f9-923b-a9ce45dfc413",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Schwarz Wilfriede  Nürnberg Bayern DE Schweriner Str. 10</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "3fe9e223-9d53-4a54-bbfb-909d7880e03e"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/85ebe562-dcb6-4db4-997d-87a6ac007dea"
+        },
+        "location": [
+          {
+            "reference": "Location/89f10a33-28b5-481e-b8ff-4546dc4b90c6"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/e5457218-066c-4548-9ea0-bd412239d528"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/70a2130b-e820-4912-90b5-0a85d8d3a65e"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/cf2208f2-3867-45eb-a57c-5b3bcd3a1244",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "cf2208f2-3867-45eb-a57c-5b3bcd3a1244",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Trumbauer Reineke  Hagen im Bremischen Niedersachsen DE Unter den Linden 42</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "8be19549-6580-4ed5-988c-ef97852133a2"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/2b7d3294-dcc4-4bc4-95f0-629a2ed8f421"
+        },
+        "location": [
+          {
+            "reference": "Location/ceb231a8-415a-41e5-ab88-7e629ddf8e68"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/e5457218-066c-4548-9ea0-bd412239d528"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/26e9f9b7-0bee-47f9-bc8d-9159c33f1431"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/e8c47937-6f9d-411d-8311-a680da82afbb",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "e8c47937-6f9d-411d-8311-a680da82afbb",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Schulz Marielena Dr. Bad Birnbach Bayern DE Hungerpointweg 45</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "708b4507-44ab-453a-b69d-c694cdb33158"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/d5e6d063-42fd-48b2-9f45-4984d75e1136"
+        },
+        "location": [
+          {
+            "reference": "Location/4afa08b6-6387-4aea-b3b4-4160ac9576bb"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/bfcf17fe-ba89-47b1-adc8-ff9a08431b77"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/d3fbc3f5-90a0-498d-9673-1dde2195534f"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/80963b51-73a0-4718-b3fe-fb97a1c1c5d3",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "80963b51-73a0-4718-b3fe-fb97a1c1c5d3",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Welter Lukida Dr. Prof. Bad Segeberg Schlewig-Holstein DE Bruchweg 18</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "c8d60701-8821-433f-86c3-4a7a2933d88f"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/87ba7e53-83c5-4335-8800-4f6e10d6c205"
+        },
+        "location": [
+          {
+            "reference": "Location/ada71f36-ec82-4177-8beb-a8fe7eda6403"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/bfcf17fe-ba89-47b1-adc8-ff9a08431b77"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/d1244f79-2881-4b5d-aba4-9bdf90a36d72"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/20a85e86-61bb-4247-a750-aa81c128bdfa",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "20a85e86-61bb-4247-a750-aa81c128bdfa",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Ingersleben Feikje Dr. med. Friedrichshafen Baden-Württemberg DE Rebhalde 42</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "9808b4b8-aeb6-4acf-a941-af8795e7e68a"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/eecc94db-9cfa-45e3-9632-367eb25187d9"
+        },
+        "location": [
+          {
+            "reference": "Location/0994086f-96dd-499f-8cdc-91a8c4572532"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/8131ad52-0a2d-4995-b8c0-3f3d3f74b596"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/ba274b0a-6a2c-4b3a-87a2-87c08e6bda0e"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/904943e3-d198-49c9-a327-9088f447bf75",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "904943e3-d198-49c9-a327-9088f447bf75",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Wechsler Denise Dr. dent. Schwedeneck Schlewig-Holstein DE Eckernförder Str. 9</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "a8eea5f3-8b72-45c7-ac02-5b57413fe3a8"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/d194960e-a05c-4bd3-a169-e32fcc6089fa"
+        },
+        "location": [
+          {
+            "reference": "Location/6cf4c7c0-ebb0-4969-99b8-a39b53268e24"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/8131ad52-0a2d-4995-b8c0-3f3d3f74b596"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/d7c77e31-366c-4bc4-a8cf-56ffc954e359"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/2ad09ecd-e107-4e0e-b604-56e52100dcdd",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "2ad09ecd-e107-4e0e-b604-56e52100dcdd",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Wehner Hans-Jürgen  Ortenburg Bayern DE Rauscheröd 11</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "cbc908c6-4892-4807-b7e5-3debf0015c54"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/681a42de-7cc2-43ba-a38b-75bd982aade2"
+        },
+        "location": [
+          {
+            "reference": "Location/fdfc96c3-1aaf-4c3c-8cd0-43bba4316fd5"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/6f07d713-44cc-4dec-8b1e-118d84b3f2fa"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/ef38714f-e397-4235-94bc-8586bc873900"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/f5158455-26fb-4007-98e6-b2e6f8e9719d",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "f5158455-26fb-4007-98e6-b2e6f8e9719d",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:10:22.697+01:00",
+          "source": "#7NrF0r8A4TyXUqsp",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Wirth Lutwin  Arnstadt Thüringen DE Heinrich-Heine-Str. 15</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "c8149d8a-e867-4fa6-b84e-2046bc34fcd7"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/70a14d3a-3b42-4d19-90ef-c67a01cf745c"
+        },
+        "location": [
+          {
+            "reference": "Location/1b040c79-a3c9-4642-b388-d0d7e163d400"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/6f07d713-44cc-4dec-8b1e-118d84b3f2fa"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/64651de7-d8e4-4627-bd8e-df704c310196"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/2f8cc2f2-6934-4852-b14b-ebe11f25a04d",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "2f8cc2f2-6934-4852-b14b-ebe11f25a04d",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:14:04.171+01:00",
+          "source": "#CB7rJ2bkOLxDA4Is",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Wetzel Sebastián Dr. St. Georgen im Schwarzwald Baden-Württemberg DE Im Hochwald 19</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "d21518ed-0b7d-4cf7-8042-4c8fbe0439c1"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/f35bfaad-359d-4248-bde2-cc6cae195ed5"
+        },
+        "location": [
+          {
+            "reference": "Location/2837cd6d-d8d1-4e89-a3da-9a9f60ce28cc"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/207fbbe8-1b33-4b02-8d62-fdb762e750da"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/00ae4cd6-ea85-4623-8fc1-465f2315d5c0"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/24d7b6d6-f337-4e18-9bec-d8c690cbc941",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "24d7b6d6-f337-4e18-9bec-d8c690cbc941",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:14:04.171+01:00",
+          "source": "#CB7rJ2bkOLxDA4Is",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Hoefler Kersta Dr. Prof. Korschenbroich Nordrhein-Westfalen DE Am Heyerhof 40</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "daf0bf47-611b-448f-a785-9b327f0390fb"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/35501879-bf5d-4f72-baa0-5c3231b7b1ec"
+        },
+        "location": [
+          {
+            "reference": "Location/57b3b16a-9abd-4295-90c0-cddc0523c74c"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/207fbbe8-1b33-4b02-8d62-fdb762e750da"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/b48493c7-d5fc-4b71-a943-eca9a914e00d"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/9e11307a-1372-4284-a518-412ff7532aa1",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "9e11307a-1372-4284-a518-412ff7532aa1",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:14:04.171+01:00",
+          "source": "#CB7rJ2bkOLxDA4Is",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Keller Karl Dr. med. Rülzheim Rheinland-Pfalz DE Raiffeisenstr. 42</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "f8e84b3e-c35d-4c23-85d3-6989a29915dd"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/8cbcd4d6-0b28-44eb-8596-c648b682a132"
+        },
+        "location": [
+          {
+            "reference": "Location/fb7cb94c-7dcd-4801-9f1b-9a36bf5cbdd8"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/4004fcb7-d524-48e3-b744-a1a9410a8f31"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/f23c40f0-0747-4636-a2c8-8f1f0c316d58"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/4eb56018-f564-4fbe-af90-3b7363319d05",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "4eb56018-f564-4fbe-af90-3b7363319d05",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:14:04.171+01:00",
+          "source": "#CB7rJ2bkOLxDA4Is",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Beyersdorf Annalene Dr. dent. Osternienburger Land Sachsen-Anhalt DE Friedrichstr. 38</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "616cce35-3c1d-48f1-aac7-0b7d3742c96a"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/c11307c2-bfb9-4aa2-8e05-d5edcd6d605d"
+        },
+        "location": [
+          {
+            "reference": "Location/3abafa47-6d72-449c-80e6-006c3a45b366"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/4004fcb7-d524-48e3-b744-a1a9410a8f31"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/5ffb3b16-dc39-4bb0-a845-2a2c89118c23"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/22d7a096-4076-4afd-924a-8047ff6d5444",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "22d7a096-4076-4afd-924a-8047ff6d5444",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:14:04.171+01:00",
+          "source": "#CB7rJ2bkOLxDA4Is",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Gensch Swenja  Saarbrücken Saarland DE Schwarzeich 37</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "cb90a60e-3513-4ba0-b9a4-d0f52d32fa3d"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/370b4c44-d091-42ca-a621-817d1e6599a4"
+        },
+        "location": [
+          {
+            "reference": "Location/812245b1-b7ac-488c-8326-c74193792ba8"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/cd751ceb-a6f8-4f16-a758-f02f700e5977"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/98182070-06aa-4fa6-95aa-2a12c13e84f9"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/d55ef104-bf05-44f4-994e-3295aa7f1989",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "d55ef104-bf05-44f4-994e-3295aa7f1989",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:14:04.171+01:00",
+          "source": "#CB7rJ2bkOLxDA4Is",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Küchler Jana Maria  Gießen Hessen DE Georg-Haas-Str. 32</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "a35f9210-99db-4477-b9c7-f1454d81e54d"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/f4d29083-de0c-4d4c-8d14-3dee7d6b1393"
+        },
+        "location": [
+          {
+            "reference": "Location/14ed0afd-d256-4069-81db-ae38bc5db3cb"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/cd751ceb-a6f8-4f16-a758-f02f700e5977"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/b96bef51-4a69-4937-829b-787b424c125a"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/ccea167a-7bae-4c8c-869f-1f642c934038",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "ccea167a-7bae-4c8c-869f-1f642c934038",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:14:04.171+01:00",
+          "source": "#CB7rJ2bkOLxDA4Is",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Hummel Kim Dr. Weißenburg i.Bay. Bayern DE Eichfeldstr. 35</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "ba9529aa-c653-4c4f-801d-ada02eba1b44"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/8213bf20-479a-4b35-b053-b7709e8dddbb"
+        },
+        "location": [
+          {
+            "reference": "Location/b4d2b0cf-de9b-498e-9814-1788f0ab1512"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/a185873a-ce98-402c-8ddd-186acec709e2"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/26285ba2-1fde-4874-ad1e-b36a06c9eb47"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/ba94132b-afe5-497c-bbbb-84a0e4727eac",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "ba94132b-afe5-497c-bbbb-84a0e4727eac",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:14:04.171+01:00",
+          "source": "#CB7rJ2bkOLxDA4Is",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Schmidt Tim Dr. Prof. Stetten am kalten Markt Baden-Württemberg DE Mühlweg 10</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "d98bcec9-0c26-4975-99e2-e6177f3bd186"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/4148d628-81fa-4562-8511-874f70cc880c"
+        },
+        "location": [
+          {
+            "reference": "Location/0ce9fb77-e484-40da-a923-a285e6b82b15"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/a185873a-ce98-402c-8ddd-186acec709e2"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/badcdc27-2198-488e-b3e2-f38a8ac152fd"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/8a6d6dc8-8e04-427d-9ab4-c48189614cbe",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "8a6d6dc8-8e04-427d-9ab4-c48189614cbe",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:14:04.171+01:00",
+          "source": "#CB7rJ2bkOLxDA4Is",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Baumgarten Leny Dr. med. Burgstädt Sachsen DE Franz-Schubert-Str. 32</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "a4c3aa2a-96ac-4305-b325-09475cc94873"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/5a75ce9f-444e-4af7-8662-d9736d4127f6"
+        },
+        "location": [
+          {
+            "reference": "Location/32edc2e4-5df1-44ac-8151-e47b9d8c281a"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/24c631ca-35dd-4399-bafb-6dc32df73798"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/7e7defdb-e30a-4305-8f91-db4694f48e1d"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/a001a3d0-8c55-4560-a3c1-b83594bfb04b",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "a001a3d0-8c55-4560-a3c1-b83594bfb04b",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:14:04.171+01:00",
+          "source": "#CB7rJ2bkOLxDA4Is",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Sauter Sisanja Dr. dent. Dülmen Nordrhein-Westfalen DE Fleigenkamp 27</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "fa942f3e-6fcb-47f0-8f66-aa9fde49b2fd"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/88907356-b553-43e8-9ce5-0702171bd832"
+        },
+        "location": [
+          {
+            "reference": "Location/f0738c93-8787-4b3e-90a1-cbe208b54230"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/24c631ca-35dd-4399-bafb-6dc32df73798"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/00084667-2d46-49c5-97c3-9f797d7cca7a"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/16b35a0e-cb3c-45fc-8a95-1985ee92c809",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "16b35a0e-cb3c-45fc-8a95-1985ee92c809",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:14:04.171+01:00",
+          "source": "#CB7rJ2bkOLxDA4Is",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Klein Degenhard  Homberg Hessen DE Schmiedegasse 18</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "a507d4f7-5c9c-49f0-a156-40d939ceb4bf"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/d28896bd-6f07-4efb-b3ee-606b49d6934c"
+        },
+        "location": [
+          {
+            "reference": "Location/3acc86c9-d36b-4fb0-82fd-30049059c1b9"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/5e1de620-84d1-4f49-bcbc-4bbb27d9d463"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/0a7fdeb0-038b-440f-80e7-cf95e5d3ed3d"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/c3a85e72-94b0-4013-b041-eea78fc7ed12",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "c3a85e72-94b0-4013-b041-eea78fc7ed12",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:14:04.171+01:00",
+          "source": "#CB7rJ2bkOLxDA4Is",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Drechsler Marieka  Egestorf Niedersachsen DE Ostende 13</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "64d73c28-f30d-4c4b-bdb8-2eac0d052bc8"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/c2a053d8-8065-41f7-8588-293d033e50a6"
+        },
+        "location": [
+          {
+            "reference": "Location/9178acd3-6a56-49d2-bb74-92724ab2454b"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/5e1de620-84d1-4f49-bcbc-4bbb27d9d463"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/ed9d20e5-978a-4f17-af8b-8509f05fda2d"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/afe64c45-9b9b-4983-baeb-4433ce9ca8ca",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "afe64c45-9b9b-4983-baeb-4433ce9ca8ca",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:14:04.171+01:00",
+          "source": "#CB7rJ2bkOLxDA4Is",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Groß Waldo Dr. Völklingen Saarland DE Auf Großscheid 32</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "41d087c5-4bcc-4957-ae2d-de644b425092"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/d0ae3a97-c716-46ac-b22b-4bcf5432a2fc"
+        },
+        "location": [
+          {
+            "reference": "Location/aa13a1e6-f7ba-4818-9fa8-ac3dcc5e0931"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/3436620d-9358-4db7-9e78-96de3252f52a"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/27137d18-486f-4521-ad5b-9e3fc2399147"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/71c3d679-534a-4647-baba-5648d510c1cb",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "71c3d679-534a-4647-baba-5648d510c1cb",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:14:04.171+01:00",
+          "source": "#CB7rJ2bkOLxDA4Is",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Schuchardt Fenja Dr. Prof. Walldorf Baden-Württemberg DE Käthe-Kollwitz-Str. 31</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "f6cc1c9a-28a6-442d-8a4c-24540e6b126b"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/c57585d5-af68-4b65-ae64-eef4709e29bb"
+        },
+        "location": [
+          {
+            "reference": "Location/5ea20431-71cb-4ec2-ba06-025045af37f7"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/3436620d-9358-4db7-9e78-96de3252f52a"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/11cd4f1a-0456-48e0-9984-bfd068a7632c"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/e65d1cda-7ccd-4184-944b-a134150af095",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "e65d1cda-7ccd-4184-944b-a134150af095",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:14:04.171+01:00",
+          "source": "#CB7rJ2bkOLxDA4Is",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Muller Karl Dr. med. Königswinter Nordrhein-Westfalen DE Auf der Alten Burg 20</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "bee1034d-7a1f-40f9-b96c-99c00b644e0b"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/ade7650e-c7c8-4de7-b7bf-b9211386ac73"
+        },
+        "location": [
+          {
+            "reference": "Location/18286cfd-c862-4e20-a3dc-4c063f1a2267"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/58c65c5e-7806-4005-ab7f-07cddbdf0195"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/74d43478-330d-44de-960b-4f888713fa6b"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/a84bc07f-e905-4c82-980f-137130549c35",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "a84bc07f-e905-4c82-980f-137130549c35",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2023-03-23T14:14:04.171+01:00",
+          "source": "#CB7rJ2bkOLxDA4Is",
+          "profile": [
+            "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory",
+            "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Wörner Schana Dr. dent. Graben-Neudorf Baden-Württemberg DE Rosenweg 44</div>"
+        },
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "47e0e090-8abc-4f4f-a498-dd6f98806c22"
+          }
+        ],
+        "practitioner": {
+          "reference": "Practitioner/71bef805-f301-422b-b3a4-f49e351bce54"
+        },
+        "location": [
+          {
+            "reference": "Location/6c2dcb76-fe35-494f-8207-8f8b71f9b8f1"
+          }
+        ],
+        "healthcareService": [
+          {
+            "reference": "HealthcareService/58c65c5e-7806-4005-ab7f-07cddbdf0195"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/1315dd97-8e60-493e-b01b-0c28186abf58"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    }
+  ]
+}
