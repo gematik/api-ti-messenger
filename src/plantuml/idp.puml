@@ -1,5 +1,3 @@
-@startuml
-
 skinparam sequenceMessageAlign direction
 skinparam WrapWidth 300
 skinparam minClassWidth 150
@@ -42,21 +40,25 @@ oa -> wb: Organisation authentisieren
 
  activate wb
 wb -> rd:POST I_Registration
- 
+ |||
  activate rd
-rd->rd: Erzeuge PKCE (Code verifier und challenge)
-rd->rd: Erstellung der Authentication Request URL\nmit den Request Parametern
-        |||
-          opt#LightGrey #AliceBlue <size:16>Download des IDP Discovery Dokumentes</size>
+      opt#LightGrey #AliceBlue <size:16>Download des IDP Discovery Dokumentes</size>
           |||        
-            rd -> ip:GET [HOSTNAME]/.well-known/openid-configuration
+            rd -> ip:""GET {HOSTNAME]}/.well-known/openid-configuration""
             activate ip
-            ip --> rd:signierte base64 kodierte openid-configuration 
+            ip --> rd:signierte Base64-kodierte openid-configuration 
             deactivate ip
             rd -> rd:Prüfung der Signatur der openid-configuration
           |||
           end
 |||
+rd->rd: Erzeuge PKCE (Code verifier und challenge) \n""code_challenge""\n""code_challenge_method""
+
+     
+|||
+rd->rd: Erstellung der Authentication Request URL\nmit den Request Parametern \n""challenge_path=""\n""{authorization_endpoint}&{client_id}&...""
+        |||
+
 rd --> wb: Redirect zu Authentication Request URL 
  deactivate rd
 
@@ -80,25 +82,27 @@ rd --> wb: Redirect zu Authentication Request URL
         ip -> au: Authentication challenge
         deactivate ip
         |||
-        au -> ko: ""getCards(Aufrufkontext)""
-         activate ko
-        ko --> au: Status, Liste der verfügbaren CardHandles
-        au -> au: Auswahl der gesteckten SMC-B --> CardHandle
+        group#LightGrey #LightBlue <size:16>Signieren der Challenge mit Konnektor-Operationen</size>
         |||
-        au -> ko: ""GetPinStatus (Aufrufkontext, CardHandle,""\n""PinType (PIN.SMC))""
-        ko --> au: Status, PinStatus
-        |||
-          opt#LightGrey #AliceBlue <size:16>Karte nicht freigeschaltet </size>
+          au -> ko: ""getCards(Aufrufkontext)""
+           activate ko
+          ko --> au: Status, Liste der verfügbaren Smartkarten
+          au -> au: Auswahl der gesteckten SMC-B --> CardHandle
           |||
-            au -> ko: ""VerifyPin (Aufrufkontext, CardHandle,""\n""PinType (PIN.SMC))""
-            ko --> oa: Aufforderung der PIN-Eingabe
-            oa -> ko: PIN-Eingabe
-            ko --> au: Status
+          au -> ko: ""GetPinStatus (Aufrufkontext, CardHandle,""\n""PinType (PIN.SMC))""
+          ko --> au: Status, PinStatus
           |||
-          end
+            opt#LightGrey #AliceBlue <size:16>Karte nicht freigeschaltet </size>
+              au -> ko: ""VerifyPin (Aufrufkontext, CardHandle,""\n""PinType (PIN.SMC))""
+              ko --> oa: Aufforderung der PIN-Eingabe
+              oa -> ko: PIN-Eingabe
+              ko --> au: Status
+            |||
+            end
+          au -> ko: ""ExternalAuthenticate""\n""(Aufrufkontext, CardHandle,""\n""C.HCI.AUT, Authentication challenge)""
+          ko --> au: Signierte Authentication challenge
         |||
-        au -> ko: ""ExternalAuthenticate""\n""(Aufrufkontext, CardHandle,""\n""C.HCI.AUT, Authentication challenge)""
-        ko --> au: Signierte Authentication challenge
+        end
           deactivate ko
         |||
         au -> au: Verschlüsselung der signierten Authentication challenge mit dem \nöffentlichen Schlüssel PuK_IDP_ENC vom IDP-Dienst
