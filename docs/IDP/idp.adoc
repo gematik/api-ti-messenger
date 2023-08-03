@@ -44,6 +44,12 @@ Der Anbieter des IDP-Dienstes MUSS bei der organisatorischen Registrierung des A
 RU: https://idp-ref.app.ti-dienste.de +
 PU: https://idp.app.ti-dienste.de/
 
+
+Fachdienstbetreiber müssen ihren Authorization-Server beim Federation Master registrieren. Die Registrierung erfolgt als organisatorischer Prozess, bevor ein Fachdienst an den vom föderierten Identitätsmanagement (IDM) angebotenen Authentifizierungsprozessen teilnehmen kann. Erst nach erfolgter Registrierung, bei der die Adresse des Fachdienstes bzw. seines Authorization-Servers, seine öffentlichen Schlüssel sowie der verwendete scope angegeben wurden, können sektorale Identity Provider ID_TOKEN für den Fachdienst ausstellen.
+
+
+
+
 == Rollen
 
 == Relying Party 
