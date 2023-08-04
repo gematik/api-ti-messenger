@@ -19,9 +19,16 @@ toc::[]
 
 = Zentrale IDP-Dienst
 == Überblick
-Der zentrale *IDP-Dienst* ermöglicht die sichere Identifikation der Akteure anhand der ihnen bereitgestellten Identifikationsmittel einer Smartcard (SMC-B / HBA). Hierfür fasst der *IDP-Dienst*, die im AUT-Zertifikat befindlichen Attribute in signierten JSON Web Token (`ID_TOKEN`) zusammen und stellt diese der anfragenden *Relying Party* aus.
+Der zentrale *IDP-Dienst* ermöglicht die sichere Identifikation der Akteure anhand der ihnen bereitgestellten Identifikationsmittel einer Smartcard (SMC-B / HBA). Hierfür fasst der *IDP-Dienst*, die im AUT-Zertifikat befindlichen Attribute in signierten JSON Web Token (`ID_TOKEN`) zusammen und stellt diese der anfragenden *Relying Party* aus. Im Kontext des *TI-Messenger-Dienstes* übernimmt der  *Registrierungs-Dienst* sowie der *Auth-Service* die Rolle des *Relying Party*, welcher einen `ID_TOKEN` beim *IDP-Dienst* anfragt. 
 
-Im Rahmen des *TI-Messenger-Dienstes* werden die folgenden Endpunkte am *zentralen IDP-Dienst* verwendet:
+Der zentrale *IDP-Dienst* der gematik wird im Rahmen des *TI-Messenger-Dienstes* in den folgenden Anwendungsfällen benötigt:
+
+* link:https://github.com/gematik/api-ti-messenger/blob/feature/C_11306/docs/anwendungsfaelle/MS-AF10103-authentisieren-organisation.adoc[AF_10103 - Authentisieren einer Organisation am TI-Messenger-Dienst]
+* link:https://github.com/gematik/api-ti-messenger/blob/feature/C_11306/docs/anwendungsfaelle/VZD-AF10058-practitioner-hinzufuegen.adoc[AF_10058 - Akteur (User-HBA) im Verzeichnisdienst hinzufügen]
+
+Dies betrifft die Anwendungsfälle für die Authntisierung mittels OpenID Connect oder über das KIM-Verfahren, wo mit Hilfe kryptograschis Schlüsselmaterial geprüft wird, ob eine KIM-EMail erfolgreich entschlüsselt werden kann. 
+
+Im Rahmen des *TI-Messenger-Dienstes* werden die folgenden Endpunkte am *zentralen IDP-Dienst* verwendet, die in den weiteren Kapitel beschrieben werden:
 
 * Discovery-Endpunkt
 * Authorization-Endpunkt
@@ -140,8 +147,6 @@ Registrierungs-Dienst
 </p>
 ++++
 
-*Beschreibung:*
-Für die Signatur der Challenge wird die Funktion "externalAuthenticate" des Konnektors verwendet,
 
 === AF_10058 - Akteur (User-HBA) im Verzeichnisdienst hinzufügen
 Auth-Service
