@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: TiMessengerTestDriver
   description: REST interface to automate the test of a TI-Messenger client implementation.
-  version: 0.4.13
+  version: 0.4.14
   contact:
     name: gematik GmbH
     email: software-development@gematik.de
@@ -2435,7 +2435,6 @@ components:
           example: "m.text"
         fileId:
           type: string
-          format: uuid
           description: "File id - for example an UUID"
           example: "74738ff5-5367-5958-9aee-98fffdcd1876"
         info:
@@ -2457,7 +2456,6 @@ components:
       properties:
         fileId:
           type: string
-          format: uuid
           example: "74738ff5-5367-5958-9aee-98fffdcd1876"
 
     DirectMessage:
