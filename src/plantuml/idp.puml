@@ -62,7 +62,7 @@ rd->rd: Erzeugung eines Zufallswertes (""CODE_VERIFIER"")  \nund Bildung darübe
 rd->rd: Erstellung der Authentication Request URL\nmit den Request Parametern \n""Authentication Request URL=""\n""{authorization_endpoint}&{client_id}&""\n""{response_type}&{redirect_uri}&{state}&""\n""{code_challenge}&{code_challenge_method}&""\n""{scope}&{nonce}""
         |||
 
-rd --> wb: Redirect zum ""{authorization_endpoint}"" des IDP-Dienstes
+rd --> wb: Redirect zur ""{Authentication Request URL}""
  deactivate rd
 
         wb -> wb: Erstellung des Deeplink \n""authenticator://?challenge_path=""\n""{Authentication Request URL}""
@@ -85,59 +85,74 @@ rd --> wb: Redirect zum ""{authorization_endpoint}"" des IDP-Dienstes
         au -> ip: ""GET {Authentication Request URL}""
         activate ip
         ip -> ip: Prüfung ob ""client_id"" und ""scope"" \nbekannt und in dieser Kombination \nzulässig sind
-        ip -> ip: Prüfung der claim ""redirect_uri"" \n gegen die registrierten ""redirect_uris""
-        ip -> ip: SESSION_ID anlegen
-        ip -> ip: Erstellung der Authentication challenge
+        ip -> ip: Prüfung der claim ""redirect_uri"" \n gegen die beim IDP-Dienst\n registrierten ""redirect_uris""
+        ip -> ip: Überführung der ""scope""\nInhalte in ""USER_CONSENT"" 
+        ip -> ip: Erstellung der Authentication challenge\n(""CHALLENGE_TOKEN"")
+        ip -> ip: Signatur des ""CHALLENGE_TOKEN""\nmit ""Prk_IDP_SIG""
                 
-        ip -> au: Authentication challenge
+        ip -> au: ""CHALLENGE_TOKEN"" & ""USER_CONSENT""
         deactivate ip
+        |||
+        au -> au: Prüfen der Signatur des ""CHALLENGE_TOKEN""\nmit dem Schlüssel ""Pub_IDP_SIG""
         |||
         group#LightGrey #LightBlue <size:16>Signieren der Challenge mit Konnektor-Operationen</size>
         |||
           au -> ko: ""getCards(Aufrufkontext)""
            activate ko
           ko --> au: Status, Liste der verfügbaren Smartkarten
+          |||
           au -> au: Auswahl der gesteckten SMC-B --> CardHandle
           |||
           au -> ko: ""GetPinStatus (Aufrufkontext, CardHandle,""\n""PinType (PIN.SMC))""
           ko --> au: Status, PinStatus
           |||
             opt#LightGrey #AliceBlue <size:16>Karte nicht freigeschaltet </size>
+              au --> oa: Zustimmung zum ""USER_CONSENT""
+              oa -> au: Zustimmung zur Verwendung der angefragten Daten
               au -> ko: ""VerifyPin (Aufrufkontext, CardHandle,""\n""PinType (PIN.SMC))""
               ko --> oa: Aufforderung der PIN-Eingabe
               oa -> ko: PIN-Eingabe
               ko --> au: Status
             |||
             end
-          au -> ko: ""ExternalAuthenticate""\n""(Aufrufkontext, CardHandle,""\n""C.HCI.AUT, Authentication challenge)""
-          ko --> au: Signierte Authentication challenge
+          au -> ko: ""ExternalAuthenticate""\n""(Aufrufkontext, CardHandle,""\n""C.HCI.AUT, CHALLENGE_TOKEN)""
+          ko --> au: Signierte ""CHALLENGE_TOKEN"""
         |||
         end
           deactivate ko
         |||
-        au -> au: Verschlüsselung der signierten Authentication challenge mit dem \nöffentlichen Schlüssel PuK_IDP_ENC vom IDP-Dienst
-        au ->ip: Authentication challenge, C.HCI.AUT der SMC-B übertragen
+        au -> au: Verschlüsselung des signierten ""CHALLENGE_TOKEN""\n mit dem öffentlichen Schlüssel ""PuK_IDP_ENC""\n vom IDP-Dienst
+        au ->ip: POST {authorization_endpoint}(signiertes und verschlüsseltes ""CHALLENGE_TOKEN"", ""C.HCI.AUT"" der SMC-B)
         activate ip
-        ip -> ip: Entschlüsselung mit ""PrK_IDP_ENC""\ndes IDP-Dienstes\nund Validierung der Signierten challenge\nanhand des im x5c-Header mitgelieferten\nAuthentifizierungszertifikats
-        ip -> ip: Erstellung des AUTHORIZATION_CODE
-        ip --> au: Redirect zur redirect_uri\ndes Registrierungs-Dienstes\nmit AUTHORIZATION_CODE
+        ip -> ip: Entschlüsselung des ""CHALLENGE_TOKEN""\nmit ""PrK_IDP_ENC"" des IDP-Dienstes
+        ip -> ip: Signaturprüfung des ""CHALLENGE_TOKEN""\nmit dem im ""x5c""-Header mitgelieferten\n""C.HCI.AUT"" Zertifikat
+        ip -> ip: Prüfung der Gültigkeit der Attribute\naus dem ""CHALLENGE_TOKEN""
+        ip -> ip: Erstellung des ""AUTHORIZATION_CODE""
+        ip -> ip: Signieren des ""AUTHORIZATION_CODE""\n mit dem Schlüssel ""Puk_IDP_SIG""
+        ip -> ip: Veschlüsselung des ""AUTHORIZATION_CODE""\nmit eigens erzeugten Schlüsselmaterial\n""(AUTH_CODE_ENC)""
+        ip --> au: Redirect zur ""redirect_uri""\ndes Registrierungs-Dienstes\nmit ""AUTHORIZATION_CODE""
           deactivate ip
-        au --> wb: Redirect zur redirect_uri\ndes Registrierungs-Dienstes\nmit AUTHORIZATION_CODE
+        au --> wb: Redirect zur ""redirect_uri""\ndes Registrierungs-Dienstes\nmit ""AUTHORIZATION_CODE""
           deactivate au
         |||
-        wb -> rd: GET /redirect_uri?code={AUTHORIZATION_CODE}
+        wb -> rd: ""GET /redirect_uri?code={AUTHORIZATION_CODE}""
           activate rd
-        rd -> rd: Erzeugung AES256-"Token-Key"
-        rd -> rd: KEY_VERIFIER mit PUK_IDP_ENC verschlüsseln
+        rd -> rd: Erzeugung eines ""AES256-Token-Key""
+        rd -> rd: ""AES256-Token-Key"" und den\nunter 7) erzeugten ""CODE_VERIFIER""\n in ein ""KEY_VERIFIER"" Objekt einbetten 
+        rd -> rd: ""KEY_VERIFIER"" mit ""PUK_IDP_ENC"" verschlüsseln
         rd -> ip: POST {token_endpoint}\n(AUTHORIZATION_CODE, KEY_VERIFIER)
          activate ip
-        ip -> ip: AUTHORIZATION_CODE\nentschlüsseln und\nValidierung mittels PUK_IDP_SIG\ndes Authorization-Endpunktes
-        ip -> ip: Entschlüsselung und Validierung\ndes KEY_VERIFIER
-        ip -> ip: Erzeugung des ID_TOKEN und\nSignieren mittels PrK_IDP_SIG\nsowie Verschlüsselung mittels Token-Key
-        ip --> rd: ID_TOKEN
+        ip -> ip: ""AUTHORIZATION_CODE"" mit\n""AUTH_CODE_ENC"" entschlüsseln
+        ip -> ip: Signaturprüfung des\n""AUTHORIZATION_CODE""\nmittels ""PUK_IDP_SIG""
+        ip -> ip: Entschlüsselung des ""KEY_VERIFIER""\nmit ""Prk_IDP_ENC""
+        ip -> ip: Extrahieren des ""CODE_VERIFIER""\naus dem ""KEY_VERIFIER""
+        ip -> ip: Extrahieren der ""CODE_CHALLENGE""\naus dem ""AUTHORIZATION_CODE""
+        ip -> ip: Hash(S256) des ""CODE_VERIFIER""\nmit der ""CODE_CHALLENGE"" abgleichen  
+        ip -> ip: Erzeugung des ""ID_TOKEN"" und\nSignieren mittels ""PrK_IDP_SIG""\nsowie Verschlüsselung mittels Token-Key
+        ip --> rd: ""ID_TOKEN""
          deactivate ip
-        rd -> rd:  Entschlüsselung des Token\nmit Token-Key und Validierung\nmit PUK_IDP_SIG
-        rd -> rd: Prüfung der im Token\nenthaltenen ProfessionOID
+        rd -> rd:  Entschlüsselung des Token\nmit ""AES256-Token-Key"" und Validierung\nmit ""PUK_IDP_SIG""
+        rd -> rd: Prüfung der im Token\nenthaltenen ""ProfessionOID"""
         rd --> wb: Status der Authentisierung
          deactivate rd
         wb --> oa: Organisation erfolgreich Authentifiziert
