@@ -19,14 +19,12 @@ toc::[]
 
 = Zentrale IDP-Dienst
 == Überblick
-Der zentrale *IDP-Dienst* ermöglicht die sichere Identifikation der Akteure anhand der ihnen bereitgestellten Identifikationsmittel einer Smartcard (SMC-B / HBA). Hierfür fasst der *IDP-Dienst*, die im AUT-Zertifikat befindlichen Attribute in signierten JSON Web Token (`ID_TOKEN`) zusammen und stellt diese der anfragenden *Relying Party* aus. Im Kontext des *TI-Messenger-Dienstes* übernimmt der  *Registrierungs-Dienst* sowie der *Auth-Service* die Rolle des *Relying Party*, welcher einen `ID_TOKEN` beim *IDP-Dienst* anfragt. 
+Der zentrale *IDP-Dienst* ermöglicht die sichere Identifikation der Akteure anhand der ihnen bereitgestellten Identifikationsmittel einer Smartcard (SMC-B / HBA). Hierfür fasst der *IDP-Dienst*, die im AUT-Zertifikat befindlichen Attribute in signierten JSON Web Token (`ID_TOKEN`) zusammen und stellt diese der anfragenden *Relying Party* aus. Im Kontext des *TI-Messenger-Dienstes* übernimmt der *Registrierungs-Dienst* sowie der *Auth-Service* die Rolle der *Relying Party*, welche einen `ID_TOKEN` beim *IDP-Dienst* anfragt. 
 
 Der zentrale *IDP-Dienst* der gematik wird im Rahmen des *TI-Messenger-Dienstes* in den folgenden Anwendungsfällen benötigt:
 
 * link:https://github.com/gematik/api-ti-messenger/blob/feature/C_11306/docs/anwendungsfaelle/MS-AF10103-authentisieren-organisation.adoc[AF_10103 - Authentisieren einer Organisation am TI-Messenger-Dienst]
-* link:https://github.com/gematik/api-ti-messenger/blob/feature/C_11306/docs/anwendungsfaelle/VZD-AF10058-practitioner-hinzufuegen.adoc[AF_10058 - Akteur (User-HBA) im Verzeichnisdienst hinzufügen]
-
-Dies betrifft die Anwendungsfälle für die Authntisierung mittels OpenID Connect oder über das KIM-Verfahren, wo mit Hilfe kryptograschis Schlüsselmaterial geprüft wird, ob eine KIM-EMail erfolgreich entschlüsselt werden kann. 
+* link:https://github.com/gematik/api-ti-messenger/blob/feature/C_11306/docs/anwendungsfaelle/VZD-AF10058-practitioner-hinzufuegen.adoc[AF_10058 - Akteur (User-HBA) im Verzeichnisdienst hinzufügen] 
 
 Im Rahmen des *TI-Messenger-Dienstes* werden die folgenden Endpunkte am *zentralen IDP-Dienst* verwendet, die in den weiteren Kapitel beschrieben werden:
 
@@ -81,19 +79,21 @@ Der Authorization-Endpunkt erzeugt eine Authentication Challenge (`CHALLENGE_TOK
 
 Auf der Clientseite wird der vom *IDP-Dienst* ausgestellte `CHALLENGE_TOKEN` unter Verwendung des `C.HCI.AUT` oder `C.HP.AUT`-Zertifikates am Konnektor signiert. Anschließend wird der `CHALLENGE_TOKEN` unter Verwendung des öffentlichen Schlüssels `PuK_IDP_ENC` des *IDP-Dienstes* verschlüsselt. Nach der erfolgreicher Verschlüsselung wird das signierte `CHALLENGE_TOKEN` mit das mitgelieferte Zertifikat der Smartcard (`C.HCI.AUT` oder `C.HP.AUT`) an den Authorization-Endpunkt übermittelt. 
 
-Der *IDP-Dienst* entschlüsselt unter Verwendung seines privaten `PuK_IDP_ENC`-Schlüssels das übertragene `CHALLENGE_TOKEN`. Anschließend 
-prüft der *IDP-Dienst* die Signatur des `CHALLENGE_TOKEN` und das mitgelieferte Zertifikat der Smartcard mittels OCSP/TSL der PKI der Telematikinfrastruktur. Sind alle im Claim geforderten Attribute vorhanden und die Gültigkeit der Attribute geprüft, erstellt der Authorization-Endpunkt einen `AUTHORIZATION_CODE` signiert diesen mit dem Schlüssel `PuK_IDP_SIG` und verschlüsselt diesen mit eigenem Schlüsselmaterial. Anschließend wird der `AUTHORIZATION_CODE` und die vom Client aufzurufende `redirect_url` vom *Reyling Party* an den Authenticator des anfragenden Client übermittelt. 
+Der *IDP-Dienst* entschlüsselt unter Verwendung seines privaten `Prk_IDP_ENC`-Schlüssels das übertragene `CHALLENGE_TOKEN`. Anschließend 
+prüft der *IDP-Dienst* die Signatur des `CHALLENGE_TOKEN` und das mitgelieferte Zertifikat der Smartcard mittels OCSP/TSL der PKI der Telematikinfrastruktur. Sind alle im Claim geforderten Attribute vorhanden und die Gültigkeit der Attribute geprüft, erstellt der Authorization-Endpunkt einen `AUTHORIZATION_CODE` signiert diesen mit dem Schlüssel `Prk_IDP_SIG` und verschlüsselt diesen mit eigenem Schlüsselmaterial. Anschließend wird der `AUTHORIZATION_CODE` und die vom Client aufzurufende `redirect_url` vom *Reyling Party* an den Authenticator des anfragenden Client übermittelt. 
 
 == Token-Endpunkt
 CAUTION: Im folgenden wird davon ausgegangen, dass der Client die `redirect_url` vom *Reyling Party* aufruft.
 
 Die *Relying Party* erzeugt einen AES256 `Token-Key`, verknüpft diesen mit dem `CODE_VERFIER` zum `KEY_VERIFIER` und sendet diesen verschlüsselt unter Nutzung des öffentlichen Schlüssels `PUK_IDP_ENC`zusammen mit dem `AUTHORIZATION_CODE` zum Token-Endpunkt des *IDP-Dienstes*.
 
-Am *IDP-Dienst* wird der `AUTHORIZATION_CODE` mit dem zuvor im Kapitel Authorization Endpunkt beschriebenen erzeugten eigenem Schlüsselmaterial entschlüsselt. Anschließend prüft der *IDP-Dienst* die Signatur des `AUTHORIZATION_CODE` unter Verwendung des Schlüssels `PuK_IDP_SIG`. Als nächstes extrahiert der *IDP-Dienst* den `CODE_VERIFIER` aus dem mittels `PuK_IDP_ENC` verschlüsselten `KEY_VERIFIER` und prüft diesen gegen die `CODE_CHALLENGE`. Das bedeutet, dass der eingereichte `CODE_VERIFIER` bei Nutzung des Hash-Verfahrens S256 zum bitgleichen Hash-Wert führt. Stimmt der Hash-Wert aus dem initialen Aufruf des Authenticator - die `CODE_CHALLENGE` - mit dem gebildeten Hash-Wert überein, ist sichergestellt, dass dieser und der initialer Aufruf von der *Relying Party* initiiert wurden. 
+Am *IDP-Dienst* wird der `AUTHORIZATION_CODE` mit dem zuvor im Kapitel Authorization Endpunkt beschriebenen erzeugten eigenem Schlüsselmaterial entschlüsselt. Anschließend prüft der *IDP-Dienst* die Signatur des `AUTHORIZATION_CODE` unter Verwendung des Schlüssels `PuK_IDP_SIG`. Als nächstes extrahiert der *IDP-Dienst* den `CODE_VERIFIER` aus dem mittels `Prk_IDP_ENC` verschlüsselten `KEY_VERIFIER` und prüft diesen gegen die `CODE_CHALLENGE`. Das bedeutet, dass der eingereichte `CODE_VERIFIER` bei Nutzung des Hash-Verfahrens S256 zum bitgleichen Hash-Wert führt. Stimmt der Hash-Wert aus dem initialen Aufruf des Authenticator - die `CODE_CHALLENGE` - mit dem gebildeten Hash-Wert überein, ist sichergestellt, dass dieser und der initialer Aufruf von der *Relying Party* initiiert wurden. 
 
 Daraufhin extrahiert der *IDP-Dienst* die aus dem eingereichten Authentifizierungszertifikat der Smartcard (AUT-Zertifikat) enthaltenen Attribute in ein JSON WEB TOKEN (`ID_TOKEN`). Um die Integrität des `ID_TOKENS` sicherzustellen und eine eineindeutige Erklärung über die Herkunft des Tokens abzugeben, wird dies mit dem privaten Schlüssel `PrK_IDP_SIG` signiert. Abschließend verschlüsselt der *IDP-Dienst* das `ID_TOKEN` mit den von der *Relying Party* übermittelten `Token_Key` und sendet dieses verschlüsselt an die *Relying Party* zurück. 
 
 TIP: Der Token-Endpunkt DARF `ID_TOKEN` mit einer Gültigkeitsdauer von mehr als 86400 Sekunden (24 Stunden) NICHT ausstellen.
+
+Aufbau eines ID-TOKEN als Beispiel einbauen TODO.
 
 == Aufbau der Authorization Request URI
 Die Authorization Request URI wird von der *Relying Party* generiert, um beim *IDP-Dienst* sich ein `ID_TOKEN` ausstellen zu lassen. 
@@ -160,6 +160,9 @@ Registrierungs-Dienst / Auth-Servie
 Das Relying Party muss einen `CODE_VERIFIER` (Zufallswert) und hierüber einen Hash, die `CODE_CHALLENGE` mit dem Algorithmus S256 erzeugen.
 
 == Registrierung
+
+Diese Registrierung erfolgt einmalig für die Anwendung bzw. den Dienst und muss bei Updates nicht wiederholt werden. Die Registrierung des Fachdienstes beinhaltet dabei auch die Abstimmung der Claims und die Gültigkeitsdauer der erstellten Token (siehe [gemSpec_IDP_FD#Kapitel 4]), wobei der Fachdienst seinen Bedarf an den gewünschten Attributen erklärt. Anpassungen an den Claims bedürfen einer erneuten Abstimmung und Registrierung.
+
 Vorbereitende Maßnahmen: Das Anwendungsfrontend und der Fachdienst haben sich im Zuge eines organisatorischen Prozesses beim IDP-Dienst registriert. Das Anwendungsfrontend und das Authenticator-Modul haben das Discovery Dokument eingelesen und kennen damit die Uniform Resource Identifier (URI) und die öffentlichen Schlüssel der vom IDP-Dienst angebotenen Endpunkte. Der Fachdienst hat bei der Registrierung am IDP-Dienst seinen öffentlichen Schlüssel hinterlegt.
 
 
