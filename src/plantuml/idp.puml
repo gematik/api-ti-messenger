@@ -1,3 +1,4 @@
+@startuml
 skinparam sequenceMessageAlign direction
 skinparam WrapWidth 300
 skinparam minClassWidth 150
