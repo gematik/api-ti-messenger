@@ -39,31 +39,34 @@ participant ip as "zentraler \nIDP-Dienst"
 oa -> wb: Organisation authentisieren 
 
  activate wb
-wb -> rd:POST I_Registration
+wb -> rd:""POST I_Registration""
  |||
  activate rd
       opt#LightGrey #AliceBlue <size:16>Download des IDP Discovery Dokumentes</size>
           |||        
-            rd -> ip:""GET {HOSTNAME]}/.well-known/openid-configuration""
+            rd -> ip:""GET {HOSTNAME}/.well-known/openid-configuration""
             activate ip
             ip --> rd:signierte Base64-kodierte openid-configuration 
             deactivate ip
             |||
             rd -> rd:Prüfung der Signatur der openid-configuration
+            |||
+            rd -> rd:Download der öffentlichen Schlüssel und \nextrahieren des ""{authorization_endpoint}""
           |||
           end
 |||
-rd->rd: Erzeugung ""CODE_VERIFIER"" und Bildung \ndarüber den Hash ""code_challenge"" mit \nHash-Algorithmus S256
+rd->rd: Erzeugung eines Zufallswertes (""CODE_VERIFIER"")  \nund Bildung darüber den Hash ""code_challenge"" \nmit Hash-Algorithmus S256
 
      
 |||
-rd->rd: Erstellung der Authentication Request URL\nmit den Request Parametern \n""challenge_path=""\n""{authorization_endpoint}&{client_id}&...""
+rd->rd: Erstellung der Authentication Request URL\nmit den Request Parametern \n""URL={authorization_endpoint}&{client_id}&""\n""{response_type}&{redirect_uri}&{state}&""\n""{code_challenge}&{code_challenge_method}&""\n""{scope}&{nonce}""
         |||
 
-rd --> wb: Redirect zu Authentication Request URL 
+rd --> wb: Redirect zum ""{authorization_endpoint}"" des IDP-Dienstes
  deactivate rd
 
-        wb -> au: Aufruf Deeplink \nauthenticator://?challenge_path=\n{Authentication Request URL} 
+        wb -> wb: Erstellung des Deeplink \n""authenticator://?challenge_path=""\n""{Authentication Request URL}""
+        wb -> au: Aufruf des Deeplinks 
         activate au        
           opt#LightGrey #AliceBlue <size:16>Download des IDP Discovery Dokumentes</size>
           |||        
