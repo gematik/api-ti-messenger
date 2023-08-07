@@ -99,7 +99,7 @@ Der Authorization-Endpunkt erzeugt eine Authentication Challenge (`CHALLENGE_TOK
   "token_type": "challenge",
   "jti": "bcc44257-4a7d-4e0d-8c60-cca2acfda059",
   "snc": "90ef93d60a5d4f2e85d419ba5968d1e1",
-  "scope": "fhir-vzd openid",
+  "scope": "ti-messenger openid",
   "code_challenge": "r3NZAB5NIdI9aLxeMjfh57axkr5xdMiZjmNc9mPp-Sw",
   "code_challenge_method": "S256",
   "response_type": "code",
@@ -299,18 +299,24 @@ Auth-Service
 
 
 == Registrierung
-[gemSpec_IDP_FD#5.1]
+Im Rahmen des *TI-Messenger-Dienstes* ist es notwendig, dass die *Relying Party* (*Registrierungs-Dienst*) sich beim zentralen *IDP-Dienst* der gematik registriert, um im Anschluss von diesem `ID_TOKEN` ausgestellt zu bekommen. Die Registrierung erfolgt hierbei als organisatorischer Prozess (siehe bitte https://gematikde.sharepoint.com/:w:/s/PTNeo/EczX7AFGfBdNrCYghzGsHz4BbSoYhV63QMmDCdz7x9zLpg?e=7wG3c[Welcome Package]). 
 
-Im Rahmen des *TI-Messenger-Dienstes* ist es notwendig, dass die Relying Party (*Registrierungs-Dienst*) sich beim zentralen *IDP-Dienst* registriert, bevor die *Relying Party* am vom *IDP-Dienst* angebotenen Authentifizierungsprozess teilnehmen kann. Die Registrierung erfolgt hierbei als organisatorischer Prozess. Erst nach erfolgter Registrierung, bei der die Adresse der *Relying Party* (`redirect_uri`), sein öffentlicher Schlüssel und die von ihm erwarteten Attribute, in Form von Claims, angegeben wurden, kann der IDP-Dienst ein `ID_TOKEN` ausstellen. 
+Bei der Registrierung der *Relying Party* muss der Anbieter die Adresse (`redirect_uri`) der gematik mitteillen. Zu der `redirect_uri` wird eine `client_id` für die *Relying Party* registriert. Die `client_id` wird von der gematik vergeben und nach Abschluss der Registrierung mitgeteilt.  
+ 
+TIP: Die Registrierung erfolgt einmalig für die Anwendung bzw. den Dienst und muss bei Updates nicht wiederholt werden.
+
+scope: ti-messenger
+
+claims: 
+"professionOID":"Zustimmung zur Verarbeitung der Rolle",
+"organizationName":"Zustimmung zur Verarbeitung der Organisationszugehörigkeit",
+"idNummer":"Zustimmung zur Verarbeitung der Id"
 
 
 
-
-Fachdienste, welche den IDP-Dienst nutzen, müssen die folgenden Prozesse und Schnittstellen bedienen:
 
 Diese Registrierung erfolgt einmalig für die Anwendung bzw. den Dienst und muss bei Updates nicht wiederholt werden. Die Registrierung des Fachdienstes beinhaltet dabei auch die Abstimmung der Claims und die Gültigkeitsdauer der erstellten Token (siehe [gemSpec_IDP_FD#Kapitel 4]), wobei der Fachdienst seinen Bedarf an den gewünschten Attributen erklärt. Anpassungen an den Claims bedürfen einer erneuten Abstimmung und Registrierung.
 
-Der Anbieter des IDP-Dienstes MUSS bei der organisatorischen Registrierung des Anwendungsfrontends diesem eine eindeutige client_id zur Nutzung des IDP-Dienstes zuweisen.
 
 * Endpunkte: +
 RU: https://idp-ref.app.ti-dienste.de +
