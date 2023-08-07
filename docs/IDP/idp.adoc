@@ -81,7 +81,7 @@ Der Authorization-Endpunkt stellt einen `AUTHORIZATION_CODE` aus, welcher späte
 Der Authorization-Endpunkt erzeugt eine Authentication Challenge (`CHALLENGE_TOKEN`) und einen `USER_CONSENT` anhand der in der Authorization Request URL des Authenticator mitgelieferten Daten (`code_challenge` und `scope`). Hierfür prüft der *IDP-Dienst* die bei der organisatorischen Registrierung der Anwendung hinterlegten `redirect_uri` der *Relying Party* mit der `redirect_uri` aus der Authorization Request URI. Stimmen diese nicht überein, wird die weitere Verarbeitung mit einem Fehler abgebrochen. Darüberhinaus prüft der *IDP-Dienst* ob die in der Authorization Request URI enthaltene `client_id` und `scope` bekannt und in dieser Kombination zulässig sind. Bei Erfolg wird das `CHALLENGE_TOKEN` an den Authenticator zur Signierung sowie der `USER_CONSENT` übermittelt. 
 
 *Beispiel eines CHALLENGE_TOKEN (Encoded):*
-[source,text]
+[source,json]
 ----
 {
   "alg": "BP256R1",
