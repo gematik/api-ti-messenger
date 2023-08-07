@@ -19,7 +19,7 @@ toc::[]
 
 = Zentrale IDP-Dienst
 == Überblick
-Der zentrale *IDP-Dienst* ermöglicht die sichere Identifikation der Akteure anhand der ihnen bereitgestellten Identifikationsmittel einer Smartcard (SMC-B / HBA). Hierfür fasst der *IDP-Dienst*, die im AUT-Zertifikat befindlichen Attribute in signierten JSON Web Token (`ID_TOKEN`) zusammen und stellt diese der anfragenden *Relying Party* aus. Im Kontext des *TI-Messenger-Dienstes* übernimmt der *Registrierungs-Dienst* sowie der *Auth-Service* die Rolle der *Relying Party*, welche einen `ID_TOKEN` beim *IDP-Dienst* anfragt. 
+Der zentrale *IDP-Dienst* der gematik (*[gemSpec_IDP_Dienst]*) ermöglicht die sichere Identifikation der Akteure anhand der ihnen bereitgestellten Identifikationsmittel einer Smartcard (SMC-B / HBA). Hierfür fasst der *IDP-Dienst*, die im AUT-Zertifikat befindlichen Attribute in signierten JSON Web Token (`ID_TOKEN`) zusammen und stellt diese der anfragenden *Relying Party* aus. Im Kontext des *TI-Messenger-Dienstes* übernimmt der *Registrierungs-Dienst* sowie der *Auth-Service* die Rolle der *Relying Party*, welche einen `ID_TOKEN` beim *IDP-Dienst* anfragt. 
 
 Der zentrale *IDP-Dienst* der gematik wird im Rahmen des *TI-Messenger-Dienstes* in den folgenden Anwendungsfällen benötigt:
 
@@ -77,23 +77,28 @@ TIP: In der oben gezeigten Tabelle sind nur die vom Hersteller eines *TI-Messeng
 == Authorization Endpunkt
 Der Authorization-Endpunkt erzeugt eine Authentication Challenge (`CHALLENGE_TOKEN`) - die auf Clientseite signiert wird - anhand der in der Authorization Request URL des Authenticator mitgelieferten Daten (`code_challenge` und `scope`). Hierfür prüft der *IDP-Dienst* die bei der organisatorischen Registrierung der Anwendung hinterlegten `redirect_uri` der *Relying Party* mit der `redirect_uri` aus der Authorization Request URI. Stimmen diese nicht überein, werden keine Token ausgestellt und die weitere Verarbeitung mit einem Fehler Response abgebrochen. Darüberhinaus prüft der *IDP-Dienst* ob die in der Authorization Request URI enthaltene `client_id` und `scope` bekannt und in dieser Kombination zulässig sind. Bei erfolg wird das `CHALLENGE_TOKEN` an dem Authenticator zur Signierung übermittelt. 
 
-Auf der Clientseite wird der vom *IDP-Dienst* ausgestellte `CHALLENGE_TOKEN` unter Verwendung des `C.HCI.AUT` oder `C.HP.AUT`-Zertifikates am Konnektor signiert. Anschließend wird der `CHALLENGE_TOKEN` unter Verwendung des öffentlichen Schlüssels `PuK_IDP_ENC` des *IDP-Dienstes* verschlüsselt. Nach der erfolgreicher Verschlüsselung wird das signierte `CHALLENGE_TOKEN` mit das mitgelieferte Zertifikat der Smartcard (`C.HCI.AUT` oder `C.HP.AUT`) an den Authorization-Endpunkt übermittelt. 
+Auf der Clientseite wird der vom *IDP-Dienst* ausgestellte `CHALLENGE_TOKEN` unter Verwendung des `C.HCI.AUT` oder `C.HP.AUT`-Zertifikates am Konnektor signiert und das Authentifizierungszertifikat der verwendeten Smartcard als x5c Parameter einbetten. Anschließend wird der `CHALLENGE_TOKEN` unter Verwendung des öffentlichen Schlüssels `PuK_IDP_ENC` des *IDP-Dienstes* verschlüsselt. Nach der erfolgreicher Verschlüsselung wird das signierte `CHALLENGE_TOKEN` mit das mitgelieferte Zertifikat der Smartcard (`C.HCI.AUT` oder `C.HP.AUT`) an den Authorization-Endpunkt übermittelt. 
 
 Der *IDP-Dienst* entschlüsselt unter Verwendung seines privaten `Prk_IDP_ENC`-Schlüssels das übertragene `CHALLENGE_TOKEN`. Anschließend 
 prüft der *IDP-Dienst* die Signatur des `CHALLENGE_TOKEN` und das mitgelieferte Zertifikat der Smartcard mittels OCSP/TSL der PKI der Telematikinfrastruktur. Sind alle im Claim geforderten Attribute vorhanden und die Gültigkeit der Attribute geprüft, erstellt der Authorization-Endpunkt einen `AUTHORIZATION_CODE` signiert diesen mit dem Schlüssel `Prk_IDP_SIG` und verschlüsselt diesen mit eigenem Schlüsselmaterial. Anschließend wird der `AUTHORIZATION_CODE` und die vom Client aufzurufende `redirect_url` vom *Reyling Party* an den Authenticator des anfragenden Client übermittelt. 
 
+
+*Beispiel: Authorization code: TODO*
+
 == Token-Endpunkt
 CAUTION: Im folgenden wird davon ausgegangen, dass der Client die `redirect_url` vom *Reyling Party* aufruft.
 
-Die *Relying Party* erzeugt einen AES256 `Token-Key`, verknüpft diesen mit dem `CODE_VERFIER` zum `KEY_VERIFIER` und sendet diesen verschlüsselt unter Nutzung des öffentlichen Schlüssels `PUK_IDP_ENC`zusammen mit dem `AUTHORIZATION_CODE` zum Token-Endpunkt des *IDP-Dienstes*.
+Die *Relying Party* erzeugt einen zufälligen 256 Bit AES-Schlüssel (`Token-Key`). Anschließend erzeugt der *Reyling Party* einen `KEY_VERIFIER` indem `Token-Key` und `CODE_VERIFIER` in einem JSON-Objekt kodiert werden und sendet diesen verschlüsselt unter Nutzung des öffentlichen Schlüssels `PUK_IDP_ENC`zusammen mit dem `AUTHORIZATION_CODE` zum Token-Endpunkt des *IDP-Dienstes*.
 
 Am *IDP-Dienst* wird der `AUTHORIZATION_CODE` mit dem zuvor im Kapitel Authorization Endpunkt beschriebenen erzeugten eigenem Schlüsselmaterial entschlüsselt. Anschließend prüft der *IDP-Dienst* die Signatur des `AUTHORIZATION_CODE` unter Verwendung des Schlüssels `PuK_IDP_SIG`. Als nächstes extrahiert der *IDP-Dienst* den `CODE_VERIFIER` aus dem mittels `Prk_IDP_ENC` verschlüsselten `KEY_VERIFIER` und prüft diesen gegen die `CODE_CHALLENGE`. Das bedeutet, dass der eingereichte `CODE_VERIFIER` bei Nutzung des Hash-Verfahrens S256 zum bitgleichen Hash-Wert führt. Stimmt der Hash-Wert aus dem initialen Aufruf des Authenticator - die `CODE_CHALLENGE` - mit dem gebildeten Hash-Wert überein, ist sichergestellt, dass dieser und der initialer Aufruf von der *Relying Party* initiiert wurden. 
 
 Daraufhin extrahiert der *IDP-Dienst* die aus dem eingereichten Authentifizierungszertifikat der Smartcard (AUT-Zertifikat) enthaltenen Attribute in ein JSON WEB TOKEN (`ID_TOKEN`). Um die Integrität des `ID_TOKENS` sicherzustellen und eine eineindeutige Erklärung über die Herkunft des Tokens abzugeben, wird dies mit dem privaten Schlüssel `PrK_IDP_SIG` signiert. Abschließend verschlüsselt der *IDP-Dienst* das `ID_TOKEN` mit den von der *Relying Party* übermittelten `Token_Key` und sendet dieses verschlüsselt an die *Relying Party* zurück. 
 
+Der *Relying Party* MUSS das erhaltene ID_TOKEN vor der Verwendung mit seinem korrespondierenden privaten Entschlüsselungskey entsprechend der "kid" in Header entschlüsseln. Signatur + Fachdienste MÜSSEN erhaltene ID_TOKEN auf das Vorhandensein der benötigten scopes überprüfen.
+
 TIP: Der Token-Endpunkt DARF `ID_TOKEN` mit einer Gültigkeitsdauer von mehr als 86400 Sekunden (24 Stunden) NICHT ausstellen.
 
-Aufbau eines ID-TOKEN als Beispiel einbauen TODO.
+*Aufbau eines ID-TOKEN als Beispiel einbauen TODO.*
 
 == Aufbau der Authorization Request URI
 Die Authorization Request URI wird von der *Relying Party* generiert, um beim *IDP-Dienst* sich ein `ID_TOKEN` ausstellen zu lassen. 
@@ -133,7 +138,7 @@ Der Scope besteht grundsätzlich aus drei Parameter: +
 Dieser Wert ist optional. Wenn er mitgegeben wird muss der gleiche Wert im abschließend ausgegebenen `ID-Token` wieder auftauchen.                                                                                                         
 |=============================================================================================================================================================================================================================================================================================================
 
-Die Anfrage wird dann über das Authenticator-Modul an den Authorization-Endpunkt des IDP-Dienstes geleitet.
+Die Anfrage wird dann über das Authenticator-Modul an den Authorization-Endpunkt des IDP-Dienstes geleitet. Der Authorization-Endpunkt des *IDP-Dienstes*, welcher die Nutzerauthentifizierung durchführt und für die Ausstellung des AUTHORIZATION_CODE zuständig ist, liefert den user_consent und das CHALLENGE_TOKEN als Antwort auf den Authorization-Request des Authenticator-Moduls.
 
 Das Anwendungsfrontend überträgt seinen Authorization Request inklusive der generierten Werte  CODE_CHALLENGE, State und Nonce gemäß [RFC8252 # Anhang B] an das Authenticator-Modul.
 
@@ -152,14 +157,33 @@ Registrierungs-Dienst
 Auth-Service
 
 
-== Rollen
-
-=== Relying Party 
-Registrierungs-Dienst / Auth-Servie
-
-Das Relying Party muss einen `CODE_VERIFIER` (Zufallswert) und hierüber einen Hash, die `CODE_CHALLENGE` mit dem Algorithmus S256 erzeugen.
-
 == Registrierung
+[gemSpec_IDP_FD#5.1]
+
+Fachdienste müssen sich beim IDP-Dienst registrieren. Die Registrierung erfolgt als organisatorischer Prozess, bevor ein Fachdienst am vom IDP-Dienst angebotenen Authentifizierungsprozess teilnehmen kann. Erst nach erfolgter Registrierung, bei der die Adresse des Fachdienstes, sein öffentlicher Schlüssel und die von ihm erwarteten Attribute, in Form von Claims, angegeben wurden, kann der IDP-Dienst ACCESS_TOKEN für den Zugriff zum Fachdienst ausstellen. 
+
+Fachdienste, welche den IDP-Dienst nutzen, müssen die folgenden Prozesse und Schnittstellen bedienen:
+
+    Registrierung des Fachdienstes beim IDP-Dienst (organisatorischer Prozess gemäß Abschnitt 5.1)
+    Abstimmen der Claims (Key/Value-Paare im Payload eines JSON Web Token) mit dem IDP-Dienst (organisatorischer Prozess gemäß Abschnitt 5.1.1)
+
+ [Create Link] A_20295 - Adressen des Dienstes werden registriert
+Der Anbieter des Fachdienstes MUSS, um die Erreichbarkeit des Fachdienstes zu gewährleisten, entsprechende Adressen im TI-Namensraum beantragen. In Fällen, in denen der Fachdienst ebenfalls aus dem Internet erreichbar sein soll, MUSS der Anbieter des Fachdienstes neben der TI-internen auch die notwendigen öffentlichen Adressen bei einem Internet Service Provider (ISP) seiner Wahl beantragen.<=
+
+ [Create Link] A_20739 - Registrierung der Claims des Fachdienstes
+Anbieter von Fachdiensten MÜSSEN bei der Registrierung ihrer Fachdienste am IDP-Dienst die von ihnen erwarteten Attribute in einem Claim (siehe Abschnitt 5.1.1 - Inhalte des Claims ) beschreiben und dem IDP-Dienst zur Verfügung stellen. Die Registrierung MUSS ebenso die absoluten URI des Fachdienstes in der TI sowie im Internet – wenn der Fachdienst auch im Internet erreichbar sein muss – umfassen.<=
+
+Hinweis: Als Claims werden Key/Value-Paare im Payload eines JWT bezeichnet. Ein vereinbarter Claim sagt aus, welche Key/Value-Paare im Payload erwartet werden. Die Vereinbarung wird zwischen dem Fachdienst und dem IDP-Dienst während der Registrierung des Fachdienstes getroffen. Anwendungsfrontends, welche Zugang zum Fachdienst erhalten wollen, müssen die geforderten Claims liefern.
+
+Hinweis:
+Die Beantragung beinhaltet eine sprechende Fachdienstbezeichnung. Die URI des Fachdienstes URI_FD muss dem Authorization Server, welcher Teil des IDP-Dienstes ist, bekanntgegeben werden. 
+
+
+Fachdienstbetreiber müssen ihren Authorization-Server beim Federation Master registrieren. Die Registrierung erfolgt als organisatorischer Prozess, bevor ein Fachdienst an den vom föderierten Identitätsmanagement (IDM) angebotenen Authentifizierungsprozessen teilnehmen kann. Erst nach erfolgter Registrierung, bei der die Adresse des Fachdienstes bzw. seines Authorization-Servers, seine öffentlichen Schlüssel sowie der verwendete scope angegeben wurden, können sektorale Identity Provider ID_TOKEN für den Fachdienst ausstellen.
+
+Anbieter von Fachdiensten MÜSSEN bei der Registrierung ihrer Authorization-Server am Federation Master die von ihnen erwarteten Attribute in scopes (siehe Abschnitt ML-128467) beschreiben und dem Federation Master zur Verfügung stellen. Die Registrierung MUSS ebenso die absolute URI des Fachdienstes im Internet umfassen (seine Client-ID) sowie dessen Signaturschlüssel für das Entity_Statement.
+
+Hinweis: scopes definieren konkrete Key/Value-Paare, die als Payload eines JWT codiert werden. Ein vereinbarter scope sagt aus, welche Key/Value-Paare im Payload erwartet werden. Die Vereinbarung wird zwischen dem Fachdienst und dem Federation Master während der Registrierung des Fachdienstes getroffen. Im Rahmen einer Authentifizierung fragen Authorization-Server den jeweils benötigten scope an, der im Rahmen des ID_TOKEN vom sektoralen Identity Provider bestätigt wird.
 
 Diese Registrierung erfolgt einmalig für die Anwendung bzw. den Dienst und muss bei Updates nicht wiederholt werden. Die Registrierung des Fachdienstes beinhaltet dabei auch die Abstimmung der Claims und die Gültigkeitsdauer der erstellten Token (siehe [gemSpec_IDP_FD#Kapitel 4]), wobei der Fachdienst seinen Bedarf an den gewünschten Attributen erklärt. Anpassungen an den Claims bedürfen einer erneuten Abstimmung und Registrierung.
 
@@ -180,10 +204,33 @@ PU: https://idp.app.ti-dienste.de/
 Fachdienstbetreiber müssen ihren Authorization-Server beim Federation Master registrieren. Die Registrierung erfolgt als organisatorischer Prozess, bevor ein Fachdienst an den vom föderierten Identitätsmanagement (IDM) angebotenen Authentifizierungsprozessen teilnehmen kann. Erst nach erfolgter Registrierung, bei der die Adresse des Fachdienstes bzw. seines Authorization-Servers, seine öffentlichen Schlüssel sowie der verwendete scope angegeben wurden, können sektorale Identity Provider ID_TOKEN für den Fachdienst ausstellen.
 
 
+*Beispiel Token mit dem Claims die vereinbart wurden TODO*
+
+
 = gematik Authenticator
+[gemSpec_IDP_Frontend]
+
+Das Authenticator-Modul bietet die Schnittstelle zum IDP-Dienst an und ist gemeinsam mit dem Anwendungsfrontend in einer mobilen App kombiniert. Für Primärsysteme muss das Authenticator-Modul als Bestandteil des Primärsystems implementiert werden (siehe [gemILF_PS_eRp]). Als Primärsysteme sollen hier PVS (ärztliche und zahnärztliche Praxisverwaltungssystem), KIS (Krankenhausinformationssystem) und AVS (Apothekenverwaltungssystem) genannt sein. Die Beschreibung des Authenticator-Moduls erfolgt in diesem Dokument, weil das Authenticator-Modul einen wesentlichen Bestandteil des Nutzer-Endgerätes/Gerät des Versicherten (GdV) darstellt und somit nicht in der zentralen Providerzone der Telematikinfrastruktur betrieben wird. Authenticator-Modul und Anwendungsfrontend werden in diesem Zusammenhang als ortsveränderliche Komponenten auf unsicheren Endgeräten betrachtet.
+
+Aufgabe des Authenticator-Moduls ist, die von einem Anwendungsfrontend zum Zugriff auf Fachdienste benötigten ID_TOKEN, ACCESS_TOKEN und SSO_TOKEN mit Zustimmung des Nutzers (Resource Owner) und nach eingehender Überprüfung dessen Identität am Authorization-Endpunkt zu beantragen. Hierfür wird vom Authorization-Endpunkt ein AUTHORIZATION_CODE ausgestellt, der vom Authenticator-Modul an das Anwendungsfrontend übergeben wird. Das gleichzeitig vom Authorization-Endpunkt übergebene SSO_TOKEN wird vom Authenticator-Modul selbst gespeichert und wird von diesem für einen zukünftigen Authentifizierungsprozess ohne erneute Abfrage der Zugangsdaten des Nutzers verwendet. Das SSO_TOKEN erfüllt hier die Funktion eines Refresh-Token. [BfDI_02_CC4: Text erweitert um "Das SSO-Token erfüllt hier die Funktion eines Refresh-Token" Anpassung zum SSO-Token auch im Glossar]  Durch Übergabe des AUTHORIZATION_CODE erhält das Anwendungsfrontend am Token-Endpunkt das ID_TOKEN und ACCESS_TOKEN. 
+
+Die für die Beantragung des ID_TOKEN und ACCESS_TOKEN notwendigen Informationen bekommt das Authenticator-Modul vom Anwendungsfrontend übergeben. Weitere Informationen bezieht das Authenticator-Modul mittels Near Field Communication-Schnittstelle (NFC) von einer Smartcard. Die notwendige elektronische Signatur im Challenge-Response-Verfahren ruft das Authenticator-Modul ebenfalls von der Smartcard ab und fordert hierbei den Nutzer zur PIN-Eingabe auf. Im Fall eines Primärsystems erfolgt diese Aktion ohne Interaktion mit dem Nutzer im Hintergrund. Weitere nicht normative Informationen hierzu finden sich im Kapitel 10.
+
+Das Authenticator-Modul MUSS das Discovery Document [RFC8414] bei eingeschaltetem Gerät regelmäßig alle 24 Stunden einlesen und auswerten, und danach die darin aufgeführten URI zu den benötigten öffentlichen Schlüsseln (Public Keys – PUK) und Diensten verwenden.
+
+Das Authenticator-Modul MUSS die Signatur des Discovery Document mathematisch prüfen und auf ein zeitlich gültiges C.FD.SIG-Zertifikat mit der Rollen-OID oid_idpd zurückführen können, welches von einer ihm bekannten Komponenten-PKI ausgestellt wurde.
+
+
+Das Authenticator-Modul MUSS im Zusammenhang mit der PIN-Abfrage für die Signatur des CHALLENGE_TOKEN durch die Smartcard im selben Dialog die Consent-Freigabe des user_consent durch den Nutzer einfordern, damit dieser durch die PIN-Eingabe seine Willenserklärung abgibt und der Verwendung seiner Daten in diesen Claims zustimmt.
+
+Das Authenticator-Modul wird vom Anwendungsfrontend zur Authentifizierung gegenüber dem IDP-Dienst herangezogen. Das Anwendungsfrontend ist eine beim IDP-Dienst als "OpenID Connect-Client" registrierte Software. Das Anwendungsfrontend erhält seinerseits bei der Registrierung am IDP-Dienst einen eindeutigen Identifier.
+
 Das Authenticator-Modul liefert die Daten zur Authentifizierung des Nutzers an den IDP-Dienst.
 
 Hinweis: Der genaue Aufbau des vom Authenticator-Modul übertragenen, signierten CHALLENGE_TOKEN findet sich in [gemSpec_IDP_Dienst#Kapitel 7.3 Authentication Request].
+
+
+
 
 = Refferenzierte Dokumente
 |===
