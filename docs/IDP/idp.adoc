@@ -34,6 +34,8 @@ Im Rahmen des *TI-Messenger-Dienstes* werden die folgenden Endpunkte am *zentral
 
 In den Folgenden Kapiteln wird die Registrierung einer *Relying Party* / *Clients* sowie der Aufbau der Authorization Request URI und der Ablauf der von der gematik geforderten Authorzation Code Flow beschrieben. 
 
+== Registrierung
+
 == Discovery-Endpunkt
 Der Discovery Endpunkt stellt ein Base64 codiertes Discovery Dokument bereit, welches unter folgenden URL der jeweiligen Umgebung aufrufbar: 
 
@@ -115,15 +117,18 @@ Der Authorization-Endpunkt erzeugt eine Authentication Challenge (`CHALLENGE_TOK
 	"requested_scopes":
 	{
 		"openid":"Der Zugriff auf den ID-Token",
-		"fhir-vzd":"Zugriff auf TI-Messenger Funktionalität"
+		"ti-messenger":"Zugriff auf TI-Messenger Funktionalität"
 	},
 	"requested_claims":
 	{
 		"professionOID":"Zustimmung zur Verarbeitung der Rolle",
-		"idNummer":"Zustimmung zur Verarbeitung der Id (z.B. Krankenversichertennummer, Telematik-Id)"
+		"organizationName":"Zustimmung zur Verarbeitung der Organisationszugehörigkeit",
+		"idNummer":"Zustimmung zur Verarbeitung der Id"
 	}
 }
 ----
+
+TIP: Die im `USER_CONSENT` enthaltenen requested_claims `professionOID`, `idNummer` und `organizationName` sind die Claims, die bei der Registrierungs (siehe Kapitel "Registrierung") der *Relying Party* am *IDP-Dienst* die für den `scope=ti-messenger` festgelegt wurden. 
 
 === Abfrage des USER_CONSENT und Signierung des CHALLENGE_TOKEN
 Auf der Nutzerseite wird das vom *IDP-Dienst* ausgestellte `CHALLENGE_TOKEN` unter Verwendung des `C.HCI.AUT` oder `C.HP.AUT`-Zertifikates am Konnektor signiert und das Authentifizierungszertifikat der verwendeten Smartcard als `x5c`-Parameter einbettet. 
@@ -296,39 +301,14 @@ Auth-Service
 == Registrierung
 [gemSpec_IDP_FD#5.1]
 
-Fachdienste müssen sich beim IDP-Dienst registrieren. Die Registrierung erfolgt als organisatorischer Prozess, bevor ein Fachdienst am vom IDP-Dienst angebotenen Authentifizierungsprozess teilnehmen kann. Erst nach erfolgter Registrierung, bei der die Adresse des Fachdienstes, sein öffentlicher Schlüssel und die von ihm erwarteten Attribute, in Form von Claims, angegeben wurden, kann der IDP-Dienst ACCESS_TOKEN für den Zugriff zum Fachdienst ausstellen. 
+Im Rahmen des *TI-Messenger-Dienstes* ist es notwendig, dass die Relying Party (*Registrierungs-Dienst*) sich beim zentralen *IDP-Dienst* registriert, bevor die *Relying Party* am vom *IDP-Dienst* angebotenen Authentifizierungsprozess teilnehmen kann. Die Registrierung erfolgt hierbei als organisatorischer Prozess. Erst nach erfolgter Registrierung, bei der die Adresse der *Relying Party* (`redirect_uri`), sein öffentlicher Schlüssel und die von ihm erwarteten Attribute, in Form von Claims, angegeben wurden, kann der IDP-Dienst ein `ID_TOKEN` ausstellen. 
+
+
+
 
 Fachdienste, welche den IDP-Dienst nutzen, müssen die folgenden Prozesse und Schnittstellen bedienen:
 
-    Registrierung des Fachdienstes beim IDP-Dienst (organisatorischer Prozess gemäß Abschnitt 5.1)
-    Abstimmen der Claims (Key/Value-Paare im Payload eines JSON Web Token) mit dem IDP-Dienst (organisatorischer Prozess gemäß Abschnitt 5.1.1)
-
- [Create Link] A_20295 - Adressen des Dienstes werden registriert
-Der Anbieter des Fachdienstes MUSS, um die Erreichbarkeit des Fachdienstes zu gewährleisten, entsprechende Adressen im TI-Namensraum beantragen. In Fällen, in denen der Fachdienst ebenfalls aus dem Internet erreichbar sein soll, MUSS der Anbieter des Fachdienstes neben der TI-internen auch die notwendigen öffentlichen Adressen bei einem Internet Service Provider (ISP) seiner Wahl beantragen.<=
-
- [Create Link] A_20739 - Registrierung der Claims des Fachdienstes
-Anbieter von Fachdiensten MÜSSEN bei der Registrierung ihrer Fachdienste am IDP-Dienst die von ihnen erwarteten Attribute in einem Claim (siehe Abschnitt 5.1.1 - Inhalte des Claims ) beschreiben und dem IDP-Dienst zur Verfügung stellen. Die Registrierung MUSS ebenso die absoluten URI des Fachdienstes in der TI sowie im Internet – wenn der Fachdienst auch im Internet erreichbar sein muss – umfassen.<=
-
-Hinweis: Als Claims werden Key/Value-Paare im Payload eines JWT bezeichnet. Ein vereinbarter Claim sagt aus, welche Key/Value-Paare im Payload erwartet werden. Die Vereinbarung wird zwischen dem Fachdienst und dem IDP-Dienst während der Registrierung des Fachdienstes getroffen. Anwendungsfrontends, welche Zugang zum Fachdienst erhalten wollen, müssen die geforderten Claims liefern.
-
-Hinweis:
-Die Beantragung beinhaltet eine sprechende Fachdienstbezeichnung. Die URI des Fachdienstes URI_FD muss dem Authorization Server, welcher Teil des IDP-Dienstes ist, bekanntgegeben werden. 
-
-
-Fachdienstbetreiber müssen ihren Authorization-Server beim Federation Master registrieren. Die Registrierung erfolgt als organisatorischer Prozess, bevor ein Fachdienst an den vom föderierten Identitätsmanagement (IDM) angebotenen Authentifizierungsprozessen teilnehmen kann. Erst nach erfolgter Registrierung, bei der die Adresse des Fachdienstes bzw. seines Authorization-Servers, seine öffentlichen Schlüssel sowie der verwendete scope angegeben wurden, können sektorale Identity Provider ID_TOKEN für den Fachdienst ausstellen.
-
-Anbieter von Fachdiensten MÜSSEN bei der Registrierung ihrer Authorization-Server am Federation Master die von ihnen erwarteten Attribute in scopes (siehe Abschnitt ML-128467) beschreiben und dem Federation Master zur Verfügung stellen. Die Registrierung MUSS ebenso die absolute URI des Fachdienstes im Internet umfassen (seine Client-ID) sowie dessen Signaturschlüssel für das Entity_Statement.
-
-Hinweis: scopes definieren konkrete Key/Value-Paare, die als Payload eines JWT codiert werden. Ein vereinbarter scope sagt aus, welche Key/Value-Paare im Payload erwartet werden. Die Vereinbarung wird zwischen dem Fachdienst und dem Federation Master während der Registrierung des Fachdienstes getroffen. Im Rahmen einer Authentifizierung fragen Authorization-Server den jeweils benötigten scope an, der im Rahmen des ID_TOKEN vom sektoralen Identity Provider bestätigt wird.
-
 Diese Registrierung erfolgt einmalig für die Anwendung bzw. den Dienst und muss bei Updates nicht wiederholt werden. Die Registrierung des Fachdienstes beinhaltet dabei auch die Abstimmung der Claims und die Gültigkeitsdauer der erstellten Token (siehe [gemSpec_IDP_FD#Kapitel 4]), wobei der Fachdienst seinen Bedarf an den gewünschten Attributen erklärt. Anpassungen an den Claims bedürfen einer erneuten Abstimmung und Registrierung.
-
-Vorbereitende Maßnahmen: Das Anwendungsfrontend und der Fachdienst haben sich im Zuge eines organisatorischen Prozesses beim IDP-Dienst registriert. Das Anwendungsfrontend und das Authenticator-Modul haben das Discovery Dokument eingelesen und kennen damit die Uniform Resource Identifier (URI) und die öffentlichen Schlüssel der vom IDP-Dienst angebotenen Endpunkte. Der Fachdienst hat bei der Registrierung am IDP-Dienst seinen öffentlichen Schlüssel hinterlegt.
-
-
-Die Registrierung des Anwendungsfrontends ist im Dokument *[gemSpec_IDP_Frontend]* beschrieben. Anbieter von Fachdiensten müssen ebenfalls die Registrierung ihres Fachdienstes über einen organisatorischen Prozess beim IDP-Dienst durchführen.
-
-Ergänzung: Diese Registrierung erfolgt einmalig für die Anwendung bzw. den Dienst und muss bei Updates nicht wiederholt werden. Die Registrierung des Fachdienstes beinhaltet dabei auch die Abstimmung der Claims und die Gültigkeitsdauer der erstellten Token (siehe [gemSpec_IDP_FD#Kapitel 4]), wobei der Fachdienst seinen Bedarf an den gewünschten Attributen erklärt. Anpassungen an den Claims bedürfen einer erneuten Abstimmung und Registrierung.
 
 Der Anbieter des IDP-Dienstes MUSS bei der organisatorischen Registrierung des Anwendungsfrontends diesem eine eindeutige client_id zur Nutzung des IDP-Dienstes zuweisen.
 
@@ -336,8 +316,6 @@ Der Anbieter des IDP-Dienstes MUSS bei der organisatorischen Registrierung des A
 RU: https://idp-ref.app.ti-dienste.de +
 PU: https://idp.app.ti-dienste.de/
 
-
-Fachdienstbetreiber müssen ihren Authorization-Server beim Federation Master registrieren. Die Registrierung erfolgt als organisatorischer Prozess, bevor ein Fachdienst an den vom föderierten Identitätsmanagement (IDM) angebotenen Authentifizierungsprozessen teilnehmen kann. Erst nach erfolgter Registrierung, bei der die Adresse des Fachdienstes bzw. seines Authorization-Servers, seine öffentlichen Schlüssel sowie der verwendete scope angegeben wurden, können sektorale Identity Provider ID_TOKEN für den Fachdienst ausstellen.
 
 
 *Beispiel Token mit dem Claims die vereinbart wurden TODO*
