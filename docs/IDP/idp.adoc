@@ -74,16 +74,54 @@ Die folgende Tabelle enthält die Abkürzungen für die öffentliche Schlüssel 
 
 TIP: In der oben gezeigten Tabelle sind nur die vom Hersteller eines *TI-Messenger-Clients* / *TI-Messenger-Fachdienstes* zu verwendenen Schlüssel gelistet
 
-== Authorization Endpunkt
-Der Authorization-Endpunkt erzeugt eine Authentication Challenge (`CHALLENGE_TOKEN`) - die auf Clientseite signiert wird - anhand der in der Authorization Request URL des Authenticator mitgelieferten Daten (`code_challenge` und `scope`). Hierfür prüft der *IDP-Dienst* die bei der organisatorischen Registrierung der Anwendung hinterlegten `redirect_uri` der *Relying Party* mit der `redirect_uri` aus der Authorization Request URI. Stimmen diese nicht überein, werden keine Token ausgestellt und die weitere Verarbeitung mit einem Fehler Response abgebrochen. Darüberhinaus prüft der *IDP-Dienst* ob die in der Authorization Request URI enthaltene `client_id` und `scope` bekannt und in dieser Kombination zulässig sind. Bei erfolg wird das `CHALLENGE_TOKEN` an dem Authenticator zur Signierung übermittelt. 
+== Authorization-Endpunkt
+Der Authorization-Endpunkt stellt einen `AUTHORIZATION_CODE` aus, welcher später am `/token`-Endpunkt des *IDP-Dienstes* gegen ein `ID_TOKEN` eingetauscht werden kann. Für die Ausstellung des `AUTHORIZATION_CODE` sind die in den folgenden Unterkapitel beschriebenen Abläufe notwendig.
 
-Auf der Clientseite wird der vom *IDP-Dienst* ausgestellte `CHALLENGE_TOKEN` unter Verwendung des `C.HCI.AUT` oder `C.HP.AUT`-Zertifikates am Konnektor signiert und das Authentifizierungszertifikat der verwendeten Smartcard als x5c Parameter einbetten. Anschließend wird der `CHALLENGE_TOKEN` unter Verwendung des öffentlichen Schlüssels `PuK_IDP_ENC` des *IDP-Dienstes* verschlüsselt. Nach der erfolgreicher Verschlüsselung wird das signierte `CHALLENGE_TOKEN` mit das mitgelieferte Zertifikat der Smartcard (`C.HCI.AUT` oder `C.HP.AUT`) an den Authorization-Endpunkt übermittelt. 
+=== Ausstellung des CHALLENGE_TOKEN und USER_CONSENT
+Der Authorization-Endpunkt erzeugt eine Authentication Challenge (`CHALLENGE_TOKEN`) und einen `USER_CONSENT` anhand der in der Authorization Request URL des Authenticator mitgelieferten Daten (`code_challenge` und `scope`). Hierfür prüft der *IDP-Dienst* die bei der organisatorischen Registrierung der Anwendung hinterlegten `redirect_uri` der *Relying Party* mit der `redirect_uri` aus der Authorization Request URI. Stimmen diese nicht überein, wird die weitere Verarbeitung mit einem Fehler abgebrochen. Darüberhinaus prüft der *IDP-Dienst* ob die in der Authorization Request URI enthaltene `client_id` und `scope` bekannt und in dieser Kombination zulässig sind. Bei Erfolg wird das `CHALLENGE_TOKEN` an den Authenticator zur Signierung sowie der `USER_CONSENT` übermittelt. 
 
+*Beispiel eines CHALLENGE_TOKEN (Encoded):*
+[source,text]
+----
+{
+  "alg": "BP256R1",
+  "kid": "puk_idp_sig",
+  "typ": "JWT"
+}
+{
+  "iss": "https://idp-ref.app.ti-dienste.de",
+  "iat": 1691392220,
+  "exp": 1691392400,
+  "token_type": "challenge",
+  "jti": "bcc44257-4a7d-4e0d-8c60-cca2acfda059",
+  "snc": "90ef93d60a5d4f2e85d419ba5968d1e1",
+  "scope": "fhir-vzd openid",
+  "code_challenge": "r3NZAB5NIdI9aLxeMjfh57axkr5xdMiZjmNc9mPp-Sw",
+  "code_challenge_method": "S256",
+  "response_type": "code",
+  "redirect_uri": "https://fhir-directory-ref.vzd.ti-dienste.de/signin-gematik-idp-dienst",
+  "client_id": "GEMgematFHI4HkPrd8SR",
+  "state": "4kBZ4hEt1PHdLqeSh8o56w"
+}
+----
+
+=== Abfrage des USER_CONSENT und Signierung des CHALLENGE_TOKEN
+Auf der Nutzerseite wird der vom *IDP-Dienst* ausgestellte `CHALLENGE_TOKEN` unter Verwendung des `C.HCI.AUT` oder `C.HP.AUT`-Zertifikates am Konnektor signiert und das Authentifizierungszertifikat der verwendeten Smartcard als x5c Parameter einbettet. 
+
+CAUTION: Damit die Signatur durch den Konnektor erfolgen darf, ist die zuvor eingeholte Zustimmung des Akteurs zur Verwendung der angefragten Daten (`USER_CONSENT`) unbedingt notwendig. 
+
+Anschließend wird das `CHALLENGE_TOKEN` unter Verwendung des öffentlichen Schlüssels `PuK_IDP_ENC` des *IDP-Dienstes* verschlüsselt. Nach der erfolgreichen Verschlüsselung wird das signierte `CHALLENGE_TOKEN` mit dem mitgelieferten Zertifikat der Smartcard (`C.HCI.AUT` oder `C.HP.AUT`) an den Authorization-Endpunkt übermittelt. 
+
+=== Ausstellung des Authorization Codes
 Der *IDP-Dienst* entschlüsselt unter Verwendung seines privaten `Prk_IDP_ENC`-Schlüssels das übertragene `CHALLENGE_TOKEN`. Anschließend 
-prüft der *IDP-Dienst* die Signatur des `CHALLENGE_TOKEN` und das mitgelieferte Zertifikat der Smartcard mittels OCSP/TSL der PKI der Telematikinfrastruktur. Sind alle im Claim geforderten Attribute vorhanden und die Gültigkeit der Attribute geprüft, erstellt der Authorization-Endpunkt einen `AUTHORIZATION_CODE` signiert diesen mit dem Schlüssel `Prk_IDP_SIG` und verschlüsselt diesen mit eigenem Schlüsselmaterial. Anschließend wird der `AUTHORIZATION_CODE` und die vom Client aufzurufende `redirect_url` vom *Reyling Party* an den Authenticator des anfragenden Client übermittelt. 
+prüft der *IDP-Dienst* die Signatur des `CHALLENGE_TOKEN` und das mitgelieferte Zertifikat der Smartcard mittels OCSP/TSL der PKI der Telematikinfrastruktur. Sind alle im Claim geforderten Attribute vorhanden und die Gültigkeit der Attribute geprüft, erstellt der Authorization Endpunkt einen `AUTHORIZATION_CODE` signiert diesen mit dem Schlüssel `Prk_IDP_SIG` und verschlüsselt diesen mit eigenem Schlüsselmaterial. Anschließend wird der `AUTHORIZATION_CODE` und die vom Client aufzurufende `redirect_url` vom *Reyling Party* an den Authenticator des anfragenden Clients übermittelt. 
 
+*Beispiel Authorization Code:*
+[source,text]
+----
 
-*Beispiel: Authorization code: TODO*
+----
+
 
 == Token-Endpunkt
 CAUTION: Im folgenden wird davon ausgegangen, dass der Client die `redirect_url` vom *Reyling Party* aufruft.
