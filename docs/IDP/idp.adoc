@@ -185,3 +185,11 @@ Das Authenticator-Modul liefert die Daten zur Authentifizierung des Nutzers an d
 
 Hinweis: Der genaue Aufbau des vom Authenticator-Modul übertragenen, signierten CHALLENGE_TOKEN findet sich in [gemSpec_IDP_Dienst#Kapitel 7.3 Authentication Request].
 
+= Refferenzierte Dokumente
+|===
+|[Source] |Editor: Title
+
+|*[gemSpec_IDP_Dienst]* |gematik: Spezifikation Identity Provider-Dienst
+|*[gemSpec_IDP_FD]* |gematik: Spezifikation Identity Provider – Nutzungsspezifikation für Fachdienste
+|*[gemSpec_IDP_Frontend]* |gematik: Spezifikation Identity Provider - Frontend
+|===
