@@ -19,7 +19,7 @@ toc::[]
 
 = Zentrale IDP-Dienst
 == Überblick
-Der zentrale *IDP-Dienst* der gematik (*[gemSpec_IDP_Dienst]*) ermöglicht die sichere Identifikation der Akteure anhand der ihnen bereitgestellten Identifikationsmittel einer Smartcard (SMC-B / HBA). Hierfür fasst der *IDP-Dienst*, die im AUT-Zertifikat befindlichen Attribute in signierten JSON Web Token (`ID_TOKEN`) zusammen und stellt diese der anfragenden *Relying Party* aus. Im Kontext des *TI-Messenger-Dienstes* übernimmt der *Registrierungs-Dienst* sowie der *Auth-Service* die Rolle der *Relying Party*, welche einen `ID_TOKEN` beim *IDP-Dienst* anfragt. 
+Der zentrale *IDP-Dienst* der gematik (*[gemSpec_IDP_Dienst]*) ermöglicht die sichere Identifikation der Akteure anhand der ihnen bereitgestellten Identifikationsmittel einer Smartcard (SMC-B / HBA). Hierfür fasst der *IDP-Dienst*, die im AUT-Zertifikat befindlichen Attribute in signierten JSON Web Token (`ID_TOKEN`) zusammen und stellt diese der anfragenden *Relying Party* aus. Im Kontext des *TI-Messenger-Dienstes* übernimmt der *Registrierungs-Dienst* eines *TI-Messenger-Fachdienstes* sowie der *Auth-Service* des *VZD-FHIR-Directory* die Rolle der *Relying Party*, welche einen `ID_TOKEN` beim *IDP-Dienst* anfragt. 
 
 Der zentrale *IDP-Dienst* der gematik wird im Rahmen des *TI-Messenger-Dienstes* in den folgenden Anwendungsfällen benötigt:
 
