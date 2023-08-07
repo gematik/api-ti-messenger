@@ -129,7 +129,7 @@ rd --> wb: Redirect zur ""{Authentication Request URL}""
         ip -> ip: Signaturprüfung des ""CHALLENGE_TOKEN""\nmit dem im ""x5c""-Header mitgelieferten\n""C.HCI.AUT"" Zertifikat
         ip -> ip: Prüfung der Gültigkeit der Attribute\naus dem ""CHALLENGE_TOKEN""
         ip -> ip: Erstellung des ""AUTHORIZATION_CODE""
-        ip -> ip: Signieren des ""AUTHORIZATION_CODE""\n mit dem Schlüssel ""Puk_IDP_SIG""
+        ip -> ip: Signieren des ""AUTHORIZATION_CODE""\n mit dem Schlüssel ""Prk_IDP_SIG""
         ip -> ip: Veschlüsselung des ""AUTHORIZATION_CODE""\nmit eigens erzeugten Schlüsselmaterial\n""(AUTH_CODE_ENC)""
         ip --> au: Redirect zur ""redirect_uri""\ndes Registrierungs-Dienstes\nmit ""AUTHORIZATION_CODE""
           deactivate ip
