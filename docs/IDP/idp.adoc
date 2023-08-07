@@ -229,7 +229,13 @@ TIP: Der Token-Endpunkt DARF `ID_TOKEN` mit einer Gültigkeitsdauer von mehr als
 Im ersten Schritt entschlüsselt der *Relying Party* den `ID_TOKEN` mit seinem selbst erzeugten 256-Bit AES-Schlüssel (`Token-Key`). Anschließend erfolgt die Signaturprüfung mit dem `PuK_IDP_SIG` des *IDP-Dienstes*. 
 
 == Aufbau der Authorization Request URI
-Die Authorization Request URI wird von der *Relying Party* generiert, um beim *IDP-Dienst* sich ein `ID_TOKEN` ausstellen zu lassen. 
+Die Authorization Request URI wird von der *Relying Party* generiert, um beim *IDP-Dienst* sich ein `ID_TOKEN` ausstellen zu lassen. Für die Erstellung der Authorization Request URI sind die in den folgenden Unterkapitel beschriebenen Abläufe notwendig.
+
+=== Bildung von CODE_VERIFIER und CODE_CHALLENGE
+Der `CODE_VERIFIER` wird zur Abfrage des `ID_TOKEN` benötigt. 
+
+=== Zusammensetzen der Authorization Request URL
+Text
 
 *Beispiel eines Authorization Requests:*
 [source,text]
