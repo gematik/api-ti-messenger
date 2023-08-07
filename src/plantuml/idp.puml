@@ -83,18 +83,23 @@ rd --> wb: Redirect zur ""{Authentication Request URL}""
           |||
           end
         |||
+        
         au -> ip: ""GET {Authentication Request URL}""
+
+        group #LightGreen <size:16>AUTHORIZATION_ENDPUNKT</size>
+        |||
         activate ip
         ip -> ip: Prüfung ob ""client_id"" und ""scope"" \nbekannt und in dieser Kombination \nzulässig sind
         ip -> ip: Prüfung der claim ""redirect_uri"" \n gegen die beim IDP-Dienst\n registrierten ""redirect_uris""
         ip -> ip: Überführung der ""scope""\nInhalte in ""USER_CONSENT"" 
         ip -> ip: Erstellung der Authentication challenge\n(""CHALLENGE_TOKEN"")
         ip -> ip: Signatur des ""CHALLENGE_TOKEN""\nmit ""Prk_IDP_SIG""
-                
+        |||
+        end
         ip -> au: ""CHALLENGE_TOKEN"" & ""USER_CONSENT""
         deactivate ip
         |||
-        au -> au: Prüfen der Signatur des ""CHALLENGE_TOKEN""\nmit dem Schlüssel ""Pub_IDP_SIG""
+        au -> au: Prüfen der Signatur des ""CHALLENGE_TOKEN""\nmit dem Schlüssel ""PuK_IDP_SIG""
         |||
         group#LightGrey #LightBlue <size:16>Signieren der Challenge mit Konnektor-Operationen</size>
         |||
@@ -123,14 +128,19 @@ rd --> wb: Redirect zur ""{Authentication Request URL}""
           deactivate ko
         |||
         au -> au: Verschlüsselung des signierten ""CHALLENGE_TOKEN""\n mit dem öffentlichen Schlüssel ""PuK_IDP_ENC""\n vom IDP-Dienst
+        
         au ->ip: POST {authorization_endpoint}(signiertes und verschlüsseltes ""CHALLENGE_TOKEN"", ""C.HCI.AUT"" der SMC-B)
         activate ip
+        group #LightGreen <size:16>AUTHORIZATION_ENDPUNKT</size>
+        |||
         ip -> ip: Entschlüsselung des ""CHALLENGE_TOKEN""\nmit ""PrK_IDP_ENC"" des IDP-Dienstes
         ip -> ip: Signaturprüfung des ""CHALLENGE_TOKEN""\nmit dem im ""x5c""-Header mitgelieferten\n""C.HCI.AUT"" Zertifikat
         ip -> ip: Prüfung der Gültigkeit der Attribute\naus dem ""CHALLENGE_TOKEN""
         ip -> ip: Erstellung des ""AUTHORIZATION_CODE""
         ip -> ip: Signieren des ""AUTHORIZATION_CODE""\n mit dem Schlüssel ""Prk_IDP_SIG""
         ip -> ip: Veschlüsselung des ""AUTHORIZATION_CODE""\nmit eigens erzeugten Schlüsselmaterial\n""(AUTH_CODE_ENC)""
+        |||
+        end
         ip --> au: Redirect zur ""redirect_uri""\ndes Registrierungs-Dienstes\nmit ""AUTHORIZATION_CODE""
           deactivate ip
         au --> wb: Redirect zur ""redirect_uri""\ndes Registrierungs-Dienstes\nmit ""AUTHORIZATION_CODE""
@@ -141,8 +151,11 @@ rd --> wb: Redirect zur ""{Authentication Request URL}""
         rd -> rd: Erzeugung eines ""AES256-Token-Key""
         rd -> rd: ""AES256-Token-Key"" und den\nunter 7) erzeugten ""CODE_VERIFIER""\n in ein ""KEY_VERIFIER"" Objekt einbetten 
         rd -> rd: ""KEY_VERIFIER"" mit ""PUK_IDP_ENC"" verschlüsseln
+        
         rd -> ip: POST {token_endpoint}\n(AUTHORIZATION_CODE, KEY_VERIFIER)
+        group #Orange <size:16>TOKEN_ENDPUNKT</size>
          activate ip
+         |||
         ip -> ip: ""AUTHORIZATION_CODE"" mit\n""AUTH_CODE_ENC"" entschlüsseln
         ip -> ip: Signaturprüfung des\n""AUTHORIZATION_CODE""\nmittels ""PUK_IDP_SIG""
         ip -> ip: Entschlüsselung des ""KEY_VERIFIER""\nmit ""Prk_IDP_ENC""
@@ -150,9 +163,11 @@ rd --> wb: Redirect zur ""{Authentication Request URL}""
         ip -> ip: Extrahieren der ""CODE_CHALLENGE""\naus dem ""AUTHORIZATION_CODE""
         ip -> ip: Hash(S256) des ""CODE_VERIFIER""\nmit der ""CODE_CHALLENGE"" abgleichen  
         ip -> ip: Erzeugung des ""ID_TOKEN"" und\nSignieren mittels ""PrK_IDP_SIG""\nsowie Verschlüsselung mittels Token-Key
+        |||
+        end
         ip --> rd: ""ID_TOKEN""
-         deactivate ip
-        rd -> rd:  Entschlüsselung des Token\nmit ""AES256-Token-Key"" und Validierung\nmit ""PUK_IDP_SIG""
+        deactivate ip
+        rd -> rd:  Entschlüsselung des Token\nmit ""AES256-Token-Key"" und Validierung\nmit ""PuK_IDP_SIG""
         rd -> rd: Prüfung der im Token\nenthaltenen ""ProfessionOID"""
         rd --> wb: Status der Authentisierung
          deactivate rd
