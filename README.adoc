@@ -127,7 +127,8 @@ link:docs/FHIR-Directory/FHIR-Directory.adoc[- VZD-FHIR-Directory] +
 link:docs/IDP/idp.adoc[- Zentraler IDP-Dienst] +
 
 *Diverses* +
-https://gematikde.sharepoint.com/:w:/s/PTNeo/EczX7AFGfBdNrCYghzGsHz4BbSoYhV63QMmDCdz7x9zLpg?e=7wG3c[- Welcome Package] +
+https://gematikde.sharepoint.com/:w:/s/PTNeo/EczX7AFGfBdNrCYghzGsHz4BbSoYhV63QMmDCdz7x9zLpg?e=7wG3c[- Welcome Package &#91;DE&#93;] +
+https://gematikde.sharepoint.com/:w:/s/PTNeo/ETwc10F5Ha1KmlM8NEsetl8BtEumSDgu56AK-PNiZ0-e1Q?e=ySZROI[- Welcome Package &#91;EN&#93;] +
 https://gematikde.sharepoint.com/sites/EXTAuthenticator/Freigegebene%20Dokumente/Forms/AllItems.aspx?id=%2Fsites%2FEXTAuthenticator%2FFreigegebene%20Dokumente%2FVer%C3%B6ffentlichte%20Version%20%2D%20gematik%20Authenticator&p=true&ga=1[- gematik Authenticator] +
 https://github.com/gematik/TI-Messenger-Testsuite[- TI-Messenger-Testsuite] +
 link:docs/Q&A.adoc[- Fragen und Antworten zur aktuellen Spezifikation &#91;FAQ&#93;]
