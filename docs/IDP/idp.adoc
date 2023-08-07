@@ -94,8 +94,6 @@ Am *IDP-Dienst* wird der `AUTHORIZATION_CODE` mit dem zuvor im Kapitel Authoriza
 
 Daraufhin extrahiert der *IDP-Dienst* die aus dem eingereichten Authentifizierungszertifikat der Smartcard (AUT-Zertifikat) enthaltenen Attribute in ein JSON WEB TOKEN (`ID_TOKEN`). Um die Integrität des `ID_TOKENS` sicherzustellen und eine eineindeutige Erklärung über die Herkunft des Tokens abzugeben, wird dies mit dem privaten Schlüssel `PrK_IDP_SIG` signiert. Abschließend verschlüsselt der *IDP-Dienst* das `ID_TOKEN` mit den von der *Relying Party* übermittelten `Token_Key` und sendet dieses verschlüsselt an die *Relying Party* zurück. 
 
-Der *Relying Party* MUSS das erhaltene ID_TOKEN vor der Verwendung mit seinem korrespondierenden privaten Entschlüsselungskey entsprechend der "kid" in Header entschlüsseln. Signatur + Fachdienste MÜSSEN erhaltene ID_TOKEN auf das Vorhandensein der benötigten scopes überprüfen.
-
 TIP: Der Token-Endpunkt DARF `ID_TOKEN` mit einer Gültigkeitsdauer von mehr als 86400 Sekunden (24 Stunden) NICHT ausstellen.
 
 *Aufbau eines ID-TOKEN als Beispiel einbauen TODO.*
