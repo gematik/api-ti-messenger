@@ -105,6 +105,24 @@ Der Authorization-Endpunkt erzeugt eine Authentication Challenge (`CHALLENGE_TOK
 }
 ----
 
+*Beispiel eines USER_CONSENT:*
+[source,json]
+----
+"user_consent":
+{
+	"requested_scopes":
+	{
+		"openid":"Der Zugriff auf den ID-Token",
+		"fhir-vzd":"Zugriff auf TI-Messenger Funktionalität"
+	},
+	"requested_claims":
+	{
+		"professionOID":"Zustimmung zur Verarbeitung der Rolle",
+		"idNummer":"Zustimmung zur Verarbeitung der Id (z.B. Krankenversichertennummer, Telematik-Id)"
+	}
+}
+----
+
 === Abfrage des USER_CONSENT und Signierung des CHALLENGE_TOKEN
 Auf der Nutzerseite wird der vom *IDP-Dienst* ausgestellte `CHALLENGE_TOKEN` unter Verwendung des `C.HCI.AUT` oder `C.HP.AUT`-Zertifikates am Konnektor signiert und das Authentifizierungszertifikat der verwendeten Smartcard als x5c Parameter einbettet. 
 
