@@ -54,6 +54,8 @@ In der folgenden Tabelle sind die `scopes` und die claims die im Rahmen des *TI-
 `idNummer` | Erforderliche Claims für den TI-Messenger-Dienst                                                                  
 |==============================================================================================================================================================================
 
+Die Claims werden später in das angeforderte JSON WEB TOKEN (`ID_TOKEN`) eingebettet. 
+
 TIP: Die Registrierung erfolgt einmalig für die Anwendung bzw. den Dienst und muss bei Updates nicht wiederholt werden. 
 
 == Ablauf: Abfrage eines ID_TOKEN am IDP-Dienst
