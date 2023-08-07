@@ -232,12 +232,12 @@ Im ersten Schritt entschlüsselt der *Relying Party* den `ID_TOKEN` mit seinem s
 Die Authorization Request URI wird von der *Relying Party* generiert, um beim *IDP-Dienst* sich ein `ID_TOKEN` ausstellen zu lassen. Für die Erstellung der Authorization Request URI sind die in den folgenden Unterkapitel beschriebenen Abläufe notwendig.
 
 === Bildung von CODE_VERIFIER und CODE_CHALLENGE
-Der `CODE_VERIFIER` wird zur Abfrage des `ID_TOKEN` benötigt. 
+Der *IDP-Dienst* der gematik unterstützt PKCE (Proof Key for Code Exchange). Daher ist es notwendig, dass die *Reyling Party* einen `CODE_VERIFIER` erzeugt und die `CODE_CHALLENGE` mithilfe von `CODE_CHALLENGE_METHOD` berechnet. Dieser wird später am token-endpunkt benötigt, um ein `ID_TOKEN` zu erhalten. 
 
 === Zusammensetzen der Authorization Request URL
-Text
+Die Authorization Request URL setzt sich aus dem Discovery Dokument ermittelten `{authorization_endpoint}` und Request Parametern, die gemäß OpenID Connect Standard definiert sind, zusammen.
 
-*Beispiel eines Authorization Requests:*
+*Beispiel eines Authorization Request URL:*
 [source,text]
 ----
 https://idp-ref.app.ti-dienste.de/auth? 
@@ -255,21 +255,21 @@ nonce=MbwsuHIExDKyqKDKSsPp
 |=============================================================================================================================================================================================================================================================================================================
 | Attribut              | Beschreibung                                                                                                                                                                                                                                                                        
 | `client_id`             | Die `client_id` der *Relying Party*. Wird bei Registrierung beim IDP vergeben.                                                                                                                                                                                                                
-| `response_type`         | Referenziert den erwarteten Response-Type des Flow
-Muss immer 'code' lauten.
+| `response_type`         | Referenziert den erwarteten Response-Type des Flow und
+muss immer `code` lauten.
 Damit wird angezeigt, dass es sich hierbei um einen Authorization Code Flow handelt.
 Für eine nähere Erläuterung siehe OpenID-Spezifikation.                                                         
 | `redirect_uri`          | Die URL wird vom *Relying Party* beim Registrierungsprozess im *IDP-Dienst* hinterlegt und leitet die Antwort des Servers an diese Adresse um.                                                                                                                                                           
 | `state`                 | Der state der Session. Sollte dem zufällig generierten state-Wert aus der initialen Anfrage entsprechen.                                                                                                                                                                            
-| `code_challenge`        | Der Hashwert des `Code-Verifiers` wird zum *IDP-Dienst* als `Code-Challenge` gesendet.                                                                                                                                                                                                           
-| `code_challenge_method` | Der *Relying Party* generiert einen `Code-Verifier` und erzeugt darüber einen Hash im Verfahren SHA-256.                                                                                                                                         
+| `code_challenge`        | Der Hashwert des `CODE_VERIFIER` wird zum *IDP-Dienst* als `CODE_CHALLENGE` gesendet.                                                                                                                                                                                                           
+| `code_challenge_method` | Der *Relying Party* generiert einen `CODE_VERIFIER` und erzeugt darüber einen Hash im Verfahren SHA-256.                                                                                                                                         
 | `scope`                 | Der `Scope` entspricht dem zwischen der *Relying Party* und dem *IDP-Dienst* festgelegten Wert.
 
 Der Scope besteht grundsätzlich aus drei Parameter: +
     `openid` +
     `ti-messenger`
 | `nonce`                 | String zur Verhinderung von CSRF-Attacke
-Dieser Wert ist optional. Wenn er mitgegeben wird muss der gleiche Wert im abschließend ausgegebenen `ID-Token` wieder auftauchen.                                                                                                         
+Dieser Wert ist optional. Wenn er mitgegeben wird muss der gleiche Wert im abschließend ausgegebenen `ID_TOKEN` wieder auftauchen.                                                                                                         
 |=============================================================================================================================================================================================================================================================================================================
 
 Die Anfrage wird dann über das Authenticator-Modul an den Authorization-Endpunkt des IDP-Dienstes geleitet. Der Authorization-Endpunkt des *IDP-Dienstes*, welcher die Nutzerauthentifizierung durchführt und für die Ausstellung des AUTHORIZATION_CODE zuständig ist, liefert den user_consent und das CHALLENGE_TOKEN als Antwort auf den Authorization-Request des Authenticator-Moduls.
