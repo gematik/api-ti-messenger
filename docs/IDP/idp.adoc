@@ -26,11 +26,13 @@ Der zentrale *IDP-Dienst* der gematik wird im Rahmen des *TI-Messenger-Dienstes*
 * link:https://github.com/gematik/api-ti-messenger/blob/feature/C_11306/docs/anwendungsfaelle/MS-AF10103-authentisieren-organisation.adoc[AF_10103 - Authentisieren einer Organisation am TI-Messenger-Dienst]
 * link:https://github.com/gematik/api-ti-messenger/blob/feature/C_11306/docs/anwendungsfaelle/VZD-AF10058-practitioner-hinzufuegen.adoc[AF_10058 - Akteur (User-HBA) im Verzeichnisdienst hinzufügen] 
 
-Im Rahmen des *TI-Messenger-Dienstes* werden die folgenden Endpunkte am *zentralen IDP-Dienst* verwendet, die in den weiteren Kapitel beschrieben werden:
+Im Rahmen des *TI-Messenger-Dienstes* werden die folgenden Endpunkte am *zentralen IDP-Dienst* verwendet:
 
 * Discovery-Endpunkt
 * Authorization-Endpunkt
 * Token-Endpunkt
+
+In den Folgenden Kapiteln wird die Registrierung einer *Relying Party* / *Clients* sowie der Aufbau der Authorization Request URI und der Ablauf der von der gematik geforderten Authorzation Code Flow beschrieben. 
 
 == Discovery-Endpunkt
 Der Discovery Endpunkt stellt ein Base64 codiertes Discovery Dokument bereit, welches unter folgenden URL der jeweiligen Umgebung aufrufbar: 
