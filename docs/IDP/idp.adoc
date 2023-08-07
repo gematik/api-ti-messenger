@@ -124,7 +124,7 @@ Der Authorization-Endpunkt erzeugt eine Authentication Challenge (`CHALLENGE_TOK
 ----
 
 === Abfrage des USER_CONSENT und Signierung des CHALLENGE_TOKEN
-Auf der Nutzerseite wird der vom *IDP-Dienst* ausgestellte `CHALLENGE_TOKEN` unter Verwendung des `C.HCI.AUT` oder `C.HP.AUT`-Zertifikates am Konnektor signiert und das Authentifizierungszertifikat der verwendeten Smartcard als x5c Parameter einbettet. 
+Auf der Nutzerseite wird das vom *IDP-Dienst* ausgestellte `CHALLENGE_TOKEN` unter Verwendung des `C.HCI.AUT` oder `C.HP.AUT`-Zertifikates am Konnektor signiert und das Authentifizierungszertifikat der verwendeten Smartcard als `x5c`-Parameter einbettet. 
 
 CAUTION: Damit die Signatur durch den Konnektor erfolgen darf, ist die zuvor eingeholte Zustimmung des Akteurs zur Verwendung der angefragten Daten (`USER_CONSENT`) unbedingt notwendig. 
 
@@ -132,27 +132,101 @@ Anschließend wird das `CHALLENGE_TOKEN` unter Verwendung des öffentlichen Schl
 
 === Ausstellung des Authorization Codes
 Der *IDP-Dienst* entschlüsselt unter Verwendung seines privaten `Prk_IDP_ENC`-Schlüssels das übertragene `CHALLENGE_TOKEN`. Anschließend 
-prüft der *IDP-Dienst* die Signatur des `CHALLENGE_TOKEN` und das mitgelieferte Zertifikat der Smartcard mittels OCSP/TSL der PKI der Telematikinfrastruktur. Sind alle im Claim geforderten Attribute vorhanden und die Gültigkeit der Attribute geprüft, erstellt der Authorization Endpunkt einen `AUTHORIZATION_CODE` signiert diesen mit dem Schlüssel `Prk_IDP_SIG` und verschlüsselt diesen mit eigenem Schlüsselmaterial. Anschließend wird der `AUTHORIZATION_CODE` und die vom Client aufzurufende `redirect_url` vom *Reyling Party* an den Authenticator des anfragenden Clients übermittelt. 
+prüft der *IDP-Dienst* die Signatur des `CHALLENGE_TOKEN` und das mitgelieferte Zertifikat der Smartcard mittels OCSP/TSL der PKI der Telematikinfrastruktur. Sind alle im Claim geforderten Attribute vorhanden und die Gültigkeit der Attribute geprüft, erstellt der Authorization-Endpunkt einen `AUTHORIZATION_CODE` signiert diesen mit dem Schlüssel `Prk_IDP_SIG` und verschlüsselt diesen mit eigenem Schlüsselmaterial. Anschließend wird der `AUTHORIZATION_CODE` und die vom Client aufzurufende `redirect_url` vom *Reyling Party* an den Authenticator des anfragenden Clients übermittelt. 
 
-*Beispiel Authorization Code:*
-[source,text]
+*Beispiel Authorization Code (Decrypted):*
+[source,json]
 ----
-
+{
+   "alg": "BP256R1",
+   "typ": "JWT",
+   "kid": "puk_idp_sig"
+}
+{
+   "organizationName": "Kleines Krankenhaus am Kornfeld TEST-ONLY",
+   "professionOID": "1.2.276.0.76.4.30",
+   "idNummer": "5-2-KHAUS-Kornfeld01",
+   "iss": "https://idp-ref.app.ti-dienste.de",
+   "response_type": "code",
+   "snc": "Ay6WUqtAUcV2p9WZYHPo",
+   "code_challenge_method": "S256",
+   "given_name": "Hans",
+   "token_type": "code",
+   "nonce": "nN4LkW1moAwg1tofYZtf",
+   "client_id": "GEMgematFHI4HkPrd8SR",
+   "scope": "openid ti-messenger",
+   "auth_time": "1618243993",
+   "redirect_uri": "https://fhir-directory-ref.vzd.ti-dienste.de/signin-gematik-idp-dienst",
+   "state": "AcYxMQ5MZMpRh6WOBjs8",
+   "exp": "1618244053",
+   "family_name": "Mueller",
+   "iat": "1618243993",
+   "code_challenge": "r3NZAB5NIdI9aLxeMjfh57axkr5xdMiZjmNc9mPp-Sw",
+   "jti": "6e8a61e316472f3b"
+}     
 ----
-
 
 == Token-Endpunkt
-CAUTION: Im folgenden wird davon ausgegangen, dass der Client die `redirect_url` vom *Reyling Party* aufruft.
+Der Token-Endpunkt stellt unter Vorlage eines gültigen Authorization Code einen `ID_TOKEN` aus. Für die Ausstellung des `ID_TOKEN` sind die in den folgenden Unterkapitel beschriebenen Abläufe notwendig.
 
-Die *Relying Party* erzeugt einen zufälligen 256 Bit AES-Schlüssel (`Token-Key`). Anschließend erzeugt der *Reyling Party* einen `KEY_VERIFIER` indem `Token-Key` und `CODE_VERIFIER` in einem JSON-Objekt kodiert werden und sendet diesen verschlüsselt unter Nutzung des öffentlichen Schlüssels `PUK_IDP_ENC`zusammen mit dem `AUTHORIZATION_CODE` zum Token-Endpunkt des *IDP-Dienstes*.
+CAUTION: Im folgenden wird davon ausgegangen, dass der Client die `redirect_url` der *Reyling Party* aufruft.
 
-Am *IDP-Dienst* wird der `AUTHORIZATION_CODE` mit dem zuvor im Kapitel Authorization Endpunkt beschriebenen erzeugten eigenem Schlüsselmaterial entschlüsselt. Anschließend prüft der *IDP-Dienst* die Signatur des `AUTHORIZATION_CODE` unter Verwendung des Schlüssels `PuK_IDP_SIG`. Als nächstes extrahiert der *IDP-Dienst* den `CODE_VERIFIER` aus dem mittels `Prk_IDP_ENC` verschlüsselten `KEY_VERIFIER` und prüft diesen gegen die `CODE_CHALLENGE`. Das bedeutet, dass der eingereichte `CODE_VERIFIER` bei Nutzung des Hash-Verfahrens S256 zum bitgleichen Hash-Wert führt. Stimmt der Hash-Wert aus dem initialen Aufruf des Authenticator - die `CODE_CHALLENGE` - mit dem gebildeten Hash-Wert überein, ist sichergestellt, dass dieser und der initialer Aufruf von der *Relying Party* initiiert wurden. 
+=== Erzeugung des KEY_VERIfIER durch die Relying Party
+Im ersten Schritt erzeugt die *Relying Party* einen zufälligen 256-Bit AES-Schlüssel (`Token-Key`). Anschließend erzeugt der *Reyling Party* einen `KEY_VERIFIER` indem `Token-Key` und `CODE_VERIFIER` in einem JSON-Objekt kodiert werden und sendet diesen verschlüsselt unter Nutzung des öffentlichen Schlüssels `PUK_IDP_ENC`zusammen mit dem `AUTHORIZATION_CODE` zum Token-Endpunkt des *IDP-Dienstes*.
+
+*Beispiel eines KEY_VERIFIER:*
+[source,json]
+----
+{
+   "token_key": "T0hHOHNKOTFaREcxTmN0dVRKSURraTZxNEpheGxaUEs",
+   "code_verifier": "W91A37hQ8oeDRVpnkYgpYthjl4LqYy95A87ISy9zpUM"
+}
+----
+
+TIP: Der im `KEY_VERIFIER` enthaltene `CODE_VERIFIER` ist der ursprünglich von der *Relying Party* erzeugte `CODE_VERIFIER` ohne Hashing des S256-Algorithmus im gegensatz zur `CODE_CHALLENGE`. 
+
+=== Ausstellung des ID_TOKEN 
+Am *IDP-Dienst* wird der `AUTHORIZATION_CODE` mit dem zuvor im Kapitel Authorization-Endpunkt beschriebenen erzeugten eigenem Schlüsselmaterial entschlüsselt. Anschließend prüft der *IDP-Dienst* die Signatur des `AUTHORIZATION_CODE` unter Verwendung des Schlüssels `PuK_IDP_SIG`. Als nächstes extrahiert der *IDP-Dienst* den `CODE_VERIFIER` aus dem mittels `Prk_IDP_ENC` verschlüsselten `KEY_VERIFIER` und prüft diesen gegen die `CODE_CHALLENGE`. Das bedeutet, dass der eingereichte `CODE_VERIFIER` bei Nutzung des Hash-Verfahrens S256 zum bitgleichen Hash-Wert führt. Stimmt der Hash-Wert aus dem initialen Aufruf des Authenticator - die `CODE_CHALLENGE` - mit dem gebildeten Hash-Wert überein, ist sichergestellt, dass dieser und der initialer Aufruf von der *Relying Party* initiiert wurden. 
 
 Daraufhin extrahiert der *IDP-Dienst* die aus dem eingereichten Authentifizierungszertifikat der Smartcard (AUT-Zertifikat) enthaltenen Attribute in ein JSON WEB TOKEN (`ID_TOKEN`). Um die Integrität des `ID_TOKENS` sicherzustellen und eine eineindeutige Erklärung über die Herkunft des Tokens abzugeben, wird dies mit dem privaten Schlüssel `PrK_IDP_SIG` signiert. Abschließend verschlüsselt der *IDP-Dienst* das `ID_TOKEN` mit den von der *Relying Party* übermittelten `Token_Key` und sendet dieses verschlüsselt an die *Relying Party* zurück. 
 
 TIP: Der Token-Endpunkt DARF `ID_TOKEN` mit einer Gültigkeitsdauer von mehr als 86400 Sekunden (24 Stunden) NICHT ausstellen.
 
-*Aufbau eines ID-TOKEN als Beispiel einbauen TODO.*
+*Beispiel des ID_TOKEN:*
+[source,json]
+----
+{
+   "alg": "BP256R1",
+   "typ": "JWT",
+   "kid": "puk_idp_sig"
+}
+{
+   "at_hash": "5AZmDxrYImUa6-kjMNAL3g",
+   "sub": "ez4D403gBzH1IhnYOXA4aUU-7spqPbWUyUELPoA79CM",
+   "organizationName": "Kleines Krankenhaus am Kornfeld TEST-ONLY",
+   "professionOID": "1.2.276.0.76.4.30",
+   "idNummer": "5-2-KHAUS-Kornfeld01",
+   "amr": [
+     "mfa",
+     "sc",
+     "pin"   ],
+   "iss": "https://idp-ref.app.ti-dienste.de",
+   "given_name": "Hans",
+   "nonce": "nN4LkW1moAwg1tofYZtf",
+   "aud": "GEMgematFHI4HkPrd8SR",
+   "acr": "gematik-ehealth-loa-high",
+   "azp": "GEMgematFHI4HkPrd8SR",
+   "auth_time": "1618243993",
+   "scope": "openid ti-messenger",
+   "exp": "1618244294",
+   "iat": "1618243994",
+   "family_name": "Mueller",
+   "jti": "c1c760ca67fe1306"
+}
+----
+
+=== Prüfung des ID_TOKEN von der Relying Party
+Im ersten Schritt entschlüsselt der *Relying Party* den `ID_TOKEN` mit seinem selbst erzeugten 256-Bit AES-Schlüssel (`Token-Key`). Anschließend erfolgt die Signaturprüfung mit dem `PuK_IDP_SIG` des *IDP-Dienstes*. 
 
 == Aufbau der Authorization Request URI
 Die Authorization Request URI wird von der *Relying Party* generiert, um beim *IDP-Dienst* sich ein `ID_TOKEN` ausstellen zu lassen. 
