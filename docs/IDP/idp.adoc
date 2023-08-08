@@ -106,15 +106,17 @@ Das Anwendungsfrontend überträgt seinen Authorization Request inklusive der ge
 === Aufrufe der Endpunkte am IDP-Dienst
 Im Rahmen des TI-Messenger-Dienstes werden die folgenden Endpunkte am zentralen *IDP-Dienst* verwendet:
 
-* Discovery-Endpunkt (/.well-known/openid-configuration)
-* Authorization-Endpunktn (/auth)
-* Token-Endpunkt (/token)
+* *Discovery-Endpunkt* +
+RU: https://idp-ref.app.ti-dienste.de/.well-known/openid-configuration +
+PU: https://idp.app.ti-dienste.de/.well-known/openid-configuration
 
-Die Endpunkte sind unter den folgenden URL's aufrufbar:
+* *Authorization-Endpunkt* +
+RU: https://idp-ref.app.ti-dienste.de/auth +
+PU: https://idp.app.ti-dienste.de/auth
 
-*Domains:* +
-RU: https://idp-ref.app.ti-dienste.de +
-PU: https://idp.app.ti-dienste.de
+* *Token-Endpunkt* +
+RU: https://idp-ref.app.ti-dienste.de/token +
+PU: https://idp.app.ti-dienste.de/token
 
 In den folgenden Unterkapiteln werden die Endpunkte weiter beschrieben. 
 
