@@ -322,8 +322,8 @@ Im ersten Schritt entschlüsselt der *Relying Party* den `ID_TOKEN` mit seinem s
 
 
 == Authorization Code Flow
+Beispiel am Anwendungsfall
 
-=== AF_10103 - Authentisieren einer Organisation am TI-Messenger-Dienst
 Registrierungs-Dienst 
 ++++
 <p align="left">
@@ -332,34 +332,13 @@ Registrierungs-Dienst
 ++++
 
 
-=== AF_10058 - Akteur (User-HBA) im Verzeichnisdienst hinzufügen
-Auth-Service
-
-
 
 = gematik Authenticator
-[gemSpec_IDP_Frontend]
+Die Aufgabe des Authenticators ist, dass von der *Relying Party* benötigte ID_TOKEN mit Zustimmung des Akteurs und nach eingehender Überprüfung dessen Identität am Authorization-Endpunkt des *IDP-Dienstes* zu beantragen. Die für die Beantragung des ID_TOKEN notwendigen Informationen bekommt der Authenticator von der *Relying Party* übergeben. Weitere Informationen bezieht das Authenticator  von einer Smartcard. Die notwendige elektronische Signatur im Challenge-Response-Verfahren ruft der Authenticator ebenfalls von der Smartcard ab und fordert hierbei den Nutzer zur PIN-Eingabe auf. Der Authenticator fordert im Zusammenhang mit der PIN-Abfrage für die Signatur des CHALLENGE_TOKEN durch die Smartcard im selben Dialog die Consent-Freigabe des user_consent durch den Nutzer ein, damit dieser durch die PIN-Eingabe seine Willenserklärung abgibt und der Verwendung seiner Daten in diesen Claims zustimmt. 
 
-Das Authenticator-Modul bietet die Schnittstelle zum IDP-Dienst an und ist gemeinsam mit dem Anwendungsfrontend in einer mobilen App kombiniert. Für Primärsysteme muss das Authenticator-Modul als Bestandteil des Primärsystems implementiert werden (siehe [gemILF_PS_eRp]). Als Primärsysteme sollen hier PVS (ärztliche und zahnärztliche Praxisverwaltungssystem), KIS (Krankenhausinformationssystem) und AVS (Apothekenverwaltungssystem) genannt sein. Die Beschreibung des Authenticator-Moduls erfolgt in diesem Dokument, weil das Authenticator-Modul einen wesentlichen Bestandteil des Nutzer-Endgerätes/Gerät des Versicherten (GdV) darstellt und somit nicht in der zentralen Providerzone der Telematikinfrastruktur betrieben wird. Authenticator-Modul und Anwendungsfrontend werden in diesem Zusammenhang als ortsveränderliche Komponenten auf unsicheren Endgeräten betrachtet.
+Der Authenticator ruft das Discovery Document bei eingeschaltetem Gerät regelmäßig alle 24 Stunden ein, um die die darin aufgeführten URI zu den benötigten öffentlichen Schlüsseln (Public Keys – PUK) und Endpunkten zu verwenden. Der Authenticator prüft die Signatur des Discovery Document und auf ein zeitlich gültiges C.FD.SIG-Zertifikat mit der Rollen-OID oid_idpd zurückführen können, welches von einer ihm bekannten Komponenten-PKI ausgestellt wurde.
 
-Aufgabe des Authenticator-Moduls ist, die von einem Anwendungsfrontend zum Zugriff auf Fachdienste benötigten ID_TOKEN, ACCESS_TOKEN und SSO_TOKEN mit Zustimmung des Nutzers (Resource Owner) und nach eingehender Überprüfung dessen Identität am Authorization-Endpunkt zu beantragen. Hierfür wird vom Authorization-Endpunkt ein AUTHORIZATION_CODE ausgestellt, der vom Authenticator-Modul an das Anwendungsfrontend übergeben wird. Das gleichzeitig vom Authorization-Endpunkt übergebene SSO_TOKEN wird vom Authenticator-Modul selbst gespeichert und wird von diesem für einen zukünftigen Authentifizierungsprozess ohne erneute Abfrage der Zugangsdaten des Nutzers verwendet. Das SSO_TOKEN erfüllt hier die Funktion eines Refresh-Token. [BfDI_02_CC4: Text erweitert um "Das SSO-Token erfüllt hier die Funktion eines Refresh-Token" Anpassung zum SSO-Token auch im Glossar]  Durch Übergabe des AUTHORIZATION_CODE erhält das Anwendungsfrontend am Token-Endpunkt das ID_TOKEN und ACCESS_TOKEN. 
-
-Die für die Beantragung des ID_TOKEN und ACCESS_TOKEN notwendigen Informationen bekommt das Authenticator-Modul vom Anwendungsfrontend übergeben. Weitere Informationen bezieht das Authenticator-Modul mittels Near Field Communication-Schnittstelle (NFC) von einer Smartcard. Die notwendige elektronische Signatur im Challenge-Response-Verfahren ruft das Authenticator-Modul ebenfalls von der Smartcard ab und fordert hierbei den Nutzer zur PIN-Eingabe auf. Im Fall eines Primärsystems erfolgt diese Aktion ohne Interaktion mit dem Nutzer im Hintergrund. Weitere nicht normative Informationen hierzu finden sich im Kapitel 10.
-
-Das Authenticator-Modul MUSS das Discovery Document [RFC8414] bei eingeschaltetem Gerät regelmäßig alle 24 Stunden einlesen und auswerten, und danach die darin aufgeführten URI zu den benötigten öffentlichen Schlüsseln (Public Keys – PUK) und Diensten verwenden.
-
-Das Authenticator-Modul MUSS die Signatur des Discovery Document mathematisch prüfen und auf ein zeitlich gültiges C.FD.SIG-Zertifikat mit der Rollen-OID oid_idpd zurückführen können, welches von einer ihm bekannten Komponenten-PKI ausgestellt wurde.
-
-
-Das Authenticator-Modul MUSS im Zusammenhang mit der PIN-Abfrage für die Signatur des CHALLENGE_TOKEN durch die Smartcard im selben Dialog die Consent-Freigabe des user_consent durch den Nutzer einfordern, damit dieser durch die PIN-Eingabe seine Willenserklärung abgibt und der Verwendung seiner Daten in diesen Claims zustimmt.
-
-Das Authenticator-Modul wird vom Anwendungsfrontend zur Authentifizierung gegenüber dem IDP-Dienst herangezogen. Das Anwendungsfrontend ist eine beim IDP-Dienst als "OpenID Connect-Client" registrierte Software. Das Anwendungsfrontend erhält seinerseits bei der Registrierung am IDP-Dienst einen eindeutigen Identifier.
-
-Das Authenticator-Modul liefert die Daten zur Authentifizierung des Nutzers an den IDP-Dienst.
-
-Hinweis: Der genaue Aufbau des vom Authenticator-Modul übertragenen, signierten CHALLENGE_TOKEN findet sich in [gemSpec_IDP_Dienst#Kapitel 7.3 Authentication Request].
-
-
+Der Authenticator der gematik gemäß  *[gemSpec_IDP_Frontend]* wird auf dezentraler Hardware in Windows-Systemumgebungen zusammen mit dem Primärsystem betrieben. Das Authenticator-Modul für den zentralen IDP-Dienst wird von der gematik bereitgestellt [gematik Authenticator]. Hersteller KÖNNEN eigene Authenticator Lösungen entwickeln.
 
 
 = Refferenzierte Dokumente
