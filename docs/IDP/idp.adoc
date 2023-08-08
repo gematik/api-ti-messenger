@@ -104,11 +104,19 @@ Die Anfrage wird dann über das Authenticator-Modul an den Authorization-Endpunk
 Das Anwendungsfrontend überträgt seinen Authorization Request inklusive der generierten Werte  CODE_CHALLENGE, State und Nonce gemäß [RFC8252 # Anhang B] an das Authenticator-Modul.
 
 === Aufrufe der Endpunkte am IDP-Dienst
-TODO
+Im Rahmen des TI-Messenger-Dienstes werden die folgenden Endpunkte am zentralen *IDP-Dienst* verwendet:
 
-* Endpunkte: +
+* Discovery-Endpunkt (/.well-known/openid-configuration)
+* Authorization-Endpunktn (/auth)
+* Token-Endpunkt (/token)
+
+Die Endpunkte sind unter den folgenden URL's aufrufbar:
+
+*Domains:* +
 RU: https://idp-ref.app.ti-dienste.de +
-PU: https://idp.app.ti-dienste.de/
+PU: https://idp.app.ti-dienste.de
+
+In den folgenden Unterkapiteln werden die Endpunkte weiter beschrieben. 
 
 ==== Discovery-Endpunkt
 Der Discovery Endpunkt stellt ein Base64 codiertes Discovery Dokument bereit, welches unter folgenden URL der jeweiligen Umgebung aufrufbar: 
