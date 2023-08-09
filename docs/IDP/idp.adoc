@@ -334,13 +334,60 @@ Registrierungs-Dienst
 
 
 = gematik Authenticator
-Die Aufgabe des Authenticators ist, dass von der *Relying Party* benötigte `ID_TOKEN` mit Zustimmung des Akteurs und nach eingehender Überprüfung dessen Identität am `Authorization-Endpunkt` des *IDP-Dienstes* zu beantragen. Die für die Beantragung des `ID_TOKEN` notwendigen Informationen bekommt der Authenticator von der *Relying Party* in der `Authorization Request URL` übergeben. Die notwendige elektronische Signatur im Challenge-Response-Verfahren zum Signieren des `CHALLENGE_TOKEN` bezieht der Authenticator von der Smartcard und fordert hierbei den Nutzer zur PIN-Eingabe auf. Der Authenticator fordert im Zusammenhang mit der PIN-Abfrage im selben Dialog die Consent-Freigabe des `USER_CONSENT` durch den Akteur ein, damit dieser durch die PIN-Eingabe seine Willenserklärung abgibt und der Verwendung seiner Daten in diesen `Claims` zustimmt. 
+Die gematik stellt einen https://gematikde.sharepoint.com/sites/EXTAuthenticator/Freigegebene%20Dokumente/Forms/AllItems.aspx?id=%2Fsites%2FEXTAuthenticator%2FFreigegebene%20Dokumente%2FVer%C3%B6ffentlichte%20Version%20%2D%20gematik%20Authenticator&p=true&ga=1[Authenticator] bereit, der die Authentisierung eines Akteurs am zentralen *IDP-Dienst* unter Verwendung einer Smartcard (SMC-B / HBA) ermöglicht. 
+
+CAUTION: Die *Relying Party* gibt vor, welche Karte für den Authentifizierungsprozess mittels Authenticator gesteckt werden soll.
+
+
+Es ist erforderlich Authenticator in der Leistungserbringer-Umgebung zu konfigurieren. Die Installations-Anleitung finden Sie hier: https://wiki.gematik.de/display/GAKB/Installationshandbuch+Authenticator
+
+Seine Aufgabe ist die Authentisierung des Nutzers an einem Identity Provider (IdP) mittels Smartcards der TI (HBA, SMC-B) und Konnektors/KT (2-Faktor-Authentisierungsverfahren). 
+
+
+Damit der Authenticator für eine neue Anwendung auch erfolgreich genutzt werden kann, muss im Vorfeld eine jeweilige Registrierung beim entsprechenden IDP erfolgt sein. Sie erhalten bei der Registrierung die notwendigen Parameter, die für die Konfiguration des Authenticators sowie die Requests aus der Fachanwendung heraus notwendig sind.
+
+Für eine initiale Registrierung wenden Sie sich bitte an folgende Adresse: IDP-Registrierung@gematik.de.
+
+SDK-Dokumentation (Verweis)?
+
+Bisher hat der gematik Authenticator die Parameter in der Form „authenticator://params“ von einer Webseite empfangen und nach Abschluss des Vorgangs das Ergebnis in dem default Browser des Betriebssystems geöffnet.
+Um das Öffnen in dem default Browser zu verhindern, wurde die Auto-Redirect Funktion entwickelt. Mit dieser Funktion verarbeitet der Authenticator einen zusätzlichen Parameter: "callback=DIRECT". Durch diesen ruft der Authenticator die Redirect-URI direkt auf, anstatt das Ergebnis der Authentifizierung in einen neuen Browser-Tab zu öffnen.
+
+
+Der Empfänger der Redirect-URI muss dazu einen GET-Endpunkt bereitstellen, welcher der Redirect-Uri entspricht. Die weitere Verarbeitung obliegt dem Empfänger.    
+
+Die Aufgabe des *Authenticators* ist, dass von der *Relying Party* benötigte `ID_TOKEN` mit Zustimmung des Akteurs und nach eingehender Überprüfung dessen Identität am `Authorization-Endpunkt` des *IDP-Dienstes* zu beantragen. Die für die Beantragung des `ID_TOKEN` notwendigen Informationen bekommt der *Authenticator* von der *Relying Party* in der `Authorization Request URL` übergeben.
+
+Der von der gematik bereitgestellte *Authenticator* bezieht die Informationen für die notwendige elektronische Signatur im Challenge-Response-Verfahren zum Signieren des `CHALLENGE_TOKEN` von der Smartcard und fordert hierbei den Nutzer zur PIN-Eingabe auf. Hierfür ruft der *Authenticator* die Operationen vom Konnektor auf. Der *Authenticator* fordert im Zusammenhang mit der PIN-Abfrage im selben Dialog die Consent-Freigabe des `USER_CONSENT` durch den Akteur ein, damit dieser durch die PIN-Eingabe seine Willenserklärung abgibt und der Verwendung seiner Daten in diesen `Claims` zustimmt. 
+
 
 Erweitern der `Authorization Request URL` mit einem `Deeplink` zu: 
+Beim Deeplink-Aufruf übergibt die Fachanwendung einen URL-String mit Query-Parametern. Dieser URL-String setzt sich abhängig vom verwendeten IDP aus dem Protokoll ( "authenticator://" ) und abhängig vom verwendeten IDP genannten Parametern für den Login-Endpoint zusammen. (Die Teilparameter können auch base64 kodiert sein. Bitte beachten: Sonderzeichen wie ':' und '/' sind dabei zu encoden ( hier '.'=> '%3a' und '/' => '%2F' ))
 
 Der Authenticator ruft das Discovery Document des *IDP-Dienstes* bei eingeschaltetem Gerät regelmäßig alle 24 Stunden ab, um die die darin aufgeführten URI zu den benötigten öffentlichen Schlüsseln (Public Keys – `PuK_*`) und Endpunkten zu verwenden. Der Authenticator prüft die Signatur des Discovery Document und auf ein zeitlich gültiges.
 
 Der Authenticator der gematik gemäß  *[gemSpec_IDP_Frontend]* wird auf dezentraler Hardware in Windows-Systemumgebungen zusammen mit dem Primärsystem betrieben. Das Authenticator-Modul für den zentralen IDP-Dienst wird von der gematik bereitgestellt [gematik Authenticator]. Hersteller können auch eigene Authenticator Lösungen entwickeln.
+
+Der Authenticator ist eine Desktop-Anwendung mit grafischer Benutzerschnittstelle, welche aktuell unter Windows lauffähig ist und aus Anwendungen (typisch: Web-Anwendungen) heraus aufgerufen wird.
+
+
+zukünftig: direkt in den Web-Client integrierbar, d.h. kein Verlassen mehr der Browser-Umgebung bei Webanwendungen
+
+CAUTION: Voraussetzungen für die Nutzung des von der gematik bereitgestellten *Authenticators*:
+* Konnektor
+* Kartenterminal
+* Internet-Browser
+
+
+
+Mockmodus
+
+Innerhalb der Entwicklervariante des Authenticators (gematik Authenticator Setup - Mock Version X.X.X.exe) ist ein Mockmodus integriert, der die Verwendung eines Konnektors simulieren kann. Somit können Funktionstests auch ohne physisch vorhandenen Konnektor durchgeführt werden. Diese Funktion soll die Entwicklung mit dem Authenticator vereinfachen, da sie neben einem speziellen Mockmodus auch mehr Logging-Möglichkeiten zur Verfügung stellt.
+https://wiki.gematik.de/display/GAKB/Gematik+Authenticator+-+Entwicklervariante+mit+Mockmodus
+
+
+
+Quellcode: https://github.com/gematik/app-Authenticator
 
 
 = Refferenzierte Dokumente
