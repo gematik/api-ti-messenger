@@ -129,7 +129,7 @@ rd --> wb: Redirect zur ""{Authentication Request URL}""
         |||
         au -> au: Verschlüsselung des signierten ""CHALLENGE_TOKEN""\n mit dem öffentlichen Schlüssel ""PuK_IDP_ENC""\n vom IDP-Dienst
         
-        au ->ip: POST {authorization_endpoint}(signiertes und verschlüsseltes ""CHALLENGE_TOKEN"", ""C.HCI.AUT"" der SMC-B)
+        au ->ip: ""POST {authorization_endpoint}""(signiertes und verschlüsseltes ""CHALLENGE_TOKEN"", ""C.HCI.AUT"" der SMC-B)
         activate ip
         group #LightGreen <size:16>AUTHORIZATION_ENDPUNKT</size>
         |||
@@ -145,8 +145,10 @@ rd --> wb: Redirect zur ""{Authentication Request URL}""
           deactivate ip
         |||
         au -> rd: ""GET /redirect_uri?code={AUTHORIZATION_CODE}""
-        deactivate au
         activate rd
+        rd --> au: HTTP 200
+        deactivate au
+        
         rd -> rd: Erzeugung eines ""AES256-Token-Key""
         rd -> rd: ""AES256-Token-Key"" und den\nunter 7) erzeugten ""CODE_VERIFIER""\n in ein ""KEY_VERIFIER"" Objekt einbetten 
         rd -> rd: ""KEY_VERIFIER"" mit ""PUK_IDP_ENC"" verschlüsseln
