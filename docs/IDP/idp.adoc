@@ -59,10 +59,10 @@ Nach der Registrierung der *Relying Party* beim *IDP-Dienst* sind die folgenden 
 Die `Authorization Request URI` wird von der *Relying Party* generiert, um beim *IDP-Dienst* sich ein `ID_TOKEN` ausstellen zu lassen. Für die Erstellung der `Authorization Request URI` sind die in den folgenden Unterkapitel beschriebenen Abläufe notwendig.
 
 ==== Bildung von CODE_VERIFIER und CODE_CHALLENGE
-Der *IDP-Dienst* der gematik unterstützt PKCE (Proof Key for Code Exchange). Daher ist es notwendig, dass die *Reyling Party* einen `CODE_VERIFIER` erzeugt und die `CODE_CHALLENGE` mithilfe von `CODE_CHALLENGE_METHOD` berechnet. Dieser wird später am token-endpunkt benötigt, um ein `ID_TOKEN` zu erhalten. 
+Der *IDP-Dienst* der gematik unterstützt PKCE (Proof Key for Code Exchange). Daher ist es notwendig, dass die *Reyling Party* einen `CODE_VERIFIER` erzeugt und die `CODE_CHALLENGE` mithilfe von `CODE_CHALLENGE_METHOD` berechnet. Dieser wird später am `/token`-Endpunkt benötigt, um ein `ID_TOKEN` zu erhalten. 
 
 ==== Zusammensetzen der Authorization Request URL
-Die Authorization Request URL setzt sich aus dem Discovery Dokument ermittelten `{authorization_endpoint}` und Request Parametern, die gemäß OpenID Connect Standard definiert sind, zusammen.
+Die `Authorization Request URL` setzt sich aus dem Discovery Dokument ermittelten `{authorization_endpoint}` und Request-Parametern, die gemäß OpenID Connect Standard definiert sind, zusammen.
 
 *Beispiel eines Authorization Request URL:*
 [source,text]
@@ -99,12 +99,10 @@ Der Scope besteht grundsätzlich aus drei Parameter: +
 Dieser Wert ist optional. Wenn er mitgegeben wird muss der gleiche Wert im abschließend ausgegebenen `ID_TOKEN` wieder auftauchen.                                                                                                         
 |=============================================================================================================================================================================================================================================================================================================
 
-Die Anfrage wird dann über das Authenticator-Modul an den Authorization-Endpunkt des IDP-Dienstes geleitet. Der Authorization-Endpunkt des *IDP-Dienstes*, welcher die Nutzerauthentifizierung durchführt und für die Ausstellung des AUTHORIZATION_CODE zuständig ist, liefert den user_consent und das CHALLENGE_TOKEN als Antwort auf den Authorization-Request des Authenticator-Moduls.
-
-Das Anwendungsfrontend überträgt seinen Authorization Request inklusive der generierten Werte  CODE_CHALLENGE, State und Nonce gemäß [RFC8252 # Anhang B] an das Authenticator-Modul.
+Die Anfrage wird dann über den Authenticator an den `/auth`-Endpunkt des IDP-Dienstes geleitet. Der Authorization-Endpunkt des *IDP-Dienstes*, welcher die Nutzerauthentifizierung durchführt und für die Ausstellung des `AUTHORIZATION_CODE` zuständig ist, liefert den `USER_CONSENT` und das CHALLENGE_TOKEN als Antwort auf den Authorization-Request des Authenticators.
 
 === Aufrufe der Endpunkte am IDP-Dienst
-Im Rahmen des TI-Messenger-Dienstes werden die folgenden Endpunkte am zentralen *IDP-Dienst* verwendet:
+Im Rahmen des *TI-Messenger-Dienstes* werden die folgenden Endpunkte am zentralen *IDP-Dienst* verwendet:
 
 * *Discovery-Endpunkt* +
 RU: https://idp-ref.app.ti-dienste.de/.well-known/openid-configuration +
@@ -160,13 +158,13 @@ Die folgende Tabelle enthält die Abkürzungen für die öffentliche Schlüssel 
 | `PuK_IDP_ENC`  | Wird für die Verschlüsselung der signierten Challenge durch das Authenticator-Modul und für die Verschlüsselung des `KEY_VERIFIER` durch den Relying Party benötigt.
 |========================================================================================================================================================================
 
-TIP: In der oben gezeigten Tabelle sind nur die vom Hersteller eines *TI-Messenger-Clients* / *TI-Messenger-Fachdienstes* zu verwendenen Schlüssel gelistet
+TIP: In der oben gezeigten Tabelle sind nur die vom Hersteller eines *TI-Messenger-Clients* / *TI-Messenger-Fachdienstes* zu verwendenen Schlüssel gelistet.
 
 ==== Authorization-Endpunkt
 Der Authorization-Endpunkt stellt einen `AUTHORIZATION_CODE` aus, welcher später am `/token`-Endpunkt des *IDP-Dienstes* gegen ein `ID_TOKEN` eingetauscht werden kann. Für die Ausstellung des `AUTHORIZATION_CODE` sind die in den folgenden Unterkapitel beschriebenen Abläufe notwendig.
 
 ===== Ausstellung des CHALLENGE_TOKEN und USER_CONSENT
-Der Authorization-Endpunkt erzeugt eine Authentication Challenge (`CHALLENGE_TOKEN`) und einen `USER_CONSENT` anhand der in der Authorization Request URL des Authenticator mitgelieferten Daten (`code_challenge` und `scope`). Hierfür prüft der *IDP-Dienst* die bei der organisatorischen Registrierung der Anwendung hinterlegten `redirect_uri` der *Relying Party* mit der `redirect_uri` aus der Authorization Request URI. Stimmen diese nicht überein, wird die weitere Verarbeitung mit einem Fehler abgebrochen. Darüberhinaus prüft der *IDP-Dienst* ob die in der Authorization Request URI enthaltene `client_id` und `scope` bekannt und in dieser Kombination zulässig sind. Bei Erfolg wird das `CHALLENGE_TOKEN` an den Authenticator zur Signierung sowie der `USER_CONSENT` übermittelt. 
+Der Authorization-Endpunkt erzeugt eine Authentication Challenge (`CHALLENGE_TOKEN`) und einen `USER_CONSENT` anhand der in der `Authorization Request URL` des Authenticator mitgelieferten Daten (`code_challenge` und `scope`). Hierfür prüft der *IDP-Dienst* die bei der organisatorischen Registrierung der Anwendung hinterlegten `redirect_uri` der *Relying Party* mit der `redirect_uri` aus der `Authorization Request URI`. Stimmen diese nicht überein, wird die weitere Verarbeitung mit einem Fehler abgebrochen. Darüberhinaus prüft der *IDP-Dienst* ob die in der `Authorization Request URI` enthaltene `client_id` und `scope` bekannt und in dieser Kombination zulässig sind. Bei Erfolg wird das `CHALLENGE_TOKEN` an den Authenticator zur Signierung sowie der `USER_CONSENT` übermittelt. 
 
 *Beispiel eines CHALLENGE_TOKEN (Encoded):*
 [source,json]
@@ -258,7 +256,7 @@ prüft der *IDP-Dienst* die Signatur des `CHALLENGE_TOKEN` und das mitgelieferte
 ----
 
 ==== Token-Endpunkt
-Der Token-Endpunkt stellt unter Vorlage eines gültigen Authorization Code einen `ID_TOKEN` aus. Für die Ausstellung des `ID_TOKEN` sind die in den folgenden Unterkapitel beschriebenen Abläufe notwendig.
+Der Token-Endpunkt stellt unter Vorlage eines gültigen `AUTHORIZATION_CODE` einen `ID_TOKEN` aus. Für die Ausstellung des `ID_TOKEN` sind die in den folgenden Unterkapitel beschriebenen Abläufe notwendig.
 
 CAUTION: Im folgenden wird davon ausgegangen, dass der Client die `redirect_url` der *Reyling Party* aufruft.
 
@@ -319,19 +317,14 @@ TIP: Der Token-Endpunkt DARF `ID_TOKEN` mit einer Gültigkeitsdauer von mehr als
 ===== Prüfung des ID_TOKEN von der Relying Party
 Im ersten Schritt entschlüsselt der *Relying Party* den `ID_TOKEN` mit seinem selbst erzeugten 256-Bit AES-Schlüssel (`Token-Key`). Anschließend erfolgt die Signaturprüfung mit dem `PuK_IDP_SIG` des *IDP-Dienstes*. 
 
-
-
 == Authorization Code Flow
-Beispiel am Anwendungsfall
+In dem folgenden Sequenzdiagramm ist der Ablauf des Authorization Code Flow für den Anwendungsfall link:https://github.com/gematik/api-ti-messenger/blob/feature/C_11306/docs/anwendungsfaelle/MS-AF10103-authentisieren-organisation.adoc[AF_10103 - Authentisieren einer Organisation am TI-Messenger-Dienst] dargestellt.
 
-Registrierungs-Dienst 
 ++++
 <p align="left">
   <img width="100%" src=../../images/diagrams/idp.svg>
 </p>
 ++++
-
-
 
 = gematik Authenticator
 Die gematik stellt einen https://gematikde.sharepoint.com/sites/EXTAuthenticator/Freigegebene%20Dokumente/Forms/AllItems.aspx?id=%2Fsites%2FEXTAuthenticator%2FFreigegebene%20Dokumente%2FVer%C3%B6ffentlichte%20Version%20%2D%20gematik%20Authenticator&p=true&ga=1[Authenticator] bereit, der die Authentisierung eines Akteurs am zentralen *IDP-Dienst* unter Verwendung einer Smartcard (SMC-B / HBA) ermöglicht. 
