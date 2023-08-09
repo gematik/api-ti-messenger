@@ -151,8 +151,8 @@ rd --> wb: Redirect zur ""{Authentication Request URL}""
         rd -> rd: ""AES256-Token-Key"" und den\nunter 7) erzeugten ""CODE_VERIFIER""\n in ein ""KEY_VERIFIER"" Objekt einbetten 
         rd -> rd: ""KEY_VERIFIER"" mit ""PUK_IDP_ENC"" verschlüsseln
         
-        rd -> ip: POST {token_endpoint}\n(AUTHORIZATION_CODE, KEY_VERIFIER)
-        group #Orange <size:16>TOKEN_ENDPUNKT</size>
+        rd -> ip: ""POST {token_endpoint}""\n""(AUTHORIZATION_CODE, KEY_VERIFIER)""
+        group #Thistle <size:16>TOKEN_ENDPUNKT</size>
          activate ip
          |||
         ip -> ip: ""AUTHORIZATION_CODE"" mit\n""AUTH_CODE_ENC"" entschlüsseln
