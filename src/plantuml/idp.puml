@@ -67,7 +67,7 @@ rd --> wb: Redirect zur ""{Authentication Request URL}""
  deactivate rd
 
         wb -> wb: Erstellung des Deeplink \n""authenticator://?challenge_path=""\n""{Authentication Request URL}""
-        wb -> au: Aufruf des Deeplinks 
+        wb -> au: Aufruf des Deeplinks mit\n""scope"" erweitert um ""callback=DIRECT""
         |||
         activate au        
           opt#LightGrey #AliceBlue <size:16>Download des IDP Discovery Dokumentes</size>
@@ -143,11 +143,10 @@ rd --> wb: Redirect zur ""{Authentication Request URL}""
         end
         ip --> au: Redirect zur ""redirect_uri""\ndes Registrierungs-Dienstes\nmit ""AUTHORIZATION_CODE""
           deactivate ip
-        au --> wb: Redirect zur ""redirect_uri""\ndes Registrierungs-Dienstes\nmit ""AUTHORIZATION_CODE""
-          deactivate au
         |||
-        wb -> rd: ""GET /redirect_uri?code={AUTHORIZATION_CODE}""
-          activate rd
+        au -> rd: ""GET /redirect_uri?code={AUTHORIZATION_CODE}""
+        deactivate au
+        activate rd
         rd -> rd: Erzeugung eines ""AES256-Token-Key""
         rd -> rd: ""AES256-Token-Key"" und den\nunter 7) erzeugten ""CODE_VERIFIER""\n in ein ""KEY_VERIFIER"" Objekt einbetten 
         rd -> rd: ""KEY_VERIFIER"" mit ""PUK_IDP_ENC"" verschlüsseln
