@@ -261,7 +261,7 @@ Der Token-Endpunkt stellt unter Vorlage eines gültigen `AUTHORIZATION_CODE` ein
 CAUTION: Im folgenden wird davon ausgegangen, dass der Client die `redirect_url` der *Reyling Party* aufruft.
 
 ===== Erzeugung des KEY_VERIfIER durch die Relying Party
-Im ersten Schritt erzeugt die *Relying Party* einen zufälligen 256-Bit AES-Schlüssel (`Token-Key`). Anschließend erzeugt der *Reyling Party* einen `KEY_VERIFIER` indem `Token-Key` und `CODE_VERIFIER` in einem JSON-Objekt kodiert werden und sendet diesen verschlüsselt unter Nutzung des öffentlichen Schlüssels `PUK_IDP_ENC`zusammen mit dem `AUTHORIZATION_CODE` zum Token-Endpunkt des *IDP-Dienstes*.
+Im ersten Schritt erzeugt die *Relying Party* einen zufälligen 256-Bit AES-Schlüssel (`Token-Key`). Anschließend erzeugt der *Reyling Party* einen `KEY_VERIFIER` indem `Token-Key` und `CODE_VERIFIER` in einem JSON-Objekt kodiert werden und sendet diesen verschlüsselt unter Nutzung des öffentlichen Schlüssels `PUK_IDP_ENC` zusammen mit dem `AUTHORIZATION_CODE` zum Token-Endpunkt des *IDP-Dienstes*.
 
 *Beispiel eines KEY_VERIFIER:*
 [source,json]
