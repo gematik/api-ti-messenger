@@ -39,14 +39,14 @@ In der folgenden Tabelle sind die `scopes` und die `claims`, die im Rahmen des *
 [options="header"]
 |==============================================================================================================================================================================
 | Scope        | Claims                                     | Beschreibung                                                                                                      
-| `openid`       | `aud` (Adressat), +
-`iss` (Aussteller), + 
-`exp` (Ablaufzeit), + 
+| `openid`       | `sub` (eindeutiger Benutzer-Identifier), +
+`aud` (Adressat: URI der RP oder Identifier der RP), +
+`iss` (Aussteller: URL des IDP), + 
 `iat` (Ausgabezeit), + 
-`sub` (Benutzer-ID)                   | Erforderliche Claims für den OpenID Connect (OIDC) Flow 
-| `ti-messenger` | `professionOID`, + 
-`organizationName`, + 
-`idNummer` | Erforderliche Claims für den TI-Messenger-Dienst                                                                  
+`exp` (Ablaufzeit)                   | Erforderliche Claims für den OpenID Connect (OIDC) Flow 
+| `ti-messenger` | `idNummer` (TelematikID), + 
+`ProfessionOID`, + 
+`organizationName`  | Erforderliche Claims für den TI-Messenger-Dienst                                                                  
 |==============================================================================================================================================================================
 
 Die `claims` werden später in das angeforderte JSON WEB TOKEN (`ID_TOKEN`) eingebettet. 
