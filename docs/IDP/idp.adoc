@@ -165,11 +165,13 @@ Die folgende Tabelle enthält die Abkürzungen für die öffentlichen Schlüssel
 
 TIP: In der oben gezeigten Tabelle sind nur die vom Hersteller eines *TI-Messenger-Clients* / *TI-Messenger-Fachdienstes* zu verwendenen Schlüssel gelistet.
 
+CAUTION: Aktuell verwenden alle aufgeführten Schlüssel den Algorithmus BP256R1
+
 ==== Authorization-Endpunkt
-Der Authorization-Endpunkt stellt einen `AUTHORIZATION_CODE` aus, welcher später am `/token`-Endpunkt des *IDP-Dienstes* gegen ein `ID_TOKEN` eingetauscht werden kann. Für die Ausstellung des `AUTHORIZATION_CODE` sind die in den folgenden Unterkapitel beschriebenen Abläufe notwendig.
+Der Authorization-Endpunkt stellt einen `AUTHORIZATION_CODE` aus, welcher später am `/token`-Endpunkt des *IDP-Dienstes* gegen ein `ID_TOKEN` eingetauscht werden kann. Für die Ausstellung des `AUTHORIZATION_CODE` sind die in den folgenden Unterkapiteln beschriebenen Abläufe notwendig.
 
 ===== Ausstellung des CHALLENGE_TOKEN und USER_CONSENT
-Der Authorization-Endpunkt erzeugt eine Authentication Challenge (`CHALLENGE_TOKEN`) und einen `USER_CONSENT` anhand der in der `Authorization Request URL` des Authenticator mitgelieferten Daten (`code_challenge` und `scope`). Hierfür prüft der *IDP-Dienst* die bei der organisatorischen Registrierung der Anwendung hinterlegten `redirect_uri` der *Relying Party* mit der `redirect_uri` aus der `Authorization Request URI`. Stimmen diese nicht überein, wird die weitere Verarbeitung mit einem Fehler abgebrochen. Darüberhinaus prüft der *IDP-Dienst* ob die in der `Authorization Request URI` enthaltene `client_id` und `scope` bekannt und in dieser Kombination zulässig sind. Bei Erfolg wird das `CHALLENGE_TOKEN` an den Authenticator zur Signierung sowie der `USER_CONSENT` übermittelt. 
+Der Authorization-Endpunkt erzeugt eine Authentication Challenge (`CHALLENGE_TOKEN`) und einen `USER_CONSENT` anhand der in der `Authorization Request URL` mitgelieferten Daten (`code_challenge` und `scope`). Hierfür prüft der *IDP-Dienst* die bei der organisatorischen Registrierung der Anwendung hinterlegte `redirect_uri` der *Relying Party* mit der `redirect_uri` aus der `Authorization Request URL`. Stimmen diese nicht überein, wird die weitere Verarbeitung mit einem Fehler abgebrochen. Darüberhinaus prüft der *IDP-Dienst* ob die in der `Authorization Request URL` enthaltene `client_id` und `scope` bekannt und in dieser Kombination zulässig sind. Bei Erfolg wird das `CHALLENGE_TOKEN` an den Authenticator zur Signierung sowie der `USER_CONSENT` übermittelt. 
 
 *Beispiel eines CHALLENGE_TOKEN (Encoded):*
 [source,json]
@@ -190,8 +192,8 @@ Der Authorization-Endpunkt erzeugt eine Authentication Challenge (`CHALLENGE_TOK
   "code_challenge": "r3NZAB5NIdI9aLxeMjfh57axkr5xdMiZjmNc9mPp-Sw",
   "code_challenge_method": "S256",
   "response_type": "code",
-  "redirect_uri": "https://fhir-directory-ref.vzd.ti-dienste.de/signin-gematik-idp-dienst",
-  "client_id": "GEMgematFHI4HkPrd8SR",
+  "redirect_uri": "https://registierungs-dienst-example.ti-dienste.de/signin",
+  "client_id": "GEMgematTIM4HkPrd8SR",
   "state": "4kBZ4hEt1PHdLqeSh8o56w"
 }
 ----
@@ -203,22 +205,22 @@ Der Authorization-Endpunkt erzeugt eine Authentication Challenge (`CHALLENGE_TOK
 {
 	"requested_scopes":
 	{
-		"openid":"Der Zugriff auf den ID-Token",
-		"ti-messenger":"Zugriff auf TI-Messenger Funktionalität"
+        "openid":"Der Zugriff auf den ID-Token",
+        "ti-messenger":"Zugriff auf TI-Messenger Funktionalität"
 	},
 	"requested_claims":
 	{
-		"professionOID":"Zustimmung zur Verarbeitung der Rolle",
-		"organizationName":"Zustimmung zur Verarbeitung der Organisationszugehörigkeit",
-		"idNummer":"Zustimmung zur Verarbeitung der Id"
+        "idNummer":"Zustimmung zur Verarbeitung der Id",
+        "professionOID":"Zustimmung zur Verarbeitung der Rolle",
+        "organizationName":"Zustimmung zur Verarbeitung der Organisationszugehörigkeit"
 	}
 }
 ----
 
-TIP: Die im `USER_CONSENT` enthaltenen requested_claims `professionOID`, `idNummer` und `organizationName` sind die Claims, die bei der Registrierungs (siehe Kapitel "Registrierung") der *Relying Party* am *IDP-Dienst* die für den `scope=ti-messenger` festgelegt wurden. 
+TIP: Die im `USER_CONSENT` enthaltenen requested_claims `idNummer`,`professionOID` und `organizationName` sind die Claims, die bei der Registrierung (siehe Kapitel "Registrierung") der *Relying Party* am *IDP-Dienst* (für den `scope=ti-messenger`) festgelegt wurden. 
 
 ===== Abfrage des USER_CONSENT und Signierung des CHALLENGE_TOKEN
-Auf der Nutzerseite wird das vom *IDP-Dienst* ausgestellte `CHALLENGE_TOKEN` unter Verwendung des `C.HCI.AUT` oder `C.HP.AUT`-Zertifikates am Konnektor signiert und das Authentifizierungszertifikat der verwendeten Smartcard als `x5c`-Parameter einbettet. 
+Auf der Nutzerseite wird das vom *IDP-Dienst* ausgestellte `CHALLENGE_TOKEN` unter Verwendung des `C.HCI.AUT`(SMC-B) oder `C.HP.AUT`(HBA)-Zertifikates am Konnektor signiert und das Authentifizierungszertifikat der verwendeten Smartcard als `x5c`-Parameter eingebettet. 
 
 CAUTION: Damit die Signatur durch den Konnektor erfolgen darf, ist die zuvor eingeholte Zustimmung des Akteurs zur Verwendung der angefragten Daten (`USER_CONSENT`) unbedingt notwendig. 
 
@@ -226,7 +228,7 @@ Anschließend wird das `CHALLENGE_TOKEN` unter Verwendung des öffentlichen Schl
 
 ===== Ausstellung des Authorization Codes
 Der *IDP-Dienst* entschlüsselt unter Verwendung seines privaten `Prk_IDP_ENC`-Schlüssels das übertragene `CHALLENGE_TOKEN`. Anschließend 
-prüft der *IDP-Dienst* die Signatur des `CHALLENGE_TOKEN` und das mitgelieferte Zertifikat der Smartcard mittels OCSP/TSL der PKI der Telematikinfrastruktur. Sind alle im Claim geforderten Attribute vorhanden und die Gültigkeit der Attribute geprüft, erstellt der Authorization-Endpunkt einen `AUTHORIZATION_CODE` signiert diesen mit dem Schlüssel `Prk_IDP_SIG` und verschlüsselt diesen mit eigenem Schlüsselmaterial. Anschließend wird der `AUTHORIZATION_CODE` und die vom Client aufzurufende `redirect_url` vom *Reyling Party* an den Authenticator des anfragenden Clients übermittelt. 
+prüft der *IDP-Dienst* die Signatur des `CHALLENGE_TOKEN` und das mitgelieferte Zertifikat der Smartcard mittels OCSP/TSL der PKI der Telematikinfrastruktur. Sind alle im `claim` geforderten Attribute vorhanden und die Gültigkeit der Attribute geprüft, erstellt der Authorization-Endpunkt einen `AUTHORIZATION_CODE` signiert diesen mit dem Schlüssel `Prk_IDP_SIG` und verschlüsselt diesen mit eigenem Schlüsselmaterial(`AUTH_CODE_ENC`). Anschließend wird der `AUTHORIZATION_CODE` und die vom Client aufzurufende `redirect_url` von der *Reyling Party* an den Authenticator des anfragenden Clients übermittelt. 
 
 *Beispiel Authorization Code (Decrypted):*
 [source,json]
@@ -242,31 +244,29 @@ prüft der *IDP-Dienst* die Signatur des `CHALLENGE_TOKEN` und das mitgelieferte
    "idNummer": "5-2-KHAUS-Kornfeld01",
    "iss": "https://idp-ref.app.ti-dienste.de",
    "response_type": "code",
-   "snc": "Ay6WUqtAUcV2p9WZYHPo",
+   "snc": "90ef93d60a5d4f2e85d419ba5968d1e1",
    "code_challenge_method": "S256",
-   "given_name": "Hans",
    "token_type": "code",
    "nonce": "nN4LkW1moAwg1tofYZtf",
-   "client_id": "GEMgematFHI4HkPrd8SR",
+   "client_id": "GEMgematTIM4HkPrd8SR",
    "scope": "openid ti-messenger",
    "auth_time": "1618243993",
-   "redirect_uri": "https://fhir-directory-ref.vzd.ti-dienste.de/signin-gematik-idp-dienst",
-   "state": "AcYxMQ5MZMpRh6WOBjs8",
+   "redirect_uri": "https://registierungs-dienst-example.ti-dienste.de/signin",
+   "state": "4kBZ4hEt1PHdLqeSh8o56w",
    "exp": "1618244053",
-   "family_name": "Mueller",
    "iat": "1618243993",
    "code_challenge": "r3NZAB5NIdI9aLxeMjfh57axkr5xdMiZjmNc9mPp-Sw",
-   "jti": "6e8a61e316472f3b"
+   "jti": "bcc44257-4a7d-4e0d-8c60-cca2acfda059"
 }     
 ----
 
 ==== Token-Endpunkt
-Der Token-Endpunkt stellt unter Vorlage eines gültigen `AUTHORIZATION_CODE` einen `ID_TOKEN` aus. Für die Ausstellung des `ID_TOKEN` sind die in den folgenden Unterkapitel beschriebenen Abläufe notwendig.
+Der Token-Endpunkt stellt unter Vorlage eines gültigen `AUTHORIZATION_CODE` einen `ID_TOKEN` aus. Für die Ausstellung des `ID_TOKEN` sind die in den folgenden Unterkapiteln beschriebenen Abläufe notwendig.
 
-CAUTION: Im folgenden wird davon ausgegangen, dass der Client die `redirect_url` der *Reyling Party* aufruft.
+CAUTION: Im folgenden wird davon ausgegangen, dass die `redirect_url` der *Reyling Party* aufrufen wurde.
 
-===== Erzeugung des KEY_VERIfIER durch die Relying Party
-Im ersten Schritt erzeugt die *Relying Party* einen zufälligen 256-Bit AES-Schlüssel (`Token-Key`). Anschließend erzeugt der *Reyling Party* einen `KEY_VERIFIER` indem `Token-Key` und `CODE_VERIFIER` in einem JSON-Objekt kodiert werden und sendet diesen verschlüsselt unter Nutzung des öffentlichen Schlüssels `PUK_IDP_ENC` zusammen mit dem `AUTHORIZATION_CODE` zum Token-Endpunkt des *IDP-Dienstes*.
+===== Erzeugung des KEY_VERIFIER durch die Relying Party
+Im ersten Schritt erzeugt die *Relying Party* einen zufälligen 256-Bit AES-Schlüssel (`Token-Key`). Anschließend erzeugt die *Relying Party* einen `KEY_VERIFIER` indem `Token-Key` und `CODE_VERIFIER` in einem JSON-Objekt kodiert werden und sendet diesen verschlüsselt unter Nutzung des öffentlichen Schlüssels `PUK_IDP_ENC` zusammen mit dem `AUTHORIZATION_CODE` zum Token-Endpunkt des *IDP-Dienstes*.
 
 *Beispiel eines KEY_VERIFIER:*
 [source,json]
@@ -277,14 +277,14 @@ Im ersten Schritt erzeugt die *Relying Party* einen zufälligen 256-Bit AES-Schl
 }
 ----
 
-TIP: Der im `KEY_VERIFIER` enthaltene `CODE_VERIFIER` ist der ursprünglich von der *Relying Party* erzeugte `CODE_VERIFIER` ohne Hashing des S256-Algorithmus im gegensatz zur `CODE_CHALLENGE`. 
+TIP: Der im `KEY_VERIFIER` enthaltene `CODE_VERIFIER` ist der ursprünglich von der *Relying Party* erzeugte `CODE_VERIFIER` ohne Hashing des S256-Algorithmus im Gegensatz zur `CODE_CHALLENGE`. 
 
 ===== Ausstellung des ID_TOKEN 
-Am *IDP-Dienst* wird der `AUTHORIZATION_CODE` mit dem zuvor im Kapitel Authorization-Endpunkt beschriebenen erzeugten eigenem Schlüsselmaterial entschlüsselt. Anschließend prüft der *IDP-Dienst* die Signatur des `AUTHORIZATION_CODE` unter Verwendung des Schlüssels `PuK_IDP_SIG`. Als nächstes extrahiert der *IDP-Dienst* den `CODE_VERIFIER` aus dem mittels `Prk_IDP_ENC` verschlüsselten `KEY_VERIFIER` und prüft diesen gegen die `CODE_CHALLENGE`. Das bedeutet, dass der eingereichte `CODE_VERIFIER` bei Nutzung des Hash-Verfahrens S256 zum bitgleichen Hash-Wert führt. Stimmt der Hash-Wert aus dem initialen Aufruf des Authenticator - die `CODE_CHALLENGE` - mit dem gebildeten Hash-Wert überein, ist sichergestellt, dass dieser und der initialer Aufruf von der *Relying Party* initiiert wurden. 
+Am *IDP-Dienst* wird der `AUTHORIZATION_CODE` mit dem zuvor im Kapitel Authorization-Endpunkt beschriebenen erzeugten eigenem Schlüsselmaterial(`AUTH_CODE_ENC`) entschlüsselt. Anschließend prüft der *IDP-Dienst* die Signatur des `AUTHORIZATION_CODE` unter Verwendung des Schlüssels `PuK_IDP_SIG`. Als nächstes extrahiert der *IDP-Dienst* den `CODE_VERIFIER` aus dem mittels `Prk_IDP_ENC` entschlüsselten `KEY_VERIFIER` und prüft diesen gegen die `CODE_CHALLENGE`. Das bedeutet, dass der eingereichte `CODE_VERIFIER` bei Nutzung des Hash-Verfahrens S256 zum bitgleichen Hash-Wert (der `CODE_CHALLENGE``) führt. Stimmt der Hash-Wert aus dem initialen Aufruf des Authenticator - die `CODE_CHALLENGE` - mit dem gebildeten Hash-Wert überein, ist sichergestellt, dass dieser und der initiale Aufruf von der *Relying Party* initiiert wurden. 
 
-Daraufhin extrahiert der *IDP-Dienst* die aus dem eingereichten Authentifizierungszertifikat der Smartcard (AUT-Zertifikat) enthaltenen Attribute in ein JSON WEB TOKEN (`ID_TOKEN`). Um die Integrität des `ID_TOKENS` sicherzustellen und eine eineindeutige Erklärung über die Herkunft des Tokens abzugeben, wird dies mit dem privaten Schlüssel `PrK_IDP_SIG` signiert. Abschließend verschlüsselt der *IDP-Dienst* das `ID_TOKEN` mit den von der *Relying Party* übermittelten `Token_Key` und sendet dieses verschlüsselt an die *Relying Party* zurück. 
+Daraufhin extrahiert der *IDP-Dienst* die aus dem eingereichten Authentifizierungszertifikat der Smartcard (AUT-Zertifikat) enthaltenen Attribute in ein JSON WEB TOKEN (`ID_TOKEN`). Um die Integrität des `ID_TOKENS` sicherzustellen und eine eineindeutige Erklärung über die Herkunft des Tokens abzugeben, wird dies mit dem privaten Schlüssel `PrK_IDP_SIG` signiert. Abschließend verschlüsselt der *IDP-Dienst* das `ID_TOKEN` mit dem von der *Relying Party* übermittelten `Token_Key` und sendet dieses verschlüsselt an die *Relying Party* zurück. 
 
-TIP: Der Token-Endpunkt DARF `ID_TOKEN` mit einer Gültigkeitsdauer von mehr als 86400 Sekunden (24 Stunden) NICHT ausstellen.
+TIP: Der Token-Endpunkt DARF `ID_TOKEN` mit einer Gültigkeitsdauer von mehr als 24 Stunden NICHT ausstellen.
 
 *Beispiel des ID_TOKEN:*
 [source,json]
@@ -305,25 +305,27 @@ TIP: Der Token-Endpunkt DARF `ID_TOKEN` mit einer Gültigkeitsdauer von mehr als
      "sc",
      "pin"   ],
    "iss": "https://idp-ref.app.ti-dienste.de",
-   "given_name": "Hans",
    "nonce": "nN4LkW1moAwg1tofYZtf",
-   "aud": "GEMgematFHI4HkPrd8SR",
+   "aud": "GEMgematTIM4HkPrd8SR",
    "acr": "gematik-ehealth-loa-high",
-   "azp": "GEMgematFHI4HkPrd8SR",
+   "azp": "GEMgematTIM4HkPrd8SR",
    "auth_time": "1618243993",
    "scope": "openid ti-messenger",
    "exp": "1618244294",
    "iat": "1618243994",
-   "family_name": "Mueller",
    "jti": "c1c760ca67fe1306"
 }
 ----
 
 ===== Prüfung des ID_TOKEN von der Relying Party
-Im ersten Schritt entschlüsselt der *Relying Party* den `ID_TOKEN` mit seinem selbst erzeugten 256-Bit AES-Schlüssel (`Token-Key`). Anschließend erfolgt die Signaturprüfung mit dem `PuK_IDP_SIG` des *IDP-Dienstes*. 
+Im ersten Schritt entschlüsselt die *Relying Party* das `ID_TOKEN` mit seinem selbst erzeugten 256-Bit AES-Schlüssel (`Token-Key`). Anschließend erfolgt die Signaturprüfung mit dem `PuK_IDP_SIG` des *IDP-Dienstes*. 
 
 == Authorization Code Flow
 In dem folgenden Sequenzdiagramm ist beispielhaft der Ablauf des Authorization Code Flow für den Anwendungsfall link:https://github.com/gematik/api-ti-messenger/blob/feature/C_11306/docs/anwendungsfaelle/MS-AF10103-authentisieren-organisation.adoc[AF_10103 - Authentisieren einer Organisation am TI-Messenger-Dienst] dargestellt. Im Kontext des *TI-Messenger-Dienstes* ist der *Registrierungs-Diens* die *Relying Party*. Als *Authenticator* wird der von der gematik bereitgestellte *Authenticator* verwendet.
+
+CAUTION: Der von der gematik bereitgestellte Authenticator wird nicht in Verbindung mit einer Web-Anwendung empfohlen, da vom Authenticator ein neuer Browser Tab geöffnet wird. Entsprechend der Fachanwendung wird im Browser eine HTML-Seite oder ein Json-Objekt(VZD-FHIR Response) angezeigt. 
+
+Die Abbildung zeigt die Verwendung des Authenticators mit der Auto-Redirect Funktion (`callback=DIRECT`) bei der die `redirect_uri` direkt vom Authenticator aufgerufen wird und der Browserclient über Polling beim Fachdienst den Status des Tokenaustausches abfragt. Details zur Interaktion mit dem *Authenticator* sind in Kapitel _Interaktion mit der Fachanwendung_ beschrieben. Alternativ könnte der *Authenticator* beim Aufruf der `redirect_uri` eine nutzerfreundliche Webseite der *Relying Party* in einem neuen Browsertab öffnen.    
 
 ++++
 <p align="left">
@@ -333,9 +335,9 @@ In dem folgenden Sequenzdiagramm ist beispielhaft der Ablauf des Authorization C
 
 = gematik Authenticator
 == Überblick
-Für die Authentifizierung mittels Smartcard stellt die gematik einen eigenen *Authenticator* zur Verfügung. Hersteller eines *TI-Messenger-Dienstes* können auch eigene Authenticator Lösungen entwickeln, um zum Beispiel an mobilen Endgeräten eine Interaktion mit Smartcards über die NFC-Schnittstelle zu realisieren. Im folgenden wird auf den *Authenticaor* der gematik eingegangen.
+Für die Authentifizierung mittels Smartcard stellt die gematik einen eigenen *Authenticator* zur Verfügung. Hersteller eines *TI-Messenger-Dienstes* können auch eigene Authenticator Lösungen entwickeln, um zum Beispiel an mobilen Endgeräten eine Interaktion mit Smartcards über die NFC-Schnittstelle zu realisieren. Im folgenden wird auf den *Authenticator* der gematik eingegangen.
 
-Die Aufgabe des *Authenticators* ist, dass von der *Relying Party* benötigte `ID_TOKEN` mit Zustimmung des Akteurs und nach eingehender Überprüfung dessen Identität am `Authorization-Endpunkt` des *IDP-Dienstes* zu beantragen. Die für die Beantragung des `ID_TOKEN` notwendigen Informationen bekommt der *Authenticator* von der *Relying Party* in der `Authorization Request URL` übergeben. Der von der gematik bereitgestellte *Authenticator* bezieht die Informationen für die notwendige elektronische Signatur im Challenge-Response-Verfahren zum Signieren des `CHALLENGE_TOKEN` von der Smartcard und fordert hierbei den Akteur zur PIN-Eingabe auf. Hierfür nutzt der *Authenticator* die notwendigen Operationen vom Konnektor. Der *Authenticator* fordert im Zusammenhang mit der PIN-Abfrage im selben Dialog die Consent-Freigabe des `USER_CONSENT` durch den Akteur ein, damit dieser durch die PIN-Eingabe seine Willenserklärung abgibt und der Verwendung seiner Daten in diesen `Claims` zustimmt. 
+Die Aufgabe des *Authenticators* ist, dass von der *Relying Party* benötigte `ID_TOKEN` mit Zustimmung des Akteurs und nach eingehender Überprüfung dessen Identität am `Authorization-Endpunkt` des *IDP-Dienstes* zu beantragen. Die für die Beantragung des `ID_TOKEN` notwendigen Informationen bekommt der *Authenticator* von der *Relying Party* in der `Authorization Request URL` übergeben. Der von der gematik bereitgestellte *Authenticator* bezieht die Informationen für die notwendige elektronische Signatur im Challenge-Response-Verfahren zum Signieren des `CHALLENGE_TOKEN` von der Smartcard und fordert hierbei den Akteur zur PIN-Eingabe auf. Hierfür nutzt der *Authenticator* die notwendigen Operationen vom Konnektor. Der *Authenticator* fordert im Zusammenhang mit der PIN-Abfrage im selben Dialog die Consent-Freigabe des `USER_CONSENT` durch den Akteur ein, damit dieser durch die PIN-Eingabe seine Willenserklärung abgibt und der Verwendung seiner Daten in diesen `claims` zustimmt. 
 
 == Download und Konfiguration des Authenticators
 Die gematik stellt einen https://gematikde.sharepoint.com/sites/EXTAuthenticator/Freigegebene%20Dokumente/Forms/AllItems.aspx?id=%2Fsites%2FEXTAuthenticator%2FFreigegebene%20Dokumente%2FVer%C3%B6ffentlichte%20Version%20%2D%20gematik%20Authenticator&p=true&ga=1[Authenticator] gemäß *[gemSpec_IDP_Frontend]* bereit, der die Authentisierung eines Akteurs am zentralen *IDP-Dienst* unter Verwendung einer Smartcard (SMC-B / HBA) - in Kombination mit einem Konnektor und einem eHealth-Kartenterminal - ermöglicht. 
@@ -345,25 +347,26 @@ CAUTION: Voraussetzungen für die Nutzung des von der gematik bereitgestellten *
 - Kartenterminal, +
 - Anwendungsfrontend (z. B. Internet-Browser)
 
-Der Authenticator ist eine Desktop-Anwendung mit grafischer Benutzerschnittstelle, welche aktuell unter Windows lauffähig ist und aus Anwendungen (typisch: Web-Anwendungen) heraus aufgerufen wird. Es ist erforderlich den *Authenticator* in der Leistungserbringer-Umgebung zu konfigurieren. Zusätzliche Informationen finden Sie in der https://wiki.gematik.de/display/GAKB/Installationshandbuch+Authenticator[Installationsanleitung].
+Der Authenticator ist eine Desktop-Anwendung mit grafischer Benutzerschnittstelle, welche aktuell unter Windows lauffähig ist und aus Anwendungen heraus aufgerufen wird. Es ist erforderlich den *Authenticator* in der Leistungserbringer-Umgebung zu konfigurieren. Zusätzliche Informationen finden Sie in der https://wiki.gematik.de/display/GAKB/Installationshandbuch+Authenticator[Installationsanleitung].
 
-== Interaktion mit dem der Fachanwendung
-Damit die Interaktion mit der Fachanwendung möglich ist, wird vorrausgesetzt das die Fachanwendung am zentralen *IDP-Dienst* registriert ist. Der *Authenticator* wird von einem Client über das Protokoll `authenticator://` gestartet (Deeplink). Beim Deeplink-Aufruf übergibt die Fachanwendung einen URL-String mit Query-Parametern. Dieser URL-String setzt sich abhängig vom verwendeten IDP aus dem Protokoll (`authenticator://`) und abhängig vom verwendeten *IDP-Dienst* genannten Parametern zusammen. Das Standardverhalten des *Authenticators* ist, dass nach Abschluss des Vorgangs das Ergebnis in dem default Browser des Betriebssystems geöffnet wird. Um das Öffnen in dem default Browser zu verhindern, bietet der *Authenticator* eine Auto-Redirect Funktion an. Mit dieser Funktion verarbeitet der *Authenticator* einen zusätzlichen Parameter: `callback=DIRECT`. Durch diesen ruft der *Authenticator* die `redirect_uri` direkt auf, anstatt das Ergebnis der Authentifizierung in einen neuen Browser-Tab zu öffnen. Der Empfänger der `redirect_uri` muss dazu einen GET-Endpunkt bereitstellen, welcher der `redirect_uri` entspricht. Die weitere Verarbeitung obliegt dem Empfänger.    
+== Interaktion mit der Fachanwendung
+Damit die Interaktion mit der Fachanwendung möglich ist, wird vorrausgesetzt das die Fachanwendung am zentralen *IDP-Dienst* registriert ist. Der *Authenticator* wird von einem Client über das Protokoll `authenticator://` gestartet (Deeplink). Beim Deeplink-Aufruf übergibt die Fachanwendung einen URL-String mit Query-Parametern. Dieser URL-String setzt sich abhängig vom verwendeten *IDP-Dienst* aus dem Protokoll (`authenticator://`) und weiteren Request-Parametern zusammen. Das Standardverhalten des *Authenticators* ist, dass nach Abschluss des Vorgangs der Response vom Aufruf der `redirect_uri` im default Browser des Betriebssystems geöffnet wird. Um das Öffnen in dem default Browser zu verhindern, bietet der *Authenticator* eine Auto-Redirect Funktion an. Mit dieser Funktion verarbeitet der *Authenticator* einen zusätzlichen Parameter: `callback=DIRECT`. Durch diesen ruft der *Authenticator* die `redirect_uri` direkt auf, anstatt das Ergebnis der Authentifizierung in einen neuen Browser-Tab zu öffnen. 
 
-CAUTION: Die Anwendung gibt vor, welcher Kartentyp (SMC-B / HBA) für den Authentifizierungsprozess mittels Authenticator gesteckt werden soll.
+CAUTION: Die Anwendung gibt vor, welcher Kartentyp (SMC-B / HBA) für den Authentifizierungsprozess mittels *Authenticator* gesteckt werden soll.
 
-Hierfür erweitert die Anwendung die in der `Authorization Request URL` befindlichen `scope` um den Parameter:
+Hierfür erweitert die Anwendung den Deeplink Aufruf um den Parameter `cardType`:
 
-* `Person_ID` (bei HBA Karte) oder 
-* `Institutions_ID` (bei SMC-B Karte).
+* `HBA` (bei HBA Karte) oder 
+* `SMC-B` (bei SMC-B Karte).
+
+WARNING: Der Parameter `cardType` wird erst mit dem Authenticator 4.4 unterstützt, bei einer Vorgängerversion ist für den Kartentyp der `scope` im Deeplink Aufruf zu erweitern. Die Anpassung des `scope` ist mit der Version 4.4 deprecated.  
 
 TIP: Sollten sich in den Konnektor-Terminals mehrere SMC-Bs befinden, erfolgt ab Version 4.0.0 des *Authenticators* keine Fehlermeldung mehr, sondern es erscheint ein Auswahldialog mit den vorhandenen SMC-Bs und detaillierten Informationen wie z.B. Kartenhalter und iccsn. Der Benutzer hat nun die Möglichkeit eine SMC-B Karte für den weiteren Auth.-Flow auszuwählen oder diesen durch 'Abbrechen' komplett zu beenden.
 
 == Entwickleroption
 Innerhalb der link:https://gematikde.sharepoint.com/sites/EXTAuthenticator/Freigegebene%20Dokumente/Forms/AllItems.aspx?ga=1&id=%2Fsites%2FEXTAuthenticator%2FFreigegebene%20Dokumente%2FVer%C3%B6ffentlichte%20Version%20%2D%20gematik%20Authenticator%2FMockvariante%20Alpha%2DVersion%20%28TEST%2DONLY%29&viewid=19543cfb%2D531c%2D4ed7%2Da8c1%2D1fbd4aa0d244[Entwicklervariante] des *Authenticators* ist ein Mockmodus integriert, der die Verwendung eines Konnektors simulieren kann. Somit können Funktionstests auch ohne physisch vorhandenen Konnektor durchgeführt werden. Diese Funktion soll die Entwicklung mit dem *Authenticator* vereinfachen, da sie neben einem speziellen Mockmodus auch mehr Logging-Möglichkeiten zur Verfügung stellt. Eine Anleitung für den Mockmodus ist link:https://wiki.gematik.de/display/GAKB/Gematik+Authenticator+-+Entwicklervariante+mit+Mockmodus[hier] zu finden.
 
-Hersteller die den gematik *Authenticator* für eine smartcardbasierte Authentisierung an ihre Fachanwendung bzw. ihren Fachdienst anbinden möchten, können die link:https://wiki.gematik.de/display/GAKB/Gematik+Authenticator+SDK+Dokumentation[SDK-Dokumentation] der gematik verwenden. Ebenfalls ist der Quellcode des *Authenticator* link:
-Quellcode: https://github.com/gematik/app-Authenticator[hier] einsehbar.
+Hersteller die den gematik *Authenticator* für eine smartcardbasierte Authentisierung an ihrer Fachanwendung bzw. ihren Fachdienst anbinden möchten, können die link:https://wiki.gematik.de/display/GAKB/Gematik+Authenticator+SDK+Dokumentation[SDK-Dokumentation] der gematik verwenden. Zusätzlich ist der Quellcode des *Authenticator* link:https://github.com/gematik/app-Authenticator[hier] einsehbar.
  
 = Refferenzierte Dokumente
 |===
