@@ -38,16 +38,33 @@ Der _TI-Messenger-Fachdienst_ besteht aus den folgenden Teilkomponenten :
 NOTE: Die Teilkomponente _Push-Gateway_ ist nach der  Matrix Spezifikation https://spec.matrix.org/latest/push-gateway-api/[&#91;Push Gateway API&#93;] zu implementieren und wird deshalb in dieser Implementierungshilfe nicht detaillierter beschrieben.
 
 == Vorraussetzungen 
+=== TI-ITSM Portal
+==== Zugang zum TI-ITSM Portal
+Die gematik stellt ein TI-IT Service Management (TI-ITSM) Portal zur Verfügung. Über das TI-ITSM Portal ist es möglich, Service-Requests für Anbieter des *TI-Messenger-Fachdienstes*  zu stellen. Dies ist im Kontext des *TI-Mesenger-Dienstes* für die folgenden Punkte notwendig:
 
-=== Zugang zum TI-ITSM
+* für den Zugang zum PKI-Management-System (PMS), 
+* Erstellung des Signaturzertifikates für den Anbeiter des *TI-Messenger-Fachdienstes*,
+* für die Beantragung der TI-Provider-Credentials für die Anbieterschnittstelle des VZD-FHIR-Directory und
+* die Registrierung des *Registrierungs-Dienstes* beim zentralen *IDP-Dienst* der gematik. 
 
-=== Zugang zum PKI-Management-System
+Hierfür ist es erforderlich, dass sich ein Anbieter eines *TI-Messenger-Fachdienstes* beim TI-ITSM registriert. Weitere Information sind im https://gematikde.sharepoint.com/:w:/s/PTNeo/EczX7AFGfBdNrCYghzGsHz4BbSoYhV63QMmDCdz7x9zLpg?e=7wG3c[Welcome Package] Schritt 4 zu finden. 
 
-=== Bekanntmachung des Registrierungs-Dienstes am VZD-FHIR-Directory
-Zunächst wird ein Zertifikat benötigt, das durch Erstellung einer Serviceanfrage im gematik TI-ITSM-Portal erworben werden kann. Das Zertifikat muss den Typ "C.FD.SIG" und die technische Rolle "oid_tim" haben. Bitte wenden Sie sich für weitere Details an Ihren Transitionmanager.
+Das TI-ITSM-Portal ist unter der folgenden Interseite erreichbar:
+* https://www.ti-itsm.de
 
-=== Beantragung der TI-Provider-Credentials
-Das Zertifikat muss dann beim Erstellen einer weiteren Serviceanfrage im gematik TI-ITSM-Portal für die TIM-Provider-Services-Zugangsdaten bereitgestellt werden. Für weitere Einzelheiten wenden Sie sich bitte an Ihren Transititon Manager. Beim Erstellen der Serviceanfrage werden Sie nach dem Zertifikat gefragt. Dadurch wird sichergestellt, dass nur registrierte TI-Messenger-Dienstanbieter Austausch-Token mit dem *VZD-FHIR-Directory* erstellen können.
+==== Zugang zum PKI-Management-System (PMS)
+Um das Signaturzertifikat (welches für die Signatur des RegService-OpenID-Token benötigt wird) abrufen zu können, müssen vorher ein Benutzeraccount und Berechtigungen über weitere Service-Requests für die Organisation und den Benutzer (nur Root-User) im TI-ITSM beantragt werden. Weitere Informationen sind im link:https://gematikde.sharepoint.com/:w:/s/PTNeo/EczX7AFGfBdNrCYghzGsHz4BbSoYhV63QMmDCdz7x9zLpg?e=7wG3c[Welcome Package] Schritt 6 zu entnehmen. 
+
+Zugang zum PMS
+* RU/TU: https://www-testref.tms.ti-dienste.de
+* PU: https://auth.ti-dienste.de/my.policy
+
+==== Erstellung des Signaturzertifikates für den Anbeiter
+Für die Signierung eines RegService-OpenID-Token durch den Registrierungs-Dienst eines *TI-Messnger-Fachdienstes* wird ein Signaturzertifikat der PKI der Telematikinfrastruktur benötigt. Das Zertifikat muss den Typ "C.FD.SIG" und die technische Rolle "oid_tim" haben. Die Beantragung des Signaturzertifikates erfolg über das TI-ITSM Portal und ist anschließend über das PMS abrufbar (siehe hierzu https://gematikde.sharepoint.com/:w:/s/PTNeo/EczX7AFGfBdNrCYghzGsHz4BbSoYhV63QMmDCdz7x9zLpg?e=7wG3c[Welcome Package] Schritt 6)
+
+
+==== Beantragung der TI-Provider-Credentials am VZD-FHIR-Directory
+Initial muss der Anbieter eines *TI-Messenger-Fachdienstes* TI-Provider-Credentials für den Zugriff auf die Schnittstelle tim-provider-services des FHIR-Proxy beantragen. Die TIM-Provider-Services-Zugangsdaten erhält der Anbieter über eine weitere Serviceanfrage im gematik TI-ITSM-Portal. Hierbei muss das Signaturzertifikat bei der Beantragung mit übergeben werden. Dadurch wird sichergestellt, dass nur registrierte Anbieter eines *TI-Messenger-Fachdienstes* RegService-OpenID-Token an der /owner-authenticate -Schnittstelle des Auth-Service des *VZD-FHIR-Directory* gegen ein owner-accesstoken eintauschen können.
 
 === Bekanntmachung des Registrierungs-Dienstes am zentralen IDP-Dienst
 
