@@ -30,17 +30,17 @@ autonumber
 
 actor oa as "Akteur in der Rolle\nOrg-Admin"
   box <size:19>Endgerät</size> #WhiteSmoke
-  participant wb as "Frontend des \nRegistrierungs-Dienstes"
-  participant au as "Authenticator"
+  participant frd as "Frontend des \nRegistrierungs-Dienstes"
+  participant au as "gematik Authenticator"
   end box
 participant ko as "Konnektor"
 participant rd as "Registrierungs-Dienst \n(Relying Party)"
 participant ip as "zentraler \nIDP-Dienst"
 
-oa -> wb: Organisation authentisieren 
+oa -> frd: Organisation authentisieren 
 
- activate wb
-wb -> rd:""POST I_Registration""
+ activate frd
+frd -> rd:""POST I_Registration""
  |||
  activate rd
       opt#LightGrey #AliceBlue <size:16>Download des IDP Discovery Dokumentes</size>
@@ -63,11 +63,11 @@ rd->rd: Erzeugung eines Zufallswertes (""CODE_VERIFIER"")  \nund Bildung darübe
 rd->rd: Erstellung der Authentication Request URL\nmit den Request Parametern \n""Authentication Request URL=""\n""{authorization_endpoint}&{client_id}&""\n""{response_type}&{redirect_uri}&{state}&""\n""{code_challenge}&{code_challenge_method}&""\n""{scope}&{nonce}""
         |||
 
-rd --> wb: Redirect zur ""{Authentication Request URL}""
+rd --> frd: Redirect zur ""{Authentication Request URL}""
  deactivate rd
 
-        wb -> wb: Erstellung des Deeplink \n""authenticator://?challenge_path=""\n""{Authentication Request URL}""
-        wb -> au: Aufruf des Deeplinks mit\n""scope"" erweitert um ""callback=DIRECT""
+        frd -> frd: Erstellung des ""challenge_path"" \n""authenticator://?challenge_path=""\n""{Authentication Request URL}""\n""&cardType=SMC-B""\n""&callback=DIRECT""
+        frd -> au: Aufruf des Authenticators mit Deeplink 
         |||
         activate au        
           opt#LightGrey #AliceBlue <size:16>Download des IDP Discovery Dokumentes</size>
@@ -93,7 +93,7 @@ rd --> wb: Redirect zur ""{Authentication Request URL}""
         ip -> ip: Prüfung der claim ""redirect_uri"" \n gegen die beim IDP-Dienst\n registrierten ""redirect_uris""
         ip -> ip: Überführung der ""scope""\nInhalte in ""USER_CONSENT"" 
         ip -> ip: Erstellung der Authentication challenge\n(""CHALLENGE_TOKEN"")
-        ip -> ip: Signatur des ""CHALLENGE_TOKEN""\nmit ""Prk_IDP_SIG""
+        ip -> ip: Signieren des ""CHALLENGE_TOKEN""\nmit ""Prk_IDP_SIG""
         |||
         end
         ip -> au: ""CHALLENGE_TOKEN"" & ""USER_CONSENT""
@@ -170,7 +170,8 @@ rd --> wb: Redirect zur ""{Authentication Request URL}""
         deactivate ip
         rd -> rd:  Entschlüsselung des Token\nmit ""AES256-Token-Key"" und Validierung\nmit ""PuK_IDP_SIG""
         rd -> rd: Prüfung der im Token\nenthaltenen ""ProfessionOID"""
-        rd --> wb: Status der Authentisierung
+        frd ->rd: Abfrage des Status(Polling)
+        rd --> frd: Status der Authentisierung
          deactivate rd
-        wb --> oa: Organisation erfolgreich Authentifiziert
+        frd --> oa: Organisation erfolgreich Authentifiziert
 @enduml

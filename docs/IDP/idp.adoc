@@ -325,7 +325,7 @@ In dem folgenden Sequenzdiagramm ist beispielhaft der Ablauf des Authorization C
 
 CAUTION: Der von der gematik bereitgestellte Authenticator wird nicht in Verbindung mit einer Web-Anwendung empfohlen, da vom Authenticator ein neuer Browser Tab geöffnet wird. Entsprechend der Fachanwendung wird im Browser eine HTML-Seite oder ein Json-Objekt(VZD-FHIR Response) angezeigt. 
 
-Die Abbildung zeigt die Verwendung des Authenticators mit der Auto-Redirect Funktion (`callback=DIRECT`) bei der die `redirect_uri` direkt vom Authenticator aufgerufen wird und der Browserclient über Polling beim Fachdienst den Status des Tokenaustausches abfragt. Details zur Interaktion mit dem *Authenticator* sind in Kapitel _Interaktion mit der Fachanwendung_ beschrieben. Alternativ könnte der *Authenticator* beim Aufruf der `redirect_uri` eine nutzerfreundliche Webseite der *Relying Party* in einem neuen Browsertab öffnen.    
+Die Abbildung zeigt die Verwendung des *Authenticators* mit der Auto-Redirect Funktion (`callback=DIRECT`) bei der die `redirect_uri` direkt vom Authenticator aufgerufen wird und der Browserclient über Polling beim Fachdienst den Status des Austausches des Tokens abfragt. Details zur Interaktion mit dem *Authenticator* sind in Kapitel _Interaktion mit der Fachanwendung_ beschrieben. Alternativ könnte der *Authenticator* beim Aufruf der `redirect_uri` eine nutzerfreundliche Webseite der *Relying Party* in einem neuen Browsertab öffnen.    
 
 ++++
 <p align="left">
