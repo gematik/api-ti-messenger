@@ -1,0 +1,22 @@
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+:imagesdir: ../../images
+:docsdir: ../docs
+:toc: macro
+:toclevels: 6
+:toc-title: Table of Contents
+:numbered:
+:sectnumlevels: 6
+
+image:gematik_logo.svg[width=70%]
+
+toc::[]
+
+= Primärsystem
+Der folgende Leitfaden beschreibt, wie das Primärsystem die Funktionalitäten vom TI-Messenger umsetzt.
