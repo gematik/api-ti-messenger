@@ -44,13 +44,13 @@ Die folgende Abbildung gibt einen Überblick über die Systemarchitektur des TI-
 
 link:docs/Fachdienst/Fachdienst.adoc[*TI Messenger-Fachdienst*]
 
-* *Registrierungs-Dienst:* +
+* link:docs/Fachdienst/Registrierungsdienst.adoc[*Registrierungs-Dienst*] +
 Der Registrierungs-Dienst bietet zwei abstrakte Schnittstellen an. Die Schnittstelle `I_Registration` wird vom Frontend des Registrierungs-Dienstes aufgerufen, um eine Organisation beim Registrierungs-Dienst zu authentifizieren und Messenger-Services zu administrieren. Die Schnittstelle `I_internVerfification` wird von den Messenger-Proxies aufgerufen, um die Föderationsliste abzurufen und für die Prüfung auf existierende VZD-FHIR-Einträge der beteiligten Akteure einer beabsichtigten Kommunikation.
 
-* *Messenger-Service:* +
+* link:docs/Fachdienst/MessengerService.adoc[*Messenger-Service*] +
 Ein Messenger-Service besteht aus den Teilkomponenten Messenger-Proxy und einem Matrix-Homeserver. Die Teilkomponente Matrix-Homeserver basiert auf dem offenen Kommunikationsprotokoll Matrix und bietet die `Matrix-Client-Server API` sowie die `Matrix-Server-Server API` an. Die Kommunikation zu einem Matrix-Homeserver wird immer über den Messenger-Proxy geleitet, sofern die Berechtigungsprüfung erfolgreich war. Dieser stellt die Schnittstelle `I_TiMessengerContactManagement` bereit, um die Administration einer Freigabeliste eines Akteurs zu ermöglichen. 
 
-* *Push-Gateway:* +
+* https://spec.matrix.org/v1.3/push-gateway-api/[*Push-Gateway*] +
 Das Push-Gateway stellt die `Matrix-Push Gateway API` gemäß der Matrix Spezifikation bereit. Dieses ermöglicht die Weiterleitung von Benachrichtigungen an Akteure des TI-Messenger-Dienstes.
 
 link:docs/Client/Client.adoc[*TI Messenger-Client*] +
