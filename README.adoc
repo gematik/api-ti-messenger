@@ -122,6 +122,9 @@ link:docs/Client/Client.adoc[- TI-Messenger-Client] +
 link:docs/FHIR-Directory/FHIR-Directory.adoc[- VZD-FHIR-Directory] +
 link:docs/IDP/idp.adoc[- Zentraler IDP-Dienst] +
 
+*Leitfaden für Primärsystemhersteller* +
+link:docs/Primaersystem/Primaersystem.adoc[- Primärsystem] +
+
 *Diverses* +
 https://gematikde.sharepoint.com/:w:/s/PTNeo/EczX7AFGfBdNrCYghzGsHz4BbSoYhV63QMmDCdz7x9zLpg?e=7wG3c[- Welcome Package &#91;DE&#93;] +
 https://gematikde.sharepoint.com/:w:/s/PTNeo/ETwc10F5Ha1KmlM8NEsetl8BtEumSDgu56AK-PNiZ0-e1Q?e=ySZROI[- Welcome Package &#91;EN&#93;] +
