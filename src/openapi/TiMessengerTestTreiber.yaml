@@ -2483,7 +2483,7 @@ components:
     RoomMembershipState:
       description: "An accounts membership state for a room"
       type: string
-      enum: [ Unrelated, Knocking, Invited, Joined, Banned ]
+      enum: [ Unrelated, Knock, Invite, Join, Ban, Leave ]
 
     RoomMember:
       description: ""
