@@ -42,10 +42,11 @@ NOTE: Die Teilkomponente _Push-Gateway_ ist nach der  Matrix Spezifikation https
 ==== Zugang zum TI-ITSM Portal
 Die gematik stellt ein TI-IT Service Management (TI-ITSM) Portal zur Verfügung. Über das TI-ITSM Portal ist es möglich, Service-Requests für Anbieter eines *TI-Messenger-Fachdienstes* zu stellen. Dies ist im Kontext des *TI-Mesenger-Dienstes* für die folgenden Punkte notwendig:
 
-* für den Zugang zum PKI-Management-System (PMS), 
-* Erstellung des Signaturzertifikates für den Anbeiter des *TI-Messenger-Fachdienstes*,
-* für die Beantragung der `TI-Provider-Credentials` für die Anbieterschnittstelle des VZD-FHIR-Directory und
-* die Registrierung des *Registrierungs-Dienstes* beim zentralen *IDP-Dienst* der gematik. 
+CAUTION: Voraussetzungen für die Nutzung des von der gematik bereitgestellten *Authenticators* sind: +
+- für den Zugang zum PKI-Management-System (PMS), +
+- Erstellung des Signaturzertifikates für den Anbeiter des *TI-Messenger-Fachdienstes*, +
+- für die Beantragung der `TI-Provider-Credentials` für die Anbieterschnittstelle des VZD-FHIR-Directory und +
+- die Registrierung des *Registrierungs-Dienstes* beim zentralen *IDP-Dienst* der gematik. 
 
 Hierfür ist es erforderlich, dass sich ein Anbieter eines *TI-Messenger-Fachdienstes* beim TI-ITSM registriert. Weitere Information sind im https://gematikde.sharepoint.com/:w:/s/PTNeo/EczX7AFGfBdNrCYghzGsHz4BbSoYhV63QMmDCdz7x9zLpg?e=7wG3c[Welcome Package] Schritt 4 zu finden. 
 
