@@ -40,11 +40,11 @@ NOTE: Die Teilkomponente _Push-Gateway_ ist nach der  Matrix Spezifikation https
 == Vorraussetzungen 
 === TI-ITSM Portal
 ==== Zugang zum TI-ITSM Portal
-Die gematik stellt ein TI-IT Service Management (TI-ITSM) Portal zur Verfügung. Über das TI-ITSM Portal ist es möglich, Service-Requests für Anbieter des *TI-Messenger-Fachdienstes*  zu stellen. Dies ist im Kontext des *TI-Mesenger-Dienstes* für die folgenden Punkte notwendig:
+Die gematik stellt ein TI-IT Service Management (TI-ITSM) Portal zur Verfügung. Über das TI-ITSM Portal ist es möglich, Service-Requests für Anbieter eines *TI-Messenger-Fachdienstes* zu stellen. Dies ist im Kontext des *TI-Mesenger-Dienstes* für die folgenden Punkte notwendig:
 
 * für den Zugang zum PKI-Management-System (PMS), 
 * Erstellung des Signaturzertifikates für den Anbeiter des *TI-Messenger-Fachdienstes*,
-* für die Beantragung der TI-Provider-Credentials für die Anbieterschnittstelle des VZD-FHIR-Directory und
+* für die Beantragung der `TI-Provider-Credentials` für die Anbieterschnittstelle des VZD-FHIR-Directory und
 * die Registrierung des *Registrierungs-Dienstes* beim zentralen *IDP-Dienst* der gematik. 
 
 Hierfür ist es erforderlich, dass sich ein Anbieter eines *TI-Messenger-Fachdienstes* beim TI-ITSM registriert. Weitere Information sind im https://gematikde.sharepoint.com/:w:/s/PTNeo/EczX7AFGfBdNrCYghzGsHz4BbSoYhV63QMmDCdz7x9zLpg?e=7wG3c[Welcome Package] Schritt 4 zu finden. 
@@ -53,18 +53,18 @@ Das TI-ITSM-Portal ist unter der folgenden Interseite erreichbar:
 * https://www.ti-itsm.de
 
 ==== Zugang zum PKI-Management-System (PMS)
-Um das Signaturzertifikat (welches für die Signatur des RegService-OpenID-Token benötigt wird) abrufen zu können, müssen vorher ein Benutzeraccount und Berechtigungen über weitere Service-Requests für die Organisation und den Benutzer (nur Root-User) im TI-ITSM beantragt werden. Weitere Informationen sind im link:https://gematikde.sharepoint.com/:w:/s/PTNeo/EczX7AFGfBdNrCYghzGsHz4BbSoYhV63QMmDCdz7x9zLpg?e=7wG3c[Welcome Package] Schritt 6 zu entnehmen. 
+Um das Signaturzertifikat (welches für die Signatur des `RegService-OpenID-Token` benötigt wird) abrufen zu können, müssen vorher ein Benutzeraccount und Berechtigungen über weitere Service-Requests für die Organisation und den Benutzer (nur Root-User) im TI-ITSM beantragt werden. Weitere Informationen sind im link:https://gematikde.sharepoint.com/:w:/s/PTNeo/EczX7AFGfBdNrCYghzGsHz4BbSoYhV63QMmDCdz7x9zLpg?e=7wG3c[Welcome Package] Schritt 6 zu entnehmen. 
 
 Zugang zum PMS
 * RU/TU: https://www-testref.tms.ti-dienste.de
 * PU: https://auth.ti-dienste.de/my.policy
 
 ==== Erstellung des Signaturzertifikates für den Anbeiter
-Für die Signierung eines RegService-OpenID-Token durch den Registrierungs-Dienst eines *TI-Messnger-Fachdienstes* wird ein Signaturzertifikat der PKI der Telematikinfrastruktur benötigt. Das Zertifikat muss den Typ "C.FD.SIG" und die technische Rolle "oid_tim" haben. Die Beantragung des Signaturzertifikates erfolg über das TI-ITSM Portal und ist anschließend über das PMS abrufbar (siehe hierzu https://gematikde.sharepoint.com/:w:/s/PTNeo/EczX7AFGfBdNrCYghzGsHz4BbSoYhV63QMmDCdz7x9zLpg?e=7wG3c[Welcome Package] Schritt 6)
+Für die Signierung eines `RegService-OpenID-Token` durch den *Registrierungs-Dienst* eines *TI-Messnger-Fachdienstes* wird ein Signaturzertifikat der PKI der Telematikinfrastruktur benötigt. Das Zertifikat muss den Typ `C.FD.SIG` und die technische Rolle `oid_tim` haben. Die Beantragung des Signaturzertifikates erfolg über das TI-ITSM Portal und ist anschließend über das PMS abrufbar (siehe hierzu https://gematikde.sharepoint.com/:w:/s/PTNeo/EczX7AFGfBdNrCYghzGsHz4BbSoYhV63QMmDCdz7x9zLpg?e=7wG3c[Welcome Package] Schritt 6)
 
 
 ==== Beantragung der TI-Provider-Credentials am VZD-FHIR-Directory
-Initial muss der Anbieter eines *TI-Messenger-Fachdienstes* TI-Provider-Credentials für den Zugriff auf die Schnittstelle tim-provider-services des FHIR-Proxy beantragen. Die TIM-Provider-Services-Zugangsdaten erhält der Anbieter über eine weitere Serviceanfrage im gematik TI-ITSM-Portal. Hierbei muss das Signaturzertifikat bei der Beantragung mit übergeben werden. Dadurch wird sichergestellt, dass nur registrierte Anbieter eines *TI-Messenger-Fachdienstes* RegService-OpenID-Token an der /owner-authenticate -Schnittstelle des Auth-Service des *VZD-FHIR-Directory* gegen ein owner-accesstoken eintauschen können.
+Initial muss der Anbieter eines *TI-Messenger-Fachdienstes* `TI-Provider-Credentials` für den Zugriff auf die Schnittstelle `/tim-provider-services` des *FHIR-Proxy* beantragen. Die TIM-Provider-Services-Zugangsdaten erhält der Anbieter über eine weitere Serviceanfrage im gematik TI-ITSM-Portal. Hierbei muss das Signaturzertifikat bei der Beantragung mit übergeben werden. Dadurch wird sichergestellt, dass nur registrierte Anbieter eines *TI-Messenger-Fachdienstes* `RegService-OpenID-Token` an der `/owner-authenticate`-Schnittstelle des *Auth-Service* des *VZD-FHIR-Directory* gegen ein `owner-accesstoken` eintauschen können.
 
 === Bekanntmachung des Registrierungs-Dienstes am zentralen IDP-Dienst
 
