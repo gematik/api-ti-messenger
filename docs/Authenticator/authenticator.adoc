@@ -1,0 +1,55 @@
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+:imagesdir: ../../images
+:docsdir: ../docs
+:toc: macro
+:toclevels: 6
+:toc-title: Table of Contents
+:numbered:
+:sectnumlevels: 6
+
+image:gematik_logo.svg[width=70%]
+
+toc::[]
+
+
+= gematik Authenticator
+== Überblick
+Für die Authentifizierung mittels Smartcard stellt die gematik einen eigenen *Authenticator* zur Verfügung. Hersteller eines *TI-Messenger-Dienstes* können auch eigene Authenticator Lösungen entwickeln, um zum Beispiel an mobilen Endgeräten eine Interaktion mit Smartcards über die NFC-Schnittstelle zu realisieren. Im folgenden wird auf den *Authenticator* der gematik eingegangen.
+
+Die Aufgabe des *Authenticators* ist, dass von der *Relying Party* benötigte `ID_TOKEN` mit Zustimmung des Akteurs und nach eingehender Überprüfung dessen Identität am `Authorization-Endpunkt` des *IDP-Dienstes* zu beantragen. Die für die Beantragung des `ID_TOKEN` notwendigen Informationen bekommt der *Authenticator* von der *Relying Party* in der `Authorization Request URL` übergeben. Der von der gematik bereitgestellte *Authenticator* bezieht die Informationen für die notwendige elektronische Signatur im Challenge-Response-Verfahren zum Signieren des `CHALLENGE_TOKEN` von der Smartcard und fordert hierbei den Akteur zur PIN-Eingabe auf. Hierfür nutzt der *Authenticator* die notwendigen Operationen vom Konnektor. Der *Authenticator* fordert im Zusammenhang mit der PIN-Abfrage im selben Dialog die Consent-Freigabe des `USER_CONSENT` durch den Akteur ein, damit dieser durch die PIN-Eingabe seine Willenserklärung abgibt und der Verwendung seiner Daten in diesen `claims` zustimmt. 
+
+== Download und Konfiguration des Authenticators
+Die gematik stellt einen https://gematikde.sharepoint.com/sites/EXTAuthenticator/Freigegebene%20Dokumente/Forms/AllItems.aspx?id=%2Fsites%2FEXTAuthenticator%2FFreigegebene%20Dokumente%2FVer%C3%B6ffentlichte%20Version%20%2D%20gematik%20Authenticator&p=true&ga=1[Authenticator] gemäß *[gemSpec_IDP_Frontend]* bereit, der die Authentisierung eines Akteurs am zentralen *IDP-Dienst* unter Verwendung einer Smartcard (SMC-B / HBA) - in Kombination mit einem Konnektor und einem eHealth-Kartenterminal - ermöglicht. 
+
+CAUTION: Voraussetzungen für die Nutzung des von der gematik bereitgestellten *Authenticators* sind: +
+- Konnektor, +
+- Kartenterminal, +
+- Anwendungsfrontend (z. B. Internet-Browser)
+
+Der Authenticator ist eine Desktop-Anwendung mit grafischer Benutzerschnittstelle, welche aktuell unter Windows lauffähig ist und aus Anwendungen heraus aufgerufen wird. Es ist erforderlich den *Authenticator* in der Leistungserbringer-Umgebung zu konfigurieren. Zusätzliche Informationen finden Sie in der https://wiki.gematik.de/display/GAKB/Installationshandbuch+Authenticator[Installationsanleitung].
+
+== Interaktion mit der Fachanwendung
+Damit die Interaktion mit der Fachanwendung möglich ist, wird vorrausgesetzt das die Fachanwendung am zentralen *IDP-Dienst* registriert ist. Der *Authenticator* wird von einem Client über das Protokoll `authenticator://` gestartet (Deeplink). Beim Deeplink-Aufruf übergibt die Fachanwendung einen URL-String mit Query-Parametern. Dieser URL-String setzt sich abhängig vom verwendeten *IDP-Dienst* aus dem Protokoll (`authenticator://`) und weiteren Request-Parametern zusammen. Das Standardverhalten des *Authenticators* ist, dass nach Abschluss des Vorgangs der Response vom Aufruf der `redirect_uri` im default Browser des Betriebssystems geöffnet wird. Um das Öffnen in dem default Browser zu verhindern, bietet der *Authenticator* eine Auto-Redirect Funktion an. Mit dieser Funktion verarbeitet der *Authenticator* einen zusätzlichen Parameter: `callback=DIRECT`. Durch diesen ruft der *Authenticator* die `redirect_uri` direkt auf, anstatt das Ergebnis der Authentifizierung in einen neuen Browser-Tab zu öffnen. 
+
+CAUTION: Die Anwendung gibt vor, welcher Kartentyp (SMC-B / HBA) für den Authentifizierungsprozess mittels *Authenticator* gesteckt werden soll.
+
+Hierfür erweitert die Anwendung den Deeplink Aufruf um den Parameter `cardType`:
+
+* `HBA` (bei HBA Karte) oder 
+* `SMC-B` (bei SMC-B Karte).
+
+WARNING: Der Parameter `cardType` wird erst mit dem Authenticator 4.4 unterstützt, bei einer Vorgängerversion ist für den Kartentyp der `scope` im Deeplink Aufruf zu erweitern. Die Anpassung des `scope` ist mit der Version 4.4 deprecated.  
+
+TIP: Sollten sich in den Konnektor-Terminals mehrere SMC-Bs befinden, erfolgt ab Version 4.0.0 des *Authenticators* keine Fehlermeldung mehr, sondern es erscheint ein Auswahldialog mit den vorhandenen SMC-Bs und detaillierten Informationen wie z.B. Kartenhalter und iccsn. Der Benutzer hat nun die Möglichkeit eine SMC-B Karte für den weiteren Auth.-Flow auszuwählen oder diesen durch 'Abbrechen' komplett zu beenden.
+
+== Entwickleroption
+Innerhalb der link:https://gematikde.sharepoint.com/sites/EXTAuthenticator/Freigegebene%20Dokumente/Forms/AllItems.aspx?ga=1&id=%2Fsites%2FEXTAuthenticator%2FFreigegebene%20Dokumente%2FVer%C3%B6ffentlichte%20Version%20%2D%20gematik%20Authenticator%2FMockvariante%20Alpha%2DVersion%20%28TEST%2DONLY%29&viewid=19543cfb%2D531c%2D4ed7%2Da8c1%2D1fbd4aa0d244[Entwicklervariante] des *Authenticators* ist ein Mockmodus integriert, der die Verwendung eines Konnektors simulieren kann. Somit können Funktionstests auch ohne physisch vorhandenen Konnektor durchgeführt werden. Diese Funktion soll die Entwicklung mit dem *Authenticator* vereinfachen, da sie neben einem speziellen Mockmodus auch mehr Logging-Möglichkeiten zur Verfügung stellt. Eine Anleitung für den Mockmodus ist link:https://wiki.gematik.de/display/GAKB/Gematik+Authenticator+-+Entwicklervariante+mit+Mockmodus[hier] zu finden.
+
+Hersteller die den gematik *Authenticator* für eine smartcardbasierte Authentisierung an ihrer Fachanwendung bzw. ihren Fachdienst anbinden möchten, können die link:https://wiki.gematik.de/display/GAKB/Gematik+Authenticator+SDK+Dokumentation[SDK-Dokumentation] der gematik verwenden. Zusätzlich ist der Quellcode des *Authenticator* link:https://github.com/gematik/app-Authenticator[hier] einsehbar.
