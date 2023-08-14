@@ -65,7 +65,7 @@ link:docs/IDP/idp.adoc[*Zentraler IDP-Dienst*] +
 
 * Der Zentralen IDP-Dienst der gematik übernimmt die Aufgabe der smartcard-basierten Authentisierung eines Akteures. Hierbei fast der IDP-Dienst aus der Smartcard notwendige Attribute (z. B. `TelematikID`, `ProfessionOID`) in signierten JSON Web Token (ID_TOKEN) zusammen, um Zugriff auf angebotene Daten zu erhalten. 
 
-link:docs/IDP/authenticator.adoc[*gematik Authenticator*] +
+link:docs/Authenticator/authenticator.adoc[*gematik Authenticator*] +
 
 * Der Authenticator der gematik erhält vom IDP-Dienst einen `AUTHORIZATION_CODE` zurück, welches durch Vorlage vom Registrierungs-Dienst oder vom Auth-Service des VZD-FHIR-Directory am IDP-Dienst durch ein ID_TOKEN ausgetauscht wird.
 
