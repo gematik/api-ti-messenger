@@ -1057,11 +1057,11 @@ paths:
     delete:
       tags:
         - room
-      description: "Delete the room."
-      operationId: deleteRoom
+      description: "Forget about this room."
+      operationId: forgetRoom
       responses:
         "204":
-          description: "room deleted"
+          description: "room forgotten"
         "401":
           $ref: "#/components/responses/Unauthorized"
         "403":
