@@ -69,4 +69,6 @@ Initial muss der Anbieter eines *TI-Messenger-Fachdienstes* `TI-Provider-Credent
 
 === Bekanntmachung des Registrierungs-Dienstes am zentralen IDP-Dienst
 
+Es besteht bereits eine abgeschlossene Scope-Registrierung am zentralen *IDP-Dienst* für den *TI-Messenger-Dienst*. Daher ist es nur erforderlich ber der gematik eine `client_id` für den *Registrierungs-Dienst* zu beantragen. Hierfür benötigt die gematik im Registrierungsformular die `redirect_uri` des *Registrierungs-Dienstes*, die zu der `client_id` registriert wird. Das Registrierungsformular kann unter idp-registrierung@gematik.de angefragt werden. Nach der Registrierung erhält der Anbieter die registrierte `client_id` sowie den Download-Endpunkt des Discovery Documentes des zentralen *IDP-Dienst*. Weitere Informationen sind im https://gematikde.sharepoint.com/:w:/s/PTNeo/EczX7AFGfBdNrCYghzGsHz4BbSoYhV63QMmDCdz7x9zLpg?e=7wG3c[Welcome Package] Schritt 5 zu finden. 
+
 
