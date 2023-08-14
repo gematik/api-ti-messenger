@@ -12,29 +12,32 @@ endif::[]
 image::gematik_logo.svg[gematik,width="70%"]
 
 image:https://img.shields.io/badge/Release%20Notes-v1.1.1-red?style=plastic&logo=github&logoColor=red[link="ReleaseNotes.md"] +
-image:https://img.shields.io/badge/ContactManagement-v1.0.1-blue?style=plastic&logo=github&logoColor=blue[link=/src/openapi/TiMessengerContactManagement.yaml"]
-image:https://img.shields.io/badge/TestTreiber-v0.3.0-blue?style=plastic&logo=github&logoColor=blue[link="/src/openapi/TiMessengerTestTreiber.yaml"] +
+image:https://img.shields.io/badge/I_TiMessengerContactManagement-v1.0.1-blue?style=plastic&logo=github&logoColor=blue[link=/src/openapi/TiMessengerContactManagement.yaml"]
+image:https://img.shields.io/badge/TiMessengerTestDriver-v0.3.0-blue?style=plastic&logo=github&logoColor=blue[link="/src/openapi/TiMessengerTestTreiber.yaml"] +
 image:https://img.shields.io/badge/TI&hyphen;Messenger&hyphen;Dienst-v1.1.1-green?style=plastic&logo=github&logoColor=green[link="https://fachportal.gematik.de/fachportal-import/files/gemSpec_TI-Messenger-Dienst_V1.1.1.pdf"]
 image:https://img.shields.io/badge/TI&hyphen;Messenger&hyphen;FD-v1.1.1-green?style=plastic&logo=github&logoColor=green[link="https://fachportal.gematik.de/fachportal-import/files/gemSpec_TI-Messenger-FD_V1.1.1.pdf"]
-image:https://img.shields.io/badge/TI&hyphen;Messenger&hyphen;Client-v1.1.1-green?style=plastic&logo=github&logoColor=green[link="https://fachportal.gematik.de/fachportal-import/files/gemSpec_TI-Messenger-Client_V1.1.1.pdf"]
+image:https://img.shields.io/badge/TI&hyphen;Messenger&hyphen;Client-v1.1.1-green?style=plastic&logo=github&logoColor=green[link="https://fachportal.gematik.de/fachportal-import/files/gemSpec_TI-Messenger-Client_V1.1.1.pdf"] +
+image:https://img.shields.io/badge/Matrix_Client_Server_API-v1.3-yellow?style=plastic&logo=github&logoColor=yellow[link="https://spec.matrix.org/v1.3/client-server-api/"] 
+image:https://img.shields.io/badge/Matrix_Server_Server_API-v1.3-yellow?style=plastic&logo=github&logoColor=yellow[link="https://spec.matrix.org/v1.3/server-server-api/"] 
+image:https://img.shields.io/badge/Matrix_Push_Gateway_API-v1.3-yellow?style=plastic&logo=github&logoColor=yellow[link="https://spec.matrix.org/v1.3/https:/spec.matrix.org/v1.3/push-gateway-api/"] 
 
 == Überblick
-Die folgende Dokumentation baut auf die Spezifikation TI-Messenger-Dienst v1.1.1 gemäß *[gemSpec_TI-Messenger-Dienst]* auf. An dieser Stelle werden insbesondere die in der Spezifikation genannten Komponenten der Lösung sowie deren Schnittstellen weiter dargestellt und erläutert, um Herstellern und Anbietern bestmöglich zu unterstützen. Der Funktionsumfang des TI Messenger-Dienst v1.1.1 beinhaltet: +
+Die folgende Dokumentation ergänzt die Spezifikation *TI-Messenger-Dienst* v1.1.1 gemäß *[gemSpec_TI-Messenger-Dienst]*. An dieser Stelle werden insbesondere die in der Spezifikation genannten Komponenten der Lösung sowie deren Schnittstellen weiter dargestellt und erläutert, um Hersteller und Anbieter eines *TI-Messenger-Dienstes* bestmöglich zu unterstützen. Der Funktionsumfang des *TI-Messenger-Dienst* v1.1.1 beinhaltet: +
 
 * die Echtzeit-Kommunikation zwischen Leistungserbringern und Leistungserbringerinstitutionen und
 * die Echtzeit-Kommunikation direkt zwischen Leistungserbringern.
 
-💡 _Hinweis: In der TI-Messenger-Dienst v1.1.1 können keine Versicherten an dem TI-Messenger Dienst teilnehmen_
+💡 _Hinweis: In der Spezifikationsversion v1.1.1 können keine Versicherten an dem *TI-Messenger-Dienst* teilnehmen_
 
 == Branches
-Für die Dokumentation des TI-Messenger-Dienstes werden die folgenden Branches verwendet:
+Für die Dokumentation des *TI-Messenger-Dienstes* werden die folgenden Branches verwendet:
 
-- *main*: enthält die Dokumentation für die aktuell veröffentlichte Version gemäß *[gemSpec_TI-Messenger-Dienst]*
-- *develop*: enthält die Dokumentation der in Entwicklung befindlichen Features 
-- *feature/**: Dieser Branch wird zur Vorbereitung und Diskussion neuer Themen, die noch nicht in der Entwicklung sind, verwendet. Diese Dokumente können unvollständig sein und sich bis zur Fertigstellung noch ändern.
+- `main`: enthält die Dokumentation für die aktuell veröffentlichte Version gemäß *[gemSpec_TI-Messenger-Dienst]*
+- `develop`: enthält die Dokumentation der in Entwicklung befindlichen Features 
+- `feature/*`: Dieser Branch wird zur Vorbereitung und Diskussion neuer Themen, die noch nicht in der Entwicklung sind, verwendet. Diese Dokumente können unvollständig sein und sich bis zur Fertigstellung noch ändern.
 
 == Systemübersicht
-Die folgende Abbildung gibt einen Überblick über die Systemarchitektur des TI-Messenger-Dienst v1.1.1. Die ebenfalls für den Betreib des TI-Messenger Dienstes notwendigen IDP-Dienste werden an dieser Stelle nicht betrachtet.
+Die folgende Abbildung gibt einen Überblick über die Systemarchitektur des *TI-Messenger-Dienst* v1.1.1 insbesondere auf die Schnittstellen zwischen den Komponenten. 
 
 ++++
 <p align="left">
@@ -42,10 +45,12 @@ Die folgende Abbildung gibt einen Überblick über die Systemarchitektur des TI-
 </p>
 ++++
 
+Die in der Abbildung gezeigten Komponenten werden in den folgenden Kapiteln weiter betrachtet. 
+
 link:docs/Fachdienst/Fachdienst.adoc[*TI Messenger-Fachdienst*]
 
 * link:docs/Fachdienst/Registrierungsdienst.adoc[*Registrierungs-Dienst*] +
-Der Registrierungs-Dienst bietet zwei abstrakte Schnittstellen an. Die Schnittstelle `I_Registration` wird vom Frontend des Registrierungs-Dienstes aufgerufen, um eine Organisation beim Registrierungs-Dienst zu authentifizieren und Messenger-Services zu administrieren. Die Schnittstelle `I_internVerfification` wird von den Messenger-Proxies aufgerufen, um die Föderationsliste abzurufen und für die Prüfung auf existierende VZD-FHIR-Einträge der beteiligten Akteure einer beabsichtigten Kommunikation.
+Der *Registrierungs-Dienst* bietet drei abstrakte Schnittstellen an. Die Schnittstelle `I_Registration` wird vom *Frontend des Registrierungs-Dienstes* aufgerufen, um eine Organisation beim *Registrierungs-Dienst* zu authentifizieren und *Messenger-Services* zu administrieren. Die Schnittstelle `I_internVerfification` wird von den *Messenger-Proxies* aufgerufen, um die Föderationsliste abzurufen und dient zusätzlich der Prüfung (der beteiligten Akteure) auf existierende VZD-FHIR-Einträge. Die Schnittstelle `I_requestToken` wird vom *Org-Admin-Client* benötigt, um Zugang am *FHIR-Proxy* zu bekommen, um FHIR-Ressourcen bearbeiten zu können. 
 
 * link:docs/Fachdienst/MessengerService.adoc[*Messenger-Service*] +
 Ein Messenger-Service besteht aus den Teilkomponenten Messenger-Proxy und einem Matrix-Homeserver. Die Teilkomponente Matrix-Homeserver basiert auf dem offenen Kommunikationsprotokoll Matrix und bietet die `Matrix-Client-Server API` sowie die `Matrix-Server-Server API` an. Die Kommunikation zu einem Matrix-Homeserver wird immer über den Messenger-Proxy geleitet, sofern die Berechtigungsprüfung erfolgreich war. Dieser stellt die Schnittstelle `I_TiMessengerContactManagement` bereit, um die Administration einer Freigabeliste eines Akteurs zu ermöglichen. 
