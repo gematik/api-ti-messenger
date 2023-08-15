@@ -56,11 +56,11 @@ Der *Registrierungs-Dienst* bietet drei abstrakte Schnittstellen an. Die Schnitt
 Ein *Messenger-Service* besteht aus den Teilkomponenten *Messenger-Proxy* und einem *Matrix-Homeserver*. Die Teilkomponente *Matrix-Homeserver* basiert auf dem offenen Kommunikationsprotokoll Matrix und bietet die `Matrix-Client-Server API` sowie die `Matrix-Server-Server API` an. Die Kommunikation zu einem *Matrix-Homeserver* wird immer über den *Messenger-Proxy* geleitet, sofern die Berechtigungsprüfung erfolgreich war. Der *Messenger-Proxy* stellt die Schnittstelle `I_TiMessengerContactManagement` bereit, um die Administration der Freigabeliste eines Akteurs zu ermöglichen. 
 
 * https://spec.matrix.org/v1.3/push-gateway-api/[*Push-Gateway*] +
-Das Push-Gateway stellt die `Matrix-Push-Gateway API` gemäß der Matrix Spezifikation bereit. Dieses ermöglicht die Weiterleitung von Benachrichtigungen an Akteure des TI-Messenger-Dienstes.
+Das *Push-Gateway* stellt die `Matrix-Push-Gateway API` gemäß der Matrix Spezifikation bereit. Dieses ermöglicht die Weiterleitung von Benachrichtigungen an Akteure des *TI-Messenger-Dienstes*.
 
 link:docs/Client/Client.adoc[*TI Messenger-Client*] +
 
-* Der TI-Messenger-Client basiert auf der `Matrix-Client-Server API`. Er wird durch weitere Funktionsmerkmale erweitert und ruft die Schnittstellen am TI-Messenger-Fachdienst sowie am VZD-FHIR-Directory auf.
+* Der *TI-Messenger-Client* basiert auf der `Matrix-Client-Server API`. Er wird durch weitere Funktionsmerkmale erweitert und ruft die Schnittstellen am *TI-Messenger-Fachdienst* sowie am *VZD-FHIR-Directory* auf.
 
 link:docs/FHIR-Directory/FHIR-Directory.adoc[*VZD-FHIR-Directory*] +
 
