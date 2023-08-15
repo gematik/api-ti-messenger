@@ -19,7 +19,7 @@ image:https://img.shields.io/badge/TI&hyphen;Messenger&hyphen;FD-v1.1.1-green?st
 image:https://img.shields.io/badge/TI&hyphen;Messenger&hyphen;Client-v1.1.1-green?style=plastic&logo=github&logoColor=green[link="https://fachportal.gematik.de/fachportal-import/files/gemSpec_TI-Messenger-Client_V1.1.1.pdf"] +
 image:https://img.shields.io/badge/Matrix_Client_Server_API-v1.3-yellow?style=plastic&logo=github&logoColor=yellow[link="https://spec.matrix.org/v1.3/client-server-api/"] 
 image:https://img.shields.io/badge/Matrix_Server_Server_API-v1.3-yellow?style=plastic&logo=github&logoColor=yellow[link="https://spec.matrix.org/v1.3/server-server-api/"] 
-image:https://img.shields.io/badge/Matrix_Push_Gateway_API-v1.3-yellow?style=plastic&logo=github&logoColor=yellow[link="https:/spec.matrix.org/v1.3/push-gateway-api/"] 
+image:https://img.shields.io/badge/Matrix_Push_Gateway_API-v1.3-yellow?style=plastic&logo=github&logoColor=yellow[link="https://spec.matrix.org/v1.3/push-gateway-api/"] 
 
 == Überblick
 Die folgende Dokumentation ergänzt die Spezifikation *TI-Messenger-Dienst* v1.1.1 gemäß *[gemSpec_TI-Messenger-Dienst]*. An dieser Stelle werden insbesondere die in der Spezifikation genannten Komponenten der Lösung sowie deren Schnittstellen weiter dargestellt und erläutert, um Hersteller und Anbieter eines *TI-Messenger-Dienstes* bestmöglich zu unterstützen. Der Funktionsumfang des *TI-Messenger-Dienst* v1.1.1 beinhaltet: +
