@@ -21,11 +21,9 @@ toc::[]
 == Überblick
 Ein *Messenger-Service* besteht immer aus den zwei Teilkomponenten *Messenger-Proxy* und *Matrix-Homeserver*. Der *Messenger-Proxy* dient als Prüfinstanz und leitet Anfragen an den *Matrix-Homeserver* weiter. Der *Matrix-Homeserver* basiert auf dem offenen Kommunikationsprotokoll Matrix. Welche Schnittstellen der Messenger-Service nutzt und anbietet ist in der folgenden Abbildung dargestellt:
 
-TODO
-
 ++++
-<p align="left">
-  <img width="100%" src=../../images/diagrams/TI-Messenger-Fachdienst/schnittstellen_messenger_service.png>
+<p align="center">
+  <img width="65%" src=../../images/diagrams/TI-Messenger-Fachdienst/API-Messenger-Service-API-Messenger-Service.svg>
 </p>
 ++++
 
@@ -35,7 +33,7 @@ TODO
 Der *Messenger-Proxy* als Prüfinstanz aller eingehenden, sowie ausgehenden Anfragen zum *Matrix-Homeserver* ist für die Regelung der gemäß Matrix-Client-Server-API und Matrix-Server-Server-API geltenden Aufrufe zuständig. Daher ist es erforderlich, dass der *Messenger-Proxy* für jeden *Messenger-Service* als Forward- sowie Reverse-Proxy bereitgestellt wird. Die folgende Abbildung verdeutlicht die beide gerade skizzierten Funktionsweisen. 
 ++++
 <p align="left">
-  <img width="100%" src=../../images/diagrams/TI-Messenger-Fachdienst/funktionalitaet_proxy-Seite-1.png>
+  <img width="100%" src=../../images/diagrams/TI-Messenger-Fachdienst/funktionalitaet_proxy-Proxy.svg>
 </p>
 ++++
 Bei Aufruf der Client-Server-API durch einen *TI-Messenger-Client* aus dem Internet fungiert der *Messenger-Proxy* als Reverse-Proxy. Beim Aufruf der Server-Server-API im Rahmen einer Server-To-Server Kommunikation fungiert der *Messenger-Proxy* als Forward-, sowie als Reverse-Proxy.
