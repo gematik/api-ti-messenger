@@ -110,14 +110,14 @@ TI-Messenger Dokumentation
 Die nachfolgende Tabelle enthält die in der vorliegenden Online Dokumentation referenzierten Dokumente der gematik zur Telematikinfrastruktur. Deren zu diesem Dokument jeweils gültige Versionsnummer entnehmen Sie bitte der aktuellen, auf der Internetseite der gematik veröffentlichten, Dokumentenlandkarte, in der die vorliegende Version aufgeführt wird.
 
 |===
-|[Source] |Editor: Title
+|[Quelle] |Editor: Titel
 
 |*[gemSpec_TI-Messenger-Dienst]* |gematik: Spezifikation TI-Messenger-Dienst
 |*[gemSpec_TI-Messenger-FD]* |gematik: Spezifikation TI-Messenger-Fachdienst
 |*[gemSpec_TI-Messenger-Client]* |gematik: Spezifikation TI-Messenger-Client
 |*[gemSpec_VZD_FHIR_Directory]* |gematik: Spezifikation Verzeichnisdienst FHIR-Directory
 |*[gemSpec_IDP_Dienst]* |gematik: Spezifikation Identity Provider-Dienst
-|*[[gemSpec_IDP_Frontend]]* |gematik: Spezifikation Identity Provider - Frontend
+|*[gemSpec_IDP_Frontend]* |gematik: Spezifikation Identity Provider - Frontend
 |===
 
 == 💡 Onboarding
