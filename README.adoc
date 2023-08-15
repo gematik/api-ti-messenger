@@ -117,6 +117,7 @@ Die nachfolgende Tabelle enthält die in der vorliegenden Online Dokumentation r
 |*[gemSpec_TI-Messenger-Client]* |gematik: Spezifikation TI-Messenger-Client
 |*[gemSpec_VZD_FHIR_Directory]* |gematik: Spezifikation Verzeichnisdienst FHIR-Directory
 |*[gemSpec_IDP_Dienst]* |gematik: Spezifikation Identity Provider-Dienst
+|*[[gemSpec_IDP_Frontend]]* |gematik: Spezifikation Identity Provider - Frontend
 |===
 
 == 💡 Onboarding
