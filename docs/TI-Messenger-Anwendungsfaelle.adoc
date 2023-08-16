@@ -19,7 +19,7 @@ image:gematik_logo.svg[width=70%]
 toc::[]
 
 = Anwendungsfälle
-Die folgende Seite gibt einen Überblick über die Anwendungsfälle des *TI-Messenger-Dienstes*. Neben einer Einleitung enthält jedes Kapitel einen Link zu einer detaillierten Anwendungsfallbeschreibung und einem Sequenzdiagramm, das die Interaktion zwischen den beteiligten Komponenten visualisiert.
+Die folgende Seite gibt einen Überblick über die Anwendungsfälle des *TI-Messenger-Dienstes* die in *[gemSpec_TI-Messenger-Dienst]* beschrieben sind. Neben einer Einleitung enthält jedes Kapitel einen Link zu einer detaillierten Anwendungsfallbeschreibung und einem Sequenzdiagramm, das die Interaktion zwischen den beteiligten Komponenten visualisiert.
 
 TIP: Die Serviceaufrufe in den Sequenzdiagrammen enthalten möglicherweise nicht alle für den Aufruf erforderlichen Parameter. Die Sequenzdiagramme umfassen möglicherweise auch nicht alle Fehlerfälle. Sie konzentrieren sich auf die häufigsten Fehler für jeden einzelnen Anwendungsfall.
 
