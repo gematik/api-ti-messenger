@@ -45,7 +45,7 @@ Das *VZD-FHIR-Directory* ist das zentrale Adressbuch für Organisationen und Per
 
 * link:{usecasedir}/VZD-AF10058-practitioner-hinzufuegen.adoc[AF_10058 Akteur (User-HBA) im Verzeichnisdienst hinzufügen]
 
-* link:{usecasedir}/VZD-suche.adoc[Einträge im VZD-FHIR-Directory suchen]
+* link:{usecasedir}/VZD-suche.adoc[A 8.1 -Einträge im VZD-FHIR-Directory suchen]
 
 == Interaktion zwischen Akteuren
 Die folgenden Anwendungsfälle beschreiben den Anmeldevorgang, die Einladung anderer Akteure sowie den Austausch von Nachrichten. Sowohl die Einladungen als auch der Nachrichtenaustausch werden aus zwei Perspektiven erklärt. Die erste Perspektive konzentriert sich auf die Kommunikation innerhalb einer Organisation, die zweite Perspektive zeigt die Abläufe für eine Kommunikation mit mehr als einem beteiligten *Matrix-Homeserver*.
