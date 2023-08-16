@@ -50,10 +50,10 @@ Das *VZD-FHIR-Directory* ist das zentrale Adressbuch für Organisationen und Per
 == Interaktion zwischen Akteuren
 Die folgenden Anwendungsfälle beschreiben den Anmeldevorgang, die Einladung anderer Akteure sowie den Austausch von Nachrichten. Sowohl die Einladungen als auch der Nachrichtenaustausch werden aus zwei Perspektiven erklärt. Die erste Perspektive konzentriert sich auf die Kommunikation innerhalb einer Organisation, die zweite Perspektive zeigt die Abläufe für eine Kommunikation mit mehr als einem beteiligten *Matrix-Homeserver*.
 
-* link:{usecasedir}/COM-AF10104-einladung-innerhalb.adoc[AF_10104 Einladung von Akteuren innerhalb einer Organisation]
+* link:{usecasedir}/COM-AF10104-einladung-innerhalb.adoc[AF_10104 - Einladung von Akteuren innerhalb einer Organisation]
 
-* link:{usecasedir}/COM-AF10063-events-innerhalb.adoc[AF_10063 Austausch von Events zwischen Akteuren innerhalb einer Organisation]
+* link:{usecasedir}/COM-AF10063-events-innerhalb.adoc[AF_10063 - Austausch von Events zwischen Akteuren innerhalb einer Organisation]
 
-* link:{usecasedir}/COM-AF10061-einladung-ausserhalb.adoc[AF_10061 Einladung von Akteuren außerhalb einer Organisation]
+* link:{usecasedir}/COM-AF10061-einladung-ausserhalb.adoc[AF_10061 - Einladung von Akteuren außerhalb einer Organisation]
 
-* link:{usecasedir}/COM-AF10062-events-ausserhalb.adoc[AF_10062 Austausch von Events zwischen Akteuren ausserhalb einer Organisation]
+* link:{usecasedir}/COM-AF10062-events-ausserhalb.adoc[AF_10062 - Austausch von Events zwischen Akteuren ausserhalb einer Organisation]
