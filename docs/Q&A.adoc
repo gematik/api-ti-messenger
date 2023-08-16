@@ -16,11 +16,12 @@ image:gematik_logo.svg[width=70%]
 
 toc::[]
 
-= Q&A-List
-This Q&A-List is intended to help developers and providers to implement the components of the TI-Messenger-Dienst interoperably. Here you will find 
-frequently asked questions with the corresponding answers in order to provide interested developers and providers with the best possible support.
+= FAQ-Liste
+Die auf dieser Seite veröffentlichte FAQ-Liste soll Entwicklern und Anbietern eines *TI-Messenger-Dienstes* helfen, die Komponenten interoperabel umzusetzen. Hier finden Sie häufig gestellte Fragen mit den dazugehörigen Antworten, um interessierte Anbieter bzw. Hersteller bei der Implementierung bestmöglich zu unterstützten.
 
-[qanda]
-What is Asciidoctor?::
-An implementation of the AsciiDoc processor in Ruby.
-What is the answer to the Ultimate Question?:: 42
+
+
+// [qanda]
+// What is Asciidoctor?::
+// An implementation of the AsciiDoc processor in Ruby.
+// What is the answer to the Ultimate Question?:: 42
