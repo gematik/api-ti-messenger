@@ -118,9 +118,9 @@ Die nachfolgende Tabelle enthält die in der vorliegenden Online Dokumentation r
 |===
 |[Quelle] |Editor: Titel
 
-|*[gemSpec_TI-Messenger-Dienst]* |gematik: Spezifikation TI-Messenger-Dienst
-|*[gemSpec_TI-Messenger-FD]* |gematik: Spezifikation TI-Messenger-Fachdienst
-|*[gemSpec_TI-Messenger-Client]* |gematik: Spezifikation TI-Messenger-Client
+|link:https://fachportal.gematik.de/fachportal-import/files/gemSpec_TI-Messenger-Dienst_V1.1.1.pdf[gemSpec_TI-Messenger-Dienst_v1.1.1] |gematik: Spezifikation TI-Messenger-Dienst
+|link:https://fachportal.gematik.de/fachportal-import/files/gemSpec_TI-Messenger-FD_V1.1.1.pdf[gemSpec_TI-Messenger-FD_v1.1.1] |gematik: Spezifikation TI-Messenger-Fachdienst
+|link:https://fachportal.gematik.de/fachportal-import/files/gemSpec_TI-Messenger-Client_V1.1.1.pdf[gemSpec_TI-Messenger-Client_v1.1.1] |gematik: Spezifikation TI-Messenger-Client
 |link:https://fachportal.gematik.de/fachportal-import/files/gemSpec_VZD_FHIR_Directory_V1.3.0.pdf[gemSpec_VZD_FHIR_Directory_v1.3.0] |gematik: Spezifikation Verzeichnisdienst FHIR-Directory
 |*[gemSpec_IDP_Dienst]* |gematik: Spezifikation Identity Provider-Dienst
 |*[gemSpec_IDP_Frontend]* |gematik: Spezifikation Identity Provider - Frontend
