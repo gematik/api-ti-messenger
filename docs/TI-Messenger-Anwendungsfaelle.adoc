@@ -41,11 +41,11 @@ Um mit anderen Akteuren Nachrichten austauschen zu können, benötigt die Organi
 == Interaktion mit dem VZD-FHIR-Directory
 Das *VZD-FHIR-Directory* ist das zentrale Adressbuch für Organisationen und Personen im deutschen Gesundheitswesen. In den folgenden Anwendungsfällen wird detailliert erläutert, was erforderlich ist, um die Organisations- oder Practitioner-Informationen im *VZD-FHIR-Directory* - im Kontext des *TI-Messenger-Dienstes* - zu ändern bzw. um FHIR-Ressourcen zu suchen. 
 
-* link:{usecasedir}/VZD-AF10059-organisation-hinzufuegen.adoc[AF_10059 Organisationsressourcen im Verzeichnisdienst hinzufügen]
+* link:{usecasedir}/VZD-AF10059-organisation-hinzufuegen.adoc[AF_10059 - Organisationsressourcen im Verzeichnisdienst hinzufügen]
 
-* link:{usecasedir}/VZD-AF10058-practitioner-hinzufuegen.adoc[AF_10058 Akteur (User-HBA) im Verzeichnisdienst hinzufügen]
+* link:{usecasedir}/VZD-AF10058-practitioner-hinzufuegen.adoc[AF_10058 - Akteur (User-HBA) im Verzeichnisdienst hinzufügen]
 
-* link:{usecasedir}/VZD-suche.adoc[A 8.1 -Einträge im VZD-FHIR-Directory suchen]
+* link:{usecasedir}/VZD-suche.adoc[A 8.1 - Einträge im VZD-FHIR-Directory suchen]
 
 == Interaktion zwischen Akteuren
 Die folgenden Anwendungsfälle beschreiben den Anmeldevorgang, die Einladung anderer Akteure sowie den Austausch von Nachrichten. Sowohl die Einladungen als auch der Nachrichtenaustausch werden aus zwei Perspektiven erklärt. Die erste Perspektive konzentriert sich auf die Kommunikation innerhalb einer Organisation, die zweite Perspektive zeigt die Abläufe für eine Kommunikation mit mehr als einem beteiligten *Matrix-Homeserver*.
