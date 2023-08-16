@@ -28,10 +28,10 @@ Dabei besteht das *VZD-FHIR-Directory* aus den Teilkomponenten:
 
 die benötigt werden, um alle Funktionsmerkmale abbilden zu können.
 
-In der folgenden Abbildung sind die Teilkomponenten sowie deren Schnittstellen und für deren Zugriff benötigten ACCESS_TOKEN dargestellt:
+In der folgenden Abbildung sind die Teilkomponenten sowie deren Schnittstellen und für deren Zugriff benötigten `ACCESS_TOKEN` dargestellt:
 
 ++++
-<p align="left">
+<p align="center">
   <img width="100%" src=../../images/I_VZD_FHIR_Directory.png>
 </p>
 ++++
@@ -41,7 +41,7 @@ Das *FHIR-Directory* basiert auf link:https://hl7.org/fhir/R4/[FHIR R4] und stel
 
 Im folgenden sind die beiden Verzeichnisse mit deren Struktur beispielhaft dargestellt: 
 
-* HealthcareService
+* `HealthcareService`
 
 ++++
 <p align="left">
@@ -49,7 +49,7 @@ Im folgenden sind die beiden Verzeichnisse mit deren Struktur beispielhaft darge
 </p>
 ++++
 
-* PractitionerRole
+* `PractitionerRole`
 
 ++++
 <p align="left">
@@ -57,7 +57,7 @@ Im folgenden sind die beiden Verzeichnisse mit deren Struktur beispielhaft darge
 </p>
 ++++
 
-Im Rahmen des TI-Messenger-Dienstes sollen die folgenden Attribute eines Endpoints eines `HealthcareService` oder `PractitionerRole` wie folgt gesetzt werden:
+Im Rahmen des *TI-Messenger-Dienstes* sollen die folgenden Attribute eines Endpoints eines `HealthcareService` oder `PractitionerRole` wie folgt gesetzt werden:
 
 [options="header"]
 |=================================================================================================================
@@ -81,7 +81,7 @@ Der Aufruf des https://github.com/gematik/api-vzd/blob/feature/gemILF_VZD_FHIR_D
 Der *Auth-Service* stellt ACCESS_TOKEN aus, die für den Zugriff auf die Endpunkte am *FHIR-Proxy* benötigt werden. Der Aufruf der link:https://github.com/gematik/api-vzd/blob/feature/gemILF_VZD_FHIR_Directory/docs/FHIR_VZD_HOWTO_Authenticate.adoc#2-fhirdirectoryauthenticationapis[Endpunkte] am *Auth-Service* ist dort beschrieben. 
 
 == FHIR-Proxy
-Der *FHIR-Proxy* gibt Zugriff auf das *FHIR-Directory* unter Vorlage eines validen ACCESS_TOKEN und somit auf die FHIR-Ressourcen. Die vom *FHIR-Proxy* zur Verfügung gestellten Endpunkte werden für die Suche und Pflege von FHIR-Ressourcen verwendet sowie zur Pflege eigener TIM Provider Einträge. Der Aufruf der Endpunkte am *FHIR-Proxy* sind hier bechrieben:
+Der *FHIR-Proxy* gibt Zugriff auf das *FHIR-Directory* unter Vorlage eines validen `ACCESS_TOKEN` und somit auf die FHIR-Ressourcen. Die vom *FHIR-Proxy* zur Verfügung gestellten Endpunkte werden für die Suche und Pflege von FHIR-Ressourcen verwendet sowie zur Pflege eigener TIM Provider Einträge. Der Aufruf der Endpunkte am *FHIR-Proxy* sind hier bechrieben:
  
 * https://github.com/gematik/api-vzd/blob/feature/gemILF_VZD_FHIR_Directory/docs/FHIR_VZD_HOWTO_Provider.adoc#2-fhirdirectoryproviderapi[/tim-provider-services]
 
