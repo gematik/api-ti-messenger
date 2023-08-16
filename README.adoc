@@ -152,7 +152,7 @@ link:docs/Q&A.adoc[- Fragen und Antworten zur aktuellen Spezifikation &#91;FAQ&#
 *Referenz-Implementierungen* +
 - [comming soon]
 
-== License
+== Lizenzbedingungen
 Copyright (c) 2023 gematik GmbH
 
 Licensed under the Apache License, Version 2.0 (the "License");
