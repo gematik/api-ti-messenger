@@ -10,8 +10,8 @@ endif::[]
 
 image:gematik_logo.svg[width=70%]
 
-=== AF_10058 Akteur (User-HBA) im Verzeichnisdienst hinzufügen
-Mit diesem Anwendungsfall wird ein Akteur in der Rolle "User-HBA" für andere Akteure anderer Messenger-Services auffindbar und erreichbar. Dafür werden FHIR-Ressourcen mit ihrer jeweiligen MXID im Personenverzeichnis (PractitionerRole) des VZD-FHIR-Directory hinterlegt. Zusätzlich besteht die Möglichkeit die Sichtbarkeit für andere Akteure einzuschränken. Dieser Anwendungsfall KANN direkt mit dem initialen Anmeldevorgang eines Akteurs am Messenger Service (siehe Anwendungsfall: AF_10057 - Anmeldung eines Akteurs am Messenger-Service) kombiniert werden. Hierfür wird der Akteur in der Rolle "User-HBA" während des Anmeldevorgangs durch den TI-Messenger-Client gefragt, ob dieser im Besitz eines HBAs ist.
+=== AF_10058 Akteur - (User-HBA) im Verzeichnisdienst hinzufügen
+Mit diesem Anwendungsfall wird ein Akteur in der Rolle "User-HBA" für andere Akteure anderer *Messenger-Services* auffindbar und erreichbar. Dafür werden FHIR-Ressourcen mit ihrer jeweiligen `MXID` im Personenverzeichnis (`PractitionerRole`) des *VZD-FHIR-Directory* hinterlegt. Zusätzlich besteht die Möglichkeit die Sichtbarkeit für andere Akteure einzuschränken. Dieser Anwendungsfall kann direkt mit dem initialen Anmeldevorgang eines Akteurs am *Messenger-Service* (siehe Anwendungsfall: link:/docs/anwendungsfaelle/VZD-AF10058-practitioner-hinzufuegen.adoc[AF_10057 - Anmeldung eines Akteurs am Messenger-Service]) kombiniert werden. Hierfür wird der Akteur in der Rolle "User-HBA" während des Anmeldevorgangs durch den *TI-Messenger-Client* gefragt, ob dieser im Besitz eines HBAs ist.
 
 .Anwendungsfallbeschreibung
 [%collapsible%open]
@@ -21,23 +21,23 @@ Akteur (User-HBA) im Verzeichnisdienst hinzufügen
 [%header, cols="1,1"]
 |===
 | |Beschreibung
-|Akteur |Leistungserbringer, Mitarbeiter einer Organisation im Gesundheitswesen in der Rolle "User-HBA"
-|Auslöser |Ein Akteur in der Rolle "User-HBA" möchte sich im Personenverzeichnis erreichbar machen, indem er seine MXID im seinen Practitioner-Datensatz im VZD-FHIR-Directory hinterlegt.
-|Komponenten a|
+|*Akteur* |Leistungserbringer, Mitarbeiter einer Organisation im Gesundheitswesen in der Rolle "User-HBA"
+|*Auslöser* |Ein Akteur in der Rolle "User-HBA" möchte sich im Personenverzeichnis erreichbar machen, indem er seine MXID im seinen Practitioner-Datensatz im VZD-FHIR-Directory hinterlegt.
+|*Komponenten* a|
               * TI-Messenger-Client,
               * Authenticator,
               * zentraler IDP-Dienst, 
               * FHIR-Proxy, 
               * Auth-service,
               * VZD-FHIR-Directory,
-|Vorbedingungen a| 
+|*Vorbedingungen* a| 
                   * Der Akteur ist bei einem gültigen Messenger-Service angemeldet.
                   * Der Akteur verfügt über einen zugelassenen TI-Messenger-Client.
                   * Das VZD-FHIR-Directory ist beim zentralen IDP-Dienst registriert.
                   * Der Akteur kann sich am zentralen IDP-Dienst authentisieren.
-|Eingangsdaten |HBA, FHIR-Practitioner-Ressourcen
-|Ergebnis |FHIR-Practitioner-Ressourcen aktualisiert, Status
-|Ausgangsdaten |aktualisierter Practitioner-Datensatz
+|*Eingangsdaten* |HBA, FHIR-Practitioner-Ressourcen
+|*Ergebnis* |FHIR-Practitioner-Ressourcen aktualisiert, Status
+|*Ausgangsdaten* |aktualisierter Practitioner-Datensatz
 |===
 ====
 .Sequenzdiagramm
@@ -45,7 +45,7 @@ Akteur (User-HBA) im Verzeichnisdienst hinzufügen
 ====
 ++++
 <p align="center">
-  <img width="55%" src=../../images/diagrams/TI-Messenger-Dienst/Ressourcen/UC_10058_Seq.svg>
+  <img width="100%" src=../../images/diagrams/TI-Messenger-Dienst/Ressourcen/UC_10058_Seq.svg>
 </p>
 ++++
 ====
