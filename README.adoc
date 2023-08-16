@@ -116,7 +116,7 @@ TI-Messenger Dokumentation
 Die nachfolgende Tabelle enthält die in der vorliegenden Online Dokumentation referenzierten Dokumente der gematik zur Telematikinfrastruktur. Deren zu diesem Dokument jeweils gültige Versionsnummer entnehmen Sie bitte der aktuellen, auf der Internetseite der gematik veröffentlichten, Dokumentenlandkarte, in der die vorliegende Version aufgeführt wird.
 
 |===
-|[Quelle] |Editor: Titel
+|[Quelle] |Herausgeber: Titel
 
 |link:https://fachportal.gematik.de/fachportal-import/files/gemSpec_TI-Messenger-Dienst_V1.1.1.pdf[gemSpec_TI-Messenger-Dienst_v1.1.1] |gematik: Spezifikation TI-Messenger-Dienst
 |link:https://fachportal.gematik.de/fachportal-import/files/gemSpec_TI-Messenger-FD_V1.1.1.pdf[gemSpec_TI-Messenger-FD_v1.1.1] |gematik: Spezifikation TI-Messenger-Fachdienst
