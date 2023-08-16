@@ -81,9 +81,16 @@ Im Folgenden ist die Organisation der Ordnerstruktur dargestellt.
 TI-Messenger Dokumentation
 ├─ github
 │   └──── workflows
+│        └── GeneratePlantumlImages.yml
 ├─ docs
-|   ├──── changes
-|   └──── use-cases
+|   ├──── Authenticator
+|   ├──── Client
+|   ├──── FHIR-Directory
+|   ├──── Fachdienst
+|   ├──── IDP
+|   ├──── Primaersystem
+|   ├──── anwendungsfaelle
+|   └──── changes
 ├─ images
 ├─ src
 │   ├──── fhir
