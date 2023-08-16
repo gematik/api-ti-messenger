@@ -37,7 +37,7 @@ Für die Dokumentation des *TI-Messenger-Dienstes* werden die folgenden Branches
 - `feature/*`: Dieser Branch wird zur Vorbereitung und Diskussion neuer Themen, die noch nicht in der Entwicklung sind, verwendet. Diese Dokumente können unvollständig sein und sich bis zur Fertigstellung noch ändern.
 
 == Systemübersicht
-Die folgende Abbildung gibt einen Überblick über die Systemarchitektur des *TI-Messenger-Dienst* v1.1.1 insbesondere auf die Schnittstellen zwischen den Komponenten. 
+Die folgende Abbildung gibt einen Überblick über die Systemarchitektur des *TI-Messenger-Dienst* v1.1.1 insbesondere auf die Schnittstellen zwischen den Komponenten, die in den folgenden Kapiteln weiter betrachtet werden. 
 
 ++++
 <p align="left">
@@ -45,9 +45,7 @@ Die folgende Abbildung gibt einen Überblick über die Systemarchitektur des *TI
 </p>
 ++++
 
-TIP: Auf die Schnittstellen zur Autentisierung am *Auth-Service* des *VZD-FHIR-Directory* wird in der oben gezeigten Abbildung verzichtet. Die Informationen hierzu können in dem entsprechenden Kapitel für das *VZD-FHIR-Directory* nachgelesenwerden.
-
-Die in der Abbildung gezeigten Komponenten werden in den folgenden Kapiteln weiter betrachtet. 
+TIP: Auf die Schnittstellen zur Autentisierung am *Auth-Service* des *VZD-FHIR-Directory* wird in der oben gezeigten Abbildung verzichtet. Die Informationen hierzu können in dem entsprechenden Kapitel für das *VZD-FHIR-Directory* nachgelesen werden.
 
 link:docs/Fachdienst/Fachdienst.adoc[*TI Messenger-Fachdienst*]
 
