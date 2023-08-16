@@ -37,7 +37,7 @@ Der *TI-Messenger-Fachdienst* besteht aus den folgenden Teilkomponenten :
 
 * link:https://spec.matrix.org/latest/push-gateway-api/[Push-Gateway] 
 
-NOTE: Die Teilkomponente *Push-Gateway* ist nach der  Matrix Spezifikation https://spec.matrix.org/latest/push-gateway-api/[&#91;Push Gateway API&#93;] zu implementieren und wird deshalb in dieser Implementierungshilfe nicht detaillierter beschrieben.
+NOTE: Die Teilkomponente *Push-Gateway* ist nach der  Matrix Spezifikation https://spec.matrix.org/v1.3/push-gateway-api/[&#91;Push Gateway API&#93;] zu implementieren und wird deshalb in dieser Implementierungshilfe nicht detaillierter beschrieben.
 
 == Vorraussetzungen 
 === TI-ITSM Portal
