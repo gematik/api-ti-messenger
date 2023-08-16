@@ -10,8 +10,8 @@ endif::[]
 
 image:gematik_logo.svg[width=70%]
 
-=== AF_10064 Föderationszugehörigkeit eines Messenger-Service prüfen
-Dieser Anwendungsfall prüft gemäß der im Kapitel 3.5 - Berechtigungskonzept festgelegten Kriterien für die Stufe 1 der Client-Server und Server-Server Kommunikation, ob ein Messenger-Service zugehörig zur TI-Messenger-Föderation ist und gilt für alle Anwendungsfälle, welche die Matrix-Domain eines Messenger-Services überprüfen müssen. Für die Prüfung der Zugehörigkeit der Matrix-Domain zur TI-Messenger-Föderation, verwendet der Messenger-Proxy eine Föderationsliste, die vom Registrierungs-Dienst seines TI-Messenger-Fachdienstes bereitgestellt wird. Die Speicherdauer der Föderationsliste des Messenger-Proxies ist limitiert. Die Aktualisierung der Föderationsliste erfolgt wie in Anhang 8.2 - Aktualisierung der Föderationsliste beschrieben.
+=== AF_10064 - Föderationszugehörigkeit eines Messenger-Service prüfen
+Dieser Anwendungsfall prüft gemäß *[gemSpec_TI-Messenger-Dienst#3.5]* die im Berechtigungskonzept festgelegten Kriterien für die Stufe 1 der Client-Server und Server-Server Kommunikation, ob ein *Messenger-Service* zugehörig zur TI-Messenger-Föderation ist und gilt für alle Anwendungsfälle, welche die Matrix-Domain eines *Messenger-Services* überprüfen müssen. Für die Prüfung der Zugehörigkeit der Matrix-Domain zur TI-Messenger-Föderation, verwendet der *Messenger-Proxy* eine Föderationsliste, die vom *Registrierungs-Dienst* seines *TI-Messenger-Fachdienstes* bereitgestellt wird. Die Speicherdauer der Föderationsliste des *Messenger-Proxies* ist limitiert. Die Aktualisierung der Föderationsliste erfolgt gemäß *[gemSpec_TI-Messenger-Dienst#8.2]*.
 
 .Anwendungsfallbeschreibung
 [%collapsible%open]
@@ -21,15 +21,15 @@ Föderationszugehörigkeit eines Messenger-Service prüfen
 [%header, cols="1,1"]
 |===
 | |Beschreibung
-|Akteur |-
-|Auslöser |Der Messenger-Proxy empfängt oder sendet ein Matrix-Event und MUSS die im Request enthaltenen MXIDs auf Domain-Zugehörigkeit zur TI-Messenger-Föderation prüfen.
-|Komponents a|
+|*Akteur* |-
+|*Auslöser* |Der Messenger-Proxy empfängt oder sendet ein Matrix-Event und MUSS die im Request enthaltenen MXIDs auf Domain-Zugehörigkeit zur TI-Messenger-Föderation prüfen.
+|*Komponenten* a|
               * Messenger-Proxy,
               * Matrix-Homeserver 
-|Vorbedingungen a| keine
-|Eingangsdaten |Matrix-Event
-|Ergebnis a|Der Messenger-Proxy ermittelt mittels der Föderationsliste, ob die Matrix-Domain des anderen Messenger-Service Teil der TI-Messenger-Föderation ist.
-|Ausgangsdaten |Status vom Matrix-Homeserver und Weiterleitung
+|*Vorbedingungen* a| keine
+|*Eingangsdaten* |Matrix-Event
+|*Ergebnis* a|Der Messenger-Proxy ermittelt mittels der Föderationsliste, ob die Matrix-Domain des anderen Messenger-Service Teil der TI-Messenger-Föderation ist.
+|*Ausgangsdaten* |Status vom Matrix-Homeserver und Weiterleitung
 |===
 ====
 .Sequenzdiagramm
@@ -37,7 +37,7 @@ Föderationszugehörigkeit eines Messenger-Service prüfen
 ====
 ++++
 <p align="center">
-  <img width="60%" src=../../images/diagrams/TI-Messenger-Dienst/Ressourcen/UC_10064_Seq.svg>
+  <img width="80%" src=../../images/diagrams/TI-Messenger-Dienst/Ressourcen/UC_10064_Seq.svg>
 </p>
 ++++
 ====
