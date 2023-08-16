@@ -78,7 +78,7 @@ Der *OAuth-Service* stellt ein `ti-provider-accesstoken` aus, welches am `/ti-pr
 Der Aufruf des https://github.com/gematik/api-vzd/blob/feature/gemILF_VZD_FHIR_Directory/docs/FHIR_VZD_HOWTO_Authenticate.adoc#22-authenticate-for-the-provider-api[Endpunktes] kann dort nachgelesen werden.
 
 == Auth-Service
-Der *Auth-Service* stellt ACCESS_TOKEN aus, die für den Zugriff auf die Endpunkte am *FHIR-Proxy* benötigt werden. Der Aufruf der link:https://github.com/gematik/api-vzd/blob/feature/gemILF_VZD_FHIR_Directory/docs/FHIR_VZD_HOWTO_Authenticate.adoc#2-fhirdirectoryauthenticationapis[Endpunkte] am *Auth-Service* ist dort beschrieben. 
+Der *Auth-Service* stellt `ACCESS_TOKEN` aus, die für den Zugriff auf die Endpunkte am *FHIR-Proxy* benötigt werden. Der Aufruf der link:https://github.com/gematik/api-vzd/blob/feature/gemILF_VZD_FHIR_Directory/docs/FHIR_VZD_HOWTO_Authenticate.adoc#2-fhirdirectoryauthenticationapis[Endpunkte] am *Auth-Service* ist dort beschrieben. 
 
 == FHIR-Proxy
 Der *FHIR-Proxy* gibt Zugriff auf das *FHIR-Directory* unter Vorlage eines validen `ACCESS_TOKEN` und somit auf die FHIR-Ressourcen. Die vom *FHIR-Proxy* zur Verfügung gestellten Endpunkte werden für die Suche und Pflege von FHIR-Ressourcen verwendet sowie zur Pflege eigener TIM Provider Einträge. Der Aufruf der Endpunkte am *FHIR-Proxy* sind hier bechrieben:
