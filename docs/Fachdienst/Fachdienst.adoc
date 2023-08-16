@@ -33,7 +33,7 @@ Der *TI-Messenger-Fachdienst* besteht aus den folgenden Teilkomponenten :
 
 * link:Registrierungsdienst.adoc[Registrierungs-Dienst], 
 
-* link:Messengerservice.adoc[Messenger-Service] 
+* link:Messengerservice.adoc[Messenger-Service],
 
 * link:https://spec.matrix.org/latest/push-gateway-api/[Push-Gateway] 
 
