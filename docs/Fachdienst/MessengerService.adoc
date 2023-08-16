@@ -19,17 +19,17 @@ toc::[]
 
 = Messenger-Service
 == Überblick
-Ein *Messenger-Service* besteht immer aus den zwei Teilkomponenten *Messenger-Proxy* und *Matrix-Homeserver*. Der *Messenger-Proxy* dient als Prüfinstanz und leitet Anfragen an den *Matrix-Homeserver* weiter. Der *Matrix-Homeserver* basiert auf dem offenen Kommunikationsprotokoll Matrix. Welche Schnittstellen der Messenger-Service nutzt und anbietet ist in der folgenden Abbildung dargestellt:
+Ein *Messenger-Service* besteht immer aus den zwei Teilkomponenten *Messenger-Proxy* und *Matrix-Homeserver*. Der *Messenger-Proxy* dient als Prüfinstanz und leitet alle Anfragen an den *Matrix-Homeserver* weiter. Der *Matrix-Homeserver* basiert auf dem offenen Kommunikationsprotokoll link:https://spec.matrix.org/v1.3/[Matrix]. Welche Schnittstellen der *Messenger-Service* nutzt und anbietet ist in der folgenden Abbildung dargestellt:
 
 ++++
 <p align="center">
-  <img width="65%" src=../../images/diagrams/TI-Messenger-Fachdienst/API-Messenger-Service-API-Messenger-Service.svg>
+  <img width="60%" src=../../images/diagrams/TI-Messenger-Fachdienst/API-Messenger-Service-API-Messenger-Service.svg>
 </p>
 ++++
 
 == Messenger-Proxy
 === Schnittstellen
-==== Matrix Client-Server und Server-Server API
+==== Matrix Client-Server / Server-Server API
 Der *Messenger-Proxy* als Prüfinstanz aller eingehenden, sowie ausgehenden Anfragen zum *Matrix-Homeserver* ist für die Regelung der gemäß Matrix-Client-Server-API und Matrix-Server-Server-API geltenden Aufrufe zuständig. Daher ist es erforderlich, dass der *Messenger-Proxy* für jeden *Messenger-Service* als Forward- sowie Reverse-Proxy bereitgestellt wird. Die folgende Abbildung verdeutlicht die beide gerade skizzierten Funktionsweisen. 
 ++++
 <p align="left">
@@ -38,36 +38,36 @@ Der *Messenger-Proxy* als Prüfinstanz aller eingehenden, sowie ausgehenden Anfr
 ++++
 Bei Aufruf der Client-Server-API durch einen *TI-Messenger-Client* aus dem Internet fungiert der *Messenger-Proxy* als Reverse-Proxy. Beim Aufruf der Server-Server-API im Rahmen einer Server-To-Server Kommunikation fungiert der *Messenger-Proxy* als Forward-, sowie als Reverse-Proxy.
 
-CAUTION: Der *Messenger-Proxy* routet die Anfragen zum Matrix-Homeserver und muss nicht selbst, das Matrix-Protokoll implementieren.
+CAUTION: Der *Messenger-Proxy* routet die Anfragen zum *Matrix-Homeserver* und muss nicht selbst, das Matrix-Protokoll implementieren.
 
 ==== Authentifizierungsverfahren
-Diese Schnittstelle wird benötigt, um die geforderte 2-Faktor-Authentifizierung zu realisieren, da diese Funktionalität aktuell von keinem *Matrix-Homeserver* angeboten wird.(siehe  link:https://github.com/matrix-org/matrix-spec-proposals/pull/1998[MSC1998]) Hierfür muss der *Messenger-Proxy* die Möglichkeit bieten mit externen Authentisierungsdiensten zu interagieren. 
+Diese Schnittstelle wird benötigt, um die geforderte 2-Faktor-Authentifizierung zu realisieren, da diese Funktionalität aktuell von keinem *Matrix-Homeserver* angeboten wird (siehe  link:https://github.com/matrix-org/matrix-spec-proposals/pull/1998[MSC1998]). Hierfür muss der *Messenger-Proxy* die Möglichkeit bieten mit externen Authentisierungsdiensten zu interagieren. 
 
 TIP: Mit der Unterstützung von link:https://areweoidcyet.com[OIDC] durch die *Matrix-Homeserver*, wird die geforderte Unterstützung durch den *Messenger-Proxy* nicht mehr benötigt. 
 
 ==== I_TiMessengerContactManagement
-Der *Messenger-Proxy* muss die Schnittstelle I_TiMessengerContactManagement als REST-Webservice über HTTPS gemäß link:src/openapi/TiMessengerContactManagement.yaml[TiMessengerContactManagement.yaml] umsetzen, um den TI-Messenger-Clients die Verwaltung einer persönlichen Freigabeliste zu ermöglichen.
-Die Schnittstelle findet u.a. Verwendung in link:docs/anwendungsfaelle/COM-AF10061-einladung-ausserhalb.adoc[AF10061].
+Der *Messenger-Proxy* muss die Schnittstelle `I_TiMessengerContactManagement` als REST-Webservice über HTTPS gemäß link:/src/openapi/TiMessengerContactManagement.yaml[TiMessengerContactManagement.yaml] umsetzen, um den *TI-Messenger-Clients* die Verwaltung einer persönlichen Freigabeliste zu ermöglichen.
+Die Schnittstelle findet u.a. Verwendung in link:/docs/anwendungsfaelle/COM-AF10061-einladung-ausserhalb.adoc[AF_10061 - Einladung von Akteuren außerhalb einer Organisation].
 
 === Berechtigungsprüfung
-Die Berechtigungsprüfung findet bei der Client-Server Kommunikation sowie bei der Server-Server Kommunikation statt. (siehe link:docs/anwendungsfaelle/MS-stufen-berechtigungspruefung.adoc[Stufen der Berchtigungsprüfung]) 
+Die Berechtigungsprüfung findet bei der Client-Server Kommunikation sowie bei der Server-Server Kommunikation statt (siehe link:/docs/anwendungsfaelle/MS-stufen-berechtigungspruefung.adoc[Stufen der Berchtigungsprüfung]). 
 
 === Betriebliche Aspekte
 ==== Abruf und Signaturprüfung der Föderationsliste
-Eine aktuelle Version der Föderationsliste wird vom *Messenger-Proxy* über die Schnittstelle I_internVerification abgerufen. Der Abruf erfolgt entweder zyklisch über ein vom Anbieter definiertes Intervall oder im Rahmen der Föderationsprüfung, wenn eine Domain in der aktuell vorliegenden Liste nicht enthalten ist.
-Der *Messenger-Proxy* muss sicherstellen, dass die vom *Registrierungs-Dienst* bereitgestellte Föderationsliste valide ist. Hierzu muss der *Messenger-Proxy* die Signatur der Föderationsliste unter Verwendung des mitgelieferten Signaturzertifikates (X5c-Header) überprüfen. (siehe link:docs/anwendungsfaelle/MS-aktualisierung-foederationsliste.adoc[Aktualisierung der Föderationsliste])
+Eine aktuelle Version der Föderationsliste wird vom *Messenger-Proxy* über die Schnittstelle `I_internVerification` abgerufen. Der Abruf erfolgt entweder zyklisch über ein vom Anbieter definiertes Intervall oder im Rahmen der Föderationsprüfung, wenn eine Domain in der aktuell vorliegenden Liste nicht enthalten ist.
+Der *Messenger-Proxy* muss sicherstellen, dass die vom *Registrierungs-Dienst* bereitgestellte Föderationsliste valide ist. Hierzu muss der *Messenger-Proxy* die Signatur der Föderationsliste unter Verwendung des mitgelieferten Signaturzertifikates (`X5c`-Header) überprüfen (siehe link:/docs/anwendungsfaelle/MS-aktualisierung-foederationsliste.adoc[Aktualisierung der Föderationsliste]).
 
 ==== .well-known & userinfo
-Für bestimmte Funktionalitäten ist es notwendig, dass Anfragen nicht durch die Berechtigungsprüfung des *Messenger-Proxys* abgelehnt werden. So muss eine Anfrage des *VZD-FHIR-Directory* an die link:https://spec.matrix.org/v1.3/server-server-api/#getwell-knownmatrixserver[.well-known] Datei erlaubt sein, um einen eigenen Port für Anfragen des *VZD-FHIR-Directoy* zu hinterlegen, um später über diesen Port den /_matrix/federation/v1/openid/userinfo Endpunkt aufzurufen. Hierzu muß der Messenger-Proxy ebenfalls den Zugriff erlauben, damit das *VZD-FHIR-Directory* einen Matrix-OpenID-Token prüfen lassen kann.
+Für bestimmte Funktionalitäten ist es notwendig, dass Anfragen nicht durch die Berechtigungsprüfung des *Messenger-Proxys* abgelehnt werden. So muss eine Anfrage des *VZD-FHIR-Directory* an die link:https://spec.matrix.org/v1.3/server-server-api/#getwell-knownmatrixserver[.well-known] Datei erlaubt sein, um einen eigenen Port für Anfragen des *VZD-FHIR-Directoy* zu hinterlegen, um später über diesen Port den `/_matrix/federation/v1/openid/userinfo`-Endpunkt aufzurufen. Hierzu muss der *Messenger-Proxy* ebenfalls den Zugriff erlauben, damit das *VZD-FHIR-Directory* einen `Matrix-OpenID-Token` prüfen lassen kann.
 
 ==== logische Mandantentrennung
-Werden durch einen TI-Messenger-Anbieter mehrere Matrix-Domains in einem gemeinsamen *Messenger-Service* betrieben, so muss die logische Trennung der Matrix-Domains sichergestellt werden. Die Art der Umsetzung bleibt dem TI-Messenger-Fachdienst-Hersteller überlassen. 
+Werden durch einen Anbieter eines *TI-Messenger-Fachdienstes* mehrere Matrix-Domains in einem gemeinsamen *Messenger-Service* betrieben, so muss die logische Trennung der Matrix-Domains sichergestellt werden. Die Art der Umsetzung bleibt dem Hersteller eines *TI-Messenger-Fachdienstes* überlassen. 
 
-TIP: Empfehlung der gematik ist eine Mandantentrennung über seperate Messenger-Services die eigene Domains verwalten zu realisieren.
+TIP: Empfehlung der gematik ist eine Mandantentrennung über seperate *Messenger-Services* die eigene Domains verwalten zu realisieren.
 
 Eine mögliche Umsetzung wäre die Mandantentrennung über einen Matrix-Server zu realisieren, der mehrere Domains unterstützt. Diese Funktionalität wird aktuell von keinem Matrix-Server angeboten.  
 
-CAUTION: Bei einer logischen Mandantentrennung muß sichergestellt werden, dass die Prüfung der Föderationszugehörigkeit(Zuordnung SMC-B zu Domain) sichergestellt ist und jeder mandantenübergreifende Zugriff verhindert wird.  
+CAUTION: Bei einer logischen Mandantentrennung muss sichergestellt werden, dass die Prüfung der Föderationszugehörigkeit (Zuordnung SMC-B zu Domain) sichergestellt ist und jeder mandantenübergreifende Zugriff verhindert wird.  
 
 == Matrix-Homeserver
 Der *Matrix-Homeserver* muss die link:https://spec.matrix.org/v1.3/server-server-api/[Server-Server API] und link:https://spec.matrix.org/v1.3/client-server-api/[Client-Server API] gemäß der Matrix-Spezifikationen in der Version v1.3 umsetzen.
@@ -75,6 +75,6 @@ Der *Matrix-Homeserver* muss die link:https://spec.matrix.org/v1.3/server-server
 Der *Matrix-Homeserver* eines *Messenger-Services*: 
 
  - muss Anfragen vom eigenen *Messenger-Proxy* akzeptieren und
- - Anfragen anderer Messenger-Proxies NICHT akzeptieren
+ - Anfragen anderer *Messenger-Proxies* NICHT akzeptieren.
 
 TIP: Als Referenz für einen Homeserver wird die link:https://github.com/matrix-org/synapse/[synapse Referenzimplementierung] empfohlen. 
