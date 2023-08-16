@@ -10,8 +10,8 @@ endif::[]
 
 image:gematik_logo.svg[width=70%]
 
-=== AF_10104 Einladung von Akteuren innerhalb einer Organisation
-In diesem Anwendungsfall wird ein Akteur der zu einer gemeinsamen Organisation gehört in einen Raum eingeladen um Aktionen auszuführen. Für die Suche von Akteuren innerhalb einer gemeinsamen Organisation durchsucht ein TI-Messenger-Client das Nutzerverzeichnis seiner Organisation auf dem Matrix-Homeserver. In diesem Anwendungsfall prüft der Messenger-Proxy gemäß Kapitel 3.5 - Berechtigungskonzept der Client-Server Kommunikation, ob die im Invite-Event enthaltenen Matrix-Domains Teil der TI-Föderation sind. Ist dies der Fall erfolgt die Weiterleitung an den Matrix-Homeserver des Einladenden. Dieser prüft ob die beteiligten Akteure bei ihm registriert sind. Ist dies nicht der Fall, handelt es sich bei dem einzuladenden Akteur nicht um einen Akteur innerhalb der Organisation und das Invite-Event wird für die externe Zustellung weitergeleitet. Der Anwendungsfall AF_10061 - Einladung von Akteuren außerhalb einer Organisation zeigt den sich daraus ergebenden Verlauf.
+=== AF_10104 - Einladung von Akteuren innerhalb einer Organisation
+In diesem Anwendungsfall wird ein Akteur der zu einer gemeinsamen Organisation gehört in einen Raum eingeladen um Aktionen auszuführen. Für die Suche von Akteuren innerhalb einer gemeinsamen Organisation durchsucht ein *TI-Messenger-Client* das Nutzerverzeichnis seiner Organisation auf dem *Matrix-Homeserver*. In diesem Anwendungsfall prüft der *Messenger-Proxy* gemäß *[gemSpec_TI-Messenger-Dienst#3.5]* der Client-Server Kommunikation, ob die im `Invite`-Event enthaltenen Matrix-Domains Teil der TI-Föderation sind. Ist dies der Fall erfolgt die Weiterleitung an den *Matrix-Homeserver* des Einladenden. Dieser prüft ob die beteiligten Akteure bei ihm registriert sind. Ist dies nicht der Fall, handelt es sich bei dem einzuladenden Akteur nicht um einen Akteur innerhalb der Organisation und das `Invite`-Event wird für die externe Zustellung weitergeleitet. Der Anwendungsfall link:/docs/anwendungsfaelle/COM-AF10061-einladung-ausserhalb.adoc[AF_10061 - Einladung von Akteuren außerhalb einer Organisation] zeigt den sich daraus ergebenden Verlauf.
 
 .Anwendungsfallbeschreibung
 [%collapsible%open]
@@ -21,21 +21,21 @@ Einladung von Akteuren innerhalb einer Organisation
 [%header, cols="1,1"]
 |===
 | |Beschreibung
-|Akteur |Leistungserbringer, Mitarbeiter einer Organisation im Gesundheitswesen in der Rolle "User / User-HBA"
-|Auslöser |Akteur A möchte Akteur B seiner Organisation in einen gemeinsamen Raum einladen.
-|Komponenten a|
+|*Akteur* |Leistungserbringer, Mitarbeiter einer Organisation im Gesundheitswesen in der Rolle "User / User-HBA"
+|*Auslöser* |Akteur A möchte Akteur B seiner Organisation in einen gemeinsamen Raum einladen.
+|*Komponenten* a|
               * TI-Messenger-Client A + B,
               * Messenger-Proxy,
               * Messenger-Homeserver, 
               * Push-Gateway
-|Vorbedingungen a| 
+|*Vorbedingungen* a| 
                   * Die Akteure sind am selben Messenger-Service angemeldet.
                   * Jeder Akteur hat einen zugelassenen TI-Messenger-Client.
                   * Ein Chatraum wurde durch den Einladenden eingerichtet.
-|Eingangsdaten | Matrix Invite-Event
-|Ergebnis a| Akteur A und Akteur B sind beide in einem gemeinsamen Chatraum.
+|*Eingangsdaten* | Matrix Invite-Event
+|*Ergebnis* a| Akteur A und Akteur B sind beide in einem gemeinsamen Chatraum.
              Optional erfolgt eine Benachrichtigung an Akteur B über die Einladung in den Chatraum.
-|Ausgangsdaten |status
+|*Ausgangsdaten* |status
 |===
 ====
 .Sequenzdiagramm
@@ -43,7 +43,7 @@ Einladung von Akteuren innerhalb einer Organisation
 ====
 ++++
 <p align="center">
-  <img width="55%" src=../../images/diagrams/TI-Messenger-Dienst/Ressourcen/UC_10104_Seq.svg>
+  <img width="100%" src=../../images/diagrams/TI-Messenger-Dienst/Ressourcen/UC_10104_Seq.svg>
 </p>
 ++++
 ====
