@@ -229,7 +229,7 @@
                         <mxPoint x="98.99000000000001" y="90.01999999999998" as="sourcePoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="16" value="&lt;div style=&quot;&quot;&gt;&lt;p style=&quot;text-align: center; margin: 0px; text-indent: 0px; vertical-align: middle; direction: ltr;&quot;&gt;&lt;font face=&quot;Arial&quot;&gt;&lt;span style=&quot;font-size: 11.29px;&quot;&gt;Authentication&lt;/span&gt;&lt;/font&gt;&lt;/p&gt;&lt;/div&gt;" style="text;vsdxID=20;edgeStyle=none;startArrow=none;endArrow=none;startSize=5;endSize=5;strokeColor=none;spacingTop=-3;spacingBottom=-3;spacingLeft=-2;spacingRight=-2;verticalAlign=middle;html=1;labelBackgroundColor=#ffffff;rounded=0;align=center;overflow=width;fillColor=none;gradientColor=none;whiteSpace=wrap;;html=1;;rotation=0;" vertex="1" parent="1">
+                <mxCell id="16" value="&lt;div style=&quot;&quot;&gt;&lt;p style=&quot;text-align: center; margin: 0px; text-indent: 0px; vertical-align: middle; direction: ltr;&quot;&gt;&lt;font face=&quot;Arial&quot;&gt;&lt;span style=&quot;font-size: 11.29px;&quot;&gt;Authentifizierungsverfahren&lt;/span&gt;&lt;/font&gt;&lt;/p&gt;&lt;/div&gt;" style="text;vsdxID=20;edgeStyle=none;startArrow=none;endArrow=none;startSize=5;endSize=5;strokeColor=none;spacingTop=-3;spacingBottom=-3;spacingLeft=-2;spacingRight=-2;verticalAlign=middle;html=1;labelBackgroundColor=#ffffff;rounded=0;align=center;overflow=width;fillColor=none;gradientColor=none;whiteSpace=wrap;;html=1;;rotation=0;" vertex="1" parent="1">
                     <mxGeometry x="160" y="55.050000000000004" width="177" height="74.98" as="geometry"/>
                 </mxCell>
             </root>
