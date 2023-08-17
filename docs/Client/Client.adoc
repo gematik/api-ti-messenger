@@ -80,7 +80,7 @@ Das Matrix-Protokoll erlaubt die Eigenschaften eines Chatraumes mit _State Event
 
 Für die fallbezogene Kommunikation sind die beiden _Custom State Events_ `de.gematik.tim.room.name` und `de.gematik.tim.room.topic` vorgesehen, um eine verschlüsselte Abbildung der beiden Standardfelder `m.room.name` und `m.room.topic` zu realisieren, da in dieser spezifischen Kommunikation hohe Datenschutzanforderungen bestehen. Im Kontext der fallbezogenen Kommunikation ist es notwendig, zusätzliche patientenbezogene Informationen bereitzustellen. Hierfür ist das _Custom State Event_ `de.gematik.tim.room.casereference.v1` vorgesehen, um in diesem den folgenden link:https://simplifier.net/tim[FHIR-Datensatz] zu hinterlegen.  
 
-Das _Custom State Event_ `de.gematik.tim.room.default.v1` ist vorgesehen, um verschlüsselte Information im Kontext von intersektoraler Kommunikation zu ermöglichen. In diesem Fall sind die Informationen zu "Name" und "Topic" des Raumes ebenfalls über die Events `de.gematik.tim.room.topic` und `de.gematik.tim.room.name` abzubilden. 
+Das _Custom State Event_ `de.gematik.tim.room.default.v1` ist vorgesehen, um verschlüsselte Information im Kontext von föderierter und intersektoraler Kommunikation zu ermöglichen. In diesem Fall sind die Informationen zu "Name" und "Topic" des Raumes ebenfalls über die Events `de.gematik.tim.room.topic` und `de.gematik.tim.room.name` abzubilden. 
 
 TIP: Weitere Informationen zu den _Custom State Events_ können in *[gemSpec_Ti-Messenger-Client]#5.4.17* und *[gemSpec_Ti-Messenger-Client#5.4.16]* nachgelesen werden. 
 
