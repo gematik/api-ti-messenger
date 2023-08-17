@@ -24,16 +24,16 @@ image:https://img.shields.io/badge/Matrix_Push_Gateway_API-v1.3-yellow?style=pla
 == Überblick
 Die folgende Dokumentation ergänzt die Spezifikation *TI-Messenger-Dienst* v1.1.1 gemäß *[gemSpec_TI-Messenger-Dienst]*. An dieser Stelle werden insbesondere die in der Spezifikation genannten Komponenten der Lösung sowie deren Schnittstellen weiter dargestellt und erläutert, um Hersteller und Anbieter eines *TI-Messenger-Dienstes* bestmöglich zu unterstützen. Der Funktionsumfang des *TI-Messenger-Dienst* v1.1.1 beinhaltet: +
 
-* die Echtzeit-Kommunikation zwischen Leistungserbringern und Leistungserbringerinstitutionen und
-* die Echtzeit-Kommunikation direkt zwischen Leistungserbringern.
+* Instant-Messaging zwischen Leistungserbringern und Leistungserbringerinstitutionen und
+* Instant-Messaging direkt zwischen Leistungserbringern.
 
-💡 _Hinweis: In der Spezifikationsversion v1.1.1 können keine Versicherten an dem *TI-Messenger-Dienst* teilnehmen_
+💡 _Hinweis: In der Spezifikationsversion v1.1.1 können keine Versicherten an dem *TI-Messenger-Dienst* teilnehmen_.
 
 == Branches
 Für die Dokumentation des *TI-Messenger-Dienstes* werden die folgenden Branches verwendet:
 
-- `main`: enthält die Dokumentation für die aktuell veröffentlichte Version gemäß *[gemSpec_TI-Messenger-Dienst]*
-- `develop`: enthält die Dokumentation der in Entwicklung befindlichen Features 
+- `main`: enthält die Dokumentation für die aktuell veröffentlichte Version gemäß *[gemSpec_TI-Messenger-Dienst]*,
+- `develop`: enthält die Dokumentation der in Entwicklung befindlichen Features, 
 - `feature/*`: Dieser Branch wird zur Vorbereitung und Diskussion neuer Themen, die noch nicht in der Entwicklung sind, verwendet. Diese Dokumente können unvollständig sein und sich bis zur Fertigstellung noch ändern.
 
 == Systemübersicht
@@ -45,12 +45,12 @@ Die folgende Abbildung gibt einen Überblick über die Systemarchitektur des *TI
 </p>
 ++++
 
-TIP: Auf die Schnittstellen zur Autentisierung am *Auth-Service* des *VZD-FHIR-Directory* wird in der oben gezeigten Abbildung verzichtet. Die Informationen hierzu können in dem entsprechenden Kapitel für das *VZD-FHIR-Directory* nachgelesen werden.
+TIP: Auf die Schnittstellen zur Autentisierung am *Auth-Service* des *VZD-FHIR-Directory* wird in der oben gezeigten Abbildung verzichtet. Die Informationen hierzu können in dem entsprechenden Kapitel für das *VZD-FHIR-Directory* link:https://github.com/gematik/api-vzd/blob/gemILF_VZD_FHIR_Directory/1.0.0/docs/FHIR_VZD_HOWTO_Authenticate.adoc#2-fhirdirectoryauthenticationapis[hier] nachgelesen werden.
 
 link:docs/Fachdienst/Fachdienst.adoc[*TI Messenger-Fachdienst*]
 
 * link:docs/Fachdienst/Registrierungsdienst.adoc[*Registrierungs-Dienst*] +
-Der *Registrierungs-Dienst* bietet drei abstrakte Schnittstellen an. Die Schnittstelle `I_Registration` wird vom *Frontend des Registrierungs-Dienstes* aufgerufen, um eine Organisation beim *Registrierungs-Dienst* zu authentifizieren und *Messenger-Services* zu administrieren. Die Schnittstelle `I_internVerfification` wird von den *Messenger-Proxies* aufgerufen, um die Föderationsliste abzurufen und dient zusätzlich der Prüfung (der beteiligten Akteure) auf existierende VZD-FHIR-Einträge. Die Schnittstelle `I_requestToken` wird vom *Org-Admin-Client* aufgerufen, um Zugang zum *FHIR-Proxy* für die Bearbeitung von FHIR-Ressourcen zu erhalten.
+Der *Registrierungs-Dienst* bietet drei abstrakte Schnittstellen an. Die Schnittstelle `I_Registration` wird vom *Frontend des Registrierungs-Dienstes* aufgerufen, um eine Organisation beim *Registrierungs-Dienst* zu authentifizieren und *Messenger-Services* zu administrieren. Die Schnittstelle `I_internVerification` wird von den *Messenger-Proxies* aufgerufen, um die Föderationsliste abzurufen und dient zusätzlich der Prüfung (der beteiligten Akteure) auf existierende VZD-FHIR-Einträge. Die Schnittstelle `I_requestToken` wird vom *Org-Admin-Client* aufgerufen, um Zugang zum *FHIR-Proxy* für die Bearbeitung von FHIR-Ressourcen zu erhalten.
 
 * link:docs/Fachdienst/MessengerService.adoc[*Messenger-Service*] +
 Ein *Messenger-Service* besteht aus den Teilkomponenten *Messenger-Proxy* und einem *Matrix-Homeserver*. Die Teilkomponente *Matrix-Homeserver* basiert auf dem offenen Kommunikationsprotokoll Matrix und bietet die `Matrix-Client-Server API` sowie die `Matrix-Server-Server API` an. Die Kommunikation zu einem *Matrix-Homeserver* wird immer über den *Messenger-Proxy* geleitet, sofern die Berechtigungsprüfung erfolgreich war. Der *Messenger-Proxy* stellt die Schnittstelle `I_TiMessengerContactManagement` bereit, um die Administration der Freigabeliste eines Akteurs zu ermöglichen. 
@@ -68,11 +68,11 @@ link:docs/FHIR-Directory/FHIR-Directory.adoc[*VZD-FHIR-Directory*] +
 
 link:docs/IDP/idp.adoc[*Zentraler IDP-Dienst*] +
 
-* Der *Zentrale IDP-Dienst* der gematik übernimmt die Aufgabe der smartcard-basierten Authentisierung eines Akteures. Hierbei fast der *IDP-Dienst* aus der Smartcard notwendige Attribute (z. B. `TelematikID`, `ProfessionOID`) in signierten JSON Web Token (`ID_TOKEN`) zusammen, um Zugriff auf angebotene Daten zu erhalten. 
+* Der *Zentrale IDP-Dienst* der gematik übernimmt die Aufgabe der smartcard-basierten Authentisierung eines Akteures. Hierbei fasst der *IDP-Dienst* aus der Smartcard notwendige Attribute (z. B. `TelematikID`, `ProfessionOID`) in ein signiertes JSON Web Token (`ID_TOKEN`) zusammen, damit sich ein Client gegenüber Fachanwendungen (*Registrierungs-Dienst* und *VZD-FHIR-Directory*) identifizieren kann. 
 
 link:docs/Authenticator/authenticator.adoc[*gematik Authenticator*] +
 
-* Der *Authenticator* der gematik erhält vom *zentralen IDP-Dienst* einen `AUTHORIZATION_CODE` zurück, welches durch Vorlage vom *Registrierungs-Dienst* oder vom *Auth-Service* des *VZD-FHIR-Directory* am *IDP-Dienst* durch ein `ID_TOKEN` ausgetauscht wird.
+* Der *Authenticator* der gematik erhält vom *zentralen IDP-Dienst* einen `AUTHORIZATION_CODE` zurück, welcher durch Vorlage vom *Registrierungs-Dienst* oder vom *Auth-Service* des *VZD-FHIR-Directory* am *IDP-Dienst* durch ein `ID_TOKEN` ausgetauscht wird.
 
 == Ordnerstruktur
 Im Folgenden ist die Organisation der Ordnerstruktur dargestellt.
@@ -112,8 +112,8 @@ TI-Messenger Dokumentation
 └── ReleaseNotes.md
 ----
 
-== Refferenzierte Dokumente
-Die nachfolgende Tabelle enthält die in der vorliegenden Online Dokumentation referenzierten Dokumente der gematik zur Telematikinfrastruktur. Deren zu diesem Dokument jeweils gültige Versionsnummer entnehmen Sie bitte der aktuellen, auf der Internetseite der gematik veröffentlichten, Dokumentenlandkarte, in der die vorliegende Version aufgeführt wird.
+== Quellen
+Die nachfolgende Tabelle enthält die in der vorliegenden Online Dokumentation referenzierten Dokumente der gematik. 
 
 |===
 |[Quelle] |Herausgeber: Titel
@@ -122,15 +122,15 @@ Die nachfolgende Tabelle enthält die in der vorliegenden Online Dokumentation r
 |link:https://fachportal.gematik.de/fachportal-import/files/gemSpec_TI-Messenger-FD_V1.1.1.pdf[gemSpec_TI-Messenger-FD_v1.1.1] |gematik: Spezifikation TI-Messenger-Fachdienst
 |link:https://fachportal.gematik.de/fachportal-import/files/gemSpec_TI-Messenger-Client_V1.1.1.pdf[gemSpec_TI-Messenger-Client_v1.1.1] |gematik: Spezifikation TI-Messenger-Client
 |link:https://fachportal.gematik.de/fachportal-import/files/gemSpec_VZD_FHIR_Directory_V1.3.0.pdf[gemSpec_VZD_FHIR_Directory_v1.3.0] |gematik: Spezifikation Verzeichnisdienst FHIR-Directory
-|*[gemSpec_IDP_Dienst]* |gematik: Spezifikation Identity Provider-Dienst
-|*[gemSpec_IDP_Frontend]* |gematik: Spezifikation Identity Provider - Frontend
+|link:https://fachportal.gematik.de/hersteller-anbieter/komponenten-dienste/identity-provider-idp[zentraler IDP_Dienst] |gematik: zentraler IDP-Dienst der gematik
+|link:https://fachportal.gematik.de/hersteller-anbieter/komponenten-dienste/authenticator[Authenticator] |gematik: Authenticator der gematik
 |===
 
 == 💡 Onboarding
-Hersteller und Anbieter eines TI-Messenger-Dienstes können das von der gematik bereitgestellte https://gematikde.sharepoint.com/:w:/s/PTNeo/EczX7AFGfBdNrCYghzGsHz4BbSoYhV63QMmDCdz7x9zLpg?e=7wG3c[Welcome Package] zum Onboarding nutzen. Dieses Welcome Package ist als "Schritt-für-Schritt"-Anleitung gedacht, um Hersteller und Anbieter beim Onboarding des TI-Messenger-Dienstes zu unterstützen.
+Hersteller und Anbieter eines *TI-Messenger-Dienstes* können das von der gematik bereitgestellte https://gematikde.sharepoint.com/:w:/s/PTNeo/EczX7AFGfBdNrCYghzGsHz4BbSoYhV63QMmDCdz7x9zLpg?e=7wG3c[Welcome Package] zum Onboarding nutzen. Dieses Welcome Package ist als "Schritt-für-Schritt"-Anleitung gedacht, um Hersteller und Anbieter beim Onboarding des *TI-Messenger-Dienstes* zu unterstützen.
 
 == Weiterführende Seiten
-*Anwendungsfäll* +
+*Anwendungsfälle* +
 link:docs/TI-Messenger-Anwendungsfaelle.adoc[- Anwendungsfälle] 
 
 *Produkttypen* +
