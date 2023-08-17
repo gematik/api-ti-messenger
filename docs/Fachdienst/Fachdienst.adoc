@@ -35,24 +35,21 @@ Der *TI-Messenger-Fachdienst* besteht aus den folgenden Teilkomponenten :
 
 * link:MessengerService.adoc[Messenger-Service],
 
-* link:https://spec.matrix.org/latest/push-gateway-api/[Push-Gateway] 
+* link:https://spec.matrix.org/v1.3/push-gateway-api/[Push-Gateway] 
 
-NOTE: Die Teilkomponente *Push-Gateway* ist nach der  Matrix Spezifikation https://spec.matrix.org/v1.3/push-gateway-api/[&#91;Push Gateway API&#93;] zu implementieren und wird deshalb in dieser Implementierungshilfe nicht detaillierter beschrieben.
+NOTE: Die Teilkomponente *Push-Gateway* ist nach der oben genannten Matrix Spezifikation zu implementieren und wird deshalb in dieser Implementierungshilfe nicht detaillierter beschrieben.
 
-== Vorraussetzungen 
+== Voraussetzungen 
 === TI-ITSM Portal
 ==== Zugang zum TI-ITSM Portal
-Die gematik stellt ein TI-IT Service Management (TI-ITSM) Portal zur Verfügung. Über das TI-ITSM Portal ist es möglich, Service-Requests für Anbieter eines *TI-Messenger-Fachdienstes* zu stellen. Dies ist im Kontext des *TI-Mesenger-Dienstes* für die folgenden Punkte notwendig:
+Die gematik stellt ein TI-IT Service Management (TI-ITSM) Portal zur Verfügung. Über das TI-ITSM Portal ist es möglich, Service-Requests für Anbieter eines *TI-Messenger-Fachdienstes* zu stellen. Dies ist im Kontext des *TI-Messenger-Dienstes* für die folgenden Punkte notwendig:
 
-CAUTION: Voraussetzungen für die Nutzung des von der gematik bereitgestellten *Authenticators* sind: +
-- für den Zugang zum PKI-Management-System (PMS), +
-- Erstellung des Signaturzertifikates für den Anbeiter des *TI-Messenger-Fachdienstes*, +
-- für die Beantragung der `TI-Provider-Credentials` für die Anbieterschnittstelle des VZD-FHIR-Directory und +
-- die Registrierung des *Registrierungs-Dienstes* beim zentralen *IDP-Dienst* der gematik. 
+* für den Zugang zum PKI-Management-System (PMS), +
+* Erstellung des Signaturzertifikates für den Anbeiter des *TI-Messenger-Fachdienstes*, +
+* für die Beantragung der `TI-Provider-Credentials` für die Anbieterschnittstelle des *VZD-FHIR-Directory* und +
+* die Registrierung des *Registrierungs-Dienstes* beim zentralen *IDP-Dienst* der gematik. 
 
-Hierfür ist es erforderlich, dass sich ein Anbieter eines *TI-Messenger-Fachdienstes* beim TI-ITSM registriert. Weitere Information sind im https://gematikde.sharepoint.com/:w:/s/PTNeo/EczX7AFGfBdNrCYghzGsHz4BbSoYhV63QMmDCdz7x9zLpg?e=7wG3c[Welcome Package] Schritt 4 zu finden. 
-
-Das TI-ITSM-Portal ist unter der folgenden Interseite erreichbar: https://www.ti-itsm.de
+Hierfür ist es erforderlich, dass sich ein Anbieter eines *TI-Messenger-Fachdienstes* beim TI-ITSM registriert. Weitere Information sind im https://gematikde.sharepoint.com/:w:/s/PTNeo/EczX7AFGfBdNrCYghzGsHz4BbSoYhV63QMmDCdz7x9zLpg?e=7wG3c[Welcome Package] Schritt 4 zu finden. Das TI-ITSM-Portal ist unter der folgenden Internetseite erreichbar: https://www.ti-itsm.de
 
 ==== Zugang zum PKI-Management-System (PMS)
 Um das Signaturzertifikat (welches für die Signatur des `RegService-OpenID-Token` benötigt wird) abrufen zu können, müssen vorher ein Benutzeraccount und Berechtigungen über weitere Service-Requests für die Organisation und den Benutzer (nur Root-User) im TI-ITSM beantragt werden. Weitere Informationen sind im link:https://gematikde.sharepoint.com/:w:/s/PTNeo/EczX7AFGfBdNrCYghzGsHz4BbSoYhV63QMmDCdz7x9zLpg?e=7wG3c[Welcome Package] Schritt 6 zu entnehmen. 
@@ -63,14 +60,14 @@ Zugang zum PMS:
 * PU: https://auth.ti-dienste.de/my.policy
 
 ==== Erstellung des Signaturzertifikates für den Anbeiter
-Für die Signierung eines `RegService-OpenID-Token` durch den *Registrierungs-Dienst* eines *TI-Messnger-Fachdienstes* wird ein Signaturzertifikat der PKI der Telematikinfrastruktur benötigt. Das Zertifikat muss den Typ `C.FD.SIG` und die technische Rolle `oid_tim` haben. Die Beantragung des Signaturzertifikates erfolg über das TI-ITSM Portal und ist anschließend über das PMS abrufbar (siehe hierzu https://gematikde.sharepoint.com/:w:/s/PTNeo/EczX7AFGfBdNrCYghzGsHz4BbSoYhV63QMmDCdz7x9zLpg?e=7wG3c[Welcome Package] Schritt 6)
+Für die Signierung eines `RegService-OpenID-Token` durch den *Registrierungs-Dienst* eines *TI-Messenger-Fachdienstes* wird ein Signaturzertifikat der PKI der Telematikinfrastruktur benötigt. Das Zertifikat muss den Typ `C.FD.SIG` und die technische Rolle `oid_tim` haben. Die Beantragung des Signaturzertifikates erfolg über das TI-ITSM Portal und ist anschließend über das PMS abrufbar (siehe hierzu https://gematikde.sharepoint.com/:w:/s/PTNeo/EczX7AFGfBdNrCYghzGsHz4BbSoYhV63QMmDCdz7x9zLpg?e=7wG3c[Welcome Package] Schritt 6)
 
 
 ==== Beantragung der TI-Provider-Credentials am VZD-FHIR-Directory
-Initial muss der Anbieter eines *TI-Messenger-Fachdienstes* `TI-Provider-Credentials` für den Zugriff auf die Schnittstelle `/tim-provider-services` des *FHIR-Proxy* beantragen. Die TIM-Provider-Services-Zugangsdaten erhält der Anbieter über eine weitere Serviceanfrage im gematik TI-ITSM-Portal. Hierbei muss das Signaturzertifikat bei der Beantragung mit übergeben werden. Dadurch wird sichergestellt, dass nur registrierte Anbieter eines *TI-Messenger-Fachdienstes* `RegService-OpenID-Token` an der `/owner-authenticate`-Schnittstelle des *Auth-Service* des *VZD-FHIR-Directory* gegen ein `owner-accesstoken` eintauschen können.
+Initial muss der Anbieter eines *TI-Messenger-Fachdienstes* `TI-Provider-Credentials` für den Zugriff auf den Endpunkt `/tim-provider-services` des *FHIR-Proxy* beantragen. Die TIM-Provider-Services-Zugangsdaten erhält der Anbieter über eine weitere Serviceanfrage im gematik TI-ITSM-Portal. Hierbei muss das Signaturzertifikat bei der Beantragung mit übergeben werden. Dadurch wird sichergestellt, dass nur registrierte Anbieter eines *TI-Messenger-Fachdienstes* `RegService-OpenID-Token` am `/owner-authenticate`-Endpunkt des *Auth-Service* des *VZD-FHIR-Directory* gegen ein `owner-accesstoken` eintauschen können.
 
 === Bekanntmachung des Registrierungs-Dienstes am zentralen IDP-Dienst
 
-Es besteht bereits eine abgeschlossene Scope-Registrierung am zentralen *IDP-Dienst* für den *TI-Messenger-Dienst*. Daher ist es nur erforderlich ber der gematik eine `client_id` für den *Registrierungs-Dienst* zu beantragen. Hierfür benötigt die gematik im Registrierungsformular die `redirect_uri` des *Registrierungs-Dienstes*, die zu der `client_id` registriert wird. Das Registrierungsformular kann unter idp-registrierung@gematik.de angefragt werden. Nach der Registrierung erhält der Anbieter die registrierte `client_id` sowie den Download-Endpunkt des Discovery Documentes des zentralen *IDP-Dienst*. Weitere Informationen sind im https://gematikde.sharepoint.com/:w:/s/PTNeo/EczX7AFGfBdNrCYghzGsHz4BbSoYhV63QMmDCdz7x9zLpg?e=7wG3c[Welcome Package] Schritt 5 zu finden. 
+Es besteht bereits eine abgeschlossene Scope-Registrierung am zentralen *IDP-Dienst* für den *TI-Messenger-Dienst*. Daher ist es nur erforderlich ber der gematik eine `client_id` für den *Registrierungs-Dienst* zu beantragen. Hierfür benötigt die gematik im Registrierungsformular die `redirect_uri` des *Registrierungs-Dienstes*, die zu der `client_id` registriert wird. Das Registrierungsformular kann unter idp-registrierung@gematik.de angefragt werden. Nach der Registrierung erhält der Anbieter die registrierte `client_id` sowie den Download-Endpunkt des Discovery Documentes des zentralen *IDP-Dienstes*. Weitere Informationen sind im https://gematikde.sharepoint.com/:w:/s/PTNeo/EczX7AFGfBdNrCYghzGsHz4BbSoYhV63QMmDCdz7x9zLpg?e=7wG3c[Welcome Package] Schritt 5 zu finden. 
 
 
