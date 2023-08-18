@@ -151,7 +151,7 @@ BEGIN:VCARD
   IMPP:matrix://<MXID> 
 END:VCARD
 ----
-Der Aufbau der `Matrix-URI` muss gemäß link:https://spec.matrix.org/v1.3/appendices/#uris[Matrix-Appendices#uris] gebildet werden.
+Der Aufbau der `Matrix-URI` muss gemäß link:https://spec.matrix.org/v1.3/appendices/#uris[Matrix-Appendices] gebildet werden.
 
 TIP: Bei dem gezeigten vCard-Object handelt es sich um die geforderte Mindestbefüllung, die Verwendung weiterer Felder ist zulässig.
 
