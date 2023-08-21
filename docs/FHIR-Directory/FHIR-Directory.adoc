@@ -17,7 +17,7 @@ image:gematik_logo.svg[width=70%]
 toc::[]
 
 = VZD-FHIR-Directory
-Beim *VZD-FHIR-Directory* handelt es sich um einen zentralen Verzeichnisdient der TI. Im Rahmen des *TI-Messenger-Dienstes* wird das *VZD-FHIR-Directory* für die deutschlandweite Suche von Organisationen und Akteuren sowie der Bereitstellung einer sektorenübergreifende Kommunikation, verwendet. 
+Beim *VZD-FHIR-Directory* handelt es sich um einen zentralen Verzeichnisdient der TI. Im Rahmen des *TI-Messenger-Dienstes* wird das *VZD-FHIR-Directory* für die deutschlandweite Suche von Organisationen und Akteuren verwendet. Zusätzlich stellt das *VZD-FHIR-Directory* Funktionalitäten bereit, um die in den *Messenger-Proxy* implementierten link:/docs/anwendungsfaelle/MS-stufen-berechtigungspruefung.adoc[Berechtigungsstufen] zu unterstützen.  
 
 Dabei besteht das *VZD-FHIR-Directory* aus den Teilkomponenten:
 
@@ -28,7 +28,7 @@ Dabei besteht das *VZD-FHIR-Directory* aus den Teilkomponenten:
 
 die benötigt werden, um alle Funktionsmerkmale abbilden zu können.
 
-In der folgenden Abbildung sind die Teilkomponenten sowie deren Schnittstellen und für deren Zugriff benötigten `ACCESS_TOKEN` dargestellt:
+In der folgenden Abbildung sind die Teilkomponenten sowie deren Schnittstellen und die für deren Zugriff benötigten Zugriffstoken dargestellt:
 
 ++++
 <p align="center">
@@ -44,7 +44,7 @@ Im folgenden sind die beiden Verzeichnisse mit deren Struktur beispielhaft darge
 * `HealthcareService`
 
 ++++
-<p align="left">
+<p align="center">
   <img width="60%" src=https://raw.githubusercontent.com/gematik/api-vzd/main/images/diagrams/ObjectDiagram.HealthcareService.svg>
 </p>
 ++++
@@ -52,17 +52,17 @@ Im folgenden sind die beiden Verzeichnisse mit deren Struktur beispielhaft darge
 * `PractitionerRole`
 
 ++++
-<p align="left">
+<p align="center">
   <img width="60%" src=https://raw.githubusercontent.com/gematik/api-vzd/main/images/diagrams/ObjectDiagram.PractitionerRole.svg>
 </p>
 ++++
 
-Im Rahmen des *TI-Messenger-Dienstes* sollen die folgenden Attribute eines Endpoints eines `HealthcareService` oder `PractitionerRole` wie folgt gesetzt werden:
+Im Rahmen des *TI-Messenger-Dienstes* sollen die folgenden Attribute eines `Endpoints` eines `HealthcareService` oder einer `PractitionerRole` wie folgt gesetzt werden:
 
 [options="header"]
 |=================================================================================================================
 | Attribut                | Wert          | Beschreibung                                      
-| `endpoint.status`         | `active`        | Sichtbarkeit des Endpunktes im Verzeichnisidienst 
+| `endpoint.status`         | `active`        | Sichtbarkeit des Endpunktes im Verzeichnisdienst 
 | `endpoint.connectionType` | `tim`           | Gibt an, um welche Anwendung es sich handelt      
 | `endpoint.name`          | `<Bezeichnung>` | Identifier des Endpoints                          
 | `endpoint.PayloadType`    | `tim-chat`      | Kennung der Übertragenen Inhalte                  
@@ -74,22 +74,22 @@ Beispiel: * `HealthcareService.endpoint.address = <MXID>`
 Weitere Informationen zu den Verzeichnistypen können link:https://github.com/gematik/api-vzd/blob/main/docs/Fachkonzept_FHIR-Directory.adoc#datenstruktur-im-fhir-directory[hier] nachgelesen werden. 
 
 == OAuth-Service
-Der *OAuth-Service* stellt ein `ti-provider-accesstoken` aus, welches am `/ti-provider-authenticate`-Endpunkt übergeben werden muss. Hierfür muss sich ein Anbieter eines *TI-Messenger-Fachdienstes* mittels seiner Zugangsdaten am OAuth-Service authentisieren. 
-Der Aufruf des https://github.com/gematik/api-vzd/blob/feature/gemILF_VZD_FHIR_Directory/docs/FHIR_VZD_HOWTO_Authenticate.adoc#22-authenticate-for-the-provider-api[Endpunktes] kann dort nachgelesen werden.
+Der *OAuth-Service* stellt ein `ti-provider-accesstoken` aus, welches am `/ti-provider-authenticate`-Endpunkt übergeben werden muss. Hierfür muss sich ein Anbieter eines *TI-Messenger-Fachdienstes* mittels seiner link:/docs/Fachdienst/Fachdienst.adoc#214-beantragung-der-ti-provider-credentials-am-vzd-fhir-directory[Zugangsdaten] am OAuth-Service authentisieren. 
+Der Aufruf des Endpunktes kann https://github.com/gematik/api-vzd/blob/gemILF_VZD_FHIR_Directory/1.0.0/docs/FHIR_VZD_HOWTO_Authenticate.adoc#22-authenticate-for-the-provider-api[hier] nachgelesen werden.
 
 == Auth-Service
-Der *Auth-Service* stellt `ACCESS_TOKEN` aus, die für den Zugriff auf die Endpunkte am *FHIR-Proxy* benötigt werden. Der Aufruf der link:https://github.com/gematik/api-vzd/blob/feature/gemILF_VZD_FHIR_Directory/docs/FHIR_VZD_HOWTO_Authenticate.adoc#2-fhirdirectoryauthenticationapis[Endpunkte] am *Auth-Service* ist dort beschrieben. 
+Der *Auth-Service* stellt Zugriffstoken aus, die für den Zugriff auf die Endpunkte am *FHIR-Proxy* benötigt werden. Der Aufruf der Endpunkte am *Auth-Service* ist link:https://github.com/gematik/api-vzd/blob/gemILF_VZD_FHIR_Directory/1.0.0/docs/FHIR_VZD_HOWTO_Authenticate.adoc#2-fhirdirectoryauthenticationapis[dort] beschrieben. 
 
 == FHIR-Proxy
-Der *FHIR-Proxy* gibt Zugriff auf das *FHIR-Directory* unter Vorlage eines validen `ACCESS_TOKEN` und somit auf die FHIR-Ressourcen. Die vom *FHIR-Proxy* zur Verfügung gestellten Endpunkte werden für die Suche und Pflege von FHIR-Ressourcen verwendet sowie zur Pflege eigener TIM Provider Einträge. Der Aufruf der Endpunkte am *FHIR-Proxy* sind hier bechrieben:
+Der *FHIR-Proxy* gibt Zugriff auf das *FHIR-Directory* unter Vorlage eines validen `ACCESS_TOKEN` und somit auf die FHIR-Ressourcen. Die vom *FHIR-Proxy* zur Verfügung gestellten Endpunkte werden für die Suche und Pflege von FHIR-Ressourcen verwendet sowie zur Pflege eigener TIM Provider Einträge. Der Aufruf der Endpunkte am *FHIR-Proxy* sind der folgenden Aufzählung zu entnehmen:
  
-* https://github.com/gematik/api-vzd/blob/feature/gemILF_VZD_FHIR_Directory/docs/FHIR_VZD_HOWTO_Provider.adoc#2-fhirdirectoryproviderapi[/tim-provider-services]
+* https://github.com/gematik/api-vzd/blob/gemILF_VZD_FHIR_Directory/1.0.0/docs/FHIR_VZD_HOWTO_Provider.adoc#2-fhirdirectoryproviderapi[/tim-provider-services]
 
-TIP: Die Anbieter eines *TI-Messenger-Fachdienstes* nutzen die Schnittstelle `/tim-provider-services`, um die Föderationsliste des TI-Messenger-Dienstes abzufragen und um die Domains der von ihnen betriebenen Messenger-Services als Teil der TI-Messenger Föderation zu verwalten.
+* https://github.com/gematik/api-vzd/blob/gemILF_VZD_FHIR_Directory/1.0.0/docs/FHIR_VZD_HOWTO_Search.adoc#21-fhirdirectorysearchapi-search-for-practitioners-and-organizations[/search]
 
-* https://github.com/gematik/api-vzd/blob/feature/gemILF_VZD_FHIR_Directory/docs/FHIR_VZD_HOWTO_Search.adoc#21-fhirdirectorysearchapi-search-for-practitioners-and-organizations[/search]
+* https://github.com/gematik/api-vzd/blob/gemILF_VZD_FHIR_Directory/1.0.0/docs/FHIR_VZD_HOWTO_Owner.adoc#2-fhirdirectoryownerapi[/owner]
 
-* https://github.com/gematik/api-vzd/blob/feature/gemILF_VZD_FHIR_Directory/docs/FHIR_VZD_HOWTO_Owner.adoc#2-fhirdirectoryownerapi[/owner]
+TIP: Die Anbieter eines *TI-Messenger-Fachdienstes* nutzen die Schnittstelle `/tim-provider-services`, um die Föderationsliste des *TI-Messenger-Dienstes* abzufragen und um die Domains der von ihnen betriebenen *Messenger-Services* als Teil der TI-Messenger Föderation zu verwalten.
 
 IMPORTANT: Die Volltextsuche über die Schnittstellen `/search` und `/owner` wird aktuell nicht vom *VZD-FHIR-Directory* unterstützt. Hierfür können die folgenden RegEx *_text* and *_content* verwendet werden. Für mehr Informationen kann die folgende  link:http://hl7.org/fhir/R4/search.html#content[Dokumentation] verwendet werden.
 
