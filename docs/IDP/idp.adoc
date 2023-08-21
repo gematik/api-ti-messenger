@@ -333,11 +333,3 @@ Die Abbildung zeigt die Verwendung des *Authenticators* mit der Auto-Redirect Fu
 </p>
 ++++
  
-= Referenzierte Dokumente
-|===
-|[Source] |Editor: Title
-
-|*[gemSpec_IDP_Dienst]* |gematik: Spezifikation Identity Provider-Dienst
-|*[gemSpec_IDP_FD]* |gematik: Spezifikation Identity Provider – Nutzungsspezifikation für Fachdienste
-|*[gemSpec_IDP_Frontend]* |gematik: Spezifikation Identity Provider - Frontend
-|===
