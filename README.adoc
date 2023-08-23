@@ -33,9 +33,10 @@ Die folgende Dokumentation ergänzt die Spezifikation *TI-Messenger-Dienst* v1.1
 == Branches
 Für die Dokumentation des *TI-Messenger-Dienstes* werden die folgenden Branches verwendet:
 
-- `main`: enthält die Dokumentation für die aktuell veröffentlichte Version gemäß *[gemSpec_TI-Messenger-Dienst]*,
-- `develop`: enthält die Dokumentation der in Entwicklung befindlichen Features, 
-- `feature/*`: Dieser Branch wird zur Vorbereitung und Diskussion neuer Themen, die noch nicht in der Entwicklung sind, verwendet. Diese Dokumente können unvollständig sein und sich bis zur Fertigstellung noch ändern.
+- `main`: enthält die Dokumentation für das aktuell veröffentlichte Release gemäß *[gemSpec_TI-Messenger-Dienst]*,
+- `develop`: enthält die Dokumentation der in Entwicklung befindlichen Features, die noch nicht released sind, 
+- `hotfix`: enthält die Dokumentation kurzfristig notwendiger Änderungen am aktuellen Release, 
+- `feature/*`: enthält eine Vorschau, Vorbereitungen und Diskussion eines neuen Themas, welches noch nicht in der Entwicklung ist. Die Inhalte können unvollständig sein und sich bis zur Fertigstellung noch ändern.
 
 == Systemübersicht
 Die folgende Abbildung gibt einen Überblick über die Systemarchitektur des *TI-Messenger-Dienst* v1.1.1 insbesondere auf die Schnittstellen zwischen den Komponenten, die in den folgenden Kapiteln weiter betrachtet werden. 
