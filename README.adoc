@@ -80,7 +80,7 @@ link:docs/Authenticator/authenticator.adoc[*gematik Authenticator*] +
 Im Folgenden sind die wesentlichen Inhalte des Repositories dargestellt.
 
 
-[source,subs="macros, branches"]
+[source,subs="macros"]
 ----
 TI-Messenger Dokumentation
 ├─ link:docs[docs]
@@ -93,7 +93,7 @@ TI-Messenger Dokumentation
 |   ├──── link:docs/anwendungsfaelle[Anwendungsfälle]
 |   └──── link:docs/changes[Changes]
 ├─ link:images[images] (Bildarchiv)
-│   └──── link:/images/diagrams[diagrams] (gerenderte Diagramme)
+│   └──── link:images/diagrams[diagrams] (gerenderte Diagramme)
 │        └── link:images/diagrams/TI-Messenger-Dienst/Ressourcen[Ressourcen] (plantuml-gerenderte Bilder)
 ├─ src
 │   ├──── fhir
