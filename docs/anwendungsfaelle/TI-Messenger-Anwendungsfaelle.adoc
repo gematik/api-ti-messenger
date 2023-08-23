@@ -6,13 +6,11 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 
-:imagesdir: ../images
+:imagesdir: ../../images
 :toc: macro
 :toclevels: 3
 :toc-title: Inhaltsverzeichnis
 :numbered:
-
-:usecasedir: anwendungsfaelle
 
 image:gematik_logo.svg[width=70%]
 
@@ -26,34 +24,34 @@ TIP: Die Serviceaufrufe in den Sequenzdiagrammen enthalten möglicherweise nicht
 == Bereitstellung und Administration eines Messenger-Service
 Um mit anderen Akteuren Nachrichten austauschen zu können, benötigt die Organisation einen *Messenger-Service* von einem Anbieter eines *TI-Messenger-Fachdienstes*. Die folgenden Anwendungsfälle erläutern die Bereitstellung eines: *Messenger-Service*, die Föderations-Prüfungen, die Verwaltung der Föderationsliste sowie die verschiedenen Ebenen der Berechtigungsprüfungen.
 
-* link:{usecasedir}/MS-AF10103-authentisieren-organisation.adoc[AF_10103 - Authentisieren einer Organisation am TI-Messenger-Dienst]
+* link:MS-AF10103-authentisieren-organisation.adoc[AF_10103 - Authentisieren einer Organisation am TI-Messenger-Dienst]
 
-* link:{usecasedir}/MS-AF10060-bereitstellung-messenger-service.adoc[AF_10060 - Bereitstellung eines Messenger-Service für eine Organisation]
+* link:MS-AF10060-bereitstellung-messenger-service.adoc[AF_10060 - Bereitstellung eines Messenger-Service für eine Organisation]
 
-* link:{usecasedir}/COM-AF10057-anmeldung-am-messenger-service.adoc[AF_10057 - Anmeldung eines Akteurs am Messenger-Service]
+* link:COM-AF10057-anmeldung-am-messenger-service.adoc[AF_10057 - Anmeldung eines Akteurs am Messenger-Service]
 
-* link:{usecasedir}/MS-AF10064-foederation-pruefen.adoc[AF_10064 - Föderationszugehörigkeit eines Messenger-Service prüfen]
+* link:MS-AF10064-foederation-pruefen.adoc[AF_10064 - Föderationszugehörigkeit eines Messenger-Service prüfen]
 
-* link:{usecasedir}/MS-aktualisierung-foederationsliste.adoc[A 8.2 - Aktualisierung der Föderationsliste]
+* link:MS-aktualisierung-foederationsliste.adoc[A 8.2 - Aktualisierung der Föderationsliste]
 
-* link:{usecasedir}/MS-stufen-berechtigungspruefung.adoc[A 8.3 - Stufen der Berechtigungsprüfung]
+* link:MS-stufen-berechtigungspruefung.adoc[A 8.3 - Stufen der Berechtigungsprüfung]
 
 == Interaktion mit dem VZD-FHIR-Directory
 Das *VZD-FHIR-Directory* ist das zentrale Adressbuch für Organisationen und Personen im deutschen Gesundheitswesen. In den folgenden Anwendungsfällen wird detailliert erläutert, was erforderlich ist, um die Organisations- oder Practitioner-Informationen im *VZD-FHIR-Directory* - im Kontext des *TI-Messenger-Dienstes* - zu ändern bzw. um FHIR-Ressourcen zu suchen. 
 
-* link:{usecasedir}/VZD-AF10059-organisation-hinzufuegen.adoc[AF_10059 - Organisationsressourcen im Verzeichnisdienst hinzufügen]
+* link:VZD-AF10059-organisation-hinzufuegen.adoc[AF_10059 - Organisationsressourcen im Verzeichnisdienst hinzufügen]
 
-* link:{usecasedir}/VZD-AF10058-practitioner-hinzufuegen.adoc[AF_10058 - Akteur (User-HBA) im Verzeichnisdienst hinzufügen]
+* link:VZD-AF10058-practitioner-hinzufuegen.adoc[AF_10058 - Akteur (User-HBA) im Verzeichnisdienst hinzufügen]
 
-* link:{usecasedir}/VZD-suche.adoc[A 8.1 - Einträge im VZD-FHIR-Directory suchen]
+* link:VZD-suche.adoc[A 8.1 - Einträge im VZD-FHIR-Directory suchen]
 
 == Interaktion zwischen Akteuren
 Die folgenden Anwendungsfälle beschreiben den Anmeldevorgang, die Einladung anderer Akteure sowie den Austausch von Nachrichten. Sowohl die Einladungen als auch der Nachrichtenaustausch werden aus zwei Perspektiven erklärt. Die erste Perspektive konzentriert sich auf die Kommunikation innerhalb einer Organisation, die zweite Perspektive zeigt die Abläufe für eine Kommunikation mit mehr als einem beteiligten *Matrix-Homeserver*.
 
-* link:{usecasedir}/COM-AF10104-einladung-innerhalb.adoc[AF_10104 - Einladung von Akteuren innerhalb einer Organisation]
+* link:COM-AF10104-einladung-innerhalb.adoc[AF_10104 - Einladung von Akteuren innerhalb einer Organisation]
 
-* link:{usecasedir}/COM-AF10063-events-innerhalb.adoc[AF_10063 - Austausch von Events zwischen Akteuren innerhalb einer Organisation]
+* link:COM-AF10063-events-innerhalb.adoc[AF_10063 - Austausch von Events zwischen Akteuren innerhalb einer Organisation]
 
-* link:{usecasedir}/COM-AF10061-einladung-ausserhalb.adoc[AF_10061 - Einladung von Akteuren außerhalb einer Organisation]
+* link:COM-AF10061-einladung-ausserhalb.adoc[AF_10061 - Einladung von Akteuren außerhalb einer Organisation]
 
-* link:{usecasedir}/COM-AF10062-events-ausserhalb.adoc[AF_10062 - Austausch von Events zwischen Akteuren ausserhalb einer Organisation]
+* link:COM-AF10062-events-ausserhalb.adoc[AF_10062 - Austausch von Events zwischen Akteuren ausserhalb einer Organisation]
