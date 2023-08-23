@@ -93,7 +93,7 @@ TI-Messenger Dokumentation
 |   ├──── link:docs/IDP[IDP]
 |   ├──── link:docs/Primaersystem[Primaersystem]
 |   ├──── link:docs/anwendungsfaelle[Anwendungsfälle]
-|   └──── link:docs/changes[Changes]
+|   └──── link:docs/changes[Changes] (Vorabveröffentlichungen zur Kommentierung)
 ├─ link:images[images] (Bildarchiv)
 │   └──── link:images/diagrams[diagrams] (gerenderte Diagramme)
 │        └── link:images/diagrams/TI-Messenger-Dienst/Ressourcen[Ressourcen] (plantuml-gerenderte Bilder)
