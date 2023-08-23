@@ -82,11 +82,10 @@ link:docs/Authenticator/authenticator.adoc[*gematik Authenticator*] +
 == Ordnerstruktur
 Im Folgenden sind die wesentlichen Inhalte des Repositories dargestellt.
 
-
 [{source-style},subs="macros"]
 ----
 TI-Messenger Dokumentation
-├─ link:docs[docs]
+├─ link:docs[docs] (weiterführende Informationen)
 |   ├──── link:docs/Authenticator[Authenticator]
 |   ├──── link:docs/Client[Client]
 |   ├──── link:docs/FHIR-Directory[FHIR-Directory]
@@ -98,24 +97,14 @@ TI-Messenger Dokumentation
 ├─ link:images[images] (Bildarchiv)
 │   └──── link:images/diagrams[diagrams] (gerenderte Diagramme)
 │        └── link:images/diagrams/TI-Messenger-Dienst/Ressourcen[Ressourcen] (plantuml-gerenderte Bilder)
-├─ src
-│   ├──── fhir
-│   │    ├── fsh-generated
-│   │    ├── input
-│   │    ├── output
-│   │    ├── temp
-│   │    └── template
-│   ├──── openapi
-│   │    ├── TiMessengerContactManagement.yaml
-│   │    └── TiMessengerTestTreiber.yaml 
-│   ├──── plantuml
-│   │    ├── TI-Messenger-Dienst
-│   │    ├── architecture
-│   │    └── includes 
-│   └──── schema
-│        └── Attachment_schema.json
-├── README.adoc
-└── ReleaseNotes.md
+├─ link:src[src] (Quellen)
+│   ├──── link:src/drawio[drawio] (Quellen der drawio-Diagramme)
+│   ├──── link:src/openapi[openapi] (Schnittstellenbeschreibungen)
+│   │    ├── link:src/openapi/TiMessengerContactManagement.yaml[TiMessengerContactManagement.yaml] (API-Beschreibung der Freigabeliste)
+│   │    └── link:src/openapi/TiMessengerTestTreiber.yaml[TiMessengerTestTreiber.yaml] (API-Beschreibung der TestTreiber-Schnittstelle)
+│   └──── link:src/plantuml[plantuml] (Quellen der plantuml-Diagramme)
+├── link:README.adoc[README.adoc]
+└── link:ReleaseNotes.md[ReleaseNotes.md]
 ----
 
 == Quellen
