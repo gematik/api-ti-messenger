@@ -105,6 +105,11 @@ TI-Messenger Dokumentation
 │   │    └── link:src/openapi/TiMessengerTestTreiber.yaml[TiMessengerTestTreiber.yaml] (API-Beschreibung der TestTreiber-Schnittstelle)
 │   └──── link:src/plantuml[plantuml] (Quellen der plantuml-Diagramme)
 ├── link:README.adoc[README.adoc]
+├── link:CODE_OF_CONDUCT.md[CODE_OF_CONDUCT.md]
+├── link:CONTRIBUTING.md[CONTRIBUTING.md]
+├── link:LICENSE.md[LICENSE.md]
+├── link:Pull_request_template.md[Pull_request_template.md]
+├── link:SECURITY.md[SECURITY.md]
 └── link:ReleaseNotes.md[ReleaseNotes.md]
 ----
 
