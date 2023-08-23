@@ -126,7 +126,7 @@ Hersteller und Anbieter eines *TI-Messenger-Dienstes* können das von der gemati
 
 == Weiterführende Seiten
 *Anwendungsfälle* +
-link:docs/TI-Messenger-Anwendungsfaelle.adoc[- Anwendungsfälle] 
+link:docs/anwendungsfaelle/TI-Messenger-Anwendungsfaelle.adoc[- Anwendungsfälle] 
 
 *Produkttypen* +
 link:docs/Fachdienst/Fachdienst.adoc[- TI-Messenger-Fachdienst] +
