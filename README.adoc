@@ -80,7 +80,7 @@ link:docs/Authenticator/authenticator.adoc[*gematik Authenticator*] +
 Im Folgenden sind die wesentlichen Inhalte des Repositories dargestellt.
 
 
-[source,subs="+macros"]
+[source,subs="macros"]
 ----
 TI-Messenger Dokumentation
 ├─ link:docs[docs]
