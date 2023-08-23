@@ -8,7 +8,7 @@ endif::[]
 
 :imagesdir: ../../images
 
-image:gematik_logo.svg[width=70%]
+image:meta/gematik_logo.svg[width=70%]
 
 === AF_10059 - Organisationsressourcen im Verzeichnisdienst hinzufügen
 Mit diesem Anwendungsfall macht ein Akteur in der Rolle "Org-Admin" Akteure seiner Organisation im *TI-Messenger-Dienst* für andere Akteure auffindbar und erreichbar. Dafür werden Endpoint-Ressourcen mit ihrer jeweiligen `MXID` im Organisationsverzeichnis (`HealthcareService`) des *VZD-FHIR-Directory* hinterlegt. Organisationen können mehrere FHIR-Ressourcen pro Organisation administrieren und somit eingehende Kommunikationsprozesse organisatorisch und thematisch strukturieren (siehe *[gemSpec_VZD_FHIR_Directory]*).

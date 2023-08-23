@@ -8,7 +8,7 @@ endif::[]
 
 :imagesdir: ../../images
 
-image:gematik_logo.svg[width=70%]
+image:meta/gematik_logo.svg[width=70%]
 
 === AF_10103 - Authentisieren einer Organisation am TI-Messenger-Dienst
 Mit diesem Anwendungsfall authentisiert ein Akteur, in der Rolle "Org-Admin", seine Organisation bei einem Anbieter eines *TI-Messenger-Dienestes*. Für die Authentisierung einer Organisation stellt der *TI-Messenger-Fachdienst* die Schnittstelle `I_Registration` an seinem *Registrierungs-Dienst* bereit. Diese wird über das *Frontend des Registrierungs-Dienstes* für die Authentisierung verwendet. Die Authentisierung der Organisation erfolgt individuell und nutzungsabhängig durch einen Akteur in der Rolle "Org-Admin". Durch die Authentifizierung MUSS der Besitz einer gültigen SMC-B nachgewiesen werden, da nur Organisationen des Gesundheitswesens berechtigt sind einen *Messenger-Service* zu erhalten. Als Nachweis MUSS eins der folgenden Verfahren verwendet werden. Für die Verifizierung der Organisation MUSS

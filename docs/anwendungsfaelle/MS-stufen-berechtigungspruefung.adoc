@@ -8,7 +8,7 @@ endif::[]
 
 :imagesdir: ../../images
 
-image:gematik_logo.svg[width=70%]
+image:meta/gematik_logo.svg[width=70%]
 
 ===  A 8.3 - Stufen der Berechtigungsprüfung
 Die folgende Sequenz beschreibt, wie die Berechtigungsprüfung eingehender und ausgehender `Matrix-Events` am *Messenger-Proxy* erfolgen muss. Das Berechtigungskonzept basiert auf einer dreistufigen Prüfung.

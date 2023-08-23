@@ -8,7 +8,7 @@ endif::[]
 
 :imagesdir: ../../images
 
-image:gematik_logo.svg[width=70%]
+image:meta/gematik_logo.svg[width=70%]
 
 === A 8.1 - Einträge im VZD-FHIR-Directory suchen
 Die folgende Sequenz beschreibt, wie ein Akteur im *VZD-FHIR-Directory* nach `HealthcareService`- und `PractitionerRole`-Ressourcen sucht. Dies setzt eine erfolgreiche Anmeldung des Akteurs an einem *Messenger-Service* voraus. Der dargestellte Ablauf zeigt alle prinzipiell notwendigen Kommunikationsbeziehungen. Weitergehende Informationen zum Ablauf sind in der *[gemSpec_VZD_FHIR_Directory]* zu finden. Für die Prüfung des `Matrix-OpenID-Tokens` muss der Zugriff auf den Endpunkt `/_matrix/federation/v1/openid/userinfo` ermöglicht werden.

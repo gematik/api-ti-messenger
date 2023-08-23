@@ -12,7 +12,7 @@ ifndef::env-github[:source-style: source]
 :imagesdir: ./images/
 = TI Messenger Documentation v1.1.1
 
-image::gematik_logo.svg[gematik,width="70%"]
+image::meta/gematik_logo.svg[gematik,width="70%"]
 
 image:https://img.shields.io/badge/Release%20Notes-v1.1.1-red?style=plastic&logo=github&logoColor=red[link="ReleaseNotes.md"] +
 image:https://img.shields.io/badge/I_TiMessengerContactManagement-v1.0.1-blue?style=plastic&logo=github&logoColor=blue[link=/src/openapi/TiMessengerContactManagement.yaml"] +

@@ -13,7 +13,7 @@ endif::[]
 :toc-title: Inhaltsverzeichnis
 :numbered:
 
-image:gematik_logo.svg[width=70%]
+image:meta/gematik_logo.svg[width=70%]
 
 toc::[]
 

@@ -8,7 +8,7 @@ endif::[]
 
 :imagesdir: ../../images
 
-image:gematik_logo.svg[width=70%]
+image:meta/gematik_logo.svg[width=70%]
 
 === AF_10061 - Einladung von Akteuren außerhalb einer Organisation
 In diesem Anwendungsfall wird ein Akteur außerhalb einer Organisation eingeladen. Für die Suche von Akteuren außerhalb der Organisation kann das *VZD-FHIR-Directory* verwendet werden. Ist die `MXID` des gesuchten Akteurs dort nicht vorhanden muss es die Möglichkeit geben, die Kontaktaufnahme auch auf andere Wege zu ermöglichen. Es muss mindestens die Kontaktaufnahme mit Hilfe eines QR-Code Scans angeboten werden. Weitere Optionen zur Eingabe der `MXID` (z. B. manuelle Eingabe) sind zulässig. Im Gegensatz zu einer Einladung von Akteuren innerhalb einer Organisation (link:/docs/anwendungsfaelle/COM-AF10104-einladung-innerhalb.adoc[AF_10104 - Einladung von Akteuren innerhalb einer Organisation]), prüft in diesem Anwendungsfall der *Messenger-Proxy* zusätzlich die in *[gemSpec_TI-Messenger-Dienst#3.5]* festgelegten Kriterien der Server-Server Kommunikation (Stufe 1 - 3). 

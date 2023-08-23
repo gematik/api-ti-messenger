@@ -8,7 +8,7 @@ endif::[]
 
 :imagesdir: ../../images
 
-image:gematik_logo.svg[width=70%]
+image:meta/gematik_logo.svg[width=70%]
 
 === AF_10058 Akteur - (User-HBA) im Verzeichnisdienst hinzufügen
 Mit diesem Anwendungsfall wird ein Akteur in der Rolle "User-HBA" für andere Akteure anderer *Messenger-Services* auffindbar und erreichbar. Dafür werden FHIR-Ressourcen mit ihrer jeweiligen `MXID` im Personenverzeichnis (`PractitionerRole`) des *VZD-FHIR-Directory* hinterlegt. Zusätzlich besteht die Möglichkeit die Sichtbarkeit für andere Akteure einzuschränken. Dieser Anwendungsfall kann direkt mit dem initialen Anmeldevorgang eines Akteurs am *Messenger-Service* (siehe Anwendungsfall: link:/docs/anwendungsfaelle/COM-AF10057-anmeldung-am-messenger-service.adoc[AF_10057 - Anmeldung eines Akteurs am Messenger-Service]) kombiniert werden. Hierfür wird der Akteur in der Rolle "User-HBA" während des Anmeldevorgangs durch den *TI-Messenger-Client* gefragt, ob dieser im Besitz eines HBAs ist.

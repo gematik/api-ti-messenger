@@ -8,7 +8,7 @@ endif::[]
 
 :imagesdir: ../../images
 
-image:gematik_logo.svg[width=70%]
+image:meta/gematik_logo.svg[width=70%]
 
 === AF_10060 - Bereitstellung eines Messenger-Service für eine Organisation
 Mit diesem Anwendungsfall wird einer zuvor am *Registrierungs-Dienst* authentifizierten Organisation ein *Messenger-Service* für diese Organisation durch einen Akteur in der Rolle "Org-Admin" bereitgestellt. Die Beantragung zur Bereitstellung eines *Messenger-Service* wird durch den Akteur in der Rolle "Org-Admin" am *Frontend des Registrierungs-Dienstes* vorgenommen. Dieser MUSS sich zuvor mit dem Admin-Account der Organisation am *Registrierungs-Dienst* anmelden. Für eine zeitnahe Adaption des *TI-Messenger-Dienstes* MUSS eine schnelle Bereitstellung von *Messenger-Services* gewährleistet sein. Anbieter eines *TI-Messenger-Fachdienstes* sind verpflichtet, Prozesse zu etablieren, damit *Messenger-Services* für Organisationen schnell und ggf. automatisiert bereitgestellt werden können. Nach erfolgreicher Bereitstellung eines *Messenger-Service* wird dieser in die Föderation des *TI-Messenger-Dienstes* aufgenommen. Werden mehrere *Messenger-Services* für eine Organisation benötigt kann dieser Anwendungsfall mehrfach ausgeführt werden.

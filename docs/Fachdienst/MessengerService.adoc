@@ -13,7 +13,7 @@ endif::[]
 :numbered:
 :sectnumlevels: 5
 
-image:gematik_logo.svg[width=70%]
+image:meta/gematik_logo.svg[width=70%]
 
 toc::[]
 

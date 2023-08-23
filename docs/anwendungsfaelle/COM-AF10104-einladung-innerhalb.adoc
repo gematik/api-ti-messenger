@@ -8,7 +8,7 @@ endif::[]
 
 :imagesdir: ../../images
 
-image:gematik_logo.svg[width=70%]
+image:meta/gematik_logo.svg[width=70%]
 
 === AF_10104 - Einladung von Akteuren innerhalb einer Organisation
 In diesem Anwendungsfall wird ein Akteur der zu einer gemeinsamen Organisation gehört in einen Raum eingeladen um Aktionen auszuführen. Für die Suche von Akteuren innerhalb einer gemeinsamen Organisation durchsucht ein *TI-Messenger-Client* das Nutzerverzeichnis seiner Organisation auf dem *Matrix-Homeserver*. In diesem Anwendungsfall prüft der *Messenger-Proxy* gemäß *[gemSpec_TI-Messenger-Dienst#3.5]* der Client-Server Kommunikation, ob die im `Invite`-Event enthaltenen Matrix-Domains Teil der TI-Föderation sind. Ist dies der Fall erfolgt die Weiterleitung an den *Matrix-Homeserver* des Einladenden. Dieser prüft ob die beteiligten Akteure bei ihm registriert sind. Ist dies nicht der Fall, handelt es sich bei dem einzuladenden Akteur nicht um einen Akteur innerhalb der Organisation und das `Invite`-Event wird für die externe Zustellung weitergeleitet. Der Anwendungsfall link:/docs/anwendungsfaelle/COM-AF10061-einladung-ausserhalb.adoc[AF_10061 - Einladung von Akteuren außerhalb einer Organisation] zeigt den sich daraus ergebenden Verlauf.

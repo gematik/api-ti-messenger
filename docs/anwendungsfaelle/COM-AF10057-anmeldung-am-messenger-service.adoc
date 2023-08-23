@@ -8,7 +8,7 @@ endif::[]
 
 :imagesdir: ../../images
 
-image:gematik_logo.svg[width=70%]
+image:meta/gematik_logo.svg[width=70%]
 
 === AF_10057 - Anmeldung eines Akteurs am Messenger-Service
 Mit diesem Anwendungsfall meldet sich ein Akteur an einem in der TI-Föderation zuständigen *Messenger-Service* an und registriert seinen *TI-Messenger-Client* als Endgerät. Der Akteur muss die Matrix-Domain des gewünschten *Messenger-Service* direkt im *TI-Messenger-Client* eingeben können. Die Eingabe kann dabei automatisiert oder durch andere Hilfsmittel wie beispielweise durch ein QR-Code-Scan unterstützt werden. Die Authentifizierung erfolgt hierbei nach den Vorgaben der jeweiligen Organisation. Nach der erfolgreichen Anmeldung eines Akteurs am *Messenger-Service* können die von ihm angebotenen Dienste verwendet werden. 

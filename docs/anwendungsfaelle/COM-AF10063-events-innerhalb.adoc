@@ -8,7 +8,7 @@ endif::[]
 
 :imagesdir: ../../images
 
-image:gematik_logo.svg[width=70%]
+image:meta/gematik_logo.svg[width=70%]
 
 === AF_10063 - Austausch von Events zwischen Akteuren innerhalb einer Organisation
 Dieser Anwendungsfall ermöglicht es Akteuren, welche sich in einem gemeinsamen Raum innerhalb eines *Messenger-Service* befinden, Nachrichten auszutauschen und weitere durch die Matrix-Spezifikation festgelegte Aktionen (`Events`) auszuführen.

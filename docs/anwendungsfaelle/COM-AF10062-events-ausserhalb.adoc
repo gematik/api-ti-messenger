@@ -8,7 +8,7 @@ endif::[]
 
 :imagesdir: ../../images
 
-image:gematik_logo.svg[width=70%]
+image:meta/gematik_logo.svg[width=70%]
 
 === AF_10062 - Austausch von Events zwischen Akteuren außerhalb einer Organisation
 In diesem Anwendungsfall können Akteure welche sich in einem gemeinsamen Raum befinden Nachrichten austauschen und andere durch die Matrix-Spezifikation festgelegte Aktionen ausführen. Dieser Anwendungsfall setzt ein erfolgreiches `Invite`-Event eines oder mehrerer beteiligter Akteure voraus. Die Prüfung auf Domainzugehörigkeit findet jedoch bei jedem `Event` der Server-Server Kommunikation statt. In diesem Anwendungsfall sind die beteiligten Akteure in einem gemeinsamen Chatraum und auf unterschiedlichen *Messenger-Services* verteilt.
