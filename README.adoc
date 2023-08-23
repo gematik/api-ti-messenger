@@ -4,9 +4,9 @@ ifdef::env-github[]
 :important-caption: :heavy_exclamation_mark:
 :caution-caption: :fire:
 :warning-caption: :warning:
+:source-style: listing
 endif::[]
 
-ifdef::env-github[:source-style: listing]
 ifndef::env-github[:source-style: source]
 
 :imagesdir: ./images/
