@@ -31,7 +31,9 @@ Die folgende Dokumentation ergänzt die Spezifikation *TI-Messenger-Dienst* v1.1
 * Instant-Messaging zwischen Leistungserbringern und Leistungserbringerinstitutionen und
 * Instant-Messaging direkt zwischen Leistungserbringern.
 
-💡 _Hinweis: In der Spezifikationsversion v1.1.1 können keine Versicherten an dem *TI-Messenger-Dienst* teilnehmen_.
+// 💡 _Hinweis: In der Spezifikationsversion v1.1.1 können keine Versicherten an dem *TI-Messenger-Dienst* teilnehmen_.
+
+IMPORTANT: Die Dokumentation ergänzt die Spezifikation gemäß link:https://fachportal.gematik.de/fachportal-import/files/gemSpec_TI-Messenger-Dienst_V1.1.1.pdf[&#91;gemSpec_TI-Messenger-Dienst&#93;], die als Grundlage für das Verständnis vorrausgesetzt wird. 
 
 == Branches
 Für die Dokumentation des *TI-Messenger-Dienstes* werden in GitHub die folgenden Branches verwendet:
