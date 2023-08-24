@@ -34,7 +34,7 @@ Die folgende Dokumentation ergänzt die Spezifikation *TI-Messenger-Dienst* v1.1
 💡 _Hinweis: In der Spezifikationsversion v1.1.1 können keine Versicherten an dem *TI-Messenger-Dienst* teilnehmen_.
 
 == Branches
-Für die Dokumentation des *TI-Messenger-Dienstes* werden die folgenden Branches verwendet:
+Für die Dokumentation des *TI-Messenger-Dienstes* werden in GitHub die folgenden Branches verwendet:
 
 - `main`: enthält die Dokumentation für das aktuell veröffentlichte Release gemäß *[gemSpec_TI-Messenger-Dienst]*,
 - `develop`: enthält die Dokumentation der in Entwicklung befindlichen Features, die noch nicht released sind, 
