@@ -1,0 +1,411 @@
+{
+	"info": {
+		"_postman_id": "e209af5a-de99-4131-9e3a-029a4dca22d2",
+		"name": "FHIRDirectorySearchAPI",
+		"description": "Um die Requests nutzen zu können, müssen die folgenden Variablen im verwendeten Environment gesetzt werden:\n\n- matrix_server - Url vom zu verwendenden Matrix Homeserver\n    \n- matrix_user - Username für den Login auf dem Matrix Homeserver\n    \n- matrix_passwd - Password für den User auf dem Matrix Homeserver\n    \n- fhir_server - Url vom zu verwendenden VZD-FHIR-Directory\n    \n\nUm die Such-Requests verwenden zu können wird ein searchToken benötigt. Dieses wird automatisch im Environment hinterlegt, wenn die Requests:\n\n1. matrixServerLogin\n    \n2. getMatrixOpenIDToken\n    \n3. getSearchAccessToken\n    \n\nin der genannten Reihenfolge erfolgreich nacheinander aufgerufen wurden.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29292558"
+	},
+	"item": [
+		{
+			"name": "matrixServerLogin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.globals.set(\"userId\", jsonData.user_id);\r",
+							"pm.globals.set(\"accessToken\", jsonData.access_token)\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"strictSSL": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"identifier\" : {\r\n        \"type\":\"m.id.user\",\r\n        \"user\": \"{{matrix_user}}\"\r\n    },\r\n    \"password\": \"{{matrix_passwd}}\",\r\n    \"type\": \"m.login.password\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{matrix_server}}/_matrix/client/r0/login",
+					"host": [
+						"{{matrix_server}}"
+					],
+					"path": [
+						"_matrix",
+						"client",
+						"r0",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getMatrixOpenIDToken",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.globals.set(\"matrixopenidtoken\", jsonData.access_token)\r",
+							"pm.globals.set(\"matrix_server_name\", jsonData.matrix_server_name)\r",
+							"\r",
+							" "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{matrix_server}}/_matrix/client/v3/user/{{userId}}/openid/request_token",
+					"host": [
+						"{{matrix_server}}"
+					],
+					"path": [
+						"_matrix",
+						"client",
+						"v3",
+						"user",
+						"{{userId}}",
+						"openid",
+						"request_token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getSearchAccessToken",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"searchToken\", jsonData.access_token)",
+							"",
+							" function parseJwt (token,part) {",
+							"   var base64Url = token.split('.')[part];",
+							"   var words = CryptoJS.enc.Base64.parse(base64Url);",
+							"   var jsonPayload = CryptoJS.enc.Utf8.stringify(words);",
+							"   return  JSON.parse(jsonPayload);",
+							"};",
+							"",
+							"var jwtInfo ={};",
+							"jwtInfo.size = jsonData.access_token.length;",
+							"jwtInfo.header = parseJwt(jsonData.access_token,0);",
+							"jwtInfo.payload = parseJwt(jsonData.access_token,1);",
+							"jwtInfo.signature = jsonData.access_token.split('.')[2];",
+							"jwtInfo.expires = ((jwtInfo.payload.exp-Date.now().valueOf()/1000)/60).toFixed(1);",
+							"console.log(jwtInfo);",
+							"",
+							"var template = `",
+							"<b>JWT  Size:{{response.size}}Bytes. Expires in {{response.expires}} minutes</b><br>",
+							"<b>Header </b>",
+							"    <table>",
+							"        <tr><th>Property</th><th>Value</th></tr>",
+							"        {{#each response.header}}",
+							"            <tr><td>{{@key}}</td><td>{{.}}</td></tr>",
+							"        {{/each}}",
+							"    </table>",
+							"<b>Payload</b>",
+							"    <table>",
+							"        <tr><th>Property</th><th>Value</th></tr>",
+							"        {{#each response.payload}}",
+							"            <tr><td>{{@key}}</td><td>{{.}}</td></tr>",
+							"        {{/each}}",
+							"    </table>",
+							" <b>Claims</b>",
+							"    <table bgcolor=\"#FFFFFF\">",
+							"        <tr><th>Claim</th><th>Value</th></tr>",
+							"        {{#each response.payload.Claims}}",
+							"            <tr>",
+							"                {{#each this}}",
+							"                    <td>{{.}}</td>       ",
+							"                {{/each}}",
+							"            </tr>",
+							"        {{/each}}",
+							"    </table>",
+							"  <i>signature:{{response.signature}}</i>",
+							"`;",
+							"pm.visualizer.set(template, {response: jwtInfo});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-Matrix-OpenID-Token",
+						"value": "{{matrixopenidtoken}}",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "{{fhir_server}}/tim-authenticate?mxId={{matrix_server_name}}",
+					"host": [
+						"{{fhir_server}}"
+					],
+					"path": [
+						"tim-authenticate"
+					],
+					"query": [
+						{
+							"key": "mxId",
+							"value": "{{matrix_server_name}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "queryPractitionerRoleWithEndpoint",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{searchToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{fhir_server}}/search/PractitionerRole?practitioner.active=true&_include=PractitionerRole:endpoint",
+					"host": [
+						"{{fhir_server}}"
+					],
+					"path": [
+						"search",
+						"PractitionerRole"
+					],
+					"query": [
+						{
+							"key": "practitioner.active",
+							"value": "true"
+						},
+						{
+							"key": "_include",
+							"value": "PractitionerRole:endpoint"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "queryPractitionerWithPractitionerName",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{searchToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{fhir_server}}/search/PractitionerRole?practitioner.active=true&practitioner.name=Trauth&_include=PractitionerRole:practitioner",
+					"host": [
+						"{{fhir_server}}"
+					],
+					"path": [
+						"search",
+						"PractitionerRole"
+					],
+					"query": [
+						{
+							"key": "practitioner.active",
+							"value": "true"
+						},
+						{
+							"key": "practitioner.name",
+							"value": "Trauth"
+						},
+						{
+							"key": "_include",
+							"value": "PractitionerRole:practitioner"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "queryHealthcareServiceWithEndpoint",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{searchToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{fhir_server}}/search/HealthcareService?organization.active=true&_include=HealthcareService:endpoint",
+					"host": [
+						"{{fhir_server}}"
+					],
+					"path": [
+						"search",
+						"HealthcareService"
+					],
+					"query": [
+						{
+							"key": "organization.active",
+							"value": "true"
+						},
+						{
+							"key": "_include",
+							"value": "HealthcareService:endpoint"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "queryHealthcareServiceWithOrganizationName",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{searchToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{fhir_server}}/search/HealthcareService?organization.active=true&organization.name=Organisation 1-2arvtst-ap000006&_include=HealthcareService:endpoint",
+					"host": [
+						"{{fhir_server}}"
+					],
+					"path": [
+						"search",
+						"HealthcareService"
+					],
+					"query": [
+						{
+							"key": "organization.active",
+							"value": "true"
+						},
+						{
+							"key": "organization.name",
+							"value": "Organisation 1-2arvtst-ap000006"
+						},
+						{
+							"key": "_include",
+							"value": "HealthcareService:endpoint"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "queryHealthcareServiceWithEndpointName",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{searchToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{fhir_server}}/search/HealthcareService?organization.active=true&endpoint.name=MatrixId von Organisation 1-2arvtst-ap000006&_include=HealthcareService:endpoint",
+					"host": [
+						"{{fhir_server}}"
+					],
+					"path": [
+						"search",
+						"HealthcareService"
+					],
+					"query": [
+						{
+							"key": "organization.active",
+							"value": "true"
+						},
+						{
+							"key": "endpoint.name",
+							"value": "MatrixId von Organisation 1-2arvtst-ap000006"
+						},
+						{
+							"key": "_include",
+							"value": "HealthcareService:endpoint"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

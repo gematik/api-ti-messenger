@@ -1,0 +1,449 @@
+{
+	"info": {
+		"_postman_id": "4d0d7eeb-9722-4b39-ba44-880528249ab7",
+		"name": "FHIRDirectoryTIMProviderAPI",
+		"description": "Um die Requests nutzen zu können, müssen die folgenden Variablen im verwendeten Environment gesetzt werden:\n\n- oauth_server - Url vom zu verwendenden OAuth-Server\n    \n- cliend_id - Client ID für den Login\n    \n- secret - Secret für den Login\n    \n- fhir_server - Url vom zu verwendenden VZD-FHIR-Directory\n    \n\nUm die Requests verwenden zu können wird ein providerToken benötigt. Dieses wird automatisch im Environment hinterlegt, wenn die Requests:\n\n1. gegen den oauth Servers\n    \n2. getProviderToken\n    \n\nin der genannten Reihenfolge erfolgreich nacheinander aufgerufen wurden.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29292558"
+	},
+	"item": [
+		{
+			"name": "getProviderToken",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.globals.set(\"providerToken\", jsonData.access_token)\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "accessTokenUrl",
+							"value": "{{oauth_server}}",
+							"type": "string"
+						},
+						{
+							"key": "clientSecret",
+							"value": "{{secret}}",
+							"type": "string"
+						},
+						{
+							"key": "clientId",
+							"value": "{{client_id}}",
+							"type": "string"
+						},
+						{
+							"key": "client_authentication",
+							"value": "body",
+							"type": "string"
+						},
+						{
+							"key": "tokenName",
+							"value": "timprovider",
+							"type": "string"
+						},
+						{
+							"key": "tokenType",
+							"value": "bearer",
+							"type": "string"
+						},
+						{
+							"key": "accessToken",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJiMkJXT0w2dmN2QjluMjhnYVRwQ19fQllnXzI1aDljMkN2UGVXbmFGYUVNIn0.eyJqdGkiOiI4OGU2M2NjNi02NzFlLTQzN2YtODQzOS1mZGQyN2Q2YjAxZmQiLCJleHAiOjE2NzU3NjUwMzcsIm5iZiI6MCwiaWF0IjoxNjc1NzY0NzM3LCJpc3MiOiJodHRwOi8vYXV0aC10ZXN0LnZ6ZC50aS1kaWVuc3RlLmRlOjk0NDMvYXV0aC9yZWFsbXMvVEktUHJvdmlkZXIiLCJzdWIiOiI2MWJjODJiOC0yN2VlLTRkMDUtYTc0OC1iNmQ3Zjc4NDk4ZmIiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJnZW1hdGlrIiwiYXV0aF90aW1lIjowLCJzZXNzaW9uX3N0YXRlIjoiN2FkZDMyMjAtNTQ2Ny00MjE3LTk5MWYtMzMxMmU3NjRhNzMzIiwiYWNyIjoiMSIsInNjb3BlIjoidGktcHJvdmlkZXIiLCJjbGllbnRJZCI6ImdlbWF0aWsiLCJjbGllbnRIb3N0IjoiMTcyLjI0LjQ2LjEwIiwiY2xpZW50QWRkcmVzcyI6IjE3Mi4yNC40Ni4xMCJ9.ZPpxn3FZ4dEysj46dpqN2wrXj-5jqc6claIY7gkFNmGPujOs_eBjR1gDrudPOidtB1rbFY24AjgryN9MfHt2PIMI_dLW9s7oE_an2w4q-jO_tRbfpgfAIIYQBrDi_fIAgMsMvwDdKRbh6be_3rRjyUwmArRHSFAugo3rvFc9SZHmZqT67XKI8aB7Eg-JIvCtNC0uxVHVzThkJ2CuzKiMLJeFLyPMeZcn33azFQGpEFeaXPXuwTv8zAgwCJv_xPiHj2RptSf5zZOn6otU9eTK3fm5DshjYRI14w40MrNs_wR5fssLBhDH85gVWXFefRbpF76yeQi333TN5Af8Lo47sg",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						},
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{fhir_server}}/ti-provider-authenticate",
+					"host": [
+						"{{fhir_server}}"
+					],
+					"path": [
+						"ti-provider-authenticate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getInfo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{fhir_server}}/tim-provider-services/",
+					"host": [
+						"{{fhir_server}}"
+					],
+					"path": [
+						"tim-provider-services",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "checkTiMessengerDomains",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{providerToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{fhir_server}}/tim-provider-services/federationCheck",
+					"host": [
+						"{{fhir_server}}"
+					],
+					"path": [
+						"tim-provider-services",
+						"federationCheck"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getFederationList",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{providerToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{fhir_server}}/tim-provider-services/FederationList/federationList.jws",
+					"host": [
+						"{{fhir_server}}"
+					],
+					"path": [
+						"tim-provider-services",
+						"FederationList",
+						"federationList.jws"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getOwnDomains",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{providerToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{fhir_server}}/tim-provider-services/federation",
+					"host": [
+						"{{fhir_server}}"
+					],
+					"path": [
+						"tim-provider-services",
+						"federation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "whereIs",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{providerToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{fhir_server}}/tim-provider-services/localization?mxid=matrix:u/1-2arvtst-ap000037:tim.test.gematik.de",
+					"host": [
+						"{{fhir_server}}"
+					],
+					"path": [
+						"tim-provider-services",
+						"localization"
+					],
+					"query": [
+						{
+							"key": "mxid",
+							"value": "matrix:u/1-2arvtst-ap000037:tim.test.gematik.de"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "domainAdministration_add",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{providerToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"domain\": \"ti-messenger.test.gdomain\",\n  \"telematikID\": \"1-2arvtst-ap000094\",\n  \"isInsurance\": false\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{fhir_server}}/tim-provider-services/federation",
+					"host": [
+						"{{fhir_server}}"
+					],
+					"path": [
+						"tim-provider-services",
+						"federation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "domainAdministration_update",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{providerToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"domain\": \"ti-messenger.test.gdomain\",\n  \"telematikID\": \"1-2arvtst-ap000098\",\n  \"isInsurance\": false\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{fhir_server}}/tim-provider-services/federation/ti-messenger.test.gdomain",
+					"host": [
+						"{{fhir_server}}"
+					],
+					"path": [
+						"tim-provider-services",
+						"federation",
+						"ti-messenger.test.gdomain"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "domainAdministration_delete",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{providerToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{fhir_server}}/tim-provider-services/federation/ti-messenger.test.gdomain",
+					"host": [
+						"{{fhir_server}}"
+					],
+					"path": [
+						"tim-provider-services",
+						"federation",
+						"ti-messenger.test.gdomain"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
