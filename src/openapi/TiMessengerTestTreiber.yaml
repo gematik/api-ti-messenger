@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: TiMessengerTestDriver
   description: REST interface to automate the test of a TI-Messenger client implementation.
-  version: 0.9.0
+  version: 0.9.1
   contact:
     name: gematik GmbH
     email: software-development@gematik.de
@@ -39,6 +39,8 @@ tags:
     description: Account operations
   - name: login/logout
     description: login / logout an account
+  - name: keyExchange
+    description: export / import recoveryKey
   - name: orgAdminFhirOrganization
     description: OrgAdmin operations that could be operated on organizations in FHIR-VZD
   - name: orgAdminFhirHealthcareService
@@ -258,6 +260,51 @@ paths:
           $ref: "#/components/responses/NotFound"
         default:
           $ref: "#/components/responses/DefaultResponse"
+
+  /devices/{deviceId}/account/key:
+    parameters:
+      - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/transactionIdHeader"
+
+    get:
+      tags:
+        - keyExchange
+      description: "Exports secret key for device synchronization. The key could be in any format but has to be understood by every provided test-driver-api per distributor!"
+      operationId: keyExport
+      responses:
+        "200":
+          description: "information about the exported key"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/matrixKeyInfo"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+    post:
+      tags:
+        - keyExchange
+      description: "Imports secret key and execute synchronization"
+      operationId: keyImport
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/matrixKeyInfo"
+      responses:
+        "204":
+          description: "sync successful"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
 
   /devices/{deviceId}/fhir/fhirAuthenticate:
     parameters:
@@ -1970,6 +2017,17 @@ components:
           type: string
           example: "@someone:gematik.de"
 
+    matrixKeyInfo:
+      description: "Information about recoveryKey"
+      type: object
+      properties:
+        mxId:
+          $ref: "#/components/schemas/MxId"
+        key:
+          type: string
+          description: "The actual key"
+          example: "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
+
     Messages:
       description: "A list of messages and its properties"
       type: array
@@ -2505,7 +2563,7 @@ components:
         daysOfWeek:
           type: array
           description: "Short term of day"
-          example: ["mon", "tue", "wed"]
+          example: [ "mon", "tue", "wed" ]
           items:
             type: string
         availableStartTime:
