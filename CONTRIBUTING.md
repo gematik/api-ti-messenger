@@ -28,7 +28,7 @@ Scan through our existing issues to find one that interests you. If you find an 
 ### Pull Request Process
  
 - When you're finished with the changes, create a pull request, also known as a PR.
-- Fill the [pull request template](pull_request_template.md) so that we can review your PR. This template helps reviewers to understand your changes as well as the purpose of your pull request.
+- Fill the [pull request template](Pull_request_template.md) so that we can review your PR. This template helps reviewers to understand your changes as well as the purpose of your pull request.
 - Don't forget to [link the PR to the issue](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue) if you are solving one.
 - Increase the version numbers in any necessary files to the new version that this
   Pull Request would represent. The versioning scheme we use is [SemVer](http://semver.org/).
