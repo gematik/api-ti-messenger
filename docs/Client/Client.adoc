@@ -26,7 +26,7 @@ Im Kontext des *TI-Messenger-Dienstes* wird zwischen den folgenden Ausprägungen
 
 Beide Arten von Clients basieren auf dem offenen Kommunikationsprotokoll Matrix und werden auf dem Endgerät eines Akteurs verwendet. In der folgenden Dokumentation werden die zwei Ausprägungen der Clients beschrieben. 
 
-TIP: Die Seite ergänzt die *[gemSpec_TI-Messenger-Client]* Spezifikation, die als Grundlage für das Verständnis vorrausgesetzt wird. 
+TIP: Die Seite ergänzt die Spezifikation gemäß link:https://fachportal.gematik.de/fachportal-import/files/gemSpec_TI-Messenger-Client_V1.1.1.pdf[&#91;gemSpec_TI-Messenger-Client&#93;], die als Grundlage für das Verständnis vorrausgesetzt wird. 
 
 == TI-Messenger-Client für Akteure
 Der *TI-Messenger-Client* für Akteure unterstützt die meisten aller, durch die Matrix-Spezifikation festgelegten Funktionalitäten eines Matrix-Messengers und weitere durch die gematik definierten Vorgaben. Die Funktionalität des *TI-Messenger-Clients* für Akteure kann in drei abstrakte Module unterteilt werden. In der folgenden Abbildung wird dies verdeutlicht.
