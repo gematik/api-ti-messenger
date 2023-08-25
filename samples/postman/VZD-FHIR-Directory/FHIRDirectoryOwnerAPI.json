@@ -1,0 +1,1078 @@
+{
+	"info": {
+		"_postman_id": "f43b7e09-357a-44c8-ad9a-1437f6a43066",
+		"name": "FHIRDirectoryOwnerAPI",
+		"description": "In dieser Collection befinden sich 2 Ordner, die Requests enthalten um einen Endpunkt an einem HealtcareService (Ordner \"Organization\") oder an einer PractitionerRole (Ordner \"Organization\") anzulegen, zu aktualisieren und zu löschen. Für die Requests wird ein owner-accesstoken benötigt. Dieses ist für die Requests im Practitioner Ordner in der Variablen practitioner_token und für die Requests im Organization Ordner in der Variablen org_token zu setzen.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29292558"
+	},
+	"item": [
+		{
+			"name": "Practitioner",
+			"item": [
+				{
+					"name": "GetPractitioner",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.collectionVariables.set(\"practitionerID\", jsonData.entry[0].resource.id);",
+									"// Log output",
+									"console.log(jsonData.entry[0].resource.id)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{practitioner_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{fhir_server}}/owner/Practitioner?identifier=1-1-ARZT-MelanieKornfeld01",
+							"host": [
+								"{{fhir_server}}"
+							],
+							"path": [
+								"owner",
+								"Practitioner"
+							],
+							"query": [
+								{
+									"key": "identifier",
+									"value": "1-1-ARZT-MelanieKornfeld01"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetPractitionerRoleCreatedBySync",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.collectionVariables.set(\"practitionerRoleLdapID\", jsonData.entry[0].resource.id);",
+									"console.log(jsonData.entry[0].resource.id)",
+									"",
+									"// Extract location reference from response",
+									"var locationReference = jsonData.entry[0].resource.location[0].reference;",
+									"pm.collectionVariables.set(\"practitionerRoleLocationRef\", locationReference);",
+									"console.log(locationReference);",
+									"",
+									"// Extract practitioner reference from response",
+									"var practitionerReference = jsonData.entry[0].resource.practitioner.reference;",
+									"pm.collectionVariables.set(\"practitionerReference\", practitionerReference);",
+									"console.log(practitionerReference);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{practitioner_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{fhir_server}}/owner/PractitionerRole?practitioner=Practitioner/{{practitionerID}}&_tag=ldap",
+							"host": [
+								"{{fhir_server}}"
+							],
+							"path": [
+								"owner",
+								"PractitionerRole"
+							],
+							"query": [
+								{
+									"key": "practitioner",
+									"value": "Practitioner/{{practitionerID}}"
+								},
+								{
+									"key": "include_",
+									"value": "endpoint",
+									"disabled": true
+								},
+								{
+									"key": "_tag",
+									"value": "ldap"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateEndpoint",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.collectionVariables.set(\"endpointID\", jsonData.id);",
+									"// Log output",
+									"console.log(jsonData.id)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{practitioner_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"resourceType\": \"Endpoint\",\n  \"meta\": {\n    \"profile\": [\n      \"https://gematik.de/fhir/directory/StructureDefinition/EndpointDirectory\",\n      \"http://hl7.org/fhir/StructureDefinition/Endpoint\"\n    ],\n    \"tag\": [\n      {\n        \"system\": \"https://gematik.de/fhir/directory/CodeSystem/Origin\",\n        \"code\": \"owner\",\n        \"display\": \"my test owner\",\n        \"userSelected\": false\n      }\n    ]\n  },\n  \"text\": {\n    \"status\": \"generated\",\n    \"div\": \"This is Sparta!!!\"\n  },\n  \"status\": \"active\",\n  \"connectionType\": {\n    \"system\": \"https://gematik.de/fhir/directory/CodeSystem/EndpointDirectoryConnectionType\",\n    \"code\": \"tim\"\n  },\n  \"name\": \"This is Sparta!!!\",\n  \"payloadType\": [\n    {\n      \"coding\": [\n        {\n          \"system\": \"https://gematik.de/fhir/directory/CodeSystem/EndpointDirectoryPayloadType\",\n          \"code\": \"tim-chat\",\n          \"display\": \"TI-Messenger chat\"\n        }\n      ]\n    }\n  ],\n  \"address\": \"@gemtest:gematik.de\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{fhir_server}}/owner/Endpoint",
+							"host": [
+								"{{fhir_server}}"
+							],
+							"path": [
+								"owner",
+								"Endpoint"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetEndpoint",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{practitioner_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{fhir_server}}/owner/Endpoint?_id={{endpointID}}",
+							"host": [
+								"{{fhir_server}}"
+							],
+							"path": [
+								"owner",
+								"Endpoint"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "This is Sparta!!!",
+									"disabled": true
+								},
+								{
+									"key": "identifier",
+									"value": "eb1acd73-a798-40d1-aa24-c2d3b0d38503",
+									"disabled": true
+								},
+								{
+									"key": "_id",
+									"value": "{{endpointID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateEndpointStatus",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{practitioner_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"resourceType\": \"Endpoint\",\n  \"id\": \"{{endpointID}}\",\n  \"meta\": {\n    \"profile\": [\n      \"https://gematik.de/fhir/directory/StructureDefinition/EndpointDirectory\",\n      \"http://hl7.org/fhir/StructureDefinition/Endpoint\"\n    ],\n    \"tag\": [\n      {\n        \"system\": \"https://gematik.de/fhir/directory/CodeSystem/Origin\",\n        \"code\": \"owner\",\n        \"display\": \"my test owner\",\n        \"userSelected\": false\n      }\n    ]\n  },\n  \"text\": {\n    \"status\": \"generated\",\n    \"div\": \"This is Sparta!!!\"\n  },\n  \"status\": \"off\",\n  \"connectionType\": {\n    \"system\": \"https://gematik.de/fhir/directory/CodeSystem/EndpointDirectoryConnectionType\",\n    \"code\": \"tim\"\n  },\n  \"name\": \"This is Sparta!!!\",\n  \"payloadType\": [\n    {\n      \"coding\": [\n        {\n          \"system\": \"https://gematik.de/fhir/directory/CodeSystem/EndpointDirectoryPayloadType\",\n          \"code\": \"tim-chat\",\n          \"display\": \"TI-Messenger chat\"\n        }\n      ]\n    }\n  ],\n  \"address\": \"@gemtest:gematik.de\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{fhir_server}}/owner/Endpoint/{{endpointID}}",
+							"host": [
+								"{{fhir_server}}"
+							],
+							"path": [
+								"owner",
+								"Endpoint",
+								"{{endpointID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteEndpoint",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{practitioner_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{fhir_server}}/owner/Endpoint/{{endpointID}}",
+							"host": [
+								"{{fhir_server}}"
+							],
+							"path": [
+								"owner",
+								"Endpoint",
+								"{{endpointID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "setEndpointForLdapPractitionerRole",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{practitioner_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"resourceType\": \"PractitionerRole\",\n    \"id\": \"{{practitionerRoleLdapID}}\",\n    \"endpoint\": [\n        {\n            \"reference\": \"Endpoint/{{endpointID}}\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{fhir_server}}/owner/PractitionerRole/{{practitionerRoleLdapID}}",
+							"host": [
+								"{{fhir_server}}"
+							],
+							"path": [
+								"owner",
+								"PractitionerRole",
+								"{{practitionerRoleLdapID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "unsetEndpointForLdapPractitionerRole",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{practitioner_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"resourceType\": \"PractitionerRole\",\n    \"id\": \"{{practitionerRoleLdapID}}\",\n    \"endpoint\": [\n        \n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{fhir_server}}/owner/PractitionerRole/{{practitionerRoleLdapID}}",
+							"host": [
+								"{{fhir_server}}"
+							],
+							"path": [
+								"owner",
+								"PractitionerRole",
+								"{{practitionerRoleLdapID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createOwnPractitionerRole",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Extracting the PractitionerRole id from the response",
+									"var responseData = pm.response.json();",
+									"var practitionerRoleId = responseData.id;",
+									"",
+									"// Storing the PractitionerRole id ",
+									"pm.collectionVariables.set(\"practitionerRoleID\", practitionerRoleId);",
+									"console.log(practitionerRoleId)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{practitioner_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"resourceType\": \"PractitionerRole\",\n    \"meta\": {\n        \"profile\": [\n            \"https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory\"\n        ],\n        \"tag\": [\n            {\n                \"system\": \"https://gematik.de/fhir/directory/CodeSystem/Origin\",\n                \"code\": \"owner\"\n            }\n        ]\n    },\n    \"specialty\": [\n        {\n            \"coding\": [\n                {\n                    \"system\": \"https://gematik.de/fhir/directory/CodeSystem/TIPractitionerProfessionOidCS\",\n                    \"code\": \"urn:oid:1.2.276.0.76.4.43\",\n                    \"display\": \"PTA-Praktikant/-in\"\n                }\n            ]\n        }\n    ],\n    \"practitioner\": {\n        \"reference\": \"{{practitionerReference}}\"\n    },\n    \"location\": [\n        {\n            \"reference\": \"{{practitionerRoleLocationRef}}\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{fhir_server}}/owner/PractitionerRole",
+							"host": [
+								"{{fhir_server}}"
+							],
+							"path": [
+								"owner",
+								"PractitionerRole"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "setEndpointForOwnPractitionerRole",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{practitioner_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"resourceType\": \"PractitionerRole\",\n    \"id\": \"{{practitionerRoleID}}\",\n    \"meta\": {\n        \"profile\": [\n            \"https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory\"\n        ],\n        \"tag\": [\n            {\n                \"system\": \"https://gematik.de/fhir/directory/CodeSystem/Origin\",\n                \"code\": \"owner\",\n                \"userSelected\": true\n            }\n        ]\n    },\n    \"practitioner\": {\n        \"reference\": \"{{practitionerReference}}\"\n    },\n    \"endpoint\": [\n        {\n            \"reference\": \"Endpoint/{{endpointID}}\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{fhir_server}}/owner/PractitionerRole/{{practitionerRoleID}}",
+							"host": [
+								"{{fhir_server}}"
+							],
+							"path": [
+								"owner",
+								"PractitionerRole",
+								"{{practitionerRoleID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteOwnPractitionerRole",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{practitioner_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://fhir-directory-ref.vzd.ti-dienste.de/owner/PractitionerRole/{{practitionerRoleID}}",
+							"protocol": "https",
+							"host": [
+								"fhir-directory-ref",
+								"vzd",
+								"ti-dienste",
+								"de"
+							],
+							"path": [
+								"owner",
+								"PractitionerRole",
+								"{{practitionerRoleID}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Organization",
+			"item": [
+				{
+					"name": "getOrganizationByTelematik-ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.collectionVariables.set(\"orgID\", jsonData.entry[0].resource.id);",
+									"// Log output",
+									"console.log(jsonData.entry[0].resource.id)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{org_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{fhir_server}}/owner/Organization?identifier=5-2-KHAUS-Kornfeld01",
+							"host": [
+								"{{fhir_server}}"
+							],
+							"path": [
+								"owner",
+								"Organization"
+							],
+							"query": [
+								{
+									"key": "identifier",
+									"value": "5-2-KHAUS-Kornfeld01"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getHealthcareServiceCreatedBySync",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.collectionVariables.set(\"healthcareServiceLdapID\", jsonData.entry[0].resource.id);",
+									"console.log(jsonData.entry[0].resource.id)",
+									"",
+									"// Extract organization reference",
+									"var organizationRef = pm.response.json().entry[0].resource.providedBy.reference;",
+									"pm.collectionVariables.set(\"organizationRef\", organizationRef);",
+									"console.log(organizationRef);",
+									"",
+									"// Extract location reference",
+									"var locationRef = pm.response.json().entry[0].resource.location[0].reference;",
+									"pm.collectionVariables.set(\"locationRef\", locationRef);",
+									"console.log(locationRef);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{org_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{fhir_server}}/owner/HealthcareService?organization._id={{orgID}}&_tag=ldap",
+							"host": [
+								"{{fhir_server}}"
+							],
+							"path": [
+								"owner",
+								"HealthcareService"
+							],
+							"query": [
+								{
+									"key": "organization._id",
+									"value": "{{orgID}}"
+								},
+								{
+									"key": "_tag",
+									"value": "ldap"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateEndpoint",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.collectionVariables.set(\"endpointID\", jsonData.id);",
+									"// Log output",
+									"console.log(jsonData.id)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{org_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"resourceType\": \"Endpoint\",\n  \"meta\": {\n    \"profile\": [\n      \"https://gematik.de/fhir/directory/StructureDefinition/EndpointDirectory\",\n      \"http://hl7.org/fhir/StructureDefinition/Endpoint\"\n    ],\n    \"tag\": [\n      {\n        \"system\": \"https://gematik.de/fhir/directory/CodeSystem/Origin\",\n        \"code\": \"owner\",\n        \"display\": \"PT Neo\",\n        \"userSelected\": false\n      }\n    ]\n  },\n  \"text\": {\n    \"status\": \"generated\",\n    \"div\": \"PT Neo\"\n  },\n  \"status\": \"active\",\n  \"connectionType\": {\n    \"system\": \"https://gematik.de/fhir/directory/CodeSystem/EndpointDirectoryConnectionType\",\n    \"code\": \"tim\"\n  },\n  \"name\": \"PT Neo's Endpoint\",\n  \"payloadType\": [\n    {\n      \"coding\": [\n        {\n          \"system\": \"https://gematik.de/fhir/directory/CodeSystem/EndpointDirectoryPayloadType\",\n          \"code\": \"tim-chat\",\n          \"display\": \"TI-Messenger chat\"\n        }\n      ]\n    }\n  ],\n  \"address\": \"@ptneo:gematik.de\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{fhir_server}}/owner/Endpoint",
+							"host": [
+								"{{fhir_server}}"
+							],
+							"path": [
+								"owner",
+								"Endpoint"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getEndpoint",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{org_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"resourceType\": \"Endpoint\",\n  \"meta\": {\n    \"profile\": [\n      \"https://gematik.de/fhir/directory/StructureDefinition/EndpointDirectory\",\n      \"http://hl7.org/fhir/StructureDefinition/Endpoint\"\n    ],\n    \"tag\": [\n      {\n        \"system\": \"https://gematik.de/fhir/directory/CodeSystem/Origin\",\n        \"code\": \"owner\",\n        \"display\": \"PT Neo\",\n        \"userSelected\": false\n      }\n    ]\n  },\n  \"text\": {\n    \"status\": \"generated\",\n    \"div\": \"PT Neo\"\n  },\n  \"status\": \"off\",\n  \"connectionType\": {\n    \"system\": \"https://gematik.de/fhir/directory/CodeSystem/EndpointDirectoryConnectionType\",\n    \"code\": \"tim\"\n  },\n  \"name\": \"PT Neo's Endpoint\",\n  \"payloadType\": [\n    {\n      \"coding\": [\n        {\n          \"system\": \"https://gematik.de/fhir/directory/CodeSystem/EndpointDirectoryPayloadType\",\n          \"code\": \"tim-chat\",\n          \"display\": \"TI-Messenger chat\"\n        }\n      ]\n    }\n  ],\n  \"address\": \"@ptneo:gematik.de\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{fhir_server}}/owner/Endpoint/{{endpointID}}",
+							"host": [
+								"{{fhir_server}}"
+							],
+							"path": [
+								"owner",
+								"Endpoint",
+								"{{endpointID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateEndpointStatus",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{org_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"resourceType\": \"Endpoint\",\n  \"id\": \"{{endpointID}}\",\n  \"meta\": {\n    \"profile\": [\n      \"https://gematik.de/fhir/directory/StructureDefinition/EndpointDirectory\",\n      \"http://hl7.org/fhir/StructureDefinition/Endpoint\"\n    ],\n    \"tag\": [\n      {\n        \"system\": \"https://gematik.de/fhir/directory/CodeSystem/Origin\",\n        \"code\": \"owner\",\n        \"display\": \"PT Neo\",\n        \"userSelected\": false\n      }\n    ]\n  },\n  \"text\": {\n    \"status\": \"generated\",\n    \"div\": \"PT Neo\"\n  },\n  \"status\": \"off\",\n  \"connectionType\": {\n    \"system\": \"https://gematik.de/fhir/directory/CodeSystem/EndpointDirectoryConnectionType\",\n    \"code\": \"tim\"\n  },\n  \"name\": \"PT Neo's Endpoint\",\n  \"payloadType\": [\n    {\n      \"coding\": [\n        {\n          \"system\": \"https://gematik.de/fhir/directory/CodeSystem/EndpointDirectoryPayloadType\",\n          \"code\": \"tim-chat\",\n          \"display\": \"TI-Messenger chat\"\n        }\n      ]\n    }\n  ],\n  \"address\": \"@ptneo:gematik.de\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{fhir_server}}/owner/Endpoint/{{endpointID}}",
+							"host": [
+								"{{fhir_server}}"
+							],
+							"path": [
+								"owner",
+								"Endpoint",
+								"{{endpointID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteEndpoint",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{org_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"resourceType\": \"Endpoint\",\n  \"meta\": {\n    \"profile\": [\n      \"https://gematik.de/fhir/directory/StructureDefinition/EndpointDirectory\",\n      \"http://hl7.org/fhir/StructureDefinition/Endpoint\"\n    ],\n    \"tag\": [\n      {\n        \"system\": \"https://gematik.de/fhir/directory/CodeSystem/Origin\",\n        \"code\": \"owner\",\n        \"display\": \"PT Neo\",\n        \"userSelected\": false\n      }\n    ]\n  },\n  \"text\": {\n    \"status\": \"generated\",\n    \"div\": \"PT Neo\"\n  },\n  \"status\": \"off\",\n  \"connectionType\": {\n    \"system\": \"https://gematik.de/fhir/directory/CodeSystem/EndpointDirectoryConnectionType\",\n    \"code\": \"tim\"\n  },\n  \"name\": \"PT Neo's Endpoint\",\n  \"payloadType\": [\n    {\n      \"coding\": [\n        {\n          \"system\": \"https://gematik.de/fhir/directory/CodeSystem/EndpointDirectoryPayloadType\",\n          \"code\": \"tim-chat\",\n          \"display\": \"TI-Messenger chat\"\n        }\n      ]\n    }\n  ],\n  \"address\": \"@ptneo:gematik.de\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{fhir_server}}/owner/Endpoint/{{endpointID}}",
+							"host": [
+								"{{fhir_server}}"
+							],
+							"path": [
+								"owner",
+								"Endpoint",
+								"{{endpointID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "connectEndpointToLdapHealthcareService",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{org_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"resourceType\": \"HealthcareService\",\n    \"id\": \"{{healthcareServiceLdapID}}\",\n    \"endpoint\": [\n        {\n            \"reference\": \"Endpoint/{{endpointID}}\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{fhir_server}}/owner/HealthcareService/{{healthcareServiceLdapID}}",
+							"host": [
+								"{{fhir_server}}"
+							],
+							"path": [
+								"owner",
+								"HealthcareService",
+								"{{healthcareServiceLdapID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "unsetEndpointForLdapHealthcareService",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{org_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"resourceType\": \"HealthcareService\",\n    \"id\": \"{{healthcareServiceLdapID}}\",\n    \"endpoint\": [\n        \n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{fhir_server}}/owner/HealthcareService/{{healthcareServiceLdapID}}",
+							"host": [
+								"{{fhir_server}}"
+							],
+							"path": [
+								"owner",
+								"HealthcareService",
+								"{{healthcareServiceLdapID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createHealthcareService",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Extracting the HealthcareService id from the response",
+									"var responseData = pm.response.json();",
+									"var healthcareServiceId = responseData.id;",
+									"",
+									"// Storing the HealthcareService id",
+									"pm.collectionVariables.set(\"healthcareServiceID\", healthcareServiceId);",
+									"console.log(healthcareServiceId)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{org_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"resourceType\": \"HealthcareService\",\n    \"meta\": {\n        \"profile\": [\n            \"https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory\"\n        ],\n        \"tag\": [\n            {\n                \"system\": \"https://gematik.de/fhir/directory/CodeSystem/Origin\",\n                \"code\": \"owner\",\n                \"display\": \"PT Neo\",\n                \"userSelected\": false\n            }\n        ]\n    },\n    \"identifier\": [\n        {\n            \"system\": \"https://gematik.de/fhir/directory/CodeSystem/myUID\",\n            \"value\": \"3589fbe0-6593-479b-af5f-75bd2041cd82\"\n        }\n    ],\n        \"providedBy\": {\n            \"reference\": \"{{organizationRef}}\"\n        },\n        \"location\": [\n            {\n                \"reference\": \"{{locationRef}}\"\n            }\n        ]\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{fhir_server}}/owner/HealthcareService",
+							"host": [
+								"{{fhir_server}}"
+							],
+							"path": [
+								"owner",
+								"HealthcareService"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "connectEndpointToOwnHealthcareService",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{org_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"resourceType\": \"HealthcareService\",\n    \"id\": \"{{healthcareServiceID}}\",\n    \"meta\": {\n        \"profile\": [\n            \"https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory\"\n        ],\n        \"tag\": [\n            {\n                \"system\": \"https://gematik.de/fhir/directory/CodeSystem/Origin\",\n                \"code\": \"owner\",\n                \"display\": \"my test owner\",\n                \"userSelected\": false\n            }\n        ]\n    },\n    \"text\": {\n        \"status\": \"generated\",\n        \"div\": \"blubber\"\n    },\n    \"providedBy\": {\n        \"reference\": \"{{organizationRef}}\"\n    },\n    \"location\": [\n        {\n            \"reference\": \"{{locationRef}}\"\n        }\n    ],\n    \"endpoint\": [\n        {\n            \"reference\": \"Endpoint/{{endpointID}}\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{fhir_server}}/owner/HealthcareService/{{healthcareServiceID}}",
+							"host": [
+								"{{fhir_server}}"
+							],
+							"path": [
+								"owner",
+								"HealthcareService",
+								"{{healthcareServiceID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteOwnHealthcareService",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{org_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"resourceType\": \"HealthcareService\",\n    \"id\": \"my-id-123456\",\n    \"meta\": {\n        \"profile\":  [\n            \"https://gematik.de/fhir/directory/StructureDefinition/HealthcareServiceDirectory\"\n        ],\n        \"tag\": [\n            {\n              \"system\": \"https://gematik.de/fhir/directory/CodeSystem/Origin\",\n              \"code\": \"owner\",\n              \"display\": \"PT Neo\",\n              \"userSelected\": false\n            }\n          ]\n        \n    },\n    \"providedBy\": {\n        \"reference\": \"{{organizationRef}}\"\n    },\n    \n        \"location\": [\n          {\n            \"reference\": \"{{locationRef}}\"\n          }\n        ]\n     \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{fhir_server}}/owner/HealthcareService/{{healthcareServiceID}}",
+							"host": [
+								"{{fhir_server}}"
+							],
+							"path": [
+								"owner",
+								"HealthcareService",
+								"{{healthcareServiceID}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "practitionerID",
+			"value": ""
+		},
+		{
+			"key": "practitionerRoleID",
+			"value": ""
+		},
+		{
+			"key": "practitionerRoleLocationRef",
+			"value": ""
+		},
+		{
+			"key": "practitionerReference",
+			"value": ""
+		},
+		{
+			"key": "orgID",
+			"value": ""
+		},
+		{
+			"key": "healthcareServiceId",
+			"value": ""
+		},
+		{
+			"key": "endpointID",
+			"value": ""
+		},
+		{
+			"key": "organizationRef",
+			"value": ""
+		},
+		{
+			"key": "locationRef",
+			"value": ""
+		},
+		{
+			"key": "practitionerRoleId",
+			"value": ""
+		},
+		{
+			"key": "practitionerRoleLdapID",
+			"value": ""
+		},
+		{
+			"key": "healthcareServiceLdapID",
+			"value": ""
+		},
+		{
+			"key": "healthcareServiceID",
+			"value": ""
+		}
+	]
+}
