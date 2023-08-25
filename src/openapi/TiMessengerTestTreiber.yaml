@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: TiMessengerTestDriver
   description: REST interface to automate the test of a TI-Messenger client implementation.
-  version: 0.9.1
+  version: 0.9.2
   contact:
     name: gematik GmbH
     email: software-development@gematik.de
@@ -2446,11 +2446,11 @@ components:
         serviceProvisionCode:
           type: array
           items:
-            $ref: "#/components/schemas/FhirCoding"
+            $ref: "#/components/schemas/FhirCodeableConcept"
         communication:
           type: array
           items:
-            $ref: "#/components/schemas/FhirCoding"
+            $ref: "#/components/schemas/FhirCodeableConcept"
         appointmentRequired:
           type: boolean
           description: "Is an appointment mandatory"
@@ -2541,7 +2541,7 @@ components:
         payloadType:
           type: array
           items:
-            $ref: "#/components/schemas/FhirCodingEntry"
+            $ref: "#/components/schemas/FhirCodeableConcept"
 
     FhirPractitioner:
       allOf:
@@ -2664,7 +2664,7 @@ components:
           items:
             $ref: "#/components/schemas/FhirCoding"
 
-    FhirCodingEntry:
+    FhirCodeableConcept:
       description: "Coding object"
       type: object
       properties:
@@ -2672,6 +2672,9 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/FhirCoding"
+        text:
+          type: string
+          description: "Plain text representation of the concept"
 
     FhirCoding:
       description: "Coding object"
