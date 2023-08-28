@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: TiMessengerTestDriver
   description: REST interface to automate the test of a TI-Messenger client implementation.
-  version: 0.9.1
+  version: 0.9.2
   contact:
     name: gematik GmbH
     email: software-development@gematik.de
@@ -2439,6 +2439,10 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/FhirReference"
+        telecom:
+          type: array
+          items:
+            $ref: "#/components/schemas/FhirTelecom"
         endpoint:
           type: array
           items:
@@ -2446,11 +2450,11 @@ components:
         serviceProvisionCode:
           type: array
           items:
-            $ref: "#/components/schemas/FhirCoding"
+            $ref: "#/components/schemas/FhirCodeableConcept"
         communication:
           type: array
           items:
-            $ref: "#/components/schemas/FhirCoding"
+            $ref: "#/components/schemas/FhirCodeableConcept"
         appointmentRequired:
           type: boolean
           description: "Is an appointment mandatory"
@@ -2541,7 +2545,7 @@ components:
         payloadType:
           type: array
           items:
-            $ref: "#/components/schemas/FhirCodingEntry"
+            $ref: "#/components/schemas/FhirCodeableConcept"
 
     FhirPractitioner:
       allOf:
@@ -2555,6 +2559,10 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/FhirName"
+        telecom:
+          type: array
+          items:
+            $ref: '#/components/schemas/FhirTelecom'
 
     FhirAvailableTimes:
       type: object
@@ -2664,7 +2672,7 @@ components:
           items:
             $ref: "#/components/schemas/FhirCoding"
 
-    FhirCodingEntry:
+    FhirCodeableConcept:
       description: "Coding object"
       type: object
       properties:
@@ -2672,6 +2680,9 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/FhirCoding"
+        text:
+          type: string
+          description: "Plain text representation of the concept"
 
     FhirCoding:
       description: "Coding object"
@@ -2686,6 +2697,23 @@ components:
         display:
           type: string
           example: "TI-Messenger chat"
+
+    FhirTelecom:
+      description: "Coding object"
+      type: object
+      properties:
+        system:
+          type: string
+          example: "phone"
+          description: "one of phone | fax | email | pager | url | sms | other"
+        value:
+          type: string
+          example: "030-606 06 60"
+          description: "the actual value"
+        use:
+          type: string
+          example: "work"
+          description: "home | work | temp | old | mobile - purpose of this contact point"
 
     FhirConnectionType:
       type: object
