@@ -2463,11 +2463,9 @@ components:
           items:
             $ref: "#/components/schemas/FhirAvailableTimes"
         availabilityExceptions:
-          type: array
-          items:
-            type: string
-            description: ""
-            example: "Closed on Friday 3.14.15926"
+          type: string
+          description: ""
+          example: "Closed on Friday 3.14.15926"
 
     FhirOrganization:
       allOf:
