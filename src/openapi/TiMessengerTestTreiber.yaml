@@ -2439,6 +2439,10 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/FhirReference"
+        telecom:
+          type: array
+          items:
+            $ref: "#/components/schemas/FhirTelecom"
         endpoint:
           type: array
           items:
@@ -2555,6 +2559,10 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/FhirName"
+        telecom:
+          type: array
+          items:
+            $ref: '#/components/schemas/FhirTelecom'
 
     FhirAvailableTimes:
       type: object
@@ -2689,6 +2697,23 @@ components:
         display:
           type: string
           example: "TI-Messenger chat"
+
+    FhirTelecom:
+      description: "Coding object"
+      type: object
+      properties:
+        system:
+          type: string
+          example: "phone"
+          description: "one of phone | fax | email | pager | url | sms | other"
+        value:
+          type: string
+          example: "030-606 06 60"
+          description: "the actual value"
+        use:
+          type: string
+          example: "work"
+          description: "home | work | temp | old | mobile - purpose of this contact point"
 
     FhirConnectionType:
       type: object
