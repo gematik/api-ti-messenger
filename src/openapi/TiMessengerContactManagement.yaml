@@ -21,7 +21,12 @@ info:
     TI-Messenger-Client ---> Messenger-Proxy
 
     # Contact
-  version: 1.0.1
+  version: 1.0.2
+  ### 1.0.2
+  # - raised patch number in server url due to bugfixing
+  # - changed MXID description and example 
+  #   changed format of mxid to normal identifier to support better handling in proxies 
+  #   and avoid security issues like https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-0450  
   ### 1.0.1
   # - raised patch number in server url due to bugfixing
   # - removed pointless 404 response while createContactSetting
@@ -41,7 +46,7 @@ externalDocs:
   url: https://github.com/gematik/api-ti-messenger
 
 servers:
-  - url: https://localhost/tim-contact-mgmt/v1.0.1/
+  - url: https://localhost/tim-contact-mgmt/v1.0.2/
 tags:
   - name: info
     description: This operation returns meta data about this interface and the status of available resources
@@ -240,12 +245,14 @@ components:
       properties:
         displayName:
           type: string
-          description: "Name of the contact)."
+          description: "Name of the contact."
           example: "Musterfrau, Erika"
         mxid:
           type: string
-          description: "ID of the contact (Matrix URI scheme))."
-          example: matrix:u/testuser:tim.test.gematik.de 
+          description: "MXID of the contact (@localpart:domain)). See "
+          externalDocs:
+            url: https://spec.matrix.org/v1.3/appendices/#user-identifiers
+          example: "@testuser:tim.test.gematik.de" 
         inviteSettings:
           type: object
           properties:
