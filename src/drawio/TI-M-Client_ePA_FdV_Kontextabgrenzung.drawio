@@ -1,19 +1,19 @@
-<mxfile host="app.diagrams.net" modified="2023-10-18T14:56:58.415Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" etag="GuCAQ14tStn82BhNS4dZ" version="22.0.4" type="device">
+<mxfile host="app.diagrams.net" modified="2023-10-19T11:04:28.187Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" etag="Np3njEYekU0bajYPNm4a" version="22.0.4" type="device">
   <diagram name="Seite-1" id="gc1YbI-Wx7_Q_iwZn_eA">
     <mxGraphModel dx="1434" dy="1585" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="ejHJoWQ4-AMJ1VvW92XO-1" value="&amp;lt;&amp;lt;System&amp;gt;&amp;gt;" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;strokeColor=#0000FF;strokeWidth=2;" vertex="1" parent="1">
+        <mxCell id="ejHJoWQ4-AMJ1VvW92XO-1" value="TI-Messenger für Versicherte" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;strokeColor=#0000FF;strokeWidth=2;" parent="1" vertex="1">
           <mxGeometry x="120" y="120" width="520" height="160" as="geometry" />
         </mxCell>
-        <mxCell id="ejHJoWQ4-AMJ1VvW92XO-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="yt_74iejyjVCjCeiJqDR-1" target="yt_74iejyjVCjCeiJqDR-2">
+        <mxCell id="ejHJoWQ4-AMJ1VvW92XO-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="yt_74iejyjVCjCeiJqDR-1" target="yt_74iejyjVCjCeiJqDR-2" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="ejHJoWQ4-AMJ1VvW92XO-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="yt_74iejyjVCjCeiJqDR-1" target="yt_74iejyjVCjCeiJqDR-5">
+        <mxCell id="ejHJoWQ4-AMJ1VvW92XO-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="yt_74iejyjVCjCeiJqDR-1" target="yt_74iejyjVCjCeiJqDR-5" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="ejHJoWQ4-AMJ1VvW92XO-10" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="yt_74iejyjVCjCeiJqDR-1" target="ejHJoWQ4-AMJ1VvW92XO-3">
+        <mxCell id="ejHJoWQ4-AMJ1VvW92XO-10" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="yt_74iejyjVCjCeiJqDR-1" target="ejHJoWQ4-AMJ1VvW92XO-3" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="440" y="200" />
@@ -22,28 +22,28 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="ejHJoWQ4-AMJ1VvW92XO-11" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="yt_74iejyjVCjCeiJqDR-1" target="ejHJoWQ4-AMJ1VvW92XO-2">
+        <mxCell id="ejHJoWQ4-AMJ1VvW92XO-11" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="yt_74iejyjVCjCeiJqDR-1" target="ejHJoWQ4-AMJ1VvW92XO-2" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="yt_74iejyjVCjCeiJqDR-1" value="TI-Messenger Client&lt;br&gt;(ePA FdV)" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#0000FF;strokeWidth=2;" parent="1" vertex="1">
           <mxGeometry x="160" y="160" width="120" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="ejHJoWQ4-AMJ1VvW92XO-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;startArrow=classic;startFill=1;" edge="1" parent="1" source="yt_74iejyjVCjCeiJqDR-2" target="ejHJoWQ4-AMJ1VvW92XO-6">
+        <mxCell id="ejHJoWQ4-AMJ1VvW92XO-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;startArrow=classic;startFill=1;" parent="1" source="yt_74iejyjVCjCeiJqDR-2" target="ejHJoWQ4-AMJ1VvW92XO-6" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="ejHJoWQ4-AMJ1VvW92XO-12" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="yt_74iejyjVCjCeiJqDR-2" target="ejHJoWQ4-AMJ1VvW92XO-4">
+        <mxCell id="ejHJoWQ4-AMJ1VvW92XO-12" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="yt_74iejyjVCjCeiJqDR-2" target="ejHJoWQ4-AMJ1VvW92XO-4" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="ejHJoWQ4-AMJ1VvW92XO-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="yt_74iejyjVCjCeiJqDR-2" target="ejHJoWQ4-AMJ1VvW92XO-3">
+        <mxCell id="ejHJoWQ4-AMJ1VvW92XO-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="yt_74iejyjVCjCeiJqDR-2" target="ejHJoWQ4-AMJ1VvW92XO-3" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="ejHJoWQ4-AMJ1VvW92XO-15" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="yt_74iejyjVCjCeiJqDR-2" target="ejHJoWQ4-AMJ1VvW92XO-2">
+        <mxCell id="ejHJoWQ4-AMJ1VvW92XO-15" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="yt_74iejyjVCjCeiJqDR-2" target="ejHJoWQ4-AMJ1VvW92XO-2" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="ejHJoWQ4-AMJ1VvW92XO-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="yt_74iejyjVCjCeiJqDR-2" target="ejHJoWQ4-AMJ1VvW92XO-16">
+        <mxCell id="ejHJoWQ4-AMJ1VvW92XO-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="yt_74iejyjVCjCeiJqDR-2" target="ejHJoWQ4-AMJ1VvW92XO-16" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="ejHJoWQ4-AMJ1VvW92XO-21" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="yt_74iejyjVCjCeiJqDR-2" target="yt_74iejyjVCjCeiJqDR-5">
+        <mxCell id="ejHJoWQ4-AMJ1VvW92XO-21" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="yt_74iejyjVCjCeiJqDR-2" target="yt_74iejyjVCjCeiJqDR-5" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="320" y="200" />
@@ -55,7 +55,7 @@
         <mxCell id="yt_74iejyjVCjCeiJqDR-2" value="TI-Messenger Fachdienst&lt;br&gt;(für Versicherte)" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#0000FF;strokeWidth=2;" parent="1" vertex="1">
           <mxGeometry x="480" y="160" width="120" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="ejHJoWQ4-AMJ1VvW92XO-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="yt_74iejyjVCjCeiJqDR-3" target="yt_74iejyjVCjCeiJqDR-1">
+        <mxCell id="ejHJoWQ4-AMJ1VvW92XO-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="yt_74iejyjVCjCeiJqDR-3" target="yt_74iejyjVCjCeiJqDR-1" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="yt_74iejyjVCjCeiJqDR-3" value="Versicherter" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;strokeWidth=2;" parent="1" vertex="1">
@@ -64,19 +64,19 @@
         <mxCell id="yt_74iejyjVCjCeiJqDR-5" value="Zero Trust&amp;nbsp;" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#EA6B66;strokeWidth=2;" parent="1" vertex="1">
           <mxGeometry x="160" y="360" width="120" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="ejHJoWQ4-AMJ1VvW92XO-2" value="Authentisierung und Authorisierung" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=2;" vertex="1" parent="1">
+        <mxCell id="ejHJoWQ4-AMJ1VvW92XO-2" value="Authentisierung und Authorisierung" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=2;strokeColor=#FFB570;" parent="1" vertex="1">
           <mxGeometry x="320" y="360" width="120" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="ejHJoWQ4-AMJ1VvW92XO-3" value="VZD" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=2;" vertex="1" parent="1">
+        <mxCell id="ejHJoWQ4-AMJ1VvW92XO-3" value="VZD" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=2;" parent="1" vertex="1">
           <mxGeometry x="480" y="360" width="120" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="ejHJoWQ4-AMJ1VvW92XO-4" value="Komponenten PKI" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=2;" vertex="1" parent="1">
+        <mxCell id="ejHJoWQ4-AMJ1VvW92XO-4" value="Komponenten PKI" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=2;" parent="1" vertex="1">
           <mxGeometry x="640" y="360" width="120" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="ejHJoWQ4-AMJ1VvW92XO-6" value="TI-Messenger Fachdienst&lt;br&gt;(für LEI und KT)" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=middle;strokeWidth=2;" vertex="1" parent="1">
+        <mxCell id="ejHJoWQ4-AMJ1VvW92XO-6" value="TI-Messenger Fachdienst&lt;br&gt;(für LEI und KT)" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=middle;strokeWidth=2;" parent="1" vertex="1">
           <mxGeometry x="720" y="160" width="120" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="ejHJoWQ4-AMJ1VvW92XO-18" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="ejHJoWQ4-AMJ1VvW92XO-16" target="yt_74iejyjVCjCeiJqDR-1">
+        <mxCell id="ejHJoWQ4-AMJ1VvW92XO-18" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="ejHJoWQ4-AMJ1VvW92XO-16" target="yt_74iejyjVCjCeiJqDR-1" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="320" />
@@ -84,13 +84,13 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="ejHJoWQ4-AMJ1VvW92XO-16" value="Push Notification Service&amp;nbsp;" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=2;" vertex="1" parent="1">
+        <mxCell id="ejHJoWQ4-AMJ1VvW92XO-16" value="Push Notification Service&amp;nbsp;" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=2;strokeColor=#FFB570;" parent="1" vertex="1">
           <mxGeometry x="480" y="-40" width="120" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="ejHJoWQ4-AMJ1VvW92XO-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;startArrow=classic;startFill=1;" edge="1" parent="1" source="ejHJoWQ4-AMJ1VvW92XO-19" target="yt_74iejyjVCjCeiJqDR-1">
+        <mxCell id="ejHJoWQ4-AMJ1VvW92XO-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;startArrow=classic;startFill=1;" parent="1" source="ejHJoWQ4-AMJ1VvW92XO-19" target="yt_74iejyjVCjCeiJqDR-1" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="ejHJoWQ4-AMJ1VvW92XO-19" value="TI-Messenger Client&lt;br&gt;(LE)" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#000000;strokeWidth=2;" vertex="1" parent="1">
+        <mxCell id="ejHJoWQ4-AMJ1VvW92XO-19" value="TI-Messenger Client&lt;br&gt;(LE)" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#000000;strokeWidth=2;" parent="1" vertex="1">
           <mxGeometry x="160" y="-40" width="120" height="80" as="geometry" />
         </mxCell>
       </root>
