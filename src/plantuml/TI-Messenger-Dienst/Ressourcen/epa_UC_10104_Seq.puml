@@ -53,7 +53,7 @@ note over U1, U2: \n<size:17>Die Akteure sind auf dem selben Messenger-Service a
       MP->MP: Prüfe auf Versichertenzugehörigkeit
     |||
     
-    alt#LightGrey #AliceBlue <size:16>Matrix-Domain nicht in der Föderation enthalten</size>
+    alt#LightGrey #LightPink <size:16>Matrix-Domain nicht in der Föderation enthalten</size>
       |||
       MP-->C1: HTTP 401 \nUnauthorized
       |||
@@ -67,7 +67,7 @@ note over U1, U2: \n<size:17>Die Akteure sind auf dem selben Messenger-Service a
       C1-->U1: Einladung nicht \nerfolgreich
       |||
 
-      else <size:16>Matrix-Domain in der Föderation enthalten
+      else #AliceBlue <size:16>Matrix-Domain in der Föderation enthalten und nur einer der Akteure ist Versicherter
       MP->MH: HTTP(S) Foward
         activate MH
       MH->MH: Invite verarbeiten
