@@ -67,7 +67,7 @@ note over U1, U2: \n<size:17>Die Akteure sind auf dem selben Messenger-Service a
       C1-->U1: Einladung nicht \nerfolgreich
       |||
 
-      else #AliceBlue <size:16>Matrix-Domain in der Föderation enthalten und nur einer der Akteure ist Versicherter
+      else #AliceBlue <size:16>Matrix-Domain in der Föderation enthalten und nur maximal einer der Akteure ist Versicherter
       MP->MH: HTTP(S) Foward
         activate MH
       MH->MH: Invite verarbeiten
