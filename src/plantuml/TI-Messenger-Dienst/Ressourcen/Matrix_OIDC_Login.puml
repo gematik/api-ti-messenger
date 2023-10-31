@@ -1,4 +1,4 @@
-@startuml "Matrix OIDC Login"
+@startuml "Matrix_OIDC_Login"
 skinparam sequenceMessageAlign direction
 skinparam WrapWidth 300
 skinparam minClassWidth 150
