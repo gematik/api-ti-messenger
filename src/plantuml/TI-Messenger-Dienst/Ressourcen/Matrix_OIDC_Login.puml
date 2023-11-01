@@ -1,4 +1,4 @@
-@startuml "Matrix_OIDC_Login"
+@startuml "Matrix OIDC Login"
 skinparam sequenceMessageAlign direction
 skinparam WrapWidth 300
 skinparam minClassWidth 150
@@ -28,14 +28,14 @@ ActorFontSize 20
 
 autonumber "<b>(0)"
 
-actor us as "User"
+actor us as "Versicherter"
   box <size:19>Endgerät</size> #WhiteSmoke
   participant app as "Matrix-Web-App\n(Browser)"
   participant au as "Authenticator\ndes sektoralen IDP"
   end box
 participant hs as "Matrix\nHomeserver\n(Relying party für IDP)"
 participant mc as "Webserver der die\nMatrix-Web-App ausliefert\n(Relying party für Homeserver)"
-participant idp as "IDP-Dienst"
+participant idp as "Sektoraler IDP"
 
 |||
 
@@ -79,21 +79,22 @@ activate app
     ""set-cookie: oidc_session=...; Max-Age=3600; Path=_synapse/client/oidc; HttpOnly; Secure; SameSite=None""\n\
     ""set-cookie: oidc_session_no_samesite=...; Max-Age=3600; Path=/_synapse/client/oidc; HttpOnly""\n\
     ""synapse-trace-id:	747f9ec899abf541""
-    app -> idp: GET	https://sektoraler-idp.de/login/oauth/authorize?response_type=code&client_id=f318c77b32dea5117eb3&\n\
+    |||
+    app -> idp: GET	https://github.com/login/oauth/authorize?response_type=code&client_id=f318c77b32dea5117eb3&\n\
     redirect_uri=https://matrix-client.homeserver-tim.de/_synapse/client/oidc/callback&\n\
     scope=read:user&state=2Mp3IrxFVlRIRzZrwZjOTyQ60OSF31&nonce=tTheFW69KwzKxYrCnoBPoxrevBuMjb
-    idp --> app: 302 Redirect ""location: https://sektoraler-idp.de/login?client_id=f318c77b32dea5117eb3&return_to=%2Flogin%2Foauth%2Fauthorize%3F""\n\
-	  ""client_id%3Df318c77b32dea5117eb3%26nonce%3DtTheFW69KwzKxYrCnoBPoxrevBuMjb%26redirect_uri%3Dhttps%253A%252F%252Fmatrix-client.homeserver-tim.de%252F""\n\
-	  ""_synapse%252Fclient%252Foidc%252Fcallback%26response_type%3Dcode%26scope%3Dread%253Auser%26state%3D2Mp3IrxFVlRIRzZrwZjOTyQ60OSF31""\n\
-    ""set-cookie:	_gh_sess=...; path=/; secure; HttpOnly; SameSite=Lax""\n\
-    ""x-sektoraler-idp-request-id: 5D12:2A7A:51BB0D3:52DA7BE:6540C256""
-    |||
+    activate idp
     group #LightBlue <size:16>IDP authentication</size>
-      app -> idp: GET https://sektoraler-idp.de/login/oauth/authorize\n\
-      ""Cookie: _gh_sess=...; dotcom_user=username""
-      activate idp
-      idp --> au: Challenge
+      idp --> au: 302 Redirect ""location: https://github.com/login?client_id=f318c77b32dea5117eb3&return_to=%2Flogin%2Foauth%2Fauthorize%3F""\n\
+	    ""client_id%3Df318c77b32dea5117eb3%26nonce%3DtTheFW69KwzKxYrCnoBPoxrevBuMjb%26redirect_uri%3Dhttps%253A%252F%252Fmatrix-client.homeserver-tim.de%252F""\n\
+	    ""_synapse%252Fclient%252Foidc%252Fcallback%26response_type%3Dcode%26scope%3Dread%253Auser%26state%3D2Mp3IrxFVlRIRzZrwZjOTyQ60OSF31""\n\
+      ""set-cookie:	_gh_sess=...; path=/; secure; HttpOnly; SameSite=Lax""\n\
+      ""x-github-request-id: 5D12:2A7A:51BB0D3:52DA7BE:6540C256""
       activate au
+      |||
+      au -> idp: GET https://github.com/login/oauth/authorize\n\
+      ""Cookie: _gh_sess=...; dotcom_user=username""
+      idp --> au: Challenge
       au -> us: Consent Page
       us --> au: Approval
       au --> idp: Response
@@ -107,8 +108,10 @@ activate app
     app -> hs: GET https://matrix-client.homeserver-tim.de/_synapse/client/oidc/callback?code=ac45be5243787b8845f6&state=2Mp3IrxFVlRIRzZrwZjOTyQ60OSF31
     hs --> app: 200 OK HTML Consent Page, Zugriff Matrix-Web-App auf Matrix Account\n\
     ""<a href="https://Matrix-Web-App/?loginToken=syl_RatSwLyrYlyDtjBrRpXH_1Yh7Or" class="primary-button">Continue</a>""
+    |||
     app -> mc: GET https://Matrix-Web-App/?loginToken=syl_RatSwLyrYlyDtjBrRpXH_1Yh7Or
     mc --> app: 200 OK HTML ""...""
+    |||
     app -> hs: POST https://matrix-client.homeserver-tim.de/_matrix/client/v3/login\n\
     ""{"token":"syl_RatSwLyrYlyDtjBrRpXH_1Yh7Or",""\n\
     """initial_device_display_name":"Matrix-Web-App: Firefox on macOS",""\n\
