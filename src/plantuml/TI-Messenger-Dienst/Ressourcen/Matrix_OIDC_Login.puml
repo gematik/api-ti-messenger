@@ -33,6 +33,7 @@ actor us as "Versicherter"
   participant app as "Matrix-Web-App\n(Browser)"
   participant au as "Authenticator\ndes sektoralen IDP"
   end box
+participant pr as "TI-M Proxy"
 participant hs as "Matrix\nHomeserver\n(Relying party für IDP)"
 participant mc as "Webserver der die\nMatrix-Web-App ausliefert\n(Relying party für Homeserver)"
 participant idp as "Sektoraler IDP"
@@ -73,33 +74,44 @@ activate app
     |||
     end 'opt
     app -> hs: GET https://matrix-client.homeserver-tim.de/_matrix/client/v3/login/sso/redirect/oidc-sektoraler-idp
-    hs --> app: 302 Redirect ""location:	https://sektoraler-idp.de/dialog/oauth?response_type=code&""\n\
+    hs --> pr: 302 Redirect ""location:	https://sektoraler-idp.de/dialog/oauth?response_type=code&""\n\
     ""client_id=270006787810904&redirect_uri=https%3A%2F%2Fmatrix-client.homeserver-tim.de%2F_synapse%2Fclient%2Foidc%2Fcallback&""\n\
     ""scope=openid+email&state=ub8idYKc01s8LluOssFIuN3QQzZEoB&nonce=kL3jhzhuSdACVZjkN0B17FebXgqHoi""\n\
     ""set-cookie: oidc_session=...; Max-Age=3600; Path=_synapse/client/oidc; HttpOnly; Secure; SameSite=None""\n\
     ""set-cookie: oidc_session_no_samesite=...; Max-Age=3600; Path=/_synapse/client/oidc; HttpOnly""\n\
     ""synapse-trace-id:	747f9ec899abf541""
+    activate pr
+    note over pr: "Changed response because IDP needs OIDC PAR"
+    pr --> app: 200 OK JSON ""{"location":"https://sektoraler-idp.de/dialog/oauth","parameter":{"response_type":"code","cient_id":"270006787810904",""\n\
+    """redirect_uri":"https://matrix-client.homeserver-tim.de/_synapse/client/oidc/callback&""\n\
+    ""scope=openid+email&state=ub8idYKc01s8LluOssFIuN3QQzZEoB&nonce=kL3jhzhuSdACVZjkN0B17FebXgqHoi",""\n\
+    """set-cookie":{"oidc_session":"...; Max-Age=3600; Path=_synapse/client/oidc; HttpOnly; Secure; SameSite=None",""\n\
+    """oidc_session_no_samesite":"...; Max-Age=3600; Path=/_synapse/client/oidc; HttpOnly"},"synapse-trace-id":"747f9ec899abf541"}}""
+    deactivate pr
     |||
-    app -> idp: GET	https://github.com/login/oauth/authorize?response_type=code&client_id=f318c77b32dea5117eb3&\n\
-    redirect_uri=https://matrix-client.homeserver-tim.de/_synapse/client/oidc/callback&\n\
-    scope=read:user&state=2Mp3IrxFVlRIRzZrwZjOTyQ60OSF31&nonce=tTheFW69KwzKxYrCnoBPoxrevBuMjb
-    activate idp
     group #LightBlue <size:16>IDP authentication</size>
-      idp --> au: 302 Redirect ""location: https://github.com/login?client_id=f318c77b32dea5117eb3&return_to=%2Flogin%2Foauth%2Fauthorize%3F""\n\
+      app -> idp: [wird geändert in PAR] GET	https://sektoraler-idp.de/login/oauth/authorize?response_type=code&client_id=f318c77b32dea5117eb3&\n\
+      redirect_uri=https://matrix-client.homeserver-tim.de/_synapse/client/oidc/callback&\n\
+      scope=read:user&state=2Mp3IrxFVlRIRzZrwZjOTyQ60OSF31&nonce=tTheFW69KwzKxYrCnoBPoxrevBuMjb
+      activate idp
+      idp --> app: [wird geändert in PAR response] 302 Redirect ""location: https://sektoraler-idp.de/login?client_id=f318c77b32dea5117eb3&return_to=%2Flogin%2Foauth%2Fauthorize%3F""\n\
 	    ""client_id%3Df318c77b32dea5117eb3%26nonce%3DtTheFW69KwzKxYrCnoBPoxrevBuMjb%26redirect_uri%3Dhttps%253A%252F%252Fmatrix-client.homeserver-tim.de%252F""\n\
 	    ""_synapse%252Fclient%252Foidc%252Fcallback%26response_type%3Dcode%26scope%3Dread%253Auser%26state%3D2Mp3IrxFVlRIRzZrwZjOTyQ60OSF31""\n\
       ""set-cookie:	_gh_sess=...; path=/; secure; HttpOnly; SameSite=Lax""\n\
       ""x-github-request-id: 5D12:2A7A:51BB0D3:52DA7BE:6540C256""
-      activate au
       |||
-      au -> idp: GET https://github.com/login/oauth/authorize\n\
+      app -> idp: GET https://sektoraler-idp.de/login/oauth/authorize\n\
       ""Cookie: _gh_sess=...; dotcom_user=username""
-      idp --> au: Challenge
-      au -> us: Consent Page
-      us --> au: Approval
-      au --> idp: Response
-      |||
+      group #DarkGray <size:16>Black box with example</size>
+        idp --> app: Challenge
+        activate au
+        app -> us: Consent Page
+        us --> app: Approval
+        app --> idp: Response
       deactivate au
+      |||
+      end ' group
+      |||
       idp --> app: 200 OK HTML ""... <meta http-equiv="refresh" content="0;url=https://matrix-client.homeserver-tim.de/_synapse/client/oidc/callback?code=ac45be5243787b8845f6&amp;""\n\
       ""state=2Mp3IrxFVlRIRzZrwZjOTyQ60OSF31\" data-url=\"https://matrix-client.homeserver-tim.de/_synapse/client/oidc/callback?code=ac45be5243787b8845f6&amp;""\n\
       ""state=2Mp3IrxFVlRIRzZrwZjOTyQ60OSF31\"""
