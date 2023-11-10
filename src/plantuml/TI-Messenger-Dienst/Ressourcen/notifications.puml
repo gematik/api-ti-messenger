@@ -7,29 +7,32 @@
 !include <tupadr3/devicons2/android>
 !include <tupadr3/devicons2/apple_original>
 
-System_Boundary(kv, "Fachdienste der Krankenkasse") {
-    Container(push, "Push-Gateway", "Zentrales Push Gateway")
-    Container(epa, "ePA-Fachdienst", "Backend der ePA-Anwendung")  
-    Container(erezept, "eRezept-Fachdienst", "Backend der ePA-Anwendung")
-    Container(tim, "TI-Messenger-Fachdienst", "Backend der TI-Messenger Anwendung")
+Container_Ext(erezept, "eRezept-Fachdienst", "Backend der eRezept-Anwendung")
+
+Container_Boundary(kv, "Fachdienste der Krankenkasse") {
+    Container(push, "Push-Gateway", "Zentrales Push Gateway", $tags=kk)
+    Container(epa, "ePA-Fachdienst", "Backend der ePA-Anwendung", $tags=kk)  
+    Container(tim, "TI-Messenger-Fachdienst", "Backend der TI-Messenger Anwendung", $tags=kk)
 }
+
 Rel(epa, push, "")
 Rel(erezept, push, "")
 Rel(tim, push, "")
 
-System_Boundary(pp, "Anbieter von Smartphone Betriebssystemen") {
-    System_Ext(fcm, "Push-Gateway", "Push Dienst von Google", $sprite=android)
-    System_Ext(apn, "Push-Gateway", "Push Dienst von Apple", $sprite=apple_original)
+AddBoundaryTag(push, #LightGray, $legendText=Anbieter von Smartphone Betriebssystemen, $borderColor=#Black)
+Container_Boundary(pp, "", $tags=push) {
+    Container_Ext(fcm, "Push-Gateway", "Push Dienst von Google", $sprite=android)
+    Container_Ext(apn, "Push-Gateway", "Push Dienst von Apple", $sprite=apple_original)
 } 
 Rel(push, fcm, "")
 Rel(push, apn, "")
 
-AddBoundaryTag("Endanwender", $legendText="Endanwender")
+AddPersonTag(Endanwender, $legendText=Endanwender)
 Boundary(ug1, "Anwender mit einem Smartphone\n mit Android Betriebssystemen") {
-    Container(s1, "ePA-App(FDV)", "", $sprite=mobile_alt)
-    Container(s2, "ePA-App(FDV)", "", $sprite=mobile_alt)
-    Person(u1, "Versicherter")
-    Person(u2, "Versicherter")
+    Container(s1, "ePA-App(FDV)", "", $sprite=mobile_alt, $tags=kk)
+    Container(s2, "ePA-App(FDV)", "", $sprite=mobile_alt, $tags=kk)
+    Person(u1, "Versicherter", $tags=Endanwender)
+    Person(u2, "Versicherter", $tags=Endanwender)
     Rel_U(u1, s1, "")
     Rel_U(u2, s2, "")
 }
@@ -38,10 +41,10 @@ Rel(fcm, s2, "")
 
 
 Boundary(ug2, "Anwender mit einem Smartphone\n mit Apple Betriebssystemen") {
-    Container(s3, "ePA-App(FDV)", "", $sprite=mobile_alt, $tags="Endanwender")
-    Container(s4, "ePA-App(FDV)", "", $sprite=mobile_alt)
-    Person(u3, "Versicherter")
-    Person(u4, "Versicherter")
+    Container(s3, "ePA-App(FDV)", "", $sprite=mobile_alt, $tags=kk)
+    Container(s4, "ePA-App(FDV)", "", $sprite=mobile_alt, $tags=kk)
+    Person(u3, "Versicherter", $tags=Endanwender)
+    Person(u4, "Versicherter", $tags=Endanwender)
     Rel_U(u3, s3, "")
     Rel_U(u4, s4, "")
 }
@@ -49,5 +52,4 @@ Rel(apn, s3, "")
 Rel(apn, s4, "")
 
 SHOW_LEGEND()
-'Rel(personAlias, containerAlias, "Label", "Optional Technology", "Optional Description")
 @enduml
