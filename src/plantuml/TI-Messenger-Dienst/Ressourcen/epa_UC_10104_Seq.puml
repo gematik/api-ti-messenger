@@ -46,11 +46,11 @@ ActorFontName Aapex
 note over U1, U2: \n<size:17>Die Akteure sind auf dem selben Messenger-Service angemeldet und im Besitz eines zugelassenen TI-Messenger-Clients.\n<size:17>Ein Chatraum wurde durch den Einladenen eingerichtet.</size>\n
 |||
     U1->C1: Akteur B einladen
-    C1->MP: POST /_matrix/client/r0/rooms/\n{roomId}/invite (roomId)
+    C1->MP: POST  /_matrix/client/v3/rooms/{roomId}/invite
     activate MP
     |||
       MP->MP: Prüfe auf Föderationszugehörigkeit
-      MP->MP: Prüfe auf Versichertenzugehörigkeit
+      MP->MP: <font color=red> <b>NEU: Prüfe auf Versichertenzugehörigkeit 
     |||
     
     alt#LightGrey #LightPink <size:16>Matrix-Domain nicht in der Föderation enthalten</size>
