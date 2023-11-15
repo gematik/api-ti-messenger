@@ -7,8 +7,10 @@
 !include <tupadr3/devicons2/android>
 !include <tupadr3/devicons2/apple_original>
 
-Container_Ext(erezept, "eRezept-Fachdienst", "Backend der eRezept-Anwendung")
+AddContainerTag(er, #Green, $legendText="Bereitstellung durch die gematik")
+Container_Ext(erezept, "eRezept-Fachdienst", "Backend der eRezept-Anwendung", $tags=er)
 
+AddContainerTag(kk, $legendText="Bereitstellungen der Krankenkasse")
 Container_Boundary(kv, "Fachdienste der Krankenkasse") {
     Container(push, "Push-Gateway", "Zentrales Push Gateway", $tags=kk)
     Container(epa, "ePA-Fachdienst", "Backend der ePA-Anwendung", $tags=kk)  
@@ -20,9 +22,10 @@ Rel(erezept, push, "")
 Rel(tim, push, "")
 
 AddBoundaryTag(push, #LightGray, $legendText=Anbieter von Smartphone Betriebssystemen, $borderColor=#Black)
+AddContainerTag(pd, #Gray, $legendText=Push-Dienste)
 Container_Boundary(pp, "", $tags=push) {
-    Container_Ext(fcm, "Push-Gateway", "Push Dienst von Google", $sprite=android)
-    Container_Ext(apn, "Push-Gateway", "Push Dienst von Apple", $sprite=apple_original)
+    Container(fcm, "Push-Gateway", "Push Dienst von Google", $tags=pd, $sprite=android)
+    Container(apn, "Push-Gateway", "Push Dienst von Apple", $tags=pd, $sprite=apple_original)
 } 
 Rel(push, fcm, "")
 Rel(push, apn, "")
@@ -50,6 +53,7 @@ Boundary(ug2, "Anwender mit einem Smartphone\n mit Apple Betriebssystemen") {
 }
 Rel(apn, s3, "")
 Rel(apn, s4, "")
+
 
 SHOW_LEGEND()
 @enduml
