@@ -104,8 +104,7 @@ activate app
       idp --> app: 302 Redirect ""location: https://sektoraler-idp.de/login?client_id=f318c77b32dea5117eb3&return_to=%2Flogin%2Foauth%2Fauthorize%3F""\n\
 	    ""client_id%3Df318c77b32dea5117eb3%26nonce%3DtTheFW69KwzKxYrCnoBPoxrevBuMjb%26redirect_uri%3Dhttps%253A%252F%252Fmatrix-client.homeserver-tim.de%252F""\n\
 	    ""_synapse%252Fclient%252Foidc%252Fcallback%26response_type%3Dcode%26scope%3Dread%253Auser%26state%3D2Mp3IrxFVlRIRzZrwZjOTyQ60OSF31""\n\
-      ""set-cookie:	_gh_sess=...; path=/; secure; HttpOnly; SameSite=Lax""\n\
-      ""x-github-request-id: 5D12:2A7A:51BB0D3:52DA7BE:6540C256""
+      ""set-cookie:	_gh_sess=...; path=/; secure; HttpOnly; SameSite=Lax""
       |||
       app -> idp: GET https://sektoraler-idp.de/login/oauth/authorize\n\
       ""Cookie: _gh_sess=...; dotcom_user=username""
