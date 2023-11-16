@@ -49,6 +49,7 @@ activate app
   group #LightGray <size:16>Matrix Protocol ... (Guest Account, Key exchange etc)</size>
     app -> hs:""GET https://homeserver-tim.de/.well-known/matrix/client""
     activate hs
+    activate pr
     hs --> app: 200 OK ...
     |||
     hnote over app : ...
@@ -74,27 +75,32 @@ activate app
     |||
     end 'opt
     app -> hs: GET https://matrix-client.homeserver-tim.de/_matrix/client/v3/login/sso/redirect/oidc-sektoraler-idp
-    hs --> pr: 302 Redirect ""location:	https://sektoraler-idp.de/dialog/oauth?response_type=code&""\n\
-    ""client_id=270006787810904&redirect_uri=https%3A%2F%2Fmatrix-client.homeserver-tim.de%2F_synapse%2Fclient%2Foidc%2Fcallback&""\n\
-    ""scope=openid+email&state=ub8idYKc01s8LluOssFIuN3QQzZEoB&nonce=kL3jhzhuSdACVZjkN0B17FebXgqHoi""\n\
-    ""set-cookie: oidc_session=...; Max-Age=3600; Path=_synapse/client/oidc; HttpOnly; Secure; SameSite=None""\n\
-    ""set-cookie: oidc_session_no_samesite=...; Max-Age=3600; Path=/_synapse/client/oidc; HttpOnly""\n\
-    ""synapse-trace-id:	747f9ec899abf541""
-    activate pr
-    note over pr: "Changed response because IDP needs OIDC PAR"
-    pr --> app: 200 OK JSON ""{"location":"https://sektoraler-idp.de/dialog/oauth","parameter":{"response_type":"code","cient_id":"270006787810904",""\n\
-    """redirect_uri":"https://matrix-client.homeserver-tim.de/_synapse/client/oidc/callback&""\n\
-    ""scope=openid+email&state=ub8idYKc01s8LluOssFIuN3QQzZEoB&nonce=kL3jhzhuSdACVZjkN0B17FebXgqHoi",""\n\
-    """set-cookie":{"oidc_session":"...; Max-Age=3600; Path=_synapse/client/oidc; HttpOnly; Secure; SameSite=None",""\n\
-    """oidc_session_no_samesite":"...; Max-Age=3600; Path=/_synapse/client/oidc; HttpOnly"},"synapse-trace-id":"747f9ec899abf541"}}""
-    deactivate pr
+    group #Tomato <size:16>Changed behavior because of OIDC PAR is required</size>
+      hs --> pr: 302 Redirect ""location:	https://sektoraler-idp.de/dialog/oauth?response_type=code&""\n\
+      ""client_id=270006787810904&redirect_uri=https%3A%2F%2Fmatrix-client.homeserver-tim.de%2F_synapse%2Fclient%2Foidc%2Fcallback&""\n\
+      ""scope=openid+email&state=ub8idYKc01s8LluOssFIuN3QQzZEoB&nonce=kL3jhzhuSdACVZjkN0B17FebXgqHoi""\n\
+      ""set-cookie: oidc_session=...; Max-Age=3600; Path=_synapse/client/oidc; HttpOnly; Secure; SameSite=None""\n\
+      ""set-cookie: oidc_session_no_samesite=...; Max-Age=3600; Path=/_synapse/client/oidc; HttpOnly""\n\
+      ""synapse-trace-id:	747f9ec899abf541""
+      |||
+      pr -> idp: POST https://sektoraler-idp.de/par\n\
+       ""Content-Type: application/x-www-form-urlencoded""\n\
+       ""response_type=code&client_id=270006787810904&state=ub8idYKc01s8LluOssFIuN3QQzZEoB&""\n\
+       ""redirect_uri=https%3A%2F%2Fmatrix-client.homeserver-tim.de%2F_synapse%2Fclient%2Foidc%2Fcallback""\n\
+       ""&code_challenge=K2-ltc83acc4h0c9w6ESC_rEMTJ3bww-uCHaoeK1t8U&code_challenge_method=S256&scope=openid%20email&""
+      idp --> pr: 200 OK\n\
+       ""Content-Type: application/json""\n\
+       ""{"request_uri":"urn:example:bwc4JK-ESC0w8acc191e-Y1LTC2,"expires_in": 90}""
+      |||
+      pr --> app: 302 Redirect ""location:	https://sektoraler-idp.de/dialog/oauth?client_id=270006787810904&""\n\
+       ""request_uri=urn%3Aexample%3Abwc4JK-ESC0w8acc191e-Y1LTC2""
+    end 'group
     |||
     group #LightBlue <size:16>IDP authentication</size>
-      app -> idp: [wird geändert in PAR] GET	https://sektoraler-idp.de/login/oauth/authorize?response_type=code&client_id=f318c77b32dea5117eb3&\n\
-      redirect_uri=https://matrix-client.homeserver-tim.de/_synapse/client/oidc/callback&\n\
-      scope=read:user&state=2Mp3IrxFVlRIRzZrwZjOTyQ60OSF31&nonce=tTheFW69KwzKxYrCnoBPoxrevBuMjb
+      app -> idp: [wird geändert in PAR] GET	https://sektoraler-idp.de/login/oauth/authorize?client_id=f318c77b32dea5117eb3&\n\
+     request_uri=urn%3Aexample%3Abwc4JK-ESC0w8acc191e-Y1LTC2
       activate idp
-      idp --> app: [wird geändert in PAR response] 302 Redirect ""location: https://sektoraler-idp.de/login?client_id=f318c77b32dea5117eb3&return_to=%2Flogin%2Foauth%2Fauthorize%3F""\n\
+      idp --> app: 302 Redirect ""location: https://sektoraler-idp.de/login?client_id=f318c77b32dea5117eb3&return_to=%2Flogin%2Foauth%2Fauthorize%3F""\n\
 	    ""client_id%3Df318c77b32dea5117eb3%26nonce%3DtTheFW69KwzKxYrCnoBPoxrevBuMjb%26redirect_uri%3Dhttps%253A%252F%252Fmatrix-client.homeserver-tim.de%252F""\n\
 	    ""_synapse%252Fclient%252Foidc%252Fcallback%26response_type%3Dcode%26scope%3Dread%253Auser%26state%3D2Mp3IrxFVlRIRzZrwZjOTyQ60OSF31""\n\
       ""set-cookie:	_gh_sess=...; path=/; secure; HttpOnly; SameSite=Lax""\n\
