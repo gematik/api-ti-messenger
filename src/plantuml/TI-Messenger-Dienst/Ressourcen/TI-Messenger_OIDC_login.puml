@@ -75,7 +75,7 @@ activate app
     |||
     end 'opt
     app -> hs: GET https://matrix-client.homeserver-tim.de/_matrix/client/v3/login/sso/redirect/oidc-sektoraler-idp
-    group #MistyRose <size:16>Changed behavior because of OIDC PAR is required</size>
+    group #MistyRose <size:16>Changed behavior because OIDC PAR is required</size>
       hs --> pr: 302 Redirect ""location:	https://sektoraler-idp.de/dialog/oauth?response_type=code&""\n\
       ""client_id=270006787810904&redirect_uri=https%3A%2F%2Fmatrix-client.homeserver-tim.de%2F_synapse%2Fclient%2Foidc%2Fcallback&""\n\
       ""scope=openid+email&state=ub8idYKc01s8LluOssFIuN3QQzZEoB&nonce=kL3jhzhuSdACVZjkN0B17FebXgqHoi""\n\
