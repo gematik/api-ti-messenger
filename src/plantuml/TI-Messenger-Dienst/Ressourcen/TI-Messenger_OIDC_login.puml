@@ -94,6 +94,7 @@ activate app
       |||
       pr --> app: 302 Redirect ""location:	https://sektoraler-idp.de/dialog/oauth?client_id=270006787810904&""\n\
        ""request_uri=urn%3Aexample%3Abwc4JK-ESC0w8acc191e-Y1LTC2""
+      |||
     end 'group
     |||
     group #LightBlue <size:16>IDP authentication</size>
