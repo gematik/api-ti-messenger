@@ -81,7 +81,7 @@ activate app
       ""scope=openid+email&state=ub8idYKc01s8LluOssFIuN3QQzZEoB&nonce=kL3jhzhuSdACVZjkN0B17FebXgqHoi""\n\
       ""set-cookie: oidc_session=...; Max-Age=3600; Path=_synapse/client/oidc; HttpOnly; Secure; SameSite=None""\n\
       ""set-cookie: oidc_session_no_samesite=...; Max-Age=3600; Path=/_synapse/client/oidc; HttpOnly""\n\
-      ""synapse-trace-id:	747f9ec899abf541""
+      ""synapse-trace-id: 747f9ec899abf541""
       |||
       pr -> idp: POST https://sektoraler-idp.de/par\n\
        ""Content-Type: application/x-www-form-urlencoded""\n\
