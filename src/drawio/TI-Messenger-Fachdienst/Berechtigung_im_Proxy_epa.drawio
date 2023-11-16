@@ -76,6 +76,9 @@
                 <mxCell id="28" value="Berechtigungsprüfung" style="html=1;strokeColor=#1C1C1C;fillColor=#ffffff;fontFamily=Tahoma;fontSize=14;fontColor=#525252;align=center;strokeWidth=2;" vertex="1" parent="1">
                     <mxGeometry x="-4105" y="470" width="150" height="40" as="geometry"/>
                 </mxCell>
+                <mxCell id="31" value="Berechtigungs-&lt;br&gt;konfiguration" style="html=1;strokeColor=#1C1C1C;fillColor=#ffffff;fontFamily=Tahoma;fontSize=14;fontColor=#525252;align=center;strokeWidth=2;" vertex="1" parent="1">
+                    <mxGeometry x="-3550" y="567.5" width="150" height="40" as="geometry"/>
+                </mxCell>
             </root>
         </mxGraphModel>
     </diagram>
