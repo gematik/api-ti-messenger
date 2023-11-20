@@ -1,0 +1,110 @@
+/'
+# TI-Messenger für Versicherte
+# TI-Messenger-Dienst
+# Sequence Diagram
+# Name: Stufen der Berechtigungsprüfung ePA
+'/
+
+@startuml
+skinparam sequenceMessageAlign direction
+skinparam minClassWidth 200
+skinparam BoxPadding 15
+skinparam sequenceReferenceHeaderBackgroundColor palegreen
+scale max 2048 width
+
+skinparam sequence {
+  ArrowColor black
+  ArrowFontSize 17
+  ActorBorderColor black
+  LifeLineBorderColor black
+  LifeLineBackgroundColor Gainsboro
+
+  ParticipantBorderColor Motivation
+  ParticipantBackgroundColor Motivation
+  ParticipantFontName Impact
+  ParticipantFontSize 20
+  ParticipantFontColor black
+  ParticipantBorderColor Black
+  ParticipantBackgroundColor MOTIVATION
+
+  ActorBackgroundColor Gainsboro
+  ActorFontColor black
+  ActorFontSize 20
+  ActorFontName Aapex
+}
+box <size:18>Messenger-Service des Einladenden\n #WhiteSmoke
+participant MP as "Messenger-\nProxy"
+participant MH as "Matrix-\nHomeserver"
+end box
+box <size:18>Messenger-Service des Eingeladenen\n #WhiteSmoke
+participant MP2 as "Messenger-\nProxy"
+participant RD2 as "Registrierungs-\nDienst"
+participant MH2 as "Matrix-\nHomeserver"
+end box
+participant VZD as "VZD-FHIR-\nDirectory"
+
+|||
+MP->MP2:Matrix-Invite-Event
+activate MP2
+|||
+== <font color=green><size:16>  Berechtigungskonzept - Stufe 1</size></font>  ==
+|||
+
+ref over MP2, MP2: <size:17>**AF_10064** - \tFöderationszugehörigkeit eines \n<size:17> \tMessenger-Service prüfen</size>\n
+|||
+alt#LightGrey #MISTYROSE <size:16>Matrix-Domain nicht in der Föderation enthalten</size>
+  MP2->MP2:<font color=red>Abbruch, \n<font color=red>Verbindung wird \n<font color=red>abgelehnt</font>
+  |||
+else <size:16>Matrix-Domain ist in der Föderation enthalten</size>
+
+  == <font color=green><size:16>  Berechtigungskonzept - Stufe 2</size></font>  ==
+
+  MP2->MP2: \nPrüfung, ob MXID \ndes Einladenden \nin der persönlichen Kontaktliste \nenthalten ist
+  |||
+
+  alt#LightGrey #MOTIVATION <size:16>MXID des Einladenden ist in der persönlichen Kontaktliste enthalten</size>
+    |||
+    MP2->MH2: HTTP(S) Forward
+    activate MH2
+    |||
+  else <size:16>MXID des Einladenden ist nicht in der persönlichen Kontaktliste enthalten</size>
+    |||
+    == <font color=green><size:16>  Berechtigungskonzept - Stufe 3</size></font>  ==
+    MP2->RD2: Abfrage, wo die MXID \nder Akteure im \nVZD-FHIR-Dirctory \nenthalten ist
+    activate RD2
+    RD2->VZD: POST /tim-provider-services/whereIs
+    activate VZD
+    VZD->VZD: Suche
+    VZD-->RD2: Ergebnis
+    deactivate VZD
+
+    RD2-->MP2: Ergebnis
+    deactivate RD2
+    MP2->MP2: Prüfung der MXID Lokalisation
+    |||
+    alt#LightGrey #LightBlue <size:16>MXID des Eingeladenen ist im Organisationsverzeichnis == true</size>
+      |||
+      MP2->MH2: HTTP(S) Forward
+      |||
+    else <size:16>MXID des Eingeladenen und die MXID des Einladenden sind im Practitionerverzeichnis == true</size>
+      |||
+      MP2->MH2: HTTP(S) Forward
+      |||
+    else <size:16>MXID ist nicht im VZD-FHIR-Directory enthalten</size>
+      |||
+      MP2->MP2: <font color=red>Abbruch, \n<font color=red>Verbindung wird \n<font color=red>abgelehnt</font>
+      |||
+    end
+    |||
+  end
+end
+MH2-->MH2: Invite-Event \nverarbeiten
+|||
+MH2-->MP2: status
+deactivate MH2
+MP2-->MP: status
+deactivate MP2
+deactivate MP
+
+|||
+@enduml
