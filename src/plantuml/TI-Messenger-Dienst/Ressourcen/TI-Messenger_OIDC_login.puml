@@ -30,7 +30,7 @@ autonumber "<b>(0)"
 
 actor us as "Versicherter"
   box <size:19>Endgerät</size> #WhiteSmoke
-  participant app as "Matrix-Web-App\n(Browser)"
+  participant app as "TI-M Client\n(Browser)"
   participant au as "Authenticator\ndes sektoralen IDP"
   end box
 participant pr as "TI-M Proxy"
@@ -79,6 +79,7 @@ activate app
       hs --> pr: 302 Redirect ""location:	https://sektoraler-idp.de/dialog/oauth?response_type=code&""\n\
       ""client_id=270006787810904&redirect_uri=https%3A%2F%2Fmatrix-client.homeserver-tim.de%2F_synapse%2Fclient%2Foidc%2Fcallback&""\n\
       ""scope=openid+email&state=ub8idYKc01s8LluOssFIuN3QQzZEoB&nonce=kL3jhzhuSdACVZjkN0B17FebXgqHoi""\n\
+      ""code_challenge=...&code_challenge_method=S256""\n\
       ""set-cookie: oidc_session=...; Max-Age=3600; Path=_synapse/client/oidc; HttpOnly; Secure; SameSite=None""\n\
       ""set-cookie: oidc_session_no_samesite=...; Max-Age=3600; Path=/_synapse/client/oidc; HttpOnly""\n\
       ""synapse-trace-id: 747f9ec899abf541""
@@ -87,10 +88,10 @@ activate app
        ""Content-Type: application/x-www-form-urlencoded""\n\
        ""response_type=code&client_id=270006787810904&state=ub8idYKc01s8LluOssFIuN3QQzZEoB&""\n\
        ""redirect_uri=https%3A%2F%2Fmatrix-client.homeserver-tim.de%2F_synapse%2Fclient%2Foidc%2Fcallback""\n\
-       ""&code_challenge=K2-ltc83acc4h0c9w6ESC_rEMTJ3bww-uCHaoeK1t8U&code_challenge_method=S256&scope=openid%20email&""
+       ""&code_challenge=...&code_challenge_method=S256&scope=openid%20email&""
       idp --> pr: 200 OK\n\
        ""Content-Type: application/json""\n\
-       ""{"request_uri":"urn:example:bwc4JK-ESC0w8acc191e-Y1LTC2,"expires_in": 90}""
+       ""{"request_uri":"urn:example:bwc4JK-ESC0w8acc191e-Y1LTC2","expires_in": 90}""
       |||
       pr --> app: 302 Redirect ""location:	https://sektoraler-idp.de/dialog/oauth?client_id=270006787810904&""\n\
        ""request_uri=urn%3Aexample%3Abwc4JK-ESC0w8acc191e-Y1LTC2""
@@ -124,6 +125,14 @@ activate app
       deactivate idp
     end 'group
     app -> hs: GET https://matrix-client.homeserver-tim.de/_synapse/client/oidc/callback?code=ac45be5243787b8845f6&state=2Mp3IrxFVlRIRzZrwZjOTyQ60OSF31
+    |||
+    hs -> idp: POST https://sektoraler-idp.de/token-endpoint\n\
+     ""Content-Type: application/x-www-form-urlencoded""\n\
+     ""authorization_code=code&code_verifier=...""
+    idp --> pr: 200 OK\n\
+     ""Content-Type: application/json""\n\
+     ""{"id_token":"...","expires_in": 90}""
+    |||
     hs --> app: 200 OK HTML Consent Page, Zugriff Matrix-Web-App auf Matrix Account\n\
     ""<a href="https://Matrix-Web-App/?loginToken=syl_RatSwLyrYlyDtjBrRpXH_1Yh7Or" class="primary-button">Continue</a>""
     |||
