@@ -115,7 +115,8 @@ activate app
       idp --> app: 302 Redirect ""location: https://matrix-client.homeserver-tim.de/_synapse/client/oidc/callback?code=example-auth-code&state=example-state""
       deactivate idp
     end 'group
-    app -> hs: GET https://matrix-client.homeserver-tim.de/_synapse/client/oidc/callback?code=example-auth-code&state=example-state
+    app -> hs: GET https://matrix-client.homeserver-tim.de/_synapse/client/oidc/callback?code=example-auth-code&state=example-state\n\
+     ""Cookie: oidc_session=...""
     |||
     hs -> idp: POST https://sektoraler-idp.de/token-endpoint\n\
      ""Content-Type: application/x-www-form-urlencoded""\n\
