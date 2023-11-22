@@ -64,7 +64,7 @@ activate app
     ""{"id":"oidc-sektoraler-idp","name":"Sektoraler-IDP","icon":"mxc://..","brand":"sektoraler-idp"},""\n\
     ""{"type":"m.login.token"}]}""
     |||
-    opt #LightYellow Registration
+    opt #LightYellow <size:16>Registration</size>
     app -> hs: POST https://matrix-client.homeserver-tim.de/_matrix/client/v3/register\n\
     ""{"initial_device_display_name":"TIM-Web-App: Firefox auf Windows"}""
     hs --> app: 401 Unauthorized ""{"session":"...","flows":[""\n\
