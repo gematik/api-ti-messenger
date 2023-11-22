@@ -35,8 +35,8 @@ actor us as "Versicherter"
   end box
 participant pr as "TI-M Proxy"
 participant hs as "Matrix\nHomeserver\n(Relying party für IDP)"
-participant mc as "Webserver der die\nTIM-Web-App ausliefert\n(Relying party für Homeserver)"
-participant idp as "Sektoraler IDP"
+participant mc as "Webserver\nliefert\nTIM-Web-App aus"
+participant idp as "Sektoraler\nIDP"
 
 |||
 
@@ -54,47 +54,56 @@ activate app
     |||
     hnote over app : ...
     |||
-    app -> hs: GET https://matrix-client.homeserver-tim.de/_matrix/client/v3/sync?filter={}&timeout=0&...
+    app -> hs: GET https://client.homeserver-tim.de/_matrix/client/v3/sync?filter={}&timeout=0&...
     hs --> app: 200 OK ""{...}""
     |||
   end 'group
   group <size:16>OIDC Login</size>
-    app -> hs: GET https://matrix-client.homeserver-tim.de/_matrix/client/v3/login
+    app -> hs: GET https://client.homeserver-tim.de/_matrix/client/v3/login
     hs --> app: 200 OK ""{"flows":[{"type":"m.login.sso","identity_providers":[""\n\
-    ""{"id":"oidc-sektoraler-idp","name":"Sektoraler-IDP","icon":"mxc://..","brand":"sektoraler-idp"},""\n\
+    ""{"id":"sektoraler-idp","name":"Sektoraler-IDP","icon":"mxc://..","brand":"sektoraler-idp"},""\n\
     ""{"type":"m.login.token"}]}""
     |||
     opt #LightYellow <size:16>Registration</size>
-    app -> hs: POST https://matrix-client.homeserver-tim.de/_matrix/client/v3/register\n\
+    app -> hs: POST https://client.homeserver-tim.de/_matrix/client/v3/register\n\
     ""{"initial_device_display_name":"TIM-Web-App: Firefox auf Windows"}""
     hs --> app: 401 Unauthorized ""{"session":"...","flows":[""\n\
     ""{"stages":["m.login.recaptcha","m.login.terms","m.login.email.identity"]}],""\n\
     """params":{"m.login.recaptcha":{"public_key":"..."},""\n\
     """m.login.terms":{"policies":{"privacy_policy":{"version":"1.0","en":{"name":"Terms and Conditions",""\n\
-    """url":"https://matrix-client.homeserver-tim.de/_matrix/consent?v=1.0"}}}}}}""
+    """url":"https://client.homeserver-tim.de/_matrix/consent?v=1.0"}}}}}}""
     |||
     end 'opt
-    app -> hs: GET https://matrix-client.homeserver-tim.de/_matrix/client/v3/login/sso/redirect/oidc-sektoraler-idp
+    |||
+    app -> hs: GET https://client.homeserver-tim.de/_matrix/client/v3/login/sso/redirect/sektoraler-idp
+    |||
     group #MistyRose <size:16>Changed behavior because OIDC PAR is required</size>
-      hs --> pr: 302 Redirect ""location:	https://sektoraler-idp.de/login/oauth?response_type=code&""\n\
-      ""client_id=example-client-id&redirect_uri=https%3A%2F%2Fmatrix-client.homeserver-tim.de%2F_synapse%2Fclient%2Foidc%2Fcallback&""\n\
-      ""scope=openid+email&state=ub8idYKc01s8LluOssFIuN3QQzZEoB&nonce=kL3jhzhuSdACVZjkN0B17FebXgqHoi""\n\
+      hs --> pr: 302 Redirect\n\
+      ""location:	https://sektoraler-idp.de/login/oauth?""\n\
+      ""response_type=code&""\n\
+      ""client_id=example-client-id&""\n\
+      ""redirect_uri=https%3A%2F%2Fclient.homeserver-tim.de%2F""\n\
+      ""_synapse%2Fclient%2Foidc%2Fcallback&""\n\
+      ""scope=openid+email""\n\
+      ""&state=example-state&nonce=example-nonce""\n\
       ""code_challenge=...&code_challenge_method=S256""\n\
-      ""set-cookie: oidc_session=...; Max-Age=3600; Path=_synapse/client/oidc; HttpOnly; Secure; SameSite=None""\n\
-      ""set-cookie: oidc_session_no_samesite=...; Max-Age=3600; Path=/_synapse/client/oidc; HttpOnly""\n\
+      ""set-cookie: oidc_session=...; ...""\n\
+      ""set-cookie: oidc_session_no_samesite=...; ...""\n\
       ""synapse-trace-id: 747f9ec899abf541""
       |||
       pr -> idp: POST https://sektoraler-idp.de/par\n\
        ""Content-Type: application/x-www-form-urlencoded""\n\
-       ""response_type=code&client_id=example-client-id&state=ub8idYKc01s8LluOssFIuN3QQzZEoB&""\n\
-       ""redirect_uri=https%3A%2F%2Fmatrix-client.homeserver-tim.de%2F_synapse%2Fclient%2Foidc%2Fcallback""\n\
-       ""&code_challenge=...&code_challenge_method=S256&scope=openid%20urn:telematik:display_name%20urn:telematik:given_name%20urn:telematik:versicherter&""
+       ""response_type=code&client_id=example-client-id&state=example-state&""\n\
+       ""redirect_uri=https%3A%2F%2Fclient.homeserver-tim.de%2F_synapse%2Fclient%2Foidc%2Fcallback""\n\
+       ""&code_challenge=...&code_challenge_method=S256&""\n\
+       ""scope=openid%20urn:telematik:display_name%20urn:telematik:given_name%20urn:telematik:versicherter&""
       activate idp
       idp --> pr: 200 OK\n\
        ""Content-Type: application/json""\n\
        ""{"request_uri":"urn:example:bwc4JK-ESC0w8acc191e-Y1LTC2","expires_in": 90}""
       |||
-      pr --> app: 302 Redirect ""location:	https://sektoraler-idp.de/login/oauth/authorize?request_uri=urn%3Aexample%3Abwc4JK-ESC0w8acc191e-Y1LTC2&""\n\
+      pr --> app: 302 Redirect\n\
+       ""location:	https://sektoraler-idp.de/login/oauth/authorize? _""\n\
        ""request_uri=urn%3Aexample%3Abwc4JK-ESC0w8acc191e-Y1LTC2""
       |||
     end 'group
@@ -112,16 +121,18 @@ activate app
       |||
       end 'group
       |||
-      idp --> app: 302 Redirect ""location: https://matrix-client.homeserver-tim.de/_synapse/client/oidc/callback?code=example-auth-code&state=example-state""
+      idp --> app: 302 Redirect ""location: https://client.homeserver-tim.de/_synapse/client/oidc/callback?code=example-auth-code&state=example-state""
       deactivate idp
+      |||
     end 'group
-    app -> hs: GET https://matrix-client.homeserver-tim.de/_synapse/client/oidc/callback?code=example-auth-code&state=example-state\n\
+    |||
+    app -> hs: GET https://client.homeserver-tim.de/_synapse/client/oidc/callback?code=example-auth-code&state=example-state\n\
      ""Cookie: oidc_session=...""
     |||
     hs -> idp: POST https://sektoraler-idp.de/token-endpoint\n\
      ""Content-Type: application/x-www-form-urlencoded""\n\
      ""authorization_code=code&code_verifier=...""
-    idp --> pr: 200 OK\n\
+    idp --> hs: 200 OK\n\
      ""Content-Type: application/json""\n\
      ""{"id_token":"...","expires_in": 90}""
     |||
@@ -131,7 +142,7 @@ activate app
     app -> mc: GET https://TIM-Web-App/?loginToken=example-matrix-login-token
     mc --> app: 200 OK HTML ""...""
     |||
-    app -> hs: POST https://matrix-client.homeserver-tim.de/_matrix/client/v3/login\n\
+    app -> hs: POST https://client.homeserver-tim.de/_matrix/client/v3/login\n\
     ""{"token":"example-matrix-login-token",""\n\
     """initial_device_display_name":"TIM-Web-App: Firefox on macOS",""\n\
     """type":"m.login.token"}""
@@ -140,7 +151,7 @@ activate app
     """access_token":"example-matrix-access-token",""\n\
     """home_server":"homeserver-tim.de",""\n\
     """device_id":"example-device-id",""\n\
-    """well_known":{"m.homeserver":{"base_url":"https://matrix-client.homeserver-tim.de/"}}}""
-
+    """well_known":{"m.homeserver":{"base_url":"https://client.homeserver-tim.de/"}}}""
+    |||
   end 'group
 @enduml
