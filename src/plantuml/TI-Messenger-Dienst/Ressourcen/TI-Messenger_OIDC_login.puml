@@ -29,12 +29,14 @@ ActorFontSize 20
 autonumber "<b>(0)"
 
 actor us as "Versicherter"
-  box <size:19>Endgerät</size> #WhiteSmoke
+box <size:19>Endgerät</size> #WhiteSmoke
   participant app as "TI-M Client\n(Browser)"
   participant au as "Authenticator\ndes sektoralen IDP"
-  end box
-participant pr as "TI-M Proxy"
-participant hs as "Matrix\nHomeserver\n(Relying party für IDP)"
+end box
+box <size:19>TI-Messenger Service</size> #WhiteSmoke
+  participant pr as "TI-M Proxy"
+  participant hs as "Matrix\nHomeserver\n(Relying party für IDP)"
+end box
 participant mc as "Webserver\nliefert\nTIM-Web-App aus"
 participant idp as "Sektoraler\nIDP"
 
