@@ -118,7 +118,7 @@ activate app
         activate au
         app -> us: Consent Page
         us --> app: Approval
-        app --> idp: Response
+        app -> idp: Response
       deactivate au
       |||
       end 'group
