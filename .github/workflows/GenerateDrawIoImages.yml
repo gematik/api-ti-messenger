@@ -1,0 +1,51 @@
+name: GenerateDrawIoImages
+
+on:
+  push:
+    branches: 
+    - '**'
+    paths: 
+    - 'src/drawio/**'
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+           
+      # creates png files from draw io image files
+      - name: Export drawio files as png
+        uses: rlespinasse/drawio-export-action@v2
+        with:
+          path: ./src/drawio/ 
+          output: .
+          format: png
+          action-mode: all
+
+      # creates svg files from draw io image files
+      - name: Export drawio files as svg 
+        uses: rlespinasse/drawio-export-action@v2
+        with:
+          path: ./src/drawio/ 
+          output: .
+          format: svg
+          action-mode: all
+
+      # copies the created png & svg files to the images/diagrams folder and deletes the drawio files
+      - name: Copy draw io
+        run: |
+          imagedir=images/diagrams
+          cp -RT ./src/drawio $imagedir
+          find $imagedir -name '*.drawio' -exec rm -rv {} \;
+          tree ./images
+      
+      # add and commit the new generated files
+      - name: Add & Commit
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: 'images/diagrams/'

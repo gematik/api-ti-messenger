@@ -1,0 +1,30 @@
+@startuml
+title Setzen von Berechtigungen im Client
+skinparam ConditionEndStyle hline
+start
+:FDV installieren;
+:Berechtigungen einrichten;
+
+if ("Allow all" or "nobody") then (Allow all)
+  if(Beschränkungen einrichten) then (Ja)
+    if(IgnoredUser-Liste bearbeiten) then (Hinzufügen)
+    :User/Gruppe hinzufügen;
+    else (Entfernen)
+    :User/Gruppe entfernen;
+    endif
+  else(Nein)
+  endif
+else (nobody)
+  if(Erlaubnisse einrichten) then (Ja)
+    if(AllowedUser-Liste bearbeiten) then (Hinzufügen)
+    :User/Gruppe hinzufügen;
+    else (Entfernen)
+    :User/Gruppe entfernen;
+    endif
+  else(Nein)
+  endif
+endif
+:Konfiguration auf dem Server sichern;
+stop
+
+@enduml
