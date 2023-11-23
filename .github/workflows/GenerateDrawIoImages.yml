@@ -1,11 +1,11 @@
 name: GenerateDrawIoImages
 
 on:
-  push:
-    branches: 
-    - '**'
-    paths: 
-    - 'src/drawio/**'
+  #push:
+   #branches: 
+    #- '**'
+   # paths: 
+    #- 'src/drawio/**'
 
   workflow_dispatch:
 
