@@ -84,8 +84,7 @@ activate app
       ""location:	https://sektoraler-idp.de/login/oauth?""\n\
       ""response_type=code&""\n\
       ""client_id=example-client-id&""\n\
-      ""redirect_uri=https%3A%2F%2Fclient.homeserver-tim.de%2F""\n\
-      ""_synapse%2Fclient%2Foidc%2Fcallback&""\n\
+      ""redirect_uri=https%3A%2F%2Fclient.homeserver-tim.de%2F_synapse%2Fclient%2Foidc%2Fcallback&""\n\
       ""scope=openid+urn:telematik:display_name+urn:telematik:given_name+urn:telematik:versicherter""\n\
       ""&state=example-state&nonce=example-nonce""\n\
       ""code_challenge=...&code_challenge_method=S256""\n\
@@ -97,7 +96,7 @@ activate app
        ""response_type=code&client_id=example-client-id&state=example-state&""\n\
        ""redirect_uri=https%3A%2F%2Fclient.homeserver-tim.de%2F_synapse%2Fclient%2Foidc%2Fcallback""\n\
        ""&code_challenge=...&code_challenge_method=S256&""\n\
-       ""scope=openid%20urn:telematik:display_name%20urn:telematik:given_name%20urn:telematik:versicherter&""
+       ""scope=openid+urn:telematik:display_name+urn:telematik:given_name+urn:telematik:versicherter&""
       activate idp
       idp --> pr: 200 OK\n\
        ""Content-Type: application/json""\n\
