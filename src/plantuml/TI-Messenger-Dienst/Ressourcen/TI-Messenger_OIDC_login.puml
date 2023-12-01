@@ -48,18 +48,6 @@ activate app
   app -> mc: Lade Matrix-Web-Client
   activate mc
   mc --> app: Webanwendung
-  group #LightGray <size:16>Matrix Protocol ... (Key exchange etc)</size>
-    app -> hs:""GET https://homeserver-tim.de/.well-known/matrix/client""
-    activate hs
-    activate pr
-    hs --> app: 200 OK ...
-    |||
-    hnote over app : ...
-    |||
-    app -> hs: GET https://client.homeserver-tim.de/_matrix/client/v3/sync?filter={}&timeout=0&...
-    hs --> app: 200 OK ""{...}""
-    |||
-  end 'group
   group <size:16>OIDC Login</size>
     app -> hs: GET https://client.homeserver-tim.de/_matrix/client/v3/login
     hs --> app: 200 OK ""{"flows":[{"type":"m.login.sso","identity_providers":[""\n\
