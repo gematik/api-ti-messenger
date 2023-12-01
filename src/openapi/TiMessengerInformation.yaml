@@ -59,9 +59,14 @@ paths:
         default:
           $ref: "#/components/responses/DefaultResponse"
 
-  /domain/{iknumber}:
+  /domain/findByIk:
     parameters:
-      - $ref: "#/components/parameters/iknumber"
+    - in: query
+      name: iknumber
+      description: "IK number to lookup the domain for."
+      required: true
+      schema:
+        type: string
     get:
       tags:
         - lookUpDomain
@@ -85,15 +90,6 @@ paths:
 
 # Descriptions of common components
 components:
-  parameters:
-    iknumber:
-      name: iknumber
-      in: path
-      description: "IK number to lookup the domain for."
-      required: true
-      schema:
-        type: string
-
   responses:
     DefaultResponse:
       description: "The default error response"
