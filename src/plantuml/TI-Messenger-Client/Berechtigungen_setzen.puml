@@ -5,9 +5,9 @@ start
 :FDV installieren;
 :Berechtigungen einrichten;
 
-if ("Allow all" or "nobody") then (Allow all)
+if ("Allow all" or "Block all") then (Allow all)
   if(Beschränkungen einrichten) then (Ja)
-    if(IgnoredUser-Liste bearbeiten) then (Hinzufügen)
+    if(BlockedUser-Liste bearbeiten) then (Hinzufügen)
     :User/Gruppe hinzufügen;
     else (Entfernen)
     :User/Gruppe entfernen;
