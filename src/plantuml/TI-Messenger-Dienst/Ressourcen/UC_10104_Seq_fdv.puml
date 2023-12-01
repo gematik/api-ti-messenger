@@ -37,15 +37,16 @@ ActorFontName Aapex
     participant C1 as "TI-Messenger-\nClient A" #AliceBlue
     box <size:18>Messenger-Service</size> #WhiteSmoke
       participant MP as "Messenger-\nProxy"
-      participant MH as "Matrix-Homeserver \n(inklusive Nutzerverzeichnis)"
+      participant MH as "Matrix-\nHomeserver"
     end box
-    participant C2 as "TI-Messenger-\nClient B"#TECHNOLOGY
+    participant C2 as "TI-Messenger-\nClient B" #AliceBlue
     actor U2 as "Akteur - B"
     
 |||
 note over U1, U2: \n<size:17>Die Akteure sind auf dem selben Messenger-Service angemeldet und im Besitz eines zugelassenen TI-Messenger-Clients.\n<size:17>Ein Chatraum wurde durch den Einladenen eingerichtet.</size>\n
 |||
     U1->C1: Akteur B einladen
+    activate C1
     C1->MP: POST  /_matrix/client/v3/rooms/{roomId}/invite
     activate MP
     |||
@@ -72,18 +73,21 @@ note over U1, U2: \n<size:17>Die Akteure sind auf dem selben Messenger-Service a
         activate MH
       MH->MH: Invite verarbeiten
       |||
-          MH->MP: Invite Request
+          MH-->MP: Invite Request
           MP->C2: HTTP(S) Forward
-            activate C2 #TECHNOLOGY
+            activate C2 
           C2->U2: Einladung anzeigen
           U2-->C2: Einladung annehmen
-          C2->MP: Einladung angenommen
+          C2-->MP: Einladung angenommen
+          deactivate C2
           |||
-          MP-->MH: HTTP(S) Forward
+          MP->MH: HTTP(S) Forward
           MH-->MP: Status
             deactivate MH
           MP-->C1: Status
+          deactivate MP
           C1-->U1: Nutzer in den \nRaum hinzugefügt
+          deactivate C1
         |||
         end
  |||
