@@ -14,7 +14,7 @@ if ("Allow all" or "Block all") then (Allow all)
     endif
   else(Nein)
   endif
-else (nobody)
+else (Block all)
   if(Erlaubnisse einrichten) then (Ja)
     if(AllowedUser-Liste bearbeiten) then (Hinzufügen)
     :User/Gruppe hinzufügen;
