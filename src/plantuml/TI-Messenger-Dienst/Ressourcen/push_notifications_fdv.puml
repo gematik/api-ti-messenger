@@ -1,0 +1,74 @@
+/' 
+# TI-Messenger 1.1
+# TI-Messenger-Dienst
+# UC - 10064
+# Sequence Diagram
+# Name: Föderationszugehörigkeit eines Messenger-Service prüfen
+'/
+
+@startuml
+skinparam sequenceMessageAlign direction
+skinparam minClassWidth 200
+skinparam BoxPadding 1
+skinparam sequenceReferenceHeaderBackgroundColor palegreen
+scale max 2048 width
+
+skinparam sequence {
+ArrowColor black
+ArrowFontSize 17
+ActorBorderColor black
+LifeLineBorderColor black
+LifeLineBackgroundColor Gainsboro
+
+ParticipantBorderColor Motivation
+ParticipantBackgroundColor Motivation
+'ParticipantFontName Impact
+ParticipantFontSize 20
+ParticipantFontColor black
+ParticipantBorderColor Black
+ParticipantBackgroundColor MOTIVATION
+
+ActorBackgroundColor Gainsboro
+ActorFontColor black
+ActorFontSize 20
+'ActorFontName Aapex
+}
+
+autonumber
+    
+    actor v as "Versicherter"
+    participant fdv as "Frontend des Versicherten"
+    'box <size:18>Messenger-Service\n#WhiteSmoke
+    participant pa as "Push-Anbieter"
+    participant pg as "Push-Gateway"
+    participant fd as "Fachdienst"
+    'end box
+
+|||
+  activate fd
+  v->fdv: installiert FdV auf dem Smartphone
+  activate fdv
+  fdv->pa: registriert sich beim Push-Anbieter
+  activate pa
+  pa-->fdv: AppToken
+  deactivate pa
+  fdv->fd: konfiguriert zu verwendendes Gateway und App-Token
+  fd-->fdv: Konfiguration übernommen
+|||
+== <font color=green><size:16>Vom Fachdienst wird eine Benachrichtigung des Versicherten ausgelöst</size></font>  ==
+fd->pg: Benachrichtigung (EventID 4711) für AppToken 
+activate pg
+pg->pa: Benachrichtigung (EventID 4711) für AppToken
+activate pa
+pa-->pg: Response
+pg-->fd:Response
+deactivate pg
+pa->fdv: Benachrichtigung (EventID 4711)
+deactivate pa
+fdv->fd: Abfrage der Daten zu EventID 4711
+fd-->fdv:Verschlüsselte Benachrichtigungsinhalte
+fdv->fdv:Entschlüssele Inhalte
+fdv->fdv:erzeuge Anwenderbenachrichtigung mit\n den entschlüsselten Inhalten
+fdv->v:Zeige Benachrichtigung
+
+@enduml
