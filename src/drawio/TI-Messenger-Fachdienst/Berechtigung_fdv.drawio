@@ -28,7 +28,7 @@
                 <mxCell id="6" value="Berechtigungsprüfung" style="html=1;strokeColor=#666666;fillColor=#f5f5f5;fontFamily=Tahoma;fontSize=14;align=center;strokeWidth=2;fontColor=#333333;" parent="12" vertex="1">
                     <mxGeometry x="30" y="40" width="150" height="40" as="geometry"/>
                 </mxCell>
-                <mxCell id="11" value="persönliche Kontakte" style="html=1;strokeColor=#666666;fillColor=#f5f5f5;fontFamily=Tahoma;fontSize=14;align=center;strokeWidth=2;fontColor=#333333;" parent="12" vertex="1">
+                <mxCell id="11" value="Freigabeliste" style="html=1;strokeColor=#666666;fillColor=#f5f5f5;fontFamily=Tahoma;fontSize=14;align=center;strokeWidth=2;fontColor=#333333;" parent="12" vertex="1">
                     <mxGeometry x="30" y="100" width="150" height="40" as="geometry"/>
                 </mxCell>
                 <mxCell id="17" style="edgeStyle=none;html=1;entryX=0;entryY=0.213;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" target="8" edge="1">
@@ -70,20 +70,14 @@
                 <mxCell id="24" value="Berechtigungsstufe 1&amp;nbsp;&lt;br&gt;(Föderationsprüfung)" style="html=1;strokeColor=#666666;fillColor=#f5f5f5;fontFamily=Tahoma;fontSize=14;align=center;strokeWidth=2;fontColor=#333333;" parent="1" vertex="1">
                     <mxGeometry x="-3780" y="567.5" width="150" height="40" as="geometry"/>
                 </mxCell>
-                <mxCell id="25" value="Kontaktliste" style="html=1;strokeColor=#666666;fillColor=#f5f5f5;fontFamily=Tahoma;fontSize=14;align=center;strokeWidth=2;fontColor=#333333;" parent="1" vertex="1">
-                    <mxGeometry x="-3550" y="630" width="150" height="40" as="geometry"/>
-                </mxCell>
                 <mxCell id="28" value="Berechtigungsprüfung" style="html=1;strokeColor=#666666;fillColor=#f5f5f5;fontFamily=Tahoma;fontSize=14;align=center;strokeWidth=2;fontColor=#333333;" parent="1" vertex="1">
                     <mxGeometry x="-4105" y="470" width="150" height="40" as="geometry"/>
                 </mxCell>
-                <mxCell id="31" value="Berechtigungs-&lt;br&gt;konfiguration" style="html=1;strokeColor=#666666;fillColor=#f5f5f5;fontFamily=Tahoma;fontSize=14;align=center;strokeWidth=2;fontColor=#333333;" parent="1" vertex="1">
+                <mxCell id="31" value="Allow-/Blocklist" style="html=1;strokeColor=#666666;fillColor=#f5f5f5;fontFamily=Tahoma;fontSize=14;align=center;strokeWidth=2;fontColor=#333333;" parent="1" vertex="1">
                     <mxGeometry x="-3550" y="567.5" width="150" height="40" as="geometry"/>
                 </mxCell>
-                <mxCell id="32" value="Kontaktliste" style="html=1;strokeColor=#666666;fillColor=#f5f5f5;fontFamily=Tahoma;fontSize=14;align=center;strokeWidth=2;fontColor=#333333;" vertex="1" parent="1">
+                <mxCell id="32" value="Allow-/Blocklist" style="html=1;strokeColor=#666666;fillColor=#f5f5f5;fontFamily=Tahoma;fontSize=14;align=center;strokeWidth=2;fontColor=#333333;" vertex="1" parent="1">
                     <mxGeometry x="-4105" y="520" width="150" height="40" as="geometry"/>
-                </mxCell>
-                <mxCell id="33" value="Kontaktliste" style="html=1;strokeColor=#666666;fillColor=#f5f5f5;fontFamily=Tahoma;fontSize=14;align=center;strokeWidth=2;fontColor=#333333;" vertex="1" parent="1">
-                    <mxGeometry x="-4105" y="90" width="150" height="40" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>
