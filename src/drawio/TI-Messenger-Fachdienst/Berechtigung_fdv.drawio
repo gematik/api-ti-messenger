@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="rDKWHRp-vBeroj9mGW1Y" name="Overview">
-        <mxGraphModel dx="5035" dy="1181" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="5069" dy="1181" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -70,7 +70,7 @@
                 <mxCell id="24" value="Berechtigungsstufe 1&amp;nbsp;&lt;br&gt;(Föderationsprüfung)" style="html=1;strokeColor=#666666;fillColor=#f5f5f5;fontFamily=Tahoma;fontSize=14;align=center;strokeWidth=2;fontColor=#333333;" parent="1" vertex="1">
                     <mxGeometry x="-3780" y="567.5" width="150" height="40" as="geometry"/>
                 </mxCell>
-                <mxCell id="28" value="Berechtigungsprüfung" style="html=1;strokeColor=#666666;fillColor=#f5f5f5;fontFamily=Tahoma;fontSize=14;align=center;strokeWidth=2;fontColor=#333333;" parent="1" vertex="1">
+                <mxCell id="28" value="Berechtigungsstufe 2" style="html=1;strokeColor=#666666;fillColor=#f5f5f5;fontFamily=Tahoma;fontSize=14;align=center;strokeWidth=2;fontColor=#333333;" parent="1" vertex="1">
                     <mxGeometry x="-4105" y="470" width="150" height="40" as="geometry"/>
                 </mxCell>
                 <mxCell id="31" value="Allow-/Blocklist" style="html=1;strokeColor=#666666;fillColor=#f5f5f5;fontFamily=Tahoma;fontSize=14;align=center;strokeWidth=2;fontColor=#333333;" parent="1" vertex="1">
