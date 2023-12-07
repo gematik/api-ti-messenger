@@ -85,11 +85,11 @@ else  <size:16>Beide Teilnehmer sind Teil der Föderation und nur maximal einer 
   MC2->MC2: Extrahieren der Invite-Events
   MC2->MC2: Prüfung, ob die Einladung erlaubt ist
 
-  alt#LightGrey #MOTIVATION <size:16>Der Anwender hat "allow all" konfiguriert und der Einladende\n<size:16> ist auf der BlockedUser-Liste(Direkt oder als Teil einer Gruppe)</size>
+  alt#LightGrey #MOTIVATION <size:16>Der Anwender hat "allow all" konfiguriert und der Einladende\n<size:16> ist auf der BlockedUser-Liste (Direkt oder als Teil einer Gruppe)</size>
     |||
-    MC2->MC2:<font color=red>Einladung is abzulehnen</font>
+    MC2->MC2:<font color=red>Einladung ist abzulehnen</font>
     |||
-  else <size:16>Der Anwender hat "block all" konfiguriert und der Einladende\n<size:16> ist nicht auf der AllowedUser-Liste(Direkt oder als Teil einer Gruppe)</size>
+  else <size:16>Der Anwender hat "block all" konfiguriert und der Einladende\n<size:16> ist nicht auf der AllowedUser-Liste (Direkt oder als Teil einer Gruppe)</size>
     |||
     MC2->MC2:<font color=red>Einladung ist abzulehnen</font>
     |||

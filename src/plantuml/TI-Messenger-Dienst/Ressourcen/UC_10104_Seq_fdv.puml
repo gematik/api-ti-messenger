@@ -43,7 +43,7 @@ ActorFontName Aapex
     actor U2 as "Akteur - B"
     
 |||
-note over U1, U2: \n<size:17>Die Akteure sind auf dem selben Messenger-Service angemeldet und im Besitz eines zugelassenen TI-Messenger-Clients.\n<size:17>Ein Chatraum wurde durch den Einladenen eingerichtet.</size>\n
+note over U1, U2: \n<size:17>Die Akteure sind auf demselben Messenger-Service angemeldet und im Besitz eines zugelassenen TI-Messenger-Clients.\n<size:17>Ein Chatraum wurde durch den Einladenen eingerichtet.</size>\n
 |||
     U1->C1: Akteur B einladen
     activate C1
