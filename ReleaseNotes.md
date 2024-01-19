@@ -7,6 +7,7 @@
 ### changed
 
 - Testdriver api: Added optional endpoint for clean up system
+- Testdriver api: Added roomVersion to room
  
 ## Release 1.1.1 (2023-08-25)
  
