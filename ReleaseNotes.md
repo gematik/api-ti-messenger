@@ -1,13 +1,18 @@
-<img align="right" width="250" height="47" src="images/meta/gematik_logo.svg"/> <br/>    
+<img align="right" width="250" height="47" src="images/meta/gematik_logo.svg" alt="Gematik Logo"/> <br/>    
  
 # Release Notes api-ti-messenger
+
+## Hotfix 1.1.1-4
+
+### changed
+
+- Testdriver api: Added roomVersion to room
 
 ## Hotfix 1.1.1-3
 
 ### changed
 
 - Testdriver api: Added optional endpoint for clean up system
-- Testdriver api: Added roomVersion to room
  
 ## Release 1.1.1 (2023-08-25)
  
