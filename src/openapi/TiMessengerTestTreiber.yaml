@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: TiMessengerTestDriver
   description: REST interface to automate the test of a TI-Messenger client implementation.
-  version: 0.9.3
+  version: 0.9.4
   contact:
     name: gematik GmbH
     email: software-development@gematik.de
@@ -2188,6 +2188,10 @@ components:
           type: string
           description: "The room identifier. Must be returned in response to a createRoom request. Is used to identify a specific room."
           example: "!dowjfsdkjfskjdfsd:gematik.de"
+        roomVersion:
+          type: string
+          description: "The room version"
+          example: "10"
 
     RoomMembershipState:
       description: "An accounts membership state for a room"
