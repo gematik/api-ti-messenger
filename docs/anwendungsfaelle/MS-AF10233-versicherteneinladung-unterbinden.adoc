@@ -1,0 +1,41 @@
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+:imagesdir: ../../images
+
+image:meta/gematik_logo.svg[width=70%]
+
+=== AF_10233 - Versicherteneinladung unterbinden
+Dieser Anwendungsfall erweitert die Prüflogik für die Stufe 1 der in der TI-M_FD_Basis definierten Prüfung Client-Server und Server-Server Kommunikation, neben der Föderationsprüfung ist zusätzlich zu prüfen, dass der Einladende und der Eingeladene nicht der Gruppe Versicherte zuzuordnen sind. Für die Prüfung der Zugehörigkeit verwendet der Messenger-Proxy die Information isInsurance aus der Föderationsliste.
+
+.Anwendungsfallbeschreibung
+[%collapsible%open]
+====
+[caption=]
+Versicherteneinladung unterbinden
+[%header, cols="1,1"]
+|===
+| |Beschreibung
+|*Auslöser* |Anfrage am Messenger Proxy
+|*Komponenten* a|
+              * Messenger-Proxy,
+|*Vorbedingungen* a| Die Domain wurde in die Föderationsliste eingetragen und als Versichertendomain markiert.
+|*Eingangsdaten* |Matrix-Invite-Event
+|*Ergebnis* a|Ablehnung der Einladung, wenn Sender und der Empfänger beide Akteure in der Rolle Versicherter sind.
+Weiterleitung der Einladung, wenn der Sender oder der Empfänger kein Akteur in der Rolle Versicherter ist.
+|===
+====
+.Sequenzdiagramm
+[%collapsible%open]
+====
+++++
+<p align="center">
+  <img width="80%" src=../../images/diagrams/TI-Messenger-Dienst/Ressourcen/UC_10233_Seq.svg>
+</p>
+++++
+====
