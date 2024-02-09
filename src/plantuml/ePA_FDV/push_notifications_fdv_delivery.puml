@@ -1,0 +1,59 @@
+@startuml
+skinparam sequenceMessageAlign direction
+skinparam minClassWidth 200
+skinparam BoxPadding 1
+skinparam sequenceReferenceHeaderBackgroundColor palegreen
+scale max 2048 width
+
+skinparam sequence {
+ArrowColor black
+ArrowFontSize 17
+ActorBorderColor black
+LifeLineBorderColor black
+LifeLineBackgroundColor Gainsboro
+
+ParticipantBorderColor Motivation
+ParticipantBackgroundColor Motivation
+'ParticipantFontName Impact
+ParticipantFontSize 20
+ParticipantFontColor black
+ParticipantBorderColor Black
+ParticipantBackgroundColor MOTIVATION
+
+ActorBackgroundColor Gainsboro
+ActorFontColor black
+ActorFontSize 20
+'ActorFontName Aapex
+}
+
+autonumber
+    
+    actor v as "Versicherter"
+    participant fdv [
+      Frontend des Versicherten
+      ----
+      Inhaber eines AppTokens
+    ]
+    participant pa as "Push-Anbieter"
+    participant pg as "Push-Gateway"
+    participant fd as "Fachdienst"
+
+activate fd
+fd->pg: Benachrichtigung (EventID) \nfür anbieterspezifisches AppToken 
+activate pg
+pg->pa: Benachrichtigung (EventID) \nfür anbieterspezifisches AppToken
+activate pa
+pa-->pg: :Response
+pg-->fd: :Response
+deactivate pg
+pa->fdv: Benachrichtigung (EventID)
+activate fdv
+deactivate pa
+fdv->fd: Abfrage der Daten zu Event(EventID)
+fd-->fdv: :Verschlüsselte Benachrichtigungsinhalte
+deactivate fd
+fdv->fdv:Entschlüssele \n(Verschlüsselte Benachrichtigungsinhalte)
+fdv->fdv:erzeuge Anwenderbenachrichtigung mit\n den entschlüsselten Inhalten
+fdv->v:Zeige Benachrichtigung
+
+@enduml
