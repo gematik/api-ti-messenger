@@ -68,7 +68,7 @@ note over U1, U2: \n<size:17>Die Akteure sind auf dem selben Messenger-Service a
     C1->MP: POST /_matrix/client/r0/rooms/\n{roomId}/invite (roomId)
     
     |||
-      ref over MP, MP: <size:17>**AF_10064** - Föderationszugehörigkeit eines Messenger-Service prüfen</size>\n 
+      ref over MP, MP: <size:17>Stufe 1 - Prüfung \n<size:17>Client-Server Kommunikation</size>\n 
     |||
     
     alt#LightGrey #AliceBlue <size:16>Matrix-Domain nicht in der Föderation enthalten</size>

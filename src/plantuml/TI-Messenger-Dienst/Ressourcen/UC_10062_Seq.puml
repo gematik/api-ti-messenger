@@ -62,14 +62,12 @@ note over U1, U2: \n<size:17>Die Akteure sind auf dem selben Messenger-Service a
   MH1->MP1: Matrix-Request
     deactivate MH1
     |||
-    ref over MP1, MP1: <size:17>**AF_10064** - \tFöderationszugehörigkeit eines \n<size:17>        \tMessenger-Service prüfen</size>\n 
-    note left: <size:16>Stufe 1 - Prüfung gemäß </size>\n<size:16>Server-Server Kommunikation</size>
+    ref over MP1, MP1: <size:17>Stufe 1 - Prüfung \n<size:17>Server-Server Kommunikation</size>\n    
   |||  
   MP1-[#red]>MP2: HTTP(S) Forward
     activate MP2
   |||
-  ref over MP2, MP2: <size:17>**AF_10064** - \tFöderationszugehörigkeit eines \n<size:17>        \tMessenger-Service prüfen</size>\n 
-  note right: <size:16>Stufe 1 - Prüfung gemäß </size>\n<size:16>Server-Server Kommunikation</size>
+  ref over MP2, MP2: <size:17>Stufe 1 - Prüfung \n<size:17>Server-Server Kommunikation</size>\n 
   |||
   MP2-[#red]>MH2: HTTP(S) Foward
   |||

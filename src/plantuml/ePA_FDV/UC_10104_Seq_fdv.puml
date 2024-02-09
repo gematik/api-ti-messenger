@@ -50,25 +50,12 @@ note over U1, U2: \n<size:17>Die Akteure sind auf demselben Messenger-Service an
     C1->MP: POST  /_matrix/client/v3/rooms/{roomId}/invite
     activate MP
     |||
-      MP->MP: Prüfe auf Föderationszugehörigkeit
-      MP->MP: <font color=red> <b>NEU: Prüfe auf Versichertenzugehörigkeit 
+      MP->MP: Prüfungen Stufe 1\nClient-Server-Proxy
     |||
+    break <size:16>Prüfung der Stufe 1 ist fehlgeschlagen</size> 
+    MP->C1: <font color=red>Verbindung wird abgelehnt</font>
+    end
     
-    alt#LightGrey #LightPink <size:16>Matrix-Domain nicht in der Föderation enthalten</size>
-      |||
-      MP-->C1: HTTP 401 \nUnauthorized
-      |||
-      C1-->U1: Einladung nicht \nerfolgreich
-      |||
-    
-      else <size:16>Matrix-Domain in der Föderation enthalten & beide Akteure sind Versicherte</size>
-      |||
-      MP-->C1: HTTP 401 \nUnauthorized
-      |||
-      C1-->U1: Einladung nicht \nerfolgreich
-      |||
-
-      else #AliceBlue <size:16>Matrix-Domain in der Föderation enthalten und nur maximal einer der Akteure ist Versicherter
       MP->MH: HTTP(S) Foward
         activate MH
       MH->MH: Invite verarbeiten
@@ -89,6 +76,5 @@ note over U1, U2: \n<size:17>Die Akteure sind auf demselben Messenger-Service an
           C1-->U1: Nutzer in den \nRaum hinzugefügt
           deactivate C1
         |||
-        end
  |||
 @enduml
