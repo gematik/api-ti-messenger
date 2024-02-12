@@ -32,15 +32,15 @@ skinparam sequence {
   ActorFontSize 20
   ActorFontName Aapex
 }
-box <size:18>Messenger-Service des Einladenden\n #WhiteSmoke
+box <size:18>Messenger-Service\ndes einladenden Akteurs\n #WhiteSmoke
 participant MS as "Messenger-Service"
 end box
-box <size:18>Messenger-Service des Eingeladenen\n #WhiteSmoke
+box <size:18>Messenger-Service\ndes eingeladenen Akteurs\n #WhiteSmoke
 participant MP2 as "Messenger-\nProxy"
 participant MH2 as "Matrix-\nHomeserver"
 participant PG as "Push-\nDienst"
 end box
-box <size:18>Messenger Client des Eingeladenen\n #WhiteSmoke
+box <size:18>Messenger Client\ndes eingeladenen Akteurs\n #WhiteSmoke
 participant MC2 as "Messenger-Client"
 end box
 MS->MP2:Matrix-Invite-Event
