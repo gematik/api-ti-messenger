@@ -4,6 +4,7 @@ skinparam minClassWidth 200
 skinparam BoxPadding 1
 skinparam sequenceReferenceHeaderBackgroundColor palegreen
 scale max 2048 width
+skinparam maxMessageSize 300
 
 skinparam sequence {
 ArrowColor black
@@ -14,7 +15,6 @@ LifeLineBackgroundColor Gainsboro
 
 ParticipantBorderColor Motivation
 ParticipantBackgroundColor Motivation
-'ParticipantFontName Impact
 ParticipantFontSize 20
 ParticipantFontColor black
 ParticipantBorderColor Black
@@ -23,7 +23,6 @@ ParticipantBackgroundColor MOTIVATION
 ActorBackgroundColor Gainsboro
 ActorFontColor black
 ActorFontSize 20
-'ActorFontName Aapex
 }
 
 autonumber
@@ -39,17 +38,18 @@ autonumber
     participant fd as "Fachdienst"
 
 activate fd
-fd->pg: Benachrichtigung (EventID) \nfür anbieterspezifisches AppToken 
+fd->pg: Benachrichtigung \nfür anbieterspezifisches AppToken(EventID)
 activate pg
-pg->pa: Benachrichtigung (EventID) \nfür anbieterspezifisches AppToken
+pg->pa: Benachrichtigung \nfür anbieterspezifisches AppToken(EventID)
 activate pa
-pa-->pg: :Response
-pg-->fd: :Response
+pa-->pg: Response
+pg-->fd: Response
 deactivate pg
-pa->fdv: Benachrichtigung (EventID)
+pa->pa: ermittle Empfänger(anbieterspezifisches AppToken):SenderID, AppID
+pa->fdv: Benachrichtigung an Empfänger(EventID, SenderID, AppID)
 activate fdv
 deactivate pa
-fdv->fd: Abfrage der Daten zu Event(EventID)
+fdv->fd: Abfrage der Daten zu Event(EventID, anbieterspezifisches AppToken)
 fd-->fdv: :Verschlüsselte Benachrichtigungsinhalte
 deactivate fd
 fdv->fdv:Entschlüssele \n(Verschlüsselte Benachrichtigungsinhalte)
