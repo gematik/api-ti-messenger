@@ -2,6 +2,12 @@
  
 # Release Notes api-ti-messenger
 
+## Hotfix 1.1.1-5
+
+### added
+
+- Additional examples and documentation for using the url format of the matrix id in FHIR directory.
+
 ## Hotfix 1.1.1-4
 
 ### changed
