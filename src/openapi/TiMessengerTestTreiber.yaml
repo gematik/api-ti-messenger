@@ -783,10 +783,10 @@ paths:
             type: string
         - name: mxId
           in: query
-          description: "MxId of account in url format"
+          description: "MxId of account"
           schema:
             type: string
-            example: matrix:u/someone:gematik.de
+            example: @someone:gematik.de
 
       responses:
         "200":
@@ -2320,14 +2320,14 @@ components:
             $ref: "#/components/schemas/HomeserverSearchResult"
 
     HomeserverSearchResult:
-      description: "A flat description of an endpoint with belonging healthcare-serviceand organization"
+      description: "A flat description of an endpoint with belonging healthcare-service and organization"
       readOnly: true
       type: object
       properties:
         mxId:
-          description: "The Matrix-ID of an account in url format"
+          description: "The Matrix-ID of an account"
           type: string
-          example: "matrix:u/someone:gematik.de"
+          example: "@someone:gematik.de"
         displayName:
           description: "The displayName"
           type: string
