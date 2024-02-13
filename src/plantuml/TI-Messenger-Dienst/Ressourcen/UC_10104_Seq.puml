@@ -1,8 +1,5 @@
 /' 
-# TI-Messenger 1.1
-# TI-Messenger-Dienst
 # UC - 10104
-# Sequence Diagram
 # Name: Einladung von Akteuren innerhalb einer Organisation
 '/
 
@@ -22,7 +19,6 @@ LifeLineBackgroundColor Gainsboro
 
 ParticipantBorderColor Motivation
 ParticipantBackgroundColor Motivation
-ParticipantFontName Impact
 ParticipantFontSize 20
 ParticipantFontColor black
 ParticipantBorderColor Black
@@ -31,9 +27,10 @@ ParticipantBackgroundColor MOTIVATION
 ActorBackgroundColor Gainsboro
 ActorFontColor black
 ActorFontSize 20
-ActorFontName Aapex
 }
-    actor U1 as "Akteur - A in der Rolle\nUser / User-HBA"
+autonumber
+
+    actor U1 as "Akteur - A in der Rolle\nUser"
     participant C1 as "TI-Messenger-\nClient A" #AliceBlue
     box <size:18>Messenger-Service</size> #WhiteSmoke
       participant MP as "Messenger-\nProxy"
@@ -41,7 +38,7 @@ ActorFontName Aapex
       participant PG as "Push-Gateway"
     end box
     participant C2 as "TI-Messenger-\nClient B"#TECHNOLOGY
-    actor U2 as "Akteur - B in der Rolle\nUser / User-HBA"
+    actor U2 as "Akteur - B in der Rolle\nUser"
     
 |||
 note over U1, U2: \n<size:17>Die Akteure sind auf dem selben Messenger-Service angemeldet und im Besitz eines zugelassenen TI-Messenger-Clients.\n<size:17>Ein Chatraum wurde durch den Einladenen eingerichtet.</size>\n
@@ -68,25 +65,26 @@ note over U1, U2: \n<size:17>Die Akteure sind auf dem selben Messenger-Service a
     C1->MP: POST /_matrix/client/r0/rooms/\n{roomId}/invite (roomId)
     
     |||
-      ref over MP, MP: <size:17>Stufe 1 - Prüfung \n<size:17>Client-Server Kommunikation</size>\n 
+      ref over MP, MH: <size:17><b>AF_10064</b> - Föderationszugehörigkeit eines Messenger-Service prüfen</size>\n 
     |||
     
     alt#LightGrey #AliceBlue <size:16>Matrix-Domain nicht in der Föderation enthalten</size>
       |||
       MP-->C1: HTTP 401 \nUnauthorized
-      |||
-      C1-->C1: Abmeldung der Session
-      |||
-      C1-->U1: Anmeldung nicht \nerfolgreich
-      |||
+
+      break#LightGrey #MistyRose
+        C1-->C1: Abmeldung der Session
+        C1-->U1: Anmeldung nicht \nerfolgreich
+        |||
+      end
     
       else <size:16>Matrix-Domain in der Föderation enthalten</size>
     
-      MP->MH: HTTP(S) Foward
+      MP->MH: HTTP(S) Forward
         activate MH
       MH->MH: Invite verarbeiten
       |||
-        opt#LightGrey #LightBlue <size:16>Pushbenachrichtigung</size>
+        opt#LightGrey #LightBlue <size:16>Push-Benachrichtigung</size>
           |||
           MH->PG: POST /_matrix/push/notify
             activate PG
