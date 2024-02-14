@@ -47,10 +47,10 @@ pg-->fd: Response
 deactivate pg
 pa->pa: ermittle Empfänger(anbieterspezifisches AppToken):SenderID, AppID
 pa->fdv: Benachrichtigung an Empfänger(EventID, SenderID, AppID)
-activate fdv
 deactivate pa
-fdv->fd: Abfrage der Daten zu Event(EventID, anbieterspezifisches AppToken)
-fd-->fdv: :Verschlüsselte Benachrichtigungsinhalte
+activate fdv
+fdv->fd: Abfrage der Daten zu Event(EventID)
+fd-->fdv: Verschlüsselte Benachrichtigungsinhalte
 deactivate fd
 fdv->fdv:Entschlüssele \n(Verschlüsselte Benachrichtigungsinhalte)
 fdv->fdv:erzeuge Anwenderbenachrichtigung mit\n den entschlüsselten Inhalten
