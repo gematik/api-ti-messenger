@@ -845,7 +845,7 @@ paths:
             type: string
         - name: contactMxid
           in: query
-          description: "MXID of the Organization.contact in url format."
+          description: "MXID of the Organization.contact in uri scheme."
           schema:
             type: string
             example: matrix:u/someone:gematik.de
@@ -894,7 +894,7 @@ paths:
             type: string
         - name: mxId
           in: query
-          description: "MxId (in url format) standing in address field of the endpoint"
+          description: "MxId (in uri scheme) standing in address field of the endpoint"
           schema:
             type: string
             example: matrix:u/someone:gematik.de
@@ -951,7 +951,7 @@ paths:
             type: string
         - name: mxid
           in: query
-          description: "MXID of the Practitioner in url format."
+          description: "MXID of the Practitioner in uri scheme."
           schema:
             type: string
             example: matrix:u/someone:gematik.de
@@ -2566,7 +2566,7 @@ components:
           example: "active"
           enum: [ active, suspended, inactive ]
         address:
-          description: "For endpoint in tim context the mxid in url format"
+          description: "For endpoint in tim context the mxid in uri scheme"
           type: string
           example: "matrix:u/test:gematik.de"
         connectionType:
