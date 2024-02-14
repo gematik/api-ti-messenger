@@ -6,7 +6,7 @@
 
 ### added
 
-- Additional examples and documentation for using the url format of the matrix id in FHIR directory.
+- Additional examples and documentation for using the uri scheme of the matrix id (see https://spec.matrix.org/v1.3/appendices/#matrix-uri-scheme) in the FHIR directory.
 
 ## Hotfix 1.1.1-4
 
