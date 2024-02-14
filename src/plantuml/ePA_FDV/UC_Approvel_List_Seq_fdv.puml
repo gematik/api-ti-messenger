@@ -21,7 +21,6 @@ skinparam sequence {
 
   ParticipantBorderColor Motivation
   ParticipantBackgroundColor Motivation
-  ParticipantFontName Impact
   ParticipantFontSize 20
   ParticipantFontColor black
   ParticipantBorderColor Black

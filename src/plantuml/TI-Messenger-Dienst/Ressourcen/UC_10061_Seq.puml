@@ -116,7 +116,7 @@ note over U2, MP2: \n<size:17>Der Akteur B ist erfolgreich beim Messenger Servic
     |||
     C1->MP1: POST /_matrix/client/r0/\nrooms/{roomId}/invite 
     |||
-      ref over MP1, MP1: <size:17>Stufe 1 - Prüfung \n<size:17>Client-Server Kommunikation</size>\n       
+      ref over MP1, MP1: <size:17>Berechtigungsprüfung</size>\n       
     |||
       break#LightGrey #MistyRose <size:16>Abbruch</size>
       |||
@@ -133,13 +133,13 @@ note over U2, MP2: \n<size:17>Der Akteur B ist erfolgreich beim Messenger Servic
     MH1->MP1: POST /_matrix/federation/v1\n/invite/{roomId}/{eventId} 
       deactivate MH1
     |||
-    ref over MP1, MP1: <size:17>Stufe 1 - Prüfung \n<size:17>Server-Server Kommunikation</size>\n
+    ref over MP1, MP1: <size:17>Berechtigungsprüfung</size>\n
     |||
     MP1->MP2: HTTP(S) Forward
     note right: <size:16>Stufe 1 - Prüfung gemäß </size>\n<size:16>Server-Server Kommunikation</size>
     |||
       activate MP2
-      ref over MP2, MP2: <size:17>Stufe 1 - Prüfung \n<size:17>Server-Server Kommunikation</size>\n
+      ref over MP2, MP2: <size:17>Berechtigungsprüfung</size>\n
     |||
 
       break#LightGrey #MistyRose <size:16>Abbruch</size>
@@ -175,7 +175,6 @@ note over U2, MP2: \n<size:17>Der Akteur B ist erfolgreich beim Messenger Servic
         C2->U2: Einladung anzeigen
         U2-->C2: Einladung bestätigen
         C2->MP2: commit
-        MP2->MP2: TLS Terminierung
         MP2-->MH2: HTTP(S) Forward
         MH2-->MH2: Invite auslösen
         MH2-->MP2: Status
