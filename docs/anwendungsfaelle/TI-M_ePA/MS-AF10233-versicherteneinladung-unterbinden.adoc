@@ -6,12 +6,12 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 
-:imagesdir: ../../images
+:imagesdir: ../../../images
 
 image:meta/gematik_logo.svg[width=70%]
 
 === AF_10233 - Versicherteneinladung unterbinden
-Dieser Anwendungsfall erweitert die Prüflogik für die Stufe 1 der in der TI-M_FD_Basis definierten Prüfung Client-Server und Server-Server Kommunikation, neben der Föderationsprüfung ist zusätzlich zu prüfen, dass der Einladende und der Eingeladene nicht der Gruppe Versicherte zuzuordnen sind. Für die Prüfung der Zugehörigkeit verwendet der Messenger-Proxy die Information isInsurance aus der Föderationsliste.
+Dieser Anwendungsfall erweitert die in der TI-M_Basis definierte Prüflogik für den Messenger-Proxy, neben der Föderationsprüfung ist zusätzlich zu prüfen, dass der Einladende und der Eingeladene nicht der Gruppe Versicherte zuzuordnen sind. Für die Prüfung der Zugehörigkeit verwendet der Messenger-Proxy die Information isInsurance aus der Föderationsliste.
 
 .Anwendungsfallbeschreibung
 [%collapsible%open]
@@ -23,11 +23,11 @@ Versicherteneinladung unterbinden
 | |Beschreibung
 |*Auslöser* |Anfrage am Messenger Proxy
 |*Komponenten* a|
-              * Messenger-Proxy,
+              * Messenger-Proxy
 |*Vorbedingungen* a| Die Domain wurde in die Föderationsliste eingetragen und als Versichertendomain markiert.
 |*Eingangsdaten* |Matrix-Invite-Event
 |*Ergebnis* a|Ablehnung der Einladung, wenn Sender und der Empfänger beide Akteure in der Rolle Versicherter sind.
-Weiterleitung der Einladung, wenn der Sender oder der Empfänger kein Akteur in der Rolle Versicherter ist.
+Weiterleitung der Einladung, wenn der Sender oder der Empfänger kein Akteur in der Rolle Versicherter ist. 
 |===
 ====
 .Sequenzdiagramm
@@ -35,7 +35,7 @@ Weiterleitung der Einladung, wenn der Sender oder der Empfänger kein Akteur in 
 ====
 ++++
 <p align="center">
-  <img width="80%" src=../../images/diagrams/TI-Messenger-Dienst/Ressourcen/UC_10233_Seq.svg>
+  <img width="80%" src=../../../images/diagrams/ePA_FDV/UC_10233_Seq.svg>
 </p>
 ++++
 ====
