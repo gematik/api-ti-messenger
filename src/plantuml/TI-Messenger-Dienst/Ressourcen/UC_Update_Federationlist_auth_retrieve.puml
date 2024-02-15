@@ -16,7 +16,6 @@ scale max 2048 width
 skinparam sequence {
 ArrowColor black
 ArrowFontSize 17
-ActorBorderColor black
 LifeLineBorderColor black
 LifeLineBackgroundColor Gainsboro
 
@@ -27,9 +26,6 @@ ParticipantFontColor black
 ParticipantBorderColor Black
 ParticipantBackgroundColor MOTIVATION
 
-ActorBackgroundColor Gainsboro
-ActorFontColor black
-ActorFontSize 20
 }
 
 autonumber

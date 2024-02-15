@@ -50,9 +50,9 @@ note over U1, U2: \n<size:17>Die Akteure sind auf demselben Messenger-Service an
     C1->MP: POST  /_matrix/client/v3/rooms/{roomId}/invite
     activate MP
     |||
-      MP->MP: Prüfungen Stufe 1\nClient-Server-Proxy
+      MP->MP: Client-Server-Prüfungen
     |||
-    break #MistyRose <size:16>Prüfung der Stufe 1 ist fehlgeschlagen</size> 
+    break #MistyRose <size:16>Client-Server Prüfung ist fehlgeschlagen</size> 
     MP->C1: <font color=red>Verbindung wird abgelehnt</font>
     end
     
