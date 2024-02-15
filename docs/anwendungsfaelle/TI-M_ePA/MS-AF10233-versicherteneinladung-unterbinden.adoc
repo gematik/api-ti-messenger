@@ -35,7 +35,7 @@ Weiterleitung der Einladung, wenn der Sender oder der Empfänger kein Akteur in 
 ====
 ++++
 <p align="center">
-  <img width="80%" src=../../../images/diagrams/ePA_FDV/UC_10233_Seq.svg>
+  <img width="80%" src=../../../images/diagrams/TI-M_ePA/UC_10233_Seq.svg>
 </p>
 ++++
 ====
