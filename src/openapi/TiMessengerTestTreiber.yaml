@@ -786,6 +786,7 @@ paths:
           description: "MxId of account"
           schema:
             type: string
+            example: @someone:gematik.de
 
       responses:
         "200":
@@ -844,9 +845,10 @@ paths:
             type: string
         - name: contactMxid
           in: query
-          description: "MXID of the Organization.contact."
+          description: "MXID of the Organization.contact in uri scheme."
           schema:
             type: string
+            example: matrix:u/someone:gematik.de
         - name: contactName
           in: query
           description: "Name of the Organization.contact."
@@ -892,9 +894,10 @@ paths:
             type: string
         - name: mxId
           in: query
-          description: "MxId standing in address field of the endpoint"
+          description: "MxId (in uri scheme) standing in address field of the endpoint"
           schema:
             type: string
+            example: matrix:u/someone:gematik.de
 
       responses:
         "200":
@@ -948,9 +951,10 @@ paths:
             type: string
         - name: mxid
           in: query
-          description: "MXID of the Practitioner."
+          description: "MXID of the Practitioner in uri scheme."
           schema:
             type: string
+            example: matrix:u/someone:gematik.de
 
       responses:
         "200":
@@ -2316,7 +2320,7 @@ components:
             $ref: "#/components/schemas/HomeserverSearchResult"
 
     HomeserverSearchResult:
-      description: "A flat description of an endpoint with belonging healthcare-serviceand organization"
+      description: "A flat description of an endpoint with belonging healthcare-service and organization"
       readOnly: true
       type: object
       properties:
@@ -2562,9 +2566,9 @@ components:
           example: "active"
           enum: [ active, suspended, inactive ]
         address:
-          description: "For endpoint in tim context the mxid"
+          description: "For endpoint in tim context the mxid in uri scheme"
           type: string
-          example: "@test:gematik.de"
+          example: "matrix:u/test:gematik.de"
         connectionType:
           $ref: "#/components/schemas/FhirConnectionType"
         payloadType:
