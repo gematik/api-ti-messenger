@@ -21,6 +21,7 @@ skinparam sequence {
 
   ParticipantBorderColor Motivation
   ParticipantBackgroundColor Motivation
+
   ParticipantFontSize 20
   ParticipantFontColor black
   ParticipantBorderColor Black
@@ -50,7 +51,7 @@ activate MS
 |||
 break #MistyRose <size:16>Matrix-Domain nicht in der Föderation enthalten</size>
   MP2->MP2:<font color=red>Abbruch, \n<font color=red>Verbindung wird \n<font color=red>abgelehnt</font>
-  MP2->MS: HTTP ERROR
+  MP2-->MS: HTTP 403
   |||
   end
 

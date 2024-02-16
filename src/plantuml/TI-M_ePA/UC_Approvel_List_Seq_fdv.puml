@@ -50,12 +50,12 @@ activate MS
 |||
 alt#LightGrey #LightBlue <size:16>Matrix-Domain nicht in der Föderation enthalten</size>
   MP2->MP2:<font color=red>Abbruch, \n<font color=red>Verbindung wird \n<font color=red>abgelehnt</font>
-  MP2->MS: HTTP ERROR
+  MP2->MS: HTTP 403
   |||
 
 else  <size:16>Einladender und der Eingeladene sind beide Versicherte</size>
   MP2->MP2:<font color=red>Abbruch, \n<font color=red>Verbindung wird \n<font color=red>abgelehnt</font>
-  MP2->MS: HTTP ERROR
+  MP2->MS: HTTP 403
   |||
 
 else  <size:16>Beide Teilnehmer sind Teil der Föderation und nur maximal einer ist ein Versicherter</size>
