@@ -136,7 +136,6 @@ note over U2, MP2: \n<size:17>Der Akteur B ist erfolgreich beim Messenger Servic
     ref over MP1, MP1: <size:17>Berechtigungsprüfung</size>\n
     |||
     MP1->MP2: HTTP(S) Forward
-    note right: <size:16>Stufe 1 - Prüfung gemäß </size>\n<size:16>Server-Server Kommunikation</size>
     |||
       activate MP2
       ref over MP2, MP2: <size:17>Berechtigungsprüfung</size>\n
@@ -151,9 +150,6 @@ note over U2, MP2: \n<size:17>Der Akteur B ist erfolgreich beim Messenger Servic
       C1-->U1: Einladung nicht \nerfolgreich
       |||
       end
-
-    |||
-      ref over MP2, MH2 : <size:16>Anhang B - Stufen der Berechtigungsprüfung</size>\n <size:16>Stufe 2 und 3</size>\n
     |||
     MP2->MH2: HTTP(S) Forward
       activate MH2

@@ -31,24 +31,24 @@ autonumber
     participant fdv [
       Frontend des Versicherten
       ----
-      Inhaber eines AppTokens
+      Inhaber eines DeviceTokens
     ]
     participant pa as "Push-Anbieter"
     participant pg as "Push-Gateway"
     participant fd as "Fachdienst"
 
 activate fd
-fd->pg: Benachrichtigung \nfür anbieterspezifisches AppToken(EventID)
+fd->pg: Benachrichtigung \nfür DeviceToken(EventID)
 activate pg
-pg->pa: Benachrichtigung \nfür anbieterspezifisches AppToken(EventID)
+pg->pa: Benachrichtigung \nfür DeviceToken(EventID, SenderID)
 activate pa
 pa-->pg: Response
 pg-->fd: Response
 deactivate pg
-pa->pa: ermittle Empfänger(anbieterspezifisches AppToken):SenderID, AppID
-pa->fdv: Benachrichtigung an Empfänger(EventID, SenderID, AppID)
+pa->fdv: Benachrichtigung an Empfänger(EventID, SenderID)
 deactivate pa
 activate fdv
+fdv->fdv: ermittle Fachdienst(SenderID)
 fdv->fd: Abfrage der Daten zu Event(EventID)
 fd-->fdv: Verschlüsselte Benachrichtigungsinhalte
 deactivate fd

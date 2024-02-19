@@ -40,10 +40,10 @@ participant fd as "Fachdienst"
   activate fdv
   fdv->pa: registriert sich beim Push-Anbieter(SenderID, APIKey, AppID)
   activate pa
-  pa-->fdv: anbieterspezifisches AppToken
+  pa-->fdv: eindeutiges DeviceToken für die app Instanz
   deactivate pa
-  fdv->fdv: speichere \nanbieterspezifisches AppToken
-  fdv->fd: konfiguriere zu verwendendes Gateway(Gateway-Information, anbieterspezifisches AppToken)
+  fdv->fdv: speichere \n DeviceToken
+  fdv->fd: konfiguriere zu verwendendes Gateway(Gateway-Information, DeviceToken)
   fd-->fdv: Konfiguration übernommen
 |||
 
