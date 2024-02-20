@@ -80,15 +80,18 @@ break #MistyRose <size:16>Matrix-Domain nicht in der Föderation enthalten</size
   MC2->MC2: Extrahieren der Invite-Events
   MC2->MC2: Prüfung, ob die Einladung erlaubt ist
 
-  alt #MistyRose <size:16>Der Akteur hat "allow all" konfiguriert und der einladende Akteur\n<size:16> ist auf der BlockedUser-Liste (Direkt oder als Teil einer Gruppe)</size>
-    |||
-    MC2->MC2:<font color=red>Einladung ist abzulehnen</font>
-    |||
-  else <size:16>Der Akteur hat "block all" konfiguriert und der einladende Akteur\n<size:16> ist nicht auf der AllowedUser-Liste (Direkt oder als Teil einer Gruppe)</size>
+  break #MistyRose <size:16>Der Akteur hat "allow all" konfiguriert und der einladende Akteur\n<size:16> ist auf der BlockedUser-Liste (Direkt oder als Teil einer Gruppe/Domain)</size>
     |||
     MC2->MC2:<font color=red>Einladung ist abzulehnen</font>
     |||
   end
+
+  break #MistyRose <size:16>Der Akteur hat "block all" konfiguriert und der einladende Akteur\n<size:16> ist nicht auf der AllowedUser-Liste (Direkt oder als Teil einer Gruppe/Domain)</size>
+    |||
+    MC2->MC2:<font color=red>Einladung ist abzulehnen</font>
+    |||
+  end
+
 
 
 |||

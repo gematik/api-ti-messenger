@@ -21,6 +21,7 @@ skinparam sequence {
 
   ParticipantBorderColor Motivation
   ParticipantBackgroundColor Motivation
+
   ParticipantFontSize 20
   ParticipantFontColor black
   ParticipantBorderColor Black
@@ -48,17 +49,17 @@ activate MS
 |||
 == <font color=green><size:16>  Berechtigungskonzept - Stufe 1</size></font>  ==
 |||
-alt#LightGrey #LightBlue <size:16>Matrix-Domain nicht in der Föderation enthalten</size>
+break #MistyRose <size:16>Matrix-Domain nicht in der Föderation enthalten</size>
+  MP2->MP2:<font color=red>Abbruch, \n<font color=red>Verbindung wird \n<font color=red>abgelehnt</font>
+  MP2-->MS: HTTP 403
+  |||
+  end
+break  #MistyRose <size:16>Einladender und der Eingeladene sind beide Versicherte</size>
   MP2->MP2:<font color=red>Abbruch, \n<font color=red>Verbindung wird \n<font color=red>abgelehnt</font>
   MP2->MS: HTTP 403
   |||
+  end
 
-else  <size:16>Einladender und der Eingeladene sind beide Versicherte</size>
-  MP2->MP2:<font color=red>Abbruch, \n<font color=red>Verbindung wird \n<font color=red>abgelehnt</font>
-  MP2->MS: HTTP 403
-  |||
-
-else  <size:16>Beide Teilnehmer sind Teil der Föderation und nur maximal einer ist ein Versicherter</size>
   MP2->MH2: HTTP(S) Forward
   activate MH2
   MH2-->MH2: Invite-Event \nverarbeiten
@@ -84,16 +85,18 @@ else  <size:16>Beide Teilnehmer sind Teil der Föderation und nur maximal einer 
   MC2->MC2: Extrahieren der Invite-Events
   MC2->MC2: Prüfung, ob die Einladung erlaubt ist
 
-  alt#LightGrey #MOTIVATION <size:16>Der Anwender hat "allow all" konfiguriert und der Einladende\n<size:16> ist auf der BlockedUser-Liste (Direkt oder als Teil einer Gruppe)</size>
-    |||
-    MC2->MC2:<font color=red>Einladung ist abzulehnen</font>
-    |||
-  else <size:16>Der Anwender hat "block all" konfiguriert und der Einladende\n<size:16> ist nicht auf der AllowedUser-Liste (Direkt oder als Teil einer Gruppe)</size>
+  break #MistyRose <size:16>Der Akteur hat "allow all" konfiguriert und der einladende Akteur\n<size:16> ist auf der BlockedUser-Liste (Direkt oder als Teil einer Gruppe/Domain)</size>
     |||
     MC2->MC2:<font color=red>Einladung ist abzulehnen</font>
     |||
   end
-end
+
+  break #MistyRose <size:16>Der Akteur hat "block all" konfiguriert und der einladende Akteur\n<size:16> ist nicht auf der AllowedUser-Liste (Direkt oder als Teil einer Gruppe/Domain)</size>
+    |||
+    MC2->MC2:<font color=red>Einladung ist abzulehnen</font>
+    |||
+  end
+
 
 |||
 MC2-->MP2: Ergebnis der Einladungsprüfung
