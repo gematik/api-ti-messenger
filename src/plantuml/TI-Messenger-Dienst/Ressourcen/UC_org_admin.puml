@@ -5,7 +5,7 @@
 # Use Case Diagram
 # Name: Org-Admin - Anwendungsfaelle
 '/
-
+!pragma layout smetana
 
 skinparam actorStyle awesome
 left to right direction

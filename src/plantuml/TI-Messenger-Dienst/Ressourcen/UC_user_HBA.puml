@@ -6,6 +6,7 @@
 '/
 
 @startuml
+!pragma layout smetana
 skinparam actorStyle awesome
 left to right direction
 scale 6/3
