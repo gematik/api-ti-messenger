@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram name="Fachdienst" id="euBj5xrBh4o_RF6xaW2p">
-        <mxGraphModel dx="1895" dy="1181" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="1895" dy="1266" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -225,7 +225,7 @@
                         <mxPoint x="220" y="480" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="2" value="Komponenten-PKI" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                <mxCell id="2" value="Komponenten-PKI" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" parent="1" vertex="1">
                     <mxGeometry x="329" y="510" width="377" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="3" value="" style="group" parent="1" vertex="1" connectable="0">
