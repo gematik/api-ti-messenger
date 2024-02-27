@@ -7,6 +7,7 @@
 '/
 
 @startuml
+!pragma teoz true
 skinparam sequenceMessageAlign direction
 skinparam minClassWidth 200
 skinparam BoxPadding 15
@@ -47,7 +48,8 @@ ActorFontName Aapex
     actor U2 as "\nAkteur - B in der Rolle\nUser / User-HBA\n"
     
 |||
-note over U1, U2: \n<size:17>Die Akteure sind auf dem selben Messenger-Service angemeldet und im Besitz eines zugelassenen TI-Messenger-Clients.</size>\n<size:17>Ebenfalls sind beide Akteure einem gemeinsamen Raum beigetreten.</size>\n
+/ note over U1, MH1: \n<size:17>Der Akteur A ist erfolgreich beim Messenger Service A angemeldet</size>\n   
+/ note over U2, MP2: \n<size:17>Der Akteur B ist erfolgreich beim Messenger Service B angemeldet</size>\n    
 |||
 
   U1->C1: Akteur A löst\nMatrix-Event aus
