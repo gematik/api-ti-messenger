@@ -786,7 +786,7 @@ paths:
           description: "MxId of account"
           schema:
             type: string
-            example: @someone:gematik.de
+            example: "@someone:gematik.de"
 
       responses:
         "200":
