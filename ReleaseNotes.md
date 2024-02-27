@@ -2,6 +2,12 @@
  
 # Release Notes api-ti-messenger
 
+## Hotfix 1.1.1-6
+
+### fixed
+
+- Fixed formatting issue in the api yaml, that prevented automated code generation.
+
 ## Hotfix 1.1.1-5
 
 ### added
