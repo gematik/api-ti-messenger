@@ -26,7 +26,7 @@ ActorFontColor black
 ActorFontSize 20
 }
 
-autonumber "<b>(0)"
+autonumber
 
 actor us as "Versicherter"
 box <size:19>Endgerät</size> #WhiteSmoke

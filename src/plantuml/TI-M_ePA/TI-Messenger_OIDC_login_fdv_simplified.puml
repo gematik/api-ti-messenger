@@ -1,0 +1,117 @@
+@startuml "TI-Messenger_OIDC_Login"
+skinparam sequenceMessageAlign direction
+skinparam WrapWidth 300
+skinparam minClassWidth 150
+skinparam BoxPadding 1
+skinparam ParticipantPadding 50
+skinparam sequenceReferenceHeaderBackgroundColor palegreen
+scale max 2048 width
+
+skinparam sequence {
+ArrowColor black
+ArrowFontSize 17
+ActorBorderColor black
+LifeLineBorderColor black
+LifeLineBackgroundColor Gainsboro
+
+ParticipantBorderColor Motivation
+ParticipantBackgroundColor Motivation
+ParticipantFontSize 20
+ParticipantFontColor black
+ParticipantBorderColor Black
+ParticipantBackgroundColor MOTIVATION
+
+ActorBackgroundColor Gainsboro
+ActorFontColor black
+ActorFontSize 20
+}
+
+autonumber
+
+actor us as "Versicherter"
+box <size:19>Endgerät</size> #WhiteSmoke
+  participant app as "TI-M Client\n(Browser)"
+end box
+box <size:19>TI-Messenger Service</size> #WhiteSmoke
+  participant pr as "TI-M Proxy"
+  participant hs as "Matrix\nHomeserver\n(Relying party für IDP)"
+end box
+participant mc as "Webserver\nliefert\nTIM-Web-App aus"
+participant idp as "Sektoraler\nIDP"
+
+|||
+
+us -> app: starte App
+
+activate app
+  app -> mc: Lade Matrix-Web-Client
+  activate mc
+  mc --> app --: Webanwendung
+  group <size:16>OIDC Login</size>
+    app -> hs ++: GET {homeserver_client_api_url}/login
+    hs --> app --: 200 OK :Login Types
+    note right
+    enthalten: ID des sektoralen IDP: ""{sidp}""
+    end note
+    |||
+    opt #LightYellow <size:16>Registration</size>
+    app -> hs ++: POST {homeserver_client_api_url}/register (initial_device_display_name, refresh_token)
+    hs --> app --: 401 Unauthorized
+    note right
+    Homeserver benötigt zusätzliche Authentisierungsinformationen
+    end note
+    |||
+    end 'opt
+    |||
+    app -> hs++: GET {homeserver_client_api_url}/login/sso/redirect/{sidp}
+    |||
+    group #MistyRose <size:16>Changed behavior because OIDC PAR is required</size>
+      hs --> pr --++: 302 Redirect :location, :response_type, :client_id, :redirect_uri, :scope, :state, :code_challenge
+      |||
+      pr -> idp ++: POST {sektoraler_idp_url}/par (response_type, redirect_uri, code_challenge, scope)
+
+      idp --> pr --: 200 OK :request_uri
+      |||
+      pr --> app --: 302 Redirect {sektoraler_idp_url}/login/oauth/authorize (request_uri)
+      |||
+    end 'group
+    |||
+    group #LightBlue <size:16>IDP authentication</size>
+      app -> idp ++: GET	{sektoraler_idp_url}/login/oauth/authorize (request_uri)
+      |||
+      group #DarkGray <size:16>Black box with example</size>
+        idp --> app: Challenge
+        app -> us: Consent Page
+        us --> app: Approval
+        app -> idp: Response
+
+      |||
+      end 'group
+      |||
+      idp --> app --: 302 Redirect {redirect_uri} :auth_code, :state
+      |||
+    end 'group
+    |||
+    app -> hs ++: GET {redirect_uri} (auth_code, state)
+    |||
+    hs -> idp ++: POST {sektoraler_idp_url}/token-endpoint (auth_code, code_verifier)
+    idp --> hs --: 200 OK :id_token
+    |||
+
+    hs --> app --: 200 OK HTML Consent Page, Zugriff TIM-Web-App auf Matrix Account\n\
+    <font color=red>""<a href="https://TIM-Web-App/?loginToken=example-matrix-login-token" class="primary-button">Continue</a>""</font>
+
+
+    |||
+    app -> mc ++: GET <font color=red>https://TIM-Web-App/?loginToken=example-matrix-login-token</font>
+    mc --> app--: 200 OK <font color=red>HTML ""...""</font>
+    |||
+
+    app -> hs ++: POST {homeserver_client_api_url}/login (matrix-login-token, initial_device_display_name)
+
+    hs --> app --: 200 OK :user_id, :access_token, :home_server, :device_id, :well_known
+
+    |||
+  end 'group
+  app --> us: Login successful
+@enduml
