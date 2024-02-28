@@ -66,7 +66,7 @@ activate app
     |||
     app -> hs++: GET https://client.homeserver-tim.de/_matrix/client/v3/login/sso/redirect/sektoraler-idp
     |||
-    group #MistyRose <size:16>Changed behavior because OIDC PAR is required</size>
+    group #Linen <size:16>Changed behavior because OIDC PAR is required</size>
       hs --> pr --++: 302 Redirect\n\
       ""location: https://sektoraler-idp.de/login/oauth?""\n\
       ""response_type=code&""\n\
