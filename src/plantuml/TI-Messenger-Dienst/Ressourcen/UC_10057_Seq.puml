@@ -22,7 +22,6 @@ LifeLineBackgroundColor Gainsboro
 
 ParticipantBorderColor Motivation
 ParticipantBackgroundColor Motivation
-ParticipantFontName Impact
 ParticipantFontSize 20
 ParticipantFontColor black
 ParticipantBorderColor Black
@@ -33,7 +32,7 @@ ActorFontColor black
 ActorFontSize 20
 ActorFontName Aapex
 }
-    actor U as "Akteur in der Rolle\nUser / User-HBA"
+    actor U as "Akteur in der Rolle\nUser"
     participant C as "TI-Messenger-Client"
     box <size:18>Messenger-Service</size> #WhiteSmoke
       participant MP as "Messenger Proxy"

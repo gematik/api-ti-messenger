@@ -33,7 +33,7 @@ ActorFontColor black
 ActorFontSize 20
 ActorFontName Aapex
 }
-    actor U1 as "\nAkteur - A in der Rolle\nUser / User-HBA\n"
+    actor U1 as "\nAkteur - A in der Rolle\nUser\n"
     participant C1 as "TI-Messenger-\nClient" #AliceBlue
     box <size:18>Messenger-Service A</size> #WhiteSmoke
       participant MP1 as "Messenger-\nProxy"
@@ -45,7 +45,7 @@ ActorFontName Aapex
     participant PG2 as "Push-\nGateway"
     end box
     participant C2 as "TI-Messenger-\nClient" #TECHNOLOGY
-    actor U2 as "\nAkteur - B in der Rolle\nUser / User-HBA\n"
+    actor U2 as "\nAkteur - B in der Rolle\nUser\n"
     
 |||
 / note over U1, MH1: \n<size:17>Der Akteur A ist erfolgreich beim Messenger Service A angemeldet</size>\n   
@@ -76,9 +76,7 @@ ActorFontName Aapex
     activate MH2
   MH2->MH2: Event \nverarbeiten
   |||
- 
-  opt#LightGrey #AliceBlue <size:16>Pushbenachrichtigung</size>
-  |||
+   opt#LightGrey #AliceBlue <size:16>Pushbenachrichtigung</size>
     MH2->PG2: POST /_matrix/push/notify
       activate PG2
     PG2->C2: Notification
