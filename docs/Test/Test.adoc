@@ -52,6 +52,11 @@ Die gematik fördert eine enge Zusammenarbeit und unterstützt Industriepartner 
 
 Die gematik stellt eine TI-Messenger-Dienst Referenzimplementierung zur Verfügung. Zur Sicherstellung der Interoperabilität zwischen verschiedenen TI-Messenger-Fachdiensten innerhalb des TI-Messenger-Dienstes MUSS der TI-Messenger-Fachdienst eines TI-Messenger-Anbieters gegen die Referenzimplementierung (TI-Messenger-Client und TI-Messenger-Fachdienst) getestet werden. Der Sourcecode für die in der Referenzimplementierung verwendeten Artefakte wird regelmäßig von der gematik unter https://github.com/tim-ref[TI-Messenger Referenzimplementierung] veröffentlicht. 
 
+=== Hersteller IOP Tests
+Anschließend wird mit den IOP- und E2E-Tests die Interoperabilität zwischen den verschiedenen TI-Messenger-Anbietern nachgewiesen. Hierfür werden dann alle bereits zur Verfügung stehenden TI-Messenger-Dienste (die Test-Instanzen der einzelnen Hersteller) zusammengeschlossen und anschließen gegeneinander getestet. Alle Anbieter MÜSSEN bereits im Vorfeld diesen IOP- und E2E-Tests selbständig und eigenverantwortlich durchführen. Bei Problemen im Rahmen der Zulassung MÜSSEN die Anbieter bei der Analyse unterstützen. In der folgenden Abbildung ist eine Systemumgebung für Herstellertests dargestellt.
+
+image:diagrams/Test/testumgebung-Hersteller.png[align="left",width="100%", title="Herstellerverantwortung"]
+
 === Zulassungstests durch die gematik
 Die gematik testet im Rahmen der Zulassungsverfahren auf Basis von Anwendungsfällen. Dabei wird sich auf die link:{docsdir}anwendungsfaelle/TI-Messenger-Anwendungsfaelle.adoc[Anwendungsfälle] bezogen. Hierbei wird versucht, möglichst viele Funktionsbereiche der Komponenten des TI-Messenger-Dienstes einzubeziehen. 
 
@@ -59,7 +64,9 @@ Die gematik testet im Rahmen der Zulassungsverfahren auf Basis von Anwendungsfä
 Die Tests werden zunächst gegen die Referenzimplementierung der gematik durchgeführt. In diesem Schritt wird die Funktionalität des Zulassungsobjektes "TI-Messenger" geprüft. 
 
 ==== IOP Tests zwischen Anbietern
-Anschließend wird mit den IOP- und E2E-Tests die Interoperabilität zwischen den verschiedenen TI-Messenger-Anbietern nachgewiesen. Hierfür werden dann alle bereits zur Verfügung stehenden TI-Messenger-Dienste (die Test-Instanzen der einzelnen Hersteller) zusammengeschlossen und anschließen gegeneinander getestet. Alle Anbieter MÜSSEN bereits im Vorfeld diesen IOP- und E2E-Tests selbständig und eigenverantwortlich durchführen. Bei Problemen im Rahmen der Zulassung MÜSSEN die Anbieter bei der Analyse unterstützen. In der folgenden Abbildung ist eine Systemumgebung für Herstellertests dargestellt.
+Zusätzlich zu den bereits durchgeführten IOP- und E2E-Tests werden weitere Interoperabilitätstests von verschiedenen TI-Messenger-Lösungen vor und nach der Zulassung durch die gematik durchgeführt. Die folgende Abbildung zeigt die Nutzung der existierenden Testumgebung durch die gematik während der Zulassungs- und Interoperabilitätstests.
+
+image:diagrams/Test/testumgebung-Gematik.png[align="left",width="100%", title="Herstellerverantwortung"]
 
 == Verpflichtung nach der Zulassung
 Der TI-Messenger-Anbieter MUSS eine Referenz-Instanz und mindestens eine Test-Instanz des TI-Messenger-Fachdienstes und TI-Messenger-Clients bereitstellen und betreiben. Die Referenz-Instanz hat die gleiche Version wie die Produktionsumgebung und kann von anderen Herstellern für Tests und Entwicklung gegen die zugelassene Version benutzt werden. Weiterhin wird die Referenz-Instanz für die Reproduktion aktueller Fehler/Probleme aus der Produktionsumgebung genutzt. Der Zugriff auf die Referenz-Instanz MUSS für die gematik zur Fehleranalyse gewährleistet sein.
