@@ -1,17 +1,15 @@
 /' 
-# TI-Messenger 1.1
 # TI-Messenger-Dienst
 # UC - 10062
-# Sequence Diagram
 # Name: Austausch von Events zwischen Akteuren außerhalb einer Organisation
 '/
 
 @startuml
-!pragma teoz true
 skinparam sequenceMessageAlign direction
 skinparam minClassWidth 200
 skinparam BoxPadding 15
 skinparam sequenceReferenceHeaderBackgroundColor palegreen
+skinparam sequenceReferenceBackgroundColor Beige
 scale max 2048 width
 
 skinparam sequence {
@@ -31,9 +29,11 @@ ParticipantBackgroundColor MOTIVATION
 ActorBackgroundColor Gainsboro
 ActorFontColor black
 ActorFontSize 20
-ActorFontName Aapex
 }
-    actor U1 as "\nAkteur - A in der Rolle\nUser\n"
+
+autonumber
+
+    actor U1 as "\nAkteur A \nin der Rolle User" #AliceBlue
     participant C1 as "TI-Messenger-\nClient" #AliceBlue
     box <size:18>Messenger-Service A</size> #WhiteSmoke
       participant MP1 as "Messenger-\nProxy"
@@ -45,11 +45,11 @@ ActorFontName Aapex
     participant PG2 as "Push-\nGateway"
     end box
     participant C2 as "TI-Messenger-\nClient" #TECHNOLOGY
-    actor U2 as "\nAkteur - B in der Rolle\nUser\n"
+    actor U2 as "\nAkteur B \nin der Rolle User" #TECHNOLOGY
     
 |||
-/ note over U1, MH1: \n<size:17>Der Akteur A ist erfolgreich beim Messenger Service A angemeldet</size>\n   
-/ note over U2, MP2: \n<size:17>Der Akteur B ist erfolgreich beim Messenger Service B angemeldet</size>\n    
+note over U1, MH1: \n<size:17>Der Akteur A ist erfolgreich beim Messenger Service A angemeldet</size>\n   
+note over U2, MP2: \n<size:17>Der Akteur B ist erfolgreich beim Messenger Service B angemeldet</size>\n    
 |||
 
   U1->C1: Akteur A löst\nMatrix-Event aus
@@ -70,7 +70,7 @@ ActorFontName Aapex
   |||
   ref over MP2, MP2: <size:17>Berechtigungsprüfung</size>\n 
   |||
-  MP2-[#red]>MH2: HTTP(S) Foward
+  MP2-[#red]>MH2: HTTP(S) Forward
   |||
 
     activate MH2
@@ -86,14 +86,14 @@ ActorFontName Aapex
   end
   |||
 
-  MH2->MP2: Matrix-Request \nan Client-B)
+  MH2->MP2: Matrix-Request \nan Client B
   MP2->C2: HTTP(S) Forward 
     activate C2 #TECHNOLOGY
   C2->C2: Event verarbeiten
 
   C2-->MP2: Status
   |||
-  MP2-->MH2: HTTP(S) Forward \n(Status Client-B)
+  MP2-->MH2: HTTP(S) Forward \n(Status Client B)
   MH2--[#red]>MP2: Status (Matrix-Request)
     deactivate MH2
   MP2-->C2: HTTP(S) Forward
