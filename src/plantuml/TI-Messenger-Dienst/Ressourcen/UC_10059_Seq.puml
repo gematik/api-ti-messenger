@@ -27,6 +27,8 @@ ParticipantFontColor black
 ParticipantBorderColor Black
 ParticipantBackgroundColor MOTIVATION
 
+autonumber
+
 ActorBackgroundColor Gainsboro
 ActorFontColor black
 ActorFontSize 20
