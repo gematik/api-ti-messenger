@@ -1,0 +1,51 @@
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+:imagesdir: ../../images
+:docsdir: ../docs
+:toc: macro
+:toclevels: 6
+:toc-title: Table of Contents
+:numbered:
+:sectnumlevels: 6
+
+image:meta/gematik_logo.svg[width=70%]
+
+toc::[]
+
+= Test und Zertifizierung der TI-Messenger
+
+
+Produkttests zur Sicherstellung der Konformität mit der Spezifikation sind vollständig in der Verantwortung der Anbieter/Hersteller des TI-Messenger-Clients. Die gematik konzentriert sich bei der Zulassung auf das Zusammenspiel der Produkte durch E2E- und IOP Tests.
+
+Die eigenverantwortlichen Produkttests bei den Industriepartnern umfassen:
+
+- Testumgebung entwickeln,
+- Testfallkatalog erstellen (für eigene Produkttests) und
+- Produkttest durchführen und dokumentieren.
+
+Die Hersteller der TI-Messenger-Fachdienste MÜSSEN zusichern, dass die gematik die Produkttests der Industriepartner in Form von Reviews der Testkonzepte, der Testspezifikationen, der Testfälle und mit dem Review der Testprotokolle (Log- und Trace-Daten) überprüfen kann.
+
+Die gematik fördert eine enge Zusammenarbeit und unterstützt Industriepartner dabei, die Qualität der Produkte zu verbessern. Dies erfolgt durch die Organisation zeitnaher IOP-Tests, die Synchronisierung von Meilensteinen und regelmäßige industriepartnerübergreifende Test-Sessions. Die Test-Sessions umfassen gegenseitige IOP- und E2E-Tests.
+
+Die gematik stellt eine TI-Messenger-Dienst Referenzimplementierung zur Verfügung. Zur Sicherstellung der Interoperabilität zwischen verschiedenen TI-Messenger-Fachdiensten innerhalb des TI-Messenger-Dienstes MUSS der TI-Messenger-Fachdienst eines TI-Messenger-Anbieters gegen die Referenzimplementierung (TI-Messenger-Client und TI-Messenger Fachdienst) getestet werden.
+
+== Testtreiber Modul
+Um einen automatisierten Test für den TI-Messenger-Dienst zu ermöglichen, MUSS die Test-App des TI-Messenger-Clients zusätzlich ein Testtreiber-Modul intern oder extern zur Verfügung stellen. Das Testtreiber-Modul MUSS die Funktionalitäten der produktspezifischen Schnittstellen des TI-Messenger-Clients über eine standardisierte Schnittstelle von außen zugänglich machen und einen Fernzugriff ermöglichen. Dieses Testtreiber-Module MUSS Bestandteil der Test-APP sein (internes Testtreiber-Modul) oder ein Zugang zum Test-Environment des Herstellers gewährleisten (externes Testtreiber-Modul). Die Schnittstelle wird gemäß link:../../src/openapi/TiMessengerTestTreiber.yaml[Testtreiber API] durch die gematik spezifiziert und bereitgestellt. Das Testtreiber-Modul MUSS die durch den TI-Messenger-Client über eine produktspezifische Schnittstelle angebotene Funktionalität nutzen, um die Operationen des TI-Messenger-Clients umzusetzen. Bei einem internen Testtreiber-Modul wird die REST-Schnittstelle in die Test-App integriert (der Zugriff erfolgt hierbei direkt über das Endgerät). Der Test von Web-Clients (TI-Messenger-Client als Web-Anwendung) findet ausschließlich über externe Treiber-Module statt. Für die Ausführung der Tests werden Organisationen und Messenger-Services benötigt. Diese Organisationen und Messenger-Services MÜSSEN von den Herstellern vor Beginn der Testphase eingerichtet und die Daten (Organisationsnamen usw.) MÜSSEN an die gematik übermittelt werden.
+In den folgenden Abbildungen wird das interne sowie das externe Testtreiber-Modul dargestellt.
+
+=== internes Testtreiber-Modul
+
+=== externes Testtreiber-Modul
+
+== Verpflichtung nach der Zulassung
+Der TI-Messenger-Anbieter MUSS eine Referenz-Instanz und mindestens eine Test-Instanz des TI-Messenger-Fachdienstes und TI-Messenger-Clients bereitstellen und betreiben. Die Referenz-Instanz hat die gleiche Version wie die Produktionsumgebung und kann von anderen Herstellern für Tests und Entwicklung gegen die zugelassene Version benutzt werden. Weiterhin wird die Referenz-Instanz für die Reproduktion aktueller Fehler/Probleme aus der Produktionsumgebung genutzt. Der Zugriff auf die Referenz-Instanz MUSS für die gematik zur Fehleranalyse gewährleistet sein.
+Die Test-Instanz dient den Herstellern bei der Entwicklung neuer TI-Messenger-Clients und TI-Messenger Fachdienste Versionen, den IOP-Tests zwischen den verschiedenen TI-Messenger-Anbietern und wird auch von der gematik für die Zulassung genutzt.
+Der TI-Messenger-Anbieter MUSS die verschiedenen Benutzer der Referenz-Instanz und der Test-Instanz koordinieren (Verwaltung eines Test-/Nutzungsplans). Bei Bedarf (Entwicklung verschiedener Versionen, hoher Auslastung durch andere Hersteller oder durch die gematik) MUSS der TI-Messenger-Anbieter auch mehrere Test-Instanzen mit der gleichen oder mit verschiedene Versionen bereitstellen und betreiben.
+
+image:diagrams/Test/nach_der_Zulassung-Seite-1.png[align="left",width="100%", title="Verpflichtung nach der Zulassung"]
