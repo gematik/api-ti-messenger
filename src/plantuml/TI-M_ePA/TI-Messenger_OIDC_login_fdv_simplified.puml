@@ -1,9 +1,8 @@
 @startuml "TI-Messenger_OIDC_Login_simplified"
 skinparam sequenceMessageAlign direction
 skinparam WrapWidth 300
-skinparam minClassWidth 150
 skinparam BoxPadding 1
-skinparam ParticipantPadding 50
+skinparam ParticipantPadding 25
 skinparam sequenceReferenceHeaderBackgroundColor palegreen
 scale max 2048 width
 skinparam maxMessageSize 400
@@ -31,13 +30,16 @@ autonumber
 
 actor us as "Akteur in der\nRolle Versicherter"
 box <size:19>Endgerät</size> #WhiteSmoke
-  participant app as "TI-M Client\n(Browser)"
+    participant app [
+      ePA-FdV
+      ----
+      TI-M Client
+    ]
 end box
 box <size:19>TI-Messenger Service</size> #WhiteSmoke
   participant pr as "Messenger-Proxy"
-  participant hs as "Matrix\nHomeserver\n(Relying party für IDP)"
+  participant hs as "Matrix-Homeserver\n(Relying party für IDP)"
 end box
-participant mc as "Webserver"
 participant idp as "Sektoraler\nIDP"
 
 |||
@@ -45,9 +47,6 @@ participant idp as "Sektoraler\nIDP"
 us -> app: starte App
 
 activate app
-  app -> mc: Lade Matrix-Web-Client
-  activate mc
-  mc --> app --: Webanwendung
   group <size:16>OIDC Login</size>
     app -> hs ++: GET ""{homeserver_client_api_url}""/login
     hs --> app --: 200 OK (:Login Types)
@@ -73,7 +72,7 @@ activate app
 
       idp --> pr --: 200 OK (:request_uri)
       |||
-      pr --> app --: 302 Redirect ""{sektoraler_idp_url}""/login/oauth/authorize (request_uri)
+      pr --> app --: 302 Redirect ""{sektoraler_idp_url}""/login/oauth/authorize (:request_uri)
       |||
     end
     |||
@@ -112,13 +111,6 @@ activate app
     note right
     HTML Consent Page, Zugriff
     TIM-Web-App auf Matrix Account
-    end note
-    |||
-    app -> mc ++: GET ""{client_url}"" (loginToken)
-    mc --> app--: 200 OK
-    note right
-    personalisierte HTML-
-    Seite für den Client
     end note
     |||
     app -> hs ++: POST ""{homeserver_client_api_url}""/login (loginToken, initial_device_display_name)
