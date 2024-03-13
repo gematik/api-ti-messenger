@@ -95,7 +95,7 @@ TI-Messenger Dokumentation
 |   ├──── link:docs/IDP[IDP]
 |   ├──── link:docs/Primaersystem[Primaersystem]
 |   ├──── link:docs/anwendungsfaelle[Anwendungsfälle]
-|   ├──── link:docs/Test.adoc[Testkonzept]
+|   ├──── link:docs/Test/Test.adoc[Testkonzept]
 |   └──── link:docs/FAQ[FAQ]
 ├─ link:images[images] (Bildarchiv)
 │   └──── link:images/diagrams[diagrams] (gerenderte Diagramme)
