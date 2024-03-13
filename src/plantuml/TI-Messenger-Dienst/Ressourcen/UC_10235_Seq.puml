@@ -1,0 +1,108 @@
+@startuml "Einträge im VZD-FHIR-Directory suchen"
+skinparam sequenceMessageAlign direction
+skinparam minClassWidth 200
+skinparam BoxPadding 1
+skinparam sequenceReferenceHeaderBackgroundColor palegreen
+skinparam sequenceReferenceBackgroundColor Beige
+scale max 2048 width
+
+skinparam sequence {
+ArrowColor black
+ArrowFontSize 17
+ActorBorderColor black
+LifeLineBorderColor black
+LifeLineBackgroundColor Gainsboro
+
+ParticipantBorderColor Motivation
+ParticipantBackgroundColor Motivation
+ParticipantFontSize 20
+ParticipantFontColor black
+ParticipantBorderColor Black
+ParticipantBackgroundColor MOTIVATION
+
+ActorBackgroundColor Gainsboro
+ActorFontColor black
+ActorFontSize 20
+}
+
+autonumber
+
+actor U as "Akteur in der Rolle\nUser"
+participant cl as "TI-Messenger-Client"
+participant mp as "Messenger Proxy"
+participant hs as "Matrix-Homeserver"
+box <size:18>VZD-FHIR-Directory</size> #WhiteSmoke
+  participant fp as "FHIR-Proxy"
+  participant au as "Auth-Service"
+  participant fd as "FHIR-Directory"
+end box
+
+|||
+note over U, hs: \n<size:17>Der Akteur ist erfolgreich beim Messenger-Service angemeldet</size>\n
+|||
+activate cl
+U->cl:Suchparameter für \nFHIR-Ressourcen \n eingeben
+|||
+group#LightGrey <size:16>Prüfung/Erhalt search-accesstoken</size>
+  |||
+  note over U
+  <size:16>dieser Akteur entspricht</size>
+  <size:16>dem "Nutzer" im folgenden</size>
+  <size:16>referenzierten Anwendungsfall</size>
+  end note
+  ref over U, cl, mp, hs, fp, au, fd
+  <size:17>gemSpec_VZD_FHIR_Directory#AF_10036-01</size>
+  |||
+  end ref
+  |||
+end group
+
+alt#LightGrey <size:16>gültiges search-accesstoken erhalten</size>
+|||
+  alt#LightGrey #AliceBlue <size:16>HealthcareService-Einträge werden gesucht</size>
+    |||
+    cl->fp: GET /search/HealthcareService/?organization.active=true&... (search-accesstoken)
+    note left
+    <size:16>Finde Datensatz für TelematikID</size>
+    end note
+    activate fp
+    fp->fp: prüfe search-accesstoken
+    |||
+    fp->fd: GET /search/HealthcareService/?organization.active=true&...
+    activate fd
+    fd-->fp: HTTP 200 (:Suchergebnis FHIR-Bundle)
+      deactivate fd
+    fp-->cl: HTTP 200 (:Suchergebnis FHIR-Bundle)
+    deactivate fp
+    cl-->U: Suchergebnis
+    |||
+  else <size:16>PractitionerRole-Einträge werden gesucht</size>
+    |||
+    cl->fp: GET /search/PractitionerRole/?practitioner.active=true&... (search-accesstoken)
+    note left
+    <size:16>Finde Datensatz für MXID</size>
+    end note
+    activate fp
+    fp->fp: prüfe search-accesstoken
+    |||
+    fp->fd: GET /search/PractitionerRole/?practitioner.active=true&...
+    activate fd
+    fd-->fp: HTTP 200 (:Suchergebnis FHIR-Bundle)
+      deactivate fd
+    fp-->cl: HTTP 200 (:Suchergebnis FHIR-Bundle)
+    deactivate fp
+    cl-->U: Suchergebnis
+    |||
+  end
+|||
+else <size:16>kein gültiges search-accesstoken</size>
+  break#LightGrey #MistyRose
+    cl->fp++: GET /search/.../?... (search-accesstoken)
+    fp-->cl--: HTTP 401
+    cl-->U: Fehlermeldung
+  |||
+  end
+|||
+end
+
+@enduml
