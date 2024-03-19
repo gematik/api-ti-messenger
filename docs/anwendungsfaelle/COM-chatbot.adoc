@@ -43,12 +43,12 @@ B. Konfiguration von Funktionsaccounts:
 * Die Zuordnung von Akteuren zu einzelnen Anfragen innerhalb eines Funktionsaccounts (z. B. Terminanfragen, Medikationsentscheidung) erfolgt durch die Konfiguration im Chatbot.
 
 C. Beispielhafter Ablauf (siehe Abbildung "Kommunikation mit einem Chatbot"):
-. Es liegt ein kardiologisches Problem vor und der Akteur sucht nach einer Organisation und/oder Unterstruktur dieser Organisation (z. B. in seinem Krankenhaus die Abteilung Kardiologie)
-. Der Akteur öffnet einen Chatraum mit dem Funktionsaccount der Abteilung Kardiologie
-. Der Chatbot des Funktionsaccounts der Abteilung Kardiologie betritt den Raum und erfragt das Anliegen vom Akteur (z. B. Terminanfrage, Rückfrage an Arzt etc.) abfragen
-. Der Akteur antwortet dem Chatbot
-. Der Chatbot lädt je nach Anliegen die ihm zugeordneten und verfügbaren Akteure in den Chatraum ein
-. Eingeladene Akteure betreten den Chatraum mit ihrem Displaynamen und kommunizieren mit dem Akteur
+. Es liegt ein kardiologisches Problem vor und der Akteur sucht nach einer Organisation und/oder Unterstruktur dieser Organisation. (z. B. in seinem Krankenhaus die Abteilung Kardiologie)
+. Der Akteur öffnet einen Chatraum mit dem Funktionsaccount der Abteilung Kardiologie.
+. Der Chatbot des Funktionsaccounts der Abteilung Kardiologie betritt den Raum und erfragt das Anliegen vom Akteur (z. B. Terminanfrage, Rückfrage an Arzt etc.) abfragen.
+. Der Akteur antwortet dem Chatbot.
+. Der Chatbot lädt je nach Anliegen die ihm zugeordneten und verfügbaren Akteure in den Chatraum ein.
+. Eingeladene Akteure betreten den Chatraum mit ihrem Displaynamen und kommunizieren mit dem Akteur.
 
 .Kommunikation mit einem Chatbot
 [%collapsible%open]
