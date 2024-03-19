@@ -56,4 +56,4 @@ Die folgenden Anwendungsfälle beschreiben den Anmeldevorgang, die Einladung and
 
 * link:COM-AF10062-events-ausserhalb.adoc[AF_10062 - Austausch von Events zwischen Akteuren ausserhalb einer Organisation]
 
-* link:
+* link:COM-chatbot.adoc[Kommunikation mit einem Chatbot]
