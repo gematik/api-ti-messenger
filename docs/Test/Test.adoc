@@ -74,3 +74,18 @@ Die Test-Instanz dient den Herstellern bei der Entwicklung neuer TI-Messenger-Cl
 Der TI-Messenger-Anbieter MUSS die verschiedenen Benutzer der Referenz-Instanz und der Test-Instanz koordinieren (Verwaltung eines Test-/Nutzungsplans). Bei Bedarf (Entwicklung verschiedener Versionen, hoher Auslastung durch andere Hersteller oder durch die gematik) MUSS der TI-Messenger-Anbieter auch mehrere Test-Instanzen mit der gleichen oder mit verschiedene Versionen bereitstellen und betreiben.
 
 image:diagrams/Test/nach_der_Zulassung-Seite-1.png[align="left",width="100%", title="Verpflichtung nach der Zulassung"]
+
+
+image:diagrams/Test/Anschaltung der Testtreiber Clients-1.png[align="left",width="100%", title="Verpflichtung nach der Zulassung"]
+
+image:diagrams/Test/HerstellerInstanz-1.png[align="left",width="100%", title="Verpflichtung nach der Zulassung"]
+
+image:diagrams/Test/IOP Pools-1.png[align="left",width="100%", title="Verpflichtung nach der Zulassung"]
+
+image:diagrams/Test/Testumgebung Basis-1.png[align="left",width="100%", title="Verpflichtung nach der Zulassung"]
+
+image:diagrams/Test/Testumgebung ePA-1.png[align="left",width="100%", title="Verpflichtung nach der Zulassung"]
+
+image:diagrams/Test/Zulassung TIM-Basis.png[align="left",width="100%", title="Verpflichtung nach der Zulassung"]
+
+image:diagrams/Test/Zulassung TIM-ePA.png[align="left",width="100%", title="Verpflichtung nach der Zulassung"]
