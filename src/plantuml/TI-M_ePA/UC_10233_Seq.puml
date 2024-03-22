@@ -46,7 +46,7 @@ Activate MP
 MP->MP: prüfe den Sender und den Empfänger des Invite-Event\n auf Zugehörigkeit zu einer Versichertendomain 
 |||
 break #MistyRose <size:16>Sender und Empfänger sind beide Versicherte</size> 
-MP->MP: <font color=red>HTTP 401 Unauthorized</font>
+MP->MP: <font color=red>HTTP 403 Forbidden</font>
 end
 
 MP->MH: HTTP(S) Forward
