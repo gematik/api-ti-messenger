@@ -35,6 +35,11 @@ box <size:19>Endgerät</size> #WhiteSmoke
       ----
       TI-M Client
     ]
+     participant auth [
+      ePA-FdV
+      ----
+      Authenticator-Modul
+    ]
 end box
 box <size:19>TI-Messenger Service</size> #WhiteSmoke
   participant pr as "Messenger-Proxy"
@@ -70,28 +75,31 @@ activate app
       |||
       pr -> idp ++: POST ""{sektoraler_idp_url}""/par (response_type, redirect_uri, code_challenge, scope)
 
-      idp --> pr --: 200 OK (:request_uri)
+      idp --> pr --: 201 CREATED (:request_uri)
       |||
       pr --> app --: 302 Redirect ""{sektoraler_idp_url}""/login/oauth/authorize (:request_uri)
       |||
     end
     |||
     group #LightBlue <size:16>IDP Authentisierung mit nutzerspezifischer Authentifizierung</size>
-      app -> idp ++: GET ""{sektoraler_idp_url}""/login/oauth/authorize (request_uri)
-      note left
-      Nutzung von Identifikationsmerkmalen,
-      die vom IDP vorgegeben sind
-      end note
+      app -> auth ++ : Authorization Request(request_uri)
+      
       |||
-      group #DarkGray <size:16>vom IDP vorgegebenes Auth-Verfahren</size>
-        idp --> app: Challenge
-        app -> us: Consent Page
-        us --> app: Approval
-        app -> idp: Response
+      group #DarkGray <size:16>Authenticator Modul IDP-sek</size>
+        auth -> idp ++: GET ""{sektoraler_idp_url}""/login/oauth/authorize (request_uri)
+        idp --> auth: Challenge
+        auth -> us: Consent Page
+        us --> auth: Approval
+        auth -> idp: Response
+        note left
+        Nutzung von Identifikationsmerkmalen,
+        die vom IDP vorgegeben sind
+        end note
+        idp --> auth --: 302 Redirect ""{redirect_uri}"" (:auth_code, :state)
       |||
       end
       |||
-      idp --> app --: 302 Redirect ""{redirect_uri}"" (:auth_code, :state)
+      auth ->app: Redirect(redirect_uri, AUTH_CODE)
       |||
     end
     |||
