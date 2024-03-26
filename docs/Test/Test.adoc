@@ -138,7 +138,7 @@ Weiterhin wird ein dauerhaftes Continuous Testing eingeführt. Diese Continuous 
 
 ==== IOP Tests TI-Messenger ePA
 
-In der folgenden Abbildung ist eine Systemumgebung für Herstellertests TI-Messenger ePA dargestellt. Bei Problemen im Rahmen der IOP Tests MÜSSEN die Anbieter des Fachdienstes und des FdVs bei der Analyse unterstützen.
+Für den TI-Messenger ePA gelten ebenso die im Kap. 3.2.1 beschriebenen Anforderungen an den IOP Test.  In der folgenden Abbildung ist eine Systemumgebung für Herstellertests TI-Messenger ePA dargestellt. Bei Problemen im Rahmen der IOP Tests MÜSSEN die Anbieter des Fachdienstes und des FdVs bei der Analyse unterstützen.
 
 .Abbildung{counter:abbildung: 1}: IOP Test TI-Messenger ePA
 image:diagrams/Test/Testumgebung ePA-1.png[align="left",width="100%", title="IOP Test TI-Messenger ePA"]
