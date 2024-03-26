@@ -42,6 +42,7 @@ usecase "**<<AF_10104>>** \nEinladung von Akteuren \ninnerhalb einer Organisatio
 usecase "**<<AF_10063>>** \nAustausch von Events \nzwischen Akteuren \ninnerhalb einer Organisation" as UC3 #AliceBlue
 usecase "**<<AF_10061>>** \nEinladung von Akteuren \naußerhalb einer Organisation" as UC4 #Ivory
 usecase "**<<AF_10062>>** \nAustausch von Events \nzwischen Akteuren \naußerhalb einer Organisation" as UC5 #Ivory
+usecase "**<<AF_10235>>** \nEinträge im VZD-FHIR-Directory suchen" as UC6 #IndianRed
 }
 
 u --> UC1
@@ -49,7 +50,7 @@ u --> UC2
 u --> UC3
 u --> UC4
 u --> UC5
-
+u --> UC6
 
 note top of (u)
 Mitarbeiter einer Organisation
