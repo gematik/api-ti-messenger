@@ -18,6 +18,17 @@ image:meta/gematik_logo.svg[width=70%]
 
 toc::[]
 
+= Testkonzept TI-Messenger-Dienst
+gematik
+| Version 1.0 | Stand: 26.03.2024
+
+Dokumentenhistorie
+[cols='10%,10%,10%,60%,10%']
+|===
+| *Version*  |*Stand*      | *Kap.* | *Grund der Änderung, besondere Hinweise* | *Bearbeiter*
+| 1.0        | 26.03.2024  |        | Erstellung                               | gematik
+|===
+
 == Test und Zertifizierung der TI-Messenger
 Für die Produkt und die Anbieter Zulassung MÜSSEN die TI-Messenger-Fachdienste und TI-Messenger-Clients bereitgestellt werden. Um einen automatisierten Test für den TI-Messenger-Dienst zu ermöglichen, MUSS die Test-App des TI-Messenger-Clients zusätzlich ein Testtreiber-Modul intern oder extern zur Verfügung stellen. Dieses MUSS die Funktionalitäten der produktspezifischen Schnittstelle des TI-Messenger-Clients über eine standardisierte Schnittstelle von außen zugänglich machen und einen Fernzugriff ermöglichen. Das Testtreiber-Modul MUSS die Ausgaben des TI-Messenger-Clients gemäß der technischen Schnittstelle aufarbeiten, aber DARF NICHT die Inhalte verfälschen.
 
