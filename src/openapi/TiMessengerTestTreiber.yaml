@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: TiMessengerTestDriver
   description: REST interface to automate the test of a TI-Messenger client implementation.
-  version: 0.9.4
+  version: 0.9.5
   contact:
     name: gematik GmbH
     email: software-development@gematik.de
@@ -65,11 +65,19 @@ tags:
     description: contact management operations
   - name: media
     description: media file upload and download
+  - name: authorizationManagement
+    description: authorization management operations
+  - name: TI-M Pro
+    description: all operations used in TI-Messenger Pro and TI-Messenger Version 1.1.x
+  - name: TI-M_ePA
+    description: all operations used in TI-Messenger ePA
 
 paths:
   /:
     get:
       tags:
+        - TI-M Pro
+        - TI-M_ePA
         - info
       description: Returns the meta data of this interface.
       operationId: getInfo
@@ -87,6 +95,8 @@ paths:
 
     post:
       tags:
+        - TI-M Pro
+        - TI-M_ePA
         - signalTestStart
       description: Implementation is optional! Testsuite sends a request to the org-admin endpoint of each involved homeserver (even if the org-admin is not named in the feature-file). There will be no claiming attempt before triggering this endpoint. After getting any response the testcase starts. This is an opportunity for the org-admin to clean user/rooms/FHIR-VZD etc. Even if errorcode returned the testsuite will start the test.
       operationId: cleanUp
@@ -103,6 +113,8 @@ paths:
   /devices:
     get:
       tags:
+        - TI-M Pro
+        - TI-M_ePA
         - devices
       description: "Returns the connected devices and the information of the deposited HBA/SMC-B if existing"
       operationId: getDevices
@@ -123,6 +135,8 @@ paths:
 
     post:
       tags:
+        - TI-M Pro
+        - TI-M_ePA
         - devices
       description: "Claims a device for exclusive use."
       operationId: claimDevice
@@ -153,6 +167,8 @@ paths:
 
     post:
       tags:
+        - TI-M Pro
+        - TI-M_ePA
         - devices
       description: "Unclaims a previously claimed device."
       operationId: unclaimDevice
@@ -172,6 +188,36 @@ paths:
         default:
           $ref: "#/components/responses/DefaultResponse"
 
+  /devices/{deviceId}/account:
+    parameters:
+      - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/transactionIdHeader"
+
+    get:
+      tags:
+        - TI-M Pro
+        - TI-M_ePA
+        - account
+      description: "Returns the account data or if no account is registered returns the authentication flows supported by the homeserver."
+      operationId: readAccount
+      responses:
+        "200":
+          description: "account data of the logged in account"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Account"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
   /devices/{deviceId}/login:
     parameters:
       - $ref: "#/components/parameters/deviceId"
@@ -180,6 +226,8 @@ paths:
     get:
       description: "Retrieve list of possible authentication flows"
       tags:
+        - TI-M Pro
+        - TI-M_ePA
         - login/logout
       operationId: getLoginOptions
       responses:
@@ -203,6 +251,8 @@ paths:
     post:
       description: "login to an account. If no login data is provided, a preconfigured account should be used. In case the device has a HBA/SMC-B its data should be used"
       tags:
+        - TI-M Pro
+        - TI-M_ePA
         - login/logout
       operationId: login
       requestBody:
@@ -236,6 +286,8 @@ paths:
     post:
       description: "logout"
       tags:
+        - TI-M Pro
+        - TI-M_ePA
         - login/logout
       operationId: logout
       responses:
@@ -250,34 +302,6 @@ paths:
         default:
           $ref: "#/components/responses/DefaultResponse"
 
-  /devices/{deviceId}/account:
-    parameters:
-      - $ref: "#/components/parameters/deviceId"
-      - $ref: "#/components/parameters/transactionIdHeader"
-
-    get:
-      tags:
-        - account
-      description: "Returns the account data or if no account is registered returns the authentication flows supported by the homeserver."
-      operationId: readAccount
-      responses:
-        "200":
-          description: "account data of the logged in account"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Account"
-        "400":
-          $ref: "#/components/responses/BadRequest"
-        "401":
-          $ref: "#/components/responses/Unauthorized"
-        "403":
-          $ref: "#/components/responses/Forbidden"
-        "404":
-          $ref: "#/components/responses/NotFound"
-        default:
-          $ref: "#/components/responses/DefaultResponse"
-
   /devices/{deviceId}/account/key:
     parameters:
       - $ref: "#/components/parameters/deviceId"
@@ -285,6 +309,8 @@ paths:
 
     get:
       tags:
+        - TI-M Pro
+        - TI-M_ePA
         - keyExchange
       description: "Exports secret key for device synchronization. The key could be in any format but has to be understood by every provided test-driver-api per distributor!"
       operationId: keyExport
@@ -304,6 +330,8 @@ paths:
 
     post:
       tags:
+        - TI-M Pro
+        - TI-M_ePA
         - keyExchange
       description: "Imports secret key and execute synchronization"
       operationId: keyImport
@@ -322,38 +350,14 @@ paths:
         default:
           $ref: "#/components/responses/DefaultResponse"
 
-
-  /devices/{deviceId}/fhir/fhirAuthenticate:
-    parameters:
-      - $ref: "#/components/parameters/deviceId"
-      - $ref: "#/components/parameters/transactionIdHeader"
-
-    post:
-      tags:
-        #- orgAdminFhirAdministration
-        - practitionerFhirAdministration
-      description: "This request starts the OIDC authentication for getting access to change the own FHIR entry."
-      operationId: authenticateOnFhirDirectory
-      responses:
-        "200":
-          description: "OIDC flow with IDP successfully completed"
-        "401":
-          $ref: "#/components/responses/Unauthorized"
-        "403":
-          $ref: "#/components/responses/Forbidden"
-        "404":
-          $ref: "#/components/responses/NotFound"
-        "501":
-          description: "Unimplemented - if the underlying client does not support FHIR-VZD authentication"
-        default:
-          $ref: "#/components/responses/DefaultResponse"
-
   /devices/{deviceId}/fhir/org:
     parameters:
       - $ref: "#/components/parameters/deviceId"
       - $ref: "#/components/parameters/transactionIdHeader"
     get:
       tags:
+        - TI-M Pro
+        - TI-M_ePA
         - orgAdminFhirOrganization
       description: "Get organization from the selected device"
       operationId: getOrganization
@@ -374,6 +378,7 @@ paths:
 
     get:
       tags:
+        - TI-M Pro
         - orgAdminFhirHealthcareService
       description: "Get healthcareServices regarding the organization that belongs to the claimed device 
       (the search result could also contain all other resources that are related with it.
@@ -391,6 +396,7 @@ paths:
 
     post:
       tags:
+        - TI-M Pro
         - orgAdminFhirHealthcareService
       description: "Created new healthcare-service and returns the ressource of the created healthcareService"
       operationId: createHealthcareService
@@ -419,6 +425,7 @@ paths:
 
     get:
       tags:
+        - TI-M Pro
         - orgAdminFhirHealthcareService
       description: "Get specific healthcareService regarding"
       operationId: getHealthcareService
@@ -436,6 +443,7 @@ paths:
 
     put:
       tags:
+        - TI-M Pro
         - orgAdminFhirHealthcareService
       description: "Changes healthcareService accordingly"
       operationId: updateHealthcareService
@@ -460,124 +468,13 @@ paths:
 
     delete:
       tags:
+        - TI-M Pro
         - orgAdminFhirHealthcareService
       description: "Delete specific healthcareService regarding"
       operationId: deleteHealthcareService
       responses:
         "204":
           description: "Successfully delete healthcare service"
-        "404":
-          $ref: "#/components/responses/NotFound"
-        default:
-          $ref: "#/components/responses/DefaultResponse"
-
-  /devices/{deviceId}/fhir/org/healthcareService/{hsId}/location:
-    parameters:
-      - $ref: "#/components/parameters/deviceId"
-      - $ref: "#/components/parameters/transactionIdHeader"
-      - $ref: "#/components/parameters/healthcareServiceId"
-
-    get:
-      tags:
-        - orgAdminFhirLocations
-      description: "Get all locations for healthcare service 
-      (the search result could also contain all other resources that are related with it.
-      Please ensure that the searched resources are included at any time!)"
-      operationId: getLocations
-      responses:
-        "200":
-          description: "Successfully get all locations for healthcare service"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/FhirSearchResult"
-        "404":
-          $ref: "#/components/responses/NotFound"
-        default:
-          $ref: "#/components/responses/DefaultResponse"
-
-    post:
-      tags:
-        - orgAdminFhirLocations
-      description: "Create location and return the created resource"
-      operationId: createLocation
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/FhirLocation"
-      responses:
-        "201":
-          description: "Successful created"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/FhirLocation"
-        "400":
-          $ref: "#/components/responses/BadRequest"
-        "404":
-          $ref: "#/components/responses/NotFound"
-        default:
-          $ref: "#/components/responses/DefaultResponse"
-
-  /devices/{deviceId}/fhir/org/healthcareService/{hsId}/location/{locId}:
-    parameters:
-      - $ref: "#/components/parameters/deviceId"
-      - $ref: "#/components/parameters/transactionIdHeader"
-      - $ref: "#/components/parameters/healthcareServiceId"
-      - $ref: "#/components/parameters/locationId"
-
-    get:
-      description: "Returns information about the requested location"
-      tags:
-        - orgAdminFhirLocations
-      operationId: getLocation
-      responses:
-        "200":
-          description: "Successfully get Location"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/FhirLocation"
-        "404":
-          $ref: "#/components/responses/NotFound"
-        default:
-          $ref: "#/components/responses/DefaultResponse"
-
-    put:
-      tags:
-        - orgAdminFhirLocations
-      description: "Updates a Location"
-      operationId: updateLocation
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/FhirLocation"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/FhirLocation"
-          description: "Successfully updated location"
-        "400":
-          $ref: "#/components/responses/BadRequest"
-        "404":
-          $ref: "#/components/responses/NotFound"
-        default:
-          $ref: "#/components/responses/DefaultResponse"
-
-    delete:
-      tags:
-        - orgAdminFhirLocations
-      description: "Deletes a location"
-      operationId: deleteLocation
-      responses:
-        "204":
-          description: "Successfully delete location"
-        "400":
-          $ref: "#/components/responses/BadRequest"
         "404":
           $ref: "#/components/responses/NotFound"
         default:
@@ -591,6 +488,7 @@ paths:
 
     get:
       tags:
+        - TI-M Pro
         - orgAdminFhirEndpoints
       description: "Get all endpoints for healthcare-service.
       (the search result could also contain all other resources that are related with it.
@@ -610,6 +508,7 @@ paths:
 
     post:
       tags:
+        - TI-M Pro
         - orgAdminFhirEndpoints
       description: "Create endpoint"
       operationId: createEndpoint
@@ -642,6 +541,7 @@ paths:
     get:
       description: "Returns information about the requested endpoint"
       tags:
+        - TI-M Pro
         - orgAdminFhirEndpoints
       operationId: getEndpoint
       responses:
@@ -658,6 +558,7 @@ paths:
 
     put:
       tags:
+        - TI-M Pro
         - orgAdminFhirEndpoints
       description: "Updates an endpoint"
       operationId: updateEndpoint
@@ -682,6 +583,7 @@ paths:
 
     delete:
       tags:
+        - TI-M Pro
         - orgAdminFhirEndpoints
       description: "Deletes a endpoint"
       operationId: deleteEndpoint
@@ -693,6 +595,148 @@ paths:
         default:
           $ref: "#/components/responses/DefaultResponse"
 
+  /devices/{deviceId}/fhir/org/healthcareService/{hsId}/location:
+    parameters:
+      - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/transactionIdHeader"
+      - $ref: "#/components/parameters/healthcareServiceId"
+
+    get:
+      tags:
+        - TI-M Pro
+        - orgAdminFhirLocations
+      description: "Get all locations for healthcare service 
+      (the search result could also contain all other resources that are related with it.
+      Please ensure that the searched resources are included at any time!)"
+      operationId: getLocations
+      responses:
+        "200":
+          description: "Successfully get all locations for healthcare service"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FhirSearchResult"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+    post:
+      tags:
+        - TI-M Pro
+        - orgAdminFhirLocations
+      description: "Create location and return the created resource"
+      operationId: createLocation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FhirLocation"
+      responses:
+        "201":
+          description: "Successful created"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FhirLocation"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+  /devices/{deviceId}/fhir/org/healthcareService/{hsId}/location/{locId}:
+    parameters:
+      - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/transactionIdHeader"
+      - $ref: "#/components/parameters/healthcareServiceId"
+      - $ref: "#/components/parameters/locationId"
+
+    get:
+      description: "Returns information about the requested location"
+      tags:
+        - TI-M Pro
+        - orgAdminFhirLocations
+      operationId: getLocation
+      responses:
+        "200":
+          description: "Successfully get Location"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FhirLocation"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+    put:
+      tags:
+        - TI-M Pro
+        - orgAdminFhirLocations
+      description: "Updates a Location"
+      operationId: updateLocation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FhirLocation"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FhirLocation"
+          description: "Successfully updated location"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+    delete:
+      tags:
+        - TI-M Pro
+        - orgAdminFhirLocations
+      description: "Deletes a location"
+      operationId: deleteLocation
+      responses:
+        "204":
+          description: "Successfully delete location"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+  /devices/{deviceId}/fhir/fhirAuthenticate:
+    parameters:
+      - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/transactionIdHeader"
+
+    post:
+      tags:
+        - TI-M Pro
+        - practitionerFhirAdministration
+      description: "This request starts the OIDC authentication for getting access to change the own FHIR entry."
+      operationId: authenticateOnFhirDirectory
+      responses:
+        "200":
+          description: "OIDC flow with IDP successfully completed"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "501":
+          description: "Unimplemented - if the underlying client does not support FHIR-VZD authentication"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
   /devices/{deviceId}/fhir/mxidInFhirDirectory:
     parameters:
       - $ref: "#/components/parameters/deviceId"
@@ -700,6 +744,7 @@ paths:
 
     post:
       tags:
+        - TI-M Pro
         - practitionerFhirAdministration
       description: "Set the MXID in the own practitioner FHIR resource and the created endpoint"
       operationId: setMxidInFhirDirectory
@@ -725,6 +770,7 @@ paths:
 
     get:
       tags:
+        - TI-M Pro
         - practitionerFhirAdministration
       description: "Returns the own practitioner entry with belonging resources from the FHIR Directory."
       operationId: readMxidInFhirDirectory
@@ -748,6 +794,7 @@ paths:
 
     delete:
       tags:
+        - TI-M Pro
         - practitionerFhirAdministration
       description: "Remove the MXID in the own Practitioner FHIR resource."
       operationId: removeMxidInFhirDirectory
@@ -772,6 +819,7 @@ paths:
 
     get:
       tags:
+        - TI-M Pro
         - searchOnHomeserver
       description: "Returns a list of users on same homeserver that matches search parameters"
       operationId: searchOnHomeserver
@@ -809,6 +857,8 @@ paths:
 
     get:
       tags:
+        - TI-M Pro
+        - TI-M_ePA
         - searchInFhirDirectory
       description: "Returns all belonging resources of an organization"
       operationId: searchOrganizationInFhirDirectory
@@ -881,6 +931,8 @@ paths:
 
     get:
       tags:
+        - TI-M Pro
+        - TI-M_ePA
         - searchInFhirDirectory
       description: "Returns the found endpoints of healthcare-services matching query.
       (the search result could also contain all other resources that are related with it.
@@ -920,6 +972,8 @@ paths:
 
     get:
       tags:
+        - TI-M Pro
+        - TI-M_ePA
         - searchInFhirDirectory
       description: "Returns the found Practitioner entries and its belonging location, endpoints and practitioner roles"
       operationId: searchPractitionerInFhirDirectory
@@ -977,6 +1031,8 @@ paths:
 
     post:
       tags:
+        - TI-M Pro
+        - TI-M_ePA
         - message
       description: "Send a direct message to another user. Should work without creating a dedicated room first. The recipients MxId is received through a searchInFhirDirectory-Request."
       operationId: sendDirectMessage
@@ -1003,164 +1059,6 @@ paths:
         default:
           $ref: "#/components/responses/DefaultResponse"
 
-  /devices/{deviceId}/rooms:
-    parameters:
-      - $ref: "#/components/parameters/deviceId"
-      - $ref: "#/components/parameters/transactionIdHeader"
-
-    get:
-      tags:
-        - room
-      operationId: getRooms
-      description: "get list of all rooms your account is associated with"
-      responses:
-        "200":
-          description: "all associated rooms of the logged in account"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Rooms"
-        "401":
-          $ref: "#/components/responses/Unauthorized"
-        "403":
-          $ref: "#/components/responses/Forbidden"
-        "404":
-          $ref: "#/components/responses/NotFound"
-        default:
-          $ref: "#/components/responses/DefaultResponse"
-
-    post:
-      tags:
-        - room
-      description: "Create a room."
-      operationId: createRoom
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/CreateRoomRequest"
-      responses:
-        "201":
-          description: "Room created"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Room"
-        "400":
-          $ref: "#/components/responses/BadRequest"
-        "401":
-          $ref: "#/components/responses/Unauthorized"
-        "403":
-          $ref: "#/components/responses/Forbidden"
-        "404":
-          $ref: "#/components/responses/NotFound"
-        default:
-          $ref: "#/components/responses/DefaultResponse"
-
-  /devices/{deviceId}/rooms/public:
-    parameters:
-      - $ref: "#/components/parameters/deviceId"
-      - $ref: "#/components/parameters/transactionIdHeader"
-
-    get:
-      tags:
-        - room
-      description: "Get public rooms matching params"
-      operationId: getPublicRooms
-      parameters:
-        - name: name
-          in: query
-          description: "Full- or partial name of the Room"
-          schema:
-            type: string
-
-      responses:
-        "200":
-          description: "all associated rooms of the logged in account"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Rooms"
-        "401":
-          $ref: "#/components/responses/Unauthorized"
-        "403":
-          $ref: "#/components/responses/Forbidden"
-        "404":
-          $ref: "#/components/responses/NotFound"
-        default:
-          $ref: "#/components/responses/DefaultResponse"
-
-  /devices/{deviceId}/rooms/{roomId}:
-    parameters:
-      - $ref: "#/components/parameters/deviceId"
-      - $ref: "#/components/parameters/transactionIdHeader"
-      - $ref: "#/components/parameters/roomId"
-    get:
-      tags:
-        - room
-      description: "Get the room settings."
-      operationId: getRoomSettings
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Room"
-        "401":
-          $ref: "#/components/responses/Unauthorized"
-        "403":
-          $ref: "#/components/responses/Forbidden"
-        "404":
-          $ref: "#/components/responses/NotFound"
-        default:
-          $ref: "#/components/responses/DefaultResponse"
-
-    put:
-      tags:
-        - room
-      description: "Change the room settings."
-      operationId: changeRoomSettings
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/RoomProperties"
-      responses:
-        "200":
-          description: "Successfully changed room settings"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Room"
-        "400":
-          $ref: "#/components/responses/BadRequest"
-        "401":
-          $ref: "#/components/responses/Unauthorized"
-        "403":
-          $ref: "#/components/responses/Forbidden"
-        "404":
-          $ref: "#/components/responses/NotFound"
-        default:
-          $ref: "#/components/responses/DefaultResponse"
-
-    delete:
-      tags:
-        - room
-      description: "Forget about this room."
-      operationId: forgetRoom
-      responses:
-        "204":
-          description: "room forgotten"
-        "401":
-          $ref: "#/components/responses/Unauthorized"
-        "403":
-          $ref: "#/components/responses/Forbidden"
-        "404":
-          $ref: "#/components/responses/NotFound"
-        default:
-          $ref: "#/components/responses/DefaultResponse"
-
   /devices/{deviceId}/rooms/{roomId}/messages:
     parameters:
       - $ref: "#/components/parameters/deviceId"
@@ -1169,6 +1067,8 @@ paths:
 
     get:
       tags:
+        - TI-M Pro
+        - TI-M_ePA
         - message
       description: "list messages in room"
       operationId: getMessages
@@ -1190,6 +1090,8 @@ paths:
 
     post:
       tags:
+        - TI-M Pro
+        - TI-M_ePA
         - message
       description: "send a new message"
       operationId: sendMessage
@@ -1226,6 +1128,8 @@ paths:
     get:
       description: "get single message"
       tags:
+        - TI-M Pro
+        - TI-M_ePA
         - message
       operationId: getMessage
       responses:
@@ -1247,6 +1151,8 @@ paths:
     put:
       description: "edit an existing message"
       tags:
+        - TI-M Pro
+        - TI-M_ePA
         - message
       operationId: editMessage
       requestBody:
@@ -1275,6 +1181,8 @@ paths:
     delete:
       description: "delete a message"
       tags:
+        - TI-M Pro
+        - TI-M_ePA
         - message
       operationId: deleteMessage
       responses:
@@ -1282,6 +1190,176 @@ paths:
           description: "message deleted"
         "400":
           $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+  /devices/{deviceId}/rooms:
+    parameters:
+      - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/transactionIdHeader"
+
+    get:
+      tags:
+        - TI-M Pro
+        - TI-M_ePA
+        - room
+      operationId: getRooms
+      description: "get list of all rooms your account is associated with"
+      responses:
+        "200":
+          description: "all associated rooms of the logged in account"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Rooms"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+    post:
+      tags:
+        - TI-M Pro
+        - TI-M_ePA
+        - room
+      description: "Create a room."
+      operationId: createRoom
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateRoomRequest"
+      responses:
+        "201":
+          description: "Room created"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Room"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+  /devices/{deviceId}/rooms/public:
+    parameters:
+      - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/transactionIdHeader"
+
+    get:
+      tags:
+        - TI-M Pro
+        - TI-M_ePA
+        - room
+      description: "Get public rooms matching params"
+      operationId: getPublicRooms
+      parameters:
+        - name: name
+          in: query
+          description: "Full- or partial name of the Room"
+          schema:
+            type: string
+
+      responses:
+        "200":
+          description: "all associated rooms of the logged in account"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Rooms"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+  /devices/{deviceId}/rooms/{roomId}:
+    parameters:
+      - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/transactionIdHeader"
+      - $ref: "#/components/parameters/roomId"
+    get:
+      tags:
+        - TI-M Pro
+        - TI-M_ePA
+        - room
+      description: "Get the room settings."
+      operationId: getRoomSettings
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Room"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+    put:
+      tags:
+        - TI-M Pro
+        - TI-M_ePA
+        - room
+      description: "Change the room settings."
+      operationId: changeRoomSettings
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RoomProperties"
+      responses:
+        "200":
+          description: "Successfully changed room settings"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Room"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+    delete:
+      tags:
+        - TI-M Pro
+        - TI-M_ePA
+        - room
+      description: "Forget about this room."
+      operationId: forgetRoom
+      responses:
+        "204":
+          description: "room forgotten"
         "401":
           $ref: "#/components/responses/Unauthorized"
         "403":
@@ -1299,6 +1377,8 @@ paths:
 
     post:
       tags:
+        - TI-M Pro
+        - TI-M_ePA
         - room
       description: "Invite a user into the room."
       operationId: inviteIntoRoom
@@ -1333,6 +1413,8 @@ paths:
 
     post:
       tags:
+        - TI-M Pro
+        - TI-M_ePA
         - room
       description: "join the room."
       operationId: joinRoom
@@ -1360,6 +1442,8 @@ paths:
 
     post:
       tags:
+        - TI-M Pro
+        - TI-M_ePA
         - room
       description: "Leave the room."
       operationId: leaveRoom
@@ -1387,6 +1471,8 @@ paths:
 
     get:
       tags:
+        - TI-M Pro
+        - TI-M_ePA
         - room
       description: "Returns all state events of the room"
       operationId: "Get state events"
@@ -1413,6 +1499,7 @@ paths:
 
     get:
       tags:
+        - TI-M Pro
         - contactManagement
       description: "Returns the contacts with invite settings."
       operationId: getContacts
@@ -1428,6 +1515,7 @@ paths:
 
     post:
       tags:
+        - TI-M Pro
         - contactManagement
       description: "Creates the setting for the contact."
       operationId: createContactSetting
@@ -1453,6 +1541,7 @@ paths:
 
     put:
       tags:
+        - TI-M Pro
         - contactManagement
       description: "Updates the setting for the contact."
       operationId: updateContactSetting
@@ -1484,6 +1573,7 @@ paths:
 
     get:
       tags:
+        - TI-M Pro
         - contactManagement
       description: "Returns the contacts with invite settings."
       operationId: getContact
@@ -1499,6 +1589,7 @@ paths:
 
     delete:
       tags:
+        - TI-M Pro
         - contactManagement
       description: "Deletes the setting for the contact {mxid}."
       operationId: deleteContactSetting
@@ -1520,6 +1611,8 @@ paths:
       - $ref: "#/components/parameters/transactionIdHeader"
     post:
       tags:
+        - TI-M Pro
+        - TI-M_ePA
         - media
       description: "Uploads a file and returns its file-id"
       operationId: postMediaFile
@@ -1552,6 +1645,8 @@ paths:
       - $ref: "#/components/parameters/fileId"
     get:
       tags:
+        - TI-M Pro
+        - TI-M_ePA
         - media
       description: "Returns a previously uploaded file with given id"
       operationId: getMediaFile
@@ -1570,6 +1665,8 @@ paths:
 
     delete:
       tags:
+        - TI-M Pro
+        - TI-M_ePA
         - media
       description: "Deletes a previously uploaded file with given id"
       operationId: deleteMediaFile
