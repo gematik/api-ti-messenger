@@ -2,6 +2,12 @@
  
 # Release Notes api-ti-messenger
 
+## Hotfix 1.1.1-7
+
+### changed
+
+ - new tags in TiMessengerTestTreiber.yaml
+
 ## Hotfix 1.1.1-6
 
 ### fixed
