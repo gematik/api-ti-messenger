@@ -1812,6 +1812,7 @@ components:
         - testDriverVersion
         - homeserver
         - contact
+        - description
       readOnly: true
       type: object
       properties:
@@ -2162,6 +2163,9 @@ components:
       description: "A message and its metadata"
       readOnly: true
       type: object
+      required:
+        - author
+        - MessageContent
       properties:
         messageId:
           type: string
@@ -2259,6 +2263,9 @@ components:
 
     Room:
       description: "Information about a room and its members"
+      required:
+        - RoomMembers
+        - RoomProperties
       allOf:
         - $ref: "#/components/schemas/RoomProperties"
         - $ref: "#/components/schemas/RoomMembers"
@@ -2268,6 +2275,8 @@ components:
       type: object
       required:
         - name
+        - roomId
+        - roomAccess
       properties:
         name:
           type: string
@@ -2302,6 +2311,9 @@ components:
     RoomMember:
       description: ""
       type: object
+      required:
+        - mxid
+        - membershipState
       properties:
         mxid:
           description: "MxId as identifier, refers to an existing account"
@@ -2313,6 +2325,8 @@ components:
     RoomMembers:
       description: "List of room associated accounts and their states"
       type: object
+      required:
+        - members
       properties:
         members:
           type: array
@@ -2405,6 +2419,9 @@ components:
       description: "The result for a search request for on homeserver"
       readOnly: true
       type: object
+      required:
+        - totalSearchResults
+        - searchResults
       properties:
         totalSearchResults:
           description: "Total result count for this search. The number of entries in searchResults may be less or equal this number."
@@ -2420,6 +2437,8 @@ components:
       description: "A flat description of an endpoint with belonging healthcare-service and organization"
       readOnly: true
       type: object
+      required:
+        - mxId
       properties:
         mxId:
           description: "The Matrix-ID of an account"
@@ -2433,6 +2452,9 @@ components:
     FhirSearchResult:
       description: "A FHIR Bundle containing search results"
       type: object
+      required:
+        - total
+        - entry
       properties:
         resourceType:
           type: string
@@ -2506,6 +2528,8 @@ components:
     FhirEntry:
       description: "FhirSearchEntry"
       type: object
+      required:
+        - resource
       properties:
         fullUrl:
           type: string
@@ -2530,6 +2554,7 @@ components:
           Practitioner: "#/components/schemas/FhirPractitioner"
       required:
         - resourceType
+        - id
       properties:
         resourceType:
           $ref: "#/components/schemas/FhirResourceType"
@@ -2620,6 +2645,8 @@ components:
       allOf:
         - $ref: "#/components/schemas/FhirBaseResource"
       type: object
+      required:
+        - practitioner
       properties:
         practitioner:
           $ref: "#/components/schemas/FhirReference"
@@ -2648,6 +2675,9 @@ components:
       allOf:
         - $ref: "#/components/schemas/FhirBaseResource"
       type: object
+      required:
+        - name
+        - address
       properties:
         name:
           type: string
@@ -2709,7 +2739,6 @@ components:
           description: "Start time"
           example: "18:00:00"
 
-
     FhirAddress:
       type: object
       description: "Possible address"
@@ -2760,6 +2789,8 @@ components:
     FhirReference:
       description: "Reference to another FhirRessource"
       type: object
+      required:
+        - reference
       properties:
         reference:
           type: string
@@ -2854,6 +2885,8 @@ components:
     FhirName:
       type: object
       description: "Personal data of practitioner"
+      required:
+        - text
       properties:
         use:
           example: "usual"

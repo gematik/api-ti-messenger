@@ -2,6 +2,12 @@
  
 # Release Notes api-ti-messenger
 
+## Hotfix 1.1.1-8
+
+### changed
+
+- all properties required by the Testsuite marked as required in TiMessengerTestTreiber.yaml
+
 ## Hotfix 1.1.1-7
 
 ### changed
