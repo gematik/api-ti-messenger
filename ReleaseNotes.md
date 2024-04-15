@@ -3,6 +3,7 @@
 # Release Notes api-ti-messenger
 
 ## Hotfix 1.1.1-7
+- added FHIR status "off"
 
 ### changed
 
