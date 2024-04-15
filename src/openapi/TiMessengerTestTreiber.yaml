@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: TiMessengerTestDriver
   description: REST interface to automate the test of a TI-Messenger client implementation.
-  version: 0.9.6
+  version: 0.9.7
   contact:
     name: gematik GmbH
     email: software-development@gematik.de
@@ -2691,7 +2691,7 @@ components:
           type: string
           description: "Status of the ressource"
           example: "active"
-          enum: [ active, suspended, inactive ]
+          enum: [ active, suspended, "off" ]
         address:
           description: "For endpoint in tim context the mxid in uri scheme"
           type: string
