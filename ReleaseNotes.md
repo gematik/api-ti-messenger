@@ -7,6 +7,7 @@
 ### changed
 
 - changed FHIR status inactive to "off" to be FHIR compliant
+- all properties required by the Testsuite marked as required in TiMessengerTestTreiber.yaml
 
 ## Hotfix 1.1.1-7
 
