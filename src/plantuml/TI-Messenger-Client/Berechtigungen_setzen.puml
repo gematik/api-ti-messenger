@@ -2,7 +2,7 @@
 title Setzen von Berechtigungen im Client
 skinparam ConditionEndStyle hline
 start
-:FDV installieren;
+:Client starten;
 :Berechtigungen einrichten;
 
 if ("Allow all" or "Block all") then (Allow all)
