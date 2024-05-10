@@ -1,0 +1,76 @@
+name: Generate PlantUML & draw.io images
+
+on:
+  push:
+    branches: 
+    - '**'
+    # paths:
+    # - 'src/plantuml/**'
+    # - 'src/drawio/**'
+
+  workflow_dispatch:
+
+env:
+  PLANTUML_VERSION: 1.2024.4
+  DRAWIO_VERSION: 24.2.5
+  PLANTUML_SRC: src/plantuml
+  DRAWIO_SRC: src/drawio
+  OUTDIR: images/diagrams
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '11'
+          check-latest: true
+
+      - name: Set up Graphviz, Xvfb & draw.io desktop
+        run: |
+            wget -q https://github.com/jgraph/drawio-desktop/releases/download/v${{ env.DRAWIO_VERSION }}/drawio-amd64-${{ env.DRAWIO_VERSION }}.deb
+            sudo apt-get update
+            sudo apt-get install --yes --no-install-recommends graphviz xvfb ./drawio-amd64-${{ env.DRAWIO_VERSION }}.deb
+
+      - name: Download PlantUML JAR
+        run: |
+          # Ironically, manually fetching the JAR is faster than installing the Debian plantuml package
+          wget -O plantuml.jar "https://github.com/plantuml/plantuml/releases/download/v${{ env.PLANTUML_VERSION }}/plantuml-${{ env.PLANTUML_VERSION }}.jar"
+
+      - name: Prepare output folder
+        run: |
+          rm -rf "${{ env.OUTDIR }}"
+          mkdir -p "${{ env.OUTDIR }}"
+
+      - name: Export PlantUML files as png / svg
+        run: |
+          for ext in png svg; do
+            java -jar plantuml.jar -t$ext -v -nometadata -failfast2 -nbthread auto -o "." "${{ env.PLANTUML_SRC }}/**.puml"
+            rsync -v --recursive --include="*.$ext" --filter="-! */" "${{ env.PLANTUML_SRC }}"/* "${{ env.OUTDIR }}"
+          done
+      - name: Export draw.io files as png / svg
+        run: |
+          # draw.io desktop requires a running X server
+          export DISPLAY=:42
+          Xvfb :42 -nolisten unix &
+
+          for ext in png svg; do
+            # The chromium args need to be specified last because of whatever
+            drawio --export --recursive --format $ext "${{ env.DRAWIO_SRC }}" --no-sandbox --disable-gpu --disable-dev-shm-usage
+
+            rsync -v --recursive --include="*.$ext" --filter="-! */" "${{ env.DRAWIO_SRC }}"/* "${{ env.OUTDIR }}"
+
+            # Nuke the exported files so that draw.io desktop doesn't attempt to use them as input files on the next loop pass
+            find "${{ env.DRAWIO_SRC }}" -name "*.$ext" -exec rm -v "{}" \;  
+          done
+
+      - name: Add & Commit
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: ${{ env.OUTDIR }}
