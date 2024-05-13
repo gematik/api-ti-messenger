@@ -42,7 +42,7 @@ Aktualisierung der Föderationsliste
 ====
 ++++
 <p align="center">
-  <img width="100%" src=../../images/diagrams/TI-Messenger-Dienst/Ressourcen/UC_Update_Federationlist_Seq.svg>
+  <img width="100%" src=../../images/plantuml/TI-Messenger-Dienst/Ressourcen/UC_Update_Federationlist_Seq.svg>
 </p>
 ++++
 ====
@@ -67,7 +67,7 @@ Sequenzdiagramm "Provider authentifizieren und Föderationsliste abrufen":
 ====
 ++++
 <p align="center">
-  <img width="100%" src=../../images/diagrams/TI-Messenger-Dienst/Ressourcen/UC_Update_Federationlist_auth_retrieve.svg>
+  <img width="100%" src=../../images/plantuml/TI-Messenger-Dienst/Ressourcen/UC_Update_Federationlist_auth_retrieve.svg>
 </p>
 ++++
 ====
@@ -80,7 +80,7 @@ Sequenzdiagramm "Signatur der Föderationsliste prüfen":
 ====
 ++++
 <p align="center">
-  <img width="60%" src=../../images/diagrams/TI-Messenger-Dienst/Ressourcen/UC_Update_Federationlist_SignCheck.svg>
+  <img width="60%" src=../../images/plantuml/TI-Messenger-Dienst/Ressourcen/UC_Update_Federationlist_SignCheck.svg>
 </p>
 ++++
 ====

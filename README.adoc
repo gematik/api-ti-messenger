@@ -97,8 +97,8 @@ TI-Messenger Dokumentation
 |   ├──── link:docs/anwendungsfaelle[Anwendungsfälle]
 |   └──── link:docs/FAQ[FAQ]
 ├─ link:images[images] (Bildarchiv)
-│   └──── link:images/diagrams[diagrams] (gerenderte Diagramme)
-│        └── link:images/diagrams/TI-Messenger-Dienst/Ressourcen[Ressourcen] (plantuml-gerenderte Bilder)
+│   └──── link:images/drawio[drawio] (gerenderte draw.io Diagramme)
+│   └──── link:images/plantuml[plantuml] (gerenderte PlantUML Diagramme)
 ├─ link:samples[samples] (Codebeispiele, Postman Collections, etc)
 ├─ link:src[src] (Quellen)
 │   ├──── link:src/drawio[drawio] (Quellen der drawio-Diagramme)

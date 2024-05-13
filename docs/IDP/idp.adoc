@@ -329,7 +329,7 @@ Die Abbildung zeigt die Verwendung des *Authenticators* mit der Auto-Redirect Fu
 
 ++++
 <p align="left">
-  <img width="100%" src=../../images/diagrams/TI-Messenger-Dienst/Ressourcen/idp.svg>
+  <img width="100%" src=../../images/plantuml/TI-Messenger-Dienst/Ressourcen/idp.svg>
 </p>
 ++++
  

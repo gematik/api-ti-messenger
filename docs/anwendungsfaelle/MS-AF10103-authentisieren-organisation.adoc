@@ -52,7 +52,7 @@ Authentisieren einer Organisation am TI-Messenger-Dienst
 ====
 ++++
 <p align="center">
-  <img width="100%" src=../../images/diagrams/TI-Messenger-Dienst/Ressourcen/UC_10103_Seq.svg>
+  <img width="100%" src=../../images/plantuml/TI-Messenger-Dienst/Ressourcen/UC_10103_Seq.svg>
 </p>
 ++++
 ====
