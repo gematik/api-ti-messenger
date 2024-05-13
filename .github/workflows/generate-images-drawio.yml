@@ -1,0 +1,55 @@
+name: draw.io images
+
+on:
+  push:
+    branches: 
+    - '**'
+    # paths:
+    # - 'src/drawio/**'
+
+  workflow_dispatch:
+
+env:
+  DRAWIO_VERSION: 24.2.5
+  DRAWIO_SRC: src/drawio
+  DRAWIO_OUT: images/drawio
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Xvfb & draw.io desktop
+        run: |
+            wget -q https://github.com/jgraph/drawio-desktop/releases/download/v${{ env.DRAWIO_VERSION }}/drawio-amd64-${{ env.DRAWIO_VERSION }}.deb
+            sudo apt-get update
+            sudo apt-get install --yes --no-install-recommends xvfb ./drawio-amd64-${{ env.DRAWIO_VERSION }}.deb
+
+      - name: Prepare output folder
+        run: |
+          rm -rf "${{ env.DRAWIO_OUT }}"
+          mkdir -p "${{ env.DRAWIO_OUT }}"
+
+      - name: Export draw.io files as png / svg
+        run: |
+          # draw.io desktop requires a running X server
+          export DISPLAY=:42
+          Xvfb :42 -nolisten unix &
+
+          for ext in png svg; do
+            # The chromium args need to be specified last because of whatever
+            drawio --export --recursive --format $ext "${{ env.DRAWIO_SRC }}" --no-sandbox --disable-gpu --disable-dev-shm-usage
+
+            rsync -v --recursive --include="*.$ext" --filter="-! */" "${{ env.DRAWIO_SRC }}"/* "${{ env.DRAWIO_OUT }}"
+
+            # Nuke the exported files so that draw.io desktop doesn't attempt to use them as input files on the next loop pass
+            find "${{ env.DRAWIO_SRC }}" -name "*.$ext" -exec rm -v "{}" \;  
+          done
+
+      - name: Add & Commit
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: ${{ env.DRAWIO_OUT }}

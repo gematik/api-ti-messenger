@@ -1,0 +1,57 @@
+name: PlantUML images
+
+on:
+  push:
+    branches: 
+    - '**'
+    # paths:
+    # - 'src/plantuml/**'
+
+  workflow_dispatch:
+
+env:
+  PLANTUML_VERSION: 1.2024.4
+  PLANTUML_SRC: src/plantuml
+  PLANTUML_OUT: images/plantuml
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '11'
+          check-latest: true
+
+      - name: Set up Graphviz
+        run: |
+            sudo apt-get update
+            sudo apt-get install --yes --no-install-recommends graphviz
+
+      - name: Download PlantUML JAR
+        run: |
+          # Ironically, manually fetching the JAR is faster than installing the Debian plantuml package
+          wget -O plantuml.jar "https://github.com/plantuml/plantuml/releases/download/v${{ env.PLANTUML_VERSION }}/plantuml-${{ env.PLANTUML_VERSION }}.jar"
+
+      - name: Prepare output folder
+        run: |
+          rm -rf "${{ env.PLANTUML_OUT }}"
+          mkdir -p "${{ env.PLANTUML_OUT }}"
+
+      - name: Export PlantUML files as png / svg
+        run: |
+          for ext in png svg; do
+            java -jar plantuml.jar -t$ext -v -nometadata -failfast2 -nbthread auto -o "." "${{ env.PLANTUML_SRC }}/**.puml"
+            rsync -v --recursive --include="*.$ext" --filter="-! */" "${{ env.PLANTUML_SRC }}"/* "${{ env.PLANTUML_OUT }}"
+          done
+
+      - name: Add & Commit
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: ${{ env.PLANTUML_OUT }}
