@@ -55,3 +55,4 @@ jobs:
         uses: EndBug/add-and-commit@v9
         with:
           add: ${{ env.PLANTUML_OUT }}
+          pull: --rebase
