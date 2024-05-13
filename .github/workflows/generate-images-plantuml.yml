@@ -4,8 +4,8 @@ on:
   push:
     branches: 
     - '**'
-    # paths:
-    # - 'src/plantuml/**'
+    paths:
+    - 'src/plantuml/**'
 
   workflow_dispatch:
 
