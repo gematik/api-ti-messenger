@@ -53,4 +53,4 @@ jobs:
         uses: EndBug/add-and-commit@v9
         with:
           add: ${{ env.DRAWIO_OUT }}
-          pull: --rebase
+          pull: --rebase --autostash
