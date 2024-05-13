@@ -5,6 +5,7 @@ on:
     branches: 
     - '**'
     paths:
+    - '.github/workflows/generate-images-plantuml.yml'
     - 'src/plantuml/**'
 
   workflow_dispatch:
