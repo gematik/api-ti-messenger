@@ -1,0 +1,64 @@
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+:imagesdir: ../../images
+
+image:meta/gematik_logo.svg[width=70%]
+
+=== Kommunikation mit einem Chatbot
+Im Folgenden wird ein Beispiel für eine mögliche Zuordnung für die Abbildung von Funktionsaccounts mit Hilfe von Chatbots und eines Akteurs der stellvertretend für die Organisation auftritt.
+Der Chatbot kann automatisiert Anfragen von Akteuren (z. B. für Terminanfragen, Medikationsentscheidung) bearbeiten oder bei Bedarf die zugeordneten und zu diesem Zeitpunkt verfügbaren Akteure in den Chatraum einladen. Die dem Chatbot zur Verfügung stehenden Akteure (in der Spalte "Akteur (MXID)") sind in der Konfiguration des Chatbots zu hinterlegen. Im letzte Beispiel in der Tabelle ist ein Akteur (natürliche Person) als Endpoint hinterlegt und tritt stellvertretend für die Organisation in den Chat ein.
+
+.Übersicht der Zuordnung von Funktionsaccounts und Akteuren
+|=== 
+|Abteilung |Funktionsaccount |Endpoint.address |Akteur (MXID) |Displayname im Chatraum
+
+|Kardiologie |Labor_Kardiologie |@MXID_Bot01:<domain>.de |@MXID_01:<domain>.de @MXID_02:<domain>.de a|
+* Empfang_Kardiologie (Chatbot) 
+* Dennert, Maltilde 
+* Fritsche, Sarah
+
+|Neurologie |Ambulanz_Neurologie |@MXID_Bot02:<domain>.de |@MXID_03:<domain>.de a|
+* Ambulanz_Neurologie (Chatbot) 
+* Gotsch, Gerd
+
+|Radiologie |Empfang_Radiologie |@MXID_04:<domain>.de |- |Fruechtl, Wilfried
+|===
+
+=== Beispiel: Einladung durch einen Chatbot
+Die folgende Grafik zeigt den Ablauf beim Kontaktieren eines Funktionsaccounts durch einen Akteur. Der Funktionsaccount wird durch den Chatbot repräsentiert. Der Chatbot kann automatisiert Anfragen von Akteuren bearbeiten oder bei Bedarf die zugeordneten und zu diesem Zeitpunkt verfügbaren Akteure in den Chatraum einladen. Die dem Chatbot zur Verfügung stehenden Akteure sind in der Konfiguration des Chatbots zu definieren. 
+
+A. Vorbedingung:
+* Die Organisation Klinikum X verfügt über einen TI-Messenger-Client mit Administrationsfunktion und einen Messenger-Service
+* Chatbots stehen zur Verfügung und können vom Akteur in der Rolle "Org-Admin" verwaltet werden
+
+B. Konfiguration von Funktionsaccounts:
+* Der Akteur in der Rolle "Org-Admin" legt einen Funktionsaccount (organisationsbezogene MXID) als einen Endpoint des gewünschten HealthcareService der Organisation an und ordnet dieser MXID einen Chatbot zu. 
+* Der Akteur in der Rolle "Org-Admin" weist zuständige Akteure der Organisation (personenbezogene MXIDs) dem Chatbot zu.
+* Die Zuordnung von Akteuren zu einzelnen Anfragen innerhalb eines Funktionsaccounts (z. B. Terminanfragen, Medikationsentscheidung) erfolgt durch die Konfiguration im Chatbot.
+
+C. Beispielhafter Ablauf (siehe Abbildung "Kommunikation mit einem Chatbot"):
+. Es liegt ein kardiologisches Problem vor und der Akteur sucht nach einer Organisation und/oder Unterstruktur dieser Organisation. (z. B. in seinem Krankenhaus die Abteilung Kardiologie)
+. Der Akteur öffnet einen Chatraum mit dem Funktionsaccount der Abteilung Kardiologie.
+. Der Chatbot des Funktionsaccounts der Abteilung Kardiologie betritt den Raum und erfragt das Anliegen vom Akteur (z. B. Terminanfrage, Rückfrage an Arzt etc.) abfragen.
+. Der Akteur antwortet dem Chatbot.
+. Der Chatbot lädt je nach Anliegen die ihm zugeordneten und verfügbaren Akteure in den Chatraum ein.
+. Eingeladene Akteure betreten den Chatraum mit ihrem Displaynamen und kommunizieren mit dem Akteur.
+
+.Kommunikation mit einem Chatbot
+[%collapsible%open]
+====
+++++
+<p align="center">
+  <img width="100%" src=../../images/diagrams/TI-Messenger-Fachdienst/chatbot-Seite-1.png>
+</p>
+++++
+====
+
+
+

@@ -5,7 +5,7 @@
 # Use Case Diagram
 # Name: Org-Admin - Anwendungsfaelle
 '/
-
+!pragma layout smetana
 
 skinparam actorStyle awesome
 left to right direction
@@ -39,12 +39,10 @@ package Rolle {
 package Anwendungsfälle {
   usecase "**<<AF_10103>>** \nAuthentisieren einer Organisation \nam TI-Messenger-Dienst" as UC1 #AliceBlue
   usecase "**<<AF_10060>>** \nBereitstellung eines Messenger-Service \nfür eine Organisation" as UC2 #AliceBlue
-  usecase "**<<AF_10059>>** \nOrganisationsressourcen im \nVerzeichnisdienst hinzufügen" as UC3
 }
 
 oa --> UC1
 oa --> UC2
-oa --> UC3
 
 note top of (oa)
   z. B. Beauftragter Mitarbeiter in einer

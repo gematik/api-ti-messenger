@@ -1,0 +1,60 @@
+/' 
+# TI-Messenger 1.1
+# TI-Messenger-Dienst
+# Use Case Diagram
+# Name: User / User-HBA - Anwendungsfaelle
+'/
+
+@startuml
+!pragma layout smetana
+skinparam actorStyle awesome
+left to right direction
+scale 6/3
+
+skinparam sequence {
+ArrowColor black
+ArrowFontSize 17
+ActorBorderColor black
+LifeLineBorderColor black
+LifeLineBackgroundColor Gainsboro
+
+ParticipantBorderColor Motivation
+ParticipantBackgroundColor Motivation
+ParticipantFontName Impact
+ParticipantFontSize 20
+ParticipantFontColor black
+ParticipantBorderColor Black
+ParticipantBackgroundColor MOTIVATION
+
+ActorBackgroundColor Gainsboro
+ActorFontColor black
+ActorFontSize 13
+ActorFontName Aapex
+}
+
+package Rolle {
+actor "User" as u
+}
+
+package Anwendungsfälle {
+usecase "**<<AF_10057>>** \nAnmeldung eines Akteurs am \nMessenger-Service" as UC1
+usecase "**<<AF_10104>>** \nEinladung von Akteuren \ninnerhalb einer Organisation" as UC2 #AliceBlue
+usecase "**<<AF_10063>>** \nAustausch von Events \nzwischen Akteuren \ninnerhalb einer Organisation" as UC3 #AliceBlue
+usecase "**<<AF_10061>>** \nEinladung von Akteuren \naußerhalb einer Organisation" as UC4 #Ivory
+usecase "**<<AF_10062>>** \nAustausch von Events \nzwischen Akteuren \naußerhalb einer Organisation" as UC5 #Ivory
+usecase "**<<AF_10235>>** \nEinträge im VZD-FHIR-Directory suchen" as UC6 #IndianRed
+}
+
+u --> UC1
+u --> UC2
+u --> UC3
+u --> UC4
+u --> UC5
+u --> UC6
+
+note top of (u)
+Mitarbeiter einer Organisation
+im Gesundheitswesen
+end note
+
+@enduml

@@ -16,7 +16,6 @@ scale max 2048 width
 skinparam sequence {
 ArrowColor black
 ArrowFontSize 17
-ActorBorderColor black
 LifeLineBorderColor black
 LifeLineBackgroundColor Gainsboro
 
@@ -27,9 +26,6 @@ ParticipantFontColor black
 ParticipantBorderColor Black
 ParticipantBackgroundColor MOTIVATION
 
-ActorBackgroundColor Gainsboro
-ActorFontColor black
-ActorFontSize 20
 }
 
 autonumber
@@ -37,24 +33,17 @@ autonumber
 box <size:18>Messenger-Service\n #WhiteSmoke
 participant MP as "Messenger-Proxy"
 end box
-participant OCSP as "<font color=blue>Public OCSP-Responder</font>"
-
-legend bottom right
-    <size:16>__Legende__</size>
-    <size:16><font color=blue>nicht anzuwenden in dieser Spezifikationsversion,</font></size>
-    <size:16><font color=blue>sondern erst, sobald der Public OCSP-Responder verfügbar ist</font></size>
-    <size:16><font color=blue>(bezieht sich auf die im diesem Diagramm blau dargestellten Prüfungen und Komponenten)</font></size>
-endlegend
+participant OCSP as "Public OCSP-Responder"
 
 activate MP
 MP->MP++: Signatur der Föderationsliste prüfen\n(Föderationsliste, x5c-Zertifikatsliste[1])
 return Signaturprüfergebnis
 |||
-loop#LightGrey <size:16><font color=blue>für jeden Eintrag von x5c-Zertifikatsliste</font></size>
-  MP->OCSP: <font color=blue>Public-OCSP-Zertifikatsprüf-Request stellen(x5c-Zertifikat)</font>
-  MP<--OCSP: <font color=blue>OCSP-Response</font>
+loop#LightGrey <size:16>für jeden Eintrag von x5c-Zertifikatsliste</size>
+  MP->OCSP: Public-OCSP-Zertifikatsprüf-Request stellen(x5c-Zertifikat)
+  MP<--OCSP: OCSP-Response
 end
-alt#LightGrey <size:16>Signaturprüfergebnis=gültig <font color=blue>UND jeder OCSP-Response.CertificateStatusValue=good</font></size>
+alt#LightGrey <size:16>Signaturprüfergebnis=gültig UND jeder OCSP-Response.CertificateStatusValue=good</size>
   MP->MP: Föderationsliste aktualisieren(Föderationsliste)
 end
 deactivate MP

@@ -1,0 +1,30 @@
+@startuml
+title Setzen von Berechtigungen im Client
+skinparam ConditionEndStyle hline
+start
+:Client starten;
+:Berechtigungen einrichten;
+
+if ("Allow all" or "Block all") then (Allow all)
+  if(Beschränkungen einrichten) then (Ja)
+    if(BlockedUser-Liste bearbeiten) then (Hinzufügen)
+    :User/Gruppe/Domain hinzufügen;
+    else (Entfernen)
+    :User/Gruppe/Domain entfernen;
+    endif
+  else(Nein)
+  endif
+else (Block all)
+  if(Erlaubnisse einrichten) then (Ja)
+    if(AllowedUser-Liste bearbeiten) then (Hinzufügen)
+    :User/Gruppe/Domain hinzufügen;
+    else (Entfernen)
+    :User/Gruppe/Domain entfernen;
+    endif
+  else(Nein)
+  endif
+endif
+:Konfiguration auf dem Server sichern;
+stop
+
+@enduml

@@ -1,0 +1,53 @@
+{
+    "$id": "https://gematik.de/ti-m/permissionConfig.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Permission Configuration",
+    "type": "object",
+    "properties": {
+        "defaultSetting": {
+            "type": "string",
+            "enum": [
+                "allow all",
+                "block all"
+            ]
+        },
+        "groupException": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+                "groupName": {
+                    "description": "The name of the group to be in-/excluded",
+                    "type": "string",
+                    "enum": [
+                        "myLocalContactList"
+                    ]
+                }
+            }
+        },
+        "domainException": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+                "domain": {
+                    "description": "The name of the domain to be in-/excluded",
+                    "type": "string",
+                    "pattern": "^((?!-)[A-Za-z0-9-]{1, 63}(?<!-)\\.)+[A-Za-z]{2, 6}$"
+                }
+            }
+        },
+        "userException": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+                "mxid": {
+                    "description": "The MXID of the user to be in-/excluded",
+                    "type": "string",
+                    "pattern": "^@[a-z0-9._=/-]+:[a-zA-Z0-9.-]+$"
+                }
+            }
+        }
+    },
+    "required": [
+        "defaultSetting"
+    ]
+}

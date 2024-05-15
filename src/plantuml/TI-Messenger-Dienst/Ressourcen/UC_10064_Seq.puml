@@ -22,16 +22,11 @@ LifeLineBackgroundColor Gainsboro
 
 ParticipantBorderColor Motivation
 ParticipantBackgroundColor Motivation
-'ParticipantFontName Impact
 ParticipantFontSize 20
 ParticipantFontColor black
 ParticipantBorderColor Black
 ParticipantBackgroundColor MOTIVATION
 
-ActorBackgroundColor Gainsboro
-ActorFontColor black
-ActorFontSize 20
-'ActorFontName Aapex
 }
 
 autonumber
@@ -60,7 +55,7 @@ alt#LightGrey  <size:16>Matrix-Domain ist in der Föderationsliste enthalten ODE
 
   else <size:16>Matrix-Domain ist nicht in der Föderationsliste enthalten</size> 
   |||  
-  ref over MP, VZD: <size:17>**Anhang B** - Aktualisierung der Föderationsliste</size>\n 
+  ref over MP, VZD: <size:17>Aktualisierung der Föderationsliste</size>\n 
   |||
   MP->MP: prüfe ob Matrix-Domain \nder MXID \nin der **aktualisierten** \nFöderationsliste vorhanden ist
   |||

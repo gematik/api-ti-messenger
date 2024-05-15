@@ -1,12 +1,8 @@
 /' 
-# TI-Messenger 1.1
-# TI-Messenger-Dienst
 # UC - 10063
-# Sequence Diagram
 # Name: Austausch von Events zwischen Akteuren innerhalb einer Organisation
 '/
-
-@startuml
+@startuml 
 skinparam sequenceMessageAlign direction
 skinparam minClassWidth 200
 skinparam BoxPadding 1
@@ -22,7 +18,6 @@ LifeLineBackgroundColor Gainsboro
 
 ParticipantBorderColor Motivation
 ParticipantBackgroundColor Motivation
-ParticipantFontName Impact
 ParticipantFontSize 20
 ParticipantFontColor black
 ParticipantBorderColor Black
@@ -31,9 +26,8 @@ ParticipantBackgroundColor MOTIVATION
 ActorBackgroundColor Gainsboro
 ActorFontColor black
 ActorFontSize 20
-ActorFontName Aapex
 }
-    actor U1 as "Akteur - A in der Rolle\nUser / User-HBA"
+    actor U1 as "Akteur A in der Rolle\nUser"
     participant C1 as "TI-Messenger-\nClient A" #AliceBlue
     box <size:18>Messenger-Service</size> #WhiteSmoke
       participant MP as "Messenger-\nProxy"
@@ -41,23 +35,24 @@ ActorFontName Aapex
       participant PG as "Push-Gateway"
     end box
     participant C2 as "TI-Messenger-\nClient B" #TECHNOLOGY
-    actor U2 as "Akteur - B in der Rolle\nUser / User-HBA"
-    
+    actor U2 as "Akteur B in der Rolle\nUser"
+
+autonumber
+
 |||
 note over U1, U2: \n<size:17>Die Akteure sind auf dem selben Messenger-Service angemeldet und im Besitz eines zugelassenen TI-Messenger-Clients.</size>\n<size:17>Ebenfalls sind beide Akteure einem gemeinsamen Raum beigetreten.</size>\n
 |||
-
     U1->C1: Akteur A löst \nMatrix-Event aus
       activate C1 #AliceBlue
-    C1-[#red]>MP: Matrix-Request
+    C1->MP: Matrix-Request
       activate MP
 
-    MP-[#red]>MH: HTTP(S) Foward
+    MP->MH: HTTP(S) Forward
       activate MH
     MH->MH: Event \nverarbeiten
     
     |||
-    opt#LightGrey #AliceBlue <size:16>Pushbenachrichtigung</size>
+    opt#LightGrey #AliceBlue <size:16>Push-Benachrichtigung</size>
     |||
     MH->PG: POST /_matrix/push/notify
       activate PG
@@ -75,7 +70,7 @@ note over U1, U2: \n<size:17>Die Akteure sind auf dem selben Messenger-Service a
     C2-->MP: Status
     MP-->MH: HTTP(S) Forward \n(Status Client-B)
     |||
-    MH-[#red]->MP: Status (Matrix-Request)
+    MH-->MP: Matrix-Request Status
       deactivate MH
     |||
     MP-->C2: HTTP(S) Forward

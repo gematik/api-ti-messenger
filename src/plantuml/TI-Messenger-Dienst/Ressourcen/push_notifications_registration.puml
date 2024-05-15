@@ -1,0 +1,60 @@
+@startuml
+skinparam sequenceMessageAlign direction
+skinparam minClassWidth 200
+skinparam BoxPadding 1
+skinparam sequenceReferenceHeaderBackgroundColor palegreen
+scale max 2048 width
+skinparam maxMessageSize 450
+
+skinparam sequence {
+ArrowColor black
+ArrowFontSize 17
+ActorBorderColor black
+LifeLineBorderColor black
+LifeLineBackgroundColor Gainsboro
+
+ParticipantBorderColor Motivation
+ParticipantBackgroundColor Motivation
+ParticipantFontSize 20
+ParticipantFontColor black
+ParticipantBorderColor Black
+ParticipantBackgroundColor MOTIVATION
+
+ActorBackgroundColor Gainsboro
+ActorFontColor black
+ActorFontSize 20
+}
+autonumber
+    
+actor v as "Akteur in der Rolle User"
+
+participant c as "TI-Messenger Client App"
+participant pa as "Push-Anbieter"
+participant fd as "Fachdienst"
+participant g as "Push-Gateway"
+actor a as "Ersteller TI-Messenger Client App"
+
+|||
+activate fd
+a->g: konfiguriert unter einer eindeutigen App_ID den Zugang zum Push-Anbieter
+  activate g
+  g->g: speichere Konfiguration
+  deactivate g
+  a->c:  hinterlege App_ID & Push-Gateway URL in der App
+   
+  v->c: installiert TI-Messenger Client App\n auf dem Smartphone
+  activate c
+  c-->v: Wollen Sie Push-Nachrichten empfangen?
+  v->c: stimmt dem Empfang von Push-Nachrichten zu
+  c->pa: registriert die App beim Push-Anbieter
+  activate pa
+  pa-->c: eindeutiges PushAnbieter-AppToken\nfür die App Instanz
+  deactivate pa
+  c->c: speichere \n PushAnbieter-AppToken
+  c->fd: konfiguriere zu verwendendes Gateway(Gateway-Url,App_ID, PushAnbieter-AppToken)
+  fd-->c: Konfiguration übernommen
+|||
+
+  deactivate fd
+  deactivate c
+@enduml

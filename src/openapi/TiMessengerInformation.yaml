@@ -1,0 +1,169 @@
+openapi: 3.0.3
+info:
+  title: I_TiMessengerInformation
+  description: |
+    # Overview
+    This is a TI-Messenger REST interface that provides Informations for the TI-Messenger Client.
+    # Context
+    ## Authentication
+    The TI-Messenger-Client uses a Matrix-OpenID-Token from his Messenger-Service for
+    authentication on all REST operations. The bearer token can be obtained from the
+    homeserver. (POST /_matrix/client/r0/user/{userId}/openid/request_token).
+
+
+    TI-Messenger-Client ---> Messenger-Proxy ---> Homeserver
+    ## REST operations
+    The interface provides read informations for a TI-Messenger-Client
+    TI-Messenger-Client ---> Messenger-Proxy
+
+    # Information
+  version: 1.0.0
+  ### 1.0.0
+  # - initial version
+  contact:
+    name: gematik GmbH
+    email: software-development@gematik.de
+    url: "https://www.gematik.de"
+  license:
+    name: Apache 2.0
+    url: "https://www.apache.org/licenses/LICENSE-2.0"
+
+externalDocs:
+  description: TI-Messenger-API
+  url: https://github.com/gematik/api-ti-messenger
+
+servers:
+  - url: https://localhost/tim-information/v1.0.0/
+tags:
+  - name: info
+    description: This operation returns meta data about this interface and the status of available resources
+  - name: contacts
+    description: Operations for contact management
+
+paths:
+  /:
+    get:
+      tags:
+        - info
+      description: Returns the meta data of this interface.
+      operationId: getInfo
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InfoObject"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+  /domain/findByIk:
+    parameters:
+    - in: query
+      name: iknumber
+      description: "IK number to lookup the domain for."
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+        - lookUpDomain
+      description: "Returns the domain that hosts user which belong to the given ik number."
+      operationId: getDomain
+      responses:
+        "200":
+          description: "The domain hosting users for the given ik number."
+          content:
+            application/json:
+              schema:
+                type: string
+                description: "the domain for the given ik number"
+                example: "gematiker-kk.de"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+# Descriptions of common components
+components:
+  responses:
+    DefaultResponse:
+      description: "The default error response"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    NotFound:
+      description: "The specified resource was not found"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    Unauthorized:
+      description: "Unauthorized"
+    Forbidden:
+      description: "Forbidden - you are not allowed to do this"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    BadRequest:
+      description: "Bad Request"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+
+  schemas:
+
+    InfoObject:
+      description: ""
+      required:
+        - title
+        - version
+      readOnly: true
+      type: object
+      properties:
+        title:
+          type: string
+          description: "Der Titel der Anwendung"
+          example: "Contact Management des TI-Messengers"
+        description:
+          type: string
+          description: "Short description of the application"
+          example: "Contact Management des TI-Messengers. Betreiber: <Betreibername>"
+        contact:
+          type: string
+          description: "Contact information"
+        version:
+          type: string
+          description: "Version der implementierten TiMessengerContactManagement.yaml Schnittstelle (Version der TiMessengerContactManagement.yaml Datei)"
+          example: "1.0.0"
+
+    Error:
+      description: "Default error object with information about the occurred error"
+      type: object
+      properties:
+        errorCode:
+          description: "a code identifying this error"
+          type: string
+        errorMessage:
+          description: "a readable message describing the error"
+          type: string
+      required:
+        - errorCode
+        - errorMessage
+
+  securitySchemes:
+    bearerMatrixOpenIdTokenAuth:            # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT    # optional, arbitrary value for documentation purposes
+
+# the security applies to all operations
+security:
+  - bearerMatrixOpenIdTokenAuth: []         # use the same name as above

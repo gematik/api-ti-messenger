@@ -1,0 +1,112 @@
+/'
+# TI-Messenger für Versicherte
+# TI-Messenger-Dienst
+# Sequence Diagram
+# Name: Stufen der Berechtigungsprüfung ePA
+'/
+
+@startuml
+skinparam sequenceMessageAlign direction
+skinparam minClassWidth 200
+skinparam BoxPadding 15
+skinparam sequenceReferenceHeaderBackgroundColor palegreen
+scale max 2048 width
+
+skinparam sequence {
+  ArrowColor black
+  ArrowFontSize 17
+  ActorBorderColor black
+  LifeLineBorderColor black
+  LifeLineBackgroundColor Gainsboro
+
+  ParticipantBorderColor Motivation
+  ParticipantBackgroundColor Motivation
+
+  ParticipantFontSize 20
+  ParticipantFontColor black
+  ParticipantBorderColor Black
+  ParticipantBackgroundColor MOTIVATION
+
+  ActorBackgroundColor Gainsboro
+  ActorFontColor black
+  ActorFontSize 20
+  ActorFontName Aapex
+}
+box <size:18>Messenger-Service\ndes einladenden Akteurs\n #WhiteSmoke
+participant MS as "Messenger-Service"
+end box
+box <size:18>Messenger-Service\ndes eingeladenen Akteurs\n #WhiteSmoke
+participant MP2 as "Messenger-\nProxy"
+participant MH2 as "Matrix-\nHomeserver"
+participant PG as "Push-\nDienst"
+end box
+box <size:18>Messenger Client\ndes eingeladenen Akteurs\n #WhiteSmoke
+participant MC2 as "Messenger-Client"
+end box
+MS->MP2:Matrix-Invite-Event
+activate MP2
+activate MS
+|||
+== <font color=green><size:16>  Berechtigungskonzept - Stufe 1</size></font>  ==
+|||
+break #MistyRose <size:16>Matrix-Domain nicht in der Föderation enthalten</size>
+  MP2->MP2:<font color=red>Abbruch, \n<font color=red>Verbindung wird \n<font color=red>abgelehnt</font>
+  MP2-->MS: HTTP 403
+  |||
+  end
+break  #MistyRose <size:16>Einladender und der Eingeladene sind beide Versicherte</size>
+  MP2->MP2:<font color=red>Abbruch, \n<font color=red>Verbindung wird \n<font color=red>abgelehnt</font>
+  MP2->MS: HTTP 403
+  |||
+  end
+
+  MP2->MH2: HTTP(S) Forward
+  activate MH2
+  MH2-->MH2: Invite-Event \nverarbeiten
+  MH2->PG++: Push Notification
+  PG->MC2--: Push Notification
+  activate MC2
+  MH2-->MP2: Response
+  deactivate MH2
+  MP2-->MS: Response
+  deactivate MP2
+  deactivate MS
+
+== <font color=green><size:16>  Berechtigungskonzept - Stufe 2</size></font>  ==
+  MC2->MP2: Abfrage neuer Events
+  activate MP2
+  MP2->MH2: HTTP(S) Forward
+  activate MH2
+  MH2-->MP2: Bereitstellung neuer Events
+  deactivate MH2
+  MP2-->MC2: HTTP(S) Forward
+  deactivate MP2
+
+  MC2->MC2: Extrahieren der Invite-Events
+  MC2->MC2: Prüfung, ob die Einladung erlaubt ist
+
+  break #MistyRose <size:16>Der Akteur hat "allow all" konfiguriert und der einladende Akteur\n<size:16> ist auf der BlockedUser-Liste (Direkt oder als Teil einer Gruppe/Domain)</size>
+    |||
+    MC2->MC2:<font color=red>Einladung ist abzulehnen</font>
+    |||
+  end
+
+  break #MistyRose <size:16>Der Akteur hat "block all" konfiguriert und der einladende Akteur\n<size:16> ist nicht auf der AllowedUser-Liste (Direkt oder als Teil einer Gruppe/Domain)</size>
+    |||
+    MC2->MC2:<font color=red>Einladung ist abzulehnen</font>
+    |||
+  end
+
+
+|||
+MC2-->MP2: Ergebnis der Einladungsprüfung
+deactivate MC2
+activate MP2
+MP2->MH2: HTTP(S) Forward
+activate MH2
+MH2-->MP2: Ergebnis der Einladungsprüfung
+deactivate MH2
+MP2-->MS: HTTP(S) Forward
+deactivate MP2
+|||
+@enduml

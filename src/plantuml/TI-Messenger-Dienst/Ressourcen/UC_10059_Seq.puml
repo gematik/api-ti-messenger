@@ -12,6 +12,7 @@ skinparam minClassWidth 200
 skinparam BoxPadding 5
 skinparam sequenceReferenceHeaderBackgroundColor palegreen
 scale max 2048 width
+autonumber
 
 skinparam sequence {
 ArrowColor black
@@ -26,6 +27,8 @@ ParticipantFontSize 20
 ParticipantFontColor black
 ParticipantBorderColor Black
 ParticipantBackgroundColor MOTIVATION
+
+
 
 ActorBackgroundColor Gainsboro
 ActorFontColor black

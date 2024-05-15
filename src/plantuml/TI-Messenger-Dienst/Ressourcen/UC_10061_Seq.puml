@@ -1,8 +1,6 @@
 /' 
-# TI-Messenger 1.1
 # TI-Messenger-Dienst
 # UC - 10061
-# Sequence Diagram
 # Name: Einladung von Akteuren außerhalb einer Organisation
 '/
 
@@ -11,6 +9,8 @@ skinparam sequenceMessageAlign direction
 skinparam minClassWidth 200
 skinparam BoxPadding 15
 skinparam sequenceReferenceHeaderBackgroundColor palegreen
+skinparam sequenceReferenceBackgroundColor Beige
+
 scale max 2048 width
 
 skinparam sequence {
@@ -31,28 +31,28 @@ ActorBackgroundColor Gainsboro
 ActorFontColor black
 ActorFontSize 20
 }
-    actor U1 as "\nAkteur - A in der Rolle\nUser / User-HBA\n"
+    actor U1 as "\nAkteur A \nin der Rolle User" #AliceBlue
     participant C1 as "TI-Messenger-\nClient" #AliceBlue
     box <size:18>Messenger-Service A</size> #WhiteSmoke
       participant MP1 as "Messenger-\nProxy"
       participant MH1 as "Matrix-\nHomeserver"
     end box
     box <size:18>Messenger-Service B</size> #WhiteSmoke
-    participant MP2 as "Messenger-\nProxy"
-    participant MH2 as "Matrix-\nHomeserver"
-    participant PG2 as "Push-\nGateway"
+      participant MP2 as "Messenger-\nProxy"
+      participant MH2 as "Matrix-\nHomeserver"
+      participant PG2 as "Push-\nGateway"
     end box
     participant C2 as "TI-Messenger-\nClient" #TECHNOLOGY
-    actor U2 as "\nAkteur - B in der Rolle\nUser / User-HBA\n"
+    actor U2 as "\nAkteur B \nin der Rolle User" #TECHNOLOGY
     
 |||
 note over U1, MH1: \n<size:17>Der Akteur A ist erfolgreich beim Messenger Service A angemeldet</size>\n   
 note over U2, MP2: \n<size:17>Der Akteur B ist erfolgreich beim Messenger Service B angemeldet</size>\n    
 |||
     
-    alt#LightGrey #AliceBlue  <size:16>Suche über VZD-FHIR-Directory</size>
+    alt#LightGrey #AliceBlue <size:16>Suche über VZD-FHIR-Directory</size>
       |||
-      ref over U1, MH1 : <size:16>Anhang B - Einträge im VZD-FHIR-Directory suchen</size>\n
+      ref over U1, MH1 : <size:16>Einträge im VZD-FHIR-Directory suchen</size>\n
       |||
     
       else <size:16>Direktaustausch über QR-Code Scan</size>
@@ -116,8 +116,7 @@ note over U2, MP2: \n<size:17>Der Akteur B ist erfolgreich beim Messenger Servic
     |||
     C1->MP1: POST /_matrix/client/r0/\nrooms/{roomId}/invite 
     |||
-      ref over MP1, MP1: <size:17>**AF_10064** - \tFöderationszugehörigkeit eines \n<size:17>        \tMessenger-Service prüfen</size>\n 
-      note right: <size:16>Stufe 1 - Prüfung gemäß </size>\n<size:16>Client-Server Kommunikation</size>
+      ref over MP1, MP1: <size:17>Berechtigungsprüfung</size>\n       
     |||
       break#LightGrey #MistyRose <size:16>Abbruch</size>
       |||
@@ -134,14 +133,12 @@ note over U2, MP2: \n<size:17>Der Akteur B ist erfolgreich beim Messenger Servic
     MH1->MP1: POST /_matrix/federation/v1\n/invite/{roomId}/{eventId} 
       deactivate MH1
     |||
-    ref over MP1, MP1: <size:17>**AF_10064** - \tFöderationszugehörigkeit eines \n<size:17>        \tMessenger-Service prüfen</size>\n 
-    note left: <size:16>Stufe 1 - Prüfung gemäß </size>\n<size:16>Server-Server Kommunikation</size>
+    ref over MP1, MP1: <size:17>Berechtigungsprüfung</size>\n
     |||
     MP1->MP2: HTTP(S) Forward
-    note right: <size:16>Stufe 1 - Prüfung gemäß </size>\n<size:16>Server-Server Kommunikation</size>
     |||
       activate MP2
-      ref over MP2, MP2: <size:17>**AF_10064** - \tFöderationszugehörigkeit eines \n<size:17>        \tMessenger-Service prüfen</size>\n 
+      ref over MP2, MP2: <size:17>Berechtigungsprüfung</size>\n
     |||
 
       break#LightGrey #MistyRose <size:16>Abbruch</size>
@@ -153,9 +150,6 @@ note over U2, MP2: \n<size:17>Der Akteur B ist erfolgreich beim Messenger Servic
       C1-->U1: Einladung nicht \nerfolgreich
       |||
       end
-
-    |||
-      ref over MP2, MH2 : <size:16>Anhang B - Stufen der Berechtigungsprüfung</size>\n <size:16>Stufe 2 und 3</size>\n
     |||
     MP2->MH2: HTTP(S) Forward
       activate MH2
@@ -177,7 +171,6 @@ note over U2, MP2: \n<size:17>Der Akteur B ist erfolgreich beim Messenger Servic
         C2->U2: Einladung anzeigen
         U2-->C2: Einladung bestätigen
         C2->MP2: commit
-        MP2->MP2: TLS Terminierung
         MP2-->MH2: HTTP(S) Forward
         MH2-->MH2: Invite auslösen
         MH2-->MP2: Status

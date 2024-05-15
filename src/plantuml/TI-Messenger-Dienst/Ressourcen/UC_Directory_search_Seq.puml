@@ -1,11 +1,4 @@
-/' 
-# TI-Messenger 1.1
-# TI-Messenger-Dienst
-# Sequence Diagram
-# Name: Einträge im VZD-FHIR-Directory suchen
-'/
-
-@startuml
+@startuml "Einträge im VZD-FHIR-Directory suchen"
 skinparam sequenceMessageAlign direction
 skinparam minClassWidth 200
 skinparam BoxPadding 1
@@ -33,7 +26,7 @@ ActorFontSize 20
 }
 autonumber
 
-actor U as "Akteur in der Rolle\nUser / User-HBA"
+actor U as "Akteur in der Rolle\nUser"
 participant cl as "TI-Messenger-Client"
 participant mp as "Messenger Proxy"
 participant hs as "Matrix-Homeserver"
@@ -73,9 +66,9 @@ alt#LightGrey #AliceBlue <size:16>kein gültiges search-accesstoken vorhanden</s
     au->au: Prüfe ob \nMatrix Server Name in \nder Föderation enthalten ist
 
 |||
-opt#LightGrey #MistyRose <size:16>Abbruch</size>
+break#LightGrey #MistyRose <size:16>Matrix Server Name nicht in der Föderation enthalten</size>
 |||    
-    au-->cl: <size:16>Matrix Server Name nicht in der Föderation enthalten</size>
+    au-->cl: Fehlermeldung
 end
 
 |||
@@ -102,16 +95,19 @@ end
       activate fp
     fp->fp: prüfe search-accesstoken
     |||
-    opt#LightGrey #MistyRose <size:16>Abbruch</size>
-      fp-->cl: kein gültiges search-accesstoken 
+    break#LightGrey #MistyRose <size:16>kein gültiges search-accesstoken</size>
+      fp-->cl: HTTP 401 Fehlermeldung 
     |||
     end
    
 |||
 alt#LightGrey #AliceBlue <size:16>HealthcareService-Einträge werden gesucht</size>
 |||
-    fp->fd: POST /search/HealthcareService/? \nFinde Datensatz für TelematikID 
+    fp->fd: POST /search/HealthcareService/?
       activate fd
+    note left
+    <size:16>Finde Datensatz für TelematikID</size>
+    end note
     fd-->fp: Suchergebnis (FHIR Bundle)
       deactivate fd
 |||
@@ -120,8 +116,11 @@ end
 |||
 alt#LightGrey #AliceBlue <size:16>PractitionerRole-Einträge werden gesucht</size>
 |||
-    fp->fd: POST /search/PractitionerRole/? \n Finde Datensatz für MXID 
+    fp->fd: POST /search/PractitionerRole/?
       activate fd
+    note left
+    <size:16>Finde Datensatz für MXID </size>
+    end note
     fd-->fp: Suchergebnis (FHIR Bundle)
       deactivate fd
 |||

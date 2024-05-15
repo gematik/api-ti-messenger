@@ -1,8 +1,5 @@
 /' 
-# TI-Messenger 1.1
-# TI-Messenger-Dienst
 # UC - 10104
-# Sequence Diagram
 # Name: Einladung von Akteuren innerhalb einer Organisation
 '/
 
@@ -22,7 +19,6 @@ LifeLineBackgroundColor Gainsboro
 
 ParticipantBorderColor Motivation
 ParticipantBackgroundColor Motivation
-ParticipantFontName Impact
 ParticipantFontSize 20
 ParticipantFontColor black
 ParticipantBorderColor Black
@@ -31,9 +27,10 @@ ParticipantBackgroundColor MOTIVATION
 ActorBackgroundColor Gainsboro
 ActorFontColor black
 ActorFontSize 20
-ActorFontName Aapex
 }
-    actor U1 as "Akteur - A in der Rolle\nUser / User-HBA"
+autonumber
+
+    actor U1 as "Akteur - A in der Rolle\nUser"
     participant C1 as "TI-Messenger-\nClient A" #AliceBlue
     box <size:18>Messenger-Service</size> #WhiteSmoke
       participant MP as "Messenger-\nProxy"
@@ -41,7 +38,7 @@ ActorFontName Aapex
       participant PG as "Push-Gateway"
     end box
     participant C2 as "TI-Messenger-\nClient B"#TECHNOLOGY
-    actor U2 as "Akteur - B in der Rolle\nUser / User-HBA"
+    actor U2 as "Akteur - B in der Rolle\nUser"
     
 |||
 note over U1, U2: \n<size:17>Die Akteure sind auf dem selben Messenger-Service angemeldet und im Besitz eines zugelassenen TI-Messenger-Clients.\n<size:17>Ein Chatraum wurde durch den Einladenen eingerichtet.</size>\n
@@ -50,10 +47,9 @@ note over U1, U2: \n<size:17>Die Akteure sind auf dem selben Messenger-Service a
     opt#LightGrey #AliceBlue <size:16>Akteur suchen</size>
     |||
     U1->C1: Suche Akteur B
-      activate C1 #AliceBlue
+      activate C1
     C1->MP: POST /_matrix/client/\nuser_directory/search
       activate MP
-    MP->MP: TLS-Terminierung
     MP->MH: HTTP(S) Forward
       activate MH
     MH-->MH: Nutzerverzeichnis \ndurchsuchen
@@ -68,54 +64,58 @@ note over U1, U2: \n<size:17>Die Akteure sind auf dem selben Messenger-Service a
     C1->MP: POST /_matrix/client/r0/rooms/\n{roomId}/invite (roomId)
     
     |||
-      ref over MP, MP: <size:17>**AF_10064** - Föderationszugehörigkeit eines Messenger-Service prüfen</size>\n 
+      ref over MP, MH: <size:17><b>Berechtigungsprüfung</size>\n 
     |||
     
     alt#LightGrey #AliceBlue <size:16>Matrix-Domain nicht in der Föderation enthalten</size>
       |||
       MP-->C1: HTTP 401 \nUnauthorized
-      |||
-      C1-->C1: Abmeldung der Session
-      |||
-      C1-->U1: Anmeldung nicht \nerfolgreich
-      |||
+      C1-->U1: Einladung nicht \nerfolgreich
+        |||
+
     
       else <size:16>Matrix-Domain in der Föderation enthalten</size>
     
-      MP->MH: HTTP(S) Foward
+      MP->MH: HTTP(S) Forward
         activate MH
       MH->MH: Invite verarbeiten
+      MH-->C1: HTTP 200
       |||
-        opt#LightGrey #LightBlue <size:16>Pushbenachrichtigung</size>
+        opt#LightGrey #LightBlue <size:16>Push-Benachrichtigung</size>
           |||
           MH->PG: POST /_matrix/push/notify
             activate PG
           PG->C2: Notification
+          activate C2
           PG-->MH: Status
             deactivate PG
         |||
         end
         |||
-          MH->MP: Invite Request
-          MP->C2: HTTP(S) Forward
-            activate C2 #TECHNOLOGY
+          
+          C2->MP: Sync Request
+          MP->MH: HTTP(S) Forward
+          MH-->MP: Sync Response
+          MP-->C2: HTTP(S) Forward
+
           C2->U2: Einladung anzeigen
           U2-->C2: Einladung bestätigen
-          C2->MP: commit
+          C2->MP: join
           |||
-          MP->MP: TLS Terminierung
           MP-->MH: HTTP(S) Forward
-          MH-->MH: Invite auslösen
-          MH-->MP: Status
-            deactivate MH
-          MP-->C1: Status
-          C1-->U1: Nutzer in den \nRaum hinzugefügt
-            deactivate C1
-          MP-->C2: Status
-            deactivate MP
+          MH->MH: join verarbeiten
+          MH-->MP: Room ID
+          MP-->C2: HTTP(S) Forward
           C2-->U2: Nutzer ist dem \nRaum beigetreten
-            deactivate C2
-
+          deactivate C2
+          C1->MP: Sync Request
+          MP->MH: HTTP(S) Forward
+          MH-->MP: Sync Response
+          deactivate MH
+          MP-->C1: HTTP(S) Forward
+          deactivate MP
+          C1-->U1: Akteur B ist dem Raum\nRaum beigetreten
+          deactivate C1
         |||
         end
  |||

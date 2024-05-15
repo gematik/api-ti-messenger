@@ -1,0 +1,52 @@
+@startuml
+skinparam sequenceMessageAlign direction
+skinparam minClassWidth 200
+skinparam BoxPadding 1
+skinparam sequenceReferenceHeaderBackgroundColor palegreen
+scale max 2048 width
+skinparam maxMessageSize 450
+
+skinparam sequence {
+ArrowColor black
+ArrowFontSize 17
+ActorBorderColor black
+LifeLineBorderColor black
+LifeLineBackgroundColor Gainsboro
+
+ParticipantBorderColor Motivation
+ParticipantBackgroundColor Motivation
+ParticipantFontSize 20
+ParticipantFontColor black
+ParticipantBorderColor Black
+ParticipantBackgroundColor MOTIVATION
+
+ActorBackgroundColor Gainsboro
+ActorFontColor black
+ActorFontSize 20
+}
+autonumber
+    
+actor v as "Versicherter"
+participant fdv as "Frontend des Versicherten"
+'box <size:18>Messenger-Service\n#WhiteSmoke
+participant pa as "Push-Anbieter"
+participant pg as "Push-Gateway"
+participant fd as "Fachdienst"
+'end box
+
+|||
+  activate fd
+  v->fdv: installiert FdV auf dem Smartphone
+  activate fdv
+  fdv->pa: registriert sich beim Push-Anbieter(SenderID, APIKey, AppID)
+  activate pa
+  pa-->fdv: eindeutiges DeviceToken für die app Instanz
+  deactivate pa
+  fdv->fdv: speichere \n DeviceToken
+  fdv->fd: konfiguriere zu verwendendes Gateway(Gateway-Information, DeviceToken)
+  fd-->fdv: Konfiguration übernommen
+|||
+
+  deactivate fd
+  deactivate fdv
+@enduml
