@@ -2,7 +2,7 @@ name: PlantUML images
 
 on:
   push:
-    branches: 
+    branches:
     - '**'
     paths:
     - '.github/workflows/generate-images-plantuml.yml'

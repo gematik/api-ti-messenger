@@ -2,7 +2,7 @@ name: draw.io images
 
 on:
   push:
-    branches: 
+    branches:
     - '**'
     paths:
     - '.github/workflows/generate-images-drawio.yml'
