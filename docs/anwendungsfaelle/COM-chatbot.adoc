@@ -55,7 +55,7 @@ C. Beispielhafter Ablauf (siehe Abbildung "Kommunikation mit einem Chatbot"):
 ====
 ++++
 <p align="center">
-  <img width="100%" src=../../images/diagrams/TI-Messenger-Fachdienst/chatbot-Seite-1.png>
+  <img width="100%" src=../../images/drawio/TI-Messenger-Fachdienst/chatbot.png>
 </p>
 ++++
 ====

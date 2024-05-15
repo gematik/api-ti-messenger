@@ -46,7 +46,7 @@ Einträge im VZD-FHIR-Directory suchen
 ====
 ++++
 <p align="center">
-  <img width="100%" src=../../images/diagrams/TI-Messenger-Dienst/Ressourcen/UC_Directory_search_Seq.svg>
+  <img width="100%" src=../../images/plantuml/TI-Messenger-Dienst/Ressourcen/UC_Directory_search_Seq.svg>
 </p>
 ++++
 ====
