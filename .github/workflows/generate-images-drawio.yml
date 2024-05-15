@@ -52,7 +52,7 @@ jobs:
               page=$((page + 1))
 
             # For whatever reason xmlstarlet doesn't end its output with a newline so we append one with echo to not lose the last line
-            done < <(xml sel -t -v "//diagram/@name" "$file"; echo)
+            done < <(xmlstarlet sel -t -v "//diagram/@name" "$file"; echo)
           done < <(find "${{ env.DRAWIO_SRC }}" -name "*.drawio")
 
           rsync -v --recursive --include="*.png" --include="*.svg" --filter="-! */" "${{ env.DRAWIO_SRC }}"/* "${{ env.DRAWIO_OUT }}"
