@@ -24,8 +24,8 @@ Der zentrale *IDP-Dienst* der gematik (*[gemSpec_IDP_Dienst]*) ermöglicht die s
 
 Der zentrale *IDP-Dienst* der gematik wird im Rahmen des *TI-Messenger-Dienstes* in den folgenden Anwendungsfällen benötigt:
 
-* link:https://github.com/gematik/api-ti-messenger/blob/main/docs/anwendungsfaelle/MS-AF10103-authentisieren-organisation.adoc[AF_10103 - Authentisieren einer Organisation am TI-Messenger-Dienst]
-* link:https://github.com/gematik/api-ti-messenger/blob/main/docs/anwendungsfaelle/VZD-AF10058-practitioner-hinzufuegen.adoc[AF_10058 - Akteur (User-HBA) im Verzeichnisdienst hinzufügen] 
+* link:https://github.com/gematik/api-ti-messenger/blob/feature/C_11306/docs/anwendungsfaelle/MS-AF10103-authentisieren-organisation.adoc[AF_10103 - Authentisieren einer Organisation am TI-Messenger-Dienst]
+* link:https://github.com/gematik/api-ti-messenger/blob/feature/C_11306/docs/anwendungsfaelle/VZD-AF10058-practitioner-hinzufuegen.adoc[AF_10058 - Akteur (User-HBA) im Verzeichnisdienst hinzufügen] 
 
 In den folgenden Kapiteln werden die notwendigen Maßnahmen / Abläufe beschrieben, um die in den Anwendungsfällen geforderte Authentifizierung via OpenID Connect durchführen zu können. 
 
@@ -321,7 +321,7 @@ TIP: Der Token-Endpunkt DARF `ID_TOKEN` mit einer Gültigkeitsdauer von mehr als
 Im ersten Schritt entschlüsselt die *Relying Party* das `ID_TOKEN` mit seinem selbst erzeugten 256-Bit AES-Schlüssel (`Token-Key`). Anschließend erfolgt die Signaturprüfung mit dem `PuK_IDP_SIG` des *IDP-Dienstes*. 
 
 == Authorization Code Flow
-In dem folgenden Sequenzdiagramm ist beispielhaft der Ablauf des Authorization Code Flow für den Anwendungsfall link:https://github.com/gematik/api-ti-messenger/blob/main/docs/anwendungsfaelle/MS-AF10103-authentisieren-organisation.adoc[AF_10103 - Authentisieren einer Organisation am TI-Messenger-Dienst] dargestellt. Im Kontext des *TI-Messenger-Dienstes* ist der *Registrierungs-Diens* die *Relying Party*. Als *Authenticator* wird der von der gematik bereitgestellte *Authenticator* verwendet.
+In dem folgenden Sequenzdiagramm ist beispielhaft der Ablauf des Authorization Code Flow für den Anwendungsfall link:https://github.com/gematik/api-ti-messenger/blob/feature/C_11306/docs/anwendungsfaelle/MS-AF10103-authentisieren-organisation.adoc[AF_10103 - Authentisieren einer Organisation am TI-Messenger-Dienst] dargestellt. Im Kontext des *TI-Messenger-Dienstes* ist der *Registrierungs-Diens* die *Relying Party*. Als *Authenticator* wird der von der gematik bereitgestellte *Authenticator* verwendet.
 
 CAUTION: Der von der gematik bereitgestellte Authenticator wird nicht in Verbindung mit einer Web-Anwendung empfohlen, da vom Authenticator ein neuer Browser Tab geöffnet wird. Entsprechend der Fachanwendung wird im Browser eine HTML-Seite oder ein Json-Objekt(VZD-FHIR Response) angezeigt. 
 
@@ -329,7 +329,7 @@ Die Abbildung zeigt die Verwendung des *Authenticators* mit der Auto-Redirect Fu
 
 ++++
 <p align="left">
-  <img width="100%" src=../../images/plantuml/TI-Messenger-Dienst/Ressourcen/idp.svg>
+  <img width="100%" src=../../images/diagrams/TI-Messenger-Dienst/Ressourcen/idp.svg>
 </p>
 ++++
  

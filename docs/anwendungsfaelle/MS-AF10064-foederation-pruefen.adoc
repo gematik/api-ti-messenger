@@ -37,7 +37,7 @@ Föderationszugehörigkeit eines Messenger-Service prüfen
 ====
 ++++
 <p align="center">
-  <img width="80%" src=../../images/plantuml/TI-Messenger-Dienst/Ressourcen/UC_10064_Seq.svg>
+  <img width="80%" src=../../images/diagrams/TI-Messenger-Dienst/Ressourcen/UC_10064_Seq.svg>
 </p>
 ++++
 ====

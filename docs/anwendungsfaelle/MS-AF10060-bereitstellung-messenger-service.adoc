@@ -46,7 +46,7 @@ Bereitstellung eines Messenger-Service für eine Organisation
 ====
 ++++
 <p align="center">
-  <img width="100%" src=../../images/plantuml/TI-Messenger-Dienst/Ressourcen/UC_10060_Seq.svg>
+  <img width="100%" src=../../images/diagrams/TI-Messenger-Dienst/Ressourcen/UC_10060_Seq.svg>
 </p>
 ++++
 ====

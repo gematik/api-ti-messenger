@@ -45,7 +45,7 @@ Optionally, a notification is sent to actor B about the invitation to the chat r
 ====
 ++++
 <p align="center">
-  <img width="100%" src=../../images/plantuml/TI-Messenger-Dienst/Ressourcen/UC_10061_Seq.svg>
+  <img width="100%" src=../../images/diagrams/TI-Messenger-Dienst/Ressourcen/UC_10061_Seq.svg>
 </p>
 ++++
 ====

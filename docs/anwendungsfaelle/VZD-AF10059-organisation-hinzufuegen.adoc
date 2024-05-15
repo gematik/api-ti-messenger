@@ -45,7 +45,7 @@ Organisationsressourcen im Verzeichnisdienst hinzufügen
 ====
 ++++
 <p align="center">
-  <img width="100%" src=../../images/plantuml/TI-Messenger-Dienst/Ressourcen/UC_10059_Seq.svg>
+  <img width="100%" src=../../images/diagrams/TI-Messenger-Dienst/Ressourcen/UC_10059_Seq.svg>
 </p>
 ++++
 ====

@@ -1,43 +1,6 @@
-<img align="right" width="250" height="47" src="images/meta/gematik_logo.svg" alt="Gematik Logo"/> <br/>    
+<img align="right" width="250" height="47" src="images/meta/gematik_logo.svg"/> <br/>    
  
 # Release Notes api-ti-messenger
-
-## Hotfix 1.1.1-8
-
-### changed
-
-- changed FHIR status inactive to "off" to be FHIR compliant
-- all properties required by the Testsuite marked as required in TiMessengerTestTreiber.yaml
-
-## Hotfix 1.1.1-7
-
-### changed
-
- - new tags in TiMessengerTestTreiber.yaml
-
-## Hotfix 1.1.1-6
-
-### fixed
-
-- Fixed formatting issue in the api yaml, that prevented automated code generation.
-
-## Hotfix 1.1.1-5
-
-### added
-
-- Additional examples and documentation for using the uri scheme of the matrix id (see https://spec.matrix.org/v1.3/appendices/#matrix-uri-scheme) in the FHIR directory. 
-
-## Hotfix 1.1.1-4
-
-### changed
-
-- Testdriver api: Added roomVersion to room
-
-## Hotfix 1.1.1-3
-
-### changed
-
-- Testdriver api: Added optional endpoint for clean up system
  
 ## Release 1.1.1 (2023-08-25)
  

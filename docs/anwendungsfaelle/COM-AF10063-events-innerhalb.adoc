@@ -42,7 +42,7 @@ Austausch von Events zwischen Akteuren innerhalb einer Organisation
 ====
 ++++
 <p align="center">
-  <img width="100%" src=../../images/plantuml/TI-Messenger-Dienst/Ressourcen/UC_10063_Seq.svg>
+  <img width="100%" src=../../images/diagrams/TI-Messenger-Dienst/Ressourcen/UC_10063_Seq.svg>
 </p>
 ++++
 ====
