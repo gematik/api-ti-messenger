@@ -62,7 +62,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: images-drawio
-          path: ${{ env.DRAWIO_OUT }}
+          path: ${{ env.DRAWIO_OUT }}/**
 
   plantuml:
     runs-on: ubuntu-latest
@@ -107,7 +107,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: images-plantuml
-          path: ${{ env.PLANTUML_OUT }}
+          path: ${{ env.PLANTUML_OUT }}/**
 
   commit:
     needs: [drawio, plantuml]
@@ -116,6 +116,13 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+
+      - name: Prepare output folders
+        run: |
+          rm -rf "${{ env.DRAWIO_OUT }}"
+          mkdir -p "${{ env.DRAWIO_OUT }}"
+          rm -rf "${{ env.PLANTUML_OUT }}"
+          mkdir -p "${{ env.PLANTUML_OUT }}"
 
       - name: Download draw.io artifact
         uses: actions/download-artifact@v4
@@ -126,7 +133,7 @@ jobs:
       - name: Download PlantUML artifact
         uses: actions/download-artifact@v4
         with:
-          name: images-plantum
+          name: images-plantuml
           path: ${{ env.PLANTUML_OUT }}
 
       - name: Lint AsciiDoc
