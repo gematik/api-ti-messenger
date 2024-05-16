@@ -74,12 +74,6 @@ jobs:
                   rc=1
                 fi
               else
-                echo "PWD: $(pwd)"
-                echo "Ref: $root$location"
-                echo "File: $(file "$root$location")"
-                tree "$(dirname "$root$location")"
-                echo '../../images/drawio/Test/Zulassung TIM-ePa.png'
-                file '../../images/drawio/Test/Zulassung TIM-ePa.png'
                 if [[ ! -f "$root$location" ]]; then
                   err "$file references non-existent image $location with imagedir ${root:-<null>}"
                   rc=1
