@@ -21,7 +21,7 @@ toc::[]
 == Überblick
 Ein *Messenger-Service* besteht immer aus den zwei Teilkomponenten *Messenger-Proxy* und *Matrix-Homeserver*. Der *Messenger-Proxy* dient als Prüfinstanz und leitet alle Anfragen an den *Matrix-Homeserver* weiter. Der *Matrix-Homeserver* basiert auf dem offenen Kommunikationsprotokoll link:https://spec.matrix.org/v1.3/[Matrix]. Welche Schnittstellen der *Messenger-Service* nutzt und anbietet ist in der folgenden Abbildung dargestellt:
 
-image:drawio/TI-Messenger-Fachdienst/API-Messenger-Service.svg[align="center",width="55%"]
+image::drawio/TI-Messenger-Fachdienst/API-Messenger-Service.svg[align="center",width="55%"]
 
 
 == Messenger-Proxy
