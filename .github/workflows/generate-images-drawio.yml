@@ -51,6 +51,16 @@ jobs:
             find "${{ env.DRAWIO_SRC }}" -name "*.$ext" -exec rm -v "{}" \;  
           done
 
+  lint:
+    runs-on: ubuntu-latest
+    needs: generate
+    uses: ./.github/workflows/lint.yml
+
+  commit:
+    runs-on: ubuntu-latest
+    needs: lint
+
+    steps:
       - name: Add & Commit
         uses: EndBug/add-and-commit@v9
         with:
