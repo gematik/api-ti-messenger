@@ -44,9 +44,5 @@ Einträge im VZD-FHIR-Directory suchen
 .Sequenzdiagramm
 [%collapsible%open]
 ====
-++++
-<p align="center">
-  <img width="100%" src=../../images/plantuml/TI-Messenger-Dienst/Ressourcen/UC_Directory_search_Seq.svg>
-</p>
-++++
+image:plantuml/TI-Messenger-Dienst/Ressourcen/UC_Directory_search_Seq.svg[width="100%"]
 ====

@@ -35,9 +35,5 @@ Föderationszugehörigkeit eines Messenger-Service prüfen
 .Sequenzdiagramm
 [%collapsible%open]
 ====
-++++
-<p align="center">
-  <img width="80%" src=../../images/plantuml/TI-Messenger-Dienst/Ressourcen/UC_10064_Seq.svg>
-</p>
-++++
+image:plantuml/TI-Messenger-Dienst/Ressourcen/UC_10064_Seq.svg[align="center",width="80%"]
 ====

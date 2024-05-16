@@ -40,11 +40,7 @@ Aktualisierung der Föderationsliste
 .Sequenzdiagramm "Föderationsliste aktualisieren"
 [%collapsible%open]
 ====
-++++
-<p align="center">
-  <img width="100%" src=../../images/plantuml/TI-Messenger-Dienst/Ressourcen/UC_Update_Federationlist_Seq.svg>
-</p>
-++++
+image:plantuml/TI-Messenger-Dienst/Ressourcen/UC_Update_Federationlist_Seq.svg[width="100%"]
 ====
 
 [caption=]
@@ -65,11 +61,7 @@ Sequenzdiagramm "Provider authentifizieren und Föderationsliste abrufen":
 .Sequenzdiagramm "Provider authentifizieren und Föderationsliste abrufen"
 [%collapsible%open]
 ====
-++++
-<p align="center">
-  <img width="100%" src=../../images/plantuml/TI-Messenger-Dienst/Ressourcen/UC_Update_Federationlist_auth_retrieve.svg>
-</p>
-++++
+image:plantuml/TI-Messenger-Dienst/Ressourcen/UC_Update_Federationlist_auth_retrieve.svg[width="100%"]
 ====
 
 Das in der Abbildung "Laufzeitansicht - Aktualisierung der Föderationsliste" referenzierte
@@ -78,9 +70,5 @@ Sequenzdiagramm "Signatur der Föderationsliste prüfen":
 .Sequenzdiagramm "Signatur der Föderationsliste prüfen"
 [%collapsible%open]
 ====
-++++
-<p align="center">
-  <img width="60%" src=../../images/plantuml/TI-Messenger-Dienst/Ressourcen/UC_Update_Federationlist_SignCheck.svg>
-</p>
-++++
+image:plantuml/TI-Messenger-Dienst/Ressourcen/UC_Update_Federationlist_SignCheck.svg[align="center",width="60%"]
 ====
