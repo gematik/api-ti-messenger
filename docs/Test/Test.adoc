@@ -117,7 +117,7 @@ image:drawio/Test/Zulassung TIM-Basis.png[align="left",width="100%", title="Zula
 Die Hersteller von Versicherten-Frontends müssen ebenfalls das FdV, die Testtreiberschnittstelle und den Fachdienst für Versicherte bereitstellen. Bei Problemen im Rahmen der Zulassung müssen die Anbieter bei der Analyse unterstützen. In der folgenden Abbildung ist eine Systemumgebung für den Zulassungstest TI-Messerger ePA (TI-M ePA) dargestellt.
 
 .Abbildung{counter:abbildung: 1}: Zulassung TI-Messenger ePA
-image:drawio/Test/Zulassung TIM-ePa.png[align="left",width="100%", title="Zulassung TI-Messenger ePA"]
+image:drawio/Test/Zulassung TIM-ePA.png[align="left",width="100%", title="Zulassung TI-Messenger ePA"]
 
 === IOP Tests zwischen Anbietern durch die gematik
 Zusätzlich zu den bereits durchgeführten IOP- und E2E-Tests werden weitere Interoperabilitätstests verschiedener TI-Messenger-Lösungen vor und nach der Zulassung durch die gematik durchgeführt. Die folgende Abbildung zeigt die Nutzung der existierenden Testumgebung durch die gematik während der Zulassungs- und Interoperabilitätstests.
