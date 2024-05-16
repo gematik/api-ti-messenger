@@ -41,4 +41,4 @@ Anmeldung eines Akteurs am Messenger-Service
 ====
 .Sequenzdiagramm
 [%collapsible%open]
-image::plantuml/TI-Messenger-Dienst/Ressourcen/UC_10057_Seq.svg[align="center",width="80%"]
+image:plantuml/TI-Messenger-Dienst/Ressourcen/UC_10057_Seq.svg[align="center",width="80%"]
