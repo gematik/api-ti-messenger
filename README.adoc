@@ -14,7 +14,7 @@ ifndef::env-github[:source-style: source]
 
 image::meta/gematik_logo.svg[gematik,width="70%"]
 
-image:https://github.com/gematik/api-ti-messenger/actions/workflows/lint.yml/badge.svg?branch=tim-epa-fdv[link="https://github.com/gematik/api-ti-messenger/actions/workflows/lint.yml"] +
+image:https://github.com/gematik/api-ti-messenger/actions/workflows/lint.yml/badge.svg?branch=tim-epa-fdv[link="https://github.com/gematik/api-ti-messenger/actions/workflows/lint.yml"]
 image:https://github.com/gematik/api-ti-messenger/actions/workflows/generate-images.yml/badge.svg?branch=tim-epa-fdv[link="https://github.com/gematik/api-ti-messenger/actions/workflows/generate-images.yml"]
 
 image:https://img.shields.io/badge/Release%20Notes-v1.1.1-red?style=plastic&logo=github&logoColor=red[link="ReleaseNotes.md"] +
