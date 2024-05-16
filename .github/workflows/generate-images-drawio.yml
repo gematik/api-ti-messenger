@@ -6,6 +6,7 @@ on:
     - '**'
     paths:
     - '.github/workflows/generate-images-drawio.yml'
+    - 'images/drawio/**'
     - 'src/drawio/**'
 
   workflow_dispatch:

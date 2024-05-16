@@ -6,6 +6,7 @@ on:
     - '**'
     paths:
     - '.github/workflows/generate-images-plantuml.yml'
+    - 'images/plantuml/**'
     - 'src/plantuml/**'
 
   workflow_dispatch:
