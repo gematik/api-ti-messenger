@@ -46,7 +46,7 @@ Für die Dokumentation des *TI-Messenger-Dienstes* werden in GitHub die folgende
 == Systemübersicht
 Die folgende Abbildung gibt einen Überblick über die Systemarchitektur des *TI-Messenger-Dienst* v1.1.1 insbesondere auf die Schnittstellen zwischen den Komponenten, die in den folgenden Kapiteln weiter betrachtet werden. 
 
-image::System_overview.png[align="left",width="100%"]
+image::System_overview.png[width="100%"]
 
 TIP: Auf die Schnittstellen zur Autentisierung am *Auth-Service* des *VZD-FHIR-Directory* wird in der oben gezeigten Abbildung verzichtet. Die Informationen hierzu können in dem entsprechenden Kapitel für das *VZD-FHIR-Directory* link:https://github.com/gematik/api-vzd/blob/gemILF_VZD_FHIR_Directory/1.0.1/docs/FHIR_VZD_HOWTO_Authenticate.adoc#2-fhirdirectoryauthenticationapis[hier] nachgelesen werden.
 
