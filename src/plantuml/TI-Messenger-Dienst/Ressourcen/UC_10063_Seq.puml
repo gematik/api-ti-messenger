@@ -2,7 +2,7 @@
 # UC - 10063
 # Name: Austausch von Events zwischen Akteuren innerhalb einer Organisation
 '/
-@startuml 
+@startuml
 skinparam sequenceMessageAlign direction
 skinparam minClassWidth 200
 skinparam BoxPadding 1
