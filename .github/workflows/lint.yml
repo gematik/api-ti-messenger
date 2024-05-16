@@ -74,6 +74,9 @@ jobs:
                   rc=1
                 fi
               else
+                echo "PWD: $(pwd)"
+                echo "Ref: $root$location"
+                echo "File: $root$location"
                 if [[ ! -f "$root$location" ]]; then
                   err "$file references non-existent image $location with imagedir ${root:-<null>}"
                   rc=1
