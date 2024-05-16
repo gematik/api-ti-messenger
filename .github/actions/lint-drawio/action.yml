@@ -4,6 +4,7 @@ runs:
   using: "composite"
   steps:
     - name: Verify number of diagrams
+      shell: bash
       run: |
         function err {
           >&2 echo -e "\033[0;31m$@\033[0m"

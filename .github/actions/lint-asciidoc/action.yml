@@ -4,6 +4,7 @@ runs:
   using: "composite"
   steps:
     - name: Verify image references
+      shell: bash
       run: |
         function err {
           >&2 echo -e "\033[0;31m$@\033[0m"
@@ -49,6 +50,7 @@ runs:
         exit $rc
 
     - name: Verify absence of <img> tags
+      shell: bash
       run: |
         function err {
           >&2 echo -e "\033[0;31m$@\033[0m"
