@@ -1,4 +1,4 @@
-@startuml "TI-Messenger_OIDC_Login"
+@startuml
 skinparam sequenceMessageAlign direction
 skinparam WrapWidth 300
 skinparam minClassWidth 150

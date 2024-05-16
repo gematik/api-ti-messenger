@@ -33,9 +33,5 @@ Weiterleitung der Einladung, wenn der Sender oder der Empfänger kein Akteur in 
 .Sequenzdiagramm
 [%collapsible%open]
 ====
-++++
-<p align="center">
-  <img width="80%" src=../../../images/diagrams/TI-M_ePA/UC_10233_Seq.svg>
-</p>
-++++
+image:plantuml/TI-M_ePA/UC_10233_Seq.svg[align="center",width="80%"]
 ====

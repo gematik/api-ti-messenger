@@ -1,0 +1,24 @@
+name: Lint draw.io
+
+runs:
+  using: "composite"
+  steps:
+    - name: Verify number of diagrams
+      shell: bash
+      run: |
+        function err {
+          >&2 echo -e "\033[0;31m$@\033[0m"
+        }
+
+        rc=0
+
+        while read -r file; do
+          echo "Checking $file"
+
+          if [[ $(grep "<diag" "$file" | wc -l) -ne 1 ]]; then
+            err "$file does not contain exactly one diagram"
+            rc=1
+          fi
+        done < <(find . -name "*.drawio")
+
+        exit $rc

@@ -41,9 +41,5 @@ Einladung von Akteuren innerhalb einer Organisation
 .Sequenzdiagramm
 [%collapsible%open]
 ====
-++++
-<p align="center">
-  <img width="100%" src=../../images/diagrams/TI-Messenger-Dienst/Ressourcen/UC_10104_Seq.svg>
-</p>
-++++
+image:plantuml/TI-Messenger-Dienst/Ressourcen/UC_10104_Seq.svg[width="100%"]
 ====

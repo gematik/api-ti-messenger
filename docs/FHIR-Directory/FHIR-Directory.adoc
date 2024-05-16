@@ -30,11 +30,7 @@ die benötigt werden, um alle Funktionsmerkmale abbilden zu können.
 
 In der folgenden Abbildung sind die Teilkomponenten sowie deren Schnittstellen und die für deren Zugriff benötigten Zugriffstoken dargestellt:
 
-++++
-<p align="center">
-  <img width="100%" src=../../images/I_VZD_FHIR_Directory.png>
-</p>
-++++
+image::I_VZD_FHIR_Directory.png[width="100%"]
 
 == FHIR-Directory / Verzeichnistypen
 Das *FHIR-Directory* basiert auf link:https://hl7.org/fhir/R4/[FHIR R4] und stellt die zwei Verzeichnisse `HealthcareServiceDirectory`- und `PractitionerRoleDirectory` bereit. Die Profilierung der FHIR-Ressourcen ist im link:https://simplifier.net/vzd-fhir-directory[Simplifier] aufrufbar. 
@@ -43,19 +39,11 @@ Im folgenden sind die beiden Verzeichnisse mit deren Struktur beispielhaft darge
 
 * `HealthcareService`
 
-++++
-<p align="center">
-  <img width="60%" src=https://raw.githubusercontent.com/gematik/api-vzd/main/images/diagrams/ObjectDiagram.HealthcareService.svg>
-</p>
-++++
+image::https://raw.githubusercontent.com/gematik/api-vzd/main/images/diagrams/ObjectDiagram.HealthcareService.svg[align="center",width="60%"]
 
 * `PractitionerRole`
 
-++++
-<p align="center">
-  <img width="60%" src=https://raw.githubusercontent.com/gematik/api-vzd/main/images/diagrams/ObjectDiagram.PractitionerRole.svg>
-</p>
-++++
+image::https://raw.githubusercontent.com/gematik/api-vzd/main/images/diagrams/ObjectDiagram.PractitionerRole.svg[align="center",width="60%"]
 
 Im Rahmen des *TI-Messenger-Dienstes* sollen die folgenden Attribute eines `Endpoints` eines `HealthcareService` oder einer `PractitionerRole` wie folgt gesetzt werden:
 

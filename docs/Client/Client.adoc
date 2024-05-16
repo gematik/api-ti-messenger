@@ -31,11 +31,7 @@ IMPORTANT: Die Seite ergänzt die Spezifikation gemäß link:https://fachportal.
 == TI-Messenger-Client für Akteure
 Der *TI-Messenger-Client* für Akteure unterstützt die meisten aller, durch die Matrix-Spezifikation festgelegten Funktionalitäten eines Matrix-Messengers und weitere durch die gematik definierten Vorgaben. Die Funktionalität des *TI-Messenger-Clients* für Akteure kann in drei abstrakte Module unterteilt werden. In der folgenden Abbildung wird dies verdeutlicht.
 
-++++
-<p align="center">
-  <img width="90%" src=../../images/I_Client.png>
-</p>
-++++
+image::I_Client.png[align="center",width="90%"]
 
 === Abstrakte Module 
 ==== TI-Messenger Modul

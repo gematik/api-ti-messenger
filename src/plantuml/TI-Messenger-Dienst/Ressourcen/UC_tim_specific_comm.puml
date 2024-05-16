@@ -1,4 +1,4 @@
-@startuml "TI-M spezifische Kommunikation"
+@startuml
 !pragma layout smetana
 skinparam actorStyle awesome
 left to right direction
