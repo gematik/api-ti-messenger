@@ -5,8 +5,7 @@ on:
     branches:
     - '**'
     paths:
-    - '.github/workflows/generate-images-drawio.yml'
-    - '.github/workflows/generate-images-plantuml.yml'
+    - '.github/workflows/generate-images.yml'
     - 'images/drawio/**'
     - 'images/plantuml/**'
     - 'src/drawio/**'
