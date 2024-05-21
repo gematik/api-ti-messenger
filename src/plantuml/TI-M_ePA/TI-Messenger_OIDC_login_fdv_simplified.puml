@@ -41,10 +41,11 @@ box <size:19>Endgerät</size> #WhiteSmoke
       Authenticator-Modul
     ]
 end box
-box <size:19>TI-Messenger Service</size> #WhiteSmoke
-  participant pr as "Messenger-Proxy"
-  participant hs as "Matrix-Homeserver\n(Relying party für IDP)"
-end box
+note left of auth
+Die Grafik zeigt exemplarisch das Authenticator-Modul als Teil des ePA-FdV. Zulässig ist ebenfalls ein Authenticator-Modul als eigenständige App auf dem Endgerät.
+end note
+participant hs as "Messenger-Service\n(Relying party für IDP)"
+
 participant idp as "Sektoraler\nIDP"
 
 |||
@@ -71,13 +72,9 @@ activate app
     app -> hs++: GET ""{homeserver_client_api_url}""/login/sso/redirect/""{sidp}""
     |||
     group #Linen <size:16>Verhaltensänderung, da der sektorale IDP OIDC PAR erfordert</size>
-      hs --> pr --++: 302 Redirect (:location, :response_type, :client_id, :redirect_uri, :scope, :state, :code_challenge)
-      |||
-      pr -> idp ++: POST ""{sektoraler_idp_url}""/par (response_type, redirect_uri, code_challenge, scope)
-
-      idp --> pr --: 201 CREATED (:request_uri)
-      |||
-      pr --> app --: 302 Redirect ""{sektoraler_idp_url}""/login/oauth/authorize (:request_uri)
+      hs -> idp ++: POST ""{sektoraler_idp_url}""/par (response_type, redirect_uri, code_challenge, scope)
+      idp --> hs --: 201 CREATED (:request_uri)
+      hs --> app --: 302 Redirect ""{sektoraler_idp_url}""/login/oauth/authorize (:request_uri)
       |||
     end
     |||
@@ -108,11 +105,10 @@ activate app
     hs -> idp ++: POST ""{sektoraler_idp_url}""/token-endpoint (auth_code, code_verifier)
     idp --> hs --: 200 OK (:id_token)
     opt #LightYellow <size:16>kein passender Benutzer-Account zum id_token vorhanden</size>
-    hs -> hs: /register  (initial_device_display_name, refresh_token, id_token)
-    note left
-    Benutzer-Account anlegen
-    end note
+    hs -> hs: Benutzer-Account anlegen
     |||
+    else <size:16>Display Name aus dem id_token stimmt nicht mit den Daten im Benutzer-Account überein.</size>
+    hs -> hs: Display Name im Benutzer-Account aktualisieren
     end
     |||
     hs --> app --: 200 OK (:loginToken)
