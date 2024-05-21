@@ -52,9 +52,8 @@ u --> UC4
 u --> UC5
 u --> UC6
 
-note top of (u)
-Mitarbeiter einer Organisation
-im Gesundheitswesen
+note bottom of (u)
+Akteur im Gesundheitswesen
 end note
 
 @enduml
