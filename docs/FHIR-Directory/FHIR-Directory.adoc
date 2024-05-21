@@ -17,7 +17,7 @@ image:meta/gematik_logo.svg[width=70%]
 toc::[]
 
 = VZD-FHIR-Directory
-Beim *VZD-FHIR-Directory* handelt es sich um einen zentralen Verzeichnisdient der TI. Im Rahmen des *TI-Messenger-Dienstes* wird das *VZD-FHIR-Directory* für die deutschlandweite Suche von Organisationen und Akteuren verwendet. Zusätzlich stellt das *VZD-FHIR-Directory* Funktionalitäten bereit, um die in den *Messenger-Proxy* implementierten link:/docs/anwendungsfaelle/MS-stufen-berechtigungspruefung.adoc[Berechtigungsstufen] zu unterstützen.  
+Beim *VZD-FHIR-Directory* handelt es sich um einen zentralen Verzeichnisdient der TI. Im Rahmen des *TI-Messengers* wird das *VZD-FHIR-Directory* für die deutschlandweite Suche von Organisationen und Akteuren verwendet. 
 
 Dabei besteht das *VZD-FHIR-Directory* aus den Teilkomponenten:
 
@@ -77,9 +77,38 @@ Der *FHIR-Proxy* gibt Zugriff auf das *FHIR-Directory* unter Vorlage eines valid
 
 * https://github.com/gematik/api-vzd/blob//1.0.1/docs/FHIR_VZD_HOWTO_Owner.adoc#2-fhirdirectoryownerapi[/owner]
 
-TIP: Die Anbieter eines *TI-Messenger-Fachdienstes* nutzen die Schnittstelle `/tim-provider-services`, um die Föderationsliste des *TI-Messenger-Dienstes* abzufragen und um die Domains der von ihnen betriebenen *Messenger-Services* als Teil der TI-Messenger Föderation zu verwalten.
+TIP: Die Anbieter eines *TI-Messenger-Fachdienstes* nutzen die Schnittstelle `/tim-provider-services`, um die Föderationsliste abzufragen und um die Domains der von ihnen betriebenen *Messenger-Services* als Teil der TI-Messenger Föderation zu verwalten.
 
 IMPORTANT: Die Volltextsuche über die Schnittstellen `/search` und `/owner` wird aktuell nicht vom *VZD-FHIR-Directory* unterstützt. Hierfür können die folgenden RegEx *_text* and *_content* verwendet werden. Für mehr Informationen kann die folgende  link:http://hl7.org/fhir/R4/search.html#content[Dokumentation] verwendet werden.
+
+== Föderationsliste
+Um nicht zum TI-M Dienst gehörende Messenger-Services ausschließen zu können, werden die Domainnamen der Messenger-Services in einer Föderationsliste zusammengefasst. Diese wird durch das [gemSpec_VZD_FHIR_Directory] bereitgestellt und kann über die Schnittstelle `/tim-provider-services` von zugelassenen Anbietern verwaltet werden. In der Föderationsliste werden die folgenden Informationen zu den Messenger-Services gespeichert:
+
+[options="header"]
+|=================================================================================================================
+| Attribut                | Beschreibung
+| `domain`                | The TI-Messenger domain
+| `telematikID`           | The telematikID of the organization that uses the TI-Messenger domain
+| `isInsurance`           | Indicates if it is a domain of an health insurance for insured persons
+| `timProvider`           | The Zuweisungsgruppe im TI-ITSM-System of the TI-Messenger Provider, who added the domain
+|=================================================================================================================
+
+Das folgenden Beispiel zeigt exemplarisch die Einträge der gematiker Krankenkasse,  die einen *TI-M FD ePA* für die Versicherten und einen *TI-M FD Pro* für die eigenen Mitarbeiter betreibt:
+----
+{
+    "domain": "versicherte.tim.gematiker-kk.de",
+      "telematikID": "4711-gem",
+      "timAnbieter": "GEM-0815",
+      "isInsurance": yes
+    },
+    {
+      "domain": "mitarbeiter.tim.gematiker-kk.de",
+      "telematikID": "4711-gem",
+      "timAnbieter": GEM-0815,
+      "isInsurance": false
+    },
+}
+----
 
 
 
