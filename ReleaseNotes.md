@@ -2,6 +2,12 @@
  
 # Release Notes api-ti-messenger
 
+## Hotfix 1.1.1-9
+
+### removed
+
+- TiMessengerTestTreiber.yaml was moved to the Testsuite repository https://github.com/gematik/TI-Messenger-Testsuite under src/main/resources/api
+
 ## Hotfix 1.1.1-8
 
 ### changed
