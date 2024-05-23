@@ -8,6 +8,7 @@ skinparam sequenceMessageAlign direction
 skinparam minClassWidth 200
 skinparam BoxPadding 1
 skinparam sequenceReferenceHeaderBackgroundColor palegreen
+skinparam sequenceReferenceBackgroundColor Beige
 scale max 2048 width
 
 skinparam sequence {
@@ -30,15 +31,15 @@ ActorFontSize 20
 }
 autonumber
 
-    actor U1 as "Akteur - A in der Rolle\nUser"
+    actor U1 as "Akteur - A in\nder Rolle User"
     participant C1 as "TI-Messenger-\nClient A" #AliceBlue
     box <size:18>Messenger-Service</size> #WhiteSmoke
       participant MP as "Messenger-\nProxy"
       participant MH as "Matrix-Homeserver \n(inklusive Nutzerverzeichnis)"
-      participant PG as "Push-Gateway"
     end box
+    participant PG as "Push-\nGateway"
     participant C2 as "TI-Messenger-\nClient B"#TECHNOLOGY
-    actor U2 as "Akteur - B in der Rolle\nUser"
+    actor U2 as "Akteur - B in\nder Rolle User"
     
 |||
 note over U1, U2: \n<size:17>Die Akteure sind auf dem selben Messenger-Service angemeldet und im Besitz eines zugelassenen TI-Messenger-Clients.\n<size:17>Ein Chatraum wurde durch den Einladenen eingerichtet.</size>\n
@@ -56,15 +57,17 @@ note over U1, U2: \n<size:17>Die Akteure sind auf dem selben Messenger-Service a
     MH-->MP: MXID
       deactivate MH
     MP-->C1: HTTP(S) Forward
+      deactivate MP
     |||
     end
     
     |||
     U1->C1: Akteur B einladen
-    C1->MP: POST /_matrix/client/r0/rooms/\n{roomId}/invite (roomId)
+    C1->MP: POST /_matrix/client/v3/\nrooms/{roomId}/invite
+      activate MP
     
     |||
-      ref over MP, MH: <size:17><b>Berechtigungsprüfung</size>\n 
+      ref over MP, MP: <size:17><b>Berechtigungsprüfung</size>\n 
     |||
     
     alt#LightGrey #AliceBlue <size:16>Matrix-Domain nicht in der Föderation enthalten</size>
@@ -79,7 +82,9 @@ note over U1, U2: \n<size:17>Die Akteure sind auf dem selben Messenger-Service a
       MP->MH: HTTP(S) Forward
         activate MH
       MH->MH: Invite verarbeiten
-      MH-->C1: HTTP 200
+      MH-->MP: HTTP 200
+      MP-->C1: HTTP(S) Forward
+        deactivate MP
       |||
         opt#LightGrey #LightBlue <size:16>Push-Benachrichtigung</size>
           |||
@@ -94,6 +99,7 @@ note over U1, U2: \n<size:17>Die Akteure sind auf dem selben Messenger-Service a
         |||
           
           C2->MP: Sync Request
+            activate MP
           MP->MH: HTTP(S) Forward
           MH-->MP: Sync Response
           MP-->C2: HTTP(S) Forward
@@ -101,15 +107,19 @@ note over U1, U2: \n<size:17>Die Akteure sind auf dem selben Messenger-Service a
           C2->U2: Einladung anzeigen
           U2-->C2: Einladung bestätigen
           C2->MP: join
-          |||
           MP-->MH: HTTP(S) Forward
           MH->MH: join verarbeiten
           MH-->MP: Room ID
+            deactivate MH
           MP-->C2: HTTP(S) Forward
+            deactivate MP
           C2-->U2: Nutzer ist dem \nRaum beigetreten
-          deactivate C2
+            deactivate C2
+
           C1->MP: Sync Request
+            activate MP
           MP->MH: HTTP(S) Forward
+            activate MH
           MH-->MP: Sync Response
           deactivate MH
           MP-->C1: HTTP(S) Forward
