@@ -35,14 +35,11 @@ ActorFontColor black
 ActorFontSize 20
 ActorFontName Aapex
 }
-    actor U as "Akteur in der Rolle\nUser"
+    actor U as "Akteur in der\nRolle User"
     participant C as "TI-Messenger-Client"
     box <size:18>Messenger-Service</size> #WhiteSmoke
       participant MP as "Messenger Proxy"
       participant MH as "Matrix-Homeserver"
-    end box
-    box <size:18>VZD-FHIR-Directory</size> #WhiteSmoke
-      participant Auth as "Auth-Service"
     end box
 
 |||
@@ -106,42 +103,11 @@ note over U, MH: <size:17>Die Authentifizierungsverfahren werden für jeden \n<s
       Deactivate MP
     |||
     C->C: Speichere \nMatrix-ACCESS_TOKEN
-    
+
+    C-->U: Anmeldung \nerfolgreich
+        Deactivate C
     |||
-    C->MP: POST /_matrix/client\n/user/{userId}/\nopenid/request_token
-      Activate MP
-    MP->MH: HTTP(S) Forward
-      Activate MH
-    MH->MH: Erstelle \nMatrix-OpenID-Token
-    MH-->MP: Matrix-OpenID-Token
-      Deactivate MH
-    MP-->C: HTTP(S) Forward
-      Deactivate MP
-    
-    |||
-    C->Auth: GET /tim-authenticate (Matrix-OpenID-Token)
-      Activate Auth
-    Auth->Auth: Prüfung, ob \nMatrix-Domain \nin Föderation \nenthalten ist
 
-      |||
-      alt#LightGrey #LightBlue <size:16>nicht valider Messenger-Service, da Matrix-Homeserver nicht in der Föderations enthalten ist</size>
-      |||  
-
-        Auth-->C: HTTP 401 \nUnauthorized 
-        C->C: Abmelden Session \nMatrix-ACCESS_TOKEN \nlöschen
-        C-->U: Anmeldung \nnicht erfolgreich
-        
-        |||
-        else <size:16>valider Messenger-Service, da Matrix-Homeserver in der Föderation enthalten ist</size>
-          |||
-          Auth-->C: HTTP 200
-            Deactivate Auth
-          C-->U: Anmeldung \nerfolgreich
-            Deactivate C
-          |||
-
-      end  
-      |||
 end
 |||
 
