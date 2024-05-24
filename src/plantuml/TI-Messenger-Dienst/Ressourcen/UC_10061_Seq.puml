@@ -69,7 +69,7 @@ note over U2, MP2: \n<size:17>Der Akteur B ist erfolgreich beim Messenger Servic
          C2--[#DarkGreen]>C1: MXID von Akteur B
          deactivate C2
          |||
-           group <size:16>optional</size>
+           group <size:16>opt</size>
             |||
             
              C1->C1: MXID auf \nAllowList \nübernehmen
