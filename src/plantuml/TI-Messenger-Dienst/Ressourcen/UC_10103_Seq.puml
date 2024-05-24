@@ -38,7 +38,7 @@ actor oa as "Akteur in der Rolle\nOrg-Admin"
   participant wb as "Frontend des \nRegistrierungs-Dienstes"
   participant au as "Authenticator"
   end box
-participant ko as "Konnektor"
+participant ko as "Konnektor /\n Basis-Consumer"
 participant rd as "Registrierungs-Dienst"
 participant ip as "zentraler \nIDP-Dienst"
 
