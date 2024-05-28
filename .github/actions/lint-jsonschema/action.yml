@@ -3,13 +3,13 @@ name: Lint JSON Schema
 runs:
   using: "composite"
   steps:
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.12'
-        cache: 'pip'
+    # - name: Set up Python
+    #   uses: actions/setup-python@v5
+    #   with:
+    #     python-version: '3.12'
+    #     cache: 'pip'
 
-    - name: Install check-jsonschema
+    - name: Set up check-jsonschema
       shell: bash
       run: |
         pip install check-jsonschema
