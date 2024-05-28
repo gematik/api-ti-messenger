@@ -11,38 +11,23 @@
                 "block all"
             ]
         },
-        "groupException": {
-            "type": "array",
-            "uniqueItems": true,
-            "items": {
-                "groupName": {
-                    "description": "The name of the group to be in-/excluded",
-                    "type": "string",
-                    "enum": [
-                        "myLocalContactList"
-                    ]
+        "domainExceptions": {
+            "type": "object",
+            "description": "The map of servers to in-/exclude. This is a mapping of Matrix server name (https://spec.matrix.org/v1.3/appendices/#server-name) to empty object.",
+            "patternProperties": {
+                "^.*$": {
+                    "type": "object",
+                    "description": "An empty object for future enhancement"
                 }
-            }
+            }    
         },
-        "domainException": {
-            "type": "array",
-            "uniqueItems": true,
-            "items": {
-                "domain": {
-                    "description": "The name of the domain to be in-/excluded",
-                    "type": "string",
-                    "pattern": "^((?!-)[A-Za-z0-9-]{1, 63}(?<!-)\\.)+[A-Za-z]{2, 6}$"
-                }
-            }
-        },
-        "userException": {
-            "type": "array",
-            "uniqueItems": true,
-            "items": {
-                "mxid": {
-                    "description": "The MXID of the user to be in-/excluded",
-                    "type": "string",
-                    "pattern": "^@[a-z0-9._=/-]+:[a-zA-Z0-9.-]+$"
+        "userExceptions": {
+            "type": "object",
+            "description": "The map of users to in-/exclude. This is a mapping of Matrix user ID (https://spec.matrix.org/v1.3/appendices/#user-identifiers) to empty object.",
+            "patternProperties": {
+                "^@.*$": {
+                    "type": "object",
+                    "description": "An empty object for future enhancement"
                 }
             }
         }
