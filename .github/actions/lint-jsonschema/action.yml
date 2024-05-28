@@ -15,6 +15,7 @@ runs:
         rc=0
 
         while read -r file; do
+          echo "Validating $file"
           if ! check-jsonschema --check-metaschema "$file"; then
             rc=1
           fi
@@ -31,7 +32,9 @@ runs:
         cd src/schema/examples
 
         while read -r file; do
-          if ! check-jsonschema --schemafile "../${file%%.*}.json" "$file"; then
+          schema=../${file%%.*}.json
+          echo "Validating $file against $schema"
+          if ! check-jsonschema --schemafile "$schema" "$file"; then
             rc=1
           fi
         done < <(find . -name "*.json" -maxdepth 1)
