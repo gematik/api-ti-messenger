@@ -8,7 +8,7 @@ runs:
       run: |
         pip install check-jsonschema
 
-    - name: Verify meta schema
+    - name: Verify schemas
       shell: bash
       run: |
         # We handle the return code ourselves to prevent the action from exiting on the first error
@@ -18,7 +18,23 @@ runs:
           if ! check-jsonschema --check-metaschema "$file"; then
             rc=1
           fi
-        done < <(find src/schema -name "*.json")
+        done < <(find src/schema -name "*.json" -maxdepth 1)
+
+        exit $rc
+
+    - name: Verify examples
+      shell: bash
+      run: |
+        # We handle the return code ourselves to prevent the action from exiting on the first error
+        rc=0
+
+        cd src/schema/examples
+
+        while read -r file; do
+          if ! check-jsonschema --schemafile "../${file%%.*}.json" "$file"; then
+            rc=1
+          fi
+        done < <(find . -name "*.json" -maxdepth 1)
 
         exit $rc
         

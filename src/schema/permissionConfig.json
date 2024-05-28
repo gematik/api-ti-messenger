@@ -5,7 +5,7 @@
     "type": "object",
     "properties": {
         "defaultSetting": {
-            "type": "string1",
+            "type": "string",
             "enum": [
                 "allow all",
                 "block all"
