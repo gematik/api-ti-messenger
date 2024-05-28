@@ -1,5 +1,9 @@
 name: Lint JSON Schema
 
+env:
+  SCHEMAS_ROOT: src/schema
+  EXAMPLES_ROOT: src/schema/examples
+
 runs:
   using: "composite"
   steps:
@@ -19,7 +23,7 @@ runs:
           if ! check-jsonschema --check-metaschema "$file"; then
             rc=1
           fi
-        done < <(find src/schema -name "*.json" -maxdepth 1)
+        done < <(find "${{ env.SCHEMAS_ROOT }}" -name "*.json" -maxdepth 1)
 
         exit $rc
 
@@ -29,15 +33,13 @@ runs:
         # We handle the return code ourselves to prevent the action from exiting on the first error
         rc=0
 
-        cd src/schema/examples
-
         while read -r file; do
-          schema=../${file%%.*}.json
+          schema=$(basename "$file")
+          schema=${{ env.SCHEMAS_ROOT }}/${schema%%.*}.json
           echo "Validating $file against $schema"
           if ! check-jsonschema --schemafile "$schema" "$file"; then
             rc=1
           fi
-        done < <(find . -name "*.json" -maxdepth 1)
+        done < <(find "${{ env.EXAMPLES_ROOT }}" -name "*.json")
 
         exit $rc
-        
