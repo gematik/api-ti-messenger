@@ -1,0 +1,6 @@
+{
+    "defaultSetting": "block all",
+    "userException": [{
+        "mxid": "@david:hassel.hoff"
+    }]
+}
