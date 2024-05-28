@@ -11,6 +11,7 @@ runs:
     - name: Verify meta schema
       shell: bash
       run: |
+        # We handle the return code ourselves to prevent the action from exiting on the first error
         rc=0
 
         while read -r file; do
