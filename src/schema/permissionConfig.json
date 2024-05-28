@@ -19,7 +19,8 @@
                     "type": "object",
                     "description": "An empty object for future enhancement"
                 }
-            }    
+            },
+            "additionalProperties": false
         },
         "userExceptions": {
             "type": "object",
@@ -29,7 +30,8 @@
                     "type": "object",
                     "description": "An empty object for future enhancement"
                 }
-            }
+            },
+            "additionalProperties": false
         }
     },
     "required": [
