@@ -44,5 +44,5 @@ Bereitstellung eines Messenger-Service für eine Organisation
 .Sequenzdiagramm
 [%collapsible%open]
 ====
-image:plantuml/TI-Messenger-Dienst/Ressourcen/UC_10060_Seq.svg[width="100%"]
+image:generated/TI-Messenger-Dienst/Ressourcen/UC_10060_Seq.svg[width="100%"]
 ====

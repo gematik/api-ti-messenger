@@ -327,4 +327,4 @@ CAUTION: Der von der gematik bereitgestellte Authenticator wird nicht in Verbind
 
 Die Abbildung zeigt die Verwendung des *Authenticators* mit der Auto-Redirect Funktion (`callback=DIRECT`) bei der die `redirect_uri` direkt vom Authenticator aufgerufen wird und der Browserclient über Polling beim Fachdienst den Status des Austausches des Tokens abfragt. Details zur Interaktion mit dem *Authenticator* sind in Kapitel _Interaktion mit der Fachanwendung_ beschrieben. Alternativ könnte der *Authenticator* beim Aufruf der `redirect_uri` eine nutzerfreundliche Webseite der *Relying Party* in einem neuen Browsertab öffnen.    
 
-image::plantuml/TI-Messenger-Dienst/Ressourcen/idp.svg[width="100%"]
+image::generated/TI-Messenger-Dienst/Ressourcen/idp.svg[width="100%"]
