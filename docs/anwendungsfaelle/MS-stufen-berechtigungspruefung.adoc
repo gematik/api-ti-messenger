@@ -37,7 +37,7 @@ Stufen der Berechtigungsprüfung
 .sequence diagram 
 [%collapsible%open]
 ====
-image:plantuml/TI-Messenger-Dienst/Ressourcen/UC_Approvel_List_Seq.svg[width="100%"]
+image:generated/TI-Messenger-Dienst/Ressourcen/UC_Approvel_List_Seq.svg[width="100%"]
 ====
 
 == Ablauf

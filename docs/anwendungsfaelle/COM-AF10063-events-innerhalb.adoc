@@ -40,5 +40,5 @@ Austausch von Events zwischen Akteuren innerhalb einer Organisation
 .Sequenzdiagramm
 [%collapsible%open]
 ====
-image:plantuml/TI-Messenger-Dienst/Ressourcen/UC_10063_Seq.svg[width="100%"]
+image:generated/TI-Messenger-Dienst/Ressourcen/UC_10063_Seq.svg[width="100%"]
 ====

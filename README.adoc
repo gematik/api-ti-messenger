@@ -97,8 +97,7 @@ TI-Messenger Dokumentation
 |   ├──── link:docs/Test/Test.adoc[Testkonzept]
 |   └──── link:docs/FAQ[FAQ]
 ├─ link:images[images] (Bildarchiv)
-│   └──── link:images/drawio[drawio] (draw.io-gerenderte Bilder)
-│   └──── link:images/plantuml[plantuml] (plantuml-gerenderte Bilder)
+│   └──── link:images/generated[generated] (draw.io & PlantUML gerenderte Bilder)
 ├─ link:samples[samples] (Codebeispiele, Postman Collections, etc)
 ├─ link:src[src] (Quellen)
 │   ├──── link:src/drawio[drawio] (Quellen der drawio-Diagramme)

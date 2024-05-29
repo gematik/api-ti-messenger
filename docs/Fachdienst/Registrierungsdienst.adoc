@@ -23,7 +23,7 @@ Der *Registrierungs-Dienst* gibt dem Anbieter eines *TI-Messenger-Fachdienstes* 
 
 Das folgende Bild zeigt die Schnittstellen des *Registrierungs-Dienstes*, die in den folgenden Kapiteln weiter beschrieben werden.
 
-image::drawio/TI-Messenger-Fachdienst/Schnittstellen_am_Registrierungs-Dienst.svg[align="center",width="90%"]
+image::generated/TI-Messenger-Fachdienst/Schnittstellen_am_Registrierungs-Dienst.svg[align="center",width="90%"]
 
 == Schnittstelle: I_Registration
 Die abstrakte Schnittstelle `I_Registration` muss die folgenden Funktionalitäten anbieten: 
