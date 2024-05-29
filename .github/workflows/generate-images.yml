@@ -6,19 +6,16 @@ on:
     - '**'
     paths:
     - '.github/workflows/generate-images.yml'
-    - 'images/drawio/**'
-    - 'images/plantuml/**'
-    - 'src/drawio/**'
-    - 'src/plantuml/**'
+    - 'images/generated/**'
+    - '**.drawio'
+    - '**.puml'
   workflow_dispatch:
 
 env:
   DRAWIO_VERSION: 24.2.5
-  DRAWIO_SRC: src/drawio
-  DRAWIO_OUT: images/drawio
   PLANTUML_VERSION: 1.2024.4
-  PLANTUML_SRC: src/plantuml
-  PLANTUML_OUT: images/plantuml
+  SRCDIR: src/images
+  OUTDIR: images/generated
 
 jobs:
   drawio:
@@ -39,8 +36,8 @@ jobs:
 
       - name: Prepare output folder
         run: |
-          rm -rf "${{ env.DRAWIO_OUT }}"
-          mkdir -p "${{ env.DRAWIO_OUT }}"
+          rm -rf "${{ env.OUTDIR }}"
+          mkdir -p "${{ env.OUTDIR }}"
 
       - name: Export draw.io files as png / svg
         run: |
@@ -49,20 +46,20 @@ jobs:
           Xvfb :42 -nolisten unix &
 
           for ext in png svg; do
+            # Nuke everything that's not a draw.io source file so that draw.io desktop doesn't waste time trying to use it as input
+            find "${{ env.SRCDIR }}" -not -name "*.drawio" -exec rm -v "{}" \;  
+
             # The chromium args need to be specified last because of whatever
-            drawio --export --recursive --format $ext "${{ env.DRAWIO_SRC }}" --no-sandbox --disable-gpu --disable-dev-shm-usage
+            drawio --export --recursive --format $ext "${{ env.SRCDIR }}" --no-sandbox --disable-gpu --disable-dev-shm-usage
 
-            rsync -v --recursive --include="*.$ext" --filter="-! */" "${{ env.DRAWIO_SRC }}"/* "${{ env.DRAWIO_OUT }}"
-
-            # Nuke the exported files so that draw.io desktop doesn't attempt to use them as input files on the next loop pass
-            find "${{ env.DRAWIO_SRC }}" -name "*.$ext" -exec rm -v "{}" \;  
+            rsync -v --recursive --include="*.$ext" --filter="-! */" "${{ env.SRCDIR }}"/* "${{ env.OUTDIR }}"
           done
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: images-drawio
-          path: ${{ env.DRAWIO_OUT }}/**
+          path: ${{ env.OUTDIR }}/**
 
   plantuml:
     runs-on: ubuntu-latest
@@ -93,21 +90,21 @@ jobs:
 
       - name: Prepare output folder
         run: |
-          rm -rf "${{ env.PLANTUML_OUT }}"
-          mkdir -p "${{ env.PLANTUML_OUT }}"
+          rm -rf "${{ env.OUTDIR }}"
+          mkdir -p "${{ env.OUTDIR }}"
 
       - name: Export PlantUML files as png / svg
         run: |
           for ext in png svg; do
-            java -jar plantuml.jar -t$ext -v -nometadata -failfast2 -nbthread auto -o "." "${{ env.PLANTUML_SRC }}/**.puml"
-            rsync -v --recursive --include="*.$ext" --filter="-! */" "${{ env.PLANTUML_SRC }}"/* "${{ env.PLANTUML_OUT }}"
+            java -jar plantuml.jar -t$ext -v -nometadata -failfast2 -nbthread auto -o "." "${{ env.SRCDIR }}/**.puml"
+            rsync -v --recursive --include="*.$ext" --filter="-! */" "${{ env.SRCDIR }}"/* "${{ env.OUTDIR }}"
           done
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: images-plantuml
-          path: ${{ env.PLANTUML_OUT }}/**
+          path: ${{ env.OUTDIR }}/**
 
   commit:
     needs: [drawio, plantuml]
@@ -117,24 +114,22 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Prepare output folders
+      - name: Prepare output folder
         run: |
-          rm -rf "${{ env.DRAWIO_OUT }}"
-          mkdir -p "${{ env.DRAWIO_OUT }}"
-          rm -rf "${{ env.PLANTUML_OUT }}"
-          mkdir -p "${{ env.PLANTUML_OUT }}"
+          rm -rf "${{ env.OUTDIR }}"
+          mkdir -p "${{ env.OUTDIR }}"
 
       - name: Download draw.io artifact
         uses: actions/download-artifact@v4
         with:
           name: images-drawio
-          path: ${{ env.DRAWIO_OUT }}
+          path: ${{ env.OUTDIR }}
 
       - name: Download PlantUML artifact
         uses: actions/download-artifact@v4
         with:
           name: images-plantuml
-          path: ${{ env.PLANTUML_OUT }}
+          path: ${{ env.OUTDIR }}
 
       - name: Lint AsciiDoc
         uses: ./.github/actions/lint-asciidoc
@@ -142,5 +137,5 @@ jobs:
       - name: Add & Commit
         uses: EndBug/add-and-commit@v9
         with:
-          add: ${{ env.DRAWIO_OUT }} ${{ env.PLANTUML_OUT }}
+          add: ${{ env.OUTDIR }}
           pull: --rebase --autostash
