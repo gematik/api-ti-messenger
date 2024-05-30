@@ -48,20 +48,20 @@ Dieses Testtreiber-Module MUSS Bestandteil der Test-APP sein (internes Testtreib
 Bei einem internen Testtreiber-Modul wird die REST-Schnittstelle in die Test-App integriert (der Zugriff erfolgt hierbei direkt über das Endgerät).
 
 .Abbildung{counter:abbildung: 1}: internes Testtreiber Modul
-image:generated/Test/testtreiber-internes-Modul.png[align="left",width="100%", title="internes Testtreiber Modul"]
+image:generated/Other/Test/testtreiber-internes-Modul.svg[align="left",width="100%", title="internes Testtreiber Modul"]
 
 ==== externes Testtreiber-Modul
 Bei einem externen Testtreiber-Modul erhält die REST-Schnittstelle Zugang zum Test-Environment des Herstellers.
 
 .Abbildung{counter:abbildung: 1}: externes Testtreiber Modul
-image:generated/Test/testtreiber-externes-Modul.png[align="left",width="100%", title="externes Testtreiber Modul"]
+image:generated/Other/Test/testtreiber-externes-Modul.svg[align="left",width="100%", title="externes Testtreiber Modul"]
 
 === TI-Messenger Testtreiber Anschaltung
 
 Das folgende Bild zeigt die Anschaltung der Testtreiber Clients. Die Clients können über eine externe oder interne Testtreiber-Schnittstelle mit der Testsuite remote oder local verbunden werden. Diese Leistung MUSS von jedem Hersteller erbracht werden. Welche Clients eingesetzt werden, können die Hersteller selbstständig entscheiden. Es werden nur bereitgestellte Clients zugelassen. Clients mit den gleichen Eigenschaften werden unter einer URL zusammengefasst. Diese URL wird dann in die Konfigurationsdatei 'combine_items.json' eingetragen. In dieser Datei werden alle Testobjekte verwaltet.
 
 .Abbildung{counter:abbildung: 1}: Anschaltung der Testtreiber Clients
-image:generated/Test/Anschaltung der Testtreiber Clients.png[align="left",width="100%", title="Anschaltung der Testtreiber Clients"]
+image:generated/Other/Test/Anschaltung der Testtreiber Clients.svg[align="left",width="100%", title="Anschaltung der Testtreiber Clients"]
 
 Die unterschiedlichen Testtreibeschnittstellen werden mit mTLS gesichert. Die gematik stellt für den zugriff auf die Schnittstelle entsprechende Zertifikate bereit. Weiterführende Informationen zur Testsuite und zur Testtreiber-Schnittstelle findet man in der
 https://github.com/gematik/TI-Messenger-Testsuite/blob/main/doc/userguide/Testsuite.adoc[Testsuite TI-M Dienst Release 1.1.1].
@@ -88,14 +88,14 @@ Die gematik stellt eine TI-M Dienst Referenzimplementierung zur Verfügung. Zur 
 Vor der Zulassung können sich die Hersteller eine Referenz-Instanz über die gematik bestellen. Die Referenz-Instanz hilft den Herstellern bei der Entwicklung neuer TI-M Clients, FdV und  TI-M FD Versionen. Für die IOP-Tests zwischen den verschiedenen TI-Messenger-Anbietern bzw. -Herstellern können sowohl die Test-Instanzen als auch die Referenz-Instanzen genutzt werden. Die TI-M Dienste müssen gegen die Referenz-Instanz erfolgreich getestet werden. Die Testergebnisse sind der gematik vorzulegen.
 
 .Abbildung{counter:abbildung: 1}: Referenz-Instanz
-image:generated/Test/HerstellerInstanz.png[align="left",width="100%", title="Referenz-Instanz"]
+image:generated/Other/Test/HerstellerInstanz.svg[align="left",width="100%", title="Referenz-Instanz"]
 
 === Hersteller IOP Tests
 
 Alle Anbieter MÜSSEN bereits im Vorfeld diesen IOP- und E2E-Tests selbständig und eigenverantwortlich durchführen. Bei Problemen im Rahmen der Zulassung MÜSSEN die Anbieter bei der Analyse unterstützen. In der folgenden Abbildung ist eine Systemumgebung für Herstellertests dargestellt.
 
 .Abbildung{counter:abbildung: 1}: IOP Testumgebung Hersteller
-image:generated/Test/testumgebung-Hersteller.png[align="left",width="100%", title="IOP Testumgebung Hersteller"]
+image:generated/Other/Test/testumgebung-Hersteller.svg[align="left",width="100%", title="IOP Testumgebung Hersteller"]
 
 == Zulassung
 
@@ -110,20 +110,20 @@ Die Tests werden zunächst gegen die Referenzimplementierung der gematik durchge
 Die Hersteller von TI-M Diensten müssen wie zuvor erwähnt die Testtreiberschnittstelle und den Fachdienst bereitstellen. Bei Problemen im Rahmen der Zulassung müssen die Anbieter bei der Analyse unterstützen. In der folgenden Abbildung ist eine Systemumgebung für den Zulassungstest TI-Messenger Pro (TI-M Pro) dargestellt.
 
 .Abbildung{counter:abbildung: 1}: Zulassung TI-Messenger Pro
-image:generated/Test/Zulassung TIM-Basis.png[align="left",width="100%", title="Zulassung TI-Messenger Pro"]
+image:generated/Other/Test/Zulassung TIM-Basis.svg[align="left",width="100%", title="Zulassung TI-Messenger Pro"]
 
 ==== Zulassung TI-Messenger ePA
 
 Die Hersteller von Versicherten-Frontends müssen ebenfalls das FdV, die Testtreiberschnittstelle und den Fachdienst für Versicherte bereitstellen. Bei Problemen im Rahmen der Zulassung müssen die Anbieter bei der Analyse unterstützen. In der folgenden Abbildung ist eine Systemumgebung für den Zulassungstest TI-Messerger ePA (TI-M ePA) dargestellt.
 
 .Abbildung{counter:abbildung: 1}: Zulassung TI-Messenger ePA
-image:generated/Test/Zulassung TIM-ePA.png[align="left",width="100%", title="Zulassung TI-Messenger ePA"]
+image:generated/Other/Test/Zulassung TIM-ePA.svg[align="left",width="100%", title="Zulassung TI-Messenger ePA"]
 
 === IOP Tests zwischen Anbietern durch die gematik
 Zusätzlich zu den bereits durchgeführten IOP- und E2E-Tests werden weitere Interoperabilitätstests verschiedener TI-Messenger-Lösungen vor und nach der Zulassung durch die gematik durchgeführt. Die folgende Abbildung zeigt die Nutzung der existierenden Testumgebung durch die gematik während der Zulassungs- und Interoperabilitätstests.
 
 .Abbildung{counter:abbildung: 1}: IOP Tests
-image:generated/Test/testumgebung-Gematik.png[align="left",width="100%", title="IOP Tests"]
+image:generated/Other/Test/testumgebung-Gematik.svg[align="left",width="100%", title="IOP Tests"]
 
 IOP- und E2E-Tests für die Interoperabilität MÜSSEN zwischen den verschiedenen TI-Messenger-Anbietern nachgewiesen werden. Hierfür werden dann alle bereits zur Verfügung stehenden TI-M Dienste (die Test-Instanzen der einzelnen Hersteller) zusammengeschlossen und anschließend gegeneinander getestet.
 
@@ -132,7 +132,7 @@ IOP- und E2E-Tests für die Interoperabilität MÜSSEN zwischen den verschiedene
 Im Anschluss der Zulassung wird mit den IOP- und E2E-Tests die Interoperabilität zwischen den verschiedenen TI-Messenger-Anbietern nachgewiesen. Hierfür werden dann alle bereits zur Verfügung stehenden TI-M Dienste (die Test-Instanzen der einzelnen Hersteller) zusammengeschlossen und anschließen gegeneinander getestet. Alle Anbieter MÜSSEN bereits im Vorfeld diesen IOP- und E2E-Tests selbständig und eigenverantwortlich durchführen. Bei Problemen im Rahmen der IOP Tests MÜSSEN die Anbieter bei der Analyse unterstützen. In der folgenden Abbildung ist eine Systemumgebung für Herstellertests TI-M Pro dargestellt.
 
 .Abbildung{counter:abbildung: 1}: IOP Test TI-Messenger Pro
-image:generated/Test/Testumgebung Basis.png[align="left",width="100%", title="IOP Test TI-Messenger Pro"]
+image:generated/Other/Test/Testumgebung Basis.svg[align="left",width="100%", title="IOP Test TI-Messenger Pro"]
 
 Weiterhin wird ein dauerhaftes Continuous Testing eingeführt. Das Continuous Testing wird dann in der Folge erweitert Dadurch wird auch ein Test unterschiedlicher Messenger Versionen und Ausprägungen ermöglicht.
 
@@ -141,19 +141,19 @@ Weiterhin wird ein dauerhaftes Continuous Testing eingeführt. Das Continuous Te
 Für den TI-M ePA gelten ebenso die im Kap. 3.2.1 beschriebenen Anforderungen an den IOP Test. In der folgenden Abbildung ist eine Systemumgebung für Herstellertests TI-M ePA dargestellt. Bei Problemen im Rahmen der IOP Tests MÜSSEN die Anbieter des Fachdienstes und des FdVs bei der Analyse unterstützen.
 
 .Abbildung{counter:abbildung: 1}: IOP Test TI-Messenger ePA
-image:generated/Test/Testumgebung ePA.png[align="left",width="100%", title="IOP Test TI-Messenger ePA"]
+image:generated/Other/Test/Testumgebung ePA.svg[align="left",width="100%", title="IOP Test TI-Messenger ePA"]
 
 ==== IOP Tests Pools
 
 Um eine größere Abdeckung zu erhalten werden die Hersteller in Pools eingeteilt. Somit können mehrere Hersteller gleichzeitig getestet werden. Anschließend werden die Pools erneut gemischt.
 
 .Abbildung{counter:abbildung: 1}: IOP Test Pools
-image:generated/Test/IOP Pools.png[align="left",width="100%", title="Verpflichtung nach der Zulassung"]
+image:generated/Other/Test/IOP Pools.svg[align="left",width="100%", title="Verpflichtung nach der Zulassung"]
 
 == Verpflichtung nach der Zulassung
 Der TI-Messenger-Anbieter MUSS eine Referenz-Instanz und mindestens eine Test-Instanz des TI-Messenger-Fachdienstes (TI-M FD) und TI-Messenger-Clients (TI-M Client) bereitstellen und betreiben. Die Referenz-Instanz hat die gleiche Version wie die Produktionsumgebung. Weiterhin wird die Referenz-Instanz für die Reproduktion aktueller Fehler/Probleme aus der Produktionsumgebung genutzt. Der Zugriff auf die Referenz-Instanz MUSS für die gematik zur Fehleranalyse gewährleistet sein. Die Test-Instanz dient den Herstellern bei der Entwicklung neuer TI-M Clients und TI-M FD Versionen, bei den IOP-Tests zwischen den verschiedenen TI-Messenger-Anbietern und wird zudem von der gematik für die Zulassung genutzt. Der TI-Messenger-Anbieter MUSS die verschiedenen Benutzer der Referenz-Instanz und der Test-Instanz koordinieren (Verwaltung eines Test-/Nutzungsplans). Bei Bedarf (Entwicklung verschiedener Versionen, hoher Auslastung durch andere Hersteller oder durch die gematik) MUSS der TI-Messenger-Anbieter auch mehrere Test-Instanzen mit der gleichen oder mit verschiedenen Versionen bereitstellen und betreiben.
 
 .Abbildung{counter:abbildung: 1}: Verpflichtung nach der Zulassung
-image:generated/Test/nach_der_Zulassung.png[align="left",width="100%", title="Verpflichtung nach der Zulassung"]
+image:generated/Other/Test/nach_der_Zulassung.svg[align="left",width="100%", title="Verpflichtung nach der Zulassung"]
 
 Die Referenz-Instanz und die Test-Instanz wird auch im Anschluss der Zulassung weiter für IOP Test und Continuous Testing genutzt.

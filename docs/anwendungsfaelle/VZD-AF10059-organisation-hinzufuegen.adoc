@@ -43,5 +43,5 @@ Organisationsressourcen im Verzeichnisdienst hinzufügen
 .Sequenzdiagramm
 [%collapsible%open]
 ====
-image:generated/TI-Messenger-Dienst/Ressourcen/UC_10059_Seq.svg[width="100%"]
+image:generated/TI-M_Pro/UC_10059_Seq.svg[width="100%"]
 ====

@@ -50,6 +50,6 @@ Authentisieren einer Organisation am TI-Messenger-Dienst
 .Sequenzdiagramm
 [%collapsible%open]
 ====
-image:generated/TI-Messenger-Dienst/Ressourcen/UC_10103_Seq.svg[width="100%"]
+image:generated/TI-M_Basis/UC_10103_Seq.svg[width="100%"]
 ====
 

@@ -53,7 +53,7 @@ C. Beispielhafter Ablauf (siehe Abbildung "Kommunikation mit einem Chatbot"):
 .Kommunikation mit einem Chatbot
 [%collapsible%open]
 ====
-image:generated/TI-Messenger-Fachdienst/chatbot.svg[width="100%"]
+image:generated/Other/chatbot.svg[width="100%"]
 ====
 
 

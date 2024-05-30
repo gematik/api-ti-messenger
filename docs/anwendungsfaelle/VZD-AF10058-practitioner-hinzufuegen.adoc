@@ -43,5 +43,5 @@ Akteur (User-HBA) im Verzeichnisdienst hinzufügen
 .Sequenzdiagramm
 [%collapsible%open]
 ====
-image:generated/TI-Messenger-Dienst/Ressourcen/UC_10058_Seq.svg[width="100%"]
+image:generated/Other/UC_10058_Seq.svg[width="100%"]
 ====
