@@ -46,22 +46,7 @@ ActorFontName Aapex
   U->C: Eingabe Messenger-Service 
     Activate C
   C->MP: GET /_matrix/client/login
-    Activate MP
-  MP->MP: TLS-Terminierung
-  |||
-  MP->MP: prüfe client_id 
-
-|||
-alt#LightGrey #AliceBlue <size:16>TI-Messenger Client wird vom Anbieter nicht unterstützt (kein gültiges client_secret)</size>
-|||  
-
-  MP-->C: HTTP 401 Unauthroized
-  C-->U: Anmeldung \nnicht erfolgreich
-  
-    |||  
-    else <size:16>TI-Messenger Client wird vom Anbieter unterstützt  (gültiges client_secret)</size>
-    |||
-
+    Activate MP 
   MP->MH: HTTP(S) Forward
    Activate MH
 
@@ -96,19 +81,15 @@ note over U, MH: <size:17>Die Authentifizierungsverfahren werden für jeden \n<s
     note over MH, MH: <size:17>Die Überprüfung ist abhängig vom \n<size:17>gewählten Authentifizierungsverfahren</size>
     
     |||
-    MH->MH: erstelle \nMatrix-ACCESS_TOKEN, \ndevice_id, \nMXID
-    MH-->MP: Matrix-ACCESS_TOKEN, \ndevice_ID, MXID
+    MH->MH: erstelle \nMatrix-ACCESS_TOKEN, \nREFRESH_TOKEN
+    MH-->MP: Matrix-ACCESS_TOKEN, \nREFRESH_TOKEN
       Deactivate MH
     MP-->C: HTTP(S) Forward
       Deactivate MP
     |||
-    C->C: Speichere \nMatrix-ACCESS_TOKEN
+    C->C: Speichere \nMatrix-ACCESS_TOKEN, \nREFRESH_TOKEN
 
     C-->U: Anmeldung \nerfolgreich
         Deactivate C
     |||
-
-end
-|||
-
 @enduml
