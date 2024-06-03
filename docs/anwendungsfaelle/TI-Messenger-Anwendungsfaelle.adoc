@@ -17,43 +17,10 @@ image:meta/gematik_logo.svg[width=70%]
 toc::[]
 
 = Anwendungsfälle
-Die folgende Seite gibt einen Überblick über die Anwendungsfälle des *TI-Messenger-Dienstes* die in *[gemSpec_TI-Messenger-Dienst]* beschrieben sind. Neben einer Einleitung enthält jedes Kapitel einen Link zu einer detaillierten Anwendungsfallbeschreibung und einem Sequenzdiagramm, das die Interaktion zwischen den beteiligten Komponenten visualisiert.
+Die folgende Seite gibt einen Überblick über die Anwendungsfälle des *TI-Messengers* aus den Spezifikationen für die Produkte *TI-M ePA*, *TI-M Pro* und *TI-M Connect*.
 
-TIP: Die Serviceaufrufe in den Sequenzdiagrammen enthalten möglicherweise nicht alle für den Aufruf erforderlichen Parameter. Die Sequenzdiagramme umfassen möglicherweise auch nicht alle Fehlerfälle. Sie konzentrieren sich auf die häufigsten Fehler für jeden einzelnen Anwendungsfall.
+== Anwendungsfälle TI-M ePA
 
-== Bereitstellung und Administration eines Messenger-Service
-Um mit anderen Akteuren Nachrichten austauschen zu können, benötigt die Organisation einen *Messenger-Service* von einem Anbieter eines *TI-Messenger-Fachdienstes*. Die folgenden Anwendungsfälle erläutern die Bereitstellung eines: *Messenger-Service*, die Föderations-Prüfungen, die Verwaltung der Föderationsliste sowie die verschiedenen Ebenen der Berechtigungsprüfungen.
+== Anwendungsfälle TI-M Pro
 
-* link:MS-AF10103-authentisieren-organisation.adoc[AF_10103 - Authentisieren einer Organisation am TI-Messenger-Dienst]
-
-* link:MS-AF10060-bereitstellung-messenger-service.adoc[AF_10060 - Bereitstellung eines Messenger-Service für eine Organisation]
-
-* link:COM-AF10057-anmeldung-am-messenger-service.adoc[AF_10057 - Anmeldung eines Akteurs am Messenger-Service]
-
-* link:MS-AF10064-foederation-pruefen.adoc[AF_10064 - Föderationszugehörigkeit eines Messenger-Service prüfen]
-
-* link:MS-aktualisierung-foederationsliste.adoc[A 8.2 - Aktualisierung der Föderationsliste]
-
-* link:MS-stufen-berechtigungspruefung.adoc[A 8.3 - Stufen der Berechtigungsprüfung]
-
-== Interaktion mit dem VZD-FHIR-Directory
-Das *VZD-FHIR-Directory* ist das zentrale Adressbuch für Organisationen und Personen im deutschen Gesundheitswesen. In den folgenden Anwendungsfällen wird detailliert erläutert, was erforderlich ist, um die Organisations- oder Practitioner-Informationen im *VZD-FHIR-Directory* - im Kontext des *TI-Messenger-Dienstes* - zu ändern bzw. um FHIR-Ressourcen zu suchen. 
-
-* link:VZD-AF10059-organisation-hinzufuegen.adoc[AF_10059 - Organisationsressourcen im Verzeichnisdienst hinzufügen]
-
-* link:VZD-AF10058-practitioner-hinzufuegen.adoc[AF_10058 - Akteur (User-HBA) im Verzeichnisdienst hinzufügen]
-
-* link:VZD-suche.adoc[A 8.1 - Einträge im VZD-FHIR-Directory suchen]
-
-== Interaktion zwischen Akteuren
-Die folgenden Anwendungsfälle beschreiben den Anmeldevorgang, die Einladung anderer Akteure sowie den Austausch von Nachrichten. Sowohl die Einladungen als auch der Nachrichtenaustausch werden aus zwei Perspektiven erklärt. Die erste Perspektive konzentriert sich auf die Kommunikation innerhalb einer Organisation, die zweite Perspektive zeigt die Abläufe für eine Kommunikation mit mehr als einem beteiligten *Matrix-Homeserver*.
-
-* link:COM-AF10104-einladung-innerhalb.adoc[AF_10104 - Einladung von Akteuren innerhalb einer Organisation]
-
-* link:COM-AF10063-events-innerhalb.adoc[AF_10063 - Austausch von Events zwischen Akteuren innerhalb einer Organisation]
-
-* link:COM-AF10061-einladung-ausserhalb.adoc[AF_10061 - Einladung von Akteuren außerhalb einer Organisation]
-
-* link:COM-AF10062-events-ausserhalb.adoc[AF_10062 - Austausch von Events zwischen Akteuren ausserhalb einer Organisation]
-
-* link:COM-chatbot.adoc[Kommunikation mit einem Chatbot]
+== Anwendungsfälle TI-M Connect
