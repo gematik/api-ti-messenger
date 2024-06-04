@@ -1,4 +1,5 @@
 use anyhow::{anyhow, Result};
+use percent_encoding::{utf8_percent_encode, AsciiSet, CONTROLS};
 use reqwest::header::AUTHORIZATION;
 use serde::{Deserialize, Serialize};
 use serde_json::to_string;
@@ -8,10 +9,15 @@ use std::path::{Path, PathBuf};
 use std::process::Command;
 use std::str::{self, FromStr};
 
+/// Control characters for path components that require escaping (https://url.spec.whatwg.org/#path-percent-encode-set)
+const PATH_COMPONENT: &AsciiSet = &CONTROLS.add(b' ').add(b'"').add(b'#').add(b'<').add(b'>')
+    .add(b'?').add(b'`').add(b'{').add(b'}')
+    .add(b'/');
+
 #[derive(Deserialize, Debug)]
 struct PolarionAttachments {
     data: Vec<PolarionAttachment>,
-    links: PolarionAttachmentsLinks
+    links: Option<PolarionAttachmentsLinks>
 }
 
 #[derive(Debug,Deserialize)]
@@ -44,6 +50,19 @@ struct PolarionPostAttachmentResources {
     data: Vec<PolarionPostAttachmentResource>
 }
 
+impl PolarionPostAttachmentResources {
+    fn create(name: &str) -> Self {
+        Self {
+            data: vec![PolarionPostAttachmentResource {
+                type_field: "document_attachments".to_string(),
+                attributes: PolarionPostAttachmentAttributes {
+                    file_name: name.to_string(),
+                    title: name.to_string()
+                }
+            }]
+        }
+    }
+}
 
 #[derive(Debug,Serialize)]
 struct PolarionPostAttachmentResource {
@@ -57,6 +76,25 @@ struct PolarionPostAttachmentAttributes {
     #[serde(rename = "fileName")]
     file_name: String,
     title: String
+}
+
+#[derive(Debug,Serialize)]
+struct PolarionPatchAttachmentResources {
+    data: PolarionPatchAttachmentResource
+}
+
+impl PolarionPatchAttachmentResources {
+    fn create(document: &Document, name: &str) -> Self {
+        Self {
+            data: PolarionPatchAttachmentResource {
+                type_field: "document_attachments".to_string(),
+                id: get_attachment_id(document, name),
+                attributes: PolarionPatchAttachmentAttributes {
+                    title: name.to_string()
+                }
+            }
+        }
+    }
 }
 
 #[derive(Debug,Serialize)]
@@ -102,6 +140,10 @@ impl Document {
             Document::Pro => "gemSpec_TI-M_Pro"
         }
     }
+
+    fn prefix(&self) -> String {
+        format!("{}/{}/{}", self.project(), self.space(), self.document())
+    }
 }
 
 /// The ... well ... main function
@@ -139,24 +181,22 @@ fn get_root_dir() -> Result<PathBuf> {
 /// Processes a single command line argument
 fn process_arg(arg: &str, root_dir: &PathBuf, token: &str) -> Result<()> {
     let path = PathBuf::from_str(&arg)?.canonicalize()?;
-    let (document, id) = guess_document_and_id(&path, root_dir)?;
+    let (document, name) = guess_document_and_name(&path, root_dir)?;
+    let is_existing = is_attachment_existing(&document, &name, token)?;
     
-    if is_attachment_existing(&document, &id, token)? {
-        println!("Attachment {} already exists. Do you want to override it?", id);
+    confirm_operation(&document, &name, is_existing)?;
+    
+    if is_existing {
+        replace_attachment(&path, &document, &name, token)?;
     } else {
-        println!("Attachment {} doesn't exists yet. Do you want to upload it?", id);
-        let mut input = String::new();
-        stdin().read_line(&mut input)?;
-
-        let attachments = upload_attachment(&path, &document, &id, token);
-        println!("{:?}", attachments);
+        upload_attachment(&path, &document, &name, token)?;
     }
     
     Ok(())
 }
 
-/// Tries to determine the corresponding Polarion document and attachment ID from a path
-fn guess_document_and_id(path: &PathBuf, root_dir: &PathBuf) -> Result<(Document, String)> {
+/// Tries to determine the corresponding Polarion document and attachment name from a path
+fn guess_document_and_name(path: &PathBuf, root_dir: &PathBuf) -> Result<(Document, String)> {
     let total = path.components().count();
     let mut remainder = total - 1;
 
@@ -168,9 +208,8 @@ fn guess_document_and_id(path: &PathBuf, root_dir: &PathBuf) -> Result<(Document
 
         if let Ok(document) = guess_document_from_last_path_component(&head) {
             let tail = path.components().skip(remainder).collect::<PathBuf>();
-            let sanitized = tail.to_string_lossy().replace("/", "___");
-            let id = format!("{}/{}/{}/{}", document.project(), document.space(), document.document(), sanitized);
-            return Ok((document, id));
+            let name = tail.to_string_lossy().replace("/", "___");
+            return Ok((document, name));
         }
 
         remainder -= 1;
@@ -191,9 +230,29 @@ fn guess_document_from_last_path_component(path: &Path) -> Result<Document> {
 }
 
 /// Checks if an attachment already exists in Polarion
-fn is_attachment_existing(document: &Document, id: &str, token: &str) -> Result<bool> {
-    let attachments = fetch_attachments(&document, token)?;
+fn is_attachment_existing(document: &Document, name: &str, token: &str) -> Result<bool> {
+    let id = get_attachment_id(document, name);
+    let attachments = fetch_attachments(document, token)?;
     Ok(attachments.iter().any(|a| a.id == id))
+}
+
+/// Builds an attachment's ID from its name and document
+fn get_attachment_id(document: &Document, name: &str) -> String {
+    format!("{}/{}", document.prefix(), name)
+}
+
+/// Asks the user to confirm uploading or replacing the attachment
+fn confirm_operation(document: &Document, name: &str, is_existing: bool) -> Result<()> {
+    if is_existing {
+        println!("Attachment {} already exists in {}. Do you want to override it?", document.prefix(), name);
+    } else {
+        println!("Attachment {} doesn't exists yet in {}. Do you want to upload it?", document.prefix(), name);
+    }
+
+    let mut input = String::new();
+    stdin().read_line(&mut input)?;
+
+    Ok(())
 }
 
 /// Fetches all existing attachments for a given document
@@ -213,13 +272,14 @@ fn fetch_attachments(document: &Document, token: &str) -> Result<Vec<PolarionAtt
             .send()?
             .json::<PolarionAttachments>()?;
         attachments.append(&mut response.data);
-        url = response.links.next;
+        url = response.links.map_or(None, |l| l.next);
     }
     
     Ok(attachments)
 }
 
-fn upload_attachment(path: &PathBuf, document: &Document, id: &str, token: &str) -> Result<Vec<PolarionAttachment>> {
+/// Creates a new attachments by uploading a file
+fn upload_attachment(path: &PathBuf, document: &Document, name: &str, token: &str) -> Result<Vec<PolarionAttachment>> {
     let url = format!("https://pet.gematik.de/polarion/rest/v1/projects/{}/spaces/{}/documents/{}/attachments", document.project(), document.space(), document.document());
 
     let client = reqwest::blocking::ClientBuilder::new()
@@ -228,19 +288,11 @@ fn upload_attachment(path: &PathBuf, document: &Document, id: &str, token: &str)
 
     let mut form = reqwest::blocking::multipart::Form::new();
 
-// TODO: For whatever reason this crap doesn't work (missing field `data` at line 1 column 161))
+    let resource = to_string(&PolarionPostAttachmentResources::create(name))?;
+    form = form.text("resource", resource);
 
-    let resources = PolarionPostAttachmentResources {
-        data: vec![PolarionPostAttachmentResource {
-            type_field: "document_attachments".to_string(),
-            attributes: PolarionPostAttachmentAttributes {
-                file_name: id.to_string(),
-                title: id.to_string()
-            }
-        }]
-    };
-    form = form.text("resource", to_string(&resources)?);
-    form = form.part("files[]", reqwest::blocking::multipart::Part::file(path)?.file_name(id.to_string()));
+    let file = reqwest::blocking::multipart::Part::file(path)?.file_name(name.to_string());
+    form = form.part("files", file);
     
     let response = client
         .post(url)
@@ -250,4 +302,30 @@ fn upload_attachment(path: &PathBuf, document: &Document, id: &str, token: &str)
         .json::<PolarionAttachments>()?;
 
     Ok(response.data)
+}
+
+/// Replaces an existing attachment by uploading a file
+fn replace_attachment(path: &PathBuf, document: &Document, name: &str, token: &str) -> Result<()> {
+    let url = format!("https://pet.gematik.de/polarion/rest/v1/projects/{}/spaces/{}/documents/{}/attachments/{}", document.project(), document.space(), document.document(), utf8_percent_encode(name, PATH_COMPONENT).collect::<String>());
+
+    let client = reqwest::blocking::ClientBuilder::new()
+        .danger_accept_invalid_certs(true)
+        .build()?;
+
+    let mut form = reqwest::blocking::multipart::Form::new();
+
+    let resource = to_string(&PolarionPatchAttachmentResources::create(document, name))?;
+    form = form.text("resource", resource);
+
+    let file = reqwest::blocking::multipart::Part::file(path)?.file_name(name.to_string());
+    form = form.part("files", file);
+    
+    client
+        .patch(url)
+        .header(AUTHORIZATION, format!("Bearer {}", token))
+        .multipart(form)
+        .send()?
+        .error_for_status()?;
+
+    Ok(())
 }
