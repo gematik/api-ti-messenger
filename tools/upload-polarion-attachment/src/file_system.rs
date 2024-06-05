@@ -36,8 +36,12 @@ pub(crate) fn guess_document_and_name(
         }
 
         if let Ok(document) = Document::try_from(&head) {
-            let tail = path.components().skip(remainder).collect::<PathBuf>();
-            let name = tail.to_string_lossy().replace('/', "___");
+            let name = path
+                .components()
+                .skip(remainder)
+                .map(|c| c.as_os_str().to_string_lossy().to_string())
+                .collect::<Vec<String>>()
+                .join("___");
             return Ok((document, name));
         }
 
