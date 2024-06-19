@@ -132,7 +132,7 @@ jobs:
           path: ${{ env.OUTDIR }}
 
       - name: Lint AsciiDoc
-        uses: gematik/github-image-actions/.github/actions/lint-asciidoc@33cdf3e043b7fedd0329ce762bb270481c461f3d
+        uses: gematik/github-image-actions/.github/actions/lint-asciidoc@3cf56f699ca4390d49689454336792c1ad787f83
 
       - name: Add & Commit
         uses: EndBug/add-and-commit@v9
