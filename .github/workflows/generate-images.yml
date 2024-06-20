@@ -13,8 +13,8 @@ on:
 
 jobs:
   generate:
-    uses: gematik/github-image-actions/.github/workflows/generate-images.yml@17f3811800b3c8e0d913d934cd8c01bc954e1bb8
+    uses: gematik/github-image-actions/.github/workflows/generate-images.yml@0.1.0
     with:
       srcdir: src/images
       outdir: images/generated
-      ref: 17f3811800b3c8e0d913d934cd8c01bc954e1bb8
+      ref: 0.1.0
