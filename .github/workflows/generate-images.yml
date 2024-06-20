@@ -17,8 +17,8 @@ env:
 
 jobs:
   generate:
-    uses: gematik/github-image-actions/.github/workflows/generate-images.yml@54e9ce2b6490d50c7fed6623636767dca3367d60
+    uses: gematik/github-image-actions/.github/workflows/generate-images.yml@c27b9d17c35ab5bb4c280fe06ae70f4b93dcc624
     with:
       srcdir: src/images
       outdir: images/generated
-      ref: 54e9ce2b6490d50c7fed6623636767dca3367d60
+      ref: c27b9d17c35ab5bb4c280fe06ae70f4b93dcc624
