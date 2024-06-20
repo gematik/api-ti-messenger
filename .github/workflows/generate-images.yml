@@ -11,10 +11,6 @@ on:
     - '**.puml'
   workflow_dispatch:
 
-env:
-  DRAWIO_VERSION: 24.2.5
-  PLANTUML_VERSION: 1.2024.4
-
 jobs:
   generate:
     uses: gematik/github-image-actions/.github/workflows/generate-images.yml@17f3811800b3c8e0d913d934cd8c01bc954e1bb8
