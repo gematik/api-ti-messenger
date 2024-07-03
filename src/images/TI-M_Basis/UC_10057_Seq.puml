@@ -81,13 +81,13 @@ note over U, MH: <size:17>Die Authentifizierungsverfahren werden für jeden \n<s
     note over MH, MH: <size:17>Die Überprüfung ist abhängig vom \n<size:17>gewählten Authentifizierungsverfahren</size>
     
     |||
-    MH->MH: erstelle \nMatrix-ACCESS_TOKEN, \nREFRESH_TOKEN
-    MH-->MP: Matrix-ACCESS_TOKEN, \nREFRESH_TOKEN
+    MH->MH: erstelle \nMatrix-ACCESS_TOKEN, \nMatrix-REFRESH_TOKEN
+    MH-->MP: :Matrix-ACCESS_TOKEN, \n:Matrix-REFRESH_TOKEN
       Deactivate MH
     MP-->C: HTTP(S) Forward
       Deactivate MP
     |||
-    C->C: Speichere \nMatrix-ACCESS_TOKEN, \nREFRESH_TOKEN
+    C->C: Speichere \nMatrix-ACCESS_TOKEN, \nMatrix-REFRESH_TOKEN
 
     C-->U: Anmeldung \nerfolgreich
         Deactivate C
