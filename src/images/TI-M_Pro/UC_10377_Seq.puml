@@ -57,7 +57,7 @@ group <size:16>VZD-FHIR-Directory Eintrag</size>
   FP-->C: result body json
     Deactivate FP
   |||
-  C->U: Ihre MXID ist für Versicherte nicht mehr sichtbar. 
+  C->U: Der Endpunkt mit der MXID <MXID> ist für Versicherte nicht mehr sichtbar. 
   Deactivate C
   end
   |||
@@ -75,7 +75,7 @@ group <size:16>VZD-FHIR-Directory Eintrag</size>
   FP-->C: result body json
     Deactivate FP
   |||
-  C->U: Ihre MXID ist für Versicherte wieder sichtbar.
+  C->U: Der Endpunkt mit der MXID <MXID> ist für Versicherte wieder sichtbar.
   Deactivate C
   end
 @enduml
