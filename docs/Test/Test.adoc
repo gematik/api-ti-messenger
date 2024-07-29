@@ -100,7 +100,7 @@ image:generated/Other/Test/testumgebung-Hersteller.svg[align="left",width="100%"
 == Zulassung
 
 === Zulassungstests durch die gematik
-Die gematik testet im Rahmen der Zulassungsverfahren auf Basis von Anwendungsfällen. Dabei wird sich auf die link:{docsdir}anwendungsfaelle/TI-Messenger-Anwendungsfaelle.adoc [Anwendungsfälle] bezogen. Hierbei wird versucht, möglichst viele Funktionsbereiche der Komponenten des TI-Messenger-Dienstes (TI-M Dienst) einzubeziehen.
+Die gematik testet im Rahmen der Zulassungsverfahren auf Basis von Anwendungsfällen. Hierbei wird versucht, möglichst viele Funktionsbereiche der Komponenten des TI-Messenger-Dienstes (TI-M Dienst) einzubeziehen.
 
 ==== Tests gegen die Referenzimplementierung
 Die Tests werden zunächst gegen die Referenzimplementierung der gematik durchgeführt. In diesem Schritt wird die Funktionalität des Zulassungsobjektes "TI-Messenger-Dienst" geprüft.
