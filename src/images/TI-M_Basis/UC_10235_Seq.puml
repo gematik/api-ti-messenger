@@ -56,7 +56,7 @@ alt#LightGrey <size:16>gültiges search-accesstoken erhalten</size>
 |||
   alt#LightGrey #AliceBlue <size:16>HealthcareService-Einträge werden gesucht</size>
     |||
-    cl->fp: GET <Search-Schnittstelle>/HealthcareService/\n?organization.active=true&...(search-accesstoken)
+    cl->fp: GET {Search-Schnittstelle}/HealthcareService/\n?organization.active=true&...(search-accesstoken)
     note left
     <size:16>Finde Datensatz für </size>
     <size:16>TelematikID</size>
@@ -64,7 +64,7 @@ alt#LightGrey <size:16>gültiges search-accesstoken erhalten</size>
     activate fp
     fp->fp: prüfe search-accesstoken
     |||
-    fp->fd: GET <Search-Schnittstelle>/HealthcareService/\n?organization.active=true&...
+    fp->fd: GET {Search-Schnittstelle}/HealthcareService/\n?organization.active=true&...
     activate fd
     fd-->fp: HTTP 200 (:Suchergebnis FHIR-Bundle)
       deactivate fd
@@ -74,14 +74,14 @@ alt#LightGrey <size:16>gültiges search-accesstoken erhalten</size>
     |||
   else <size:16>PractitionerRole-Einträge werden gesucht</size>
     |||
-    cl->fp: GET <Search-Schnittstelle>/PractitionerRole/\n?practitioner.active=true&...(search-accesstoken)
+    cl->fp: GET {Search-Schnittstelle}/PractitionerRole/\n?practitioner.active=true&...(search-accesstoken)
     note left
     <size:16>Finde Datensatz für MXID</size>
     end note
     activate fp
     fp->fp: prüfe search-accesstoken
     |||
-    fp->fd: GET <Search-Schnittstelle>/PractitionerRole/\n?practitioner.active=true&...
+    fp->fd: GET {Search-Schnittstelle}/PractitionerRole/\n?practitioner.active=true&...
     activate fd
     fd-->fp: HTTP 200 (:Suchergebnis FHIR-Bundle)
       deactivate fd
@@ -93,7 +93,7 @@ alt#LightGrey <size:16>gültiges search-accesstoken erhalten</size>
 |||
 else <size:16>kein gültiges search-accesstoken</size>
   break#LightGrey #MistyRose
-    cl->fp++: GET <Search-Schnittstelle> (search-accesstoken)
+    cl->fp++: GET {Search-Schnittstelle} (search-accesstoken)
     fp-->cl--: HTTP 401
     cl-->U: Fehlermeldung
   |||
