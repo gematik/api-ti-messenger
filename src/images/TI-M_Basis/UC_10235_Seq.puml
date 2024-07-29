@@ -27,10 +27,9 @@ ActorFontSize 20
 
 autonumber
 
-actor U as "Akteur in der Rolle\nUser"
-participant cl as "TI-Messenger-Client"
-participant mp as "Messenger Proxy"
-participant hs as "Matrix-Homeserver"
+actor U as "Akteur in der\nRolle User"
+participant cl as "TI-Messenger Client"
+participant ms as "Messenger Service"
 box <size:18>VZD-FHIR-Directory</size> #WhiteSmoke
   participant fp as "FHIR-Proxy"
   participant au as "Auth-Service"
@@ -38,20 +37,16 @@ box <size:18>VZD-FHIR-Directory</size> #WhiteSmoke
 end box
 
 |||
-note over U, hs: \n<size:17>Der Akteur ist erfolgreich beim Messenger-Service angemeldet</size>\n
+note over U, ms: \n<size:17>Der Akteur ist erfolgreich beim Messenger-Service angemeldet</size>\n
 |||
 activate cl
 U->cl:Suchparameter für \nFHIR-Ressourcen \n eingeben
 |||
 group#LightGrey <size:16>Prüfung/Erhalt search-accesstoken</size>
   |||
-  note over U
-  <size:16>dieser Akteur entspricht</size>
-  <size:16>dem "Nutzer" im folgenden</size>
-  <size:16>referenzierten Anwendungsfall</size>
-  end note
-  ref over U, cl, mp, hs, fp, au, fd
+  ref over U, cl, ms, fp, au, fd
   <size:17>gemSpec_VZD_FHIR_Directory#AF_10036-01</size>
+  <size:16>(Der Akteur entspricht dem "Nutzer" im referenzierten Anwendungsfall)</size>
   |||
   end ref
   |||
@@ -61,9 +56,10 @@ alt#LightGrey <size:16>gültiges search-accesstoken erhalten</size>
 |||
   alt#LightGrey #AliceBlue <size:16>HealthcareService-Einträge werden gesucht</size>
     |||
-    cl->fp: GET /search/HealthcareService/?organization.active=true&... (search-accesstoken)
+    cl->fp: GET /search/HealthcareService/?organization.active=true&...\n(search-accesstoken)
     note left
-    <size:16>Finde Datensatz für TelematikID</size>
+    <size:16>Finde Datensatz für </size>
+    <size:16>TelematikID</size>
     end note
     activate fp
     fp->fp: prüfe search-accesstoken
@@ -78,7 +74,7 @@ alt#LightGrey <size:16>gültiges search-accesstoken erhalten</size>
     |||
   else <size:16>PractitionerRole-Einträge werden gesucht</size>
     |||
-    cl->fp: GET /search/PractitionerRole/?practitioner.active=true&... (search-accesstoken)
+    cl->fp: GET /search/PractitionerRole/?practitioner.active=true&...\n(search-accesstoken)
     note left
     <size:16>Finde Datensatz für MXID</size>
     end note
@@ -97,7 +93,7 @@ alt#LightGrey <size:16>gültiges search-accesstoken erhalten</size>
 |||
 else <size:16>kein gültiges search-accesstoken</size>
   break#LightGrey #MistyRose
-    cl->fp++: GET /search/.../?... (search-accesstoken)
+    cl->fp++: GET <Search-Schnittstelle> (search-accesstoken)
     fp-->cl--: HTTP 401
     cl-->U: Fehlermeldung
   |||
