@@ -28,8 +28,8 @@ image::generated/TI-M_Basis/Schnittstellen_am_Registrierungs-Dienst.svg[align="c
 == Schnittstelle: I_Registration
 Die abstrakte Schnittstelle `I_Registration` muss die folgenden Funktionalitäten anbieten: 
 
-* Die Authentisierung einer Organisation am *TI-Messenger-Dienst* (siehe link:{docsdir}/anwendungsfaelle/MS-AF10103-authentisieren-organisation.adoc[AF_10103]) und 
-* Die Möglichkeit der Bereitstellung eines *Messenger-Services* für eine Organisation (siehe link:{docsdir}/anwendungsfaelle/MS-AF10060-bereitstellung-messenger-service.adoc[AF_10060])
+* Die Authentisierung einer Organisation am *TI-Messenger-Dienst*
+* Die Möglichkeit der Bereitstellung eines *Messenger-Services* für eine Organisation
 
 CAUTION: Für die initiale Registrierung einer Organisation am *TI-Messenger-Fachdienst* ist die Verwendung der SMC-B notwendig und somit die Verwendung von einem Konnektor und Kartenterminal Voraussetzung.
 
@@ -39,7 +39,7 @@ Im folgenden werden die umzusetzenden Funktionalitäten der Schnittstelle beschr
 Die von der abstrakten Schnittstelle `I_Registration` angebotene Funktionalität soll als Webschnittstelle bereitgestellt werden, die von einem Akteur über einen Webclient (*Frontend des Registrierungs-Dienstes*) genutzt wird. Diese muss für alle Akteure im Internet verfügbar sein.
 
 === Authentisieren einer Organisation
-Die abstrakte Schnittstelle `I_Registration` muss es einer Organisation ermöglichen sich mittels der SMC-B der Organisation zu authentisieren. Der *Registrierungs-Dienst* kann hierfür einen Prozess mittels OpenID-Connect oder KIM anbieten. In beiden Varianten muss der *Registrierung-Dienst* die `TelematikID` und auch die `ProfessionOID` der Organisation validieren & speichern. Nach erfolgreicher Authentifizierung durch den *Registrierungs-Dienst* wird ein Administratorkonto für die Organisation bereitgestellt. Weitere Details finden Sie unter link:{docsdir}/anwendungsfaelle/MS-AF10103-authentisieren-organisation.adoc[AF_10103]. 
+Die abstrakte Schnittstelle `I_Registration` muss es einer Organisation ermöglichen sich mittels der SMC-B der Organisation zu authentisieren. Der *Registrierungs-Dienst* kann hierfür einen Prozess mittels OpenID-Connect oder KIM anbieten. In beiden Varianten muss der *Registrierung-Dienst* die `TelematikID` und auch die `ProfessionOID` der Organisation validieren & speichern. Nach erfolgreicher Authentifizierung durch den *Registrierungs-Dienst* wird ein Administratorkonto für die Organisation bereitgestellt.
 
 === Bereitstellung eines Messenger-Service
 Nach dem Authentifizierungsvorgang muss das bereitgestellte Admin-Konto verwendet werden, um *Messenger-Services* für die Organisation zu erstellen. Um einen neuen *Messenger-Service* zu erstellen, muss ein *Registrierungs-Dienst*:
@@ -94,7 +94,7 @@ Bei der Schnittstelle `I_internVerification` handelt es sich um eine abstrakte S
 Die Schnittstelle muss die folgenden Funktionalitäten bereitstellen:
 
 * Bereitstellung und Aktualisierung der Föderationsliste und
-* Berechtigungsprüfung - Stufe 3 gemäß link:../anwendungsfaelle/MS-stufen-berechtigungspruefung.adoc[Berechtigungskonzept]
+* Berechtigungsprüfung - Stufe 3
 
 TIP: Die geforderten Funktionalitäten dürfen auch über seperate Schnittstellen zur Verfügung gestellt werden. 
 
@@ -102,8 +102,6 @@ Die umzusetzenden Funktionalitäten werden im folgenden beschrieben.
 
 === Bereitstellung und Aktualisierung der Föderationsliste.
 Um die Zugehörigkeit zur TI-Messenger-Föderation zu verifizieren, muss der *Registrierungs-Dienst* den *Messenger-Proxies* über die abstrakte Schnittstelle `I_internVerification` eine aktuelle Föderationsliste zur Verfügung stellen. Dazu muss der *Registrierungs-Dienst* die Operation `/tim-provider-services/getFederationList` am *FHIR-Proxy* des *VZD-FHIR-Directory* aufrufen, um eine aktuelle Föderationsliste zu erhalten. Diese Schnittstelle ist am *VZD-FHIR-Directory* durch einen `ACCESS_TOKEN` geschützt (https://github.com/gematik/api-vzd/blob/gemILF_VZD_FHIR_Directory/1.0.1/docs/FHIR_VZD_HOWTO_Authenticate.adoc#22-authenticate-for-the-provider-api[provider-accesstoken]). Nach Erhalt des `provider-accesstokens` muss dieses im Authorization Header genutzt werden, um über die Operation https://github.com/gematik/api-vzd/blob/gemILF_VZD_FHIR_Directory/1.0.1/docs/FHIR_VZD_HOWTO_Provider.adoc#22-query-federationlist[getFederationList] eine aktuelle Föderationsliste abzufragen.
-
-TIP: Der Ablauf des Anwendungfalls zur Aktualisierung und Bereitstellung kann im Detail link:../anwendungsfaelle/MS-aktualisierung-foederationsliste.adoc[hier] nachvollzogen werden. 
 
 Die aktuelle Struktur der Föderationsliste ist https://github.com/gematik/api-vzd/blob/gemILF_VZD_FHIR_Directory/1.0.1/src/schema/FederationList.json[hier] hinterlegt.
 

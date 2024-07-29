@@ -51,7 +51,7 @@ CAUTION: Der Playground bildet immer die aktuellste Version der Matrix-Spezifika
 Im Rahmen der Verwendung des Matrix-Protokolls im deutschen Gesundheitswesen ist es notwendig, dies um zusätzliche Vorgaben zu erweitern. Hierzu trifft die gematik die folgenden weiteren Festlegungen zum Umgang mit dem Matrix-Protokoll.
 
 ====== CreateRoom 
-Beim Anlegen eines Raumes über den `/_matrix/client/v3/createRoom` Endpunkt (siehe: link:https://spec.matrix.org/v1.3/client-server-api/#post_matrixclientv3createroom[createRoom]) über die [Client-Server-API] ist darauf zu achten, dass im `invite`-Feld maximal eine Matrix-ID (`MXID`) eines einzuladenden Akteurs angegeben werden darf. Die Vorgabe muss eingehalten werden, damit diese bei der link:../../docs/anwendungsfaelle/MS-stufen-berechtigungspruefung.adoc#stufe-1-pr%C3%BCfung-der-ti-f%C3%B6derationszugeh%C3%B6rigkeit[Proxy Berechtigungsprüfung] validiert werden kann.
+Beim Anlegen eines Raumes über den `/_matrix/client/v3/createRoom` Endpunkt (siehe: link:https://spec.matrix.org/v1.3/client-server-api/#post_matrixclientv3createroom[createRoom]) über die [Client-Server-API] ist darauf zu achten, dass im `invite`-Feld maximal eine Matrix-ID (`MXID`) eines einzuladenden Akteurs angegeben werden darf. Die Vorgabe muss eingehalten werden, damit diese bei der Proxy Berechtigungsprüfung validiert werden kann.
 
 ====== Custom Room Types 
 Das Matrix-Protokoll erlaubt während der Erstellung eines Chatraumes einen eigene Raumtyp (_Custom Room Type_) für diesen mit Hilfe einer Typinitialisierung im `/createRoom`-Endpunkt zu definieren, um spezielle Raumeigenschaften (_Room State Events_) für diesen _Custom Room Type_ zu verwenden. Die gematik definiert für föderierte und fallbezogene Kommunikation die folgenden Raumtypen. 
@@ -83,7 +83,7 @@ TIP: Weitere Informationen zu den _Custom State Events_ können in *[gemSpec_Ti-
 NOTE: In der veröffentlichten und zulassungsrelevanten Spezifikationsversion v1.1.1 wird die produktive Verwendung der _Custom State Events_ aktuell nicht gefordert, da die notwendigen Vorbedingungen für den produktiven Einsatz seitens des Matrix-Protokolls noch nicht vollständig erfüllt sind.
 
 ===== I_TiMessengerContactManagement
-Über die vom *Messenger-Proxy* bereitgestellte Schnittstelle `I_TiMessengerContactManagement` wird die für einen Akteur im Proxy vorgehaltene Freigabeliste administriert. Die Freigabeliste wird in link:/docs/anwendungsfaelle/COM-AF10061-einladung-ausserhalb.adoc[AF10061 - Einladung von Akteuren außerhalb einer Organisation] benötigt, wenn zwei Akteure ihre Kontaktdaten mittels QR-Scan austauschen möchten. Weitere Informationen zu der Schittstelle sind link:../../docs/Fachdienst/MessengerService.adoc#i_timessengercontactmanagement[hier] zu finden.
+Über die vom *Messenger-Proxy* bereitgestellte Schnittstelle `I_TiMessengerContactManagement` wird die für einen Akteur im Proxy vorgehaltene Freigabeliste administriert. Die Freigabeliste wird bei der Einladung von Akteuren außerhalb einer Organisation benötigt, wenn zwei Akteure ihre Kontaktdaten mittels QR-Scan austauschen möchten. Weitere Informationen zu der Schittstelle sind link:../../docs/Fachdienst/MessengerService.adoc#i_timessengercontactmanagement[hier] zu finden.
 
 ==== VZD-FHIR-Directory Modul
 Über das _VZD-FHIR-Directory Modul_ wird die Suche und die Pflege von Einträgen im *FHIR-Directory* ermöglicht. Hier werden die folgenden Endpunkte der Teilkomponenten *Auth-Services* und *FHIR-Proxy* des *VZD-FHIR-Directory* vom _VZD-FHIR-Directory Modul_ des *TI-Messenger-Clients* angesprochen:
@@ -104,7 +104,7 @@ Der *Auth-Service* des *VZD-FHIR-Directory* bietet die zwei Endpunkte an, die di
 Für den Zugriff auf die Suchfunktionalität von FHIR-Ressourcen (`/search`-Endpunkt) authentisiert sich der *TI-Messenger-Client* gegenüber dem *VZD-FHIR-Directory* mit einem 3rd-Party-Token (`Matrix-OpenID Token`), das er von seinem *Matrix-Homeserver* anfordern kann (siehe link:https://spec.matrix.org/v1.3/client-server-api/#post_matrixclientv3useruseridopenidrequest_token[Matrix OpenID Token]). Dieses 3rd-Party-Token benötigt der *TI-Messenger-Client*, um es beim `/tim-authenticate`-Endpunkt des *VZD-FHIR-Directory* gegen ein `search-accesstoken` einzutauschen. Bei Aufruf des Endpunktes `/tim-authenticate` ist es erforderlich, das 3rd-Party-Token (`Matrix-OpenID-Token`) im Header sowie die URL des *Matrix-Homeservers* im Parameter `MXID` zu übergeben. Der Aufruf des `/tim-authenticate`-Endpunktes ist link:https://github.com/gematik/api-vzd/blob/gemILF_VZD_FHIR_Directory/1.0.0/docs/FHIR_VZD_HOWTO_Authenticate.adoc#21-authenticate-for-the-search-endpoint[hier] beschrieben. 
 
 ====== /owner-authenticate
-Für die Pflege von FHIR-Ressourcen (`/owner`-Endpunkt) authentisiert sich der *TI-Messenger-Client* gegenüber dem *VZD-FHIR-Directory* unter Verwendung einer Smartcard (HBA), um ein `owner-accesstoken` vom *Auth-Service* zu erhalten. Für die Authentisierung mittels Smartcard ist der von der gematik bereitgestellte link:/docs/IDP/idp.adoc[zentrale IDP-Dienst] zu verwenden. Details sind dem Anwendungsfall link:/docs/anwendungsfaelle/VZD-AF10058-practitioner-hinzufuegen.adoc[AF10058 - Akteur (User-HBA) im Verzeichnisdienst hinzufügen] zu entnehmen. Nach erfolgreicher Authensierung erhält der *TI-Messenger-Client* vom *Auth-Service* ein `owner-accesstoken`. Der Aufruf des `/owner-authenticate`-Endpunktes ist link:https://github.com/gematik/api-vzd/blob/gemILF_VZD_FHIR_Directory/1.0.0/docs/FHIR_VZD_HOWTO_Authenticate.adoc#24-authenticate-for-the-owner-endpoint-as-an-user[hier] beschrieben. 
+Für die Pflege von FHIR-Ressourcen (`/owner`-Endpunkt) authentisiert sich der *TI-Messenger-Client* gegenüber dem *VZD-FHIR-Directory* unter Verwendung einer Smartcard (HBA), um ein `owner-accesstoken` vom *Auth-Service* zu erhalten. Für die Authentisierung mittels Smartcard ist der von der gematik bereitgestellte link:/docs/IDP/idp.adoc[zentrale IDP-Dienst] zu verwenden.
 
 TIP: Für die Interaktion mit den Smartcards und dem *zentralen IDP-Dienst* ist der link:https://fachportal.gematik.de/hersteller-anbieter/komponenten-dienste/authenticator[gematik authenticator] vorgesehen. Es können auch eigene Authenticator-Lösungen verwendet werden. 
 
@@ -120,7 +120,7 @@ Der *FHIR-Proxy* bietet über die Schnittstelle `FHIRDirectorySearchAPI` den End
 Der *FHIR-Proxy* bietet über die Schnittstelle `FHIRDirectoryOwnerAPI` den Endpunkt `/owner` an, um FHIR-Ressourcen zu suchen und eigene Einträge zu pflegen. Um diesen Endpunkt aufrufen zu können, wird ein `owner-accesstoken` im Authorization Header benötigt. Eine beispielhafte Verwendung der Schnittstelle zur Pflege der FHIR-Ressourcen ist in link:https://github.com/gematik/api-vzd/blob/gemILF_VZD_FHIR_Directory/1.0.0/docs/FHIR_VZD_HOWTO_Owner.adoc[owner API examples] beschrieben. 
 
 ==== Auth Modul
-Über das _Auth Modul_ wird die Kommunikation mit Smartcards (HBA) realisiert, um diese zur Authentisierung am  `/owner-authenticate`-Endpunkt zu ermöglichen. Dies wird als Grundlage für den Anwendungsfall link:/docs/anwendungsfaelle/VZD-AF10058-practitioner-hinzufuegen.adoc[AF_10058 Akteur(User-HBA) im Verzeichnisdienst hinzufügen] benötigt. Im Folgenden wird der Prozess kurz skizziert, nachdem beim Aufruf des `/owner-authenticate`-Endpunktes das _Auth Modul_ einen `Redirect` zum `Authorization Endpoint` des *IDP-Dienstes* vom *Auth-Service* erhalten hat. 
+Über das _Auth Modul_ wird die Kommunikation mit Smartcards (HBA) realisiert, um diese zur Authentisierung am `/owner-authenticate`-Endpunkt zu ermöglichen. Im Folgenden wird der Prozess kurz skizziert, nachdem beim Aufruf des `/owner-authenticate`-Endpunktes das _Auth Modul_ einen `Redirect` zum `Authorization Endpoint` des *IDP-Dienstes* vom *Auth-Service* erhalten hat. 
 
 ===== Authorization Endpoint zentraler IDP-Dienst
 Nach Erhalt des `Redirects` ruft das _Auth Modul_ des *TI-Messenger-Clients* den `{Authorization Endpoint}` am *zentralen IDP-Dienst* auf, um das Challenge-Response-Verfahren durchzuführen und abschließend den `AuthorizationCode` sowie den `Redirect` zum `/signin-gematik-idp-dienst`-Endpunkt zu erhalten. 
@@ -151,7 +151,7 @@ Der Aufbau der `Matrix-URI` muss gemäß link:https://spec.matrix.org/v1.3/appen
 
 TIP: Bei dem gezeigten vCard-Object handelt es sich um die geforderte Mindestbefüllung, die Verwendung weiterer Felder ist zulässig.
 
-Der *TI-Messenger-Client* muss den eingescannten 2D-Code gemäß [ISO/IEC 18004:2006] decodieren und mindestens den vollständigen Namen sowie die `MXID` aus den Parameter `N` und `IMPP` dem Akteur anzeigen, damit dieser die Aufnahme in die Freigabeliste bestätigen oder ablehnen kann (siehe link:/docs/anwendungsfaelle/COM-AF10061-einladung-ausserhalb.adoc[AF_10061 - Einladung von Akteuren außerhalb einer Organisation]).
+Der *TI-Messenger-Client* muss den eingescannten 2D-Code gemäß [ISO/IEC 18004:2006] decodieren und mindestens den vollständigen Namen sowie die `MXID` aus den Parameter `N` und `IMPP` dem Akteur anzeigen, damit dieser die Aufnahme in die Freigabeliste bestätigen oder ablehnen kann.
 
 ==== Editierbarkeit von Displaynamen
 Der *TI-Messenger-Client* muss bei der initialen Vergabe des Displayname die folgende Bildungsregel durchsetzen: `[Name], [Vorname]`. Der *TI-Messenger-Client* darf dem Akteur nach der initialen Vergabe des Displaynamen nicht die Möglichkeit anbieten, diesen zu ändern. Hierfür darf der *TI-Messenger-Client* nicht die REST-Schnittstelle `/_matrix/client/v3/profile/{userId}/displayname` der [Client-Server API] aufrufen. 
@@ -172,7 +172,7 @@ Mit dem *Org-Admin-Client* haben Administratoren einer Organisation die Möglich
 * Einrichtung von Funktionsaccounts.
 
 ==== Organisationsressourcen im VZD-FHIR-Directory bearbeiten
-Der Administrator einer Organisation (in der Rolle "Org-Admin") verwaltet mittels des *Org-Admin-Clients* die FHIR-Ressourcen für seine Organisation im *VZD-FHIR-Directory* (siehe link:/docs/anwendungsfaelle/VZD-AF10059-organisation-hinzufuegen.adoc[AF_10059 - Organisationsressourcen im Verzeichnisdienst hinzufügen]).
+Der Administrator einer Organisation (in der Rolle "Org-Admin") verwaltet mittels des *Org-Admin-Clients* die FHIR-Ressourcen für seine Organisation im *VZD-FHIR-Directory*.
 
 *Authentisierung*
 
