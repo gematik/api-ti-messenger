@@ -1,0 +1,58 @@
+@startuml
+skinparam sequenceMessageAlign direction
+skinparam minClassWidth 200
+skinparam BoxPadding 1
+skinparam sequenceReferenceHeaderBackgroundColor palegreen
+scale max 2048 width
+skinparam maxMessageSize 300
+
+skinparam sequence {
+ArrowColor black
+ArrowFontSize 17
+ActorBorderColor black
+LifeLineBorderColor black
+LifeLineBackgroundColor Gainsboro
+
+ParticipantBorderColor Motivation
+ParticipantBackgroundColor Motivation
+ParticipantFontSize 20
+ParticipantFontColor black
+ParticipantBorderColor Black
+ParticipantBackgroundColor MOTIVATION
+
+ActorBackgroundColor Gainsboro
+ActorFontColor black
+ActorFontSize 20
+}
+
+autonumber
+    
+    actor v as "Akteur in der Rolle User"
+    participant fdv [
+      TI-Messenger Client App
+      ----
+      Inhaber PushAnbieter-App Token
+    ]
+    participant pa as "Push-Anbieter"
+    participant pg as "Push-Gateway"
+    participant fd as "Fachdienst"
+
+activate fd
+fd->pg: Benachrichtigung(App_ID, PushAnbieter-AppToken, EventID)
+activate pg
+pg->pa: Benachrichtigung(PushAnbieter-AppToken, EventID)
+activate pa
+pa-->pg: Response
+pg-->fd: Response
+deactivate pg
+pa->fdv: Benachrichtigung an Empfänger(PushAnbieter-AppToken, EventID)
+deactivate pa
+activate fdv
+fdv->fd: Abfrage der Daten zu Event(EventID)
+fd-->fdv: Verschlüsselte Benachrichtigungsinhalte
+deactivate fd
+fdv->fdv:Entschlüssele \n(Verschlüsselte Benachrichtigungsinhalte)
+fdv->fdv:erzeuge Anwenderbenachrichtigung mit\n den entschlüsselten Inhalten
+fdv->v:Zeige Benachrichtigung
+
+@enduml

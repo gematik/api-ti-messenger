@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: TiMessengerTestDriver
   description: REST interface to automate the test of a TI-Messenger client implementation.
-  version: 0.9.4
+  version: 0.9.2
   contact:
     name: gematik GmbH
     email: software-development@gematik.de
@@ -33,8 +33,6 @@ servers:
 tags:
   - name: info
     description: This operation returns meta data about this interface and the status of available resources
-  - name: signalTestStart
-    description: This endpoint serves the possibility to clean system before test
   - name: devices
     description: Operations for device management
   - name: account
@@ -82,21 +80,6 @@ paths:
                 $ref: "#/components/schemas/InfoObject"
         "403":
           $ref: "#/components/responses/Forbidden"
-        default:
-          $ref: "#/components/responses/DefaultResponse"
-
-    post:
-      tags:
-        - signalTestStart
-      description: Implementation is optional! Testsuite sends a request to the org-admin endpoint of each involved homeserver (even if the org-admin is not named in the feature-file). There will be no claiming attempt before triggering this endpoint. After getting any response the testcase starts. This is an opportunity for the org-admin to clean user/rooms/FHIR-VZD etc. Even if errorcode returned the testsuite will start the test.
-      operationId: cleanUp
-      responses:
-        "200":
-          description: System clean
-        "404":
-          $ref: "#/components/responses/NotFound"
-        "500":
-          $ref: "#/components/responses/InternalServerError"
         default:
           $ref: "#/components/responses/DefaultResponse"
 
@@ -1675,12 +1658,6 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/Error"
-    InternalServerError:
-      description: "Something went wrong server internally"
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/Error"
     Unauthorized:
       description: "Unauthorized - you have to login first"
       content:
@@ -2188,10 +2165,6 @@ components:
           type: string
           description: "The room identifier. Must be returned in response to a createRoom request. Is used to identify a specific room."
           example: "!dowjfsdkjfskjdfsd:gematik.de"
-        roomVersion:
-          type: string
-          description: "The room version"
-          example: "10"
 
     RoomMembershipState:
       description: "An accounts membership state for a room"

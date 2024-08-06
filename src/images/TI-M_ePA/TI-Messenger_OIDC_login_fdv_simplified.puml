@@ -1,0 +1,125 @@
+@startuml
+skinparam sequenceMessageAlign direction
+skinparam WrapWidth 300
+skinparam BoxPadding 1
+skinparam ParticipantPadding 25
+skinparam sequenceReferenceHeaderBackgroundColor palegreen
+scale max 2048 width
+skinparam maxMessageSize 400
+
+skinparam sequence {
+ArrowColor black
+ArrowFontSize 17
+ActorBorderColor black
+LifeLineBorderColor black
+LifeLineBackgroundColor Gainsboro
+
+ParticipantBorderColor Motivation
+ParticipantBackgroundColor Motivation
+ParticipantFontSize 20
+ParticipantFontColor black
+ParticipantBorderColor Black
+ParticipantBackgroundColor MOTIVATION
+
+ActorBackgroundColor Gainsboro
+ActorFontColor black
+ActorFontSize 20
+}
+
+autonumber
+
+actor us as "Akteur in der\nRolle Versicherter"
+box <size:19>Endgerät</size> #WhiteSmoke
+    participant app [
+      ePA-FdV
+      ----
+      TI-M Client
+    ]
+     participant auth [
+      ePA-FdV
+      ----
+      Authenticator-Modul
+    ]
+end box
+note left of auth
+Die Grafik zeigt exemplarisch das Authenticator-Modul als Teil des ePA-FdV. Zulässig ist ebenfalls ein Authenticator-Modul als eigenständige App auf dem Endgerät.
+end note
+participant hs as "Messenger-Service\n(Relying party für IDP)"
+
+participant idp as "Sektoraler\nIDP"
+
+|||
+
+us -> app: starte App
+
+activate app
+  group <size:16>OIDC Login</size>
+    app -> hs ++: GET ""{homeserver_client_api_url}""/login
+    hs --> app --: 200 OK (:Login Types)
+    note right
+    enthalten: ID des sektoralen IDP: ""{sidp}""
+    end note
+    |||
+    opt #LightYellow <size:16>Auswahl durch Akteur: Registrierungs- statt Login-Funktion</size>
+    app -> hs ++: POST ""{homeserver_client_api_url}""/register (initial_device_display_name, refresh_token)
+    hs --> app --: 401 Unauthorized
+    note right
+    Homeserver benötigt zusätzliche Authentisierungsinformationen
+    end note
+    |||
+    end
+    |||
+    app -> hs++: GET ""{homeserver_client_api_url}""/login/sso/redirect/""{sidp}""
+    |||
+    group #Linen <size:16>Verhaltensänderung, da der sektorale IDP OIDC PAR erfordert</size>
+      hs -> idp ++: POST ""{sektoraler_idp_url}""/par (response_type, redirect_uri, code_challenge, scope)
+      idp --> hs --: 201 CREATED (:request_uri)
+      hs --> app --: 302 Redirect ""{sektoraler_idp_url}""/login/oauth/authorize (:request_uri)
+      |||
+    end
+    |||
+    group #LightBlue <size:16>IDP Authentisierung mit nutzerspezifischer Authentifizierung</size>
+      app -> auth ++ : Authorization Request(request_uri)
+      
+      |||
+      group #DarkGray <size:16>Authenticator Modul IDP-sek</size>
+        auth -> idp ++: GET ""{sektoraler_idp_url}""/login/oauth/authorize (request_uri)
+        idp --> auth: Challenge
+        auth -> us: Consent Page
+        us --> auth: Approval
+        auth -> idp: Response
+        note left
+        Nutzung von Identifikationsmerkmalen,
+        die vom IDP vorgegeben sind
+        end note
+        idp --> auth --: 302 Redirect ""{redirect_uri}"" (:auth_code, :state)
+      |||
+      end
+      |||
+      auth ->app: Redirect(redirect_uri, AUTH_CODE)
+      |||
+    end
+    |||
+    app -> hs ++: GET ""{redirect_uri}"" (auth_code, state)
+    |||
+    hs -> idp ++: POST ""{sektoraler_idp_url}""/token-endpoint (auth_code, code_verifier)
+    idp --> hs --: 200 OK (:id_token)
+    opt #LightYellow <size:16>kein passender Benutzer-Account zum id_token vorhanden</size>
+    hs -> hs: Benutzer-Account anlegen
+    |||
+    else <size:16>Display Name aus dem id_token stimmt nicht mit den Daten im Benutzer-Account überein.</size>
+    hs -> hs: Display Name im Benutzer-Account aktualisieren
+    end
+    |||
+    hs --> app --: 200 OK (:loginToken)
+    note right
+    HTML Consent Page, Zugriff
+    TIM-Web-App auf Matrix Account
+    end note
+    |||
+    app -> hs ++: POST ""{homeserver_client_api_url}""/login (loginToken, initial_device_display_name)
+    hs --> app --: 200 OK (:user_id, :access_token, :home_server, :device_id, :well_known)
+    |||
+  end
+  app --> us: Login erfolgreich
+@enduml

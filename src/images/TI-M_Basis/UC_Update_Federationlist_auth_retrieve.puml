@@ -1,0 +1,82 @@
+/' 
+# TI-Messenger 1.1.1
+# TI-Messenger-Dienst
+# UC - 
+# Sequence Diagram
+# Name: Provider authentifizieren und Föderationsliste abrufen
+'/
+
+@startuml
+skinparam sequenceMessageAlign direction
+skinparam minClassWidth 200
+skinparam BoxPadding 1
+skinparam sequenceReferenceHeaderBackgroundColor palegreen
+scale max 2048 width
+
+skinparam sequence {
+ArrowColor black
+ArrowFontSize 17
+LifeLineBorderColor black
+LifeLineBackgroundColor Gainsboro
+
+ParticipantBorderColor Motivation
+ParticipantBackgroundColor Motivation
+ParticipantFontSize 20
+ParticipantFontColor black
+ParticipantBorderColor Black
+ParticipantBackgroundColor MOTIVATION
+
+}
+
+autonumber
+
+participant RD as "Registrierungs-Dienst"
+box <size:18>VZD-FHIR-Directory</size> #WhiteSmoke
+  participant Oauth as "OAuth-Service"
+  participant AuthService as "Auth-Service"
+  participant FP as "FHIR-Proxy"
+end box
+
+alt#LightGrey <size:16>kein gültiges provider-accesstoken vorhanden</size>
+  activate RD
+  alt#LightGrey <size:16>Benötigt IDP-TI-Provider-Accesstoken</size>
+      RD -> Oauth: POST /auth/realms/TI-Provider/protocol/openid-connect/token\n(client_id, client_secret)\n{<10s := HealthState_VZD=gesund}
+      activate Oauth
+      Oauth -> Oauth: Credentials prüfen \n(client_id, client_secret)
+      Oauth --> RD: ti-provider-accesstoken
+      deactivate Oauth
+  end
+  RD -> AuthService: GET /ti-provider-authenticate(ti-provider-accesstoken)\n{<10s := HealthState_VZD=gesund}
+  activate AuthService
+  AuthService -> AuthService: Token prüfen\n(ti-provider-accesstoken)
+  AuthService --> RD: provider-accesstoken
+  deactivate AuthService
+end
+
+|||
+RD->FP: GET /tim-provider-services/FederationList/federationList.jws\n(provider-accesstoken, FLVersion_RD)\n{<10s := HealthState_VZD=gesund}
+  Activate FP
+FP->FP: Token prüfen\n(provider-accesstoken)
+
+break#LightGrey #LightPink <size:16>Abruf der Föderationsliste nicht möglich</size>
+  FP-->RD: ResponseType=Bad Request ODER \nResponseType=Unauthorized ODER \nResponseType=Forbidden ODER \nResponseType=Not Found
+end 
+
+|||
+FP->FP: Auf neuere Version der \nFöderationsliste prüfen\n(FLVersion_RD)
+|||
+
+alt#LightGrey <size:16>keine neuere Version der Föderationsliste vorhanden</size>
+  FP-->RD: ResponseType=No Content
+  RD->RD: Alter_Föderationsliste zurücksetzen(Alter_Föderationsliste=0s)
+  |||
+else <size:16>neuere Version der Föderationsliste vorhanden ODER FLVersion_RD=NULL</size>
+  FP-->RD: Föderationsliste, x5c-Zertifikatsliste
+      Deactivate FP
+  RD->RD++: Föderationsliste aktualisieren(Föderationsliste)
+  return Föderationsliste
+  RD->RD: Alter_Föderationsliste zurücksetzen(Alter_Föderationsliste=0s)
+  |||
+end
+|||
+@enduml

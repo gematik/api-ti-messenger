@@ -1,0 +1,6 @@
+{
+    "defaultSetting": "block all",
+    "userExceptions": {
+        "@david:hassel.hoff": {}
+    }
+}

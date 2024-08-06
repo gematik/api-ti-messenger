@@ -1,0 +1,170 @@
+/' 
+# TI-Messenger-Dienst
+# UC - 10061
+# Name: Einladung von Akteuren außerhalb einer Organisation
+'/
+
+@startuml
+skinparam sequenceMessageAlign direction
+skinparam minClassWidth 200
+skinparam BoxPadding 15
+skinparam sequenceReferenceHeaderBackgroundColor palegreen
+skinparam sequenceReferenceBackgroundColor Beige
+
+scale max 2048 width
+
+skinparam sequence {
+ArrowColor black
+ArrowFontSize 17
+ActorBorderColor black
+LifeLineBorderColor black
+LifeLineBackgroundColor Gainsboro
+
+ParticipantBorderColor Motivation
+ParticipantBackgroundColor Motivation
+ParticipantFontSize 20
+ParticipantFontColor black
+ParticipantBorderColor Black
+ParticipantBackgroundColor MOTIVATION
+
+ActorBackgroundColor Gainsboro
+ActorFontColor black
+ActorFontSize 20
+}
+    actor U1 as "\nAkteur A in\nder Rolle User" #AliceBlue
+    participant C1 as "TI-Messenger-\nClient" #AliceBlue
+    box <size:18>Messenger-Service A</size> #WhiteSmoke
+      participant MP1 as "Messenger-\nProxy"
+      participant MH1 as "Matrix-\nHomeserver"
+    end box
+    box <size:18>Messenger-Service B</size> #WhiteSmoke
+      participant MP2 as "Messenger-\nProxy"
+      participant MH2 as "Matrix-\nHomeserver"
+    end box
+    participant PG2 as "Push-\nGateway"
+    participant C2 as "TI-Messenger-\nClient" #TECHNOLOGY
+    actor U2 as "\nAkteur B in\nder Rolle User" #TECHNOLOGY
+    
+|||
+note over U1, MH1: \n<size:17>Der Akteur A ist erfolgreich beim Messenger Service A angemeldet</size>\n   
+note over U2, MP2: \n<size:17>Der Akteur B ist erfolgreich beim Messenger Service B angemeldet</size>\n    
+|||
+    
+    alt#LightGrey #AliceBlue <size:16>Suche über VZD-FHIR-Directory</size>
+      |||
+      ref over U1, MH1 : <size:16>Einträge im VZD-FHIR-Directory suchen</size>\n
+      |||
+    
+      else <size:16>Direktaustausch über QR-Code Scan</size>
+         |||
+         note over U1, U2: \n<size:16>Akteur A und Akteur B treffen sich persönlich\n
+         |||
+         autonumber
+         |||
+         U2-[#DarkGreen]>C2: QR-Code teilen
+         activate C2
+         U1-[#0000FF]>C1: QR-Code scannen
+         activate C1
+         C1-[#0000FF]>C2: GET /scan
+         C2--[#DarkGreen]>C1: MXID von Akteur B
+         deactivate C2
+         |||
+           group <size:16>opt</size>
+            |||
+            
+             C1->C1: MXID auf \nAllowList \nübernehmen
+          end
+          |||
+    end
+    |||
+    note over U1, MH1: \n<size:17>Ein Chatraum wurde bereits durch den Akteur A eingerichtet.</size>\n
+    
+    |||
+    C1->MP1: POST /_matrix/client/v3/rooms/{roomId}/invite
+    activate MP1
+    |||
+      ref over MP1, MP1: <size:17>Berechtigungsprüfung</size>\n       
+    |||
+      break#LightGrey #MistyRose <size:16>Abbruch</size>
+      |||
+      MP1-->C1: HTTP 403 Forbidden
+      C1-->U1: Einladung nicht \nerfolgreich
+      |||
+      end
+      |||
+
+    MP1->MH1: HTTP(S) Forward
+      activate MH1
+    MH1->MH1: Invite verarbeiten
+    MH1->MP1: POST /_matrix/federation/v1\n/invite/{roomId}/{eventId} 
+
+    |||
+    ref over MP1, MP1: <size:17>Berechtigungsprüfung</size>\n
+    |||
+    MP1->MP2: HTTP(S) Forward
+    |||
+      activate MP2
+      ref over MP2, MP2: <size:17>Berechtigungsprüfung</size>\n
+    |||
+
+      break#LightGrey #MistyRose <size:16>Abbruch</size>
+      |||
+      MP2-->MP1: HTTP 403 Forbidden
+      MP1-->C1: HTTP(S) forward
+      C1-->U1: Einladung nicht \nerfolgreich
+      |||
+      end
+    |||
+    MP2->MH2: HTTP(S) Forward
+      activate MH2
+      MH2->MH2: Invite verarbeiten
+      |||
+      opt#LightGrey #AliceBlue <size:16>Pushbenachrichtigung</size>
+      |||
+        MH2->PG2: POST /_matrix/push/notify
+          activate PG2
+        PG2->C2: Notification
+        PG2-->MH2: Status
+          deactivate PG2
+      |||
+      end
+      |||
+        MH2-->MP2: Status
+        deactivate MH2
+        MP2-->MP1: HTTP(S) Forward
+        deactivate MP2
+        MP1-->MH1: HTTP(S) Forward
+        MH1-->MP1: Status
+        deactivate MH1
+        MP1-->C1: Nutzer in den\nRaum eingeladen
+        deactivate MP1
+        deactivate C1
+
+        C2->MP2: GET /_matrix/client/v3/sync
+          activate C2 #TECHNOLOGY
+          activate MP2
+        MP2->MH2: HTTP(S) Forward
+          activate MH2
+        MH2-->MP2: Status
+          deactivate MH2
+        MP2-->C2: HTTP(S) Forward
+          deactivate MP2
+
+        C2->U2: Einladung anzeigen
+        U2-->C2: Einladung bestätigen
+
+        C2->MP2: POST /_matrix/client/v3/join/{roomId}
+          activate MP2
+        MP2-->MH2: HTTP(S) Forward
+          activate MH2
+        MH2-->MH2: Invite auslösen
+        MH2-->MP2: Status
+          deactivate MH2
+        MP2-->C2: Status
+          deactivate MP2
+
+        C2-->U2: Nutzer ist dem \nRaum beigetreten
+          deactivate C2
+  |||
+|||
+@enduml

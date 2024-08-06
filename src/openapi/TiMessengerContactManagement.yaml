@@ -101,7 +101,7 @@ paths:
               $ref: "#/components/schemas/Contact"
       responses:
         "200":
-          description: "Contact setting for {mxid successfully created"
+          description: "Contact setting for {mxid} successfully created"
           content:
             application/json:
               schema:

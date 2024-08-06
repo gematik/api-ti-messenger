@@ -1,0 +1,58 @@
+@startuml
+!pragma layout smetana
+skinparam actorStyle awesome
+left to right direction
+scale 6/3
+
+skinparam sequence {
+ArrowColor black
+ArrowFontSize 17
+ActorBorderColor black
+LifeLineBorderColor black
+LifeLineBackgroundColor Gainsboro
+
+ParticipantBorderColor Motivation
+ParticipantBackgroundColor Motivation
+ParticipantFontName Impact
+ParticipantFontSize 20
+ParticipantFontColor black
+ParticipantBorderColor Black
+ParticipantBackgroundColor MOTIVATION
+
+ActorBackgroundColor Gainsboro
+ActorFontColor black
+ActorFontSize 13
+}
+
+package Rolle {
+actor "User" as u
+}
+
+package "TI-M spezifische Kommunikation" {
+
+usecase ucbasis as "Basis-Anwendungsfall für\nTI-M spezifische Kommunikation
+
+--Merkmale--
+<font size=12>Nutzung zusätzlicher Chatroom-Eigenschaften</font>
+<font size=12>(Custom State Events und/oder</font>
+<font size=12>Custom Room Types)</font>
+..
+<font size=12>Unterstützung von FHIR-Resources</font>
+<font size=12>zur strukturierten Kommunikation</font>
+"
+
+usecase "Fallbezogene\nKommunikation" as ucfallbezug
+usecase "Föderierte und intersektorale\nKommunikation" as ucfedcomm
+}
+
+u --> ucbasis
+ucbasis <. ucfallbezug : <<include>>
+ucbasis <. ucfedcomm : <<include>>
+
+
+note bottom of (u)
+jeder Akteur, der an der Kommunikation
+in der TI-M Föderation teilnimmt
+end note
+
+@enduml

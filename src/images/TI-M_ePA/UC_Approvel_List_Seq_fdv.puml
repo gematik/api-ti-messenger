@@ -1,0 +1,108 @@
+/'
+# TI-Messenger für Versicherte
+# TI-Messenger-Dienst
+# Sequence Diagram
+# Name: Stufen der Berechtigungsprüfung ePA
+'/
+
+@startuml
+skinparam sequenceMessageAlign direction
+skinparam minClassWidth 200
+skinparam BoxPadding 15
+skinparam sequenceReferenceHeaderBackgroundColor palegreen
+scale max 2048 width
+
+skinparam sequence {
+  ArrowColor black
+  ArrowFontSize 17
+  ActorBorderColor black
+  LifeLineBorderColor black
+  LifeLineBackgroundColor Gainsboro
+
+  ParticipantBorderColor Motivation
+  ParticipantBackgroundColor Motivation
+
+  ParticipantFontSize 20
+  ParticipantFontColor black
+  ParticipantBorderColor Black
+  ParticipantBackgroundColor MOTIVATION
+
+  ActorBackgroundColor Gainsboro
+  ActorFontColor black
+  ActorFontSize 20
+  ActorFontName Aapex
+}
+box <size:18>Messenger-Service\ndes einladenden Akteurs\n #WhiteSmoke
+participant MS as "Messenger-Service"
+end box
+box <size:18>Messenger-Service\ndes eingeladenen Akteurs\n #WhiteSmoke
+participant MS2 as "Messenger-Service"
+end box
+box <size:18>Push-Gateway des eingeladenden Akteurs\n #WhiteSmoke
+participant PG as "Push-\nGateway"
+end box
+box <size:18>Messenger Client\ndes eingeladenen Akteurs\n #WhiteSmoke
+participant MC2 as "Messenger-Client"
+end box
+MS->MS2:Matrix-Invite-Event
+activate MS2
+activate MS
+|||
+== <font color=green><size:16>  Berechtigungskonzept - Stufe 1</size></font>  ==
+|||
+break #MistyRose <size:16>Matrix-Domain nicht in der Föderation enthalten</size>
+  MS2->MS2:<font color=red>Abbruch, \n<font color=red>Verbindung wird \n<font color=red>abgelehnt</font>
+  MS2-->MS: HTTP 403
+  |||
+  end
+break  #MistyRose <size:16>Einladender und der Eingeladene sind beide Versicherte</size>
+  MS2->MS2:<font color=red>Abbruch, \n<font color=red>Verbindung wird \n<font color=red>abgelehnt</font>
+  MS2->MS: HTTP 403
+  |||
+  end
+
+== <font color=green><size:16>  Berechtigungskonzept - Stufe 2</size></font>  ==
+MS2-->MS2: Invite-Event \nverarbeiten
+opt #SkyBlue <size:16>Durchsetzen der akteursspezifischen Berechtigungskonfiguration</size>
+MS2->MS2: Prüfung, ob die Einladung erlaubt ist
+break #MistyRose <size:16>Der Akteur hat "allow all" konfiguriert und der einladende Akteur\n<size:16> ist auf der BlockedUser-Liste (Direkt oder als Teil einer Domain)</size>
+    |||
+    MS2->MS2:<font color=red>Einladung ist abzulehnen</font>
+    |||
+  end
+
+  break #MistyRose <size:16>Der Akteur hat "block all" konfiguriert und der einladende Akteur\n<size:16> ist nicht auf der AllowedUser-Liste (Direkt oder als Teil einer Domain)</size>
+    |||
+    MS2->MS2:<font color=red>Einladung ist abzulehnen</font>
+    |||
+  end
+end
+
+  MS2->PG++: Push Notification
+  PG->MC2: Push Notification
+  activate MC2
+  PG-->MS2: Response
+  deactivate PG
+
+  MC2->MS2: Abfrage neuer Events
+  MS2-->MC2: Bereitstellung neuer Events
+
+  opt #SkyBlue <size:16>Durchsetzen der akteursspezifischen Berechtigungskonfiguration</size>
+  MC2->MC2: Prüfung, ob die Einladung erlaubt ist
+  break #MistyRose <size:16>Der Akteur hat "allow all" konfiguriert und der einladende Akteur\n<size:16> ist auf der BlockedUser-Liste (Direkt oder als Teil einer Domain)</size>
+    |||
+    MC2->MC2:<font color=red>Einladung ist abzulehnen</font>
+    |||
+  end
+
+  break #MistyRose <size:16>Der Akteur hat "block all" konfiguriert und der einladende Akteur\n<size:16> ist nicht auf der AllowedUser-Liste (Direkt oder als Teil einer Domain)</size>
+    |||
+    MC2->MC2:<font color=red>Einladung ist abzulehnen</font>
+    |||
+  end
+end
+|||
+MC2-->MS2: Einladungsergebnis
+MS2-->MS: Einladungsergebnis
+|||
+@enduml

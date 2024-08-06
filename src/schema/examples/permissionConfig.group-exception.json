@@ -1,0 +1,8 @@
+{
+    "defaultSetting": "allow all",
+    "groupExceptions": [
+        {
+            "groupName": "isInsuredPerson"
+        }
+    ]
+}

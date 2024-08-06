@@ -1,0 +1,81 @@
+/' 
+# Sequence Diagram
+# Name: Organisation  Sichtbarkeit für Versicherte setzen
+'/
+
+@startuml
+skinparam sequenceMessageAlign direction
+skinparam minClassWidth 200
+skinparam BoxPadding 1
+skinparam sequenceReferenceHeaderBackgroundColor palegreen
+scale max 2048 width
+
+skinparam sequence {
+ArrowColor black
+ArrowFontSize 17
+ActorBorderColor black
+LifeLineBorderColor black
+LifeLineBackgroundColor Gainsboro
+
+ParticipantBorderColor Motivation
+ParticipantBackgroundColor Motivation
+ParticipantFontSize 20
+ParticipantFontColor black
+ParticipantBorderColor Black
+
+ActorBackgroundColor Gainsboro
+ActorFontColor black
+ActorFontSize 20
+}
+
+autonumber
+
+actor U as "Akteur in der Rolle\nOrg-Admin"
+box <size:18>Endgerät</size> #WhiteSmoke
+  participant C as "TI-Messenger-Client"
+end box
+
+box <size:18>VZD-FHIR-Directory</size> #WhiteSmoke
+  participant FP as "FHIR-Proxy"
+  participant VZD as "FHIR-Directory"
+end box
+
+group <size:16>VZD-FHIR-Directory Eintrag</size>
+  |||
+  group <size:16>Sichtbarkeit für Versicherte abschalten</size>
+  U->C: Deaktiviere Sichtbarkeit für Versicherte
+  
+  Activate C
+  |||
+  C->FP: PUT /owner/Endpoint/?... \nSetze Endpoint.extension:endpointVisibility auf "code": "hide-versicherte"
+    Activate FP
+  FP->FP: prüfe \nowner-accesstoken
+  FP->VZD: HTTPS Forward
+    Activate VZD
+  VZD-->FP: result body json
+    Deactivate VZD
+  FP-->C: result body json
+    Deactivate FP
+  |||
+  C->U: Der Endpunkt mit der MXID <MXID> ist für Versicherte nicht mehr sichtbar. 
+  Deactivate C
+  end
+  |||
+  group <size:16>Sichtbarkeit für Versicherte anschalten</size>
+  |||
+  U->C: Aktiviere Sichtbarkeit für Versicherte
+  Activate C
+  C->FP: PUT /owner/Endpoint/?... \nEntferne Endpoint.extension:endpointVisibility 
+    Activate FP
+  FP->FP: prüfe \nowner-accesstoken
+  FP->VZD: HTTPS Forward
+    Activate VZD
+  VZD-->FP: result body json
+    Deactivate VZD
+  FP-->C: result body json
+    Deactivate FP
+  |||
+  C->U: Der Endpunkt mit der MXID <MXID> ist für Versicherte wieder sichtbar.
+  Deactivate C
+  end
+@enduml

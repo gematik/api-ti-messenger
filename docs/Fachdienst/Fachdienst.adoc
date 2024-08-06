@@ -23,11 +23,7 @@ IMPORTANT: Die Seite ergänzt die Spezifikation gemäß link:https://fachportal.
 
 Der *TI-Messenger-Fachdienst* besteht aus unterschiedlichen Teilkomponenten und Schnittstellen. Die nachfolge Abbildung verdeutlicht den Zusammenhang zwischen den Komponenten und den Kommunikationsschnittstellen. 
 
-++++
-<p align="left">
-  <img width="100%" src=../../images/I_Fachdienst.png>
-</p>
-++++
+image::I_Fachdienst.png[width="100%"]
 
 Der *TI-Messenger-Fachdienst* besteht aus den folgenden Teilkomponenten :  
 

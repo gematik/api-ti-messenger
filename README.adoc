@@ -14,10 +14,13 @@ ifndef::env-github[:source-style: source]
 
 image::meta/gematik_logo.svg[gematik,width="70%"]
 
-image:https://img.shields.io/badge/Release%20Notes-v1.1.1&hyphen;4-red?style=plastic&logo=github&logoColor=red[link="ReleaseNotes.md"] +
-image:https://img.shields.io/badge/I_TiMessengerContactManagement-v1.0.2-blue?style=plastic&logo=github&logoColor=blue[link=/src/openapi/TiMessengerContactManagement.yaml"] +
-image:https://img.shields.io/badge/TiMessengerTestDriver-v0.9.4-purple?style=plastic&logo=github&logoColor=purple[link="/src/openapi/TiMessengerTestTreiber.yaml"]
-image:https://img.shields.io/badge/TiMessengerTestSuite-v0.9.7-purple?style=plastic&logo=github&logoColor=purple[link="https://github.com/gematik/TI-Messenger-Testsuite"] +
+image:https://github.com/gematik/api-ti-messenger/actions/workflows/lint.yml/badge.svg?branch=tim-epa-fdv[link="https://github.com/gematik/api-ti-messenger/actions/workflows/lint.yml"]
+image:https://github.com/gematik/api-ti-messenger/actions/workflows/generate-images.yml/badge.svg?branch=tim-epa-fdv[link="https://github.com/gematik/api-ti-messenger/actions/workflows/generate-images.yml"]
+
+image:https://img.shields.io/badge/Release%20Notes-v1.1.1-red?style=plastic&logo=github&logoColor=red[link="ReleaseNotes.md"] +
+image:https://img.shields.io/badge/I_TiMessengerContactManagement-v1.0.1-blue?style=plastic&logo=github&logoColor=blue[link=/src/openapi/TiMessengerContactManagement.yaml"] +
+image:https://img.shields.io/badge/TiMessengerTestDriver-v0.9.2-purple?style=plastic&logo=github&logoColor=purple[link="/src/openapi/TiMessengerTestTreiber.yaml"]
+image:https://img.shields.io/badge/TiMessengerTestSuite-v0.9.2-purple?style=plastic&logo=github&logoColor=purple[link="https://github.com/gematik/TI-Messenger-Testsuite"] +
 image:https://img.shields.io/badge/TI&hyphen;Messenger&hyphen;Dienst-v1.1.1-green?style=plastic&logo=github&logoColor=green[link="https://fachportal.gematik.de/fachportal-import/files/gemSpec_TI-Messenger-Dienst_V1.1.1.pdf"]
 image:https://img.shields.io/badge/TI&hyphen;Messenger&hyphen;FD-v1.1.1-green?style=plastic&logo=github&logoColor=green[link="https://fachportal.gematik.de/fachportal-import/files/gemSpec_TI-Messenger-FD_V1.1.1.pdf"]
 image:https://img.shields.io/badge/TI&hyphen;Messenger&hyphen;Client-v1.1.1-green?style=plastic&logo=github&logoColor=green[link="https://fachportal.gematik.de/fachportal-import/files/gemSpec_TI-Messenger-Client_V1.1.1.pdf"] +
@@ -46,11 +49,7 @@ Für die Dokumentation des *TI-Messenger-Dienstes* werden in GitHub die folgende
 == Systemübersicht
 Die folgende Abbildung gibt einen Überblick über die Systemarchitektur des *TI-Messenger-Dienst* v1.1.1 insbesondere auf die Schnittstellen zwischen den Komponenten, die in den folgenden Kapiteln weiter betrachtet werden. 
 
-++++
-<p align="left">
-  <img width="100%" src=./images/System_overview.png>
-</p>
-++++
+image::System_overview.png[width="100%"]
 
 TIP: Auf die Schnittstellen zur Autentisierung am *Auth-Service* des *VZD-FHIR-Directory* wird in der oben gezeigten Abbildung verzichtet. Die Informationen hierzu können in dem entsprechenden Kapitel für das *VZD-FHIR-Directory* link:https://github.com/gematik/api-vzd/blob/gemILF_VZD_FHIR_Directory/1.0.1/docs/FHIR_VZD_HOWTO_Authenticate.adoc#2-fhirdirectoryauthenticationapis[hier] nachgelesen werden.
 
@@ -95,10 +94,11 @@ TI-Messenger Dokumentation
 |   ├──── link:docs/IDP[IDP]
 |   ├──── link:docs/Primaersystem[Primaersystem]
 |   ├──── link:docs/anwendungsfaelle[Anwendungsfälle]
+|   ├──── link:docs/anwendungsfaelle/COM-chatbot.adoc[Chatbot]
+|   ├──── link:docs/Test/Test.adoc[Testkonzept]
 |   └──── link:docs/FAQ[FAQ]
 ├─ link:images[images] (Bildarchiv)
-│   └──── link:images/diagrams[diagrams] (gerenderte Diagramme)
-│        └── link:images/diagrams/TI-Messenger-Dienst/Ressourcen[Ressourcen] (plantuml-gerenderte Bilder)
+│   └──── link:images/generated[generated] (draw.io & PlantUML gerenderte Bilder)
 ├─ link:samples[samples] (Codebeispiele, Postman Collections, etc)
 ├─ link:src[src] (Quellen)
 │   ├──── link:src/drawio[drawio] (Quellen der drawio-Diagramme)
@@ -150,10 +150,11 @@ https://gematikde.sharepoint.com/:w:/s/PTNeo/EczX7AFGfBdNrCYghzGsHz4BbSoYhV63QMm
 https://gematikde.sharepoint.com/:w:/s/PTNeo/ETwc10F5Ha1KmlM8NEsetl8BtEumSDgu56AK-PNiZ0-e1Q?e=ySZROI[- Welcome Package &#91;EN&#93;] +
 https://gematikde.sharepoint.com/sites/EXTAuthenticator/Freigegebene%20Dokumente/Forms/AllItems.aspx?id=%2Fsites%2FEXTAuthenticator%2FFreigegebene%20Dokumente%2FVer%C3%B6ffentlichte%20Version%20%2D%20gematik%20Authenticator&p=true&ga=1[- gematik Authenticator] +
 https://github.com/gematik/TI-Messenger-Testsuite[- TI-Messenger-Testsuite] +
+link:docs/samples[- Codebeispiele & Requestsammlungen] +
 link:docs/FAQ/FAQ.adoc[- Fragen und Antworten zur aktuellen Spezifikation &#91;FAQ&#93;]
 
 *Referenz-Implementierungen* +
-- [coming soon]
+- [comming soon]
 
 == Lizenzbedingungen
 Copyright (c) 2023 gematik GmbH

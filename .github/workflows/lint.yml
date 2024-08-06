@@ -1,0 +1,50 @@
+name: Lint
+
+on:
+  pull_request:
+  push:
+    branches:
+    - main
+    - tim-epa-fdv
+  workflow_dispatch:
+
+jobs:
+  asciidoc:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Lint
+        uses: gematik/github-image-actions/.github/actions/lint-asciidoc@0.1.0
+
+  drawio:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Lint
+        uses: gematik/github-image-actions/.github/actions/lint-drawio@0.1.0
+
+  jsonschema:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Lint
+        uses: ./.github/actions/lint-jsonschema
+
+  plantuml:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Lint
+        uses: gematik/github-image-actions/.github/actions/lint-plantuml@0.1.0
