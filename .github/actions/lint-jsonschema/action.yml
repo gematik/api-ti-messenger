@@ -70,7 +70,7 @@ runs:
 
             if [[ "$location" == http* ]]; then
               if ! curl --head --silent --fail "$location" 2>&1 > /dev/null; then
-                err "$file references non-existent image $location"
+                err "$file references non-existent location $location"
                 rc=1
               fi
             else
@@ -78,7 +78,7 @@ runs:
               if [[ "$location" == /* ]]; then
                 path=$(git rev-parse --show-toplevel)/$location
               fi
-              if [[ ! -f "$path" ]]; then
+              if [[ ! -e "$path" ]]; then
                 err "$file references non-existent location $location"
                 rc=1
               fi
