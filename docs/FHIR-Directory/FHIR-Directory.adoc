@@ -73,9 +73,9 @@ Der *FHIR-Proxy* gibt Zugriff auf das *FHIR-Directory* unter Vorlage eines valid
  
 * https://github.com/gematik/api-vzd/blob/gemILF_VZD_FHIR_Directory/1.0.1/docs/FHIR_VZD_HOWTO_Provider.adoc#2-fhirdirectoryproviderapi[/tim-provider-services]
 
-* https://github.com/gematik/api-vzd/blob//1.0.1/docs/FHIR_VZD_HOWTO_Search.adoc#21-fhirdirectorysearchapi-search-for-practitioners-and-organizations[/search]
+* https://github.com/gematik/api-vzd/blob/gemILF_VZD_FHIR_Directory/1.0.1/docs/FHIR_VZD_HOWTO_Search.adoc#21-fhirdirectorysearchapi-search-for-practitioners-and-organizations[/search]
 
-* https://github.com/gematik/api-vzd/blob//1.0.1/docs/FHIR_VZD_HOWTO_Owner.adoc#2-fhirdirectoryownerapi[/owner]
+* https://github.com/gematik/api-vzd/blob/gemILF_VZD_FHIR_Directory/1.0.1/docs/FHIR_VZD_HOWTO_Owner.adoc#2-fhirdirectoryownerapi[/owner]
 
 TIP: Die Anbieter eines *TI-Messenger-Fachdienstes* nutzen die Schnittstelle `/tim-provider-services`, um die Föderationsliste abzufragen und um die Domains der von ihnen betriebenen *Messenger-Services* als Teil der TI-Messenger Föderation zu verwalten.
 
