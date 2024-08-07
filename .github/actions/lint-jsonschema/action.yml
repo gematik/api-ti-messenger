@@ -83,7 +83,7 @@ runs:
                 rc=1
               fi
             fi
-          done < <(grep -oE "link:+[^\[]*" "$(basename "$file")" | sed -E "s/^link:+//g")
+          done < <(grep -oE "link:+[^#\[]*" "$(basename "$file")" | sed -E "s/^link:+//g")
 
           popd > /dev/null
         done < <(find . -type f -name "*.adoc")
