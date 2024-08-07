@@ -74,7 +74,11 @@ runs:
                 rc=1
               fi
             else
-              if [[ ! -f "$location" ]]; then
+              path=$location
+              if [[ "$location" == /* ]]; then
+                path=$(git rev-parse --show-toplevel)/$location
+              fi
+              if [[ ! -f "$path" ]]; then
                 err "$file references non-existent location $location"
                 rc=1
               fi
