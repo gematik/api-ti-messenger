@@ -50,3 +50,38 @@ runs:
         done < <(find "$EXAMPLES_ROOT" -name "*.json")
 
         exit $rc
+
+    - name: Verify links
+      shell: bash
+      run: |
+        function err {
+          >&2 echo -e "\033[0;31m$@\033[0m"
+        }
+
+        rc=0
+
+        while read -r file; do
+          echo "Checking $file"
+
+          pushd "$(dirname "$file")" > /dev/null
+
+          while read -r location; do
+            echo "Checking location $location"
+
+            if [[ "$location" == http* ]]; then
+              if ! curl --head --silent --fail "$location" 2>&1 > /dev/null; then
+                err "$file references non-existent image $location"
+                rc=1
+              fi
+            else
+              if [[ ! -f "$location" ]]; then
+                err "$file references non-existent location $location"
+                rc=1
+              fi
+            fi
+          done < <(grep -oE "link:+[^\[]*" "$(basename "$file")" | sed -E "s/^link:+//g")
+
+          popd > /dev/null
+        done < <(find . -type f -name "*.adoc")
+
+        exit $rc
