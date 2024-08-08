@@ -65,7 +65,7 @@ paths:
   /domain/findByIk:
     parameters:
       - in: query
-        name: iknumber
+        name: ikNumber
         description: "IK number to lookup the domain for."
         required: true
         schema:
