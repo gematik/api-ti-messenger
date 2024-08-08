@@ -31,7 +31,7 @@ externalDocs:
   url: https://github.com/gematik/api-ti-messenger
 
 servers:
-  - url: https://{serverDomain}/tim-information/v1.0.0
+  - url: https://{serverDomain}/tim-information
     variables:
       serverDomain:
         description: The domain of the server
@@ -62,7 +62,7 @@ paths:
         default:
           $ref: "#/components/responses/DefaultResponse"
 
-  /domain/findByIk:
+  /v1/domain/findByIk:
     parameters:
       - in: query
         name: ikNumber
