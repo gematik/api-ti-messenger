@@ -74,7 +74,7 @@ paths:
       tags:
         - lookUpDomain
       summary: "Find domain by IK number"
-      description: "Returns the domain that hosts users which belong to the given ik number."
+      description: "Returns the domain that hosts users which belong to the given IK number."
       operationId: getDomain
       responses:
         "200":
