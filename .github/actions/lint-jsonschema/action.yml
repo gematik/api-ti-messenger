@@ -74,10 +74,12 @@ runs:
                 rc=1
               fi
             else
-              path=$location
+              # Strip fragments and prefix absolute paths with repo root
+              path=${location/\#*/}
               if [[ "$location" == /* ]]; then
                 path=$(git rev-parse --show-toplevel)/$location
               fi
+
               if [[ ! -e "$path" ]]; then
                 err "$file references non-existent location $location"
                 rc=1
