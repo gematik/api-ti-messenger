@@ -77,11 +77,11 @@ runs:
                 if ! curl --head --silent --fail "$location" 2>&1 > /dev/null; then
                   if ! curl --silent --fail "$location" 2>&1 > /dev/null; then
                     # Some URLs are examples or the endpoints helpfully support neither OPTIONS nor HEAD
-                    if [[ "$location" =~ .*example.* ]] || \
-                       [[ "$location" = https://idp-ref.app.ti-dienste.de/auth ]] || \
-                       [[ "$location" = https://idp.app.ti-dienste.de/auth ]] || \
-                       [[ "$location" = https://idp-ref.app.ti-dienste.de/token ]] || \
-                       [[ "$location" = https://idp.app.ti-dienste.de/token ]] || \
+                    if [[ "$location" = *example* ]] || \
+                       [[ "$location" = https://idp-ref.app.ti-dienste.de/auth* ]] || \
+                       [[ "$location" = https://idp.app.ti-dienste.de/auth* ]] || \
+                       [[ "$location" = https://idp-ref.app.ti-dienste.de/token* ]] || \
+                       [[ "$location" = https://idp.app.ti-dienste.de/token* ]] || \
                        [[ "$location" = https://idp-ref.app.ti-dienste.de ]];
                     then
                       warn "$file references non-verifiable location $location"
