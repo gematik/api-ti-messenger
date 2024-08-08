@@ -24,7 +24,7 @@ Der zentrale *IDP-Dienst* der gematik (*[gemSpec_IDP_Dienst]*) ermöglicht die s
 In den folgenden Kapiteln werden die notwendigen Maßnahmen / Abläufe beschrieben, um die in der Spezifikation geforderte Authentifizierung via OpenID Connect durchführen zu können. 
 
 == Registrierung der Relying Party am IDP-Dienst
-Im Rahmen des *TI-Messenger-Dienstes* ist es notwendig, dass der *TI-Messenger-Anbieter* einer *Relying Party* (*Registrierungs-Dienst*) diesen beim zentralen *IDP-Dienst* der gematik registriert, um von diesem `ID_TOKEN` ausgestellt zu bekommen. Die Registrierung der *Relying Party* erfolgt hierbei als organisatorischer Prozess (siehe bitte https://gematikde.sharepoint.com/:w:/s/PTNeo/EczX7AFGfBdNrCYghzGsHz4BbSoYhV63QMmDCdz7x9zLpg?e=7wG3c[Welcome Package] 5. Schritt). 
+Im Rahmen des *TI-Messenger-Dienstes* ist es notwendig, dass der *TI-Messenger-Anbieter* einer *Relying Party* (*Registrierungs-Dienst*) diesen beim zentralen *IDP-Dienst* der gematik registriert, um von diesem `ID_TOKEN` ausgestellt zu bekommen. Die Registrierung der *Relying Party* erfolgt hierbei als organisatorischer Prozess. Weitere Information können dem im https://fachportal.gematik.de/anwendungen/ti-messenger[Fachportal] bereitgestelltem Welcome Package (Schritt 5) entnommen werden.
 
 Bei der Registrierung der *Relying Party* muss der *TI-Messenger-Anbieter* die Adresse(n) (`redirect_uri`) der gematik mitteilen. Zu der `redirect_uri` wird eine `client_id` für die *Relying Party* registriert. Die `client_id` wird von der gematik vergeben und nach Abschluss der Registrierung dem *TI-Messenger-Anbieter* mitgeteilt.  
  
