@@ -81,7 +81,7 @@ Für die Signatur des `RegService-OpenID-Token` ist der private Schlüssel des l
 TIP: *VZD-FHIR-Directory* Endpunkte: +
 - TU: https://fhir-directory-test.vzd.ti-dienste.de/owner-authenticate +
 - RU: https://fhir-directory-ref.vzd.ti-dienste.de/owner-authenticate +
-- PU: https://vzd-fhir-directory.vzd.ti-dienste.de/owner-authenticate 
+- PU: https://fhir-directory.vzd.ti-dienste.de/owner-authenticate 
 
 === Austausch des RegService-OpenID-Token
 Das `RegService-OpenID-Token` kann am `/owner-authenticate`-Endpunkt des *Auth-Service* gegen ein `owner-accesstoken` eingetauscht werden. 

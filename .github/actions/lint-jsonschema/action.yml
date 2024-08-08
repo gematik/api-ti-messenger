@@ -54,6 +54,10 @@ runs:
     - name: Verify links
       shell: bash
       run: |
+        function warn {
+          >&2 echo -e "\033[0;33m$@\033[0m"
+        }
+
         function err {
           >&2 echo -e "\033[0;31m$@\033[0m"
         }
@@ -72,8 +76,19 @@ runs:
               if ! curl -X OPTIONS --silent --fail "$location" 2>&1 > /dev/null; then
                 if ! curl --head --silent --fail "$location" 2>&1 > /dev/null; then
                   if ! curl --silent --fail "$location" 2>&1 > /dev/null; then
-                    err "$file references non-existent location $location"
-                    rc=1
+                    # Some URLs are examples or the endpoints helpfully support neither OPTIONS nor HEAD
+                    if [[ "$location" =~ *example* ]] || \
+                       [[ "$location" = https://idp-ref.app.ti-dienste.de/auth ]] || \
+                       [[ "$location" = https://idp.app.ti-dienste.de/auth ]] || \
+                       [[ "$location" = https://idp-ref.app.ti-dienste.de/token ]] || \
+                       [[ "$location" = https://idp.app.ti-dienste.de/token ]] || \
+                       [[ "$location" = https://idp-ref.app.ti-dienste.de ]];
+                    then
+                      warn "$file references non-verifiable location $location"warn 
+                    else
+                      err "$file references non-existent location $location"
+                      rc=1
+                    fi
                   fi
                 fi
               fi
