@@ -70,8 +70,10 @@ runs:
 
             if [[ "$location" == http* ]]; then
               if ! curl --head --silent --fail "$location" 2>&1 > /dev/null; then
-                err "$file references non-existent location $location"
-                rc=1
+                if ! curl --silent --fail "$location" 2>&1 > /dev/null; then
+                  err "$file references non-existent location $location"
+                  rc=1
+                fi
               fi
             else
               # Strip fragments and prefix absolute paths with repo root
