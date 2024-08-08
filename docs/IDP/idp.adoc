@@ -112,7 +112,7 @@ PU: https://idp.app.ti-dienste.de/auth
 RU: https://idp-ref.app.ti-dienste.de/token +
 PU: https://idp.app.ti-dienste.de/token
 
-In den folgenden Unterkapiteln werden die Endpunkte weiter beschrieben. 
+In den folgenden Unterkapiteln werden die Endpunkte weiter beschrieben.
 
 ==== Discovery-Endpunkt
 Das Discovery Dokument ist ein Base64 kodiertes Metadatendokument, das den Großteil der Informationen enthält, die für eine Anwendung zum Durchführen einer Anmeldung erforderlich sind. Hierzu gehören Informationen wie z. B. die zu verwendenden Schnittstellen und der Speicherort der öffentlichen Signaturschlüssel des *IDP-Dienstes*.
