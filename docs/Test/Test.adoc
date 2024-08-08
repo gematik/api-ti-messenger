@@ -7,7 +7,6 @@ ifdef::env-github[]
 endif::[]
 
 :imagesdir: ../../images
-:docsdir: ../
 :toc: macro
 :toclevels: 6
 :toc-title: Table of Contents

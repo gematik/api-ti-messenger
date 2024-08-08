@@ -5,11 +5,10 @@ on:
   push:
     branches:
     - main
-    - tim-epa-fdv
   workflow_dispatch:
 
 jobs:
-  asciidoc:
+  asciidoc-images:
     runs-on: ubuntu-latest
 
     steps:
@@ -18,6 +17,16 @@ jobs:
 
       - name: Lint
         uses: gematik/github-image-actions/.github/actions/lint-asciidoc@0.1.0
+
+  asciidoc-links:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Lint
+        uses: ./.github/actions/lint-links
 
   drawio:
     runs-on: ubuntu-latest

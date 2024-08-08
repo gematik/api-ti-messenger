@@ -7,7 +7,6 @@ ifdef::env-github[]
 endif::[]
 
 :imagesdir: ../../images
-:docsdir: ../../docs
 :toc: macro
 :toclevels: 5
 :toc-title: Inhaltsverzeichnis
@@ -53,8 +52,8 @@ Die abstrakte Schnittstelle `I_requestToken` wird vom *Registrierungs-Dienst* zu
 === Vorbedingungen
 Damit der *Registrierungs-Dienst* in die Lage versetzt wird, `RegService-OpenID-Token` ausstellen zu können, müssen die folgenden Vorbedingungen erfüllt werden. 
 
-* link:{docsdir}/Fachdienst/Fachdienst.adoc#213-erstellung-des-signaturzertifikates-f%C3%BCr-den-anbeiter[Bekanntmachung des Registrierungs-Dienstes] beim Anbieter des *VZD-FHIR-Directory* und
-* Sicherung der `TelematikID` und der `ProfessionOID` der Organisation im Rahmen der link:{docsdir}/Fachdienst/Registrierungsdienst.adoc#authentisieren-einer-organisation[Bestellung des TI-Messenger-Dienstes]
+* link:/docs/Fachdienst/Fachdienst.adoc#213-erstellung-des-signaturzertifikates-f%C3%BCr-den-anbeiter[Bekanntmachung des Registrierungs-Dienstes] beim Anbieter des *VZD-FHIR-Directory* und
+* Sicherung der `TelematikID` und der `ProfessionOID` der Organisation im Rahmen der link:/docs/Fachdienst/Registrierungsdienst.adoc#authentisieren-einer-organisation[Bestellung des TI-Messenger-Dienstes]
 
 === Aufbau des RegService-OpenID-Token
 Das `RegService-OpenID-Token` ist ein JWT und mit den folgenden Inhalten zu füllen: 
@@ -77,12 +76,12 @@ Das `RegService-OpenID-Token` ist ein JWT und mit den folgenden Inhalten zu fül
 }
 ----
 
-Für die Signatur des `RegService-OpenID-Token` ist der private Schlüssel des link:{docsdir}/Fachdienst/Fachdienst.adoc#213-erstellung-des-signaturzertifikates-f%C3%BCr-den-anbeiter[beantragten Signaturzertifikates] zu verwenden. 
+Für die Signatur des `RegService-OpenID-Token` ist der private Schlüssel des link:/docs/Fachdienst/Fachdienst.adoc#213-erstellung-des-signaturzertifikates-f%C3%BCr-den-anbeiter[beantragten Signaturzertifikates] zu verwenden. 
 
 TIP: *VZD-FHIR-Directory* Endpunkte: +
 - TU: https://fhir-directory-test.vzd.ti-dienste.de/owner-authenticate +
 - RU: https://fhir-directory-ref.vzd.ti-dienste.de/owner-authenticate +
-- PU: https://vzd-fhir-directory.vzd.ti-dienste.de/owner-authenticate 
+- PU: https://fhir-directory.vzd.ti-dienste.de/owner-authenticate 
 
 === Austausch des RegService-OpenID-Token
 Das `RegService-OpenID-Token` kann am `/owner-authenticate`-Endpunkt des *Auth-Service* gegen ein `owner-accesstoken` eingetauscht werden. 
