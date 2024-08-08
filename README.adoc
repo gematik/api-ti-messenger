@@ -101,11 +101,10 @@ TI-Messenger Dokumentation
 │   └──── link:images/generated[generated] (draw.io & PlantUML gerenderte Bilder)
 ├─ link:samples[samples] (Codebeispiele, Postman Collections, etc)
 ├─ link:src[src] (Quellen)
-│   ├──── link:src/drawio[drawio] (Quellen der drawio-Diagramme)
-│   ├──── link:src/openapi[openapi] (Schnittstellenbeschreibungen)
-│   │    ├── link:src/openapi/TiMessengerContactManagement.yaml[TiMessengerContactManagement.yaml] (API-Beschreibung der Freigabeliste)
-│   │    └── link:src/openapi/TiMessengerTestTreiber.yaml[TiMessengerTestTreiber.yaml] (API-Beschreibung der TestTreiber-Schnittstelle)
-│   └──── link:src/plantuml[plantuml] (Quellen der plantuml-Diagramme)
+│   ├──── link:src/images[images] (Quellen der draw.io- und PlantUML-Diagramme)
+│   └──── link:src/openapi[openapi] (Schnittstellenbeschreibungen)
+│        ├── link:src/openapi/TiMessengerContactManagement.yaml[TiMessengerContactManagement.yaml] (API-Beschreibung der Freigabeliste)
+│        └── link:src/openapi/TiMessengerTestTreiber.yaml[TiMessengerTestTreiber.yaml] (API-Beschreibung der TestTreiber-Schnittstelle)
 ├── link:README.adoc[README.adoc]
 ├── link:CODE_OF_CONDUCT.md[CODE_OF_CONDUCT.md]
 ├── link:CONTRIBUTING.md[CONTRIBUTING.md]
@@ -133,9 +132,6 @@ Die nachfolgende Tabelle enthält die in der vorliegenden Online Dokumentation r
 Hersteller und Anbieter eines *TI-Messenger-Dienstes* können das von der gematik im https://fachportal.gematik.de/anwendungen/ti-messenger[Fachportal] bereitgestellte Welcome Package zum Onboarding nutzen. Dieses Welcome Package ist als "Schritt-für-Schritt"-Anleitung gedacht, um Hersteller und Anbieter beim Onboarding des *TI-Messenger-Dienstes* zu unterstützen.
 
 == Weiterführende Seiten
-*Anwendungsfälle* +
-link:docs/anwendungsfaelle/TI-Messenger-Anwendungsfaelle.adoc[- Anwendungsfälle] 
-
 *Produkttypen* +
 link:docs/Fachdienst/Fachdienst.adoc[- TI-Messenger-Fachdienst] +
 link:docs/Client/Client.adoc[- TI-Messenger-Client] +
@@ -147,9 +143,8 @@ link:docs/Primaersystem/Primaersystem.adoc[- Primärsystem] +
 
 *Diverses* +
 https://fachportal.gematik.de/anwendungen/ti-messenger[- TI-Messenger im gematik Fachportal]
-https://gematikde.sharepoint.com/sites/EXTAuthenticator/Freigegebene%20Dokumente/Forms/AllItems.aspx?id=%2Fsites%2FEXTAuthenticator%2FFreigegebene%20Dokumente%2FVer%C3%B6ffentlichte%20Version%20%2D%20gematik%20Authenticator&p=true&ga=1[- gematik Authenticator] +
+https://fachportal.gematik.de/hersteller-anbieter/komponenten-dienste/authenticator[- Authenticator im gematik Fachportal] +
 https://github.com/gematik/TI-Messenger-Testsuite[- TI-Messenger-Testsuite] +
-link:docs/samples[- Codebeispiele & Requestsammlungen] +
 link:docs/FAQ/FAQ.adoc[- Fragen und Antworten zur aktuellen Spezifikation &#91;FAQ&#93;]
 
 *Referenz-Implementierungen* +
