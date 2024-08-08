@@ -63,19 +63,19 @@ Weitere Informationen zu den Verzeichnistypen können link:https://github.com/ge
 
 == OAuth-Service
 Der *OAuth-Service* stellt ein `ti-provider-accesstoken` aus, welches am `/ti-provider-authenticate`-Endpunkt übergeben werden muss. Hierfür muss sich ein Anbieter eines *TI-Messenger-Fachdienstes* mittels seiner link:/docs/Fachdienst/Fachdienst.adoc#214-beantragung-der-ti-provider-credentials-am-vzd-fhir-directory[Zugangsdaten] am OAuth-Service authentisieren. 
-Der Aufruf des Endpunktes kann https://github.com/gematik/api-vzd/blob/gemILF_VZD_FHIR_Directory/1.0.1/docs/FHIR_VZD_HOWTO_Authenticate.adoc#22-authenticate-for-the-provider-api[hier] nachgelesen werden.
+Der Aufruf des Endpunktes kann https://github.com/gematik/api-vzd/blob/gemILF_VZD_FHIR_Directory/1.2.2/docs/FHIR_VZD_HOWTO_Authenticate.adoc#authenticate-for-the-provider-api[hier] nachgelesen werden.
 
 == Auth-Service
-Der *Auth-Service* stellt Zugriffstoken aus, die für den Zugriff auf die Endpunkte am *FHIR-Proxy* benötigt werden. Der Aufruf der Endpunkte am *Auth-Service* ist link:https://github.com/gematik/api-vzd/blob/gemILF_VZD_FHIR_Directory/1.0.1/docs/FHIR_VZD_HOWTO_Authenticate.adoc#2-fhirdirectoryauthenticationapis[dort] beschrieben. 
+Der *Auth-Service* stellt Zugriffstoken aus, die für den Zugriff auf die Endpunkte am *FHIR-Proxy* benötigt werden. Der Aufruf der Endpunkte am *Auth-Service* ist link:https://github.com/gematik/api-vzd/blob/gemILF_VZD_FHIR_Directory/1.2.2/docs/FHIR_VZD_HOWTO_Authenticate.adoc#fhirdirectoryauthenticationapis[dort] beschrieben.
 
 == FHIR-Proxy
 Der *FHIR-Proxy* gibt Zugriff auf das *FHIR-Directory* unter Vorlage eines validen `ACCESS_TOKEN` und somit auf die FHIR-Ressourcen. Die vom *FHIR-Proxy* zur Verfügung gestellten Endpunkte werden für die Suche und Pflege von FHIR-Ressourcen verwendet sowie zur Pflege eigener TIM Provider Einträge. Der Aufruf der Endpunkte am *FHIR-Proxy* sind der folgenden Aufzählung zu entnehmen:
  
-* https://github.com/gematik/api-vzd/blob/gemILF_VZD_FHIR_Directory/1.0.1/docs/FHIR_VZD_HOWTO_Provider.adoc#2-fhirdirectoryproviderapi[/tim-provider-services]
+* https://github.com/gematik/api-vzd/blob/gemILF_VZD_FHIR_Directory/1.2.2/docs/FHIR_VZD_HOWTO_Provider.adoc#fhirdirectoryproviderapi[/tim-provider-services]
 
-* https://github.com/gematik/api-vzd/blob//1.0.1/docs/FHIR_VZD_HOWTO_Search.adoc#21-fhirdirectorysearchapi-search-for-practitioners-and-organizations[/search]
+* https://github.com/gematik/api-vzd/blob/gemILF_VZD_FHIR_Directory/1.2.2/docs/FHIR_VZD_HOWTO_Search.adoc#fhirdirectorysearchapi-search-for-practitioners-and-organizations[/search]
 
-* https://github.com/gematik/api-vzd/blob//1.0.1/docs/FHIR_VZD_HOWTO_Owner.adoc#2-fhirdirectoryownerapi[/owner]
+* https://github.com/gematik/api-vzd/blob/gemILF_VZD_FHIR_Directory/1.2.2/docs/FHIR_VZD_HOWTO_Owner.adoc#fhirdirectoryownerapi[/owner]
 
 TIP: Die Anbieter eines *TI-Messenger-Fachdienstes* nutzen die Schnittstelle `/tim-provider-services`, um die Föderationsliste abzufragen und um die Domains der von ihnen betriebenen *Messenger-Services* als Teil der TI-Messenger Föderation zu verwalten.
 

@@ -33,7 +33,7 @@ Die abstrakte Schnittstelle `I_Registration` muss die folgenden Funktionalitäte
 
 CAUTION: Für die initiale Registrierung einer Organisation am *TI-Messenger-Fachdienst* ist die Verwendung der SMC-B notwendig und somit die Verwendung von einem Konnektor und Kartenterminal Voraussetzung.
 
-Im folgenden werden die umzusetzenden Funktionalitäten der Schnittstelle beschrieben. 
+Im folgenden werden die umzusetzenden Funktionalitäten der Schnittstelle beschrieben.
 
 === Bereitstellung von Webschnittstellen
 Die von der abstrakten Schnittstelle `I_Registration` angebotene Funktionalität soll als Webschnittstelle bereitgestellt werden, die von einem Akteur über einen Webclient (*Frontend des Registrierungs-Dienstes*) genutzt wird. Diese muss für alle Akteure im Internet verfügbar sein.
@@ -44,8 +44,8 @@ Die abstrakte Schnittstelle `I_Registration` muss es einer Organisation ermögli
 === Bereitstellung eines Messenger-Service
 Nach dem Authentifizierungsvorgang muss das bereitgestellte Admin-Konto verwendet werden, um *Messenger-Services* für die Organisation zu erstellen. Um einen neuen *Messenger-Service* zu erstellen, muss ein *Registrierungs-Dienst*:
 
-. sich gegenüber dem Endpunkt `/tim-provider-services` gemäß https://github.com/gematik/api-vzd/blob/gemILF_VZD_FHIR_Directory/1.0.1/docs/FHIR_VZD_HOWTO_Authenticate.adoc#22-authenticate-for-the-provider-api[Authentisierung für die Anbieter-API] authentisieren und
-. die neue Domäne zur Föderationsliste https://github.com/gematik/api-vzd/blob/gemILF_VZD_FHIR_Directory/1.0.1/docs/FHIR_VZD_HOWTO_Provider.adoc#24-add-own-domain[hinzufügen].
+. sich gegenüber dem Endpunkt `/tim-provider-services` gemäß https://github.com/gematik/api-vzd/blob/gemILF_VZD_FHIR_Directory/1.2.2/docs/FHIR_VZD_HOWTO_Authenticate.adoc#authenticate-for-the-provider-api[Authentisierung für die Anbieter-API] authentisieren und
+. die neue Domäne zur Föderationsliste https://github.com/gematik/api-vzd/blob/gemILF_VZD_FHIR_Directory/1.2.2/docs/FHIR_VZD_HOWTO_Provider.adoc#add-own-domain[hinzufügen].
 
 == Schnittstelle: I_requestToken
 Die abstrakte Schnittstelle `I_requestToken` wird vom *Registrierungs-Dienst* zur Verfügung gestellt, um ein `RegService-OpenID-Token` anzufordern, das gegen ein `owner-accesstoken` am *Auth-Service* des *VZD-FHIR-Directory* ausgetauscht werden kann. Die Schnittstelle ist nur für Akteure in der Rolle "Org-Admin" zugänglich, um im Anschluß die FHIR-Ressourcen der Organisation im *VZD-FHIR-Directory* verwalten zu können.
@@ -86,7 +86,7 @@ TIP: *VZD-FHIR-Directory* Endpunkte: +
 
 === Austausch des RegService-OpenID-Token
 Das `RegService-OpenID-Token` kann am `/owner-authenticate`-Endpunkt des *Auth-Service* gegen ein `owner-accesstoken` eingetauscht werden. 
-Weitere Details sind in link:https://github.com/gematik/api-vzd/blob/gemILF_VZD_FHIR_Directory/1.0.1/docs/FHIR_VZD_HOWTO_Authenticate.adoc#231-authenticate-with-an-regservice-openid-token[Authentisierung RegService-OpenID-Token] beschrieben.
+Weitere Details sind in link:https://github.com/gematik/api-vzd/blob/gemILF_VZD_FHIR_Directory/1.2.2/docs/FHIR_VZD_HOWTO_Authenticate.adoc#authenticate-with-an-regservice-openid-token[Authentisierung RegService-OpenID-Token] beschrieben.
 
 == Schnittstelle: I_internVerification
 Bei der Schnittstelle `I_internVerification` handelt es sich um eine abstrakte Schnittstelle, deren Ausgestaltung dem Hersteller obliegt.
@@ -98,12 +98,12 @@ Die Schnittstelle muss die folgenden Funktionalitäten bereitstellen:
 
 TIP: Die geforderten Funktionalitäten dürfen auch über seperate Schnittstellen zur Verfügung gestellt werden. 
 
-Die umzusetzenden Funktionalitäten werden im folgenden beschrieben. 
+Die umzusetzenden Funktionalitäten werden im folgenden beschrieben.
 
 === Bereitstellung und Aktualisierung der Föderationsliste.
-Um die Zugehörigkeit zur TI-Messenger-Föderation zu verifizieren, muss der *Registrierungs-Dienst* den *Messenger-Proxies* über die abstrakte Schnittstelle `I_internVerification` eine aktuelle Föderationsliste zur Verfügung stellen. Dazu muss der *Registrierungs-Dienst* die Operation `/tim-provider-services/getFederationList` am *FHIR-Proxy* des *VZD-FHIR-Directory* aufrufen, um eine aktuelle Föderationsliste zu erhalten. Diese Schnittstelle ist am *VZD-FHIR-Directory* durch einen `ACCESS_TOKEN` geschützt (https://github.com/gematik/api-vzd/blob/gemILF_VZD_FHIR_Directory/1.0.1/docs/FHIR_VZD_HOWTO_Authenticate.adoc#22-authenticate-for-the-provider-api[provider-accesstoken]). Nach Erhalt des `provider-accesstokens` muss dieses im Authorization Header genutzt werden, um über die Operation https://github.com/gematik/api-vzd/blob/gemILF_VZD_FHIR_Directory/1.0.1/docs/FHIR_VZD_HOWTO_Provider.adoc#22-query-federationlist[getFederationList] eine aktuelle Föderationsliste abzufragen.
+Um die Zugehörigkeit zur TI-Messenger-Föderation zu verifizieren, muss der *Registrierungs-Dienst* den *Messenger-Proxies* über die abstrakte Schnittstelle `I_internVerification` eine aktuelle Föderationsliste zur Verfügung stellen. Dazu muss der *Registrierungs-Dienst* die Operation `/tim-provider-services/getFederationList` am *FHIR-Proxy* des *VZD-FHIR-Directory* aufrufen, um eine aktuelle Föderationsliste zu erhalten. Diese Schnittstelle ist am *VZD-FHIR-Directory* durch einen `ACCESS_TOKEN` geschützt (https://github.com/gematik/api-vzd/blob/gemILF_VZD_FHIR_Directory/1.2.2/docs/FHIR_VZD_HOWTO_Authenticate.adoc#authenticate-for-the-provider-api[provider-accesstoken]). Nach Erhalt des `provider-accesstokens` muss dieses im Authorization Header genutzt werden, um über die Operation https://github.com/gematik/api-vzd/blob/gemILF_VZD_FHIR_Directory/1.2.2/docs/FHIR_VZD_HOWTO_Provider.adoc#query-federationlist[getFederationList] eine aktuelle Föderationsliste abzufragen.
 
-Die aktuelle Struktur der Föderationsliste ist https://github.com/gematik/api-vzd/blob/gemILF_VZD_FHIR_Directory/1.0.1/src/schema/FederationList.json[hier] hinterlegt.
+Die aktuelle Struktur der Föderationsliste ist https://github.com/gematik/api-vzd/blob/gemILF_VZD_FHIR_Directory/1.2.2/src/schema/FederationList.json[hier] hinterlegt.
 
 Im folgenden ist ein Beispiel für den Aufbau der Föderationsliste gezeigt:
 
@@ -154,7 +154,7 @@ a|
 |====
 
 === Berechtigungsprüfung - Stufe 3
-Der *Registrierungs-Dienst* muss den *Messenger-Proxies* über die abstrakte Schnittstelle `I_internVerification` eine Funktion anbieten, mit der die Überprüfung auf `MXID`-Einträge im *VZD-FHIR-Directory* möglich ist. Zur Prüfung muss der *Registrierungs-Dienst* die Operation `whereIs (GET /tim-provider-services/localization)` am *FHIR-Proxy* des *VZD-FHIR-Directory* verwenden. Ein Beispielaufruf ist https://github.com/gematik/api-vzd/blob/gemILF_VZD_FHIR_Directory/1.0.1/docs/FHIR_VZD_HOWTO_Provider.adoc#query-mxid-location[hier] zu finden. 
+Der *Registrierungs-Dienst* muss den *Messenger-Proxies* über die abstrakte Schnittstelle `I_internVerification` eine Funktion anbieten, mit der die Überprüfung auf `MXID`-Einträge im *VZD-FHIR-Directory* möglich ist. Zur Prüfung muss der *Registrierungs-Dienst* die Operation `whereIs (GET /tim-provider-services/localization)` am *FHIR-Proxy* des *VZD-FHIR-Directory* verwenden. Ein Beispielaufruf ist https://github.com/gematik/api-vzd/blob/gemILF_VZD_FHIR_Directory/1.2.2/docs/FHIR_VZD_HOWTO_Provider.adoc#query-mxid-location[hier] zu finden.
 
 TIP: Es kann nur eine `MXID` im URL Format beim Aufruf der Operation `whereIs` übergeben werden.
 
