@@ -81,7 +81,7 @@ runs:
               fi
 
               if [[ ! -e "$path" ]]; then
-                err "$file references non-existent location $location"
+                err "$file references non-existent location $location ($path)"
                 rc=1
               fi
             fi
