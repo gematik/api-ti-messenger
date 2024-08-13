@@ -3,14 +3,12 @@ info:
   title: I_TiMessengerInformation
   description: |
     # Overview
-    This is a TI-Messenger REST interface that provides Informations for the TI-Messenger Client.
+    This is a TI-Messenger REST interface that provides Informations for TI-Messenger Clients.
     # Context
     ## Authentication
     The TI-Messenger-Client uses a Matrix-OpenID-Token from his Messenger-Service for
     authentication on all REST operations. The bearer token can be obtained from the
-    homeserver. (POST /_matrix/client/r0/user/{userId}/openid/request_token).
-
-
+    homeserver. (POST /_matrix/client/v3/user/{userId}/openid/request_token).
     TI-Messenger-Client ---> Messenger-Proxy ---> Homeserver
     ## REST operations
     The interface provides read informations for a TI-Messenger-Client
@@ -33,18 +31,23 @@ externalDocs:
   url: https://github.com/gematik/api-ti-messenger
 
 servers:
-  - url: https://localhost/tim-information/v1.0.0/
+  - url: https://{serverDomain}/tim-information
+    variables:
+      serverDomain:
+        description: The domain of the server
+        default: tobereplaced.de
 tags:
   - name: info
     description: This operation returns meta data about this interface and the status of available resources
-  - name: contacts
-    description: Operations for contact management
+  - name: lookUpDomain
+    description: Operations for domain lookup
 
 paths:
   /:
     get:
       tags:
         - info
+      summary: "Get information about the interface"
       description: Returns the meta data of this interface.
       operationId: getInfo
       responses:
@@ -59,18 +62,19 @@ paths:
         default:
           $ref: "#/components/responses/DefaultResponse"
 
-  /domain/findByIk:
+  /v1/domain/findByIk:
     parameters:
-    - in: query
-      name: iknumber
-      description: "IK number to lookup the domain for."
-      required: true
-      schema:
-        type: string
+      - in: query
+        name: ikNumber
+        description: "IK number to lookup the domain for."
+        required: true
+        schema:
+          type: string
     get:
       tags:
         - lookUpDomain
-      description: "Returns the domain that hosts user which belong to the given ik number."
+      summary: "Find domain by IK number"
+      description: "Returns the domain that hosts users which belong to the given IK number."
       operationId: getDomain
       responses:
         "200":
@@ -83,6 +87,8 @@ paths:
                 example: "gematiker-kk.de"
         "400":
           $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
         "404":
           $ref: "#/components/responses/NotFound"
         default:
@@ -119,7 +125,6 @@ components:
             $ref: "#/components/schemas/Error"
 
   schemas:
-
     InfoObject:
       description: ""
       required:
@@ -131,17 +136,17 @@ components:
         title:
           type: string
           description: "Der Titel der Anwendung"
-          example: "Contact Management des TI-Messengers"
+          example: "Contact Information API des TI-Messengers"
         description:
           type: string
           description: "Short description of the application"
-          example: "Contact Management des TI-Messengers. Betreiber: <Betreibername>"
+          example: "Contact Information API des TI-Messengers. Betreiber: <Betreibername>"
         contact:
           type: string
-          description: "Contact information"
+          description: "Kontaktinformationen des Betreibers"
         version:
           type: string
-          description: "Version der implementierten TiMessengerContactManagement.yaml Schnittstelle (Version der TiMessengerContactManagement.yaml Datei)"
+          description: "Version der implementierten TiMessengerContactInformation.yaml"
           example: "1.0.0"
 
     Error:
@@ -159,11 +164,11 @@ components:
         - errorMessage
 
   securitySchemes:
-    bearerMatrixOpenIdTokenAuth:            # arbitrary name for the security scheme
+    bearerMatrixOpenIdTokenAuth: # arbitrary name for the security scheme
       type: http
       scheme: bearer
-      bearerFormat: JWT    # optional, arbitrary value for documentation purposes
+      bearerFormat: JWT # optional, arbitrary value for documentation purposes
 
 # the security applies to all operations
 security:
-  - bearerMatrixOpenIdTokenAuth: []         # use the same name as above
+  - bearerMatrixOpenIdTokenAuth: [] # use the same name as above
