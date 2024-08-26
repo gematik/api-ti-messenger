@@ -27,7 +27,7 @@ Die folgende Seite gibt einen kurzen Überblick über die Funktionalitäten des 
 Die abstrakte Schnittstelle `I_Registration` muss es einer Organisation ermöglichen sich mittels der SM\(C)-B der Organisation zu authentisieren. Der *Registrierungs-Dienst* kann hierfür einen Prozess mittels OpenID-Connect oder KIM anbieten. 
 
 === Bereitstellung eines Messenger-Service
-Nach erfolgreicher Authentifizierung einer Organisation am *Registrierungs-Dienst* wird ein Admin-Account für die Organisation auf dem Registrierungs-Dienst angelegt.Unter Verwendung des bereitgestellten Admin-Kontos können *Messenger-Services* für die Organisation erstellt werden. Um einen neuen *Messenger-Service* zu erstellen, muss ein *Registrierungs-Dienst*:
+Nach erfolgreicher Authentifizierung einer Organisation am *Registrierungs-Dienst* wird ein Admin-Account für die Organisation auf dem Registrierungs-Dienst angelegt. Unter Verwendung des bereitgestellten Admin-Kontos können *Messenger-Services* für die Organisation erstellt werden. Um einen neuen *Messenger-Service* zu erstellen, muss ein *Registrierungs-Dienst*:
 
 . sich gegenüber dem Endpunkt `/tim-provider-services` gemäß https://github.com/gematik/api-vzd/blob/gemILF_VZD_FHIR_Directory/1.2.2/docs/FHIR_VZD_HOWTO_Authenticate.adoc#authenticate-for-the-provider-api[Authentisierung für die Anbieter-API] authentisieren und
 . die neue Domäne zur Föderationsliste https://github.com/gematik/api-vzd/blob/gemILF_VZD_FHIR_Directory/1.2.2/docs/FHIR_VZD_HOWTO_Provider.adoc#add-own-domain[hinzufügen].
