@@ -18,7 +18,7 @@ toc::[]
 
 = Registrierungs-Dienst
 == Überblick
-Die folgende Seite gibt einen kurzen Überblick über die Funktionalitäten des *Registrierungs-Dienstes* und beschreibt die  Unterschiede für den *Registrierungs-Dienst* unterschiedlichen Produktausprägungen des *TI-Messengers*. Details sind den Spezifikationen auf den link:https://gemspec.gematik.de/[gemspec Pages] der gematik zu entnehmen.  
+Die folgende Seite gibt einen kurzen Überblick über die Funktionalitäten des *Registrierungs-Dienstes* und beschreibt die Unterschiede für den *Registrierungs-Dienst* in unterschiedlichen Produktausprägungen des *TI-Messengers*. Details sind den Spezifikationen auf den link:https://gemspec.gematik.de/[gemspec Pages] der gematik zu entnehmen.  
 
 == Schnittstelle: I_Registration
 Über die Schnittstelle `I_Registration` werden 2 Funktionen bereitgestellt. Zum einen kann die eigene Organisation (z. B. per SM\(C)-B) registriert werden, um einen Admin-Account zu erhalten. Zum anderen können anschließend über die Schnittstelle neue *Messenger-Services* bereitgestellt werden. Die Ausgestaltung des Frontends sowie der Schnittstelle `I_Registration`` ist dem jeweiligen TI-Messenger-Hersteller überlassen. 
