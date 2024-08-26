@@ -33,7 +33,7 @@ Nach erfolgreicher Authentifizierung einer Organisation am *Registrierungs-Diens
 . die neue Domäne zur Föderationsliste https://github.com/gematik/api-vzd/blob/gemILF_VZD_FHIR_Directory/1.2.2/docs/FHIR_VZD_HOWTO_Provider.adoc#add-own-domain[hinzufügen].
 
 TIP: 
-Wenn für die Auflösung der Matrix Domains Redirects verwendet werden, dann müssen verwendeten Redirects ebenfalls in der Föderationsliste hinterlegt werden. Sonst kann der Zugriff auf den */getInfo* Endpunkt durch das *VZD-FHIR-Directory* nicht gewährleistet werden. (Die Firewall des *VZD-FHIR-Directorys* blockiert sonst den Zugriff auf die Redirect Domains, wenn diese nicht in der "Allowlist" werden. Das hinterlegen für die Firewall erfolgt automatisch, wenn die Redirects in der Föderationsliste hinterlegt werden)
+Wenn für die Auflösung der Matrix Domains Redirects verwendet werden, dann müssen diese ebenfalls in der Föderationsliste hinterlegt werden. Sonst kann der Zugriff auf den `/getInfo` Endpunkt durch das *VZD-FHIR-Directory* nicht gewährleistet werden. (Die Firewall des *VZD-FHIR-Directorys* blockiert sonst den Zugriff auf die Redirect Domains, wenn diese nicht in der "Allowlist" hinterlegt werden. Das Hinterlegen für die Firewall erfolgt automatisch, wenn die Redirects in der Föderationsliste hinterlegt werden)
 
 == Schnittstelle: I_Admin
 Über die Schnittstelle `I_Admin` stellt der *Registrierungs-Dienst* dem Akteur in der Rolle *Org-Admin* Funktionen zur Verwaltung der eigenen *Messenger-Services* zur Verfügung.
