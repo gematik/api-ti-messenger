@@ -56,5 +56,5 @@ TIP: *VZD-FHIR-Directory* Endpunkte für den Austausch von `RegService-OpenID-To
 = TI-M ePA Besonderheiten
 
 == Bereitstellung eines Messenger-Service für eine Organisation
-Der *Registrierungs-Dienst* des *TI-M ePA Fachdienstes* darf nur Usern in der Rolle *Org-Admin* einen *Messenger-Service* bereitstellen, die sich mit einer SM\(C)-B für Kostenträger(professionOID 1.2.276.0.76.4.59) authentisiert haben. 
+Der *Registrierungs-Dienst* des *TI-M ePA Fachdienstes* darf nur Usern in der Rolle *Org-Admin* einen *Messenger-Service* bereitstellen, die sich mit einer SM\(C)-B für Kostenträger (professionOID 1.2.276.0.76.4.59) authentisiert haben. 
 
