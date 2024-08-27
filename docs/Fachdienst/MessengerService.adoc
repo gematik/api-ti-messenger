@@ -105,4 +105,4 @@ Ein *TI-M Messenger-Service ePA* soll verhindern, dass ein User in der Rolle *Ve
 - Der *Matrix-Homeserver* muss die Anlage öffentlicher Räume durch einen Akteur in der Rolle Versicherter unterbinden.
 - Der *TI-M Fachdienst ePA* muss Requests zu den Endpunkten für die Profilinformationen mit einer HTTP 403 Response ablehnen, sofern der anfragende Nutzer keine gemeinsamen Räume mit dem angefragten Nutzer hat.
 - Der *TI-M Fachdienst ePA* darf über die user directory search *KEINE* Profile von Nutzern ausliefern, die keine gemeinsamen Räume mit dem anfragenden Nutzer haben.
-- Der *TI-M Fachdienst ePA* muss in regelmäßigen Abständen(konfigurierbares Intervall) lokale Nutzer aus Räumen entfernen, in denen sich nur Versicherte befinden.
+- Der *TI-M Fachdienst ePA* muss in regelmäßigen Abständen (konfigurierbares Intervall) lokale Nutzer aus Räumen entfernen, in denen sich nur Versicherte befinden.
