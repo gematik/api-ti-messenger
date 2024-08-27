@@ -48,7 +48,7 @@ In der Funktion als Server-Server Proxy prüft der Messenger-Proxy alle ausgehen
 Die folgenden Prüfungen sind durch den *Messenger-Proxy* durchzuführen:
 - Bei jedem Event muss der *Messenger-Proxy* die Föderationszugehörigkeit der im Event enthaltenen Matrix-Domains prüfen.
 - Ist auf einem eingehenden Request, im *Authorization-Header* das Attribut `origin` gesetzt, so muss der *Messenger-Proxy* den enthaltenen Servernamen auf Föderationszugehörigkeit prüfen.
-- Ist auf einem ausgehenden Request, im Authorization-Header das Attribut `destination` gesetzt, so muss der *Messenger-Proxy* den enthaltenen Servernamen auf Föderationszugehörigkeit prüfen.
+- Ist auf einem ausgehenden Request, im *Authorization-Header* das Attribut `destination` gesetzt, so muss der *Messenger-Proxy* den enthaltenen Servernamen auf Föderationszugehörigkeit prüfen.
 - Der *Messenger-Proxy* muss bei ausgehender Kommunikation zum Endpunkt `/.well-known/matrix/server` den im Host-Header enthaltenen Servernamen auf Föderationszugehörigkeit prüfen.
 - Der *Messenger-Proxy* muss bei ausgehender Kommunikation auf die Medien-Endpunkte die Pfadkomponente {serverName} auf Föderationszugehörigkeit prüfen
 
