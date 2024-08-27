@@ -44,7 +44,7 @@ Die folgenden Prüfungen sind durch den *Messenger-Proxy* durchzuführen:
 - Der *Messenger-Proxy* muss bei eingehender Kommunikation auf die Medien-Endpunkte die Pfadkomponente {serverName} auf Föderationszugehörigkeit prüfen
 
 ==== Server-Server Prüfungen
-n der Funktion als Server-Server Proxy prüft der Messenger-Proxy alle ausgehenden sowie eingehenden Events. Damit fungiert der Server-Server Proxy sowohl als Forward als auch als Reverse-Proxy. 
+In der Funktion als Server-Server Proxy prüft der Messenger-Proxy alle ausgehenden sowie eingehenden Events. Damit fungiert der Server-Server Proxy sowohl als Forward als auch als Reverse-Proxy. 
 Die folgenden Prüfungen sind durch den *Messenger-Proxy* durchzuführen:
 - Bei jedem Event muss der *Messenger-Proxy* die Föderationszugehörigkeit der im Event enthaltenen Matrix-Domains prüfen.
 - Ist auf einem eingehenden Request, im *Authorization-Header* das Attribut `origin` gesetzt, so muss der *Messenger-Proxy* den enthaltenen Servernamen auf Föderationszugehörigkeit prüfen.
