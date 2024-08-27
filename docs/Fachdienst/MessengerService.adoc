@@ -72,7 +72,7 @@ Eine mögliche Umsetzung wäre die Mandantentrennung über einen Matrix-Server z
 CAUTION: Bei einer logischen Mandantentrennung muss sichergestellt werden, dass die Prüfung der Föderationszugehörigkeit (Zuordnung SM\(C)-B zu Domain) sichergestellt ist und jeder mandantenübergreifende Zugriff verhindert wird.  
 
 == Matrix-Homeserver
-Der *Matrix-Homeserver* ist die zentrale Komponente für die Kommunikation zwischen den Akteuren und stellt den *TI-M Clients* die in der Matrix Spezifikation definierten Endpunkte zur Verfügung. Der Matrix-Homeserver verwaltet die Akteure selbst oder bietet eine Schnittelle für einen externen Identity Provider an, um das Authentifizierungsverfahren der Organisation nachnutzen zu können. 
+Der *Matrix-Homeserver* ist die zentrale Komponente für die Kommunikation zwischen den Akteuren und stellt den *TI-M Clients* die in der Matrix Spezifikation definierten Endpunkte zur Verfügung. Der Matrix-Homeserver verwaltet die Akteure selbst oder bietet eine Schnittstelle für einen externen Identity Provider an, um das Authentifizierungsverfahren der Organisation nachnutzen zu können. 
 
 TIP: Als Referenz für einen Homeserver wird die link:https://github.com/element-hq/synapse[synapse Referenzimplementierung] empfohlen. 
 
