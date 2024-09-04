@@ -11,7 +11,7 @@
                 "block all"
             ]
         },
-        "domainExceptions": {
+        "serverExceptions": {
             "type": "object",
             "description": "The map of servers to in-/exclude. This is a mapping of Matrix server name (https://spec.matrix.org/v1.3/appendices/#server-name) to empty object.",
             "patternProperties": {
