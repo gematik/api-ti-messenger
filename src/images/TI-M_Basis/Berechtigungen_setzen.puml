@@ -8,18 +8,18 @@ start
 if ("Allow all" or "Block all") then (Allow all)
   if(Beschränkungen einrichten) then (Ja)
     if(BlockedUser-Liste bearbeiten) then (Hinzufügen)
-    :User/Domain hinzufügen;
+    :User/Server hinzufügen;
     else (Entfernen)
-    :User/Domain entfernen;
+    :User/Server entfernen;
     endif
   else(Nein)
   endif
 else (Block all)
   if(Erlaubnisse einrichten) then (Ja)
     if(AllowedUser-Liste bearbeiten) then (Hinzufügen)
-    :User/Domain hinzufügen;
+    :User/Server hinzufügen;
     else (Entfernen)
-    :User/Domain entfernen;
+    :User/Server entfernen;
     endif
   else(Nein)
   endif
