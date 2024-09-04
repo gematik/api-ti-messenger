@@ -50,35 +50,16 @@ note over U1, MH1: \n<size:17>Der Akteur A ist erfolgreich beim Messenger Servic
 note over U2, MP2: \n<size:17>Der Akteur B ist erfolgreich beim Messenger Service B angemeldet</size>\n    
 |||
     
-    alt#LightGrey #AliceBlue <size:16>Suche über VZD-FHIR-Directory</size>
+    opt#LightGrey #AliceBlue <size:16>Suche über VZD-FHIR-Directory</size>
       |||
       ref over U1, MH1 : <size:16>Einträge im VZD-FHIR-Directory suchen</size>\n
       |||
-    
-      else <size:16>Direktaustausch über QR-Code Scan</size>
-         |||
-         note over U1, U2: \n<size:16>Akteur A und Akteur B treffen sich persönlich\n
-         |||
-         autonumber
-         |||
-         U2-[#DarkGreen]>C2: QR-Code teilen
-         activate C2
-         U1-[#0000FF]>C1: QR-Code scannen
-         activate C1
-         C1-[#0000FF]>C2: GET /scan
-         C2--[#DarkGreen]>C1: MXID von Akteur B
-         deactivate C2
-         |||
-           group <size:16>opt</size>
-            |||
-            
-             C1->C1: MXID auf \nAllowList \nübernehmen
-          end
-          |||
     end
     |||
     note over U1, MH1: \n<size:17>Ein Chatraum wurde bereits durch den Akteur A eingerichtet.</size>\n
     
+    autonumber
+
     |||
     C1->MP1: POST /_matrix/client/v3/rooms/{roomId}/invite
     activate MP1
