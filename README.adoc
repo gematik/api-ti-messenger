@@ -135,7 +135,7 @@ Hersteller und Anbieter eines *TI-Messenger-Dienstes* können das von der gemati
 *Produkttypen* +
 link:docs/Fachdienst/Fachdienst.adoc[- TI-Messenger-Fachdienst] +
 link:docs/Client/Client.adoc[- TI-Messenger-Client] +
-link:https://github.com/gematik/api-vzd/blob/main/docs/Fachkonzept_FHIR-Directory.adoc[[- VZD-FHIR-Directory] +
+link:https://github.com/gematik/api-vzd/blob/main/docs/Fachkonzept_FHIR-Directory.adoc[- VZD-FHIR-Directory] +
 link:docs/IDP/idp.adoc[- Zentraler IDP-Dienst] +
 
 *Leitfaden für Primärsystemhersteller* +
