@@ -68,9 +68,9 @@ link:docs/Client/Client.adoc[*TI Messenger-Client*] +
 
 * Der *TI-Messenger-Client* basiert auf der `Matrix-Client-Server API`. Er wird durch weitere Funktionsmerkmale erweitert und ruft die Schnittstellen am *TI-Messenger-Fachdienst* sowie am *VZD-FHIR-Directory* auf.
 
-link:docs/FHIR-Directory/FHIR-Directory.adoc[*VZD-FHIR-Directory*] +
+link:https://github.com/gematik/api-vzd/blob/main/docs/Fachkonzept_FHIR-Directory.adoc[*VZD-FHIR-Directory*] +
 
-* Beim *VZD-FHIR-Directory* handelt es sich um einen zentralen Verzeichnisdient der TI, der die deutschlandweite Suche von Organisationen und Akteuren des *TI-Messenger-Dienstes* ermöglicht. Das *VZD-FHIR-Directory* basiert auf dem FHIR-Standard und bietet für den *TI-Messenger-Dienst* relevante Schnittstellen an. Die Schnittstelle `FHIRDirectoryTIMProviderAPI` wird vom *Registrierungs-Dienst* aufgerufen, um eine Föderationsliste herunterzuladen. Die Schnittstellen `FHIRDirectorySearchAPI` und `FHIRDirectoryOwnerAPI` werden von den *TI-Messenger-Clients* aufgerufen, um eine Suche bzw. einen Eintrag im *FHIR-Directory* zu ermöglichen.
+* Beim *VZD-FHIR-Directory* handelt es sich um einen zentralen Verzeichnisdient der TI, der die deutschlandweite Suche von Organisationen und Akteuren des *TI-Messenger-Dienstes* ermöglicht. Das *VZD-FHIR-Directory* basiert auf dem FHIR-Standard und bietet neben der Suche (`FHIRDirectorySearchAPI`) für den *TI-Messenger-Dienst* Schnittstellen zur Administration der link:docs/Foederationsliste/Foederationsliste.adoc[*Föderationsliste*] an (`FHIRDirectoryTIMProviderAPI`). Zusätzlich existiert für Organisaitonen und Practitioner eine Schnittstelle (`FHIRDirectoryOwnerAPI`), über die die Verwaltung des eigenen Eintrages im *VZD-FHIR-Directory* möglich ist. Details sind dem link:https://github.com/gematik/api-vzd/blob/gemILF_VZD_FHIR_Directory/1.2.2/docs/gemILF_VZD_FHIR_Directory.adoc[*Implementierungsleitfaden*] des *VZD-FHIR-Directory* zu entnehmen.
 
 link:docs/IDP/idp.adoc[*Zentraler IDP-Dienst*] +
 
@@ -89,7 +89,7 @@ TI-Messenger Dokumentation
 ├─ link:docs[docs] (weiterführende Informationen)
 |   ├──── link:docs/Authenticator[Authenticator]
 |   ├──── link:docs/Client[Client]
-|   ├──── link:docs/FHIR-Directory[FHIR-Directory]
+|   ├──── link:docs/Foederationsliste[Föderationsliste]
 |   ├──── link:docs/Fachdienst[Fachdienst]
 |   ├──── link:docs/IDP[IDP]
 |   ├──── link:docs/Primaersystem[Primaersystem]
@@ -135,7 +135,7 @@ Hersteller und Anbieter eines *TI-Messenger-Dienstes* können das von der gemati
 *Produkttypen* +
 link:docs/Fachdienst/Fachdienst.adoc[- TI-Messenger-Fachdienst] +
 link:docs/Client/Client.adoc[- TI-Messenger-Client] +
-link:docs/FHIR-Directory/FHIR-Directory.adoc[- VZD-FHIR-Directory] +
+link:https://github.com/gematik/api-vzd/blob/main/docs/Fachkonzept_FHIR-Directory.adoc[- VZD-FHIR-Directory] +
 link:docs/IDP/idp.adoc[- Zentraler IDP-Dienst] +
 
 *Leitfaden für Primärsystemhersteller* +
