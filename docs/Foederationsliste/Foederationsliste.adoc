@@ -46,8 +46,3 @@ Das folgenden Beispiel zeigt exemplarisch die Einträge der gematiker Krankenkas
 }
 ----
 
-
-
-
-
-
