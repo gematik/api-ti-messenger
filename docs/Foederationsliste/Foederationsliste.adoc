@@ -25,7 +25,7 @@ Um nicht zum TI-M Dienst gehörende Messenger-Services ausschließen zu können,
 | Attribut                | Beschreibung
 | `domain`                | The TI-Messenger domain
 | `telematikID`           | The telematikID of the organization that uses the TI-Messenger domain
-| `isInsurance`           | Indicates if it is a domain of an health insurance for insured persons
+| `isInsurance`           | Indicates if it is a domain of a health insurance for insured persons
 | `timProvider`           | The Zuweisungsgruppe im TI-ITSM-System of the TI-Messenger Provider, who added the domain
 |=================================================================================================================
 
