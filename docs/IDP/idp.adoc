@@ -315,9 +315,9 @@ TIP: Der Token-Endpunkt DARF `ID_TOKEN` mit einer Gültigkeitsdauer von mehr als
 Im ersten Schritt entschlüsselt die *Relying Party* das `ID_TOKEN` mit seinem selbst erzeugten 256-Bit AES-Schlüssel (`Token-Key`). Anschließend erfolgt die Signaturprüfung mit dem `PuK_IDP_SIG` des *IDP-Dienstes*. 
 
 == Authorization Code Flow
-In dem folgenden Sequenzdiagramm ist beispielhaft der Ablauf des Authorization Code Flow für den Anwendungsfall dargestellt. Im Kontext des *TI-Messenger-Dienstes* ist der *Registrierungs-Diens* die *Relying Party*. Als *Authenticator* wird der von der gematik bereitgestellte *Authenticator* verwendet.
+In dem folgenden Sequenzdiagramm ist beispielhaft der Ablauf des Authorization Code Flow beim Authentisieren einer Organisation am TI-Messenger-Dienst dargestellt. Im Kontext des *TI-Messenger-Dienstes* ist der *Registrierungs-Diens* die *Relying Party*. Als *Authenticator* wird der von der gematik bereitgestellte *Authenticator* verwendet.
 
-CAUTION: Der von der gematik bereitgestellte Authenticator wird nicht in Verbindung mit einer Web-Anwendung empfohlen, da vom Authenticator ein neuer Browser Tab geöffnet wird. Entsprechend der Fachanwendung wird im Browser eine HTML-Seite oder ein Json-Objekt(VZD-FHIR Response) angezeigt. 
+CAUTION: Der von der gematik bereitgestellte Authenticator wird nicht in Verbindung mit einer Web-Anwendung empfohlen, da vom Authenticator ein neuer Browser Tab geöffnet wird. Entsprechend der Fachanwendung wird im Browser eine HTML-Seite oder ein Json-Objekt(VZD-FHIR Response) angezeigt.
 
 Die Abbildung zeigt die Verwendung des *Authenticators* mit der Auto-Redirect Funktion (`callback=DIRECT`) bei der die `redirect_uri` direkt vom Authenticator aufgerufen wird und der Browserclient über Polling beim Fachdienst den Status des Austausches des Tokens abfragt. Details zur Interaktion mit dem *Authenticator* sind in Kapitel _Interaktion mit der Fachanwendung_ beschrieben. Alternativ könnte der *Authenticator* beim Aufruf der `redirect_uri` eine nutzerfreundliche Webseite der *Relying Party* in einem neuen Browsertab öffnen.    
 

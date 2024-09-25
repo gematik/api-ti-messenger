@@ -73,6 +73,9 @@ paths:
           $ref: "#/components/responses/DefaultResponse"
 
   /contacts:
+    parameters:
+      - $ref: "#/components/parameters/mxidHeader"
+
     get:
       tags:
         - getContacts
@@ -138,6 +141,7 @@ paths:
 
   /contacts/{mxid}:
     parameters:
+      - $ref: "#/components/parameters/mxidHeader"
       - $ref: "#/components/parameters/mxid"
 
     get:
@@ -177,6 +181,14 @@ components:
 
   parameters:
 
+    mxidHeader:
+      name: Mxid
+      in: header
+      description: MXID of the contact settings owner. MUST match with the
+        MXID resolved from the Matrix-OpenID-Token.
+      required: true
+      schema:
+        type: string
     mxid:
       name: mxid
       in: path
