@@ -2,19 +2,11 @@ openapi: 3.0.3
 info:
   title: I_TiMessengerInformation
   description: |
-    # Overview
-    This is a TI-Messenger REST interface that provides Informations for TI-Messenger Clients.
-    # Context
-    ## Authentication
-    The TI-Messenger-Client uses a Matrix-OpenID-Token from his Messenger-Service for
-    authentication on all REST operations. The bearer token can be obtained from the
-    homeserver. (POST /_matrix/client/v3/user/{userId}/openid/request_token).
-    TI-Messenger-Client ---> Messenger-Proxy ---> Homeserver
-    ## REST operations
-    The interface provides read informations for a TI-Messenger-Client
-    TI-Messenger-Client ---> Messenger-Proxy
+    This is a REST interface that provides information to TI-Messenger clients.
 
-    # Information
+    The client uses a Matrix-OpenID-Token for authentication on all REST
+    operations. The bearer token can be obtained from the homeserver via
+    POST /_matrix/client/v3/user/{userId}/openid/request_token).
   version: 1.0.0
   ### 1.0.0
   # - initial version
@@ -31,78 +23,100 @@ externalDocs:
   url: https://github.com/gematik/api-ti-messenger
 
 servers:
-  - url: https://{serverDomain}/tim-information
+  - url: https://{server}/tim-information
     variables:
-      serverDomain:
-        description: The domain of the server
+      server:
+        description: "The server hosting this interface."
         default: tobereplaced.de
+
 tags:
   - name: info
-    description: This operation returns meta data about this interface and the status of available resources
-  - name: lookUpDomain
-    description: Operations for domain lookup
+    description: "Information about this interface itself."
+  - name: lookUpServer
+    description: "Operations for server lookup."
 
 paths:
   /:
     get:
       tags:
         - info
-      summary: "Get information about the interface"
-      description: Returns the meta data of this interface.
-      operationId: getInfo
+      summary: "Retrieve metadata about this interface."
       responses:
         "200":
-          description: OK
+          description: "OK"
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/InfoObject"
         "403":
           $ref: "#/components/responses/Forbidden"
-        default:
-          $ref: "#/components/responses/DefaultResponse"
 
-  /v1/domain/findByIk:
-    parameters:
-      - in: query
-        name: ikNumber
-        description: "IK number to lookup the domain for."
-        required: true
-        schema:
-          type: string
+  /v1/server/findByIk:
     get:
       tags:
-        - lookUpDomain
-      summary: "Find domain by IK number"
-      description: "Returns the domain that hosts users which belong to the given IK number."
-      operationId: getDomain
+        - lookUpServer
+      summary: "Resolve an IK number to the associated TI-Messenger server name."
+      parameters:
+        - in: query
+          name: ikNumber
+          description: "IK number to look up."
+          required: true
+          schema:
+            type: string
       responses:
         "200":
-          description: "The domain hosting users for the given ik number."
+          description: "OK"
           content:
             application/json:
               schema:
-                type: string
-                description: "the domain for the given ik number"
-                example: "gematiker-kk.de"
+                type: object
+                required:
+                  - serverName
+                properties:
+                  serverName:
+                    type: string
+                    description: "The TI-Messenger server name for the given IK number."
+                    example: "gematiker-kk.de"
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
           $ref: "#/components/responses/Unauthorized"
         "404":
           $ref: "#/components/responses/NotFound"
-        default:
-          $ref: "#/components/responses/DefaultResponse"
+
+  /v1/server/isInsurance:
+    get:
+      tags:
+        - lookUpServer
+      summary: "Check whether a TI-Messenger server name represents an insurance."
+      parameters:
+        - in: query
+          name: serverName
+          description: "The server name to query."
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - isInsurance
+                properties:
+                  isInsurance:
+                    type: boolean
+                    description: "`true` if the server name represents an insurance or `false` otherwise."
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
 
 # Descriptions of common components
 components:
   responses:
-    DefaultResponse:
-      description: "The default error response"
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/Error"
     NotFound:
       description: "The specified resource was not found"
       content:
@@ -126,7 +140,6 @@ components:
 
   schemas:
     InfoObject:
-      description: ""
       required:
         - title
         - version
@@ -135,29 +148,28 @@ components:
       properties:
         title:
           type: string
-          description: "Der Titel der Anwendung"
+          description: "The service's title."
           example: "Contact Information API des TI-Messengers"
         description:
           type: string
-          description: "Short description of the application"
+          description: "Short description of the service."
           example: "Contact Information API des TI-Messengers. Betreiber: <Betreibername>"
         contact:
           type: string
-          description: "Kontaktinformationen des Betreibers"
+          description: "Contact information of the operator."
         version:
           type: string
-          description: "Version der implementierten TiMessengerContactInformation.yaml"
+          description: "Version of the `TiMessengerContactInformation.yaml` interface."
           example: "1.0.0"
 
     Error:
-      description: "Default error object with information about the occurred error"
       type: object
       properties:
         errorCode:
-          description: "a code identifying this error"
+          description: "A code identifying this error."
           type: string
         errorMessage:
-          description: "a readable message describing the error"
+          description: "A readable message describing the error."
           type: string
       required:
         - errorCode
