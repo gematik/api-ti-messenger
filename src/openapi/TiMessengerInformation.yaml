@@ -117,12 +117,6 @@ paths:
 # Descriptions of common components
 components:
   responses:
-    DefaultResponse:
-      description: "Default error response."
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/Error"
     NotFound:
       description: "The specified resource was not found"
       content:
