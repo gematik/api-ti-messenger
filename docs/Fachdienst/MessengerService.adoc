@@ -92,6 +92,9 @@ CAUTION: Die momentan in der Zulassung referenzierte Version 1.3 der Matrix-Spez
 = TI-M Pro Besonderheiten
 == Auflösen der IK-Nummer zu einer Domain
 Damit ein Akteur in der Rolle *User* den *TI-M Client Pro* nutzen kann, um die MXID mit Hilfe von vorliegenden Stammdaten (KVNR und IK-Nummer) zu generieren, ist es notwendig eine Schnittstelle zu schaffen, die Auskunft über die Domain liefert, auf der Versicherte mit einer bestimmten IK-Nummer ihren Account haben.
+
+Des Weiteren muss der *TI-M Client Pro* in der Lage sein zu bestimmen ob eine MXID zu einem TI-M ePA Fachdienst für Versicherte gehört damit das Berechtigungskonzept clientseitig durchgesetzt werden kann. Hierfür bedarf es einer Schnittstelle mittels welcher festgestellt werden kann ob ein Matrix Servername einen Versichertenserver darstellt.
+
 Um diese Auflösung zu ermöglichen wurde die API link:../../src/openapi/TiMessengerInformation.yaml[TiMessengerInformation] geschaffen. 
 
 = TI-M ePA Besonderheiten
