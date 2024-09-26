@@ -1,0 +1,125 @@
+/'
+# TI-Messenger 1.1.1
+# TI-Messenger-Dienst
+# UC -
+# Sequence Diagram
+# Name: Föderationsliste aktualisieren
+'/
+
+@startuml
+skinparam sequenceMessageAlign direction
+skinparam minClassWidth 200
+skinparam BoxPadding 1
+skinparam sequenceReferenceHeaderBackgroundColor palegreen
+scale max 2048 width
+
+skinparam sequence {
+ArrowColor black
+ArrowFontSize 17
+LifeLineBorderColor black
+LifeLineBackgroundColor Gainsboro
+
+ParticipantBorderColor Motivation
+ParticipantBackgroundColor Motivation
+ParticipantFontSize 20
+ParticipantFontColor black
+ParticipantBorderColor Black
+ParticipantBackgroundColor MOTIVATION
+
+}
+
+autonumber
+
+box <size:18>Messenger-Service\n #WhiteSmoke
+participant MP as "Messenger-Proxy"
+end box
+participant RD as "Registrierungs-Dienst"
+box <size:18>VZD-FHIR-Directory</size> #WhiteSmoke
+  participant FP as "FHIR-Proxy"
+  participant AS as "OAuth-Service"
+end box
+
+== <size:16>scheduled</size> ==
+
+loop#LightGrey <size:16>alle 1h</size>
+  alt#LightGrey <size:16>HealthState_VZD=gesund ODER Alter_Föderationsliste>=1h</size>
+  activate RD
+  |||
+  ref over AS, FP, RD
+    <size:16>Provider authentifizieren und Föderationsliste abrufen</size>
+  end ref
+  |||
+
+  else <size:16>HealthState_VZD!=gesund</size>
+    RD->RD: HealthStateCheck einleiten(HealthStateCheck_VZD=0)
+    loop#LightGrey <size:16>alle 5min UND HealthStateCheck_VZD<=3</size>
+      |||
+      ref over AS, FP, RD
+        <size:16>Provider authentifizieren und Föderationsliste abrufen</size>
+      end ref
+      |||
+      alt#LightGrey <size:16>HealthState_VZD=gesund</size>
+        break#LightGrey #LightPink
+          RD->RD: HealthStateCheck_VZD abbrechen()
+        end
+      else <size:16>HealthState_VZD!=gesund</size>
+        RD->RD: HealthStateCheck_VZD erhöhen\n(HealthStateCheck_VZD+1)
+        alt#LightGrey <size:16>HealthStateCheck_VZD=3</size>
+          RD ->?: Incident-Event erzeugen()
+          RD->RD++: letzte vorhandene Föderationsliste puffern()
+          return Föderationsliste
+        |||
+        end
+      end
+    end
+    deactivate RD
+  end
+end
+
+== <size:16>on request</size> ==
+
+MP <-?: Föderationsliste \naktualisieren()
+activate MP
+MP->RD: GET /I_internVerification(FLVersion_MP)
+note right: <size:16>Schnittstelle wird nicht \n<size:16>durch die gematik spezifiziert</size>
+|||
+  Activate RD
+
+alt#LightGrey <size:16>HealthState_VZD=gesund UND Alter_Föderationsliste>=1h </size>
+
+  |||
+  ref over AS, FP, RD
+    <size:16>Provider authentifizieren und Föderationsliste abrufen</size>
+  end ref
+  |||
+
+end
+
+break#LightGrey #LightPink <size:16>Alter_Föderationsliste>TTL_Föderationsliste</size>
+  RD-->MP: FLStatus_RD=veraltet
+  RD ->?: Incident-Event erzeugen()
+  MP->MP: unterbinde Registrierungsdienst-Requests(Dauer=1h)
+  MP->MP: blockiere Kommunikation zu anderen Homeservern()
+  |||
+end
+
+  RD->RD++: vergleiche Versionen\n(FLVersion_MP, FLVersion_RD)
+  return Vergleichsergebnis_RD
+
+  alt#LightGrey <size:16>Vergleichsergebnis_RD=identisch</size>
+    |||
+    RD-->MP: FLStatus_MP=aktuell
+    |||
+
+  else <size:16>Vergleichsergebnis_RD!=identisch</size>
+    RD-->MP: Föderationsliste, x5c-Zertifikatsliste
+    ref over MP
+      <size:16>Signatur der Föderationsliste prüfen</size>
+    end ref
+    |||
+  end
+  |||
+  Deactivate RD
+  MP-[hidden]> MP
+  deactivate MP
+@enduml

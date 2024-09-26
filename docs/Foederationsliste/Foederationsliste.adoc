@@ -1,0 +1,48 @@
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+:imagesdir: ../../images
+:toc: macro
+:toclevels: 5
+:toc-title: Table of Contents
+:numbered:
+
+image:meta/gematik_logo.svg[width=70%]
+
+toc::[]
+
+= Föderationsliste
+
+Um nicht zum TI-M Dienst gehörende Messenger-Services ausschließen zu können, werden die Domainnamen der Messenger-Services in einer Föderationsliste zusammengefasst. Diese wird durch das [gemSpec_VZD_FHIR_Directory] bereitgestellt und kann über die Schnittstelle `/tim-provider-services` von zugelassenen Anbietern verwaltet werden. In der Föderationsliste werden die folgenden Informationen zu den Messenger-Services gespeichert:
+
+[options="header"]
+|=================================================================================================================
+| Attribut                | Beschreibung
+| `domain`                | The TI-Messenger domain
+| `telematikID`           | The telematikID of the organization that uses the TI-Messenger domain
+| `isInsurance`           | Indicates if it is a domain of a health insurance for insured persons
+| `timProvider`           | The Zuweisungsgruppe im TI-ITSM-System of the TI-Messenger Provider, who added the domain
+|=================================================================================================================
+
+Das folgenden Beispiel zeigt exemplarisch die Einträge der gematiker Krankenkasse,  die einen *TI-M FD ePA* für die Versicherten und einen *TI-M FD Pro* für die eigenen Mitarbeiter betreibt:
+----
+{
+    "domain": "versicherte.tim.gematiker-kk.de",
+      "telematikID": "4711-gem",
+      "timAnbieter": "GEM-0815",
+      "isInsurance": yes
+    },
+    {
+      "domain": "mitarbeiter.tim.gematiker-kk.de",
+      "telematikID": "4711-gem",
+      "timAnbieter": GEM-0815,
+      "isInsurance": false
+    },
+}
+----
+

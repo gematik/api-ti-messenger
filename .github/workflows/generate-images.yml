@@ -1,0 +1,20 @@
+name: Generate images
+
+on:
+  push:
+    branches:
+    - '**'
+    paths:
+    - '.github/workflows/generate-images.yml'
+    - 'images/generated/**'
+    - '**.drawio'
+    - '**.puml'
+  workflow_dispatch:
+
+jobs:
+  generate:
+    uses: gematik/github-image-actions/.github/workflows/generate-images.yml@0.1.0
+    with:
+      srcdir: src/images
+      outdir: images/generated
+      ref: 0.1.0

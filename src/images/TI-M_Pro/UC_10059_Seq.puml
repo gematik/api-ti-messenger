@@ -1,0 +1,139 @@
+/' 
+# TI-Messenger 1.1
+# TI-Messenger-Dienst
+# UC - 10059
+# Sequence Diagram
+# Name: Organisationsressourcen im Verzeichnisdienst hinzufügen
+'/
+
+@startuml
+skinparam sequenceMessageAlign direction
+skinparam minClassWidth 200
+skinparam BoxPadding 5
+skinparam sequenceReferenceHeaderBackgroundColor palegreen
+scale max 2048 width
+autonumber
+
+skinparam sequence {
+ArrowColor black
+ArrowFontSize 17
+ActorBorderColor black
+LifeLineBorderColor black
+LifeLineBackgroundColor Gainsboro
+
+ParticipantBorderColor Motivation
+ParticipantBackgroundColor Motivation
+ParticipantFontSize 20
+ParticipantFontColor black
+ParticipantBorderColor Black
+ParticipantBackgroundColor MOTIVATION
+
+
+
+ActorBackgroundColor Gainsboro
+ActorFontColor black
+ActorFontSize 20
+ActorFontName Aapex
+}
+    actor U as "Akteur in der Rolle\nOrg-Admin"
+    box <size:18>Endgerät</size>\n #WhiteSmoke 
+    participant C as "TI-Messenger-Client\n mit Org-Admin \nFunktionalität"
+    end box
+    box <size:18>VZD-FHIR-Directory</size> #WhiteSmoke
+      participant FP as "FHIR-Proxy"
+      participant Auth as "Auth-Service"
+      participant VZD as "FHIR-Directory"
+    end box
+    box <size:18>Ti-Messenger-Fachdienst</size> #WhiteSmoke
+    participant RD as "Registrierungs-Dienst"
+    end box
+
+|||
+note over U, C: <size:17>Die Organisation hat einen Messenger-Service\n<size:17>bereitgestellt bekommen, der Teil der Föderation ist</size>
+|||
+
+U->C: FHIR Ressourcen im \nVZD-FHIR-Directory \nhinzufügen
+  Activate C
+C->C: Prüfung, ob gültiges \nowner-accesstoken \nvorliegt
+
+|||
+alt#LightGrey #AliceBlue <size:16>kein gültiges owner-accesstoken vorhanden</size>
+|||
+  alt#LightGrey #LightBlue <size:16>Akteur ist nicht am Registrierungs-Dienst angemeldet</size>
+    |||
+    U->C: Mit Admin-Account \nam Registrierungs-Dienst \nanmelden
+    C->RD: Login mit Client-Credentials + 2.Faktor
+    note right: <size:16>Schnittstelle wird nicht \n<size:16>durch die gematik spezifiziert</size>
+      activate RD
+    RD->RD: prüfe Client-Credentials\nund 2. Faktor
+    RD-->C: status
+      deactivate RD
+    C-->U: Erfolgreich angemeldet
+    |||
+  end
+  |||
+  C -> RD: RegService-OpenID-Token anfragen (z. B. GET /regserv/request_Token)
+  note right: <size:16>Schnittstelle wird nicht \n<size:16>durch die gematik spezifiziert</size>
+    activate RD 
+  RD -> RD: Verifizierung des\nangemeldeten Akteurs 
+  RD --> C: RegService-OpenID-Token {telematikID, professionOID, Signaturzertifikat (x5c)}
+    deactivate RD
+  |||
+  C->Auth: GET /owner-authenticate (Auth Header mit RegService-OpenID-Token)
+    activate Auth
+    |||
+  Auth -> Auth: Prüfung des Token
+  note right: <size:16>Die Prüfschritte sind der \n<size:16>gemSpec_VZD_FHIR_Directory \n<size:16>zu entnehmen</size>
+  |||
+    opt#LightGrey #MistyRose <size:16>Abbruch</size>
+    Auth --> C: Tokenprüfung fehlgeschlagen
+    C --> U: keine Berechtigung
+    |||
+    end
+  |||
+  Auth->Auth: erzeuge \nowner-accesstoken
+  Auth-->C: owner-accesstoken
+  ||| 
+    deactivate Auth
+end
+|||
+
+group <size:16>FHIR-Directory Eintrag erstellen</size>
+  |||
+  group <size:16>FHIR-Ressource der Organisation anzeigen</size>
+  |||
+  C->FP: FHIR-Operation um eigenen Datensatz anzuzeigen\nAuthorization Bearer owner-accesstoken
+    Activate FP
+  FP->FP: prüfe \nowner-accesstoken
+  FP->VZD: HTTPS Forward
+    Activate VZD
+  VZD->VZD: Eintrag suchen
+  VZD-->FP: FHIR Bundle
+    Deactivate VZD
+  FP-->C: HTTPS Forward
+    Deactivate FP
+  |||
+  end
+
+  |||
+  group <size:16>FHIR-Ressource der Organisation erstellen/ändern</size>
+  |||
+  C->FP: FHIR-Operationen um eigenen Datensatz zu bearbeiten\nAuthorization Bearer owner-accesstoken
+    Activate FP
+  FP->FP: prüfe \nowner-accesstoken
+  FP->VZD: HTTPS Forward
+    Activate VZD
+  VZD->VZD: Eintrag bearbeiten
+  VZD-->FP: Status
+    Deactivate VZD
+  FP-->C: HTTPS Forward
+     Deactivate FP
+  |||
+  end
+  C-->U: status    
+  |||
+end
+|||
+
+  Deactivate C
+@enduml

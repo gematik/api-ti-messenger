@@ -2,6 +2,17 @@
  
 # Release Notes api-ti-messenger
 
+## tim-pro-1.0.0
+
+### added
+
+- TiMessengerInformation Rest interface
+- Group exceptions in permissionConfig_V1 for TI-M Pro
+
+### changed
+
+- Separate permissionConfig_V1 for TI-M Pro & ePA
+
 ## Hotfix 1.1.1-9
 
 ### removed
