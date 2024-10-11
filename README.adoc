@@ -10,9 +10,11 @@ endif::[]
 ifndef::env-github[:source-style: source]
 
 :imagesdir: ./images/
+
+image::meta/gematik.png[logo,width=200,height=47,role=right]
+
 = TI Messenger Documentation v1.1.1
 
-image::meta/gematik_logo.svg[gematik,width="70%"]
 
 image:https://github.com/gematik/api-ti-messenger/actions/workflows/lint.yml/badge.svg[link="https://github.com/gematik/api-ti-messenger/actions/workflows/lint.yml"]
 image:https://github.com/gematik/api-ti-messenger/actions/workflows/generate-images.yml/badge.svg[link="https://github.com/gematik/api-ti-messenger/actions/workflows/generate-images.yml"]
