@@ -8,7 +8,7 @@ endif::[]
 
 :imagesdir: ../../images
 
-image::meta/gematik.png[logo,width=200,height=47,role=right]
+image::meta/gematik.png[logo,width=250,height=47,role=right]
 
 === Kommunikation mit einem Chatbot
 Im Folgenden wird ein Beispiel für eine mögliche Zuordnung für die Abbildung von Funktionsaccounts mit Hilfe von Chatbots und eines Akteurs der stellvertretend für die Organisation auftritt.

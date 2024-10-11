@@ -12,7 +12,7 @@ endif::[]
 :toc-title: Table of Contents
 :numbered:
 
-image::meta/gematik.png[logo,width=200,height=47,role=right]
+image::meta/gematik.png[logo,width=250,height=47,role=right]
 
 toc::[]
 
