@@ -1,5 +1,5 @@
-<img align="right" width="250" height="47" src="images/meta/gematik_logo.svg" alt="Gematik Logo"/> <br/>    
- 
+<img align="right" width="250" height="47" src="images/meta/gematik.png" alt="Gematik Logo"/>
+
 # Release Notes api-ti-messenger
 
 ## tim-pro-1.0.0
