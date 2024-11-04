@@ -140,6 +140,9 @@ link:docs/Client/Client.adoc[- TI-Messenger-Client] +
 link:https://github.com/gematik/api-vzd/blob/main/docs/Fachkonzept_FHIR-Directory.adoc[- VZD-FHIR-Directory] +
 link:docs/IDP/idp.adoc[- Zentraler IDP-Dienst] +
 
+*Nutzung des TI-Messenger-Clients: Automatisierung und Schnittstellenintegration* +
+link:docs/Client/Automatisierung.adoc[- Automatisierung und Schnittstellenintegration] +
+
 *Leitfaden für Primärsystemhersteller* +
 link:docs/Primaersystem/Primaersystem.adoc[- Primärsystem] +
 
