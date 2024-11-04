@@ -32,8 +32,8 @@ In Abhängigkeit davon, welchen Umfang die zusätzliche Schnittstelle hat, ist d
 
 Der Login des Clients, der hier als notwendiger Schritt für die Inbetriebnahme benannt wurde, ist ein Schritt, der üblicherweise nur einmalig ausgeführt wird. Der erfolgreiche Login des Clients führt zur Ausstellung von Access- und Refresh-Token durch den Fachdienst, auf deren Grundlage der Client eingeloggt bleibt, unabhängig davon, ob der Client zwischenzeitlich abgeschaltet oder gar das ganze Host-System heruntergefahren wird. Einzige Kriterien für den Erhalt des Zustands "eingeloggt", sind:
 
-- dass die Token nicht mutwillig entfernt werden (bspw. durch manuelles Löschen im Dateisystem)
-- dass der Client nicht proaktiv ausgeloggt wird - das passiert nicht von selbst und wird auch nicht gefordert -, 
+- dass die Token nicht mutwillig entfernt werden. (bspw. durch manuelles Löschen im Dateisystem)
+- dass der Client nicht proaktiv ausgeloggt wird.
 - dass der Client in einem Zeitraum von sechs Monaten wenigstens einmal Kontakt zum Fachdienst hatte.
 
 Es kann plausiblerweise angenommen werden, dass diese drei Kriterien regelmäßig dauerhaft erfüllt sind und es deshalb nicht zu Fällen kommt, in denen ein einmal eingerichteter Client mit aktivierter Schnittstelle für das Drittsystem wiederholt über sein eigenes GUI angesteuert werden muss, um derartige Prozesse zu wiederholen. Der hier beschriebene, idealerweise nur einmal ausgeführte Login des Clients am Fachdienst, erfordert wie bereits erwähnt die Authentisierung mittels zweiten Faktors (2FA), bei dem es sich auch um die SMC-B oder HSM-B der jeweiligen Institution bzw. Kostenträgers handeln kann, die für den Authentisierenden praktisch unsichtbar nachgenutzt werden kann. Die 2FA steht in direktem Zusammenhang zum Login und muss in diesem Sinne auch nur einmalig durchgeführt werden, wenn die drei genannten Kriterien erfüllt bleiben. Der Login mittels 2FA muss nicht zwingend durch den Kassenmitarbeiter erfolgen, der auch das Frontend benutzt, sondern kann ebenso durch einen Administrator oder eine andere von der Institution berechtigte Person durchgeführt werden.
