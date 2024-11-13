@@ -13,7 +13,7 @@ endif::[]
 :numbered:
 :sectnumlevels: 6
 
-image:meta/gematik_logo.svg[width=70%]
+image::meta/gematik.png[logo,width=250,height=47,role=right]
 
 = Testkonzept TI-Messenger-Dienst
 gematik

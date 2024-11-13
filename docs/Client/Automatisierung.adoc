@@ -1,0 +1,45 @@
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+:imagesdir: ../../images
+:toc: macro
+:toclevels: 6
+:toc-title: Inhaltsverzeichnis
+:numbered:
+:sectnumlevels: 6
+
+image::meta/gematik.png[logo,width=250,height=47,role=right]
+
+toc::[]
+
+= Nutzung des TI-Messenger-Clients: Automatisierung und Schnittstellenintegration
+== Szenariobeschreibung
+Die TI-Messenger-Spezifikation regelt TI-Messenger-Fachdienste und -Clients hinsichtlich bestimmter Eigenschaften, die für den sicheren Betrieb als Anwendung der TI erforderlich sind. In diesem Sinne macht die Spezifikation Vorschriften zur Güte von Zufallszahlen, zu verwendender kryptographischer Primitiven und vieler anderer funktionaler und sicherheitstechnischer Eigenschaften.
+Damit beschreibt die Spezifikation aber keinen einzelnen konkreten Fachdienst oder Client mit all seinen Eigenschaften, die so und nicht anders zu wählen sind. Vielmehr spannt die Spezifikation einen Raum auf, innerhalb dessen sich verschiedene konforme und damit zulassungsfähige Fachdienste und Clients manifestieren können.
+
+Der TI-Messenger-Client ist gemäß aktueller Spezifikation grundsätzlich ein Stück Software, das mit einer graphischen Nutzeroberfläche (GUI) ausgestattet ist, die von Endanwendern für die Kommunikation mit anderen TI-M-Nutzern verwendet wird. Die Gestaltung der GUI unterliegt ein paar wenigen Regelungen hinsichtlich der Kenntlichmachung bestimmter Informationen und anderer Aspekte, lässt ansonsten aber viele Freiheitsgrade, was das konkrete Erscheinungsbild betrifft. Jedoch, während die grundsätzliche Existenz einer GUI gefordert wird, muss die Bedienung des Clients nicht zwangsläufig über diese erfolgen. 
+
+Die KANN-Anforderung link:https://gemspec.gematik.de/prereleases/Draft_TI-Messenger_24_2/gemSpec_TI-M_Pro_V1.0.0_CC/#A_25544[A_25544] erlaubt die Bereitstellung zusätzlicher Schnittstellen durch den TI-Messenger-Client, damit Drittsysteme - damit sind die Primärsysteme der Kostenträger und Leistungserbringer gemeint - auf diesen zugreifen können und macht dabei keine Vorgaben zur Art und Umfang der Schnittstelle. Damit muss ein Client gemäß voriger Ausführung immer noch ein GUI haben. Letztlich kann der Client aber vollständig per zusätzlicher Schnittstelle gesteuert werden, die derart gestaltet werden kann, dass ein Drittsystem die Funktionalität des TI-M-Clients den eigenen Anforderungen entsprechend integrieren kann.
+
+In solch einer Konstellation kann der eigentliche TI-Messenger-Client - damit ist das Stück Software gemeint, dass von der gematik spezifiziert und zugelassen wird, nicht das Front-End welches ihn durch die zusätzliche Schnittstelle (fern-)steuert - in einem Backend betrieben werden, auf das Endanwender keinen direkten Zugriff haben und auch nicht haben müssen, da die Steuerung über die zusätzliche Schnittstelle erfolgt, für die das eigene Primärsystem das Frontend stellt. 
+
+In Abhängigkeit davon, welchen Umfang die zusätzliche Schnittstelle hat, ist die Bedienung des TI-Messenger-Clients über seine eigene GUI nicht oder nur in geringem Maße notwendig. Zum jetzigen Zeitpunkt erscheint es aber plausibel, dass die initiale Konfiguration des Clients die Bedienung über das eigene GUI des Clients erfordern. Damit ist der Login des Clients in ein TI-Messenger-Nutzerkonto gemeint, in dessen Rahmen es auch zur Zwei-Faktor-Authentisierung kommt, und eventuell die Aktivierung der zusätzlichen Schnittstelle vorgenommen wird, so dass der Client eben nicht durch sein eigenes GUI gesteuert werden muss.
+
+Der Login des Clients, der hier als notwendiger Schritt für die Inbetriebnahme benannt wurde, ist ein Schritt, der üblicherweise nur einmalig ausgeführt wird. Der erfolgreiche Login des Clients führt zur Ausstellung von Access- und Refresh-Token durch den Fachdienst, auf deren Grundlage der Client eingeloggt bleibt, unabhängig davon, ob der Client zwischenzeitlich abgeschaltet oder gar das ganze Host-System heruntergefahren wird. Einzige Kriterien für den Erhalt des Zustands "eingeloggt", sind:
+
+- dass die Token nicht mutwillig entfernt werden (bspw. durch manuelles Löschen im Dateisystem), 
+- dass der Client nicht proaktiv ausgeloggt wird und
+- dass der Client in einem Zeitraum von sechs Monaten wenigstens einmal Kontakt zum Fachdienst hatte.
+
+Es kann plausiblerweise angenommen werden, dass diese drei Kriterien regelmäßig dauerhaft erfüllt sind und es deshalb nicht zu Fällen kommt, in denen ein einmal eingerichteter Client mit aktivierter Schnittstelle für das Drittsystem wiederholt über sein eigenes GUI angesteuert werden muss, um derartige Prozesse zu wiederholen. Der hier beschriebene, idealerweise nur einmal ausgeführte Login des Clients am Fachdienst, erfordert wie bereits erwähnt die Authentisierung mittels zweiten Faktors (2FA), bei dem es sich auch um die SMC-B oder HSM-B der jeweiligen Institution bzw. Kostenträgers handeln kann, die für den Authentisierenden praktisch unsichtbar nachgenutzt werden kann. Die 2FA steht in direktem Zusammenhang zum Login und muss in diesem Sinne auch nur einmalig durchgeführt werden, wenn die drei genannten Kriterien erfüllt bleiben. Der Login mittels 2FA muss nicht zwingend durch den Kassenmitarbeiter erfolgen, der auch das Frontend benutzt, sondern kann ebenso durch einen Administrator oder eine andere von der Institution berechtigte Person durchgeführt werden.
+
+Die zusätzliche Schnittstelle des Clients zur Nachnutzung durch ein Drittsystem macht keine Vorgaben zur Art der Authentisierung. Weiterhin gibt es keine Einschränkung dahingehend, durch wie viele Nutzer eine eingeloggte TI-Messenger-Client-Instanz verwendet wird, sodass bspw. im Fall von Funktionsaccounts ein Pool von Mitarbeitern die Kommunikation über einen eingeloggten Client abwickeln kann.
+
+Der TI-Messenger-Client übernimmt die Ende-zu-Ende-Verschlüsselung (E2EE), die eine der zentralen Sicherheitsleistungen des TI-Messengers darstellt, was unter anderem auch die Notwendigkeit seiner Zulassung begründet. Im beschriebenen Szenario der Steuerung des Clients durch eine zusätzliche Schnittstelle, die vom Primärsystem genutzt wird, endet die E2EE ebenfalls am Client. Von dort aus werden ausgetauschte Inhalte dann weiter zum Frontend des Primärsystems transportiert, weshalb es in solchen Szenarien wichtig ist, dass die Transportstrecke zwischen Client - der sich womöglich in einem Backend befindet - und dem Frontend hinreichend geschützt ist. Gleiches gilt für die Umgebung, in der der eigentliche TI-Messenger-Client, der die E2EE terminiert, betrieben wird.
+
+Das hier beschriebene Szenario hat zum Ziel, die grundsätzliche Machbarkeit der Integration der Funktionen des TI-Messengers in ein Drittsystem unter Einhaltung der Anforderungen der aktuellen Spezifikation zu illustrieren. In diesem Sinne berücksichtigt das Szenario die geforderte Existenz eines GUI, obgleich dieses nicht zwingend verwendet werden muss und stattdessen eine frei gestaltbare zusätzliche Schnittstelle zum Einsatz kommen kann. Jenseits der Inbetriebnahme erfüllt die graphische Oberfläche in diesem Szenario aber auch keinen weiteren Zweck, weshalb die Spezifikation eines Clients, der ohne GUI auskommt und damit besser für den Betrieb in einem Backend geeignet ist, sinnvoll erscheint. Die Spezifikation eines solchen headless Clients ist für eine folgende Version der Spezifikation aufgeplant.  
