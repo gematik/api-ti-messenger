@@ -30,7 +30,7 @@ ActorFontSize 20
 
 autonumber
 
-actor U as "Akteur in der Rolle\nOrg-Admin"
+actor U as "Akteur"
 box <size:18>Endgerät</size> #WhiteSmoke
   participant C as "TI-Messenger-Client"
 end box
