@@ -32,7 +32,7 @@ autonumber
 
 actor U as "Akteur"
 box <size:18>Endgerät</size> #WhiteSmoke
-  participant C as "TI-Messenger-Client"
+  participant C as "Client"
 end box
 
 box <size:18>VZD-FHIR-Directory</size> #WhiteSmoke
