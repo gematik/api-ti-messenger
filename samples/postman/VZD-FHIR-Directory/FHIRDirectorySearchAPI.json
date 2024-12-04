@@ -73,13 +73,29 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"var jsonData = pm.response.json();\r",
-							"pm.globals.set(\"matrixopenidtoken\", jsonData.access_token)\r",
-							"pm.globals.set(\"matrix_server_name\", jsonData.matrix_server_name)\r",
+							"pm.test(\"succeeds\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
 							"\r",
-							" "
+							"const json = pm.response.json();\r",
+							"const accessToken = json.access_token;\r",
+							"\r",
+							"pm.test(\"has access token\", () => {\r",
+							"    pm.expect(accessToken).to.not.be.oneOf([undefined, null]);\r",
+							"});\r",
+							"\r",
+							"const serverName = json.matrix_server_name;\r",
+							"\r",
+							"pm.test(\"has server name\", () => {\r",
+							"    pm.expect(serverName).to.not.be.oneOf([undefined, null]);\r",
+							"});\r",
+							"\r",
+							"pm.globals.set(\"matrixopenidtoken\", accessToken);\r",
+							"pm.globals.set(\"matrix_server_name\", serverName);\r",
+							""
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
@@ -106,7 +122,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{matrix_server}}/_matrix/client/v3/user/{{userId}}/openid/request_token",
+					"raw": "{{matrix_server}}/_matrix/client/v3/user/{{matrix_user}}/openid/request_token",
 					"host": [
 						"{{matrix_server}}"
 					],
@@ -115,7 +131,7 @@
 						"client",
 						"v3",
 						"user",
-						"{{userId}}",
+						"{{matrix_user}}",
 						"openid",
 						"request_token"
 					]
