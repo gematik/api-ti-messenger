@@ -125,7 +125,7 @@ Die nachfolgende Tabelle enthält die in der vorliegenden Online Dokumentation r
 |link:https://fachportal.gematik.de/fachportal-import/files/gemSpec_TI-Messenger-Dienst_V1.1.1.pdf[gemSpec_TI-Messenger-Dienst_v1.1.1] |gematik: Spezifikation TI-Messenger-Dienst
 |link:https://fachportal.gematik.de/fachportal-import/files/gemSpec_TI-Messenger-FD_V1.1.1.pdf[gemSpec_TI-Messenger-FD_v1.1.1] |gematik: Spezifikation TI-Messenger-Fachdienst
 |link:https://fachportal.gematik.de/fachportal-import/files/gemSpec_TI-Messenger-Client_V1.1.1.pdf[gemSpec_TI-Messenger-Client_v1.1.1] |gematik: Spezifikation TI-Messenger-Client
-|link:https://fachportal.gematik.de/fachportal-import/files/gemSpec_VZD_FHIR_Directory_V1.3.0.pdf[gemSpec_VZD_FHIR_Directory_v1.3.0] |gematik: Spezifikation Verzeichnisdienst FHIR-Directory
+|link:https://gemspec.gematik.de/docs/gemSpec/gemSpec_VZD_FHIR_Directory/gemSpec_VZD_FHIR_Directory_V1.3.0[gemSpec_VZD_FHIR_Directory_v1.3.0] |gematik: Spezifikation Verzeichnisdienst FHIR-Directory
 |link:https://fachportal.gematik.de/hersteller-anbieter/komponenten-dienste/identity-provider-idp[zentraler IDP_Dienst] |gematik: zentraler IDP-Dienst der gematik
 |link:https://fachportal.gematik.de/hersteller-anbieter/komponenten-dienste/authenticator[Authenticator] |gematik: Authenticator der gematik
 |===
