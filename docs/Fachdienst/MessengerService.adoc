@@ -23,7 +23,7 @@ Die folgende Seite gibt einen kurzen Überblick über die Funktionalitäten und 
 == Überblick
 Der *Messenger-Service* ist eine Teilkomponente des *TI-M Fachdienstes* und wird für Organisationen des Gesundheitswesens (z. B. Arztpraxis, Krankenhaus, Krankenkasse, Apotheke, Verband, Kostenträger etc.) bereitgestellt. Der *Messenger-Service* besteht aus einem *Matrix-Homeserver* (basierend auf dem Matrix-Protokoll) und einem *Messenger-Proxy*. Dieser stellt sicher, dass eine Kommunikation mit anderen Messenger-Services, als Teil des *TI-M Dienstes*, nur innerhalb der gemeinsamen *TI-Föderation* erfolgt. Der *Matrix-Homeserver* basiert auf dem offenen Kommunikationsprotokoll link:https://spec.matrix.org/[Matrix]. Welche Schnittstellen der *Messenger-Service* nutzt und anbietet ist in der folgenden Abbildung dargestellt:
 
-image::generated/TI-M_Basis/API-Messenger-Service.svg[align="center",width="55%"]
+image::generated/TI-M_Basis/API-Messenger-Service.png[align="center",width="55%"]
 
 ==== Authentifizierungsverfahren
 *Messenger-Services* können den Akteuren unterschiedliche Authentifizierungsverfahren anbieten. Dabei können diverse Authentifizierungsmechanismen durch eine Organisation für Ihre Akteure bereitgestellt werden. Die Organisation und der von ihr gewählte *TI-Messenger-Anbieter* vereinbaren das zur Anwendung kommende Authentifizierungsverfahren bilateral und stimmen sich über die technische Realisierung der dafür notwendigen Anbindung ab.
@@ -34,7 +34,7 @@ Der *Messenger-Proxy* agiert neben der Funktion als Proxy zur Weiterleitung alle
 ==== Client-Server Prüfungen
 Der *Messenger-Proxy* als Prüfinstanz aller eingehenden, sowie ausgehenden Anfragen zum *Matrix-Homeserver* ist für die Regelung der gemäß Matrix-Client-Server-API und Matrix-Server-Server-API geltenden Aufrufe zuständig. Daher ist es erforderlich, dass der *Messenger-Proxy* für jeden *Messenger-Service* als Forward- sowie Reverse-Proxy bereitgestellt wird. Die folgende Abbildung verdeutlicht die beide gerade skizzierten Funktionsweisen. 
 
-image::generated/TI-M_Basis/Pruefungen_Messenger_Proxy.svg[width="100%"]
+image::generated/TI-M_Basis/Pruefungen_Messenger_Proxy.png[width="100%"]
 
 Bei Aufruf der Client-Server-API durch einen *TI-Messenger-Client* aus dem Internet fungiert der *Messenger-Proxy* als Reverse-Proxy. Beim Aufruf der Server-Server-API im Rahmen einer Server-To-Server Kommunikation fungiert der *Messenger-Proxy* als Forward-, sowie als Reverse-Proxy.
 
