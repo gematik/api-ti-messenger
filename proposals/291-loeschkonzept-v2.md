@@ -89,6 +89,9 @@ festgelegten Zeitraum seit letzter Aktivität im Raum gelöscht werden. Die
 Löschung MUSS server-lokal und ohne direkten Einfluss auf die Föderation
 erfolgen. **\[\<=\]**
 
+Da sich, abgesehen von Raum-Avataren, Medien in Matrix aktuell nicht mit Räumen
+verlinken lassen, impliziert die obige Formulieren die Verwendung von [MSC3911].
+
 ### Clientseitiges Löschen
 
 **Story 4**
@@ -327,6 +330,7 @@ in dieselben Kategorien wie im vorigen Abschnitt "Änderungsvorschlag" gruppiert
 
   [TI-M Basis]: https://gemspec.gematik.de/docs/gemSpec/gemSpec_TI-M_Basis/gemSpec_TI-M_Basis_V1.1.1
   [Message Retention Policies]: https://element-hq.github.io/synapse/latest/message_retention_policies.html
+  [MSC3911]: https://github.com/matrix-org/matrix-spec-proposals/pull/3911
   [Server Notices]: https://spec.matrix.org/v1.13/client-server-api/#server-notices
   [`/leave`]: https://spec.matrix.org/v1.13/client-server-api/#post_matrixclientv3roomsroomidleave
   [`/sync`]: https://spec.matrix.org/v1.13/client-server-api/#get_matrixclientv3sync
