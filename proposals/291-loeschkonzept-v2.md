@@ -90,7 +90,7 @@ Löschung MUSS server-lokal und ohne direkten Einfluss auf die Föderation
 erfolgen. **\[\<=\]**
 
 Da sich, abgesehen von Raum-Avataren, Medien in Matrix aktuell nicht mit Räumen
-verlinken lassen, impliziert die obige Formulieren die Verwendung von [MSC3911].
+verlinken lassen, impliziert die obige Formulierung die Verwendung von [MSC3911].
 
 ### Clientseitiges Löschen
 
