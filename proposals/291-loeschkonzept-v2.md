@@ -109,7 +109,7 @@ verlinken lassen, impliziert die obige Formulierung die Verwendung von [MSC3911]
 **Story 6**
 
 - Als Endnutzer
-- möchte ich, dass abgeschlossene Chats gelöscht werden
+- möchte ich abgeschlossene Chats löschen können
 - damit meine Chatliste übersichtlich bleibt.
 
 Die serverseitige Löschung von Rauminhalten propagiert allerspätestens dann wenn
