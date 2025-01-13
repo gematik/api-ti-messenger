@@ -141,6 +141,8 @@ Zwischenablage für historische Räume.
 Clients MÜSSEN Nutzern erlauben Räume über die Nutzung der APIs [`/leave`] und
 [`/forget`] vom Client zu löschen. **\[\<=\]**
 
+_Hinweis: Clients steht es frei die Operationen [`/leave`] und [`/forget`] zu trennen um dem Nutzer zu ermöglichen ein Archiv verlassener Räume zu erstellen._
+
 Eine regelmäßige Erinnerung an das clientseitige Löschen von Räumen ist nicht
 erforderlich. Zum Einen ist der überwiegende Teil der Kommunikation in TI-M
 Ende-zu-Ende verschlüsselt. Zum Anderen lässt sich bei mehreren Raumteilnehmern
