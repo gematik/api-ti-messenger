@@ -21,7 +21,7 @@ Zulassungstests geprüft wird. Auch dies verursacht wiederkehrend Verwirrung,
 denn das zwangsweise Senden von Events, die gar nicht benutzt werden können
 erscheint vollständig zwecklos.
 
-Dieses Proposal schlägt eine inkrementelle Verbesserung dieser Situation durch
+Dieses Proposal strebt eine inkrementelle Verbesserung dieser Situation durch
 Entfernung bestimmter nutzloser Teile der Spezifikation an.
 
 ## Änderungsvorschlag
