@@ -90,7 +90,8 @@ Löschung MUSS server-lokal und ohne direkten Einfluss auf die Föderation
 erfolgen. **\[\<=\]**
 
 Da sich, abgesehen von Raum-Avataren, Medien in Matrix aktuell nicht mit Räumen
-verlinken lassen, impliziert die obige Formulierung die Verwendung von [MSC3911].
+verlinken lassen, impliziert die obige Formulierung die Verwendung von
+[MSC3911].
 
 ### Clientseitiges Löschen
 
@@ -141,8 +142,8 @@ Zwischenablage für historische Räume.
 Clients MÜSSEN Nutzern erlauben Räume über die Nutzung der APIs [`/leave`] und
 [`/forget`] vom Client zu löschen. **\[\<=\]**
 
-_Hinweis: Clients steht es frei die Operationen [`/leave`] und [`/forget`] zu
-trennen um dem Nutzer zu ermöglichen ein Archiv verlassener Räume zu erstellen._
+*Hinweis: Clients steht es frei die Operationen [`/leave`] und [`/forget`] zu
+trennen um dem Nutzer zu ermöglichen ein Archiv verlassener Räume zu erstellen.*
 
 Eine regelmäßige Erinnerung an das clientseitige Löschen von Räumen ist nicht
 erforderlich. Zum Einen ist der überwiegende Teil der Kommunikation in TI-M
@@ -156,32 +157,43 @@ und diese dem Nutzer zur Löschung anzubieten.
 
 **Story 7**
 
-- Als Organisation im Gesundheitswesen
-- möchte ich zentral vorgeben ob meine Nutzer einzelne Nachrichten per Redaction
-  löschen dürfen
-- damit ich die medizinische Dokumentation sicherstellen kann.
+- Als Endnutzer
+- möchte ich von mir gesendete Nachrichten für alle Gesprächsteilnehmer löschen
+- damit ich schwerwiegende Fehler korrigieren kann.
 
 Die Matrix-Spezifikation ermöglicht die (Selbst-)Moderation von Events mittels
 [Redactions]. Redactions sind eine invasive Form des Löschens da sie über die
 Föderation propagieren und letztendlich zu einer irreversiblen Löschung von
-Inhalten auf allen beteiligten Servern und Clients führen. Der sinnvollen
-Nutzung von Redactions zur Moderation gegenüber steht also das Problem des
-unerwarteten Verlusts von Nachrichten für alle Gesprächsteilnehmer. Da letzteres
-schwerwiegender erscheint müssen TI-M Fachdienste Redactions grundsätzlich
-unterbinden.
+Inhalten auf allen beteiligten Servern und Clients führen.
 
-Unabhängig davon können TI-M Clients bei Bedarf visuelles Löschen für z. B.
-`m.room.message` Events auch über [Event Replacements] implementieren. Diese
-Form des Löschens ist reversibel und transparent da Replacements separate Events
-sind und die gesamte Historie von Events erhalten bleibt. Story 7 wird somit
-gegenstandslos, da es bei dieser Art des "Löschens" keinen Grund für
-Organisationen gibt die Nutzung einzuschränken.
+Dieses Verhalten ist in bestimmten Fällen wünschenswert. Man stelle sich z. B.
+vor es wurden Daten eines Patienten versehentlich an einen anderen Patienten
+gesendet. Hier erscheint es sinnvoller den Versender diesen Fehler direkt per
+Redaction korrigieren zu lassen anstatt einen langsameren Eskalationsprozess mit
+Löschung durch einen Administrator zu verwenden.
 
-**A_4 - Verbot von Redactions**
+Gleichzeitig führen Redactions bei Fehlbenutzung aber zu einem unerwarteten
+Verlusts von eigentlich relevanten Nachrichten für andere Gesprächsteilnehmer.
+Als Kompromiss werden Redactions daher zwar erlaubt. Sie müssen im Client aber
+stets mit einem Warnhinweis versehen werden[^1].
 
-Homeserver müssen Requests am Endpunkt
-[`/_matrix/client/v3/rooms/{roomId}/redact/{eventId}/{txnId}`] mit einer HTTP
-403 Response und dem Fehlercode `M_FORBIDDEN` quittieren. **\[\<=\]**
+**A_4 - Nachrichtenbasiertes Löschen per Redaction**
+
+Clients MÜSSEN ihren Nutzern erlauben eigene Nachrichten per Redaction zu
+löschen. Dabei MUSS der Nutzer vor jedem Auslösen einer Redaction per
+Warnhinweis darauf hingewiesen werden, dass die Nachricht irreversibel und für
+alle Gesprächsteilnehmer gelöscht wird. **\[\<=\]**
+
+**A_5 - Kennzeichnung gelöschter Nachrichten**
+
+Clients MÜSSEN `m.room.redaction` Events analog zu Servern anwenden und
+gelöschte Nachrichten mit Datum, Uhrzeit und löschendem Akteur kennzeichnen.
+**\[\<=\]**
+
+Unabhängig von Redactions können TI-M Clients bei Bedarf visuelles Löschen für
+z. B. `m.room.message` Events auch über [Event Replacements] implementieren.
+Diese Form des Löschens ist reversibel und transparent da Replacements separate
+Events sind und die gesamte Historie von Events erhalten bleibt.
 
 ### DSGVO & Datenschutz
 
@@ -215,7 +227,7 @@ Dies ergibt sich insbesondere daraus, dass das Verlassen eines Raumes nach
 Karenzzeit dient daher dazu die Wahrscheinlichkeit eines unerwarteten Verlustes
 von Rauminhalten für den Nutzer zu reduzieren.
 
-**A_5 - Serverseitiges Löschen nach `/forget`**
+**A_6 - Serverseitiges Löschen nach `/forget`**
 
 Homeserver MÜSSEN einen Raum und dessen Inhalte lokal löschen, wenn:
 
@@ -228,7 +240,7 @@ Homeserver MÜSSEN einen Raum und dessen Inhalte lokal löschen, wenn:
 Diese Löschung MUSS innerhalb von 7 Tagen ab letztem [`/forget`] erfolgen.
 **\[\<=\]**
 
-**A_6 - Serverseitiges Löschen ohne `/forget`**
+**A_7 - Serverseitiges Löschen ohne `/forget`**
 
 Homeserver MÜSSEN einen Raum und dessen Inhalte für mindestens 7 Tage vorhalten,
 wenn:
@@ -297,7 +309,7 @@ in dieselben Kategorien wie im vorigen Abschnitt "Änderungsvorschlag" gruppiert
 > der Nutzer zu, so wird er aus dem Raum entfernt, was auch zu einer
 > Benachrichtigung des Servers führt. **\[\<=\]**
 
-> **[A_25492] - Löschfunktion des Clients[^1]**
+> **[A_25492] - Löschfunktion des Clients[^2]**
 >
 > Der TI-M Client MUSS Löschfunktionen implementieren, die es dem Akteur
 > ermöglichen, Daten sowohl lokal auf dem Client zu löschen, bspw. durch
@@ -328,7 +340,10 @@ in dieselben Kategorien wie im vorigen Abschnitt "Änderungsvorschlag" gruppiert
 > löschenden Akteur, das Datum und die Uhrzeit der Löschung enthalten.
 > **\[\<=\]**
 
-[^1]: Der zweite Teil dieser Anforderung ist redundant zu [A_25575] und gehört
+[^1]: Dieses Verhalten wird in ähnlicher Form auch bei der Löschung von Dokument
+    aus der ePA verwendet. Siehe hierzu [A_20103].
+
+[^2]: Der zweite Teil dieser Anforderung ist redundant zu [A_25575] und gehört
     daher eigentlich auch in die Kategorie "Redactions".
 
   [TI-M Basis]: https://gemspec.gematik.de/docs/gemSpec/gemSpec_TI-M_Basis/gemSpec_TI-M_Basis_V1.1.1
@@ -340,7 +355,6 @@ in dieselben Kategorien wie im vorigen Abschnitt "Änderungsvorschlag" gruppiert
   [`/forget`]: https://spec.matrix.org/v1.13/client-server-api/#post_matrixclientv3roomsroomidforget
   [Redactions]: https://spec.matrix.org/v1.13/client-server-api/#redactions
   [Event Replacements]: https://spec.matrix.org/v1.13/client-server-api/#event-replacements
-  [`/_matrix/client/v3/rooms/{roomId}/redact/{eventId}/{txnId}`]: https://spec.matrix.org/v1.13/client-server-api/#put_matrixclientv3roomsroomidredacteventidtxnid
   [A_26348]: https://gemspec.gematik.de/docs/gemSpec/gemSpec_TI-M_ePA/latest/#A_26348
   [A_26463]: https://gemspec.gematik.de/docs/gemSpec/gemSpec_TI-M_Pro/latest/#A_26463
   [A_25318]: https://gemspec.gematik.de/docs/gemSpec/gemSpec_TI-M_Basis/gemSpec_TI-M_Basis_V1.1.1/#A_25318
@@ -352,3 +366,4 @@ in dieselben Kategorien wie im vorigen Abschnitt "Änderungsvorschlag" gruppiert
   [A_25575]: https://gemspec.gematik.de/docs/gemSpec/gemSpec_TI-M_Basis/gemSpec_TI-M_Basis_V1.1.1/#A_25575
   [A_25576]: https://gemspec.gematik.de/docs/gemSpec/gemSpec_TI-M_Basis/gemSpec_TI-M_Basis_V1.1.1/#A_25576
   [A_25577]: https://gemspec.gematik.de/docs/gemSpec/gemSpec_TI-M_Basis/gemSpec_TI-M_Basis_V1.1.1/#A_25577
+  [A_20103]: https://gemspec.gematik.de/docs/gemSpec/gemSpec_ePA_FdV/latest/#A_20103
