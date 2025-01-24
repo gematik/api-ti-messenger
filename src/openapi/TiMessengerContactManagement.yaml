@@ -21,7 +21,9 @@ info:
     TI-Messenger-Client ---> Messenger-Proxy
 
     # Contact
-  version: 1.0.2
+  version: 1.0.3
+  ### 1.0.3
+  # - fixed tags of routes to create combined class for contacts routes
   ### 1.0.2
   # - raised patch number in server url due to bugfixing
   # - changed MXID description and example 
@@ -78,7 +80,7 @@ paths:
 
     get:
       tags:
-        - getContacts
+        - contacts
       description: "Returns the contacts with invite settings."
       operationId: getContacts
       responses:
@@ -93,7 +95,7 @@ paths:
 
     post:
       tags:
-        - createContactSetting
+        - contacts
       description: "Creates the setting for the contact {mxid}."
       operationId: createContactSetting
       requestBody:
@@ -116,7 +118,7 @@ paths:
 
     put:
       tags:
-        - updateContactSetting
+        - contacts
       description: "Updates the setting for the contact {mxid}."
       operationId: updateContactSetting
       requestBody:
@@ -146,7 +148,7 @@ paths:
 
     get:
       tags:
-        - getContact
+        - contacts
       description: "Returns the contacts with invite settings."
       operationId: getContact
       responses:
@@ -161,7 +163,7 @@ paths:
 
     delete:
       tags:
-        - deleteContactSetting
+        - contacts
       description: "Deletes the setting for the contact {mxid}."
       operationId: deleteContactSetting
       responses:
