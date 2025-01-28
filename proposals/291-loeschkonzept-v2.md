@@ -44,7 +44,7 @@ identischem Wortlaut in die Spezifikation übernommen werden sollen.
 **Story 1**
 
 - Als Anbieter
-- möchte ich nicht mehr benötigte Räume und deren Inhalte löschen
+- möchte ich nicht mehr benötigte Räume und deren Inhalte (v. a. Medien) löschen
 - damit ich die Speicherkosten meines Homeservers reduzieren kann.
 
 **Story 2**
