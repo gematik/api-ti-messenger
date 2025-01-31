@@ -110,8 +110,8 @@ verlinken lassen, impliziert die obige Formulierung die Verwendung von
 **Story 6**
 
 - Als Endnutzer
-- möchte ich Chats löschen können
-- damit meine Chatliste übersichtlich bleibt.
+- möchte ich nicht mehr benötigte Chats löschen können
+- um Ordnung in meiner Chatliste zu schaffen.
 
 Die serverseitige Löschung von Rauminhalten propagiert allerspätestens dann wenn
 der Nutzer das Gerät wechselt auch auf den Client. Der Nutzerwunsch über die
