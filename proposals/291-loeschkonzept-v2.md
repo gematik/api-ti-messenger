@@ -180,9 +180,14 @@ stets mit einem Warnhinweis versehen werden[^1].
 **A_4 - Nachrichtenbasiertes Löschen per Redaction**
 
 Clients MÜSSEN ihren Nutzern erlauben eigene Nachrichten per Redaction zu
-löschen. Dabei MUSS der Nutzer vor jedem Auslösen einer Redaction per
-Warnhinweis darauf hingewiesen werden, dass die Nachricht irreversibel und für
-alle Gesprächsteilnehmer gelöscht wird. **\[\<=\]**
+löschen. Dabei MUSS der Nutzer vor jedem Auslösen einer Löschung per Warnhinweis
+darauf hingewiesen werden, dass die Nachricht irreversibel und für alle
+Gesprächsteilnehmer gelöscht wird.
+
+Ist eine zu löschende Nachricht Ausgangspunkt einer Kette von [Event
+Replacements], so MÜSSEN alle Events dieser Kette redacted werden. Dies kann
+z.B. über mehrere einzelne Redactions oder einen Mechanismus wie in [MSC3912]
+geschehen. **\[\<=\]**
 
 **A_5 - Kennzeichnung gelöschter Nachrichten**
 
@@ -355,6 +360,7 @@ in dieselben Kategorien wie im vorigen Abschnitt "Änderungsvorschlag" gruppiert
   [`/forget`]: https://spec.matrix.org/v1.13/client-server-api/#post_matrixclientv3roomsroomidforget
   [Redactions]: https://spec.matrix.org/v1.13/client-server-api/#redactions
   [Event Replacements]: https://spec.matrix.org/v1.13/client-server-api/#event-replacements
+  [MSC3912]: https://github.com/matrix-org/matrix-spec-proposals/pull/3912
   [A_26348]: https://gemspec.gematik.de/docs/gemSpec/gemSpec_TI-M_ePA/latest/#A_26348
   [A_26463]: https://gemspec.gematik.de/docs/gemSpec/gemSpec_TI-M_Pro/latest/#A_26463
   [A_25318]: https://gemspec.gematik.de/docs/gemSpec/gemSpec_TI-M_Basis/gemSpec_TI-M_Basis_V1.1.1/#A_25318
