@@ -50,7 +50,7 @@ identischem Wortlaut in die Spezifikation übernommen werden sollen.
 **Story 2**
 
 - Als Anbieter
-- möchte ich meinen Nutzern verschiedene Preismodelle für die Haltung ihrer
+- möchte ich Leistungserbringern verschiedene Preismodelle für die Haltung ihrer
   historischen Kommunikation anbieten
 - damit ich meine Speicherkosten an sie weiterreichen kann.
 
