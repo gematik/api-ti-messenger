@@ -39,111 +39,158 @@ Abschnitt "Aktuelle Löschanforderungen" aufgelistet. Des Weiteren sind die neue
 Anforderungen als grobe Vorschläge zu verstehen, die nicht zwingend mit
 identischem Wortlaut in die Spezifikation übernommen werden sollen.
 
+Zum besseren Verständnis der weiteren Ausführungen ist im Folgenden der Verlauf
+einer TI-M Nachricht von einem Versicherten bis zu einem Mitarbeiter des
+Gesundheitswesens dargestellt.
+
+![TI-M Architektur]
+
 ### Serverseitiges Löschen
 
 **Story 1**
+
+- Als Versicherter
+- möchte ich selbst entscheiden wann meine Unterhaltungen gelöscht werden
+- damit ich mir wichtige Inhalte nicht überraschend verliere.
+
+**Story 2**
 
 - Als Anbieter
 - möchte ich nicht mehr benötigte Räume und deren Inhalte (v. a. Medien) löschen
 - damit ich die Speicherkosten meines Homeservers reduzieren kann.
 
-**Story 2**
+**Story 3**
 
 - Als Anbieter
 - möchte ich Leistungserbringern verschiedene Preismodelle für die Haltung ihrer
   historischen Kommunikation anbieten
 - damit ich meine Speicherkosten an sie weiterreichen kann.
 
-**Story 3**
+**Story 4**
 
 - Als Organisation im Gesundheitswesen
 - möchte ich zentral vorgeben wann die Chats meiner Mitarbeiter gelöscht werden
 - damit ich die Kontrolle über die Daten meiner Nutzer behalte.
 
-Um diese Nutzungsszenarien zu realisieren ist es notwendig, dass Homeserver eine
-konfigurierbare Funktion zum serverseitigen Löschen von Rauminhalten anbieten.
-Da die Löschung in erster Linie der Wahrung der individuellen Wirtschaftlichkeit
-und Datenhoheit dient, sind Voreinstellungen und Defaultwerte nicht erforderlich
-sondern können dem Markt überlassen werden. Anbieter dürfen dabei im Rahmen
-ihrer Preisgestaltung auch die Grenzen der Konfigurierbarkeit für Organisationen
-festlegen.
+Aus diesen Stories wird ersichtlich, dass es eine Unterscheidung geben muss
+zwischen dem Löschen für Versicherte (TI-M ePA) und dem Löschen für Mitarbeiter
+des Gesundheitswesens (TI-M Pro). Da diese beiden Nutzergruppen verschiedene
+Clients und Fachdienste verwenden, lässt sich diese Unterscheidung auch gut
+technisch abbilden.
 
-Die Löschoperation selbst darf nur server-lokal und ohne direkte Auswirkung auf
-die Föderation erfolgen, da ansonsten Löschkonfigurationen auf unterschiedlichen
-Servern kollidieren könnten. Diese server-lokale Löschung schließt also z. B.
-die Verwendung von Redactions oder das Kicken der Nutzer anderer Homeserver aus.
+Versicherte auf der einen Seite haben die alleinige Hoheit über ihre Daten und
+Kommunikation. Im Gegensatz zu Mitarbeitern im Gesundheitswesen haben
+Versicherte zudem kein Archivsystem, in das sie TI-M Inhalte exportieren können.
+Hier darf es daher keine automatische Löschung ohne Nutzereinwilligung geben da
+sonst Inhalte unerwartet und unwiederbringlich verloren gehen könnten.
 
-Für die konkrete technische Implementierung gibt es verschiedene Möglichkeiten.
-So könnten z. B. Nutzer des eigenen Homeservers aus Räumen entfernt werden und
-diese Räume samt der zugehörigen Events und Medien dann aus der Datenbank des
-Servers gelöscht werden. Alternativ wäre auch ein fortlaufendes Löschen von
-veralteten Events und Medien aus der Datenbank des Servers möglich wobei der
-Raum selbst bestehen bleibt. Homeserver wie Synapse beispielsweise bieten
-hierfür konfigurierbare [Message Retention Policies] an.
+**A_1 - Serverseitige Löschung nur nach Nutzereinwilligung**
 
-**A_1 - Serverseitige Löschfunktion**
+TI-M ePA Fachdienste DÜRFEN Rauminhalte und damit verbundene Medien NICHT ohne
+vorige Einwilligung aller lokalen Teilnehmer des Raumes löschen. Redactions sind
+von dieser Regelung ausgenommen. **\[\<=\]**
 
-Matrix-Homeserver MÜSSEN eine Funktion anbieten, durch die Rauminhalte und mit
-einzelnen Räumen assoziierte Daten wie z. B. versendete Dateien nach einem
-festgelegten Zeitraum seit letzter Aktivität im Raum gelöscht werden. Die
-Löschung MUSS server-lokal und ohne direkten Einfluss auf die Föderation
-erfolgen. **\[\<=\]**
+Mitarbeiter des Gesundheitswesens auf der anderen Seite sind ihrer Organisation
+und deren Regeln untergeordnet. Darüber hinaus gelten für sie gesetzliche
+Vorgaben zur Datenhaltung, die eine automatische Löschung nötig machen können.
+Beispiele hierfür sind [DSGVO Art. 17] und [SGB 5 § 304].
 
-Da sich, abgesehen von Raum-Avataren, Medien in Matrix aktuell nicht mit Räumen
-verlinken lassen, impliziert die obige Formulierung die Verwendung von
-[MSC3911].
+Die Löschoperation selbst darf dabei allerdings nur server-lokal und ohne
+direkte Auswirkung auf die Föderation erfolgen damit Löschkonfigurationen auf
+unterschiedlichen Servern nicht interferieren. Diese server-lokale Löschung
+schließt z. B. die Verwendung von Redactions oder das Kicken der Nutzer anderer
+Homeserver aus.
+
+**A_2 - Automatische serverseitige Löschung**
+
+TI-M Pro Fachdienste KÖNNEN Rauminhalte und damit verbundene Medien automatisch
+und ohne Einwilligung der Raumteilnehmer löschen. **\[\<=\]**
+
+**A_3 - Lokale Beschränkung der automatischen serverseitigen Löschung**
+
+Implementieren TI-M Pro Fachdienste Funktionen zum automatisch Löschen von
+Rauminhalten oder damit verbundener Medien, so MUSS die Löschung server-lokal
+und ohne direkten Einfluss auf die Föderation erfolgen. **\[\<=\]**
+
+Damit Inhalte nicht unerwartet verloren gehen, müssen Nutzer über etwaige
+automatische Löschfunktionen zumindest informiert werden. Die konkrete Form der
+Information bleibt dabei dem Anbieter überlassen. So könnte der Anbieter z. B.
+über [Server Notices] einzelne Räumlöschungen vorankündigen. Alternativ wäre es
+auch denkbar, dass nur einmalig über feste Löschintervalle informiert wird.
+
+**A_4 - Information über automatische serverseitige Löschung**
+
+Nutzen TI-M Pro Anbieter Funktionen zur automatischen serverseitigen Löschung
+von Rauminhalte oder damit verbundener Medien, so MÜSSEN sie ihre Nutzer vorab
+darüber informieren. **\[\<=\]**
+
+Die konkrete Ausgestaltung einer automatischen serverseitigen Löschfunktion muss
+durch die Spezifikation nicht weiter vorgegeben werden. Hier gibt es
+verschiedene Möglichkeiten. So könnten z. B. Nutzer des eigenen Homeservers aus
+Räumen entfernt werden und diese Räume samt der zugehörigen Events und Medien
+dann aus der Datenbank des Servers gelöscht werden. Alternativ wäre auch ein
+fortlaufendes Löschen von veralteten Events und Medien aus der Datenbank des
+Servers möglich, wobei der Raum selbst bestehen bleibt. Homeserver wie Synapse
+bieten hierfür konfigurierbare [Message Retention Policies] an. Eine weitere
+Möglichkeit wäre die Implementierung eines Quota-Systems wie es z. B. bei
+E-Mail-Anbietern gängig ist. Die hierfür eventuell notwendige Verlinkung von
+Räumen und Medien könnte beispielsweise durch [MSC3911] realisiert werden.
 
 ### Clientseitiges Löschen
 
-**Story 4**
-
-- Als Endnutzer
-- möchte ich selbst entscheiden wann meine Unterhaltungen gelöscht werden
-- damit ich mir wichtige Inhalte nicht überraschend verliere.
-
 **Story 5**
-
-- Als Mitarbeiter im Gesundheitswesen
-- möchte ich Chats, die ich in ein Drittsystem archiviert habe, löschen
-- um Doppeldokumentation zu vermeiden.
-
-**Story 6**
 
 - Als Endnutzer
 - möchte ich nicht mehr benötigte Chats löschen können
 - um Ordnung in meiner Chatliste zu schaffen.
 
-Die serverseitige Löschung von Rauminhalten propagiert allerspätestens dann wenn
-der Nutzer das Gerät wechselt auch auf den Client. Der Nutzerwunsch über die
-Löschung der eigenen Daten zu bestimmen kann daher mit dem Anbieter- und
-Organisationswunsch Speicher zur Steigerung der Wirtschaftlichkeit freizugeben
-kollidieren. Anbieter müssen ihre Nutzer deswegen über etwaige serverseitige
-Löschungen informieren damit Daten nicht unerwartet verloren gehen. Die konkrete
-Form der Information bleibt dabei dem Anbieter überlassen. So könnte der
-Anbieter z. B. über [Server Notices] konkrete Räumlöschungen vorankündigen.
-Alternativ wäre es auch denkbar, dass nur einmalig über feste Löschintervalle
-informiert wird.
+**Story 6**
 
-**A_2 - Information über serverseitige Löschung**
+- Als Mitarbeiter im Gesundheitswesen
+- möchte ich Chats, die ich in ein Drittsystem archiviert habe, löschen
+- um Doppeldokumentation zu vermeiden.
 
-Anbieter MÜSSEN ihre Nutzer vorab über die serverseitige Löschung von Räumen und
-Rauminhalten informieren. **\[\<=\]**
-
-Weiterhin müssen Nutzer für die Organisation ihrer Unterhaltungen in die Lage
-versetzt werden Räume selbstständig zu verlassen und vom Client zu entfernen.
-Hierbei ist zu beachten, dass Räume nach erfolgreichem [`/leave`] weiterhin in
-der [`/sync`]-Response auftauchen und dort erst durch ein explizites [`/forget`]
+Nutzer müssen für die Organisation ihrer Unterhaltungen in die Lage versetzt
+werden Räume selbstständig verlassen und vom Client entfernen zu können. Hierbei
+ist zu beachten, dass Räume nach erfolgreichem [`/leave`] weiterhin in der
+[`/sync`]-Response auftauchen und dort erst durch ein explizites [`/forget`]
 verschwinden. Clients steht es frei diese beiden Operationen zu kombinieren oder
 zu trennen. Werden sie getrennt, entsteht dadurch gewissermaßen eine
-Zwischenablage für historische Räume.
+Zwischenablage für historische Räume. Um diese Trennung zu ermöglichen dürfen
+Homeserver die beiden Operationen nicht automatisch kombinieren (wie z. B. bei
+der [`forget_rooms_on_leave`] Konfiguration in Synapse).
 
-**A_3 - Verlassen von Räumen**
+**A_5 - Verlassen von Räumen**
 
-Clients MÜSSEN Nutzern erlauben Räume über die Nutzung der APIs [`/leave`] und
-[`/forget`] vom Client zu löschen. **\[\<=\]**
+TI-M Clients MÜSSEN Nutzern erlauben Räume über die Nutzung der APIs [`/leave`]
+und [`/forget`] vom Client zu löschen. **\[\<=\]**
 
-*Hinweis: Clients steht es frei die Operationen [`/leave`] und [`/forget`] zu
-trennen um dem Nutzer zu ermöglichen ein Archiv verlassener Räume zu erstellen.*
+**A_6 - Keine automatische Kombination von `/leave` und `/forget`**
+
+TI-M Fachdienste DÜRFEN bei Aufruf der API [`/leave`] NICHT automatisch ein
+[`/forget`] ausführen. **\[\<=\]**
+
+Haben alle Teilnehmer eines Homeservers einen privaten Raum verlassen und per
+[`/forget`] clientseitig entfernt, so muss dieser Raum mit seinen Inhalten auch
+serverseitig gelöscht werden. Dies folgt direkt aus dem DSGVO-Prinzip der
+Datensparsamkeit und der Tatsache, dass Nutzer diese Räume nicht mehr betreten
+können und auch auf ihren Geräten zur Löschung freigegeben haben.
+
+**A_7 - Serverseitiges Löschen nach `/forget`**
+
+TI-M Fachdienste MÜSSEN einen Raum und dessen Inhalte lokal löschen, wenn:
+
+- der Raum privat ist und
+- keiner der Nutzer des Homservers im Raum die Membership `invite` oder `join`
+  hat und
+- alle Nutzer des Homeservers, deren Membership im Raum `leave` oder `ban` ist,
+  den Raum per [`/forget`] von ihren Clients entfernt haben.
+
+Diese Löschung MUSS innerhalb von 7 Tagen ab letztem [`/forget`] erfolgen.
+**\[\<=\]**
+
+Die Regelungen zum serverseitigen Löschen bei [`/leave`] *ohne* [`/forget`]
+richten sich nach dem vorigen Abschnitt.
 
 Eine regelmäßige Erinnerung an das clientseitige Löschen von Räumen ist nicht
 erforderlich. Zum Einen ist der überwiegende Teil der Kommunikation in TI-M
@@ -177,7 +224,7 @@ Verlusts von eigentlich relevanten Nachrichten für andere Gesprächsteilnehmer.
 Als Kompromiss werden Redactions daher zwar erlaubt. Sie müssen im Client aber
 stets mit einem Warnhinweis versehen werden[^1].
 
-**A_4 - Nachrichtenbasiertes Löschen per Redaction**
+**A_8 - Nachrichtenbasiertes Löschen per Redaction**
 
 Clients MÜSSEN ihren Nutzern erlauben eigene Nachrichten per Redaction zu
 löschen. Dabei MUSS der Nutzer vor jedem Auslösen einer Löschung per Warnhinweis
@@ -189,7 +236,7 @@ Replacements], so MÜSSEN alle Events dieser Kette redacted werden. Dies kann
 z.B. über mehrere einzelne Redactions oder einen Mechanismus wie in [MSC3912]
 geschehen. **\[\<=\]**
 
-**A_5 - Kennzeichnung gelöschter Nachrichten**
+**A_9 - Kennzeichnung gelöschter Nachrichten**
 
 Clients MÜSSEN `m.room.redaction` Events analog zu Servern anwenden und
 gelöschte Nachrichten mit Datum, Uhrzeit und löschendem Akteur kennzeichnen.
@@ -214,51 +261,12 @@ keiner weiteren Regelung. Insbesondere kann das Recht auf Löschung der eigenen
 Daten auch durch einen Supportprozess außerhalb des Clients implementiert
 werden.
 
-Da die Matrix-Spezifikation zwischen [`/leave`] und [`/forget`] unterscheidet
-und dies nicht selten zu Verwirrung führt erscheinen einige explizite Regelungen
-dennoch sinnvoll.
+*TODO: Betrachtung von [Erasure requests] und weiterer DSGVO Pflichten.*
 
-Zum einen müssen private Räume, die von allen Teilnehmern eines Homeservers
-verlassen und per [`/forget`] clientseitig entfernt wurden auch serverseitig
-gelöscht werden. Dies folgt direkt aus dem DSGVO-Prinzip der Datensparsamkeit
-und der Tatsache, dass Nutzer diese Räume nicht mehr betreten können und auch
-auf ihren Geräten zur Löschung freigegeben haben.
-
-Zum anderen dürfen private Räume, die zwar von allen Teilnehmern eines
-Homeservers verlassen aber nicht per [`/forget`] zur Löschung freigegeben
-wurden, erst nach einer gewissen Karenzzeit auf dem Homeserver gelöscht werden.
-Dies ergibt sich insbesondere daraus, dass das Verlassen eines Raumes nach
-[A_26348] und [A_26463] nicht zwingend vom Nutzer selbst initiert wird. Die
-Karenzzeit dient daher dazu die Wahrscheinlichkeit eines unerwarteten Verlustes
-von Rauminhalten für den Nutzer zu reduzieren.
-
-**A_6 - Serverseitiges Löschen nach `/forget`**
-
-Homeserver MÜSSEN einen Raum und dessen Inhalte lokal löschen, wenn:
-
-- der Raum privat ist und
-- keiner der Nutzer des Homservers im Raum die Membership `invite` oder `join`
-  hat und
-- alle Nutzer des Homeservers, deren Membership im Raum `leave` oder `ban` ist,
-  den Raum per [`/forget`] von ihren Clients entfernt haben.
-
-Diese Löschung MUSS innerhalb von 7 Tagen ab letztem [`/forget`] erfolgen.
-**\[\<=\]**
-
-**A_7 - Serverseitiges Löschen ohne `/forget`**
-
-Homeserver MÜSSEN einen Raum und dessen Inhalte für mindestens 7 Tage vorhalten,
-wenn:
-
-- der Raum privat ist und
-- keiner der Nutzer des Homservers im Raum die Membership `invite` oder `join`
-  hat und
-- es Nutzer des Homeservers gibt, deren Membership im Raum `leave` oder `ban`
-  ist, die den Raum aber *nicht* per [`/forget`] von ihren Clients entfernt
-  haben.
-
-Nach Ablauf dieser Karenzzeit, ist eine serverseite Löschung erlaubt.
-**\[\<=\]**
+- *Verarbeitungsverzeichnis gem. Art. 30 DSGVO*
+- *Nachweis über Sicherheit der Verarbeitung Art. 32 DSGVO*
+- *Auskunftsrecht der betroffenen Person Art. 15 DSGVO*
+- *Nachweis der „Rechenschaftspflicht“ Art. 5.2 DSGVO*
 
 ## Aktuelle Löschanforderungen
 
@@ -345,24 +353,27 @@ in dieselben Kategorien wie im vorigen Abschnitt "Änderungsvorschlag" gruppiert
 > löschenden Akteur, das Datum und die Uhrzeit der Löschung enthalten.
 > **\[\<=\]**
 
-[^1]: Dieses Verhalten wird in ähnlicher Form auch bei der Löschung von Dokument
-    aus der ePA verwendet. Siehe hierzu [A_20103].
+[^1]: Dieses Verhalten wird in ähnlicher Form auch bei der Löschung von
+    Dokumenten aus der ePA verwendet. Siehe hierzu [A_20103].
 
 [^2]: Der zweite Teil dieser Anforderung ist redundant zu [A_25575] und gehört
     daher eigentlich auch in die Kategorie "Redactions".
 
   [TI-M Basis]: https://gemspec.gematik.de/docs/gemSpec/gemSpec_TI-M_Basis/gemSpec_TI-M_Basis_V1.1.1
+  [TI-M Architektur]: 291-architektur.png "Architektur"
+  [DSGVO Art. 17]: https://dsgvo-gesetz.de/art-17-dsgvo/
+  [SGB 5 § 304]: https://www.gesetze-im-internet.de/sgb_5/__304.html
+  [Server Notices]: https://spec.matrix.org/v1.13/client-server-api/#server-notices
   [Message Retention Policies]: https://element-hq.github.io/synapse/latest/message_retention_policies.html
   [MSC3911]: https://github.com/matrix-org/matrix-spec-proposals/pull/3911
-  [Server Notices]: https://spec.matrix.org/v1.13/client-server-api/#server-notices
   [`/leave`]: https://spec.matrix.org/v1.13/client-server-api/#post_matrixclientv3roomsroomidleave
   [`/sync`]: https://spec.matrix.org/v1.13/client-server-api/#get_matrixclientv3sync
   [`/forget`]: https://spec.matrix.org/v1.13/client-server-api/#post_matrixclientv3roomsroomidforget
+  [`forget_rooms_on_leave`]: https://element-hq.github.io/synapse/latest/usage/configuration/config_documentation.html#forget_rooms_on_leave
   [Redactions]: https://spec.matrix.org/v1.13/client-server-api/#redactions
   [Event Replacements]: https://spec.matrix.org/v1.13/client-server-api/#event-replacements
   [MSC3912]: https://github.com/matrix-org/matrix-spec-proposals/pull/3912
-  [A_26348]: https://gemspec.gematik.de/docs/gemSpec/gemSpec_TI-M_ePA/latest/#A_26348
-  [A_26463]: https://gemspec.gematik.de/docs/gemSpec/gemSpec_TI-M_Pro/latest/#A_26463
+  [Erasure requests]: https://matrix.org/blog/2024/06/regulatory-update/
   [A_25318]: https://gemspec.gematik.de/docs/gemSpec/gemSpec_TI-M_Basis/gemSpec_TI-M_Basis_V1.1.1/#A_25318
   [A_25319]: https://gemspec.gematik.de/docs/gemSpec/gemSpec_TI-M_Basis/gemSpec_TI-M_Basis_V1.1.1/#A_25319
   [A_25609]: https://gemspec.gematik.de/docs/gemSpec/gemSpec_TI-M_Basis/gemSpec_TI-M_Basis_V1.1.1/#A_25609
