@@ -208,7 +208,7 @@ und diese dem Nutzer zur Löschung anzubieten.
 - möchte ich von mir gesendete Nachrichten für alle Gesprächsteilnehmer löschen
 - damit ich schwerwiegende Fehler korrigieren kann.
 
-Die Matrix-Spezifikation ermöglicht die (Selbst-)Moderation von Events mittels
+Die Matrix-Spezifikation ermöglicht die Selbstmoderation von Events mittels
 [Redactions]. Redactions sind eine invasive Form des Löschens da sie über die
 Föderation propagieren und letztendlich zu einer irreversiblen Löschung von
 Inhalten auf allen beteiligten Servern und Clients führen.
@@ -246,6 +246,17 @@ Unabhängig von Redactions können TI-M Clients bei Bedarf visuelles Löschen f�
 z. B. `m.room.message` Events auch über [Event Replacements] implementieren.
 Diese Form des Löschens ist reversibel und transparent da Replacements separate
 Events sind und die gesamte Historie von Events erhalten bleibt.
+
+Redactions können weiterhin auch zur Fremdmoderation, also dem Löschen von
+Events *anderer* Nutzer, verwendet werden, z. B. in Verbindung mit dem Modul
+[Reporting Content]. Im TI-M Kontext stellt dies momentan allerdings keinen
+nennenswerten Use Case dar. Das liegt zum einen daran, dass alle Nutzer-Accounts
+gemanagt und identifizierbar sind. Der Versand von z. B. illegalen Inhalten
+würde daher in erster Linie den Absender und nicht den Empfänger belasten. Zum
+anderen ist Fremdmoderation in der Regel nur in öffentlichen und
+unverschlüsselten Räumen sinnvoll und praktikabel. Solche Räume können aktuell
+aber nur lokal auf TI-M Pro Homeservern existieren. Das Thema der
+Fremdmoderation wird daher an dieser Stelle nicht weiter behandelt.
 
 ### DSGVO & Datenschutz
 
@@ -373,6 +384,7 @@ in dieselben Kategorien wie im vorigen Abschnitt "Änderungsvorschlag" gruppiert
   [Redactions]: https://spec.matrix.org/v1.13/client-server-api/#redactions
   [Event Replacements]: https://spec.matrix.org/v1.13/client-server-api/#event-replacements
   [MSC3912]: https://github.com/matrix-org/matrix-spec-proposals/pull/3912
+  [Reporting Content]: https://spec.matrix.org/v1.13/client-server-api/#reporting-content
   [Erasure requests]: https://matrix.org/blog/2024/06/regulatory-update/
   [A_25318]: https://gemspec.gematik.de/docs/gemSpec/gemSpec_TI-M_Basis/gemSpec_TI-M_Basis_V1.1.1/#A_25318
   [A_25319]: https://gemspec.gematik.de/docs/gemSpec/gemSpec_TI-M_Basis/gemSpec_TI-M_Basis_V1.1.1/#A_25319
