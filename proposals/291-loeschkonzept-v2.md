@@ -279,12 +279,14 @@ werden.
 - *Auskunftsrecht der betroffenen Person Art. 15 DSGVO*
 - *Nachweis der „Rechenschaftspflicht“ Art. 5.2 DSGVO*
 
-## Aktuelle Löschanforderungen
+## Bisherige und in Zukunft entfallende Löschanforderungen
 
 Da das aktuelle Löschkonzept wie eingangs erwähnt fragmentiert ist, werden der
 Vollständigkeit halber im Folgenden die momentan existierenden Anforderungen aus
 [TI-M Basis] aufgelistet. Die Anforderungen sind dabei zum besseren Verständnis
 in dieselben Kategorien wie im vorigen Abschnitt "Änderungsvorschlag" gruppiert.
+Wie zuvor erwähnt, entfallen alle bisherigen Anforderungen und werden durch die
+im Änderungsvorschlag aufgelisteten neuen Anforderungen ersetzt.
 
 ### Serverseitiges Löschen
 
