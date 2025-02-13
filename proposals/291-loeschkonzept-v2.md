@@ -152,10 +152,13 @@ Räumen und Medien könnte beispielsweise durch [MSC3911] realisiert werden.
 
 Nutzer müssen für die Organisation ihrer Unterhaltungen in die Lage versetzt
 werden Räume selbstständig verlassen und vom Client entfernen zu können. Hierbei
-ist zu beachten, dass Räume nach erfolgreichem [`/leave`] weiterhin in der
-[`/sync`]-Response auftauchen und dort erst durch ein explizites [`/forget`]
-verschwinden. Clients steht es frei diese beiden Operationen zu kombinieren oder
-zu trennen. Werden sie getrennt, entsteht dadurch gewissermaßen eine
+ist zu beachten, dass Räume nach erfolgreichem [`/leave`] weiterhin per
+[`/sync`] abrufbar sind. Dafür müssen Clients lediglich einen entsprechenden
+[Filter] mit `include_leave = true` verwenden. Erst durch ein explizites
+[`/forget`] verschwinden verlassene Räume dauerhaft aus der [`/sync`]-Response.
+
+Clients steht es frei die Operationen [`/leave`] und [`/forget`] zu kombinieren
+oder zu trennen. Werden sie getrennt, entsteht dadurch gewissermaßen eine
 Zwischenablage für historische Räume. Um diese Trennung zu ermöglichen dürfen
 Homeserver die beiden Operationen nicht automatisch kombinieren (wie z. B. bei
 der [`forget_rooms_on_leave`] Konfiguration in Synapse).
@@ -381,6 +384,7 @@ im Änderungsvorschlag aufgelisteten neuen Anforderungen ersetzt.
   [MSC3911]: https://github.com/matrix-org/matrix-spec-proposals/pull/3911
   [`/leave`]: https://spec.matrix.org/v1.13/client-server-api/#post_matrixclientv3roomsroomidleave
   [`/sync`]: https://spec.matrix.org/v1.13/client-server-api/#get_matrixclientv3sync
+  [Filter]: https://spec.matrix.org/v1.13/client-server-api/#filtering
   [`/forget`]: https://spec.matrix.org/v1.13/client-server-api/#post_matrixclientv3roomsroomidforget
   [`forget_rooms_on_leave`]: https://element-hq.github.io/synapse/latest/usage/configuration/config_documentation.html#forget_rooms_on_leave
   [Redactions]: https://spec.matrix.org/v1.13/client-server-api/#redactions
