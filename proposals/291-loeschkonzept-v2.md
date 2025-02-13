@@ -263,24 +263,202 @@ Fremdmoderation wird daher an dieser Stelle nicht weiter behandelt.
 
 ### DSGVO & Datenschutz
 
-**Story 8**
+TI-M Clients und Fachdienste unterliegen der DSGVO. Da dies bereits gesetzlich
+geregelt ist, bedarf es hierfür prinzipiell keiner neuen Anforderungen in der
+TI-M Spezifikation. Gleichzeitig muss validiert werden, dass die zuvor
+eingeführten neuen Anforderungen nicht im Widerspruch zur DSGVO oder daraus
+abgeleiteten Aktionen stehen. Weiterhin kann eine konkrete Anwendung der DSGVO
+auf TI-M und Matrix Hersteller und Anbieter bei einer rechtskonformen Umsetzung
+unterstützen.
 
-- Als Endnutzer
-- möchte ich mein Recht auf Löschung nach DSGVO wahrnehmen
-- damit ich die Kontrolle über meine Daten behalte.
+#### Personenbezogene Daten und Anwendungsbereiche der DSGVO
 
-TI-M Clients und Fachdienste müssen DSGVO konform sein. Dies gilt ganz
-unabhängig von der TI-M Spezifikation und Bedarf an dieser Stelle eigentlich
-keiner weiteren Regelung. Insbesondere kann das Recht auf Löschung der eigenen
-Daten auch durch einen Supportprozess außerhalb des Clients implementiert
-werden.
+Bei der Verwendung von TI-M fallen vielfältige personenbezogene Daten im Sinne
+von [DSGVO Art. 4 Nr. 1] an. Unter anderem sind, abgesehen von
+Funktionsaccounts, alle TI-M Accounts identifizierbar, bei Versicherten
+insbesondere durch Verwendung der KVNR in der Matrix-ID. Zu den
+personenbezogenen Daten gehören daher *mindestens* alle Informationen, die sich
+mit der Matrix-ID eines Nutzers verknüpfen lassen:
 
-*TODO: Betrachtung von [Erasure requests] und weiterer DSGVO Pflichten.*
+- Versendete Events und Medien (egal ob verschlüsselt oder nicht)
+- Raummitgliedschaften ([`m.room.member`]) und andere gesendete State Events
+- [Profile]
+- [(Room) Account Data]
+- [Devices]
+- [Key Backups]
+- [Veröffentlichte Schlüssel]
+- ...
 
-- *Verarbeitungsverzeichnis gem. Art. 30 DSGVO*
-- *Nachweis über Sicherheit der Verarbeitung Art. 32 DSGVO*
-- *Auskunftsrecht der betroffenen Person Art. 15 DSGVO*
-- *Nachweis der „Rechenschaftspflicht“ Art. 5.2 DSGVO*
+Die "Verarbeitung" dieser Daten umfasst nach [DSGVO Art. 4 Nr.
+2][DSGVO Art. 4 Nr. 1] auch deren Speicherung auf TI-M Clients und Homeservern.
+Hierbei sind natürliche Personen in ausschließlich persönlicher Tätigkeit nach
+\[DSGVO Art. 2 Absatz 2c\] ausgenommen. Auf Versicherte als Verarbeiter von
+Daten gestützt durch ihre TI-M ePA Clients und Homeserver findet die DSGVO daher
+keine Anwendung. Alle anderen Komponenten der obigen Architekturskizze hingegen,
+insbesondere auch die Mitarbeiter des Gesundheitswesens und deren Archivsysteme
+unterliegen gegenüber Versicherten der DSGVO. Es ist dabei unerheblich, dass die
+Archivsysteme selbst nicht Teil der TI sind.
+
+#### Auskunftsrecht
+
+Nach [DSGVO Art. 15] haben TI-M Nutzer gegenüber dem Anbieter ihres Homeservers
+ein Auskunftsrecht. Dies umfasst sowohl die Herausgabe der gesammelten
+personenbezogenen Daten selbst als auch die Auflistung von Dritten,
+denengegenüber diese Daten offengelegt wurden.
+
+Im TI-M Kontext werden diese Dritten insbesondere auch andere Homeserver sein.
+Die Offenlegung von Daten gegenüber diesen Servern kann einerseits vom Nutzer
+selbst verursacht worden sein, z. B. durch das Versenden von Nachrichten.
+Andererseits können Homeserver bestimmte Informationen über die
+[Server-Server-API] auch selbstständig abfragen. Hierzu zählen u. a.
+[historische Events], [freigegebene Profile] und [Schlüssel]. Um das
+Auskunftsrecht erfüllen zu können ist daher eine fortlaufende serverseitige
+Protokollierung dieser Offenlegungen notwendig.
+
+Weiterhin kaskadiert das Auskunftsrecht auf Dritte mit denen Daten geteilt
+wurden. Ein Versicherter hat daher auch ein Auskunftsrecht gegenüber dem
+Mitarbeiter des Gesundheitswesens bzw. dem Anbieter dessen Homservers.
+
+#### Zweckgebundene Verarbeitung
+
+Die Verarbeitung von Daten muss nach [DSGVO Art. 6] stets zweckgebunden sein. Im
+Kontext von TI-M lassen sich innerhalb der TI zwei verschiedene Zwecke
+identifizieren:
+
+1.  Die medizinische Kommunikation selbst (nach [SGB 5 § 342 Absatz 2 Nr. 2])
+2.  Die Ausleitung der Kommunikation in ein externes Archivsystem zur
+    medizinischen Dokumentation (z. B. nach [BGB § 630f Absatz 3])
+
+Für das außerhalb der TI befindliche Archivsystem gibt es nur einen
+Verarbeitungszweck:
+
+1.  Die Vorhaltung der Kommunikation zur medizinischen Dokumentation (z. B. nach
+    [BGB § 630f Absatz 3])
+
+Bevor Daten verarbeitet werden dürfen müssen TI-M Anbieter von ihren Nutzern
+eine Einwilligung einholen und dabei die zugrundeliegenden Zwecke darlegen. Eine
+gegebene Einwilligung können Nutzer allerdings jederzeit widerrufen.
+
+Weiterhin können Verarbeitungszwecke im Laufe der Zeit gegenstandslos werden. So
+entfällt der Zweck der Ausleitung von Daten in ein Archivsystem offensichtlich
+sobald diese Ausleitung stattgefunden hat. Der Zweck der Vorhaltung von Daten in
+einem Archivsystem wiederum entfällt sobald die zugrundeliegende gesetzliche
+Vorhaltedauer abgelaufen ist. Der Zweck der medizinischen Kommunikation
+schließlich entfällt wenn z. B. ein Behandlungsgespräch abgeschlossen ist.
+
+#### Löschung und Recht auf Vergessenwerden
+
+Eine Verarbeitung von Daten ohne zugrundeliegende Verarbeitungszwecke ist nach
+[DSGVO Art. 6] nicht zulässig. Sind alle Zwecke entfallen, so müssen die
+personenbezogenen Daten daher gelöscht werden. Dabei ist gemäß [BDSG § 58 Absatz
+3] anstatt einer Löschung auch eine Einschränkung der Verarbeitung erlaubt.
+
+Des Weiteren haben TI-M Nutzer nach [DSGVO Art. 17 Absatz 1][DSGVO Art. 17] das
+Recht die Löschung ihrer personenbezogenen Daten zu verlangen ("Recht auf
+Vergessenwerden"). Die Löschung muss daraufhin vollzogen werden, es sei denn es
+existieren vom Widerruf der Nutzereinwilligung unberührte Verarbeitungszwecke
+wie z. B. gesetzliche Vorhaltefristen.
+
+Änlich zum Auskunftsrecht kaskadiert auch das Recht auf Vergessenwerden auf
+Dritte mit denen personenbezogene Daten geteilt wurden. Gemäß [DSGVO Art. 17
+Absatz 2][DSGVO Art. 17] müssen entsprechende Anfragen zudem auch an diese
+Dritten weitergeleitet werden. Dies kann wahlweise technisch oder
+organisatorisch erfolgen.
+
+Zur Illustration der Löschung betrachten wir im Folgenden verschiedene
+Szenarien.
+
+##### Szenario 1: Versicherter fordert Recht auf Vergessenwerden vom Anbieter seines TI-M ePA Homeservers ein
+
+Für den TI-M ePA Anbieter ist der einzige Verarbeitungszweck die medizinische
+Kommunikation. Mit der Anfrage des Versicherten entfällt dieser Zweck, so dass
+die personenbezogenen Daten des Versicherten auf dem Homeserver gelöscht werden
+müssen.
+
+Der Anbieter kann die meisten der oben aufgelisteten Daten direkt und ohne
+schädliche Einflüsse auf andere Nutzer oder Server löschen.
+
+Events stellen einen Sonderfall dar denn sie bilden eine serverseitige
+Datenstruktur, die von allen Raumteilnehmern desselben Homeservers geteilt und
+zudem über die Föderation verbreitet wird. Der TI-M ePA Anbieter hat dabei keine
+Einsicht darin ob die Verarbeitungszwecke auf den empfangenden TI-M Pro
+Homeservern durch den Widerruf der Einwilligung entfallen oder nicht. Unterliegt
+die Kommunikation z. B. Regelungen der medizinischen Dokumentation und wurde sie
+noch nicht archiviert, so dürfen die Events dort bis zur Archivierung weiterhin
+verarbeitet werden.
+
+Hieraus ergibt sich für den TI-M ePA Anbieter, dass eine Löschung aller vom
+Versicherten versendeten Events per Redactions nicht zulässig ist. Stattdessen
+muss der Versicherte aus allen seinen Räumen entfernt werden, analog zu einem
+[`/leave`] mit anschließendem [`/forget`]. Nach A_7 müssen die Räume samt der
+enthaltenen Events dann lokal gelöscht werden. Die einzige Ausnahme hiervon ist
+wenn sich wegen einer Vertreterregelung ein zweiter Versicherter desselben
+Homeservers in den Räumen befindet.
+
+Weiterhin ist zu beachten, dass gängige Matrix Homeserver Nutzer-Accounts selbst
+in der Regel nicht löschen sondern nur deaktivieren. In der öffentlichen
+Föderation wäre eine Löschung im allgemeinen unerwünscht, da sich dann jemand
+anderes unter derselben Matrix-ID registrieren und den vorigen Besitzer
+personifizieren könnte. Für TI-M ePA Homeserver besteht dieses Risiko allerdings
+nicht weil die Matrix-ID nach [A_25706] aus der KVNR des Versicherten abgeleitet
+wird. Der TI-M ePA Anbieter kann und muss daher auch den Account selbst löschen.
+Aktuell gibt es hierfür in Matrix keine dedizierte API. Hersteller können aber
+eigene APIs implementieren oder das Verhalten von
+[`/_matrix/client/v3/account/deactivate`] über Module anpassen sofern ihre
+Homeserverimplementierung dies zulässt. In einem zukünftigen Proposal sollte u.
+U. eine einheitliche API eingeführt werden.
+
+Abschließend muss der TI-M ePA Anbieter die Anfrage des Versicherten an alle
+Homeserver weiterleiten mit denen er Daten des Versicherten geteilt hat. Auch
+hierfür gibt es in Matrix momentan keinen technischen Mechanismus. Die
+Kommunikation kann daher nur manuell über die in [`/.well-known/matrix/support`]
+hinterlegten Wege erfolgen. Mit einem zukünftigen Proposal sollte u. U. auch
+hier eine dedizierte API geschaffen werden.
+
+##### Szenario 2: Versicherter fordert Recht auf Vergessenwerden von seinem Arzt ein
+
+Fällt die Kommunikation unter Regelungen zur medizinischen Dokumentation, so
+muss der Arzt sie zunächst in sein Archivsystem übertragen. Anschließend sind
+für ihn innerhalb der TI alle Verarbeitungszwecke entfallen und er muss die
+personenbezogenen Daten über seinen TI-M Pro Client löschen. Redactions als
+Mittel zur Löschung verbieten sich auch hier denn der Arzt kann nicht wissen ob
+der Versicherte auch eine Anfrage gegen den Anbieter seines eigenen Homeservers
+gestellt hat. Stattdessen muss der Arzt die Räume des Versicherten per
+[`/leave`] und [`/forget`] verlassen. Nach A_7 führt dies dann auch zur Löschung
+der Räume und der darin enthaltenen Events auf dem TI-M Pro Homeserver des
+Arztes.
+
+Die im Archivsystem befindlichen personenbezogen Daten des Versicherten hingegen
+darf der Arzt nicht löschen solange die zugrundeliegende gesetzliche
+Vorhaltedauer nicht verstrichen ist.
+
+##### Szenario 3: Mitarbeiter einer Krankenkasse sieht Unterhaltung mit einem Versicherten als abgeschlossen an
+
+Beim Zweck der medizinischen Kommunikation ist es wichtig zu beachten, dass
+deren Abschluss von den Teilnehmern unterschiedlich beurteilt werden kann.
+Aufgrund der dezentralen Architektur von TI-M lässt sich dies jedoch gut
+handhaben.
+
+Betrachtet der Mitarbeiter das Gespräch als beendet entfällt für ihn der einzige
+Verarbeitungszweck. Der Versicherte kann gleichzeitig eine andere Meinung über
+den Abschluss der Kommunikation haben. Analog zu oben sind für den Mitarbeiter
+Redactions daher als Instrument zur Löschung ausgeschlossen. Stattdessen muss
+der Mitarbeiter den Raum auf seinem TI-M Pro Client per [`/leave`] und
+[`/forget`] verlassen was wegen A_7 wieder zu einer Löschung des Raums auf
+seinem TI-M Pro Homeserver führt.
+
+Auf dem TI-M ePA Homeserver des Versicherten kann der Raum dadurch ungehindert
+weiterbestehen.
+
+#### Erasure Requests
+
+Die Matrix Foundation hat zur Behandlung von datenschutzrechtlichen
+Löschanfragen sogenannte [Erasure requests] definiert. Dieser Mechanismus
+orientiert sich an der E-Mail-Architektur und ist speziell für die öffentliche
+Föderation entworfen worden. Da in diesem Verfahren zu keinem Zeitpunkt eine
+Löschung oder Einschränkung der Verarbeitung für vormalige Empfänger von Events
+stattfindet, ist es zur Behandlung von Anfragen zum Recht auf Vergessenwerden im
+TI-M-Kontext ungeeignet.
 
 ## Bisherige und in Zukunft entfallende Löschanforderungen
 
@@ -391,6 +569,25 @@ im Änderungsvorschlag aufgelisteten neuen Anforderungen ersetzt.
   [Event Replacements]: https://spec.matrix.org/v1.13/client-server-api/#event-replacements
   [MSC3912]: https://github.com/matrix-org/matrix-spec-proposals/pull/3912
   [Reporting Content]: https://spec.matrix.org/v1.13/client-server-api/#reporting-content
+  [DSGVO Art. 4 Nr. 1]: https://dsgvo-gesetz.de/art-4-dsgvo/
+  [`m.room.member`]: https://spec.matrix.org/v1.13/client-server-api/#mroommember
+  [Profile]: https://spec.matrix.org/v1.13/client-server-api/#profiles
+  [(Room) Account Data]: https://spec.matrix.org/v1.13/client-server-api/#client-config
+  [Devices]: https://spec.matrix.org/v1.13/client-server-api/#get_matrixclientv3devices
+  [Key Backups]: https://spec.matrix.org/v1.13/client-server-api/#server-side-key-backups
+  [Veröffentlichte Schlüssel]: https://spec.matrix.org/v1.13/client-server-api/#post_matrixclientv3keysupload
+  [DSGVO Art. 15]: https://dsgvo-gesetz.de/art-15-dsgvo/
+  [Server-Server-API]: https://spec.matrix.org/v1.13/server-server-api/
+  [historische Events]: https://spec.matrix.org/v1.13/server-server-api/#backfilling-and-retrieving-missing-events
+  [freigegebene Profile]: https://spec.matrix.org/v1.13/server-server-api/#get_matrixfederationv1queryprofile
+  [Schlüssel]: https://spec.matrix.org/v1.13/server-server-api/#post_matrixfederationv1userkeysquery
+  [DSGVO Art. 6]: https://dsgvo-gesetz.de/art-6-dsgvo/
+  [SGB 5 § 342 Absatz 2 Nr. 2]: https://www.gesetze-im-internet.de/sgb_5/__342.html
+  [BGB § 630f Absatz 3]: https://www.gesetze-im-internet.de/bgb/__630f.html
+  [BDSG § 58 Absatz 3]: https://dsgvo-gesetz.de/bdsg/58-bdsg/
+  [A_25706]: https://gemspec.gematik.de/docs/gemSpec/gemSpec_TI-M_ePA/latest/#A_25706
+  [`/_matrix/client/v3/account/deactivate`]: https://spec.matrix.org/v1.13/client-server-api/#post_matrixclientv3accountdeactivate
+  [`/.well-known/matrix/support`]: https://spec.matrix.org/v1.13/client-server-api/#getwell-knownmatrixsupport
   [Erasure requests]: https://matrix.org/blog/2024/06/regulatory-update/
   [A_25318]: https://gemspec.gematik.de/docs/gemSpec/gemSpec_TI-M_Basis/gemSpec_TI-M_Basis_V1.1.1/#A_25318
   [A_25319]: https://gemspec.gematik.de/docs/gemSpec/gemSpec_TI-M_Basis/gemSpec_TI-M_Basis_V1.1.1/#A_25319
