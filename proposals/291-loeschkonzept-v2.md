@@ -391,9 +391,9 @@ Hieraus ergibt sich für den TI-M ePA Anbieter, dass eine Löschung aller vom
 Versicherten versendeten Events per Redactions nicht zulässig ist. Stattdessen
 muss der Versicherte aus allen seinen Räumen entfernt werden, analog zu einem
 [`/leave`] mit anschließendem [`/forget`]. Nach A_7 müssen die Räume samt der
-enthaltenen Events dann lokal gelöscht werden. Die einzige Ausnahme hiervon ist
-wenn sich wegen einer Vertreterregelung ein zweiter Versicherter desselben
-Homeservers in den Räumen befindet.
+enthaltenen Events dann lokal gelöscht werden, sofern sich kein weiterer
+Versicherter desselben Homeservers darin befindet (z. B. wegen einer
+Vertreterregelung).
 
 Weiterhin ist zu beachten, dass gängige Matrix Homeserver Nutzer-Accounts selbst
 in der Regel nicht löschen sondern nur deaktivieren. In der öffentlichen
