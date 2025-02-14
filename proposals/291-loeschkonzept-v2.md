@@ -292,9 +292,9 @@ mit der Matrix-ID eines Nutzers verknüpfen lassen:
 Die "Verarbeitung" dieser Daten umfasst nach [DSGVO Art. 4 Nr.
 2][DSGVO Art. 4 Nr. 1] auch deren Speicherung auf TI-M Clients und Homeservern.
 Hierbei sind natürliche Personen in ausschließlich persönlicher Tätigkeit nach
-\[DSGVO Art. 2 Absatz 2c\] ausgenommen. Auf Versicherte als Verarbeiter von
-Daten gestützt durch ihre TI-M ePA Clients und Homeserver findet die DSGVO daher
-keine Anwendung. Alle anderen Komponenten der obigen Architekturskizze hingegen,
+[DSGVO Art. 2 Absatz 2c] ausgenommen. Auf Versicherte als Verarbeiter von Daten
+gestützt durch ihre TI-M ePA Clients und Homeserver findet die DSGVO daher keine
+Anwendung. Alle anderen Komponenten der obigen Architekturskizze hingegen,
 insbesondere auch die Mitarbeiter des Gesundheitswesens und deren Archivsysteme
 unterliegen gegenüber Versicherten der DSGVO. Es ist dabei unerheblich, dass die
 Archivsysteme selbst nicht Teil der TI sind.
@@ -576,6 +576,7 @@ im Änderungsvorschlag aufgelisteten neuen Anforderungen ersetzt.
   [Devices]: https://spec.matrix.org/v1.13/client-server-api/#get_matrixclientv3devices
   [Key Backups]: https://spec.matrix.org/v1.13/client-server-api/#server-side-key-backups
   [Veröffentlichte Schlüssel]: https://spec.matrix.org/v1.13/client-server-api/#post_matrixclientv3keysupload
+  [DSGVO Art. 2 Absatz 2c]: https://dsgvo-gesetz.de/art-2-dsgvo/
   [DSGVO Art. 15]: https://dsgvo-gesetz.de/art-15-dsgvo/
   [Server-Server-API]: https://spec.matrix.org/v1.13/server-server-api/
   [historische Events]: https://spec.matrix.org/v1.13/server-server-api/#backfilling-and-retrieving-missing-events
