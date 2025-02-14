@@ -196,12 +196,16 @@ Die Regelungen zum serverseitigen Löschen bei [`/leave`] *ohne* [`/forget`]
 richten sich nach dem vorigen Abschnitt.
 
 Eine regelmäßige Erinnerung an das clientseitige Löschen von Räumen ist nicht
-erforderlich. Zum Einen ist der überwiegende Teil der Kommunikation in TI-M
-Ende-zu-Ende verschlüsselt. Zum Anderen lässt sich bei mehreren Raumteilnehmern
-von verschiedenen Homeservern vom Client ohnehin kein tatsächliches Löschen der
-Daten auf dem Server durchsetzen. Gleichzeitig steht es Herstellern aber frei
-intelligente Systeme zur Erkennung abgeschlossener Unterhaltungen zu entwickeln
-und diese dem Nutzer zur Löschung anzubieten.
+erforderlich. Versicherte auf der einen Seite unterliegen als Privatpersonen,
+die im persönlichen Interesse handeln, selbst nicht der DSGVO. Sie dürfen in
+ihren TI-M ePA Clients und gestützt durch ihre TI-M ePA Fachdienste Inhalte
+daher solange sie wünschen behalten. Mitarbeiter des Gesundheitswesens auf der
+anderen Seite können von Regelungen zur Dokumentationspflicht wie z. B. [BGB §
+630f Absatz 3] betroffen sein. Dieser Pflicht können sie insbesondere auch durch
+eine zeitgebundene Archivierung in TI-M selbst nachkommen. Da sich der Zweck der
+Vorhaltung von Räumen ohne Einblick in die verschlüsselten Rauminhalte aber
+nicht automatisiert erkennen lässt, ist eine regelmäßig Löscherinnerung auch für
+TI-M Pro Clients unnötig.
 
 ### Redactions
 
@@ -322,18 +326,23 @@ Mitarbeiter des Gesundheitswesens bzw. dem Anbieter dessen Homservers.
 #### Zweckgebundene Verarbeitung
 
 Die Verarbeitung von Daten muss nach [DSGVO Art. 6] stets zweckgebunden sein. Im
-Kontext von TI-M lassen sich innerhalb der TI zwei verschiedene Zwecke
-identifizieren:
+Kontext von TI-M lassen sich für die verschiedenen datenverarbeitenden
+Komponenten unterschiedliche Zwecke identifizieren:
 
-1.  Die medizinische Kommunikation selbst (nach [SGB 5 § 342 Absatz 2 Nr. 2])
-2.  Die Ausleitung der Kommunikation in ein externes Archivsystem zur
-    medizinischen Dokumentation (z. B. nach [BGB § 630f Absatz 3])
-
-Für das außerhalb der TI befindliche Archivsystem gibt es nur einen
-Verarbeitungszweck:
-
-1.  Die Vorhaltung der Kommunikation zur medizinischen Dokumentation (z. B. nach
-    [BGB § 630f Absatz 3])
+- Für TI-M ePA Clients & Fachdienste:
+  - Die medizinische Kommunikation selbst (nach [SGB 5 § 342 Absatz 2 Nr. 2]),
+    was auch die Weiterleitung von Daten an andere Clients und Fachdienste
+    einschließt
+- Für TI-M Pro Clients & Fachdienste:
+  - Die medizinische Kommunikation selbst
+  - Falls zutreffend, die Ausleitung der Kommunikation in ein externes
+    Archivsystem zur medizinischen Dokumentation (z. B. nach [BGB § 630f Absatz
+    3])
+  - Falls zutreffend, die Vorhaltung der Kommunikation zur medizinischen
+    Dokumentation in TI-M selbst
+- Für externe Archivsysteme:
+  - Falls zutreffend, die Vorhaltung der Kommunikation zur medizinischen
+    Dokumentation
 
 Bevor Daten verarbeitet werden dürfen müssen TI-M Anbieter von ihren Nutzern
 eine Einwilligung einholen und dabei die zugrundeliegenden Zwecke darlegen. Eine
@@ -384,8 +393,7 @@ zudem über die Föderation verbreitet wird. Der TI-M ePA Anbieter hat dabei kei
 Einsicht darin ob die Verarbeitungszwecke auf den empfangenden TI-M Pro
 Homeservern durch den Widerruf der Einwilligung entfallen oder nicht. Unterliegt
 die Kommunikation z. B. Regelungen der medizinischen Dokumentation und wurde sie
-noch nicht archiviert, so dürfen die Events dort bis zur Archivierung weiterhin
-verarbeitet werden.
+noch nicht archiviert, so dürfen die Events dort weiterhin verarbeitet werden.
 
 Hieraus ergibt sich für den TI-M ePA Anbieter, dass eine Löschung aller vom
 Versicherten versendeten Events per Redactions nicht zulässig ist. Stattdessen
@@ -418,19 +426,28 @@ hier eine dedizierte API geschaffen werden.
 ##### Szenario 2: Versicherter fordert Recht auf Vergessenwerden von seinem Arzt ein
 
 Fällt die Kommunikation unter Regelungen zur medizinischen Dokumentation, so
-muss der Arzt sie zunächst in sein Archivsystem übertragen. Anschließend sind
-für ihn innerhalb der TI alle Verarbeitungszwecke entfallen und er muss die
-personenbezogenen Daten über seinen TI-M Pro Client löschen. Redactions als
-Mittel zur Löschung verbieten sich auch hier denn der Arzt kann nicht wissen ob
-der Versicherte auch eine Anfrage gegen den Anbieter seines eigenen Homeservers
-gestellt hat. Stattdessen muss der Arzt die Räume des Versicherten per
-[`/leave`] und [`/forget`] verlassen. Nach A_7 führt dies dann auch zur Löschung
-der Räume und der darin enthaltenen Events auf dem TI-M Pro Homeserver des
-Arztes.
+muss unterschieden werden ob der Arzt für die Archivierung TI-M selbst oder ein
+externes System verwendet. Archiviert er in TI-M, so muss er die Events des
+Versicherten nicht löschen sondern darf sie bis zum Ablauf der zugrundeliegenden
+Vorhaltedauer weiter verarbeiten.
 
-Die im Archivsystem befindlichen personenbezogen Daten des Versicherten hingegen
-darf der Arzt nicht löschen solange die zugrundeliegende gesetzliche
-Vorhaltedauer nicht verstrichen ist.
+Benutzt er hingegen ein externes Archivsystem, so muss er die Kommunikation in
+dieses System übertragen. Hierdurch entfallen für den Arzt alle
+Verarbeitungszwecke innerhalb der TI und er muss die personenbezogenen Daten
+über seinen TI-M Pro Client löschen. Gleiches gilt wenn die Kommunikation von
+Anfang an nicht unter Regelungen zur medizinischen Dokumentation fiel.
+
+Redactions als Mittel zur Löschung verbieten sich auch hier denn der Arzt kann
+nicht wissen ob der Versicherte auch eine Anfrage gegen den Anbieter seines
+eigenen Homeservers gestellt hat. Stattdessen muss der Arzt die Räume des
+Versicherten per [`/leave`] und [`/forget`] verlassen. Nach A_7 führt dies dann
+auch zur Löschung der Räume und der darin enthaltenen Events auf dem TI-M Pro
+Homeserver des Arztes.
+
+Für personenbezogene Daten des Versicherten im Archivsystem gilt das gleiche wie
+bei Archivierung in TI-M selbst. Der Arzt darf diese Daten ohne Löschung
+weiterverarbeiten solange die zugrundeliegende gesetzliche Vorhaltedauer nicht
+verstrichen ist.
 
 ##### Szenario 3: Mitarbeiter einer Krankenkasse sieht Unterhaltung mit einem Versicherten als abgeschlossen an
 
@@ -565,6 +582,7 @@ im Änderungsvorschlag aufgelisteten neuen Anforderungen ersetzt.
   [Filter]: https://spec.matrix.org/v1.13/client-server-api/#filtering
   [`/forget`]: https://spec.matrix.org/v1.13/client-server-api/#post_matrixclientv3roomsroomidforget
   [`forget_rooms_on_leave`]: https://element-hq.github.io/synapse/latest/usage/configuration/config_documentation.html#forget_rooms_on_leave
+  [BGB § 630f Absatz 3]: https://www.gesetze-im-internet.de/bgb/__630f.html
   [Redactions]: https://spec.matrix.org/v1.13/client-server-api/#redactions
   [Event Replacements]: https://spec.matrix.org/v1.13/client-server-api/#event-replacements
   [MSC3912]: https://github.com/matrix-org/matrix-spec-proposals/pull/3912
@@ -584,7 +602,6 @@ im Änderungsvorschlag aufgelisteten neuen Anforderungen ersetzt.
   [Schlüssel]: https://spec.matrix.org/v1.13/server-server-api/#post_matrixfederationv1userkeysquery
   [DSGVO Art. 6]: https://dsgvo-gesetz.de/art-6-dsgvo/
   [SGB 5 § 342 Absatz 2 Nr. 2]: https://www.gesetze-im-internet.de/sgb_5/__342.html
-  [BGB § 630f Absatz 3]: https://www.gesetze-im-internet.de/bgb/__630f.html
   [BDSG § 58 Absatz 3]: https://dsgvo-gesetz.de/bdsg/58-bdsg/
   [A_25706]: https://gemspec.gematik.de/docs/gemSpec/gemSpec_TI-M_ePA/latest/#A_25706
   [`/_matrix/client/v3/account/deactivate`]: https://spec.matrix.org/v1.13/client-server-api/#post_matrixclientv3accountdeactivate
