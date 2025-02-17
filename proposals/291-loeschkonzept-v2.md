@@ -228,22 +228,29 @@ Löschung durch einen Administrator zu verwenden.
 
 Gleichzeitig führen Redactions bei Fehlbenutzung aber zu einem unerwarteten
 Verlusts von eigentlich relevanten Nachrichten für andere Gesprächsteilnehmer.
-Als Kompromiss werden Redactions daher zwar erlaubt. Sie müssen im Client aber
-stets mit einem Warnhinweis versehen werden[^1].
+Als Kompromiss werden Redactions daher zwar erlaubt. Sie werden aber zeitlich
+eingeschränkt und müssen im Client stets mit einem Warnhinweis versehen
+werden[^1].
 
 **A_8 - Nachrichtenbasiertes Löschen per Redaction**
 
-Clients MÜSSEN ihren Nutzern erlauben eigene Nachrichten per Redaction zu
-löschen. Dabei MUSS der Nutzer vor jedem Auslösen einer Löschung per Warnhinweis
-darauf hingewiesen werden, dass die Nachricht irreversibel und für alle
-Gesprächsteilnehmer gelöscht wird.
+Clients MÜSSEN ihren Nutzern erlauben eigene Nachrichten per Redaction innerhalb
+von 24h ab `origin_server_ts` zu löschen. Dabei MUSS der Nutzer vor jedem
+Auslösen einer Löschung per Warnhinweis darauf hingewiesen werden, dass die
+Nachricht irreversibel und für alle Gesprächsteilnehmer gelöscht wird.
 
 Ist eine zu löschende Nachricht Ausgangspunkt einer Kette von [Event
 Replacements], so MÜSSEN alle Events dieser Kette redacted werden. Dies kann
 z.B. über mehrere einzelne Redactions oder einen Mechanismus wie in [MSC3912]
 geschehen. **\[\<=\]**
 
-**A_9 - Kennzeichnung gelöschter Nachrichten**
+**A_9 - Zeitgrenze für Redactions**
+
+Fachdienste MÜSSEN Redactions der eigenen Nachrichten eines Nutzers ablehnen
+wenn seit `origin_server_ts` des zu redactenden Events mehr als 24h vergangen
+sind. **\[\<=\]**
+
+**A_10 - Kennzeichnung gelöschter Nachrichten**
 
 Clients MÜSSEN `m.room.redaction` Events analog zu Servern anwenden und
 gelöschte Nachrichten mit Datum, Uhrzeit und löschendem Akteur kennzeichnen.
