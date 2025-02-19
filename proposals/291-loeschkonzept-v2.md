@@ -152,26 +152,42 @@ Räumen und Medien könnte beispielsweise durch [MSC3911] realisiert werden.
 
 Nutzer müssen für die Organisation ihrer Unterhaltungen in die Lage versetzt
 werden Räume selbstständig verlassen und vom Client entfernen zu können. Hierbei
-ist zu beachten, dass Räume nach erfolgreichem [`/leave`] weiterhin per
+ist zu beachten, dass Räume nach erfolgreichem [`/leave`] weiterhin per Initial
 [`/sync`] abrufbar sind. Dafür müssen Clients lediglich einen entsprechenden
 [Filter] mit `include_leave = true` verwenden. Erst durch ein explizites
-[`/forget`] verschwinden verlassene Räume dauerhaft aus der [`/sync`]-Response.
+[`/forget`] verschwinden verlassene Räume dauerhaft aus der Initial
+[`/sync`]-Response.
 
 Clients steht es frei die Operationen [`/leave`] und [`/forget`] zu kombinieren
-oder zu trennen. Werden sie getrennt, entsteht dadurch gewissermaßen eine
-Zwischenablage für historische Räume. Um diese Trennung zu ermöglichen dürfen
-Homeserver die beiden Operationen nicht automatisch kombinieren (wie z. B. bei
-der [`forget_rooms_on_leave`] Konfiguration in Synapse).
+oder zu trennen. Werden sie getrennt, können Nutzer dadurch gewissermaßen eine
+Zwischenablage für historische Räume verwalten. Um diese Trennung zu ermöglichen
+dürfen Homeserver die beiden Operationen nicht automatisch kombinieren (wie z.
+B. bei der [`forget_rooms_on_leave`] Konfiguration in Synapse).
 
 **A_5 - Verlassen von Räumen**
 
 TI-M Clients MÜSSEN Nutzern erlauben Räume über die Nutzung der APIs [`/leave`]
 und [`/forget`] vom Client zu löschen. **\[\<=\]**
 
+*Hinweis: Es existiert in Matrix aktuell kein Mechanismus zum Synchronisieren
+von vergessenen Räumen über mehrere Geräte eines Nutzers hinweg.*
+
 **A_6 - Keine automatische Kombination von `/leave` und `/forget`**
 
 TI-M Fachdienste DÜRFEN bei Aufruf der API [`/leave`] NICHT automatisch ein
 [`/forget`] ausführen. **\[\<=\]**
+
+Wegen [A_26348] können TI-M ePA Clients auch automatisch und ohne [`/forget`]
+aus Räumen entfernt werden. In Abhängigkeit von Regelungen einer Organisation
+wäre ein automatisches Entfernen aus Räumen für TI-M Pro Clients ebenfalls
+denkbar. Damit die Inhalte dieser Räume für den Nutzer nicht unerwartet
+verschwinden, müssen TI-M Clients daher historische Räume in ihrem UI zugänglich
+machen.
+
+**A_7 - Anzeige historischer Räume**
+
+TI-M Clients MÜSSEN Räume, die verlassen aber noch nicht mittels [`/forget`]
+vergessen wurden, per [`/sync`] abfragen und zugänglich machen. **\[\<=\]**
 
 Haben alle Teilnehmer eines Homeservers einen privaten Raum verlassen und per
 [`/forget`] clientseitig entfernt, so muss dieser Raum mit seinen Inhalten auch
@@ -179,7 +195,7 @@ serverseitig gelöscht werden. Dies folgt direkt aus dem DSGVO-Prinzip der
 Datensparsamkeit und der Tatsache, dass Nutzer diese Räume nicht mehr betreten
 können und auch auf ihren Geräten zur Löschung freigegeben haben.
 
-**A_7 - Serverseitiges Löschen nach `/forget`**
+**A_8 - Serverseitiges Löschen nach `/forget`**
 
 TI-M Fachdienste MÜSSEN einen Raum und dessen Inhalte lokal löschen, wenn:
 
@@ -232,7 +248,7 @@ Als Kompromiss werden Redactions daher zwar erlaubt. Sie werden aber zeitlich
 eingeschränkt und müssen im Client stets mit einem Warnhinweis versehen
 werden[^1].
 
-**A_8 - Nachrichtenbasiertes Löschen per Redaction**
+**A_9 - Nachrichtenbasiertes Löschen per Redaction**
 
 Clients MÜSSEN ihren Nutzern erlauben eigene Nachrichten per Redaction innerhalb
 von 24h ab `origin_server_ts` zu löschen. Dabei MUSS der Nutzer vor jedem
@@ -244,13 +260,13 @@ Replacements], so MÜSSEN alle Events dieser Kette redacted werden. Dies kann
 z.B. über mehrere einzelne Redactions oder einen Mechanismus wie in [MSC3912]
 geschehen. **\[\<=\]**
 
-**A_9 - Zeitgrenze für Redactions**
+**A_10 - Zeitgrenze für Redactions**
 
 Fachdienste MÜSSEN Redactions der eigenen Nachrichten eines Nutzers ablehnen
 wenn seit `origin_server_ts` des zu redactenden Events mehr als 24h vergangen
 sind. **\[\<=\]**
 
-**A_10 - Kennzeichnung gelöschter Nachrichten**
+**A_11 - Kennzeichnung gelöschter Nachrichten**
 
 Clients MÜSSEN `m.room.redaction` Events analog zu Servern anwenden und
 gelöschte Nachrichten mit Datum, Uhrzeit und löschendem Akteur kennzeichnen.
@@ -589,6 +605,7 @@ im Änderungsvorschlag aufgelisteten neuen Anforderungen ersetzt.
   [Filter]: https://spec.matrix.org/v1.13/client-server-api/#filtering
   [`/forget`]: https://spec.matrix.org/v1.13/client-server-api/#post_matrixclientv3roomsroomidforget
   [`forget_rooms_on_leave`]: https://element-hq.github.io/synapse/latest/usage/configuration/config_documentation.html#forget_rooms_on_leave
+  [A_26348]: https://gemspec.gematik.de/docs/gemSpec/gemSpec_TI-M_ePA/latest/#A_26348
   [BGB § 630f Absatz 3]: https://www.gesetze-im-internet.de/bgb/__630f.html
   [Redactions]: https://spec.matrix.org/v1.13/client-server-api/#redactions
   [Event Replacements]: https://spec.matrix.org/v1.13/client-server-api/#event-replacements
