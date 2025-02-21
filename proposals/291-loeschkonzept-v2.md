@@ -152,42 +152,49 @@ Räumen und Medien könnte beispielsweise durch [MSC3911] realisiert werden.
 
 Nutzer müssen für die Organisation ihrer Unterhaltungen in die Lage versetzt
 werden Räume selbstständig verlassen und vom Client entfernen zu können. Hierbei
-ist zu beachten, dass Räume nach erfolgreichem [`/leave`] weiterhin per Initial
-[`/sync`] abrufbar sind. Dafür müssen Clients lediglich einen entsprechenden
-[Filter] mit `include_leave = true` verwenden. Erst durch ein explizites
-[`/forget`] verschwinden verlassene Räume dauerhaft aus der Initial
-[`/sync`]-Response.
+ist zu beachten, dass Matrix zwischen [`/leave`] und [`/forget`] unterscheidet.
+Ein Nutzer nimmt nach [`/leave`] nicht mehr an der weiteren Kommunikation in
+einem Raum teil. Er kann die bis dahin gesendeten Inhalte aber weiterhin
+abrufen. Erst nach [`/forget`] hat der Nutzer keinen Zugriff mehr auf die
+Raumhistorie.
 
-Clients steht es frei die Operationen [`/leave`] und [`/forget`] zu kombinieren
-oder zu trennen. Werden sie getrennt, können Nutzer dadurch gewissermaßen eine
-Zwischenablage für historische Räume verwalten. Um diese Trennung zu ermöglichen
-dürfen Homeserver die beiden Operationen nicht automatisch kombinieren (wie z.
-B. bei der [`forget_rooms_on_leave`] Konfiguration in Synapse).
+Clients steht es frei nach dem Verlassen eines Raumes durch [`/leave`]
+automatisch auch ein Vergessen per [`/forget`] auszuführen. Tun sie das nicht,
+ermöglichen sie ihren Nutzern damit die Verwaltung einer Zwischenablage für
+historische Räume.
 
-**A_5 - Verlassen von Räumen**
+Da das Verlassen eines Raumes auch fremdausgelöst sein kann, z. B. durch
+[A_26348], müssen Clients historische Räume aber in jedem Falle in ihrem UI
+zugänglich machen. Hierfür kann ein [Filter] mit `include_leave = true`
+verwendet werden wodurch alle verlassenen aber noch nicht vergessenen Räume mit
+dem Initial [`/sync`] zurückgeliefert werden. Dabei muss allerdings beachtet
+werden, dass es in Matrix aktuell keinen Mechanismus zum Synchronisieren von
+vergessenen Räumen über mehrere Geräte eines Nutzers hinweg gibt. Sofern die
+gleichzeitige Anmeldung auf mehreren Geräten nicht technisch ausgeschlossen
+wird, empfiehlt es sich daher in gewissen Abständen einen Initial [`/sync`]
+auszuführen um neu vergessene Räume einzusammeln.
+
+**A_5 - Vergessen von Räumen**
 
 TI-M Clients MÜSSEN Nutzern erlauben Räume über die Nutzung der APIs [`/leave`]
-und [`/forget`] vom Client zu löschen. **\[\<=\]**
+und [`/forget`] vom Client zu löschen. Dabei können diese Operationen wahlweise
+gemeinsam oder getrennt auslösbar sein. **\[\<=\]**
 
-*Hinweis: Es existiert in Matrix aktuell kein Mechanismus zum Synchronisieren
-von vergessenen Räumen über mehrere Geräte eines Nutzers hinweg.*
+**A_6 - Anzeige historischer Räume**
 
-**A_6 - Keine automatische Kombination von `/leave` und `/forget`**
+TI-M Clients MÜSSEN Räume, die verlassen aber noch nicht mittels [`/forget`]
+vergessen wurden, per [`/sync`] abfragen und in ihrem UI zugänglich machen.
+**\[\<=\]**
+
+Damit Clients tatsächlich die Wahl haben ob sie [`/forget`] automatisch
+ausführen oder nicht dürfen Homeserver diesen Automatismus nicht selbst
+implementieren (wie es z. B. bei der [`forget_rooms_on_leave`] Konfiguration in
+Synapse passiert).
+
+**A_7 - Keine serverseitige Kombination von `/leave` und `/forget`**
 
 TI-M Fachdienste DÜRFEN bei Aufruf der API [`/leave`] NICHT automatisch ein
 [`/forget`] ausführen. **\[\<=\]**
-
-Wegen [A_26348] können TI-M ePA Clients auch automatisch und ohne [`/forget`]
-aus Räumen entfernt werden. In Abhängigkeit von Regelungen einer Organisation
-wäre ein automatisches Entfernen aus Räumen für TI-M Pro Clients ebenfalls
-denkbar. Damit die Inhalte dieser Räume für den Nutzer nicht unerwartet
-verschwinden, müssen TI-M Clients daher historische Räume in ihrem UI zugänglich
-machen.
-
-**A_7 - Anzeige historischer Räume**
-
-TI-M Clients MÜSSEN Räume, die verlassen aber noch nicht mittels [`/forget`]
-vergessen wurden, per [`/sync`] abfragen und zugänglich machen. **\[\<=\]**
 
 Haben alle Teilnehmer eines Homeservers einen privaten Raum verlassen und per
 [`/forget`] clientseitig entfernt, so muss dieser Raum mit seinen Inhalten auch
@@ -601,11 +608,11 @@ im Änderungsvorschlag aufgelisteten neuen Anforderungen ersetzt.
   [Message Retention Policies]: https://element-hq.github.io/synapse/latest/message_retention_policies.html
   [MSC3911]: https://github.com/matrix-org/matrix-spec-proposals/pull/3911
   [`/leave`]: https://spec.matrix.org/v1.13/client-server-api/#post_matrixclientv3roomsroomidleave
-  [`/sync`]: https://spec.matrix.org/v1.13/client-server-api/#get_matrixclientv3sync
-  [Filter]: https://spec.matrix.org/v1.13/client-server-api/#filtering
   [`/forget`]: https://spec.matrix.org/v1.13/client-server-api/#post_matrixclientv3roomsroomidforget
-  [`forget_rooms_on_leave`]: https://element-hq.github.io/synapse/latest/usage/configuration/config_documentation.html#forget_rooms_on_leave
   [A_26348]: https://gemspec.gematik.de/docs/gemSpec/gemSpec_TI-M_ePA/latest/#A_26348
+  [Filter]: https://spec.matrix.org/v1.13/client-server-api/#filtering
+  [`/sync`]: https://spec.matrix.org/v1.13/client-server-api/#get_matrixclientv3sync
+  [`forget_rooms_on_leave`]: https://element-hq.github.io/synapse/latest/usage/configuration/config_documentation.html#forget_rooms_on_leave
   [BGB § 630f Absatz 3]: https://www.gesetze-im-internet.de/bgb/__630f.html
   [Redactions]: https://spec.matrix.org/v1.13/client-server-api/#redactions
   [Event Replacements]: https://spec.matrix.org/v1.13/client-server-api/#event-replacements
