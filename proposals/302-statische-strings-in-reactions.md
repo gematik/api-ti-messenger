@@ -54,6 +54,12 @@ Versendens von sensiblen Inhalten aber gar nicht betroffen.
 
 ## Kompatibilität & Migration
 
+Manche Serverimplementierungen begrenzen die Länge von Reactions intern (bei
+Synapse z. B. auf [500 Zeichen]). Die Verwendung sehr langer statischer Strings
+könnte dadurch verhindert werden. Konkrete Anwendungsfälle mit solchen Längen
+sind aktuell allerdings nicht bekannt, so dass dieses Risiko als gering
+eingestuft werden kann.
+
 Wegen [A_26228] werden aktuelle Fachdienste Reactions mit statischen Strings
 länger als 1 Zeichen ablehnen. Ein Client, der dieses Proposal implementiert
 kann zwar vorab nicht erkennen welcher Version der Spezifikation der Server
@@ -78,3 +84,4 @@ Keine.
   [A_26228]: https://gemspec.gematik.de/docs/gemSpec/gemSpec_TI-M_Basis/gemSpec_TI-M_Basis_V1.1.1/#A_26228-01
   [Heruntergeladen Reaction]: 302-statische-strings-in-reactions.png
     "Heruntergeladen Reaction"
+  [500 Zeichen]: https://github.com/element-hq/synapse/blob/c360da0f8b642d28601a06f2b5c3e072a5dbfca7/synapse/handlers/message.py#L1384
