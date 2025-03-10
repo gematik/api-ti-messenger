@@ -1,4 +1,4 @@
-# GSC302: Statische Strings in Annotations bzw. Reactions
+# GSC302: Freitextverbot in Annotations bzw. Reactions
 
 Das `key` Feld in `m.reaction` Events ist nach [Matrix-Spezifikation] ein
 nicht-längenbeschränkter String. Da dieses Feld innerhalb einer `m.annotation`
@@ -29,20 +29,27 @@ sind statische Strings, z. B. zur Markierung von Bildern als "Heruntergeladen".
 ![Heruntergeladen Reaction]
 
 Das vorliegende Proposal schwächt die bestehenden Anforderungen ab um die
-Verwendung statischer Strings in Reactions zu ermöglichen.
+Verwendung von Reactions nicht mehr als tatsächlich notwendig zu beschränken.
 
 ## Änderungsvorschlag
 
-[A_26227] wird aufgeweicht um das Senden statischer Strings zu erlauben.
+Die naheliegendste und wahrscheinlich einzige realistische Möglichkeit wie es zu
+einem unbeabsichtigten Senden sensibler Informationen in Reactions kommen kann
+ist wenn ein Client die Eingabe von Freitext für Reactions ermöglicht. Daher
+wird [A_26227] aufgeweicht um nur diesen konkreten Fall zu unterbinden.
 
-> **A_26227-02 - Beschränkung von Annotationen in Reactions**
+> **A_26227-02 - Kein Freitext in Reactions**
 >
-> Der TI-M Client MUSS sicherstellen, dass der Wert des Attributes `key` im
-> Event-Content von `m.reaction` Events nur vordefinierte, statische Strings
-> ohne Personenbezug enthält. **\[\<=\]**
+> Der TI-M Client DARF es Nutzern NICHT ermöglichen den Wert des Attributes
+> `key` im Event-Content von `m.reaction` Events mit Freitext zu befüllen.
+> **\[\<=\]**
+
+Die Prüfung dieser Anforderung kann nur im Sicherheits- bzw. Produktgutachten
+stattfinden.
 
 [A_26228] wird nicht angepasst sondern gestrichen da der Server alleine nicht
-entscheiden kann ob ein String statisch ist oder nicht.
+entscheiden kann ob ein konkreter Wert durch freie Eingabe entstanden ist oder
+nicht.
 
 ## Sicherheit und Datenschutz
 
@@ -60,11 +67,10 @@ könnte dadurch verhindert werden. Konkrete Anwendungsfälle mit solchen Längen
 sind aktuell allerdings nicht bekannt, so dass dieses Risiko als gering
 eingestuft werden kann.
 
-Wegen [A_26228] werden aktuelle Fachdienste Reactions mit statischen Strings
-länger als 1 Zeichen ablehnen. Ein Client, der dieses Proposal implementiert
-kann zwar vorab nicht erkennen welcher Version der Spezifikation der Server
-unterliegt. Er kann allerdings auf den zurückgelieferten Fehlercode entsprechend
-reagieren.
+Wegen [A_26228] werden aktuelle Fachdienste Reactions mit Strings länger als 1
+Zeichen ablehnen. Ein Client, der dieses Proposal implementiert kann zwar vorab
+nicht erkennen welcher Version der Spezifikation der Server unterliegt. Er kann
+allerdings auf den zurückgelieferten Fehlercode entsprechend reagieren.
 
 Clients könnten für bestimmte statische Reactions ein spezielles UI
 implementieren oder darauf mit einer speziellen Aktion reagieren. Da dieses
@@ -77,7 +83,17 @@ bestimmt werden.
 
 ## Alternativen
 
-Keine.
+Anstatt Freitext in Reactions zu verbieten, wäre es auch möglich nur statische
+Strings zu erlauben.
+
+> **A_26227-02 - Beschränkung von Annotationen in Reactions**
+>
+> Der TI-M Client MUSS sicherstellen, dass der Wert des Attributes `key` im
+> Event-Content von `m.reaction` Events nur vordefinierte, statische Strings
+> ohne Personenbezug enthält. **\[\<=\]**
+
+Diese Variante ist allerdings komplizierter, da hier auch die Grenzen von
+statischen Strings genau definiert werden müssten.
 
   [Matrix-Spezifikation]: https://spec.matrix.org/v1.13/client-server-api/#event-annotations-and-reactions
   [A_26227]: https://gemspec.gematik.de/docs/gemSpec/gemSpec_TI-M_Basis/gemSpec_TI-M_Basis_V1.1.1/#A_26227-01
