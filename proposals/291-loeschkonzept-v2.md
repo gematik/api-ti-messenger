@@ -34,14 +34,14 @@ gruppierten User Stories und die daraus abgeleiteten Änderungsvorschläge
 vorgestellt.
 
 Ausgangspunkt der Vorschläge ist, dass alle aktuellen Anforderung zum Löschen
-entfallen. Diese Anforderungen sind der Vollständigkeit halber im nachfolgenden
+entfallen. Diese Anforderungen sind der Vollständigkeit halber weiter unten im
 Abschnitt "Aktuelle Löschanforderungen" aufgelistet. Des Weiteren sind die neuen
 Anforderungen als grobe Vorschläge zu verstehen, die nicht zwingend mit
 identischem Wortlaut in die Spezifikation übernommen werden sollen.
 
 Zum besseren Verständnis der weiteren Ausführungen ist im Folgenden der Verlauf
-einer TI-M Nachricht von einem Versicherten bis zu einem Mitarbeiter des
-Gesundheitswesens dargestellt.
+einer TI-M Nachricht von einem Mitarbeiter des Gesundheitswesens bis zu einem
+Versicherten dargestellt.
 
 ![TI-M Architektur]
 
@@ -86,9 +86,9 @@ sonst Inhalte unerwartet und unwiederbringlich verloren gehen könnten.
 
 **A_1 - Serverseitige Löschung nur nach Nutzereinwilligung**
 
-TI-M ePA Fachdienste DÜRFEN Rauminhalte und damit verbundene Medien NICHT ohne
-vorige Einwilligung aller lokalen Teilnehmer des Raumes löschen. Redactions sind
-von dieser Regelung ausgenommen. **\[\<=\]**
+TI-M ePA Fachdienste DÜRFEN Rauminhalte (= Events) NICHT ohne vorige
+Einwilligung aller lokalen Teilnehmer des Raumes löschen. Redactions sind von
+dieser Regelung ausgenommen. **\[\<=\]**
 
 Mitarbeiter des Gesundheitswesens auf der anderen Seite sind ihrer Organisation
 und deren Regeln untergeordnet. Darüber hinaus gelten für sie gesetzliche
@@ -103,14 +103,14 @@ Homeserver aus.
 
 **A_2 - Automatische serverseitige Löschung**
 
-TI-M Pro Fachdienste KÖNNEN Rauminhalte und damit verbundene Medien automatisch
-und ohne Einwilligung der Raumteilnehmer löschen. **\[\<=\]**
+TI-M Pro Fachdienste KÖNNEN Rauminhalte (= Events) automatisch und ohne
+Einwilligung der Raumteilnehmer löschen. **\[\<=\]**
 
 **A_3 - Lokale Beschränkung der automatischen serverseitigen Löschung**
 
 Implementieren TI-M Pro Fachdienste Funktionen zum automatisch Löschen von
-Rauminhalten oder damit verbundener Medien, so MUSS die Löschung server-lokal
-und ohne direkten Einfluss auf die Föderation erfolgen. **\[\<=\]**
+Rauminhalten (= Events), so MUSS die Löschung server-lokal und ohne direkten
+Einfluss auf die Föderation erfolgen. **\[\<=\]**
 
 Damit Inhalte nicht unerwartet verloren gehen, müssen Nutzer über etwaige
 automatische Löschfunktionen zumindest informiert werden. Die konkrete Form der
@@ -121,20 +121,53 @@ auch denkbar, dass nur einmalig über feste Löschintervalle informiert wird.
 **A_4 - Information über automatische serverseitige Löschung**
 
 Nutzen TI-M Pro Anbieter Funktionen zur automatischen serverseitigen Löschung
-von Rauminhalte oder damit verbundener Medien, so MÜSSEN sie ihre Nutzer vorab
-darüber informieren. **\[\<=\]**
+von Rauminhalten (= Events), so MÜSSEN sie ihre Nutzer vorab darüber
+informieren. **\[\<=\]**
 
 Die konkrete Ausgestaltung einer automatischen serverseitigen Löschfunktion muss
 durch die Spezifikation nicht weiter vorgegeben werden. Hier gibt es
 verschiedene Möglichkeiten. So könnten z. B. Nutzer des eigenen Homeservers aus
-Räumen entfernt werden und diese Räume samt der zugehörigen Events und Medien
-dann aus der Datenbank des Servers gelöscht werden. Alternativ wäre auch ein
-fortlaufendes Löschen von veralteten Events und Medien aus der Datenbank des
-Servers möglich, wobei der Raum selbst bestehen bleibt. Homeserver wie Synapse
-bieten hierfür konfigurierbare [Message Retention Policies] an. Eine weitere
-Möglichkeit wäre die Implementierung eines Quota-Systems wie es z. B. bei
-E-Mail-Anbietern gängig ist. Die hierfür eventuell notwendige Verlinkung von
-Räumen und Medien könnte beispielsweise durch [MSC3911] realisiert werden.
+Räumen entfernt werden und diese Räume samt der zugehörigen Events dann aus der
+Datenbank des Servers gelöscht werden. Alternativ wäre auch ein fortlaufendes
+Löschen von veralteten Events aus der Datenbank des Servers möglich, wobei der
+Raum selbst bestehen bleibt. Homeserver wie Synapse bieten hierfür
+konfigurierbare [Message Retention Policies] an. Eine weitere Möglichkeit wäre
+die Implementierung eines Quota-Systems wie es z. B. bei E-Mail-Anbietern gängig
+ist.
+
+#### Serverseitiges Löschen von Medien
+
+Die vorangegangenen Überlegungen für Events sollten prinzipiell auch für Medien
+gelten. Hierbei gibt es aber zwei technologische Einschränkungen:
+
+1.  Events lassen sich aktuell in Matrix nur im unverschlüsselten Zustand, also
+    nur auf Clients, mit Medien verknüpfen (vgl. auch obige Architekturskizze).
+2.  Es gibt in Matrix momentan keine API zum Löschen von Medien, die ein Client
+    benutzen könnte.
+
+Für beide Probleme existieren Lösungsvorschläge ([MSC3911] bzw. [MSC2278]).
+Diese stellen allerdings weitreichende und bisher nicht als praktikabel
+bewiesene Eingriffe ins Protokoll dar. Die Lösung dieser Probleme wird daher
+hier aus dem Scope ausgeklammert und auf eine zukünftige Iteration des
+Löschkonzepts verschoben.
+
+Geht man also vom aktuellen Zustand aus, so haben Homeserver abgesehen vom
+Zeitpunkt des letzten Downloads, keine Information darüber ob Medien obsolet
+sind oder nicht. Gleichzeitig haben Clients keine Möglichkeit Medien selbst zu
+löschen oder als obsolet zu kennzeichnen. Eine dauerhafte und anlasslose
+Speicherung von Daten, egal ob verschlüsselt oder nicht, ist nach DSGVO aber
+nicht zulässig. Hieraus resultiert zwangsläufig, dass Homeserver Medien nach
+Ablauf eines Intervalls automatisch Löschen müssen. Die konkrete Festlegung des
+Intervalls obliegt dabei dem Betreiber.
+
+**A_5 - Automatische Löschung von Medien**
+
+TI-M Fachdienste müssen Medien nach Ablauf eines konfigurierbaren Intervalls
+seit Empfang oder letztem Download löschen. **\[\<=\]**
+
+Es sei an dieser Stelle betont, dass diese automatische Löschung von Medien, die
+ganz offensichtlich den zuvor benannten Zielen für Events widerspricht, nur eine
+Zwischenlösung ist.
 
 ### Clientseitiges Löschen
 
@@ -174,13 +207,13 @@ gleichzeitige Anmeldung auf mehreren Geräten nicht technisch ausgeschlossen
 wird, empfiehlt es sich daher in gewissen Abständen einen Initial [`/sync`]
 auszuführen um neu vergessene Räume einzusammeln.
 
-**A_5 - Vergessen von Räumen**
+**A_6 - Vergessen von Räumen**
 
 TI-M Clients MÜSSEN Nutzern erlauben Räume über die Nutzung der APIs [`/leave`]
 und [`/forget`] vom Client zu löschen. Dabei können diese Operationen wahlweise
 gemeinsam oder getrennt auslösbar sein. **\[\<=\]**
 
-**A_6 - Anzeige historischer Räume**
+**A_7 - Anzeige historischer Räume**
 
 TI-M Clients MÜSSEN Räume, die verlassen aber noch nicht mittels [`/forget`]
 vergessen wurden, per [`/sync`] abfragen und in ihrem UI zugänglich machen.
@@ -191,7 +224,7 @@ ausführen oder nicht dürfen Homeserver diesen Automatismus nicht selbst
 implementieren (wie es z. B. bei der [`forget_rooms_on_leave`] Konfiguration in
 Synapse passiert).
 
-**A_7 - Keine serverseitige Kombination von `/leave` und `/forget`**
+**A_8 - Keine serverseitige Kombination von `/leave` und `/forget`**
 
 TI-M Fachdienste DÜRFEN bei Aufruf der API [`/leave`] NICHT automatisch ein
 [`/forget`] ausführen. **\[\<=\]**
@@ -202,11 +235,11 @@ serverseitig gelöscht werden. Dies folgt direkt aus dem DSGVO-Prinzip der
 Datensparsamkeit und der Tatsache, dass Nutzer diese Räume nicht mehr betreten
 können und auch auf ihren Geräten zur Löschung freigegeben haben.
 
-**A_8 - Serverseitiges Löschen nach `/forget`**
+**A_9 - Serverseitiges Löschen nach `/forget`**
 
 TI-M Fachdienste MÜSSEN einen Raum und dessen Inhalte lokal löschen, wenn:
 
-- der Raum privat ist und
+- der Raum privat ist (im Sinne von Join Rules und History Visibility) und
 - keiner der Nutzer des Homservers im Raum die Membership `invite` oder `join`
   hat und
 - alle Nutzer des Homeservers, deren Membership im Raum `leave` oder `ban` ist,
@@ -255,7 +288,7 @@ Als Kompromiss werden Redactions daher zwar erlaubt. Sie werden aber zeitlich
 eingeschränkt und müssen im Client stets mit einem Warnhinweis versehen
 werden[^1].
 
-**A_9 - Nachrichtenbasiertes Löschen per Redaction**
+**A_10 - Nachrichtenbasiertes Löschen per Redaction**
 
 Clients MÜSSEN ihren Nutzern erlauben eigene Nachrichten per Redaction innerhalb
 von 24h ab `origin_server_ts` zu löschen. Dabei MUSS der Nutzer vor jedem
@@ -267,13 +300,13 @@ Replacements], so MÜSSEN alle Events dieser Kette redacted werden. Dies kann
 z.B. über mehrere einzelne Redactions oder einen Mechanismus wie in [MSC3912]
 geschehen. **\[\<=\]**
 
-**A_10 - Zeitgrenze für Redactions**
+**A_11 - Zeitgrenze für Redactions**
 
 Fachdienste MÜSSEN Redactions der eigenen Nachrichten eines Nutzers ablehnen
 wenn seit `origin_server_ts` des zu redactenden Events mehr als 24h vergangen
 sind. **\[\<=\]**
 
-**A_11 - Kennzeichnung gelöschter Nachrichten**
+**A_12 - Kennzeichnung gelöschter Nachrichten**
 
 Clients MÜSSEN `m.room.redaction` Events analog zu Servern anwenden und
 gelöschte Nachrichten mit Datum, Uhrzeit und löschendem Akteur kennzeichnen.
@@ -398,7 +431,7 @@ Vergessenwerden"). Die Löschung muss daraufhin vollzogen werden, es sei denn es
 existieren vom Widerruf der Nutzereinwilligung unberührte Verarbeitungszwecke
 wie z. B. gesetzliche Vorhaltefristen.
 
-Änlich zum Auskunftsrecht kaskadiert auch das Recht auf Vergessenwerden auf
+Ähnlich zum Auskunftsrecht kaskadiert auch das Recht auf Vergessenwerden auf
 Dritte mit denen personenbezogene Daten geteilt wurden. Gemäß [DSGVO Art. 17
 Absatz 2][DSGVO Art. 17] müssen entsprechende Anfragen zudem auch an diese
 Dritten weitergeleitet werden. Dies kann wahlweise technisch oder
@@ -414,8 +447,9 @@ Kommunikation. Mit der Anfrage des Versicherten entfällt dieser Zweck, so dass
 die personenbezogenen Daten des Versicherten auf dem Homeserver gelöscht werden
 müssen.
 
-Der Anbieter kann die meisten der oben aufgelisteten Daten direkt und ohne
-schädliche Einflüsse auf andere Nutzer oder Server löschen.
+Medien werden durch A_5 bereits automatisch gelöscht. Die meisten anderen der
+oben aufgelisteten Daten kann der Anbieter direkt und ohne schädliche Einflüsse
+auf andere Nutzer oder Server löschen.
 
 Events stellen einen Sonderfall dar denn sie bilden eine serverseitige
 Datenstruktur, die von allen Raumteilnehmern desselben Homeservers geteilt und
@@ -428,7 +462,7 @@ noch nicht archiviert, so dürfen die Events dort weiterhin verarbeitet werden.
 Hieraus ergibt sich für den TI-M ePA Anbieter, dass eine Löschung aller vom
 Versicherten versendeten Events per Redactions nicht zulässig ist. Stattdessen
 muss der Versicherte aus allen seinen Räumen entfernt werden, analog zu einem
-[`/leave`] mit anschließendem [`/forget`]. Nach A_7 müssen die Räume samt der
+[`/leave`] mit anschließendem [`/forget`]. Nach A_9 müssen die Räume samt der
 enthaltenen Events dann lokal gelöscht werden, sofern sich kein weiterer
 Versicherter desselben Homeservers darin befindet (z. B. wegen einer
 Vertreterregelung).
@@ -470,12 +504,12 @@ Anfang an nicht unter Regelungen zur medizinischen Dokumentation fiel.
 Redactions als Mittel zur Löschung verbieten sich auch hier denn der Arzt kann
 nicht wissen ob der Versicherte auch eine Anfrage gegen den Anbieter seines
 eigenen Homeservers gestellt hat. Stattdessen muss der Arzt die Räume des
-Versicherten per [`/leave`] und [`/forget`] verlassen. Nach A_7 führt dies dann
+Versicherten per [`/leave`] und [`/forget`] verlassen. Nach A_9 führt dies dann
 auch zur Löschung der Räume und der darin enthaltenen Events auf dem TI-M Pro
 Homeserver des Arztes.
 
 Für personenbezogene Daten des Versicherten im Archivsystem gilt das gleiche wie
-bei Archivierung in TI-M selbst. Der Arzt darf diese Daten ohne Löschung
+bei der Archivierung in TI-M selbst. Der Arzt darf diese Daten ohne Löschung
 weiterverarbeiten solange die zugrundeliegende gesetzliche Vorhaltedauer nicht
 verstrichen ist.
 
@@ -491,7 +525,7 @@ Verarbeitungszweck. Der Versicherte kann gleichzeitig eine andere Meinung über
 den Abschluss der Kommunikation haben. Analog zu oben sind für den Mitarbeiter
 Redactions daher als Instrument zur Löschung ausgeschlossen. Stattdessen muss
 der Mitarbeiter den Raum auf seinem TI-M Pro Client per [`/leave`] und
-[`/forget`] verlassen was wegen A_7 wieder zu einer Löschung des Raums auf
+[`/forget`] verlassen was wegen A_9 wieder zu einer Löschung des Raums auf
 seinem TI-M Pro Homeserver führt.
 
 Auf dem TI-M ePA Homeserver des Versicherten kann der Raum dadurch ungehindert
@@ -505,7 +539,7 @@ orientiert sich an der E-Mail-Architektur und ist speziell für die öffentliche
 Föderation entworfen worden. Da in diesem Verfahren zu keinem Zeitpunkt eine
 Löschung oder Einschränkung der Verarbeitung für vormalige Empfänger von Events
 stattfindet, ist es zur Behandlung von Anfragen zum Recht auf Vergessenwerden im
-TI-M-Kontext ungeeignet.
+TI-M-Kontext allerdings ungeeignet.
 
 ## Bisherige und in Zukunft entfallende Löschanforderungen
 
@@ -607,6 +641,7 @@ im Änderungsvorschlag aufgelisteten neuen Anforderungen ersetzt.
   [Server Notices]: https://spec.matrix.org/v1.13/client-server-api/#server-notices
   [Message Retention Policies]: https://element-hq.github.io/synapse/latest/message_retention_policies.html
   [MSC3911]: https://github.com/matrix-org/matrix-spec-proposals/pull/3911
+  [MSC2278]: https://github.com/matrix-org/matrix-spec-proposals/pull/2278
   [`/leave`]: https://spec.matrix.org/v1.13/client-server-api/#post_matrixclientv3roomsroomidleave
   [`/forget`]: https://spec.matrix.org/v1.13/client-server-api/#post_matrixclientv3roomsroomidforget
   [A_26348]: https://gemspec.gematik.de/docs/gemSpec/gemSpec_TI-M_ePA/latest/#A_26348
