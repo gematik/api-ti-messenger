@@ -36,7 +36,7 @@ vorgestellt.
 Ausgangspunkt der Vorschläge ist, dass alle aktuellen Anforderung zum Löschen
 entfallen. Diese Anforderungen sind der Vollständigkeit halber weiter unten im
 Abschnitt "Aktuelle Löschanforderungen" aufgelistet. Des Weiteren sind die neuen
-Anforderungen als grobe Vorschläge zu verstehen, die nicht zwingend mit
+Anforderungen als unverbindliche Vorschläge zu verstehen, die nicht zwingend mit
 identischem Wortlaut in die Spezifikation übernommen werden sollen.
 
 Zum besseren Verständnis der weiteren Ausführungen ist im Folgenden der Verlauf
@@ -78,22 +78,26 @@ des Gesundheitswesens (TI-M Pro). Da diese beiden Nutzergruppen verschiedene
 Clients und Fachdienste verwenden, lässt sich diese Unterscheidung auch gut
 technisch abbilden.
 
-Versicherte auf der einen Seite haben die alleinige Hoheit über ihre Daten und
-Kommunikation. Im Gegensatz zu Mitarbeitern im Gesundheitswesen haben
-Versicherte zudem kein Archivsystem, in das sie TI-M Inhalte exportieren können.
+Versicherte auf der einen Seite haben grundsätzlich die Hoheit über ihre Daten
+und Kommunikation. Im Gegensatz zu Mitarbeitern im Gesundheitswesen ist
+anzunehmen, dass Versicherte zudem kein Archivsystem haben, in das sie TI-M
+Inhalte exportieren können. Hier darf es daher keine automatische Löschung ohne
+vorherige Bestätigung durch den Versicherten geben, da sonst Inhalte unerwartet
+verloren gehen würden.
+
 Hier darf es daher keine automatische Löschung ohne Nutzereinwilligung geben da
 sonst Inhalte unerwartet und unwiederbringlich verloren gehen könnten.
 
-**A_1 - Serverseitige Löschung nur nach Nutzereinwilligung**
+**A_1 - Serverseitige Löschung nur nach Nutzerbestätigung**
 
-TI-M ePA Fachdienste DÜRFEN Rauminhalte (= Events) NICHT ohne vorige
-Einwilligung aller lokalen Teilnehmer des Raumes löschen. Redactions sind von
-dieser Regelung ausgenommen. **\[\<=\]**
+TI-M ePA Fachdienste DÜRFEN Rauminhalte (= Events) NICHT ohne vorige Bestätigung
+aller lokalen Teilnehmer des Raumes löschen. Redactions sind von dieser Regelung
+ausgenommen. **\[\<=\]**
 
-Mitarbeiter des Gesundheitswesens auf der anderen Seite sind ihrer Organisation
-und deren Regeln untergeordnet. Darüber hinaus gelten für sie gesetzliche
-Vorgaben zur Datenhaltung, die eine automatische Löschung nötig machen können.
-Beispiele hierfür sind [DSGVO Art. 17] und [SGB 5 § 304].
+Mitarbeiter des Gesundheitswesens auf der anderen Seite sind ihren
+Organisationen und deren Regeln untergeordnet. Für diese Organisationen wiederum
+gelten gesetzliche Vorgaben zur Datenhaltung, die eine automatische Löschung
+nötig machen können. Beispiele hierfür sind [DSGVO Art. 17] und [SGB 5 § 304].
 
 Die Löschoperation selbst darf dabei allerdings nur server-lokal und ohne
 direkte Auswirkung auf die Föderation erfolgen damit Löschkonfigurationen auf
@@ -251,18 +255,6 @@ Diese Löschung MUSS innerhalb von 7 Tagen ab letztem [`/forget`] erfolgen.
 Die Regelungen zum serverseitigen Löschen bei [`/leave`] *ohne* [`/forget`]
 richten sich nach dem vorigen Abschnitt.
 
-Eine regelmäßige Erinnerung an das clientseitige Löschen von Räumen ist nicht
-erforderlich. Versicherte auf der einen Seite unterliegen als Privatpersonen,
-die im persönlichen Interesse handeln, selbst nicht der DSGVO. Sie dürfen in
-ihren TI-M ePA Clients und gestützt durch ihre TI-M ePA Fachdienste Inhalte
-daher solange sie wünschen behalten. Mitarbeiter des Gesundheitswesens auf der
-anderen Seite können von Regelungen zur Dokumentationspflicht wie z. B. [BGB §
-630f Absatz 3] betroffen sein. Dieser Pflicht können sie insbesondere auch durch
-eine zeitgebundene Archivierung in TI-M selbst nachkommen. Da sich der Zweck der
-Vorhaltung von Räumen ohne Einblick in die verschlüsselten Rauminhalte aber
-nicht automatisiert erkennen lässt, ist eine regelmäßig Löscherinnerung auch für
-TI-M Pro Clients unnötig.
-
 ### Redactions
 
 **Story 7**
@@ -283,7 +275,7 @@ Redaction korrigieren zu lassen anstatt einen langsameren Eskalationsprozess mit
 Löschung durch einen Administrator zu verwenden.
 
 Gleichzeitig führen Redactions bei Fehlbenutzung aber zu einem unerwarteten
-Verlusts von eigentlich relevanten Nachrichten für andere Gesprächsteilnehmer.
+Verlust von eigentlich relevanten Nachrichten für andere Gesprächsteilnehmer.
 Als Kompromiss werden Redactions daher zwar erlaubt. Sie werden aber zeitlich
 eingeschränkt und müssen im Client stets mit einem Warnhinweis versehen
 werden[^1].
@@ -435,31 +427,10 @@ im Änderungsvorschlag aufgelisteten neuen Anforderungen ersetzt.
   [Filter]: https://spec.matrix.org/v1.13/client-server-api/#filtering
   [`/sync`]: https://spec.matrix.org/v1.13/client-server-api/#get_matrixclientv3sync
   [`forget_rooms_on_leave`]: https://element-hq.github.io/synapse/latest/usage/configuration/config_documentation.html#forget_rooms_on_leave
-  [BGB § 630f Absatz 3]: https://www.gesetze-im-internet.de/bgb/__630f.html
   [Redactions]: https://spec.matrix.org/v1.13/client-server-api/#redactions
   [Event Replacements]: https://spec.matrix.org/v1.13/client-server-api/#event-replacements
   [MSC3912]: https://github.com/matrix-org/matrix-spec-proposals/pull/3912
   [Reporting Content]: https://spec.matrix.org/v1.13/client-server-api/#reporting-content
-  [DSGVO Art. 4 Nr. 1]: https://dsgvo-gesetz.de/art-4-dsgvo/
-  [`m.room.member`]: https://spec.matrix.org/v1.13/client-server-api/#mroommember
-  [Profile]: https://spec.matrix.org/v1.13/client-server-api/#profiles
-  [(Room) Account Data]: https://spec.matrix.org/v1.13/client-server-api/#client-config
-  [Devices]: https://spec.matrix.org/v1.13/client-server-api/#get_matrixclientv3devices
-  [Key Backups]: https://spec.matrix.org/v1.13/client-server-api/#server-side-key-backups
-  [Veröffentlichte Schlüssel]: https://spec.matrix.org/v1.13/client-server-api/#post_matrixclientv3keysupload
-  [DSGVO Art. 2 Absatz 2c]: https://dsgvo-gesetz.de/art-2-dsgvo/
-  [DSGVO Art. 15]: https://dsgvo-gesetz.de/art-15-dsgvo/
-  [Server-Server-API]: https://spec.matrix.org/v1.13/server-server-api/
-  [historische Events]: https://spec.matrix.org/v1.13/server-server-api/#backfilling-and-retrieving-missing-events
-  [freigegebene Profile]: https://spec.matrix.org/v1.13/server-server-api/#get_matrixfederationv1queryprofile
-  [Schlüssel]: https://spec.matrix.org/v1.13/server-server-api/#post_matrixfederationv1userkeysquery
-  [DSGVO Art. 6]: https://dsgvo-gesetz.de/art-6-dsgvo/
-  [SGB 5 § 342 Absatz 2 Nr. 2]: https://www.gesetze-im-internet.de/sgb_5/__342.html
-  [BDSG § 58 Absatz 3]: https://dsgvo-gesetz.de/bdsg/58-bdsg/
-  [A_25706]: https://gemspec.gematik.de/docs/gemSpec/gemSpec_TI-M_ePA/latest/#A_25706
-  [`/_matrix/client/v3/account/deactivate`]: https://spec.matrix.org/v1.13/client-server-api/#post_matrixclientv3accountdeactivate
-  [`/.well-known/matrix/support`]: https://spec.matrix.org/v1.13/client-server-api/#getwell-knownmatrixsupport
-  [Erasure requests]: https://matrix.org/blog/2024/06/regulatory-update/
   [A_25318]: https://gemspec.gematik.de/docs/gemSpec/gemSpec_TI-M_Basis/gemSpec_TI-M_Basis_V1.1.1/#A_25318
   [A_25319]: https://gemspec.gematik.de/docs/gemSpec/gemSpec_TI-M_Basis/gemSpec_TI-M_Basis_V1.1.1/#A_25319
   [A_25609]: https://gemspec.gematik.de/docs/gemSpec/gemSpec_TI-M_Basis/gemSpec_TI-M_Basis_V1.1.1/#A_25609
