@@ -214,8 +214,8 @@ auszuführen um neu vergessene Räume einzusammeln.
 **A_6 - Vergessen von Räumen**
 
 TI-M Clients MÜSSEN Nutzern erlauben Räume über die Nutzung der APIs [`/leave`]
-und [`/forget`] vom Client zu löschen. Dabei können diese Operationen wahlweise
-gemeinsam oder getrennt auslösbar sein. **\[\<=\]**
+und [`/forget`] vom Client zu löschen. Dabei können Clients diese Operationen
+wahlweise getrennt oder nur kombiniert auslösbar machen. **\[\<=\]**
 
 **A_7 - Anzeige historischer Räume**
 
