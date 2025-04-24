@@ -1,6 +1,0 @@
-{
-    "defaultSetting": "block all",
-    "domainExceptions": {
-        "hassel.hoff": {}
-    }
-}
