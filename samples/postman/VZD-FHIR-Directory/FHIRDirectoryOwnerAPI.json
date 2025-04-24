@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "5c93d5ae-43c4-40e7-9096-a9dc4dfafa10",
+		"_postman_id": "f43b7e09-357a-44c8-ad9a-1437f6a43066",
 		"name": "FHIRDirectoryOwnerAPI",
 		"description": "In dieser Collection befinden sich 2 Ordner, die Requests enthalten um einen Endpunkt an einem HealtcareService (Ordner \"Organization\") oder an einer PractitionerRole (Ordner \"Organization\") anzulegen, zu aktualisieren und zu löschen. Für die Requests wird ein owner-accesstoken benötigt. Dieses ist für die Requests im Practitioner Ordner in der Variablen practitioner_token und für die Requests im Organization Ordner in der Variablen org_token zu setzen.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "40068010"
+		"_exporter_id": "29292558"
 	},
 	"item": [
 		{
@@ -220,25 +220,7 @@
 					"response": []
 				},
 				{
-					"name": "UpdateEndpointStatus (visible)",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"did reset visibility extension\", () => {",
-									"    const extensions = pm.response.json()?.extension;",
-									"    const extension = extensions?.filter(e => e.url === \"https://gematik.de/fhir/directory/StructureDefinition/EndpointVisibility\")?.[0];",
-									"    const code = extension?.valueCoding?.code;",
-									"    pm.expect(code).to.equal(undefined);",
-									"});",
-									""
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
+					"name": "UpdateEndpointStatus",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -255,62 +237,6 @@
 						"body": {
 							"mode": "raw",
 							"raw": "{\n  \"resourceType\": \"Endpoint\",\n  \"id\": \"{{endpointID}}\",\n  \"meta\": {\n    \"profile\": [\n      \"https://gematik.de/fhir/directory/StructureDefinition/EndpointDirectory\",\n      \"http://hl7.org/fhir/StructureDefinition/Endpoint\"\n    ],\n    \"tag\": [\n      {\n        \"system\": \"https://gematik.de/fhir/directory/CodeSystem/Origin\",\n        \"code\": \"owner\",\n        \"display\": \"my test owner\",\n        \"userSelected\": false\n      }\n    ]\n  },\n  \"text\": {\n    \"status\": \"generated\",\n    \"div\": \"This is Sparta!!!\"\n  },\n  \"status\": \"off\",\n  \"connectionType\": {\n    \"system\": \"https://gematik.de/fhir/directory/CodeSystem/EndpointDirectoryConnectionType\",\n    \"code\": \"tim\"\n  },\n  \"name\": \"This is Sparta!!!\",\n  \"payloadType\": [\n    {\n      \"coding\": [\n        {\n          \"system\": \"https://gematik.de/fhir/directory/CodeSystem/EndpointDirectoryPayloadType\",\n          \"code\": \"tim-chat\",\n          \"display\": \"TI-Messenger chat\"\n        }\n      ]\n    }\n  ],\n  \"address\": \"@gemtest:gematik.de\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{fhir_server}}/owner/Endpoint/{{endpointID}}",
-							"host": [
-								"{{fhir_server}}"
-							],
-							"path": [
-								"owner",
-								"Endpoint",
-								"{{endpointID}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "UpdateEndpointStatus (invisible)",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"did set visibility extension\", () => {",
-									"    const extensions = pm.response.json()?.extension;",
-									"    const extension = extensions?.filter(e => e.url === \"https://gematik.de/fhir/directory/StructureDefinition/EndpointVisibility\")?.[0];",
-									"    const code = extension?.valueCoding?.code;",
-									"    pm.expect(code).to.equal(\"hide-versicherte\");",
-									"});",
-									""
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{practitioner_token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"resourceType\": \"Endpoint\",\n  \"id\": \"{{endpointID}}\",\n  \"meta\": {\n    \"profile\": [\n      \"https://gematik.de/fhir/directory/StructureDefinition/EndpointDirectory\",\n      \"http://hl7.org/fhir/StructureDefinition/Endpoint\"\n    ],\n    \"tag\": [\n      {\n        \"system\": \"https://gematik.de/fhir/directory/CodeSystem/Origin\",\n        \"code\": \"owner\",\n        \"display\": \"my test owner\",\n        \"userSelected\": false\n      }\n    ]\n  },\n  \"text\": {\n    \"status\": \"generated\",\n    \"div\": \"This is Sparta!!!\"\n  },\n  \"status\": \"off\",\n  \"connectionType\": {\n    \"system\": \"https://gematik.de/fhir/directory/CodeSystem/EndpointDirectoryConnectionType\",\n    \"code\": \"tim\"\n  },\n  \"name\": \"This is Sparta!!!\",\n  \"payloadType\": [\n    {\n      \"coding\": [\n        {\n          \"system\": \"https://gematik.de/fhir/directory/CodeSystem/EndpointDirectoryPayloadType\",\n          \"code\": \"tim-chat\",\n          \"display\": \"TI-Messenger chat\"\n        }\n      ]\n    }\n  ],\n  \"address\": \"@gemtest:gematik.de\",\n  \"extension\": [\n    {\n      \"url\": \"https://gematik.de/fhir/directory/StructureDefinition/EndpointVisibility\",\n      \"valueCoding\": [\n        {\n          \"system\": \"https://gematik.de/fhir/directory/CodeSystem/EndpointVisibilityCS\",\n          \"code\": \"hide-versicherte\"\n        }\n      ]\n    }\n  ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"

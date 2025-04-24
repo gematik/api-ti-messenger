@@ -13,43 +13,32 @@ ifndef::env-github[:source-style: source]
 
 image::meta/gematik.png[logo,width=250,height=47,role=right]
 
-= TI Messenger Documentation v1.1.1
-
+= TI-Messenger
 
 image:https://github.com/gematik/api-ti-messenger/actions/workflows/lint.yml/badge.svg[link="https://github.com/gematik/api-ti-messenger/actions/workflows/lint.yml"]
 image:https://github.com/gematik/api-ti-messenger/actions/workflows/generate-images.yml/badge.svg[link="https://github.com/gematik/api-ti-messenger/actions/workflows/generate-images.yml"]
 
-image:https://img.shields.io/badge/Release%20Notes-v1.1.1-red?style=plastic&logo=github&logoColor=red[link="ReleaseNotes.md"] +
-image:https://img.shields.io/badge/I_TiMessengerContactManagement-v1.0.1-blue?style=plastic&logo=github&logoColor=blue[link=/src/openapi/TiMessengerContactManagement.yaml"] +
-image:https://img.shields.io/badge/TiMessengerTestDriver-v0.9.2-purple?style=plastic&logo=github&logoColor=purple[link="/src/openapi/TiMessengerTestTreiber.yaml"]
-image:https://img.shields.io/badge/TiMessengerTestSuite-v0.9.2-purple?style=plastic&logo=github&logoColor=purple[link="https://github.com/gematik/TI-Messenger-Testsuite"] +
-image:https://img.shields.io/badge/TI&hyphen;Messenger&hyphen;Dienst-v1.1.1-green?style=plastic&logo=github&logoColor=green[link="https://fachportal.gematik.de/fachportal-import/files/gemSpec_TI-Messenger-Dienst_V1.1.1.pdf"]
-image:https://img.shields.io/badge/TI&hyphen;Messenger&hyphen;FD-v1.1.1-green?style=plastic&logo=github&logoColor=green[link="https://fachportal.gematik.de/fachportal-import/files/gemSpec_TI-Messenger-FD_V1.1.1.pdf"]
-image:https://img.shields.io/badge/TI&hyphen;Messenger&hyphen;Client-v1.1.1-green?style=plastic&logo=github&logoColor=green[link="https://fachportal.gematik.de/fachportal-import/files/gemSpec_TI-Messenger-Client_V1.1.1.pdf"] +
-image:https://img.shields.io/badge/Matrix_Client_Server_API-v1.3-yellow?style=plastic&logo=github&logoColor=yellow[link="https://spec.matrix.org/v1.3/client-server-api/"] 
-image:https://img.shields.io/badge/Matrix_Server_Server_API-v1.3-yellow?style=plastic&logo=github&logoColor=yellow[link="https://spec.matrix.org/v1.3/server-server-api/"] 
-image:https://img.shields.io/badge/Matrix_Push_Gateway_API-v1.3-yellow?style=plastic&logo=github&logoColor=yellow[link="https://spec.matrix.org/v1.3/push-gateway-api/"] 
+image:https://img.shields.io/badge/Release%20Notes-tim&hyphen;pro&hyphen;1.0.0-red?style=plastic&logo=github&logoColor=red[link="ReleaseNotes.md"] +
+image:https://img.shields.io/badge/TI&hyphen;Messenger&hyphen;Basis-latest-green?style=plastic&logo=github&logoColor=green[link="https://gemspec.gematik.de/docs/gemSpec/gemSpec_TI-M_Basis/latest/"]
+image:https://img.shields.io/badge/TI&hyphen;Messenger&hyphen;ePA-latest-green?style=plastic&logo=github&logoColor=green[link="https://gemspec.gematik.de/docs/gemSpec/gemSpec_TI-M_ePA/latest/"]
+image:https://img.shields.io/badge/TI&hyphen;Messenger&hyphen;Pro-latest-green?style=plastic&logo=github&logoColor=green[link="https://gemspec.gematik.de/docs/gemSpec/gemSpec_TI-M_Pro/latest/"] +
+image:https://img.shields.io/badge/Matrix_Client_Server_API-v1.11-yellow?style=plastic&logo=github&logoColor=yellow[link="https://spec.matrix.org/v1.11/client-server-api/"]
+image:https://img.shields.io/badge/Matrix_Server_Server_API-v1.11-yellow?style=plastic&logo=github&logoColor=yellow[link="https://spec.matrix.org/v1.11/server-server-api/"]
+image:https://img.shields.io/badge/Matrix_Push_Gateway_API-v1.11-yellow?style=plastic&logo=github&logoColor=yellow[link="https://spec.matrix.org/v1.11/push-gateway-api/"]
 
 == Überblick
-Die folgende Dokumentation ergänzt die Spezifikation *TI-Messenger-Dienst* v1.1.1 gemäß *[gemSpec_TI-Messenger-Dienst]*. An dieser Stelle werden insbesondere die in der Spezifikation genannten Komponenten der Lösung sowie deren Schnittstellen weiter dargestellt und erläutert, um Hersteller und Anbieter eines *TI-Messenger-Dienstes* bestmöglich zu unterstützen. Der Funktionsumfang des *TI-Messenger-Dienst* v1.1.1 beinhaltet: +
-
-* Instant-Messaging zwischen Leistungserbringern und Leistungserbringerinstitutionen und
-* Instant-Messaging direkt zwischen Leistungserbringern.
-
-// 💡 _Hinweis: In der Spezifikationsversion v1.1.1 können keine Versicherten an dem *TI-Messenger-Dienst* teilnehmen_.
-
-IMPORTANT: Die Dokumentation ergänzt die Spezifikation gemäß link:https://fachportal.gematik.de/fachportal-import/files/gemSpec_TI-Messenger-Dienst_V1.1.1.pdf[&#91;gemSpec_TI-Messenger-Dienst&#93;], die als Grundlage für das Verständnis vorrausgesetzt wird. 
+Die folgende Dokumentation ergänzt die Spezifikationen *TI-Messenger ePA* und *TI-Messenger Pro*. An dieser Stelle werden insbesondere die in der Spezifikation genannten Komponenten der Lösung sowie deren Schnittstellen weiter dargestellt und erläutert, um Hersteller und Anbieter bestmöglich zu unterstützen.
 
 == Branches
 Für die Dokumentation des *TI-Messenger-Dienstes* werden in GitHub die folgenden Branches verwendet:
 
-- `main`: enthält die Dokumentation für das aktuell veröffentlichte Release gemäß *[gemSpec_TI-Messenger-Dienst]*,
+- `main`: enthält die Dokumentation für das aktuell veröffentlichte Release
 - `develop`: enthält die Dokumentation der in Entwicklung befindlichen Features, die noch nicht released sind, 
 - `hotfix`: enthält die Dokumentation kurzfristig notwendiger Änderungen am aktuellen Release, 
 - `feature/*`: enthält eine Vorschau, Vorbereitungen und Diskussion eines neuen Themas, welches noch nicht in der Entwicklung ist. Die Inhalte können unvollständig sein und sich bis zur Fertigstellung noch ändern.
 
 == Systemübersicht
-Die folgende Abbildung gibt einen Überblick über die Systemarchitektur des *TI-Messenger-Dienst* v1.1.1 insbesondere auf die Schnittstellen zwischen den Komponenten, die in den folgenden Kapiteln weiter betrachtet werden. 
+Die folgende Abbildung gibt einen Überblick über die Systemarchitektur des TI-Messengers insbesondere auf die Schnittstellen zwischen den Komponenten, die in den folgenden Kapiteln weiter betrachtet werden.
 
 image::System_overview.png[width="100%"]
 
@@ -116,22 +105,8 @@ TI-Messenger Dokumentation
 └── link:ReleaseNotes.md[ReleaseNotes.md]
 ----
 
-== Quellen
-Die nachfolgende Tabelle enthält die in der vorliegenden Online Dokumentation referenzierten Dokumente der gematik. 
-
-|===
-|[Quelle] |Herausgeber: Titel
-
-|link:https://fachportal.gematik.de/fachportal-import/files/gemSpec_TI-Messenger-Dienst_V1.1.1.pdf[gemSpec_TI-Messenger-Dienst_v1.1.1] |gematik: Spezifikation TI-Messenger-Dienst
-|link:https://fachportal.gematik.de/fachportal-import/files/gemSpec_TI-Messenger-FD_V1.1.1.pdf[gemSpec_TI-Messenger-FD_v1.1.1] |gematik: Spezifikation TI-Messenger-Fachdienst
-|link:https://fachportal.gematik.de/fachportal-import/files/gemSpec_TI-Messenger-Client_V1.1.1.pdf[gemSpec_TI-Messenger-Client_v1.1.1] |gematik: Spezifikation TI-Messenger-Client
-|link:https://gemspec.gematik.de/docs/gemSpec/gemSpec_VZD_FHIR_Directory/gemSpec_VZD_FHIR_Directory_V1.3.0[gemSpec_VZD_FHIR_Directory_v1.3.0] |gematik: Spezifikation Verzeichnisdienst FHIR-Directory
-|link:https://fachportal.gematik.de/hersteller-anbieter/komponenten-dienste/identity-provider-idp[zentraler IDP_Dienst] |gematik: zentraler IDP-Dienst der gematik
-|link:https://fachportal.gematik.de/hersteller-anbieter/komponenten-dienste/authenticator[Authenticator] |gematik: Authenticator der gematik
-|===
-
 == 💡 Onboarding
-Hersteller und Anbieter eines *TI-Messenger-Dienstes* können das von der gematik im https://fachportal.gematik.de/anwendungen/ti-messenger[Fachportal] bereitgestellte Welcome Package zum Onboarding nutzen. Dieses Welcome Package ist als "Schritt-für-Schritt"-Anleitung gedacht, um Hersteller und Anbieter beim Onboarding des *TI-Messenger-Dienstes* zu unterstützen.
+Hersteller und Anbieter eines TI-Messengers können das von der gematik im https://fachportal.gematik.de/anwendungen/ti-messenger[Fachportal] bereitgestellte Welcome Package zum Onboarding nutzen. Dieses Welcome Package ist als "Schritt-für-Schritt"-Anleitung gedacht, um Hersteller und Anbieter beim Onboarding des *TI-Messenger-Dienstes* zu unterstützen.
 
 == Weiterführende Seiten
 *Produkttypen* +
