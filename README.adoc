@@ -13,19 +13,18 @@ ifndef::env-github[:source-style: source]
 
 image::meta/gematik.png[logo,width=250,height=47,role=right]
 
-= TI Messenger Documentation v1.1.1
-
+= TI-Messenger
 
 image:https://github.com/gematik/api-ti-messenger/actions/workflows/lint.yml/badge.svg[link="https://github.com/gematik/api-ti-messenger/actions/workflows/lint.yml"]
 image:https://github.com/gematik/api-ti-messenger/actions/workflows/generate-images.yml/badge.svg[link="https://github.com/gematik/api-ti-messenger/actions/workflows/generate-images.yml"]
 
 image:https://img.shields.io/badge/Release%20Notes-tim&hyphen;pro&hyphen;1.0.0-red?style=plastic&logo=github&logoColor=red[link="ReleaseNotes.md"] +
-image:https://img.shields.io/badge/TI&hyphen;Messenger&hyphen;Basis-v1.1.0-green?style=plastic&logo=github&logoColor=green[link="https://gemspec.gematik.de/docs/gemSpec/gemSpec_TI-M_Basis/gemSpec_TI-M_Basis_V1.1.0/"]
-image:https://img.shields.io/badge/TI&hyphen;Messenger&hyphen;ePA-v1.0.0-green?style=plastic&logo=github&logoColor=green[link="https://gemspec.gematik.de/docs/gemSpec/gemSpec_TI-M_ePA/gemSpec_TI-M_ePA_V1.0.0/"]
-image:https://img.shields.io/badge/TI&hyphen;Messenger&hyphen;Pro-v1.0.0-green?style=plastic&logo=github&logoColor=green[link="https://gemspec.gematik.de/docs/gemSpec/gemSpec_TI-M_Pro/gemSpec_TI-M_Pro_V1.0.0/"] +
-image:https://img.shields.io/badge/Matrix_Client_Server_API-v1.11-yellow?style=plastic&logo=github&logoColor=yellow[link="https://spec.matrix.org/v1.11/client-server-api/"] 
-image:https://img.shields.io/badge/Matrix_Server_Server_API-v1.11-yellow?style=plastic&logo=github&logoColor=yellow[link="https://spec.matrix.org/v1.11/server-server-api/"] 
-image:https://img.shields.io/badge/Matrix_Push_Gateway_API-v1.11-yellow?style=plastic&logo=github&logoColor=yellow[link="https://spec.matrix.org/v1.11/push-gateway-api/"] 
+image:https://img.shields.io/badge/TI&hyphen;Messenger&hyphen;Basis-latest-green?style=plastic&logo=github&logoColor=green[link="https://gemspec.gematik.de/docs/gemSpec/gemSpec_TI-M_Basis/latest/"]
+image:https://img.shields.io/badge/TI&hyphen;Messenger&hyphen;ePA-latest-green?style=plastic&logo=github&logoColor=green[link="https://gemspec.gematik.de/docs/gemSpec/gemSpec_TI-M_ePA/latest/"]
+image:https://img.shields.io/badge/TI&hyphen;Messenger&hyphen;Pro-latest-green?style=plastic&logo=github&logoColor=green[link="https://gemspec.gematik.de/docs/gemSpec/gemSpec_TI-M_Pro/latest/"] +
+image:https://img.shields.io/badge/Matrix_Client_Server_API-v1.11-yellow?style=plastic&logo=github&logoColor=yellow[link="https://spec.matrix.org/v1.11/client-server-api/"]
+image:https://img.shields.io/badge/Matrix_Server_Server_API-v1.11-yellow?style=plastic&logo=github&logoColor=yellow[link="https://spec.matrix.org/v1.11/server-server-api/"]
+image:https://img.shields.io/badge/Matrix_Push_Gateway_API-v1.11-yellow?style=plastic&logo=github&logoColor=yellow[link="https://spec.matrix.org/v1.11/push-gateway-api/"]
 
 == Überblick
 Die folgende Dokumentation ergänzt die Spezifikationen *TI-Messenger ePA* und *TI-Messenger Pro*. An dieser Stelle werden insbesondere die in der Spezifikation genannten Komponenten der Lösung sowie deren Schnittstellen weiter dargestellt und erläutert, um Hersteller und Anbieter bestmöglich zu unterstützen.
@@ -33,13 +32,13 @@ Die folgende Dokumentation ergänzt die Spezifikationen *TI-Messenger ePA* und *
 == Branches
 Für die Dokumentation des *TI-Messenger-Dienstes* werden in GitHub die folgenden Branches verwendet:
 
-- `main`: enthält die Dokumentation für das aktuell veröffentlichte Release gemäß *[gemSpec_TI-Messenger-Dienst]*,
+- `main`: enthält die Dokumentation für das aktuell veröffentlichte Release
 - `develop`: enthält die Dokumentation der in Entwicklung befindlichen Features, die noch nicht released sind, 
 - `hotfix`: enthält die Dokumentation kurzfristig notwendiger Änderungen am aktuellen Release, 
 - `feature/*`: enthält eine Vorschau, Vorbereitungen und Diskussion eines neuen Themas, welches noch nicht in der Entwicklung ist. Die Inhalte können unvollständig sein und sich bis zur Fertigstellung noch ändern.
 
 == Systemübersicht
-Die folgende Abbildung gibt einen Überblick über die Systemarchitektur des *TI-Messenger-Dienst* v1.1.1 insbesondere auf die Schnittstellen zwischen den Komponenten, die in den folgenden Kapiteln weiter betrachtet werden. 
+Die folgende Abbildung gibt einen Überblick über die Systemarchitektur des TI-Messengers insbesondere auf die Schnittstellen zwischen den Komponenten, die in den folgenden Kapiteln weiter betrachtet werden.
 
 image::System_overview.png[width="100%"]
 
@@ -107,7 +106,7 @@ TI-Messenger Dokumentation
 ----
 
 == 💡 Onboarding
-Hersteller und Anbieter eines *TI-Messenger-Dienstes* können das von der gematik im https://fachportal.gematik.de/anwendungen/ti-messenger[Fachportal] bereitgestellte Welcome Package zum Onboarding nutzen. Dieses Welcome Package ist als "Schritt-für-Schritt"-Anleitung gedacht, um Hersteller und Anbieter beim Onboarding des *TI-Messenger-Dienstes* zu unterstützen.
+Hersteller und Anbieter eines TI-Messengers können das von der gematik im https://fachportal.gematik.de/anwendungen/ti-messenger[Fachportal] bereitgestellte Welcome Package zum Onboarding nutzen. Dieses Welcome Package ist als "Schritt-für-Schritt"-Anleitung gedacht, um Hersteller und Anbieter beim Onboarding des *TI-Messenger-Dienstes* zu unterstützen.
 
 == Weiterführende Seiten
 *Produkttypen* +
