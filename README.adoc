@@ -15,6 +15,8 @@ image::meta/gematik.png[logo,width=250,height=47,role=right]
 
 = TI-Messenger
 
+Öffentlicher Matrixraum: https://matrix.to/#/#tim-spec:matrix.org
+
 image:https://github.com/gematik/api-ti-messenger/actions/workflows/lint.yml/badge.svg[link="https://github.com/gematik/api-ti-messenger/actions/workflows/lint.yml"]
 image:https://github.com/gematik/api-ti-messenger/actions/workflows/generate-images.yml/badge.svg[link="https://github.com/gematik/api-ti-messenger/actions/workflows/generate-images.yml"]
 
