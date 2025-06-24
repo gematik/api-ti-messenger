@@ -70,14 +70,14 @@ komplexere Inhalte wie z. B. serialisierte FHIR-Resourcen versendet, kann es sin
 Verarbeitungsstatus anzufragen um sicherzustellen, dass der empfangende Client die Inhalte
 verstanden hat.
 
-Im Falle, dass ein empfangender Client ein ihm unbekanntes proprietäres Event antrifft, ist es
-essenziell, dass der Nutzer die Möglichkeit hat den Inhalt bei Bedarf manuell weiterzuverarbeiten.
+Für Mitarbeiter im Gesundheitswesen kann es hilfreich sein unbekannte Events bei Bedarf manuell
+weiterzuverarbeiten, z. B. in dem die Inhalte in ein PVS oder anderes Drittsystem exportiert werden.
 Dazu ist es erforderlich, dass solche Events angezeigt und mit der Möglichkeit zur Einsicht der
 Rohdaten versehen werden.
 
 **A_2 - Anzeige und Rohdaten von unbekannten proprietären Events**
 
-TI-M Clients MÜSSEN ihnen unbekannte proprietäre Events (also solche, deren Typ nicht mit `m.`
+TI-M Pro Clients MÜSSEN ihnen unbekannte proprietäre Events (also solche, deren Typ nicht mit `m.`
 beginnt) darstellen und dem Nutzer die Möglichkeit bieten die Rohdaten des Events anzuzeigen.
 **\[\<=\]**
 
