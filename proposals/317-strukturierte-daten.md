@@ -71,7 +71,7 @@ Verarbeitungsstatus anzufragen um sicherzustellen, dass der empfangende Client d
 verstanden hat.
 
 Für Mitarbeiter im Gesundheitswesen kann es hilfreich sein unbekannte Events bei Bedarf manuell
-weiterzuverarbeiten, z. B. in dem die Inhalte in ein PVS oder anderes Drittsystem exportiert werden.
+weiterzuverarbeiten, z. B. indem die Inhalte in ein PVS oder anderes Drittsystem exportiert werden.
 Dazu ist es erforderlich, dass solche Events angezeigt und mit der Möglichkeit zur Einsicht der
 Rohdaten versehen werden.
 
