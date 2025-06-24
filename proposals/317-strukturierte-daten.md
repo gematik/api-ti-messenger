@@ -62,10 +62,13 @@ mit einem `de.gematik.msc4300.response.status` Event antworten sofern die `lifet
 noch nicht verstrichen ist. **\[\<=\]**
 
 Absendene Clients sollten Anfragen zum Verarbeitungsstatus nicht mit jedem beliebigen Event
-verschicken sondern nur in Fällen, in denen die Kenntnis des Verarbeitungsstatus essentiell ist.
+verschicken sondern nur in Fällen, in denen die Kenntnis des Verarbeitungsstatus essenziell ist.
 Dies wird üblicherweise nur bei proprietären Events oder Dateien mit speziellem Inhalt der Fall
 sein. So wäre es z. B. unsinnig den Verarbeitungsstatus von reinen Text- oder Bild-Nachrichten zu
-erfragen, da alle TI-M Clients diese Nachrichten ohnehin unterstützen sollten.
+erfragen, da alle TI-M Clients diese Nachrichten ohnehin unterstützen sollten. Werden andererseits
+komplexere Inhalte wie z. B. serialisierte FHIR-Resourcen versendet, kann es sinnvoll sein, den
+Verarbeitungsstatus anzufragen um sicherzustellen, dass der empfangende Client die Inhalte
+verstanden hat.
 
 Im Falle, dass ein empfangender Client ein ihm unbekanntes proprietäres Event antrifft, ist es
 essenziell, dass der Nutzer die Möglichkeit hat den Inhalt bei Bedarf manuell weiterzuverarbeiten.
