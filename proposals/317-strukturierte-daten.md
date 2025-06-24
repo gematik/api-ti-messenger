@@ -17,7 +17,7 @@ Hierbei ergeben sich allerdings folgende Probleme:
     oder verarbeitet, ohne dass der Absender Kenntnis davon erlangt. Das kann besonders dann fatal
     sein, wenn automatisierte Systeme als TI-M Clients auftreten.
 2.  Discoverability – Um zu verhindern, dass verschiedene Hersteller vergleichbare Probleme mehrfach
-    lösen wäre es wünschenswert eine zentrale Übersicht ähnlich zu den [Dienstkennung] von KIM zu
+    lösen wäre es wünschenswert eine zentrale Übersicht ähnlich zu den [Dienstkennungen] von KIM zu
     haben.
 
 Dieses Proposal befasst sich mit Punkt 1 und beschreibt ein Verfahren, mit dem TI-M Clients Events
@@ -243,7 +243,7 @@ Verarbeitungsstatus ignorieren.
 Keine.
 
   [Spezifikation]: https://spec.matrix.org/v1.14/appendices/#common-namespaced-identifier-grammar
-  [Dienstkennung]: https://fachportal.gematik.de/toolkit/dienstkennung-kim-kom-le
+  [Dienstkennungen]: https://fachportal.gematik.de/toolkit/dienstkennung-kim-kom-le
   [MSC4300]: https://github.com/matrix-org/matrix-spec-proposals/pull/4300
   [MSC4301]: https://github.com/matrix-org/matrix-spec-proposals/pull/4301
   [MSC4302]: https://github.com/matrix-org/matrix-spec-proposals/pull/4302
