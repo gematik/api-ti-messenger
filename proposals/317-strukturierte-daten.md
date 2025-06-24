@@ -26,8 +26,33 @@ mit proprietären Inhalten kompatibel austauschen können.
 ## Änderungsvorschlag
 
 Zentrales Instrument dieses Proposals ist [MSC4300]. Dieses MSC definiert einen Mechanismus, mit dem
-Absender den Verarbeitungsstatus eines Events von Empfängern anfordern können. Damit diese Funktion
-sinnvoll nutzbar ist, werden alle TI-M Clients verpflichtet, solche Anfragen zu beantworten.
+Absender den Verarbeitungsstatus eines Events von Empfängern anfordern können. Hierzu wird auf dem
+betroffenen Event ein `de.gematik.msc4300.request.status` Content-Block gesetzt, welcher die
+absendende Device-ID und eine optionale Lebensdauer enthält.
+
+``` json5
+{
+  "event_id": "$1",
+  "type": "<Event-Typ>",
+  "content": {
+    <Event-Inhalt>
+    // Anfrage des Verarbeitungsstatus
+    "de.gematik.msc4300.request.status": {
+      "from_device": "RJYKSTBOIE",
+      "lifetime": 90_000, // 90s
+    }
+  },
+  ...
+}
+```
+
+Der Content-Block zur Anfrage des Verarbeitungsstatus ist modular und kann auf beliebigen
+Event-Typen verwendet werden. Eine Verpflichtung hierzu besteht für TI-M Clients jedoch nicht. Die
+gematik stellt hier lediglich die nötige Infrastruktur bereit, damit diese Anfragen bei Bedarf und
+in spezilisierten Anwendungsfällen verwendet werden können um Kompatibilität zu gewährleisten.
+
+Damit diese Funktion sinnvoll nutzbar ist, ist es allerdings erforderlich, dass *empfangene*
+Anfragen beantwortet werden. Daher werden alle TI-M Clients hierzu verpflichtet.
 
 **A_1 - Antwort auf Anfragen zum Verarbeitungsstatus von Events**
 
