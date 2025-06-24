@@ -1,12 +1,11 @@
 # GSC317: Kompatibler Austausch strukturierter Daten
 
 Matrix unterstützt neben den eingebauten Events auch den Austausch proprietärer Events. Einzige
-Bedingung ist, dass neue Event-Typen gemäß [Spezifikation] mit einem Vendor-Präfix beginnen müssen
-um Kollisionen untereinandeer und mit den standardisierten `m.*` Events zu vermeiden. TI-M
-Hersteller können daher schon heute eigene Event-Typen für den Austausch strukturierter Daten
-verwenden und damit spezialisierte Anwendungsfälle bedienen. Ebenso ist es möglich strukturierte
-Daten als Datei über den eingebauten `m.file` Message-Type mit entsprechendem MIME-Type zu
-versenden.
+Bedingung ist, dass neue Event-Typen gemäß [Spezifikation] mit einem rDNS-Präfix beginnen müssen um
+Kollisionen untereinandeer und mit den standardisierten `m.*` Events zu vermeiden. TI-M Hersteller
+können daher schon heute eigene Event-Typen für den Austausch strukturierter Daten verwenden und
+damit spezialisierte Anwendungsfälle bedienen. Ebenso ist es möglich strukturierte Daten als Datei
+über den eingebauten `m.file` Message-Type mit entsprechendem MIME-Type zu versenden.
 
 Hierbei ergeben sich allerdings folgende Probleme:
 
