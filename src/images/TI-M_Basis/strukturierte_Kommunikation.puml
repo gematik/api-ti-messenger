@@ -24,59 +24,85 @@ participant "Matrix-Raum" as HS
 participant "Bob (Client B1)" as B1 #86EFAC
 participant "Bob (Client B2)" as B2 #C4B5FD
 
-== Phase 1 – Alice sendet Questionnaire (Event $1) inkl. Status-Anfrage ==
-A -> HS : m.room.message ($1)
+== Phase 1 – Alice fragt Bobs Clients an, wer eine bestimmte FHIR Questionaire unterstützt ==
+A -> HS : m.room.encrypted ($1)
 note over A, HS
 {
+  "type": "m.request.event_capability",
   "event_id": "$1",
-  "type": "m.room.message",
-  "sender": "@dr.alice:alice.com",
   "content": {
-    // Fragebogen
-    "msgtype": "m.file",
-    "body": "Bitten füllen sie diesen Fragebogen aus, danke.",
-    "filename": "questionnaire.xml",
-    "info": {
-      "mimetype": "application/fhir+xml",
-      ...
+    "m.request.status": {
+      "from_device": "RJYKSTBOIE",
+      "lifetime": 90_000, // 90s
     },
-    // Anfrage des Verarbeitungsstatus
-    "de.gematik.msc4300.request.status": {
-      "from_device": "A",
-      "lifetime": 600_000, // 10min
+    // I'd like to send any of these events into this room.
+    // Which of these do you understand?
+    "m.request.event_capability": {
+      "events": [
+        // How about m.fhir containing advanced rendering SDC questionnaires v4?
+        {
+          "type": "m.fhir",
+          "content": [{
+            "key": "m\.fhir\.structure_definition.url",
+            "value": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-render"
+          }, {
+            "key": "m\.fhir\.structure_definition.version",
+            "value": "4.0.0"
+          }]
+        }
+        ]
     }
-    ...
-  },
-  ...
+  }
 }
 end note
-
 HS -> B1 : Event $1
 HS -> B2 : Event $1
 
+== Phase 2 – Bobs Client B1 lent die Abfrage ab, da die Version nicht unterstützt wird ==
 ' Antwort von B1 farbig (grün)
 B1 -[#86EFAC]> HS : de.gematik.msc4300.response.status (ref $1)
 note over B1, HS #86EFAC
 {
-  "type": "de.gematik.msc4300.response.status",
-  "sender": "@bob:bob.com",
-  "content": {
-    "m.response.status": {
-      "from_device": "B1",
-      "status": "success",
-      "messages": [{
-        "type": "warning",
-        "m.text": [{ "body": "Unbekannte FHIR-Datei wird nur zum Download angeboten" }]
-      }]
-    },
-    "m.relates_to": {
-      "event_id": "$1",
-      "rel_type": "m.reference",
-    },
+  {
+    "type": "m.response.status",
+    "content": {
+      // Properties from MSC4300
+      "m.response.status": {
+        "from_device": "EIOBTSKYJR",
+        "status": "error",
+        "messages": [{
+          "type": "info",
+          "m.text": [{ "body": "Unknown structure definition
+           http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-render" }]
+        }]
+      },
+      "m.relates_to": {
+        "event_id": "$1",
+        "rel_type": "m.reference",
+      },
+      // These are the events I understand.
+      "m.response.event_capability": {
+        "events": [
+          // I can only do m.fhir with the structure in Version 3.0.0
+          {
+            "type": "m.fhir",
+            "content": [{
+              "key": "m\.fhir\.structure_definition.url",
+              "value": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-render"
+            }, {
+              "key": "m\.fhir\.structure_definition.version",
+              "value": "3.0.0"
+            }]
+          }
+        ]
+      }
+    }
   }
 }
 end note
 HS -> A : Zustellung Status (B1)
+
+== Phase 2 – Bobs Client B2 bestätigt, dass er das FHIR Objekt verarbeiten kann==
 
 ' Antwort von B2 farbig (violett)
 B2 -[#C4B5FD]> HS : de.gematik.msc4300.response.status (ref $1)
@@ -97,23 +123,65 @@ note over B2, HS #C4B5FD
 }
 end note
 HS -> A : Zustellung Status (B2)
+== Phase 3 – Alice sendet Questionnaire in den Raum, weil zumindest Client B2 das Questionnaire verarbeiten kann ==
+A -> HS : m.room.encrypted ($2)
+note over A, HS
+{
+  {
+    "type": "m.fhir",
+    "content": {
+      // Metadata to help identify the resource
+      "m.fhir.structure_definition": {
+        "url": "https://gematik.de/fhir/isik/StructureDefinition/ISiKFormularDefinition",
+        "version": "5.0.0",
+        "type": "Questionnaire",
+        "fhir_version": "4.0.1",
+      },
+      // Either: The resource in inline form
+      "m.fhir.resource": {
+        "resourceType": "Questionnaire",
+        "title": "Dr. Dre's anamnesis questionnaire for new patients",
+        // further properties as per the questionnaire's schema
+      },
+      // Or: A file representing the resource
+      "m.file": {
+        "url": "mxc://example.org/abcd1234",
+        "mimetype": "application/fhir+json",
+        // further properties as per MSC3551
+    }
+  }
+}
+end note
+HS -> B1 : Event $2
+HS -> B2 : Event $2
 
-== Phase 2 – Bob sendet QuestionnaireResponse (Event $2) inkl. Status-Anfrage ==
+
+== Phase 4 – Bob sendet QuestionnaireResponse von Client B2 (Event $3) inkl. Status-Anfrage ==
 ' Versand von B2 farbig (violett)
-B2 -[#C4B5FD]> HS : m.room.message ($2)
+B2 -[#C4B5FD]> HS : m.room.encrypted (ref $2)
 note over B2, HS #C4B5FD
 {
-  "event_id": "$2",
-  "type": "m.room.message",
-  "sender": "@bob:bob.com",
-  "content": {
-    // Ausgefüllter Fragebogen
-    "msgtype": "m.file",
-    "filename": "questionnaire_response.xml",
-    "info": {
-      "mimetype": "application/fhir+xml",
-      ...
-    },
+  {
+      "type": "m.fhir",
+      "content": {
+        // Metadata to help identify the resource
+        "m.fhir.structure_definition": {
+          "url": "https://gematik.de/fhir/isik/StructureDefinition/ISiKFormularDaten",
+          "version": "5.0.0",
+          "type": "QuestionnaireResponse",
+          "fhir_version": "4.0.1",
+        },
+        A file representing the resource
+        "m.file": {
+          "url": "mxc://example.org/abcd1234",
+          "mimetype": "application/fhir+json",
+          // further properties as per MSC3551
+      }
+    }
+     "m.relates_to": {
+            "event_id": "$2",
+            "rel_type": "m.reference",
+          },
     // Anfrage des Verarbeitungsstatus
     "de.gematik.msc4300.request.status": {
       "from_device": "B2",
@@ -124,9 +192,9 @@ note over B2, HS #C4B5FD
   ...
 }
 end note
-HS -> A : Event $2
+HS -> A : Event $3
 
-A -> HS : de.gematik.msc4300.response.status (ref $2)
+A -> HS : de.gematik.msc4300.response.status (ref $3)
 note over A, HS
 {
   "type": "de.gematik.msc4300.response.status",
@@ -137,7 +205,7 @@ note over A, HS
       "status": "success",
     },
     "m.relates_to": {
-      "event_id": "$2",
+      "event_id": "$3",
       "rel_type": "m.reference",
     },
   }
