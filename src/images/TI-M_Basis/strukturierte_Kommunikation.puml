@@ -29,44 +29,36 @@ actor "Erika Mustermann" as EM
 == Phase $phaseCounter – Dr. Schröder möchte feststellen, ob Erika Mustermann einen TI-M Client nutzt, \n der ISiK-Formulate in einer bestimmten Version unterstützt und sendet eine Abfrage in den Raum. ==
 A -> HS : m.room.encrypted ($1)
 note over A, HS
-{
-  "type": "de.gematik.msc4301.request.event_capability",
+{ "type": "de.gematik.msc4301.request.event_capability",
   "event_id": "$1",
   "content": {
     "de.gematik.msc4300.request.status": {
       "from_device": "RJYKSTBOIE",
-      "lifetime": 90_000, // 90s
+      "lifetime": 90000, // 90s
     },
-    // Abfrage der ISiK Formulardefinition in der Version 4.0.0
     "de.gematik.msc4301.request.event_capability": {
       "events": [
         {
           "type": "de.gematik.msc4302.fhir",
           "content": [{
-            "key": "de\.gematik\.msc4302\.fhir\.structure_definition\.fhir\.structure_definition.url",
+            "key": "de\.gematik\.msc4302\.fhir\.structure_definition.url",
             "value": "https://gematik.de/fhir/isik/StructureDefinition/ISiKFormularDefinition"
           }, {
             "key": "de\.gematik\.msc4302\.fhir\.structure_definition.version",
             "value": "5.0.0"
-          }]
-        }
-        ]
-    }
-  }
+          }]}]}}
 }
 end note
 HS -> B1 : Event $1
 HS -> B2 : Event $1
+
 !$phaseCounter=$phaseCounter + 1
 == Phase $phaseCounter a) – Der TI-M Client auf Frau Mustermanns iPhone unterstützt das angefragte FHIR-Profil nicht\n und sendet ein leeres events Array zurück. ==
 ' Antwort von B1 farbig (grün)
 B1 -[#86EFAC]> HS : m.room.encrypted (ref $1)
 note over B1, HS #86EFAC
-{
-  {
-    "type": "de.gematik.msc4300.response.status",
+{   "type": "de.gematik.msc4300.response.status",
     "content": {
-      // Properties from MSC4300
       "m.response.status": {
         "from_device": "EIOBTSKYJR",
         "status": "success",
@@ -74,18 +66,14 @@ note over B1, HS #86EFAC
           "type": "info",
           "m.text": [{ "body": "Unknown structure definition
            https://gematik.de/fhir/isik/StructureDefinition/ISiKFormularDefinition" }]
-        }]
-      },
+        }]},
       "m.relates_to": {
         "event_id": "$1",
         "rel_type": "m.reference",
       },
-      // Diese angfragten Events kann ich verarbeiten
       "de.gematik.msc4301.response.event_capability": {
         "events": []
-      }
-    }
-  }
+      }}}
 }
 end note
 HS -> A : Zustellung Status (B1)
@@ -94,8 +82,7 @@ HS -> A : Zustellung Status (B1)
 ' Antwort von B2 farbig (violett)
 B2 -[#C4B5FD]> HS : m.room.encrypted (ref $1)
 note over B2, HS #C4B5FD
-{
-  "type": "de.gematik.msc4300.response.status",
+{ "type": "de.gematik.msc4300.response.status",
   "sender": "@I12345678:gematikerKK.de",
   "content": {
     "de.gematik.msc4300.response.status": {
@@ -108,7 +95,6 @@ note over B2, HS #C4B5FD
     },
     "de.gematik.msc4301.event_capability": {
           "events": [
-            // Ja ich kann das angefragte Formular verarbeiten
             {
               "type": "de.gematik.msc4302.fhir",
               "content": [{
@@ -117,11 +103,7 @@ note over B2, HS #C4B5FD
               }, {
                 "key": "de\.gematik\.msc4302\.fhir\.structure_definition.version",
                 "value": "5.0.0"
-              }]
-            }
-          ]
-        }
-  }
+              }]}]}}
 }
 end note
 HS -> A : Zustellung Status (B2)
@@ -130,32 +112,29 @@ HS -> A : Zustellung Status (B2)
 == Phase $phaseCounter – Dr. Schröder sendet das Formular, weil Client B2(das iPad) bestätigt hat die Version verarbeiten zu können.\n und fragt den Status ab. ==
 A -> HS : m.room.encrypted ($2)
 note over A, HS
-{
-  {
-    "type": "de.gematik.msc4302.fhir",
+{   "type": "de.gematik.msc4302.fhir",
     "content": {
      "de.gematik.msc4300.request.status": {
           "from_device": "RJYKSTBOIE",
-          "lifetime": 90_000, // 90s
+          "lifetime": 90000, // 90s
         },
-      // Metadata zum Indentifizieren der passenden Strukturdefinition
       "de.gematik.msc4302.fhir.structure_definition": {
         "url": "https://gematik.de/fhir/isik/StructureDefinition/ISiKFormularDefinition",
         "version": "5.0.0",
         "type": "Questionnaire",
         "fhir_version": "4.0.1",
       },
-      // Bereitstellung des ISiKFormulars als JSON-Datei zum Download über das Content-Repository.
       "org.matrix.msc1767.file: {
         "url": "mxc://example.org/abcd1234",
         "mimetype": "application/fhir+json",
         // further properties as per MSC3551
-    }
-  }
+    }}
 }
 end note
 HS -> B1 : Event $2
 HS -> B2 : Event $2
+
+newpage
 
 !$phaseCounter=$phaseCounter + 1
 == Phase $phaseCounter a)– Der TI-M Client auf Frau Mustermanns iPhone unterstützt das übertragene FHIR-Profil nicht\n und sendet daher den Status error zurück.==
@@ -166,7 +145,6 @@ note over B1, HS #86EFAC
   {
     "type": "de.gematik.msc4300.response.status",
     "content": {
-      // Properties from MSC4300
       "de.gematik.msc4300.response.status": {
         "from_device": "EIOBTSKYJR",
         "status": "error",
@@ -179,9 +157,7 @@ note over B1, HS #86EFAC
       "m.relates_to": {
         "event_id": "$2",
         "rel_type": "m.reference",
-      },
-    }
-  }
+      }}}
 }
 end note
 HS -> A : Zustellung Status (B1)
@@ -190,11 +166,8 @@ HS -> A : Zustellung Status (B1)
 ' Versand von B2 farbig (violett)
 B2 -[#C4B5FD]> HS : m.room.encrypted (ref $2)
 note over B2, HS #C4B5FD
-{
-  {
-    "type": "de.gematik.msc4300.response.status",
+ {  "type": "de.gematik.msc4300.response.status",
     "content": {
-      // Properties from MSC4300
       "de.gematik.msc4300.response.status": {
         "from_device": "B2",
         "status": "success",
@@ -202,9 +175,7 @@ note over B2, HS #C4B5FD
       "m.relates_to": {
         "event_id": "$2",
         "rel_type": "m.reference",
-      },
-    }
-  }
+      }}}
 }
 end note
 HS -> A : Zustellung Status (B2)
@@ -224,37 +195,27 @@ EM -> B2 : Fertigstellen des Formulars im TI-M Client auf dem iPad
 ' Versand von B2 farbig (violett)
 B2 -[#C4B5FD]> HS : m.room.encrypted
 note over B2, HS #C4B5FD
-{
-  {
-      "type": "de.gematik.msc4302.fhir",
+{     "type": "de.gematik.msc4302.fhir",
       "content": {
-
-        // Metadata to help identify the resource
         "de.gematik.msc4300.fhir.structure_definition": {
           "url": "https://gematik.de/fhir/isik/StructureDefinition/ISiKFormularDaten",
           "version": "5.0.0",
           "type": "QuestionnaireResponse",
           "fhir_version": "4.0.1",
         },
-        A file representing the resource
         "org.matrix.msc1767.file": {
           "url": "mxc://example.org/abcd1234",
           "mimetype": "application/fhir+json",
           // further properties as per MSC3551
-      }
-    }
+      }}
      "m.relates_to": {
             "event_id": "$2",
             "rel_type": "m.reference",
           },
-    // Anfrage des Verarbeitungsstatus
     "de.gematik.msc4300.request.status": {
       "from_device": "B2",
       "lifetime": 600_000, // 10min
-    }
-    ...
-  },
-  ...
+    }}
 }
 end note
 HS -> A : Event $3
@@ -267,8 +228,7 @@ HS -> B1 : Event $3
 == Phase $phaseCounter – Der TI-M Client von Dr. Schröder empfängt das Event.\nDer Client extrahiert die enthaltene FHIR-Resource und übermittelt sie an Dr. Schröders PVS.\nAnschließend sendet der Client zur Bestätigung ein de.gematik.msc4300.response.status Event mit dem Status success zurück. ==
 A -> HS : de.gematik.msc4300.response.status (ref $3)
 note over A, HS
-{
-  "type": "de.gematik.msc4300.response.status",
+{ "type": "de.gematik.msc4300.response.status",
   "sender": "@dr.schroeder:praxis.de",
   "content": {
     "de.gematik.msc4300.response.status": {
@@ -278,8 +238,7 @@ note over A, HS
     "m.relates_to": {
       "event_id": "$3",
       "rel_type": "m.reference",
-    },
-  }
+    }}
 }
 end note
 
