@@ -1,0 +1,84 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://gematik.de/ti-m/structuredData.json",
+    "title": "Structured data event",
+    "description": "Schema for structured data events",
+    "type": "object",
+    "properties": {
+        "type": {
+            "description": "The event type. MUST be prefixed with `de.gematik.data.`.",
+            "type": "string",
+            "pattern": "^de\\.gematik\\.data\\..*"
+        },
+        "content": {
+            "description": "The event content.",
+            "type": "object",
+            "properties": {
+                "m.text": {
+                    "description": "An ordered array of textual representations in different mimetypes to be used as fallback by clients that don't understand the event otherwise. Senders MUST specify at least one representation and MUST always include a plaintext representation. Receivers SHOULD use the first representation in the array that they understand.",
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "mimetype": {
+                                "description": "The mimetype. Defaults to `text/plain` if omitted.",
+                                "type": "string",
+                                "example": "text/html"
+                            },
+                            "body": {
+                                "description": "The string content. Clients SHOULD validate and sanitize the content as they do for rich content associated with `msgtype` of `m.room.message`.",
+                                "type": "string"
+                            }
+                        },
+                        "required": ["body"]
+                    },
+                    "minItems": 1
+                },
+                "m.file": {
+                    "description": "A file representation to be used as fallback by clients that don't understand the event otherwise.",
+                    "type": "object",
+                    "properties": {
+                        "uri": {
+                            "description": "The `mxc://` URI for the file.",
+                            "type": "string",
+                            "pattern": "^mxc://.*"
+                        },
+                        "name": {
+                            "description": "Name of the file including extension (if applicable).",
+                            "type": "string"
+                        },
+                        "mimetype": {
+                            "description": "The file's mimetype. Optional but RECOMMENDED.",
+                            "example": "application/pdf"
+                        },
+                        "size": {
+                            "description": "The file's size in bytes. Optional but RECOMMENDED.",
+                            "type": "number"
+                        },
+                        "key": {
+                            "description": "A JSON Web Key object as per the `EncryptedFile` type in `m.room.message`. REQUIRED if the file is encrypted.",
+                            "type": "object"
+                        },
+                        "iv": {
+                            "description": "The 128-bit initialization vector as per the `EncryptedFile` type in `m.room.message`. REQUIRED if the file is encrypted.",
+                            "type": "string"
+                        },
+                        "hashes": {
+                            "description": "A map from an algorithm name to a hash of the ciphertext, encoded as unpadded base64 as per the `EncryptedFile` type in `m.room.message`. REQUIRED if the file is encrypted.",
+                            "type": "object"
+                        },
+                        "v": {
+                            "description": "Version of the encrypted attachments protocol as per the `EncryptedFile` type in `m.room.message`. REQUIRED if the file is encrypted.",
+                            "type": "string"
+                        }
+
+                    },
+                    "required": ["uri", "name"]
+                }
+            },
+            "additionalProperties": true,
+            "required": ["m.text"]
+        }
+    },
+    "required": ["type", "content"]
+}
