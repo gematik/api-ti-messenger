@@ -28,7 +28,7 @@ runs:
           if ! check-jsonschema --check-metaschema "$file"; then
             rc=1
           fi
-        done < <(find "$SCHEMAS_ROOT" -name "*.json" -maxdepth 1)
+        done < <(find "$SCHEMAS_ROOT" -name "*.json" -not -path '*/examples/*')
 
         exit $rc
 
