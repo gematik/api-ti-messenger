@@ -49,6 +49,7 @@
                         },
                         "mimetype": {
                             "description": "The file's mimetype. Optional but RECOMMENDED.",
+                            "type": "string",
                             "example": "application/pdf"
                         },
                         "size": {
