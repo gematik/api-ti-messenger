@@ -8,7 +8,7 @@
         "type": {
             "description": "The event type. MUST use Java package naming convention.",
             "type": "string",
-            "example": "de\\.wald-krankenhaus\\..notfalleinsatzprotokoll"
+            "example": "de.wald-krankenhaus.notfalleinsatzprotokoll"
         },
         "content": {
             "description": "The event content.",
