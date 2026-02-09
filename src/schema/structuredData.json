@@ -6,9 +6,9 @@
     "type": "object",
     "properties": {
         "type": {
-            "description": "The event type. MUST be prefixed with `de.gematik.data.`.",
+            "description": "The event type. MUST use Java package naming convention.",
             "type": "string",
-            "pattern": "^de\\.gematik\\.data\\..*"
+            "example": "de\\.wald-krankenhaus\\..notfalleinsatzprotokoll"
         },
         "content": {
             "description": "The event content.",
