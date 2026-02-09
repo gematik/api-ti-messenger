@@ -38,7 +38,7 @@
                     "description": "A file representation to be used as fallback by clients that don't understand the event otherwise.",
                     "type": "object",
                     "properties": {
-                        "uri": {
+                        "url": {
                             "description": "The `mxc://` URI for the file.",
                             "type": "string",
                             "pattern": "^mxc://.*"
