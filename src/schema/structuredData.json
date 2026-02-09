@@ -14,7 +14,7 @@
             "description": "The event content.",
             "type": "object",
             "properties": {
-                "m.text": {
+                "de.gematik.text": {
                     "description": "An ordered array of textual representations in different mimetypes to be used as fallback by clients that don't understand the event otherwise. Senders MUST specify at least one representation and MUST always include a plaintext representation. Receivers SHOULD use the first representation in the array that they understand.",
                     "type": "array",
                     "items": {
@@ -34,7 +34,7 @@
                     },
                     "minItems": 1
                 },
-                "m.file": {
+                "de.gematik.file": {
                     "description": "A file representation to be used as fallback by clients that don't understand the event otherwise.",
                     "type": "object",
                     "properties": {
@@ -77,7 +77,7 @@
                 }
             },
             "additionalProperties": true,
-            "required": ["m.text"]
+            "required": ["de.gematik.text"]
         }
     },
     "required": ["type", "content"]
