@@ -54,7 +54,8 @@
                         },
                         "size": {
                             "description": "The file's size in bytes. Optional but RECOMMENDED.",
-                            "type": "number"
+                            "type": "integer",
+                            "minimum": 0
                         },
                         "key": {
                             "description": "A JSON Web Key object as per the `EncryptedFile` type in `m.room.message`. REQUIRED if the file is encrypted.",
