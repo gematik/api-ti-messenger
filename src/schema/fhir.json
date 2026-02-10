@@ -1,7 +1,7 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$id": "https://gematik.de/ti-m/structuredData.json",
-    "title": "Structured data event",
+    "title": "FHIR event",
     "description": "Schema of the de.gematik.fhir event for exchanging FHIR resources. See also [MSC4302](https://github.com/matrix-org/matrix-spec-proposals/pull/4302) for further context.",
     "type": "object",
     "properties": {
