@@ -147,7 +147,7 @@
                     "required": ["url", "name"]
                 }
             },
-            "oneOf": [{
+            "anyOf": [{
                 "required": ["de.gematik.fhir.structure_definition", "de.gematik.text", "de.gematik.fhir.resource"]
             }, {
                 "required": ["de.gematik.fhir.structure_definition", "de.gematik.text", "de.gematik.fhir.file"]
