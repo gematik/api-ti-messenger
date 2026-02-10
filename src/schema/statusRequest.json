@@ -10,7 +10,7 @@
             "type": "string"
         },
         "to_device": {
-            "description": "The receiving device's device ID. Should be set when the sender wants to a address a specific recipient device only. If omitted, the devices of all room members are considered recipients.",
+            "description": "The receiving device's device ID. Should be set when the sender wants to address a specific recipient device only. If omitted, the devices of all room members are considered recipients.",
             "type": "string"
         },
         "lifetime": {
