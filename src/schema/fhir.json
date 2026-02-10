@@ -7,6 +7,7 @@
     "properties": {
         "type": {
             "description": "The event type.",
+            "type": "string",
             "const": "de.gematik.fhir"
         },
         "content": {

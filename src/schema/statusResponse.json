@@ -7,6 +7,7 @@
     "properties": {
         "type": {
             "description": "The event type.",
+            "type": "string",
             "const": "de.gematik.response.status"
         },
         "content": {
@@ -67,6 +68,7 @@
                     "properties": {
                         "rel_type": {
                             "description": "The namespaced relationship type.",
+                            "type": "string",
                             "const": "m.reference"
                         },
                         "event_id": {
