@@ -15,7 +15,8 @@
         },
         "lifetime": {
             "description": "The duration in milliseconds during which the sender will consider responses to this request. Prevents meaningless delayed responses when new or previously disconnected devices encounter requests on older events.",
-            "type": "integer"
+            "type": "integer",
+            "minimum": 0
         }
     },
     "required": ["from_device"]
