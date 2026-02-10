@@ -2,7 +2,7 @@
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$id": "https://gematik.de/ti-m/structuredData.json",
     "title": "Structured data event",
-    "description": "Schema for structured data events",
+    "description": "Schema for structured data events.",
     "type": "object",
     "properties": {
         "type": {

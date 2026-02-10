@@ -1,0 +1,48 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://gematik.de/ti-m/structuredData.json",
+    "title": "Procesing status request",
+    "description": "Schema of the `de.gematik.client_capability.*` objects for storing per-device capabilities in user profiles. See also [MSC4401](https://github.com/matrix-org/matrix-spec-proposals/pull/4401) for further context.",
+    "type": "object",
+    "properties": {
+        "events": {
+            "description": "A list of objects containing details about the events this device supports.",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "description": "The type of the event.",
+                        "type": "string",
+                        "example": "de.wald-krankenhaus.message"
+                    },
+                    "content": {
+                        "description": "An optional list of objects describing additional requirements for properties inside the content of the event.",
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "key": {
+                                    "description": "The dot-separated path of the property (analogous to key in event_match push rule conditions).",
+                                    "type": "string",
+                                    "example": "content.msgtype"
+                                },
+                                "value": {
+                                    "description": "The exact value of the property",
+                                    "type": "string",
+                                    "example": "de.wald-krankenhaus.dicom"
+                                }
+                            },
+                            "required": [
+                                "key",
+                                "value"
+                            ]
+                        }
+                    }
+                },
+                "required": []
+            }
+        }
+    },
+    "required": []
+}
