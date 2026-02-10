@@ -78,7 +78,7 @@
                 }
             },
             "required": ["de.gematik.response.status", "m.relates_to"]
-        }    
+        }
     },
     "required": ["type", "content"]
 }
