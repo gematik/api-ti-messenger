@@ -14,7 +14,7 @@
                     "type": {
                         "description": "The type of the event.",
                         "type": "string",
-                        "example": "de.wald-krankenhaus.message"
+                        "examples": ["de.wald-krankenhaus.message"]
                     },
                     "content": {
                         "description": "An optional list of objects describing additional requirements for properties inside the content of the event.",
@@ -25,12 +25,12 @@
                                 "key": {
                                     "description": "The dot-separated path of the property (analogous to key in event_match push rule conditions).",
                                     "type": "string",
-                                    "example": "content.msgtype"
+                                    "examples": ["content.msgtype"]
                                 },
                                 "value": {
                                     "description": "The exact value of the property",
                                     "type": "string",
-                                    "example": "de.wald-krankenhaus.dicom"
+                                    "examples": ["de.wald-krankenhaus.dicom"]
                                 }
                             },
                             "required": [

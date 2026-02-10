@@ -43,7 +43,7 @@
                                                 "mimetype": {
                                                     "description": "The mimetype. Defaults to `text/plain` if omitted.",
                                                     "type": "string",
-                                                    "example": "text/html"
+                                                    "examples": ["text/html"]
                                                 },
                                                 "body": {
                                                     "description": "The string content. Clients SHOULD validate and sanitize the content as they do for rich content associated with `msgtype` of `m.room.message`.",
