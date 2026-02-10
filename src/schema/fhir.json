@@ -48,7 +48,7 @@
                         "url": {
                             "description": "The `mxc://` URI for the file.",
                             "type": "string",
-                            "pattern": "^mxc://.*"
+                            "pattern": "^mxc://.+"
                         },
                         "name": {
                             "description": "Name of the file including extension (if applicable).",
