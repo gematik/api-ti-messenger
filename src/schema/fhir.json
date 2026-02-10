@@ -1,0 +1,159 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://gematik.de/ti-m/fhir.json",
+    "title": "FHIR event",
+    "description": "Schema of the de.gematik.fhir event for exchanging FHIR resources. See also [MSC4302](https://github.com/matrix-org/matrix-spec-proposals/pull/4302) for further context.",
+    "type": "object",
+    "properties": {
+        "type": {
+            "description": "The event type.",
+            "type": "string",
+            "const": "de.gematik.fhir"
+        },
+        "content": {
+            "description": "The event content.",
+            "type": "object",
+            "properties": {
+                "de.gematik.fhir.structure_definition": {
+                    "description": "Information about the resource's `StructureDefinition`.",
+                    "type": "object",
+                    "properties": {
+                        "url": {
+                            "description": "The canonical URL of the most specific `StructureDefinition` describing the resource. This is equivalent to `StructureDefinition.url` in FHIR.",
+                            "type": "string"
+                        },
+                        "version": {
+                            "description": "The version of the `StructureDefinition`. This is equivalent to `StructureDefinition.version` in FHIR.",
+                            "type": "string"
+                        },
+                        "type": {
+                            "description": "The `StructureDefinition`'s base type. This is equivalent to `StructureDefinition.type` in FHIR.",
+                            "type": "string"
+                        },
+                        "fhir_version": {
+                            "description": "The version of the FHIR specification on which the `StructureDefinition` is based. This is equivalent to `StructureDefinition.fhirVersion` in FHIR.",
+                            "type": "string"
+                        }
+                    },
+                    "required": ["url", "version", "type", "fhir_version"]
+                },
+                "de.gematik.fhir.resource": {
+                    "description": "The serialised JSON of the resource if it fits within the 64 KiB event size limit. REQUIRED if `de.gematik.fhir.file` is missing.",
+                    "type": "object",
+                    "additionalProperties": true
+                },
+                "de.gematik.fhir.file": {
+                    "description": "A file containing the JSON or XML serialisation of the resource if it is too large to be inlined. REQUIRED if `de.gematik.fhir.resource` is missing.",
+                    "type": "object",
+                    "properties": {
+                        "url": {
+                            "description": "The `mxc://` URI for the file.",
+                            "type": "string",
+                            "pattern": "^mxc://.+"
+                        },
+                        "name": {
+                            "description": "Name of the file including extension (if applicable).",
+                            "type": "string"
+                        },
+                        "mimetype": {
+                            "description": "The file's mimetype. Optional but RECOMMENDED.",
+                            "enum": ["application/fhir+json", "application/fhir+xml"]
+                        },
+                        "size": {
+                            "description": "The file's size in bytes. Optional but RECOMMENDED.",
+                            "type": "integer",
+                            "minimum": 0
+                        },
+                        "key": {
+                            "description": "A JSON Web Key object as per the `EncryptedFile` type in `m.room.message`. REQUIRED if the file is encrypted.",
+                            "type": "object"
+                        },
+                        "iv": {
+                            "description": "The 128-bit initialization vector as per the `EncryptedFile` type in `m.room.message`. REQUIRED if the file is encrypted.",
+                            "type": "string"
+                        },
+                        "hashes": {
+                            "description": "A map from an algorithm name to a hash of the ciphertext, encoded as unpadded base64 as per the `EncryptedFile` type in `m.room.message`. REQUIRED if the file is encrypted.",
+                            "type": "object"
+                        },
+                        "v": {
+                            "description": "Version of the encrypted attachments protocol as per the `EncryptedFile` type in `m.room.message`. REQUIRED if the file is encrypted.",
+                            "type": "string"
+                        }
+
+                    },
+                    "required": ["url", "name"]
+                },
+                "de.gematik.text": {
+                    "description": "An ordered array of textual representations of the resource in different mimetypes to be used as fallback by clients that don't understand the event otherwise. Senders MUST specify at least one representation and MUST always include a plaintext representation. Receivers SHOULD use the first representation in the array that they understand.",
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "mimetype": {
+                                "description": "The mimetype. Defaults to `text/plain` if omitted.",
+                                "type": "string",
+                                "examples": ["text/html"]
+                            },
+                            "body": {
+                                "description": "The string content. Clients SHOULD validate and sanitize the content as they do for rich content associated with `msgtype` of `m.room.message`.",
+                                "type": "string"
+                            }
+                        },
+                        "required": ["body"]
+                    },
+                    "minItems": 1
+                },
+                "de.gematik.file": {
+                    "description": "A file representation of the resource to be used as fallback by clients that don't understand the event otherwise.",
+                    "type": "object",
+                    "properties": {
+                        "url": {
+                            "description": "The `mxc://` URI for the file.",
+                            "type": "string",
+                            "pattern": "^mxc://.+"
+                        },
+                        "name": {
+                            "description": "Name of the file including extension (if applicable).",
+                            "type": "string"
+                        },
+                        "mimetype": {
+                            "description": "The file's mimetype. Optional but RECOMMENDED.",
+                            "type": "string",
+                            "examples": ["application/pdf"]
+                        },
+                        "size": {
+                            "description": "The file's size in bytes. Optional but RECOMMENDED.",
+                            "type": "integer",
+                            "minimum": 0
+                        },
+                        "key": {
+                            "description": "A JSON Web Key object as per the `EncryptedFile` type in `m.room.message`. REQUIRED if the file is encrypted.",
+                            "type": "object"
+                        },
+                        "iv": {
+                            "description": "The 128-bit initialization vector as per the `EncryptedFile` type in `m.room.message`. REQUIRED if the file is encrypted.",
+                            "type": "string"
+                        },
+                        "hashes": {
+                            "description": "A map from an algorithm name to a hash of the ciphertext, encoded as unpadded base64 as per the `EncryptedFile` type in `m.room.message`. REQUIRED if the file is encrypted.",
+                            "type": "object"
+                        },
+                        "v": {
+                            "description": "Version of the encrypted attachments protocol as per the `EncryptedFile` type in `m.room.message`. REQUIRED if the file is encrypted.",
+                            "type": "string"
+                        }
+
+                    },
+                    "required": ["url", "name"]
+                }
+            },
+            "anyOf": [{
+                "required": ["de.gematik.fhir.structure_definition", "de.gematik.text", "de.gematik.fhir.resource"]
+            }, {
+                "required": ["de.gematik.fhir.structure_definition", "de.gematik.text", "de.gematik.fhir.file"]
+            }]
+        }
+    },
+    "required": ["type", "content"]
+}
