@@ -37,12 +37,12 @@
                     "required": ["url", "version", "type", "fhir_version"]
                 },
                 "de.gematik.fhir.resource": {
-                    "description": "The serialised JSON of the resource if it fits within the 64 KiB event size limit. REQUIRED if `m.fhir.file` is missing.",
+                    "description": "The serialised JSON of the resource if it fits within the 64 KiB event size limit. REQUIRED if `de.gematik.fhir.file` is missing.",
                     "type": "object",
                     "additionalProperties": true
                 },
                 "de.gematik.fhir.file": {
-                    "description": "A file containing the JSON or XML serialisation of the resource if it is too large to be inlined. REQUIRED if `m.fhir.resource` is missing.",
+                    "description": "A file containing the JSON or XML serialisation of the resource if it is too large to be inlined. REQUIRED if `de.gematik.fhir.resource` is missing.",
                     "type": "object",
                     "properties": {
                         "url": {
