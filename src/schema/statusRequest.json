@@ -1,6 +1,6 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "https://gematik.de/ti-m/structuredData.json",
+    "$id": "https://gematik.de/ti-m/statusRequest.json",
     "title": "Processing status request",
     "description": "Schema of the `de.gematik.request.status` content block for requesting the processing status of an event. See also [MSC4300](https://github.com/matrix-org/matrix-spec-proposals/pull/4300) for further context.",
     "type": "object",
