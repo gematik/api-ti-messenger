@@ -1,6 +1,6 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "https://gematik.de/ti-m/structuredData.json",
+    "$id": "https://gematik.de/ti-m/clientCapabilities.json",
     "title": "Client capabilities",
     "description": "Schema of the `de.gematik.client_capability.*` objects for storing per-device capabilities in user profiles. See also [MSC4401](https://github.com/matrix-org/matrix-spec-proposals/pull/4401) for further context.",
     "type": "object",
