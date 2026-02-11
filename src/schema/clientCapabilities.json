@@ -23,9 +23,9 @@
                             "type": "object",
                             "properties": {
                                 "key": {
-                                    "description": "The dot-separated path of the property (analogous to key in event_match push rule conditions).",
+                                    "description": "The dot-separated path of the property (analogous to key in `event_match` push rule conditions but starting at `content` rather than the event root).",
                                     "type": "string",
-                                    "examples": ["content.msgtype"]
+                                    "examples": ["msgtype"]
                                 },
                                 "value": {
                                     "description": "The exact value of the property",
