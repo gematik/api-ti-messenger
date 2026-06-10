@@ -1,0 +1,17 @@
+%% For editing and converting to PNG use https://mermaid.live
+
+sequenceDiagram
+    participant pro as Arzt<br><br>(TI-M Pro Client)
+    participant epa as Versicherter<br><br>(TI-M ePA Client)
+
+    alt Fragebogen
+        pro->>+epa: de.gematik.fhir<br>{ ISiKFormularDefinition }
+    else Fragebogen mit vorbefüllter Antwort
+        pro->>epa: de.gematik.fhir<br>{ Bundle { ISiKFormularDefinition, ISiKFormularDaten } }
+    end
+
+    note right of epa: Fragebogen<br>ausfüllen
+    epa->>epa:
+
+    epa->>-pro: de.gematik.fhir<br>{ ISiKFormularDaten }
+    

@@ -1,0 +1,18 @@
+%% For editing and converting to PNG use https://mermaid.live
+
+%%{init: { 'sequence': {'noteAlign': 'left'} }}%%
+sequenceDiagram
+    participant pro as Notarzt<br><br>(TI-M Pro Client / Device-ID A)
+    participant lei as Leitstelle<br><br>(TI-M Pro Client / Device-ID B)
+
+    pro->>+lei: de.divi.notfalleinsatzprotokoll.v6
+
+    note right of pro: {<br>  // Strukturierte Daten & Fallbacks<br>  ...<br><br>  // Anfrage des Verarbeitungsstatus<br>  "de.gematik.request.status": {<br>    "from_device": "A",<br>    "to_device": "B",<br>    "lifetime": 90000,<br>  }<br>}
+
+    alt Verarbeitung erfolgreich
+        lei->>pro: de.gematik.response.status
+        note right of pro: {<br>  // Verarbeitungsstatus<br>  "de.gematik.response.status": {<br>    "from_device": "B",<br>    "status": "success",<br>    "messages": [{<br>      "type": "info",<br>      "m.text": [{ "body": "Protokoll erfolgreich verarbeitet" }]<br>    }]<br>  },<br>  ...<br>}
+    else Verarbeitung fehlgeschlagen
+        lei->>-pro: de.gematik.response.status
+        note right of pro: {<br>  // Verarbeitungsstatus<br>  "de.gematik.response.status": {<br>    "from_device": "B",<br>    "status": "error",<br>    "messages": [{<br>      "type": "error",<br>      "m.text": [{ "body": "Einsatzort fehlt im Protokoll" }]<br>    }]<br>  },<br>  ...<br>}
+    end
