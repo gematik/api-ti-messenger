@@ -1,0 +1,105 @@
+/'
+# TI-Messenger 1.1
+# TI-Messenger-Dienst
+# UC - 10103
+# Sequence Diagram
+# Name: Authentisieren einer Organisation am TI-Messenger-Dienst
+'/
+
+@startuml
+skinparam sequenceMessageAlign direction
+skinparam WrapWidth 300
+skinparam minClassWidth 150
+skinparam BoxPadding 1
+scale max 2048 width
+autonumber
+
+skinparam sequence {
+  ArrowColor black
+  ArrowFontSize 17
+  ActorBorderColor black
+  LifeLineBorderColor black
+  LifeLineBackgroundColor Gainsboro
+
+  ParticipantBorderColor Motivation
+  ParticipantBackgroundColor Motivation
+  ParticipantFontSize 20
+  ParticipantFontColor black
+  ParticipantBorderColor Black
+  ParticipantBackgroundColor MOTIVATION
+
+  ActorBackgroundColor Gainsboro
+  ActorFontColor black
+  ActorFontSize 20
+}
+
+actor oa as "Akteur in der Rolle\nOrg-Admin"
+  box <size:19>Endgerät</size> #WhiteSmoke
+  participant wb as "Frontend des \nRegistrierungs-Dienstes"
+  participant au as "Authenticator"
+  end box
+participant ko as "Konnektor /\n Basis-Consumer"
+participant rd as "Registrierungs-Dienst"
+participant ip as "zentraler \nIDP-Dienst"
+
+
+
+|||
+alt#LightGrey #AliceBlue <size:16>Org-Admin Account für die Organisation existiert bereits</size>
+|||
+      oa -> wb: Admin Login mit Credentials und 2. Faktor
+      alt#LightGrey #LightBlue <size:16>Neue Institutionsidentität hinufügen</size>
+          activate wb
+        wb -> rd:POST I_Registration
+        note right: <size:16>Schnittstelle wird nicht \n<size:16>durch die gematik spezifiziert</size>
+          activate rd
+        rd->rd: Erzeuge PKCE Code \nfür verifier und challenge
+        rd --> wb: Redirect to IDP Authorization Endpoint
+          deactivate rd
+        |||
+        wb -> au: Deeplink authenticator://...
+        activate au
+        au -> ip: GET {authorization_endpoint}
+        activate ip
+        ip -> au: Authentication challenge
+        au -> ko: ExternalAuthenticate
+          activate ko
+        ko --> au: ExternalAuthenticateResponse
+          deactivate ko
+        au -->ip: Authentication challenge response
+        ip -->au: HTTP 302 Redirect(auth_code)
+          deactivate ip
+        au -->wb: {client_callback_uri}\n(Redirect + auth_code)
+          deactivate au
+        |||
+        wb -> rd: POST I_Registration(auth_code)
+          activate rd
+        rd -> ip: POST {token_endpoint}(auth_code, verifier)
+          activate ip
+        ip --> rd: id_token
+          deactivate ip
+        |||
+        rd -> rd: ID_TOKEN validieren(id_token)
+        rd -> rd: enthaltene \nProfessionOID auf \ngültige Organisation \nprüfen
+        rd -> wb: Status
+         deactivate rd
+        wb -> oa: Telematik-ID<ID> wurde erfolgreich ihrem Konto hinzugefügt.
+        |||
+      else <size:16>Institutionsidentität löschen</size>
+        |||
+        oa -> wb: Abfrage der Institutionsidentitäten
+        wb -> rd: GET I_Registration
+          activate rd
+        rd -> rd: Ermitteln der diesem Org-Admin zugeordneten Institutionsidentitäten
+        |||
+        rd -> wb: Liste der Institutionsidentitäten
+        wb-> oa: Zeige Liste der Institutionsidentitäten
+        |||
+        oa -> wb: Institutionsidentität auswählen, die gelöscht werden soll
+        wb -> rd: DELETE I_Registration
+        rd->wb: Status
+         deactivate rd
+        wb -> oa: Telematik-ID<ID> wurde erfolgreich von ihrem Konto entfernt.
+        |||
+      end
+@enduml
