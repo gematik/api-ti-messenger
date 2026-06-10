@@ -33,6 +33,32 @@
                         "fhir_version": {
                             "description": "The version of the FHIR specification on which the `StructureDefinition` is based. This is equivalent to `StructureDefinition.fhirVersion` in FHIR.",
                             "type": "string"
+                        },
+                        "content": {
+                            "description": "If the resource is a collection type such as `Bundle`, an array of objects providing information about the `StructureDefinition`s of contained resources. The array has set semantics meaning that it MUST NOT contain duplicates and the order of elements is irrelevant.",
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "url": {
+                                        "description": "The canonical URL of the most specific `StructureDefinition` describing the resource. This is equivalent to `StructureDefinition.url` in FHIR.",
+                                        "type": "string"
+                                    },
+                                    "version": {
+                                        "description": "The version of the `StructureDefinition`. This is equivalent to `StructureDefinition.version` in FHIR.",
+                                        "type": "string"
+                                    },
+                                    "type": {
+                                        "description": "The `StructureDefinition`'s base type. This is equivalent to `StructureDefinition.type` in FHIR.",
+                                        "type": "string"
+                                    },
+                                    "fhir_version": {
+                                        "description": "The version of the FHIR specification on which the `StructureDefinition` is based. This is equivalent to `StructureDefinition.fhirVersion` in FHIR.",
+                                        "type": "string"
+                                    }
+                                },
+                                "required": ["url", "version", "type", "fhir_version"]
+                            }
                         }
                     },
                     "required": ["url", "version", "type", "fhir_version"]
