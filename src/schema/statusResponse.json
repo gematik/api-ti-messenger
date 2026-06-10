@@ -1,0 +1,86 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://gematik.de/ti-m/statusResponse.json",
+    "title": "Processing status response",
+    "description": "Schema of the de.gematik.response.status event for communicating the processing status of an event back to its sender. See also [MSC4300](https://github.com/matrix-org/matrix-spec-proposals/pull/4300) for further context.",
+    "type": "object",
+    "properties": {
+        "type": {
+            "description": "The event type.",
+            "type": "string",
+            "const": "de.gematik.response.status"
+        },
+        "content": {
+            "type": "object",
+            "description": "The event content.",
+            "properties": {
+                "de.gematik.response.status": {
+                    "type": "object",
+                    "properties": {
+                        "from_device": {
+                            "description": "The sending device's device ID. Helps clients identify the remote echo of their own responses.",
+                            "type": "string"
+                        },
+                        "status": {
+                            "description": "Whether the sending device has understood and successfully processed the event.",
+                            "enum": ["success", "error"]
+                        },
+                        "messages": {
+                            "description": "An optional array of messages to help recipients understand the status.",
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "type": {
+                                        "description": "The message category.",
+                                        "enum": ["info", "warning", "error"]
+                                    },
+                                    "de.gematik.text": {
+                                        "description": "An ordered array of textual representations of the message in different mimetypes. MUST always include a plaintext representation. Receivers SHOULD use the first representation in the array that they understand.",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "mimetype": {
+                                                    "description": "The mimetype. Defaults to `text/plain` if omitted.",
+                                                    "type": "string",
+                                                    "examples": ["text/html"]
+                                                },
+                                                "body": {
+                                                    "description": "The string content. Clients SHOULD validate and sanitize the content as they do for rich content associated with `msgtype` of `m.room.message`.",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": ["body"]
+                                        },
+                                        "minItems": 1
+                                    }
+                                },
+                                "required": ["type", "de.gematik.text"]
+                            }
+                        }
+                    },
+                    "required": ["from_device", "status"]
+                },
+                "m.relates_to": {
+                    "description": "The relationship of this event to its parent.",
+                    "type": "object",
+                    "properties": {
+                        "rel_type": {
+                            "description": "The namespaced relationship type.",
+                            "type": "string",
+                            "const": "m.reference"
+                        },
+                        "event_id": {
+                            "description": "The ID of the event that contained the de.gematik.request.status content block that this event replies to.",
+                            "type": "string"
+                        }
+                    },
+                    "required": ["rel_type", "event_id"]
+                }
+            },
+            "required": ["de.gematik.response.status", "m.relates_to"]
+        }
+    },
+    "required": ["type", "content"]
+}
