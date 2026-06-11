@@ -1,0 +1,82 @@
+openapi: 3.0.3
+info:
+  title: Structured Data Client Report API
+  version: 1.0.0
+  description: API zum Übermitteln von strukturierten Client-Reports
+
+paths:
+  /report:
+    post:
+      summary: Structured Data Client Report senden
+      operationId: postStructuredDataClientReport
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StructuredDataClientReport'
+      responses:
+        '200':
+          description: Report erfolgreich empfangen
+        '400':
+          description: Ungültige Anfrage
+        '401':
+          description: Nicht autorisiert – ungültiges oder fehlendes Access Token
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    StructuredDataClientReport:
+      type: object
+      required:
+        - start
+      properties:
+        start:
+          type: string
+          description: Beginn der Messung (ISO 8601 Timestamp mit Zeitzone)
+          example: "2026-03-23T12:13:23.183Z"
+
+        sent:
+          type: array
+          description: Gesendete Fachverfahren
+          minItems: 1
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/FachverfahrenEntry'
+
+        received:
+          type: array
+          description: Empfangene Fachverfahren
+          minItems: 1
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/FachverfahrenEntry'
+
+    FachverfahrenEntry:
+      type: object
+      required:
+        - Fachverfahren
+        - Version
+        - Anzahl
+      properties:
+        Fachverfahren:
+          type: string
+          description: Bezeichnung des Fachverfahrens
+          example: "de.gematik.questionnaire.generic"
+
+        Version:
+          type: string
+          description: Version entsprechend der Kennzeichnung
+          example: "v1"
+
+        Anzahl:
+          type: integer
+          description: Anzahl der Events seit der letzten erfolgreichen Übermittlung
+          example: 8
