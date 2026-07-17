@@ -38,58 +38,34 @@ ActorFontName Aapex
     actor U as "Akteur in der\nRolle User"
     participant C as "TI-Messenger-Client"
     box <size:18>Messenger-Service</size> #WhiteSmoke
-      participant MP as "Messenger Proxy"
+      participant AS as "Auth Server"
       participant MH as "Matrix-Homeserver"
     end box
 
+
 |||
-  U->C: Eingabe Messenger-Service 
+  U->C: Eingabe Messenger-Service
     Activate C
-  C->MP: GET /_matrix/client/login
-    Activate MP 
-  MP->MH: HTTP(S) Forward
-   Activate MH
-
-|||
-note over U, MH: <size:17>Die Authentifizierungsverfahren werden für jeden \n<size:17>Messenger-Service durch die Organisation festgelegt</size>
-|||
-
-  MH-->MP: unterstützte \nAuthentifizierungs-\nverfahren
+  C->MH:  /_matrix/client/v1/auth_metadata
+    Activate MH
+    MH-->C: auth_metadata
     Deactivate MH
-  MP-->C: HTTP(S) Forward
-    Deactivate MP
-  C-->U: Zeige \nAuthentifizierungsmaske
+
+  C->AS: POST /{register_endpunkt}
+  Activate AS
+  AS-->C: register_metadaten mit client id
+    Deactivate AS
+|||
+  C->C: Erzeuge Parameter für\nauthorization request
+  C->AS: /{auth_endpunkt}
+   Activate AS
+  AS->C: authorization_code
+    Deactivate AS
+|||
+  C->AS: /{token_endpunkt}
+  Activate AS
+  AS-->C: access_token, refresh_token
+  Deactivate AS
   |||
-  U->U: Starte Authentifizierung
-  U->C: Anmeldung
-  C->MP: POST /_matrix/client/login
-    Activate MP
-
-    
-    MP->MH: HTTP(S) Forward
-      Activate MH
-    MH->MH: prüfe \nClient-Credentials
-    |||
-    opt#LightGrey #MistyRose <size:16>Abbruch</size>
-      MH-->MP:Fehlerhafte \nAnmeldedaten 
-      MP-->C: HTTP(S) Forward
-      C-->U: Anmeldedaten \nsind nicht korrekt
-      |||
-    end
-    |||
-    
-    note over MH, MH: <size:17>Die Überprüfung ist abhängig vom \n<size:17>gewählten Authentifizierungsverfahren</size>
-    
-    |||
-    MH->MH: erstelle \nMatrix-ACCESS_TOKEN, \nMatrix-REFRESH_TOKEN
-    MH-->MP: :Matrix-ACCESS_TOKEN, \n:Matrix-REFRESH_TOKEN
-      Deactivate MH
-    MP-->C: HTTP(S) Forward
-      Deactivate MP
-    |||
-    C->C: Speichere \nMatrix-ACCESS_TOKEN, \nMatrix-REFRESH_TOKEN
-
-    C-->U: Anmeldung \nerfolgreich
-        Deactivate C
-    |||
+  C->MH: /{some_url} mit access_token
 @enduml
