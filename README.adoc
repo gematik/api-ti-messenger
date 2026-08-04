@@ -24,9 +24,9 @@ image:https://img.shields.io/badge/Release%20Notes-tim&hyphen;pro&hyphen;1.0.0-r
 image:https://img.shields.io/badge/TI&hyphen;Messenger&hyphen;Basis-latest-green?style=plastic&logo=github&logoColor=green[link="https://gemspec.gematik.de/docs/gemSpec/gemSpec_TI-M_Basis/latest/"]
 image:https://img.shields.io/badge/TI&hyphen;Messenger&hyphen;ePA-latest-green?style=plastic&logo=github&logoColor=green[link="https://gemspec.gematik.de/docs/gemSpec/gemSpec_TI-M_ePA/latest/"]
 image:https://img.shields.io/badge/TI&hyphen;Messenger&hyphen;Pro-latest-green?style=plastic&logo=github&logoColor=green[link="https://gemspec.gematik.de/docs/gemSpec/gemSpec_TI-M_Pro/latest/"] +
-image:https://img.shields.io/badge/Matrix_Client_Server_API-v1.11-yellow?style=plastic&logo=github&logoColor=yellow[link="https://spec.matrix.org/v1.11/client-server-api/"]
-image:https://img.shields.io/badge/Matrix_Server_Server_API-v1.11-yellow?style=plastic&logo=github&logoColor=yellow[link="https://spec.matrix.org/v1.11/server-server-api/"]
-image:https://img.shields.io/badge/Matrix_Push_Gateway_API-v1.11-yellow?style=plastic&logo=github&logoColor=yellow[link="https://spec.matrix.org/v1.11/push-gateway-api/"]
+image:https://img.shields.io/badge/Matrix_Client_Server_API-v1.17-yellow?style=plastic&logo=github&logoColor=yellow[link="https://spec.matrix.org/v1.17/client-server-api/"]
+image:https://img.shields.io/badge/Matrix_Server_Server_API-v1.17-yellow?style=plastic&logo=github&logoColor=yellow[link="https://spec.matrix.org/v1.17/server-server-api/"]
+image:https://img.shields.io/badge/Matrix_Push_Gateway_API-v1.17-yellow?style=plastic&logo=github&logoColor=yellow[link="https://spec.matrix.org/v1.17/push-gateway-api/"]
 
 == Überblick
 Die folgende Dokumentation ergänzt die Spezifikationen *TI-Messenger ePA* und *TI-Messenger Pro*. An dieser Stelle werden insbesondere die in der Spezifikation genannten Komponenten der Lösung sowie deren Schnittstellen weiter dargestellt und erläutert, um Hersteller und Anbieter bestmöglich zu unterstützen.
@@ -85,11 +85,9 @@ TI-Messenger Dokumentation
 |   ├──── link:docs/Foederationsliste[Föderationsliste]
 |   ├──── link:docs/Fachdienst[Fachdienst]
 |   ├──── link:docs/IDP[IDP]
-|   ├──── link:docs/Primaersystem[Primaersystem]
 |   ├──── link:docs/anwendungsfaelle[Anwendungsfälle]
 |   ├──── link:docs/anwendungsfaelle/COM-chatbot.adoc[Chatbot]
 |   ├──── link:docs/Test/Test.adoc[Testkonzept]
-|   └──── link:docs/FAQ[FAQ]
 ├─ link:images[images] (Bildarchiv)
 │   └──── link:images/generated[generated] (draw.io & PlantUML gerenderte Bilder)
 ├─ link:samples[samples] (Codebeispiele, Postman Collections, etc)
@@ -117,17 +115,10 @@ link:docs/Client/Client.adoc[- TI-Messenger-Client] +
 link:https://github.com/gematik/api-vzd/blob/main/docs/Fachkonzept_FHIR-Directory.adoc[- VZD-FHIR-Directory] +
 link:docs/IDP/idp.adoc[- Zentraler IDP-Dienst] +
 
-*Nutzung des TI-Messenger-Clients: Automatisierung und Schnittstellenintegration* +
-link:docs/Client/Automatisierung.adoc[- Automatisierung und Schnittstellenintegration] +
-
-*Leitfaden für Primärsystemhersteller* +
-link:docs/Primaersystem/Primaersystem.adoc[- Primärsystem] +
-
 *Diverses* +
 https://fachportal.gematik.de/anwendungen/ti-messenger[- TI-Messenger im gematik Fachportal]
 https://fachportal.gematik.de/hersteller-anbieter/komponenten-dienste/authenticator[- Authenticator im gematik Fachportal] +
 https://github.com/gematik/TI-Messenger-Testsuite[- TI-Messenger-Testsuite] +
-link:docs/FAQ/FAQ.adoc[- Fragen und Antworten zur aktuellen Spezifikation &#91;FAQ&#93;]
 
 *Referenz-Implementierungen* +
 - [comming soon]

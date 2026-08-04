@@ -2,6 +2,25 @@
 
 # Release Notes api-ti-messenger
 
+## TI-Messenger_26_2
+
+### added
+
+- Added client report API description: `src/openapi/TIMessengerClientReport.yaml`.
+- Added JSON schema artifacts for structured data support (`src/schema/clientCapabilities.json`, `src/schema/fhir.json`, `src/schema/statusRequest.json`, and `src/schema/statusResponse.json`).
+- Added/extended diagrams for headless client, structured data workflows, and TI-M Pro sequence `UC_10438`.
+
+### changed
+
+- Refactored authentication flow in `UC_10057` sequence diagram.
+- Updated license notes to latest guidelines.
+- Added Matrix room link in `README.adoc`.
+
+### removed
+- Removed legacy permission config schema and related examples.
+- Removed outdated proposal documents.
+- Removed obsolete ePA login diagram source that was replaced by TI federation concept diagrams.
+
 ## tim-pro-1.0.0
 
 ### added
