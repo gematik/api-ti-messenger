@@ -20,7 +20,7 @@ image::meta/gematik.png[logo,width=250,height=47,role=right]
 image:https://github.com/gematik/api-ti-messenger/actions/workflows/lint.yml/badge.svg[link="https://github.com/gematik/api-ti-messenger/actions/workflows/lint.yml"]
 image:https://github.com/gematik/api-ti-messenger/actions/workflows/generate-images.yml/badge.svg[link="https://github.com/gematik/api-ti-messenger/actions/workflows/generate-images.yml"]
 
-image:https://img.shields.io/badge/Release%20Notes-tim&hyphen;pro&hyphen;1.0.0-red?style=plastic&logo=github&logoColor=red[link="ReleaseNotes.md"] +
+image:https://img.shields.io/badge/Release%20Notes-TIMessenger-red?style=plastic&logo=github&logoColor=red[link="ReleaseNotes.md"] +
 image:https://img.shields.io/badge/TI&hyphen;Messenger&hyphen;Basis-latest-green?style=plastic&logo=github&logoColor=green[link="https://gemspec.gematik.de/docs/gemSpec/gemSpec_TI-M_Basis/latest/"]
 image:https://img.shields.io/badge/TI&hyphen;Messenger&hyphen;ePA-latest-green?style=plastic&logo=github&logoColor=green[link="https://gemspec.gematik.de/docs/gemSpec/gemSpec_TI-M_ePA/latest/"]
 image:https://img.shields.io/badge/TI&hyphen;Messenger&hyphen;Pro-latest-green?style=plastic&logo=github&logoColor=green[link="https://gemspec.gematik.de/docs/gemSpec/gemSpec_TI-M_Pro/latest/"] +
