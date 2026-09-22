@@ -40,7 +40,7 @@ components:
       properties:
         start:
           type: string
-          description: Beginn der Messung (ISO 8601 Timestamp mit Zeitzone)
+          description:  der Messung (ISO 8601 Timestamp mit Zeitzone)
           example: "2026-03-23T12:13:23.183Z"
 
         sent:
@@ -62,21 +62,21 @@ components:
     FachverfahrenEntry:
       type: object
       required:
-        - Fachverfahren
-        - Version
-        - Anzahl
+        - fachverfahren
+        - version
+        - eventID
       properties:
-        Fachverfahren:
+        fachverfahren:
           type: string
           description: Bezeichnung des Fachverfahrens
           example: "de.gematik.questionnaire.generic"
 
-        Version:
+        version:
           type: string
           description: Version entsprechend der Kennzeichnung
           example: "v1"
 
-        Anzahl:
-          type: integer
-          description: Anzahl der Events seit der letzten erfolgreichen Übermittlung
-          example: 8
+        eventID:
+          type: string
+          description: Die Matrix Event ID mit dem das Fachverfahren übermittelt wurde.
+          example: "$EKMvEDAUMrYXWMSQpiwQawHqtN13EWONVOybX791aT0"
